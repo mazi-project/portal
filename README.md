@@ -24,5 +24,5 @@ Installation
 Execution
 ---------
 
-    $ ruby -I lib mazi_portal_server.rb
+    $ ruby -I lib -I database mazi_portal_server.rb
 
