@@ -1,0 +1,4 @@
+# username and password for the admin panel
+:admin:
+  :admin_username: 'mazi_admin'
+  :admin_password: '1234'
