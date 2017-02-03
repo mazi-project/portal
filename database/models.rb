@@ -3,4 +3,4 @@ module Mazi
 end
 
 Sequel.default_timezone = :utc
-Dir['./lib/models/*.rb'].each{|f| require f}
+Dir['./database/models/*.rb'].each{|f| require f}
