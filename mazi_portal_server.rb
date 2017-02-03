@@ -96,6 +96,30 @@ class MaziApp < Sinatra::Base
     redirect '/admin_application'
   end
 
+  # admin edit application
+  post '/application/edit' do
+    MaziLogger.debug "request: put/application from ip: #{request.ip} params: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+    e = Mazi::Model::Application.validate_edit(params)
+    unless e.nil?
+      MaziLogger.debug "invalid param #{e}"
+      session['error'] = e
+      redirect '/admin_application'
+    end
+    id = params['id']
+    app =  Mazi::Model::Application.find(id: params['id'].to_i)
+    app.name = params['name']
+    app.url = params['url']
+    app.description = params['description']
+    app.save
+    redirect '/admin_application'
+  end
+
+  # admin delete application
   delete '/application/:id' do |id| 
     MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
     if !authorized?
