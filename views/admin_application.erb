@@ -7,10 +7,15 @@
 </div>
 
 <div class="row">
+  <% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+  <% end %>
   <table class="table">
     <thead>
       <tr>
-        <th>#</th>
+        <th>ID</th>
         <th>Application Name</th>
         <th>URL</th>
         <th>Description</th>
@@ -19,30 +24,52 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Application 1</td>
-        <td>http://192.168.1.1:8801/</td>
-        <td>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-        <td>12</td>
+      <% applications.each do |app| %>
+      <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
+        <th scope="row"><%= app.id %></th>
+        <td><%= app.name %></td>
+        <td><%= app.url %></td>
+        <td><%= app.description %></td>
+        <td><%= app.click_counter %></td>
         <td>
-          <a class="teal-text"><i class="fa fa-pencil"></i></a>
-          <a class="red-text"><i class="fa fa-times"></i></a>
+          <a class="teal-text edit_app" id='app_<%= app.id %>'><i class="fa fa-pencil"></i></a>
+          <a class="red-text del_app" id='app_<%= app.id %>'><i class="fa fa-times"></i></a>
         </td>
       </tr>
+      <% end %> 
     </tbody>
-    </tfoot>
+    <tfoot>
       <tr>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="teal-text"><i class="fa fa-plus"></i></a></td>
+        <td><a class="teal-text" data-toggle="modal" data-target="#new-application-modal"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
-  <% applications.each do |app| %>
+</div>
 
-  <% end %> 
+<!-- create application modal-->
+<div class="modal fade" id="new-application-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create new Application</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/application" method="post">
+          <div class="form-group">
+            <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
+            <input type="text" name="url" class="form-control" placeholder="URL" required>
+            <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (100 characters max)' maxlength="100"></textarea>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 </div>

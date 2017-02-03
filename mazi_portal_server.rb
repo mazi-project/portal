@@ -21,41 +21,36 @@ class MaziApp < Sinatra::Base
   # this is the main routing configuration that routes all the erb files
   get '/:index' do |index|
     MaziLogger.debug "request: get/#{index} from ip: #{request.ip}"
+    locals = {}
+    locals[:local_data] = {}
+    locals[:js] = []
+    locals[:error_msg] = nil
     case index
     when 'index'
-      locals = {}
-      locals[:local_data] = {}
+      locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
+      locals[:local_data][:applications] = Mazi::Model::Application.all
       erb :index_main, locals: locals
     when 'admin'
-      unless authorized?
-        MaziLogger.debug "Not authorized"
-        main_body = :admin_login
-        session['error'] = 'username and password missmatch!'
-        redirect '/admin_login'
-      end
-      MaziLogger.debug "Authorized"
-      locals = {}
-      locals[:local_data] = {}
-      locals[:main_body] = :admin_application
-      locals[:local_data][:applications]  = Mazi::Model::Application.all
-      erb :admin_main, locals: locals
+      redirect 'admin_application'
     when 'admin_application'
       unless authorized?
-        main_body = :admin_login
-        session['error'] = 'username and password missmatch!'
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
         redirect '/admin_login'
       end
-      locals = {}
-      locals[:local_data] = {}
+      locals[:js] << "js/admin_application.js"
       locals[:main_body] = :admin_application
+      locals[:local_data][:applications]  = Mazi::Model::Application.all
+      unless session['error'].nil?
+        locals[:error_msg]  = session["error"]
+        session[:error] = nil
+      end
       erb :admin_main, locals: locals
     when 'admin_login'
-      locals = {}
-      locals[:local_data] = {}
       locals[:main_body] = :admin_login
       unless session['error'].nil?
-        locals[:error]  = session["error"]
+        locals[:error_msg]  = session["error"]
         session[:error] = nil
       end
       erb :admin_main, locals: locals
@@ -67,7 +62,10 @@ class MaziApp < Sinatra::Base
   # admin login post request
   post '/admin_login' do
     MaziLogger.debug "request: post/admin_login from ip: #{request.ip} creds: #{params.inspect}"
-    redirect '/admin_login' unless valid_admin_credentials?(params['username'], params['password'])
+    unless valid_admin_credentials?(params['username'], params['password'])
+      session['error'] = 'Password and username missmatch!'
+      redirect '/admin_login' 
+    end
     MaziLogger.debug "valid credential"
     session[:username] = params['username']
     redirect '/admin'
@@ -77,6 +75,38 @@ class MaziApp < Sinatra::Base
   delete '/admin_login' do
     session[:username] = nil
     redirect '/admin'
+  end
+
+  # admin create application
+  post '/application' do
+    MaziLogger.debug "request: post/application from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+    e = Mazi::Model::Application.validate(params)
+    unless e.nil?
+      MaziLogger.debug "invalid param #{e}"
+      session['error'] = e
+      redirect '/admin_application'
+    end
+
+    a =  Mazi::Model::Application.create(params)
+    redirect '/admin_application'
+  end
+
+  delete '/application/:id' do |id| 
+    MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Unauthorized', id: id}.to_json
+    else
+      app = Mazi::Model::Application.first(id)
+      app.destroy
+      {result: 'OK', id: id}.to_json
+    end
   end
 end
 

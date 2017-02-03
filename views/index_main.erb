@@ -9,15 +9,15 @@
   <meta name="author" content="nitlab">
 
   <title>Mazizone Portal</title>
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/portal_main.css" rel="stylesheet">
-  <link href="css/plugins/morris.css" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+  <link href="css/index_main.css" rel="stylesheet" type="text/css">
+  <link href="css/plugins/morris.css" rel="stylesheet" type="text/css">
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <script src="js/jquery.js"></script>
   <script src="js/bootstrap.min.js"></script>
-  <script src="js/plugins/morris/raphael.min.js"></script>
-  <script src="js/plugins/morris/morris.min.js"></script>
-  <script src="js/plugins/morris/morris-data.js"></script>
+  <% js.each do |j| %>
+    <script src="<%= j %>"></script>
+  <% end %>
 </head>
 
 <body>
@@ -74,7 +74,8 @@
     <div id="page-wrapper">
       <div class="container-fluid">
 
-        <%= erb main_body %>
+        <% local_data[:error_msg] = error_msg %>
+        <%= erb main_body, locals: local_data %>
 
       </div>
     </div>

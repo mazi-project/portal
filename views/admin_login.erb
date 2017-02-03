@@ -2,6 +2,11 @@
   <div class="col-sm-6 col-md-4 col-md-offset-4">
     <div class="account-wall">
       <img class="profile-img" src="/images/maziLogo.png" alt="">
+      <% unless error_msg.nil? %>
+      <div class="alert alert-danger">
+        <p><%= error_msg %></p>
+      </div>
+      <% end %>
       <form class="form-signin" action="/admin_login" method="post">
         <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
         <input type="password" name="password" class="form-control" placeholder="Password" required>
@@ -9,8 +14,7 @@
         <!-- <label class="checkbox pull-right">
           <input type="checkbox" value="remember-me">Remember me
         </label> -->
-        </form>
-      </div>
+      </form>
     </div>
   </div>
 </div
