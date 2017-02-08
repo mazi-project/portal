@@ -263,3 +263,10 @@ ul.alert-dropdown {
   padding-top: 5px;
 }
 
+.welcome-txt{
+  padding-left: 20px;
+}
+
+.password-it{
+  color: grey;
+}

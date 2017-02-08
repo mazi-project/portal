@@ -301,3 +301,9 @@ ul.alert-dropdown {
     display: block;
     margin-top: 10px;
 }
+
+.change-conf-div{
+  padding-top: 15px;
+  padding-bottom: 10px;
+  padding-right: 8px;
+}
