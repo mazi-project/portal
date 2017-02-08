@@ -5,6 +5,6 @@ module Authorizer
   end
 
   def valid_admin_credentials?(username, password)
-    username == @config[:admin][:admin_username] && password == @config[:admin][:admin_password]
+    username == readConfigFile[:admin][:admin_username] && password == readConfigFile[:admin][:admin_password]
   end
 end
