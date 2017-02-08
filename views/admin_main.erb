@@ -64,8 +64,14 @@
       </ul>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-          <li class="active">
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
+          <li <%= 'class="active"' if main_body == :admin_application %> >
+            <a href="admin_application"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
+          </li>
+          <li <%= 'class="active"' if main_body == :admin_network %>>
+            <a href="admin_network"><i class="fa fa-fw fa-wifi"></i> Networking</a>
+          </li>
+          <li <%= 'class="active"' if main_body == :admin_configuration %>>
+            <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i> Configurations</a>
           </li>
         </ul>
       </div>
