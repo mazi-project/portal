@@ -1,4 +1,17 @@
-# username and password for the admin panel
+---
 :admin:
-  :admin_username: 'mazi_admin'
+  :admin_username: mazi_admin
   :admin_password: '1234'
+:scripts:
+  :backend_scripts_folder: "/root/back-end/"
+  :enabled_scripts:
+  - wifiap.sh
+  - current.sh
+  - internet.sh
+  - ls
+:portal_configuration:
+  :title: Mazizone Portal
+  :applications_title: Mazizone
+  :applications_subtitle: Applications
+  :applications_welcome_text: Welcome to the Mazizone Applications Portal, please
+    use the links bellow to navigate to the applications offered by Mazizone.
