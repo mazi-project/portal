@@ -23,12 +23,23 @@ module Mazi::Model
       mandatory_keys.each do |key|
         return key if description[key].nil? || description[key].empty?
       end
-      valid_keys = ['id', 'name', 'description', 'url']
+      valid_keys = ['id', 'name', 'description', 'url', 'enabled']
       description.each do |key|
         description.delete_if {|k, v| !valid_keys.include?(k) }  
       end
       description['click_counter'] = 0
+      description['enabled'] ||= true
       nil
+    end
+
+    def enable
+      self.enabled = true
+      self.save
+    end
+
+    def disable
+      self.enabled = false
+      self.save
     end
   end
 end

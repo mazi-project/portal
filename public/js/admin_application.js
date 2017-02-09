@@ -13,4 +13,16 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('.enabled-switch').click(function(){
+    var appId = $(this).attr('id').split('_').pop();
+    console.log(appId);
+    $.ajax({
+      url: '/application/' + appId,
+      type: 'PUT',
+      success: function(result) {
+        id = JSON.parse(result).id;
+      }
+    });
+  });
 });

@@ -16,6 +16,7 @@
     <thead>
       <tr>
         <th>ID</th>
+        <th>Status</th>
         <th>Application Name</th>
         <th>URL</th>
         <th>Description</th>
@@ -26,7 +27,13 @@
     <tbody>
       <% applications.each do |app| %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
-        <th scope="row"><%= app.id %></th>
+        <td scope="row"><%= app.id %></td>
+        <td>
+          <label class="switch">
+            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
+            <div class="slider round enabled-switch" id='enabled-switch_<%= app.id %>'></div>
+          </label>
+        </td>
         <td><%= app.name %></td>
         <td><%= app.url %></td>
         <td><%= app.description %></td>
@@ -40,6 +47,7 @@
     </tbody>
     <tfoot>
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

@@ -19,6 +19,7 @@
   <% colors = ['green', 'red', 'yellow', 'blue', 'purple']%>
   <% icons = ['file-text-o', 'search', 'cloud', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
   <% applications.each do |app| %>
+  <% next unless app.enabled %>
   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
     <div class="panel panel-<%= colors[cnt % colors.length] %>">
       <div class="panel-heading">
@@ -38,7 +39,7 @@
       </div>
       <a href="<%= app.url %>">
         <div class="panel-footer">
-          <span class="pull-left">Start Application</span>
+          <span class="pull-left">Join Application</span>
           <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
           <div class="clearfix"></div>
         </div>

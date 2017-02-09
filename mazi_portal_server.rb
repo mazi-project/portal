@@ -20,6 +20,10 @@ class MaziApp < Sinatra::Base
     require 'models'
   end
 
+  get '/' do
+    redirect 'index'
+  end
+
   # this is the main routing configuration that routes all the erb files
   get '/:index/?' do |index|
     MaziLogger.debug "request: get/#{index} from ip: #{request.ip}"
@@ -149,9 +153,10 @@ class MaziApp < Sinatra::Base
     end
     id = params['id']
     app =  Mazi::Model::Application.find(id: params['id'].to_i)
-    app.name = params['name']
-    app.url = params['url']
-    app.description = params['description']
+    app.name = params['name'] if params['name']
+    app.url = params['url'] if params['url']
+    app.description = params['description'] if params['description']
+    app.enabled = params['enabled'] if params['enabled']
     app.save
     redirect '/admin_application'
   end
@@ -164,8 +169,23 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       {error: 'Unauthorized', id: id}.to_json
     else
-      app = Mazi::Model::Application.first(id)
+      app = Mazi::Model::Application.find(id: id)
       app.destroy
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles application enable disable
+  put '/application/:id/?' do |id|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Unauthorized', id: id}.to_json
+    else
+      app = Mazi::Model::Application.find(id: id)
+      app.enabled = !app.enabled 
+      app.save
       {result: 'OK', id: id}.to_json
     end
   end
@@ -229,3 +249,4 @@ class MaziApp < Sinatra::Base
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
+
