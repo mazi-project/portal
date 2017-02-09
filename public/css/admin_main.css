@@ -311,8 +311,8 @@ ul.alert-dropdown {
 .switch {
   position: relative;
   display: inline-block;
-  width: 60px;
-  height: 34px;
+  width: 40px;
+  height: 22px;
 }
 
 .switch input {display:none;}
@@ -332,8 +332,8 @@ ul.alert-dropdown {
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 15px;
+  width: 15px;
   left: 4px;
   bottom: 4px;
   background-color: white;
@@ -350,14 +350,14 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(26px);
-  -ms-transform: translateX(26px);
-  transform: translateX(26px);
+  -webkit-transform: translateX(15px);
+  -ms-transform: translateX(15px);
+  transform: translateX(15px);
 }
 
 /* Rounded sliders */
 .slider.round {
-  border-radius: 34px;
+  border-radius: 22px;
 }
 
 .slider.round:before {
