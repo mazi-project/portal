@@ -222,6 +222,10 @@ ul.alert-dropdown {
   color: #f0ad4e;
 }
 
+.panel-yellow > a:hover {
+  color: #d38312;
+}
+
 .panel-blue {
   border-color: #1ad1ff;
 }
