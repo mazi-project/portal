@@ -33,9 +33,12 @@ class MaziApp < Sinatra::Base
     locals[:error_msg] = nil
     case index
     when 'index'
+      session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
       locals[:local_data][:applications] = Mazi::Model::Application.all
+      locals[:local_data][:notifications] = Mazi::Model::Notification.all
+      locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data] = @config[:portal_configuration]
       erb :index_main, locals: locals
     when 'admin'
@@ -90,6 +93,20 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/jscolor.min.js"
       locals[:main_body] = :admin_configuration
       locals[:local_data][:portal_configuration] = @config[:portal_configuration]
+      erb :admin_main, locals: locals
+    when 'admin_notification'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:js] << "js/admin_notification.js"
+      locals[:main_body] = :admin_notification
+      locals[:local_data][:notifications]  = Mazi::Model::Notification.all
+      unless session['error'].nil?
+        locals[:error_msg]  = session["error"]
+        session[:error] = nil
+      end
       erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
@@ -191,6 +208,72 @@ class MaziApp < Sinatra::Base
       app.save
       {result: 'OK', id: id}.to_json
     end
+  end
+
+  # admin create notification
+  post '/notification/?' do
+    MaziLogger.debug "request: post/notification from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+
+    a =  Mazi::Model::Notification.create(params)
+    redirect '/admin_notification'
+  end
+
+  # admin edit notification
+  post '/notification/edit/?' do
+    MaziLogger.debug "request: put/notification from ip: #{request.ip} params: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+    id = params['id']
+    notif =  Mazi::Model::Notification.find(id: params['id'].to_i)
+    notif.title = params['title'] if params['title']
+    notif.body = params['body'] if params['body']
+    notif.enabled = params['enabled'] if params['enabled']
+    notif.save
+    redirect '/admin_notification'
+  end
+
+  # admin delete notification
+  delete '/notification/:id/?' do |id| 
+    MaziLogger.debug "request: delete/notification from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    else
+      notif = Mazi::Model::Notification.find(id: id)
+      notif.destroy
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles notification enable disable
+  put '/notification/:id/?' do |id|
+    MaziLogger.debug "request: put/notification from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    else
+      notif = Mazi::Model::Notification.find(id: id)
+      notif.enabled = !notif.enabled 
+      notif.save
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles notification read just in session
+  put '/notification/:id/read/?' do |id|
+    MaziLogger.debug "request: put/notification from ip: #{request.ip} id: #{id}"
+    session[:notifications_read] << id.to_i
+    {result: 'OK', id: id}.to_json
   end
 
   # executing a script

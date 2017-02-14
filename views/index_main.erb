@@ -10,13 +10,16 @@
 
   <title><%= local_data[:config_data][:title] %></title>
   <link href="css/bootstrap.css" rel="stylesheet" type="text/css">
+  <link href="css/jquery-ui.min.css" rel="stylesheet">
   <link href="css/index_main.css" rel="stylesheet" type="text/css">
   <link href="css/plugins/morris.css" rel="stylesheet" type="text/css">
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <script src="js/jquery.js"></script>
+  <script src="js/jquery-ui.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
+  <script src="js/index_main.js"></script>
   <% js.each do |j| %>
-    <script src="<%= j %>"></script>
+  <script src="<%= j %>"></script>
   <% end %>
   <style type="text/css">
     @media(min-width:768px) {
@@ -88,22 +91,22 @@
         </button>
         <a class="navbar-brand" href="index"><%= local_data[:config_data][:title] %></a>
       </div>
+      <% unless local_data[:notifications].nil? || local_data[:notifications].empty? %>
       <ul class="nav navbar-right top-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
+            <% local_data[:notifications].each do |notification|%>
             <li>
-              <a href="#"><span class="label label-success">New</span> Welcome</a>
+              <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
+                <%= local_data[:notifications_read].include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %> 
+              </a>
             </li>
-            <li>
-              <a href="#"><span class="label label-success">New</span> Patch Notes</a>
-            </li>
-            <li>
-              <a href="#"><span class="label label-default">Read</span> New Application</a>
-            </li>
+            <% end %>
           </ul>
         </li>
       </ul>
+      <% end %>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li class="active">
@@ -124,13 +127,30 @@
 
       </div>
     </div>
-<!-- 
-    <script type="text/javascript">
-      $(document).ready(function() {
-        console.log('qqqq');
-        $('.side-nav').css('background-color', <%= local_data[:config_data][:side_panel_color]%>);
-      });
-    </script> -->
+
+
+    <% local_data[:notifications].each do |notification|%>
+
+    <div class="modal fade" id="show-notification-modal-<%= notification.id %>" role="dialog">
+      <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header notification-modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title"><%= notification.title %></h4>
+          </div>
+          <div class="modal-body">
+            <p>
+              <%= notification.body %>
+            </p>
+          </div>
+          <div class="modal-footer notification-modal-footer">
+            <button type="button" class="btn btn-default notification-close" data-dismiss="modal" id="notification-close-<%= notification.id %>">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% end %>
   </div>
 </body>
 </html>
