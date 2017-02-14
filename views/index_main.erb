@@ -18,6 +18,61 @@
   <% js.each do |j| %>
     <script src="<%= j %>"></script>
   <% end %>
+  <style type="text/css">
+    @media(min-width:768px) {
+      .side-nav {
+        position: fixed;
+        top: 51px;
+        left: 225px;
+        width: 225px;
+        margin-left: -225px;
+        border: none;
+        border-radius: 0;
+        overflow-y: auto;
+        background-color: #<%= local_data[:config_data][:side_panel_color]%>;
+        bottom: 0;
+        overflow-x: hidden;
+        padding-bottom: 40px;
+      }
+
+      .side-nav>li>a {
+        width: 225px;
+      }
+
+      .side-nav li a:hover,
+      .side-nav li a:focus {
+        outline: none;
+        background-color: #000 !important;
+      }
+    }
+
+    .side-nav{
+      background-color: #<%= local_data[:config_data][:side_panel_color]%> !important;
+    }
+
+    .navbar-inverse .navbar-nav > .active > a, 
+    .navbar-inverse .navbar-nav > .active > a:hover, 
+      .navbar-inverse .navbar-nav > .active > a:focus {
+      background-color: #<%= local_data[:config_data][:side_panel_active_color]%> !important;
+    }
+
+    .side-nav li a:hover,
+    .side-nav li a:focus {
+      background-color: #<%= local_data[:config_data][:side_panel_active_color]%> !important;
+    }
+
+    .top-nav>li>a:hover,
+    .top-nav>li>a:focus,
+    .top-nav>.open>a,
+    .top-nav>.open>a:hover,
+    .top-nav>.open>a:focus {
+      background-color: #<%= local_data[:config_data][:top_panel_active_color]%> !important;
+    }
+
+    .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
+      background-color: #<%= local_data[:config_data][:top_panel_color]%> !important;
+    }
+  </style>
 </head>
 
 <body>
@@ -31,7 +86,7 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="index.html"><%= local_data[:config_data][:title] %></a>
+        <a class="navbar-brand" href="index"><%= local_data[:config_data][:title] %></a>
       </div>
       <ul class="nav navbar-right top-nav">
         <li class="dropdown">
@@ -54,6 +109,9 @@
           <li class="active">
             <a href="index"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
           </li>
+          <li>
+            <a href="index"><i class="fa fa-fw fa-dashboard"></i> Statistics</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -66,6 +124,13 @@
 
       </div>
     </div>
+<!-- 
+    <script type="text/javascript">
+      $(document).ready(function() {
+        console.log('qqqq');
+        $('.side-nav').css('background-color', <%= local_data[:config_data][:side_panel_color]%>);
+      });
+    </script> -->
   </div>
 </body>
 </html>

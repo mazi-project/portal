@@ -129,33 +129,30 @@
           </div>
         </div>
       </li> -->
-      <li class="list-group-item toggle" data-toggle="detail-6">
+      <li class="list-group-item">
         <div class="row" id="dropdown-detail-6">
           <div class="col-xs-10">
             <div class="row">
-              <span class="col-lg-2">
-                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelColor(this)'}">
+              <span class="col-lg-1">
+              <b>Colors: </b>
+              </span>
+              <span class="col-lg-6">
+                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelColor(this)', value:'<%= portal_configuration[:side_panel_color] %>'}">
                   Side panel main color
                 </button>
-              </span>
-              <span class="col-lg-2">
-                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelActiveColor(this)'}">
+                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelActiveColor(this)', value:'<%= portal_configuration[:side_panel_active_color] %>'}">
                   Side panel active color
                 </button>
-              </span>
-              <span class="col-lg-2">
-                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelColor(this)'}">
+                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelColor(this)', value:'<%= portal_configuration[:top_panel_color] %>'}">
                   Top panel main color
                 </button>
-              </span>
-              <span class="col-lg-2">
-                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelActiveColor(this)'}">
+                <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelActiveColor(this)', value:'<%= portal_configuration[:top_panel_active_color] %>'}">
                   Top panel active color
                 </button>
               </span>
             </div>
           </div>
-          <div class="col-xs-2">
+          <div class="col-xs-2 toggle" data-toggle="detail-6">
             <i class="fa fa-chevron-down pull-right"></i>
           </div>
         </div>
@@ -256,21 +253,21 @@
       sidePanelColor = null;
     }
     else if(sidePanelActiveColor != null){ 
-      data.side_panel_color = sidePanelActiveColor;
+      data.side_panel_active_color = sidePanelActiveColor;
       sidePanelActiveColor = null;
     }
     else if(topPanelColor != null){ 
-      data.side_panel_color = topPanelColor;
+      data.top_panel_color = topPanelColor;
       topPanelColor = null;
     }
     else if(topPanelActiveColor != null){ 
-      data.side_panel_color = topPanelActiveColor;
+      data.top_panel_active_color = topPanelActiveColor;
       topPanelActiveColor = null;
     }
     else {
       return;
     }
-
+    console.log(data);
     $.ajax({
       url: '/conf/',
       type: 'PUT',

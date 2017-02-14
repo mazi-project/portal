@@ -85,6 +85,9 @@ class MaziApp < Sinatra::Base
         redirect '/admin_login'
       end
       locals[:js] << "js/admin_network.js"
+      # locals[:js] << "js/tinycolor-0.9.15.min.js"
+      # locals[:js] << "js/pick-a-color-1.2.3.min.js"
+      locals[:js] << "js/jscolor.min.js"
       locals[:main_body] = :admin_configuration
       locals[:local_data][:portal_configuration] = @config[:portal_configuration]
       erb :admin_main, locals: locals
@@ -167,7 +170,7 @@ class MaziApp < Sinatra::Base
     if !authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
-      {error: 'Unauthorized', id: id}.to_json
+      {error: 'Not Authorized!', id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       app.destroy
@@ -181,7 +184,7 @@ class MaziApp < Sinatra::Base
     if !authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
-      {error: 'Unauthorized', id: id}.to_json
+      {error: 'Not Authorized!', id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       app.enabled = !app.enabled 
@@ -240,11 +243,42 @@ class MaziApp < Sinatra::Base
     data[:applications_title] = params['applications_title'] unless params['applications_title'].nil?  || params['applications_title'].empty?
     data[:applications_subtitle] = params['applications_subtitle'] unless params['applications_subtitle'].nil?  || params['applications_subtitle'].empty?
     data[:applications_welcome_text] = params['applications_welcome_text'] unless params['applications_welcome_text'].nil?  || params['applications_welcome_text'].empty?
+    data[:side_panel_color] = params['side_panel_color'] unless params['side_panel_color'].nil?  || params['side_panel_color'].empty?
+    data[:side_panel_active_color] = params['side_panel_active_color'] unless params['side_panel_active_color'].nil?  || params['side_panel_active_color'].empty?
+    data[:top_panel_color] = params['top_panel_color'] unless params['top_panel_color'].nil?  || params['top_panel_color'].empty?
+    data[:top_panel_active_color] = params['top_panel_active_color'] unless params['top_panel_active_color'].nil?  || params['top_panel_active_color'].empty?
     data.each do |key, value|
       changeConfigFile("portal_configuration->#{key}", value)
     end
     writeConfigFile
     redirect '/admin_configuration'
+  end
+
+  # saving configurations without a refresh
+  put '/conf/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    MaziLogger.debug "request: put/conf from ip: #{request.ip} body: #{body}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!'}.to_json
+    else
+      data = {}
+      data[:title] = body['title'] unless body['title'].nil? || body['title'].empty?
+      data[:applications_title] = body['applications_title'] unless body['applications_title'].nil?  || body['applications_title'].empty?
+      data[:applications_subtitle] = body['applications_subtitle'] unless body['applications_subtitle'].nil?  || body['applications_subtitle'].empty?
+      data[:applications_welcome_text] = body['applications_welcome_text'] unless body['applications_welcome_text'].nil?  || body['applications_welcome_text'].empty?
+      data[:side_panel_color] = body['side_panel_color'].to_i unless body['side_panel_color'].nil?  || body['side_panel_color'].empty?
+      data[:side_panel_active_color] = body['side_panel_active_color'].to_i unless body['side_panel_active_color'].nil?  || body['side_panel_active_color'].empty?
+      data[:top_panel_color] = body['top_panel_color'].to_i unless body['top_panel_color'].nil?  || body['top_panel_color'].empty?
+      data[:top_panel_active_color] = body['top_panel_active_color'].to_i unless body['top_panel_active_color'].nil?  || body['top_panel_active_color'].empty?
+      data.each do |key, value|
+        changeConfigFile("portal_configuration->#{key}", value)
+      end
+      writeConfigFile
+      {result: 'OK'}.to_json
+    end
   end
 end
 
