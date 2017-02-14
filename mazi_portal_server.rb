@@ -115,6 +115,10 @@ class MaziApp < Sinatra::Base
         session[:error] = nil
       end
       erb :admin_main, locals: locals
+    when 'admin_logout'
+      locals[:main_body] = :admin_login
+      session[:username] = nil
+      erb :admin_main, locals: locals
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
     end

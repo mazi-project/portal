@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-  console.log( "ready!" );
   var confirm_element_id = null;
 
   $( "#delete-dialog-confirm" ).dialog({
