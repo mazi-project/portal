@@ -91,12 +91,22 @@
         </button>
         <a class="navbar-brand" href="index"><%= local_data[:config_data][:title] %></a>
       </div>
-      <% unless local_data[:notifications].nil? || local_data[:notifications].empty? %>
+      <%
+        flag = false
+        local_data[:notifications].each do |notification|
+          if notification.enabled
+            flag = true
+            break
+          end
+        end unless local_data[:notifications].nil? || local_data[:notifications].empty?
+      %>
+      <% if flag %>
       <ul class="nav navbar-right top-nav">
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
             <% local_data[:notifications].each do |notification|%>
+            <% next unless notification.enabled %>
             <li>
               <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
                 <%= local_data[:notifications_read].include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %> 
