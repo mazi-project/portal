@@ -15,7 +15,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
+        <th>Active</th>
         <th>Status</th>
         <th>Application Name</th>
         <th>URL</th>
@@ -26,21 +26,34 @@
     </thead>
     <tbody>
       <% applications.each do |app| %>
+        <% status = app.status %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
-        <td scope="row"><%= app.id %></td>
-        <td>
+        <td scope="row">
           <label class="switch">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
             <div class="slider round enabled-switch" id='enabled-switch_<%= app.id %>'></div>
           </label>
         </td>
+        <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
         <td><%= app.name %></td>
         <td><%= app.url %></td>
         <td><%= app.description %></td>
         <td><%= app.click_counter %></td>
         <td>
-          <a class="teal-text edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>"><i class="fa fa-pencil"></i></a>
-          <a class="red-text del_app" id='del_app_<%= app.id %>'><i class="fa fa-times"></i></a>
+          <div class="btn-group">
+            <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' %>>
+              <i class="fa fa-play" title="Align Left"></i>
+            </a>
+            <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'ON' %>>
+              <i class="fa fa-stop" title="Align Center"></i>
+            </a>
+            <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>">
+              <i class="fa fa-pencil" title="Align Right"></i>
+            </a>
+            <a class="btn btn-danger del_app" id='del_app_<%= app.id %>'>
+              <i class="fa fa-times" title="Align Justify"></i>
+            </a>
+          </div>
         </td>
       </tr>
       <% end %> 

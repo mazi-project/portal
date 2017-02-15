@@ -41,5 +41,17 @@ module Mazi::Model
       self.enabled = false
       self.save
     end
+
+    def status
+      "ON"
+    end
+
+    def start
+      "OK"
+    end
+
+    def stop
+      "OK"
+    end
   end
 end

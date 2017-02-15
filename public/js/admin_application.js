@@ -43,4 +43,14 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('.start_app:enabled').click(function(){
+    var appId = $(this).attr('id').split('_').pop();
+    console.log(appId);
+  });
+
+  $('.stop_app:enabled').click(function(){
+    var appId = $(this).attr('id').split('_').pop();
+    console.log(appId);
+  });
 });

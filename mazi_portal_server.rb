@@ -214,6 +214,28 @@ class MaziApp < Sinatra::Base
     end
   end
 
+  # application status/start/stop
+  ut '/application/:id/action/:action/?' do |id, action|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id} action: #{action}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    else
+      app = Mazi::Model::Application.find(id: id)
+      res = 'FAIL'
+      case action
+      when 'start'
+        res = app.start
+      when 'stop'
+        res = app.stop
+      when 'status'
+        res = app.status
+      end
+      {result: res, id: id}.to_json
+    end
+  end
+
   # admin create notification
   post '/notification/?' do
     MaziLogger.debug "request: post/notification from ip: #{request.ip} creds: #{params.inspect}"
