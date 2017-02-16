@@ -41,6 +41,14 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data] = @config[:portal_configuration]
       erb :index_main, locals: locals
+    when 'index_statistics'
+      session['notifications_read'] = [] if session['notifications_read'].nil?
+      locals[:js] << "js/index_notifications.js"
+      locals[:main_body] = :index_statistics
+      locals[:local_data][:notifications] = Mazi::Model::Notification.all
+      locals[:local_data][:notifications_read] = session['notifications_read']
+      locals[:local_data][:config_data] = @config[:portal_configuration]
+      erb :index_main, locals: locals
     when 'admin'
       redirect 'admin_application'
     when 'admin_application'
@@ -215,7 +223,7 @@ class MaziApp < Sinatra::Base
   end
 
   # application status/start/stop
-  ut '/application/:id/action/:action/?' do |id, action|
+  put '/application/:id/action/:action/?' do |id, action|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id} action: #{action}"
     if !authorized?
       MaziLogger.debug "Not authorized"
