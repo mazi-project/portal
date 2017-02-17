@@ -50,7 +50,34 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:config_data] = @config[:portal_configuration]
       erb :index_main, locals: locals
     when 'admin'
-      redirect 'admin_application'
+      redirect 'admin_dashboard'
+    when 'admin_dashboard'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:js] << "js/admin_dashboard.js"
+      locals[:main_body] = :admin_dashboard
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      lines = ex.exec_command
+      locals[:local_data][:net_info] = {}
+      ssid = ex.parseFor('ssid')
+      locals[:local_data][:net_info][:ssid] = ssid[1] if ssid.kind_of? Array
+      mode = ex.parseFor('mode')
+      ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      lines = ex2.exec_command
+      users = ex2.parseFor('wifi users')
+      locals[:local_data][:users] = {}
+      locals[:local_data][:users][:online] = users[2] if ssid.kind_of? Array
+      locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
+      locals[:local_data][:applications] = Mazi::Model::Application.all
+      locals[:local_data][:notifications]  = Mazi::Model::Notification.all
+      unless session['error'].nil?
+        locals[:error_msg]  = session["error"]
+        session[:error] = nil
+      end
+      erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
         MaziLogger.debug "Not authorized"
@@ -64,6 +91,14 @@ class MaziApp < Sinatra::Base
         locals[:error_msg]  = session["error"]
         session[:error] = nil
       end
+      erb :admin_main, locals: locals
+    when 'admin_documentation'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:main_body] = :admin_documentation
       erb :admin_main, locals: locals
     when 'admin_network'
       unless authorized?
@@ -386,10 +421,10 @@ class MaziApp < Sinatra::Base
       data[:applications_title] = body['applications_title'] unless body['applications_title'].nil?  || body['applications_title'].empty?
       data[:applications_subtitle] = body['applications_subtitle'] unless body['applications_subtitle'].nil?  || body['applications_subtitle'].empty?
       data[:applications_welcome_text] = body['applications_welcome_text'] unless body['applications_welcome_text'].nil?  || body['applications_welcome_text'].empty?
-      data[:side_panel_color] = body['side_panel_color'].to_i unless body['side_panel_color'].nil?  || body['side_panel_color'].empty?
-      data[:side_panel_active_color] = body['side_panel_active_color'].to_i unless body['side_panel_active_color'].nil?  || body['side_panel_active_color'].empty?
-      data[:top_panel_color] = body['top_panel_color'].to_i unless body['top_panel_color'].nil?  || body['top_panel_color'].empty?
-      data[:top_panel_active_color] = body['top_panel_active_color'].to_i unless body['top_panel_active_color'].nil?  || body['top_panel_active_color'].empty?
+      data[:side_panel_color] = body['side_panel_color'] unless body['side_panel_color'].nil?  || body['side_panel_color'].empty?
+      data[:side_panel_active_color] = body['side_panel_active_color'] unless body['side_panel_active_color'].nil?  || body['side_panel_active_color'].empty?
+      data[:top_panel_color] = body['top_panel_color'] unless body['top_panel_color'].nil?  || body['top_panel_color'].empty?
+      data[:top_panel_active_color] = body['top_panel_active_color'] unless body['top_panel_active_color'].nil?  || body['top_panel_active_color'].empty?
       data.each do |key, value|
         changeConfigFile("portal_configuration->#{key}", value)
       end
