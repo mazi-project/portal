@@ -1,0 +1,115 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Mazizone <small>Dashboard</small>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+  <% end %>
+
+  <div class="col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Welcome</h3>
+      </div>
+      <div class="panel-body">
+        <p><strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the <em>industry's standard</em> dummy text ever since the 1500s, <code>code</code> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
+        <p><abbr title="HyperText Markup Language" class="initialism">HTML</abbr> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-lg-6'>
+    <div class="row">
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Networking
+              <a href="admin_network" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row col-with-divider">
+              <div class="col-xs-6 text-center"> 
+                <h2><%= users[:online] %></h2>
+                <small>Users Online Now</small>
+              </div>
+              <div class="col-xs-6 text-center"> 
+                <h2><%= net_info[:ssid] %></h2>
+                <small>Wi-Fi Network Info </small>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Applications
+              <a href="admin_application" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6 text-left"> 
+                <h2 class="no-margins"><%= applications.length %></h2>
+                <small>Applications Installed</small>
+              </div>
+              <div class="pull-right"><i class="fa fa-fw fa-5x fa-laptop"></i></div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Traffic</div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row col-with-divider">
+              <div class="col-xs-6 text-center"> 
+                <h2 class="no-margins">52</h2>
+                <small>Overall Portal Visits</small>
+              </div>
+              <div class="col-xs-6 text-center"> 
+                <h2 class="no-margins">78</h2>
+                <small>Application Visits</small>
+              </div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Notifications
+              <a href="admin_notification" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6 text-left"> 
+                <h2 class="no-margins"><%= notifications.length %></h2>
+                <small>Active Portal Notifications</small>
+              </div>
+              <div class="pull-right"><i class="fa fa-fw fa-5x fa-bell"></i></div>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
