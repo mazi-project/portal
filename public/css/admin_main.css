@@ -154,6 +154,10 @@ ul.alert-dropdown {
   color: #fff;
 }
 
+.activated{
+  background-color: #000;
+}
+
 /* Flot Chart Containers */
 
 .flot-chart {
@@ -372,4 +376,8 @@ input:checked + .slider:before {
 #pick-a-color-0{
   width: 150px;
   display: inline-table;
+}
+
+.col-with-divider > div:nth-child(1){
+  border-right: solid 1px #ddd;
 }

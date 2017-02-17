@@ -48,8 +48,19 @@
       </ul>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-          <li <%= 'class="active"' if main_body == :admin_application %> >
-            <a href="admin_application"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
+          <li <%= 'class="active"' if main_body == :admin_dashboard %> >
+            <a href="admin_dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+          </li>
+          <li <%= 'class="active"' if main_body == :admin_application || main_body == :admin_documentation %>>
+            <a href="javascript:;" data-toggle="collapse" data-target="#applications"><i class="fa fa-fw fa-laptop"></i> Applications <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="applications" class="<%= main_body == :admin_application || main_body == :admin_documentation ? 'active' : 'collapse' %>">
+              <li <%= 'class="activated"' if main_body == :admin_application %>>
+                <a href="admin_application"><i class="fa fa-fw fa-laptop"></i> Aplications</a>
+              </li>
+              <li <%= 'class="activated"' if main_body == :admin_documentation %>>
+                <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> Documentation</a>
+              </li>
+            </ul>
           </li>
           <li <%= 'class="active"' if main_body == :admin_network %>>
             <a href="admin_network"><i class="fa fa-fw fa-wifi"></i> Networking</a>
