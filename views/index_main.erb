@@ -119,10 +119,10 @@
       <% end %>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
-          <li class="active">
+          <li <%= 'class="active"' if main_body == :index_application %>>
             <a href="index"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
           </li>
-          <li>
+          <li <%= 'class="active"' if main_body == :index_statistics %>>
             <a href="index_statistics"><i class="fa fa-fw fa-dashboard"></i> Statistics</a>
           </li>
         </ul>
