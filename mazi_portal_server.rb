@@ -16,6 +16,7 @@ class MaziApp < Sinatra::Base
   def initialize
     super
     @config = loadConfigFile
+    MaziLogger.debug "INIT with config: #{@config}"
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
   end
@@ -199,6 +200,11 @@ class MaziApp < Sinatra::Base
       session['error'] = e
       redirect '/admin_application'
     end
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode create app"
+      session['error'] = "This portal runs on Demo mode! This action would have created a new application."
+      redirect '/admin_application'
+    end
 
     a =  Mazi::Model::Application.create(params)
     redirect '/admin_application'
@@ -220,6 +226,11 @@ class MaziApp < Sinatra::Base
     end
     id = params['id']
     app =  Mazi::Model::Application.find(id: params['id'].to_i)
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode edit app"
+      session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
+      redirect '/admin_application'
+    end
     app.name = params['name'] if params['name']
     app.url = params['url'] if params['url']
     app.description = params['description'] if params['description']
@@ -235,6 +246,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode delete app"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have deleted an existing application.", id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       app.destroy
@@ -264,6 +279,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode app action"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have run the action '#{action}' to an existing application.", id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       res = 'FAIL'
@@ -360,12 +379,21 @@ class MaziApp < Sinatra::Base
     case cmd
     when 'wifiap.sh'
       args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        md, vl = params['ssid'] ? ['ssid', params['ssid']] : params['channel'] ? ['channel', params['channel']] : params['password'] ? ['password', params['password']] : ['wpa', 'off']
+        session['error'] = "This portal runs on Demo mode! This action would have changed the '#{md}' to '#{vl}'"
+      end
       args << "-s #{params['ssid']}" if params['ssid']
       args << "-c #{params['channel']}" if params['channel']
       args << "-p #{params['password']}" if params['password']
       args << "-w off" if args.empty? && (params['password'].nil? || params['password'].empty?)
     when 'internet.sh'
       args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        session['error'] = "This portal runs on Demo mode! This action would have changed the 'network mode' to '#{params['mode']}'" if params['mode']
+      end
       args << "-m #{params['mode']}" if params['mode']
       redirect '/admin_network' if args.empty?
     else
@@ -389,6 +417,11 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       redirect '/admin_login'
+    end
+    if params['reset']
+      changePortalConfigToDefault
+      writeConfigFile
+      redirect '/admin_configuration'
     end
     data = {}
     data[:title] = params['title'] unless params['title'].nil? || params['title'].empty?

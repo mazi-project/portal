@@ -21,7 +21,7 @@
         <th>URL</th>
         <th>Description</th>
         <th>Click Counter</th>
-        <th>Actions</th>
+        <th class='text-center'>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -40,19 +40,21 @@
         <td><%= app.description %></td>
         <td><%= app.click_counter %></td>
         <td>
-          <div class="btn-group">
-            <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' %>>
-              <i class="fa fa-play" title="Align Left"></i>
-            </a>
-            <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'ON' %>>
-              <i class="fa fa-stop" title="Align Center"></i>
-            </a>
-            <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>">
-              <i class="fa fa-pencil" title="Align Right"></i>
-            </a>
-            <a class="btn btn-danger del_app" id='del_app_<%= app.id %>'>
-              <i class="fa fa-times" title="Align Justify"></i>
-            </a>
+          <div class="text-center">
+            <div class="btn-group pull-center">
+              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' %>>
+                <i class="fa fa-play" title="Align Left"></i>
+              </a>
+              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'ON' %>>
+                <i class="fa fa-stop" title="Align Center"></i>
+              </a>
+              <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>">
+                <i class="fa fa-pencil" title="Align Right"></i>
+              </a>
+              <a class="btn btn-danger del_app" id='del_app_<%= app.id %>'>
+                <i class="fa fa-times" title="Align Justify"></i>
+              </a>
+            </div>
           </div>
         </td>
       </tr>
@@ -66,7 +68,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="teal-text" data-toggle="modal" data-target="#new-application-modal"><i class="fa fa-plus"></i></a></td>
+        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
