@@ -7,6 +7,11 @@
 </div>
 
 <div class="row">
+  <% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+  <% end %>
   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Wi-Fi Network Settings</h3>
