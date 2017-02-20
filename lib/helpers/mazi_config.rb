@@ -4,6 +4,9 @@ TOPCOMMENTS = <<TEXT
 # This is the main configuration file for the mazizone portal.
 # If you manually change some values on this file a server restart is
 # mandatory for the changes to take effect.
+# On the general section:
+# - mode: (normal/demo) mode determines if there is an actual mazizone 
+#         or this runs just for demo purposes
 # On the admin section:
 # - admin_username: admin username for the admin panel
 # - admin_password: admin password for the admin panel.
@@ -22,6 +25,9 @@ TOPCOMMENTS = <<TEXT
 # - top_panel_color: top panel main color (hex value)
 # - side_panel_active_color: top panel active and on hover color (hex value)
 TEXT
+
+DEFAULTPORTALCONF = {title: 'Mazizone Portal', applications_title: 'Mazizone', applications_subtitle: 'Applications', applications_welcome_text: 'Welcome to the Mazizone Applications Portal, please
+    use the links bellow to navigate to the applications offered by Mazizone.', side_panel_color: '222', side_panel_active_color: '080808', top_panel_color:'222', top_panel_active_color: '080808'}
 
 module MaziConfig
   # loads the configuration file
@@ -65,5 +71,9 @@ module MaziConfig
       output.write str
     output.close
     @config
+  end
+
+  def changePortalConfigToDefault
+    @config[:portal_configuration] = DEFAULTPORTALCONF
   end
 end

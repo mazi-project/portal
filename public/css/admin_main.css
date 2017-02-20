@@ -381,3 +381,7 @@ input:checked + .slider:before {
 .col-with-divider > div:nth-child(1){
   border-right: solid 1px #ddd;
 }
+
+.reset-conf{
+  padding-left: 10px;
+}
