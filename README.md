@@ -8,7 +8,7 @@ Prerequirements
 
 Install the following packages:
 
-    $ apt-get install build-essentials git-core libsqlite3-dev ruby-dev
+    $ apt-get install build-essential git-core libsqlite3-dev ruby-dev
 
 Also install the following gems:
 
