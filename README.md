@@ -8,7 +8,8 @@ Prerequirements
 
 Install the following packages:
 
-    $ apt-get install build-essential git-core libsqlite3-dev ruby-dev
+    $ apt-get update
+    $ apt-get install build-essential git-core libsqlite3-dev ruby ruby-dev
 
 Also install the following gems:
 
@@ -18,8 +19,8 @@ Installation
 ------------
 
     $ git clone git@github.com:mazi-project/portal.git
-    $ cd mazizone_portal
-    $ rake db:init
+    $ cd portal
+    $ rake db:migrate
 
 Execution
 ---------
