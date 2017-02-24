@@ -8,87 +8,119 @@
       <br><br>
       <div class="tabbable" >
         <ul class="nav nav-tabs" id="myTabs">
-          <li class="active"><a href="#p1" data-toggle="tab"><strong>Application 1</strong></a></li>
-          <li><a href="#p2" data-toggle="tab"><strong>Application 2</strong></a></li>
+          <li class="active"><a href="#p1" data-toggle="tab"><strong>EtherPad</strong></a></li>
+          <li><a href="#p2" data-toggle="tab"><strong>NextCloud</strong></a></li>
           <li><a href="#p3" data-toggle="tab"><strong>Application 3</strong></a></li>
-          <li><a href="#p4" data-toggle="tab"><strong>Application 4</strong></a></li>
         </ul>
       </div>
     </div>
     <div class="panel-body">
       <div class="tab-content">
         <div class="tab-pane fade in active " id="p1">
-          <h3 class="text-center" id="pg1"> Application 1</h3>
+          <h3 class="text-center" id="pg1"> EtherPad</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan ligula velit, et tristique orci posuere ut. Nunc sed nisi lacinia, lobortis eros ac, dapibus purus. In luctus leo ante, quis pharetra enim elementum nec. Nam tincidunt egestas elit at efficitur. Quisque ut mollis dolor. Vestibulum ullamcorper semper faucibus. Aliquam vestibulum pharetra turpis. Nam dignissim nisi et purus placerat luctus. Aliquam nec condimentum leo. Cras quis scelerisque nunc, pharetra scelerisque quam. Duis dignissim quam non ligula varius fringilla. Aliquam suscipit egestas ante in fringilla. Ut interdum, lacus sed congue pharetra, sem ipsum tempus odio, eu condimentum sapien enim eu metus. Nulla convallis arcu ut urna scelerisque eleifend. Aliquam nec purus sed dolor ultricies aliquam sed nec nulla. Nulla ut ante eget orci bibendum pellentesque quis condimentum massa.
-
-            Suspendisse varius cursus mi ac gravida. Etiam varius pharetra ante, placerat cursus erat posuere sed. Donec consequat nibh sed eros rutrum lobortis. Cras turpis odio, tempor vitae vestibulum at, pulvinar eu diam. Phasellus facilisis finibus ligula, et volutpat purus interdum at. Pellentesque feugiat nisl libero, vitae consectetur diam volutpat vitae. In semper vehicula fermentum. Vivamus rutrum pretium lacus id egestas. Vestibulum pellentesque ultrices varius. Sed vitae ex eu mi faucibus suscipit ac non quam. Nullam vitae ante ex. Fusce placerat, sapien vitae imperdiet tincidunt, justo urna pulvinar ex, in tincidunt dolor diam vehicula urna. Nunc ex est, convallis eu tristique vulputate, pellentesque eu augue.
-
-            Praesent et lorem augue. Nam tincidunt ipsum velit, sit amet condimentum enim maximus id. Maecenas hendrerit consequat est, ac blandit purus. Phasellus sem massa, feugiat auctor sollicitudin quis, malesuada quis lacus. Duis commodo venenatis pharetra. Morbi a odio sit amet mi tristique gravida. Nam semper felis vitae quam dapibus luctus.
-
-            Mauris eu porttitor felis, ut pulvinar metus. Etiam at massa vitae massa elementum tempor quis at erat. Duis pretium tempus sem, sit amet blandit turpis eleifend a. Vivamus bibendum neque risus, et egestas erat auctor a. Nunc pulvinar pellentesque condimentum. Aenean non magna elit. In hac habitasse platea dictumst. Sed accumsan gravida metus, eget malesuada tellus placerat sed. Vivamus posuere tortor enim, id tempus lectus blandit maximus. Proin dictum, quam a ullamcorper tincidunt, purus orci cursus felis, id laoreet est elit vel nulla.
-
-            Aliquam eget enim quam. Morbi faucibus vitae dolor non fringilla. Morbi eget cursus purus. Donec velit purus, dignissim in libero mattis, molestie scelerisque justo. Nullam hendrerit in nunc et laoreet. Integer vestibulum neque ac mi vestibulum condimentum. Donec nec quam nisi. Integer ac mauris sit amet est egestas sagittis vel et quam. Fusce suscipit neque a mauris commodo, eget feugiat felis maximus.
+            <h4>Description</h4>
+            <p>
+              Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow students or colleagues, all working on the same document at the same time.All instances provide access to all data through a well-documented API and supports import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.
+            </p>
+            <h4>Administration Guide</h4>
+            <p>
+              You will find admin panel at <b>local.mazizone.eu:9001/admin</b></br>
+              <b>User Name :</b> admin</br>
+              <b>Password :</b> mazizone
+            </p>
+            <p>
+              In order to change the admin password, in the Admin panel select settings and change "mazizone" with your password 
+              <pre><code>
+              "users": {
+                "admin": {
+                  "password": "mazizone",
+                  "is_admin": true
+                },
+              }
+              </code></pre>
+            </p>
+            <img src="images/etherpad_doc.png" class="img-responsive center-block" alt="Image for Etherpad Admin Panel">
           </div>
           <div class="voffset9"></div>
         </div>
         
         <div class="tab-pane fade" id="p2">
-          <h3 class="text-center" id="pg2"> Application 2</h3>
+          <h3 class="text-center" id="pg1"> NextCloud</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
+            <h4>Description</h4>
+            <p>
+              Nextcloud is a private file sync & share and communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
+            </p>
+            <h4>Administration Guide</h4>
+            <p>
+              You will find admin panel at <b>local.mazizone.eu/nextcloud</b></br>
+              <b>User Name :</b> admin</br>
+              <b>Password :</b> mazizone
+            </p>
+            <img src="images/nextcloud_doc.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel" style='padding-bottom: 10px'>
+            <p>
+              To access your personal settings:</br>
+                1. Clicking on admin in the top, right corner of your nextCloud instance. The Personal Settings Menu opens.
+            </p>
+            <img src="images/nextcloud_doc2.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel 2">
+            <p>
+              2. Choose Personal from the drop down menu.
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan ligula velit, et tristique orci posuere ut. Nunc sed nisi lacinia, lobortis eros ac, dapibus purus. In luctus leo ante, quis pharetra enim elementum nec. Nam tincidunt egestas elit at efficitur. Quisque ut mollis dolor. Vestibulum ullamcorper semper faucibus. Aliquam vestibulum pharetra turpis. Nam dignissim nisi et purus placerat luctus. Aliquam nec condimentum leo. Cras quis scelerisque nunc, pharetra scelerisque quam. Duis dignissim quam non ligula varius fringilla. Aliquam suscipit egestas ante in fringilla. Ut interdum, lacus sed congue pharetra, sem ipsum tempus odio, eu condimentum sapien enim eu metus. Nulla convallis arcu ut urna scelerisque eleifend. Aliquam nec purus sed dolor ultricies aliquam sed nec nulla. Nulla ut ante eget orci bibendum pellentesque quis condimentum massa.
-
-            Suspendisse varius cursus mi ac gravida. Etiam varius pharetra ante, placerat cursus erat posuere sed. Donec consequat nibh sed eros rutrum lobortis. Cras turpis odio, tempor vitae vestibulum at, pulvinar eu diam. Phasellus facilisis finibus ligula, et volutpat purus interdum at. Pellentesque feugiat nisl libero, vitae consectetur diam volutpat vitae. In semper vehicula fermentum. Vivamus rutrum pretium lacus id egestas. Vestibulum pellentesque ultrices varius. Sed vitae ex eu mi faucibus suscipit ac non quam. Nullam vitae ante ex. Fusce placerat, sapien vitae imperdiet tincidunt, justo urna pulvinar ex, in tincidunt dolor diam vehicula urna. Nunc ex est, convallis eu tristique vulputate, pellentesque eu augue.
-
-            Praesent et lorem augue. Nam tincidunt ipsum velit, sit amet condimentum enim maximus id. Maecenas hendrerit consequat est, ac blandit purus. Phasellus sem massa, feugiat auctor sollicitudin quis, malesuada quis lacus. Duis commodo venenatis pharetra. Morbi a odio sit amet mi tristique gravida. Nam semper felis vitae quam dapibus luctus.
-
-            Mauris eu porttitor felis, ut pulvinar metus. Etiam at massa vitae massa elementum tempor quis at erat. Duis pretium tempus sem, sit amet blandit turpis eleifend a. Vivamus bibendum neque risus, et egestas erat auctor a. Nunc pulvinar pellentesque condimentum. Aenean non magna elit. In hac habitasse platea dictumst. Sed accumsan gravida metus, eget malesuada tellus placerat sed. Vivamus posuere tortor enim, id tempus lectus blandit maximus. Proin dictum, quam a ullamcorper tincidunt, purus orci cursus felis, id laoreet est elit vel nulla.
-
-            Aliquam eget enim quam. Morbi faucibus vitae dolor non fringilla. Morbi eget cursus purus. Donec velit purus, dignissim in libero mattis, molestie scelerisque justo. Nullam hendrerit in nunc et laoreet. Integer vestibulum neque ac mi vestibulum condimentum. Donec nec quam nisi. Integer ac mauris sit amet est egestas sagittis vel et quam. Fusce suscipit neque a mauris commodo, eget feugiat felis maximus.
-
-            <br><br>     
+              Some of the features you will see include the following.
+              <ul>
+               <li> Usage and available quota</li>
+               <li> Manage your profile picture.</li>
+               <li> Full name. You can make this anything you want, as it is separate from your login name, which is unique and cannot be changed.</li>
+               <li> Email address.</li>
+               <li> Lists your Group memberships.</li>
+               <li> Manage your password. </li>
+               <li> Choose the language for your nextCloud interface. </li>
+               <li> Links to desktop and mobile apps.</li>
+              </ul>
+            </p>
           </div>
+          <div class="voffset9"></div>
         </div>
         <div class="tab-pane fade" id="p3">
-          <h3 class="text-center" id="pg3"> Application 3</h3>
+          <h3 class="text-center" id="pg1"> Guest Book</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
+            <h4>Description</h4>
+            <p>
+              Nextcloud is a private file sync & share and communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
+            </p>
+            <h4>Administration Guide</h4>
+            <p>
+              You will find admin panel at <b>local.mazizone.eu/nextcloud</b></br>
+              <b>User Name :</b> admin</br>
+              <b>Password :</b> mazizone
+            </p>
+            <img src="images/nextcloud_doc.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel" style='padding-bottom: 10px'>
+            <p>
+              To access your personal settings:</br>
+                1. Clicking on admin in the top, right corner of your nextCloud instance. The Personal Settings Menu opens.
+            </p>
+            <img src="images/nextcloud_doc2.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel 2">
+            <p>
+              2. Choose Personal from the drop down menu.
 
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan ligula velit, et tristique orci posuere ut. Nunc sed nisi lacinia, lobortis eros ac, dapibus purus. In luctus leo ante, quis pharetra enim elementum nec. Nam tincidunt egestas elit at efficitur. Quisque ut mollis dolor. Vestibulum ullamcorper semper faucibus. Aliquam vestibulum pharetra turpis. Nam dignissim nisi et purus placerat luctus. Aliquam nec condimentum leo. Cras quis scelerisque nunc, pharetra scelerisque quam. Duis dignissim quam non ligula varius fringilla. Aliquam suscipit egestas ante in fringilla. Ut interdum, lacus sed congue pharetra, sem ipsum tempus odio, eu condimentum sapien enim eu metus. Nulla convallis arcu ut urna scelerisque eleifend. Aliquam nec purus sed dolor ultricies aliquam sed nec nulla. Nulla ut ante eget orci bibendum pellentesque quis condimentum massa.
-
-            Suspendisse varius cursus mi ac gravida. Etiam varius pharetra ante, placerat cursus erat posuere sed. Donec consequat nibh sed eros rutrum lobortis. Cras turpis odio, tempor vitae vestibulum at, pulvinar eu diam. Phasellus facilisis finibus ligula, et volutpat purus interdum at. Pellentesque feugiat nisl libero, vitae consectetur diam volutpat vitae. In semper vehicula fermentum. Vivamus rutrum pretium lacus id egestas. Vestibulum pellentesque ultrices varius. Sed vitae ex eu mi faucibus suscipit ac non quam. Nullam vitae ante ex. Fusce placerat, sapien vitae imperdiet tincidunt, justo urna pulvinar ex, in tincidunt dolor diam vehicula urna. Nunc ex est, convallis eu tristique vulputate, pellentesque eu augue.
-
-            Praesent et lorem augue. Nam tincidunt ipsum velit, sit amet condimentum enim maximus id. Maecenas hendrerit consequat est, ac blandit purus. Phasellus sem massa, feugiat auctor sollicitudin quis, malesuada quis lacus. Duis commodo venenatis pharetra. Morbi a odio sit amet mi tristique gravida. Nam semper felis vitae quam dapibus luctus.
-
-            Mauris eu porttitor felis, ut pulvinar metus. Etiam at massa vitae massa elementum tempor quis at erat. Duis pretium tempus sem, sit amet blandit turpis eleifend a. Vivamus bibendum neque risus, et egestas erat auctor a. Nunc pulvinar pellentesque condimentum. Aenean non magna elit. In hac habitasse platea dictumst. Sed accumsan gravida metus, eget malesuada tellus placerat sed. Vivamus posuere tortor enim, id tempus lectus blandit maximus. Proin dictum, quam a ullamcorper tincidunt, purus orci cursus felis, id laoreet est elit vel nulla.
-
-            Aliquam eget enim quam. Morbi faucibus vitae dolor non fringilla. Morbi eget cursus purus. Donec velit purus, dignissim in libero mattis, molestie scelerisque justo. Nullam hendrerit in nunc et laoreet. Integer vestibulum neque ac mi vestibulum condimentum. Donec nec quam nisi. Integer ac mauris sit amet est egestas sagittis vel et quam. Fusce suscipit neque a mauris commodo, eget feugiat felis maximus.
-
-            <br><br>     
+              Some of the features you will see include the following.
+              <ul>
+               <li> Usage and available quota</li>
+               <li> Manage your profile picture.</li>
+               <li> Full name. You can make this anything you want, as it is separate from your login name, which is unique and cannot be changed.</li>
+               <li> Email address.</li>
+               <li> Lists your Group memberships.</li>
+               <li> Manage your password. </li>
+               <li> Choose the language for your nextCloud interface. </li>
+               <li> Links to desktop and mobile apps.</li>
+              </ul>
+            </p>
           </div>
-        </div>
-
-        <div class="tab-pane fade" id="p4">
-          <h3 class="text-center" id="pg1"> Application 1</h3>
-          <br>
-          <div class="col-sm-12 col-md-12 col-lg-12">
-
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed accumsan ligula velit, et tristique orci posuere ut. Nunc sed nisi lacinia, lobortis eros ac, dapibus purus. In luctus leo ante, quis pharetra enim elementum nec. Nam tincidunt egestas elit at efficitur. Quisque ut mollis dolor. Vestibulum ullamcorper semper faucibus. Aliquam vestibulum pharetra turpis. Nam dignissim nisi et purus placerat luctus. Aliquam nec condimentum leo. Cras quis scelerisque nunc, pharetra scelerisque quam. Duis dignissim quam non ligula varius fringilla. Aliquam suscipit egestas ante in fringilla. Ut interdum, lacus sed congue pharetra, sem ipsum tempus odio, eu condimentum sapien enim eu metus. Nulla convallis arcu ut urna scelerisque eleifend. Aliquam nec purus sed dolor ultricies aliquam sed nec nulla. Nulla ut ante eget orci bibendum pellentesque quis condimentum massa.
-
-            Suspendisse varius cursus mi ac gravida. Etiam varius pharetra ante, placerat cursus erat posuere sed. Donec consequat nibh sed eros rutrum lobortis. Cras turpis odio, tempor vitae vestibulum at, pulvinar eu diam. Phasellus facilisis finibus ligula, et volutpat purus interdum at. Pellentesque feugiat nisl libero, vitae consectetur diam volutpat vitae. In semper vehicula fermentum. Vivamus rutrum pretium lacus id egestas. Vestibulum pellentesque ultrices varius. Sed vitae ex eu mi faucibus suscipit ac non quam. Nullam vitae ante ex. Fusce placerat, sapien vitae imperdiet tincidunt, justo urna pulvinar ex, in tincidunt dolor diam vehicula urna. Nunc ex est, convallis eu tristique vulputate, pellentesque eu augue.
-
-            Praesent et lorem augue. Nam tincidunt ipsum velit, sit amet condimentum enim maximus id. Maecenas hendrerit consequat est, ac blandit purus. Phasellus sem massa, feugiat auctor sollicitudin quis, malesuada quis lacus. Duis commodo venenatis pharetra. Morbi a odio sit amet mi tristique gravida. Nam semper felis vitae quam dapibus luctus.
-
-            Mauris eu porttitor felis, ut pulvinar metus. Etiam at massa vitae massa elementum tempor quis at erat. Duis pretium tempus sem, sit amet blandit turpis eleifend a. Vivamus bibendum neque risus, et egestas erat auctor a. Nunc pulvinar pellentesque condimentum. Aenean non magna elit. In hac habitasse platea dictumst. Sed accumsan gravida metus, eget malesuada tellus placerat sed. Vivamus posuere tortor enim, id tempus lectus blandit maximus. Proin dictum, quam a ullamcorper tincidunt, purus orci cursus felis, id laoreet est elit vel nulla.
-
-            Aliquam eget enim quam. Morbi faucibus vitae dolor non fringilla. Morbi eget cursus purus. Donec velit purus, dignissim in libero mattis, molestie scelerisque justo. Nullam hendrerit in nunc et laoreet. Integer vestibulum neque ac mi vestibulum condimentum. Donec nec quam nisi. Integer ac mauris sit amet est egestas sagittis vel et quam. Fusce suscipit neque a mauris commodo, eget feugiat felis maximus.
-
-            <br><br>     
-          </div>
+          <div class="voffset9"></div>
         </div>
       </div>
     </div>
