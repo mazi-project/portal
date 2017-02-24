@@ -15,4 +15,11 @@ $( document ).ready(function() {
       }
     });
   });
+
+  var heights = $(".panel-desc-txt-block").map(function() {
+    return $(this).height();
+  }).get(),
+  maxHeight = Math.max.apply(null, heights);
+
+  $(".panel-desc-txt-block").height(maxHeight);
 });

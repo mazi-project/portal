@@ -50,13 +50,37 @@ $( document ).ready(function() {
     });
   });
 
-  $('.start_app:enabled').click(function(){
+  $('.start_app').click(function(){
+    if ($(this).attr('disabled')){
+      return;
+    }
     var appId = $(this).attr('id').split('_').pop();
-    console.log(appId);
+    $.ajax({
+      url: '/application/' + appId + '/action/start/',
+      type: 'PUT',
+      success: function(result) {
+        id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        console.log(result);
+        window.setTimeout(function(){location.reload()},3000);
+      }
+    });
   });
 
-  $('.stop_app:enabled').click(function(){
+  $('.stop_app').click(function(){
+    if ($(this).attr('disabled')){
+      return;
+    }
     var appId = $(this).attr('id').split('_').pop();
-    console.log(appId);
+    $.ajax({
+      url: '/application/' + appId + '/action/stop/' ,
+      type: 'PUT',
+      success: function(result) {
+        id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        console.log(result);
+        window.setTimeout(function(){location.reload()},3000);
+      }
+    });
   });
 });

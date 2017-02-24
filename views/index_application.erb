@@ -17,15 +17,16 @@
 <div class="row">
   <% cnt = 0 %>
   <% colors = ['green', 'red', 'yellow', 'blue', 'purple']%>
-  <% icons = ['file-text-o', 'search', 'cloud', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
+  <% icons = ['search', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
   <% applications.each do |app| %>
   <% next unless app.enabled %>
+  <% icon = app.name == 'EtherPad' ? 'file-text-o' : app.name == 'NextCloud' ? 'cloud' : app.name == 'GuestBook' ? 'book' : icons[cnt % icons.length]%>
   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
     <div class="panel panel-<%= colors[cnt % colors.length] %>">
       <div class="panel-heading">
         <div class="row">
           <div class="col-xs-3">
-            <i class="fa fa-<%= icons[cnt % icons.length] %> fa-5x"></i>
+            <i class="fa fa-<%= icon %> fa-5x"></i>
           </div>
           <div class="col-xs-9 text-center">
               <div class="huge"><%= app.name %></div>
@@ -33,11 +34,11 @@
         </div>
         <div class="row">
           <div class="col-xs-11 text-justify">
-            <p class="panel-desc"><%= app.description %></p>
+            <p class="panel-desc panel-desc-txt-block"><%= app.description %></p>
           </div>
         </div>
       </div>
-      <a href="<%= app.url %>">
+      <a target="_blank" href="<%= app.url %>" class="app-link" id="app_link_<%= app.id %>">
         <div class="panel-footer">
           <span class="pull-left">Join Application</span>
           <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>

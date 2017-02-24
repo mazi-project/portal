@@ -21,7 +21,7 @@ class MaziExecCmd
   end
 
   def exec_command
-    return demoExec if @demo
+    return demoExec if @demo == 'demo'
     command = "#{@env} #{@path}#{@cmd} #{@args.join(' ')}"
     MaziLogger.debug "$ #{command}"
     @output = []
@@ -35,7 +35,7 @@ class MaziExecCmd
   end
 
   def parseFor(token, splitter=' ')
-    return demoParse(token, splitter) if @demo
+    return demoParse(token, splitter) if @demo == 'demo'
     @output.each do |line|
       return line.split(splitter) if line.include? token
     end

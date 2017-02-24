@@ -44,11 +44,20 @@ class MaziApp < Sinatra::Base
       erb :index_main, locals: locals
     when 'index_statistics'
       session['notifications_read'] = [] if session['notifications_read'].nil?
-      locals[:js] << "js/index_notifications.js"
+      locals[:js] << "js/index_statistics.js"
       locals[:main_body] = :index_statistics
       locals[:local_data][:notifications] = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data] = @config[:portal_configuration]
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      lines = ex.exec_command
+      users = ex.parseFor('wifi users')
+      locals[:local_data][:users] = {}
+      locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
+      locals[:local_data][:clicks] = 0
+      Mazi::Model::Application.all.each do |app|
+        locals[:local_data][:clicks] += app.click_counter
+      end
       erb :index_main, locals: locals
     when 'admin'
       redirect 'admin_dashboard'
@@ -70,7 +79,7 @@ class MaziApp < Sinatra::Base
       lines = ex2.exec_command
       users = ex2.parseFor('wifi users')
       locals[:local_data][:users] = {}
-      locals[:local_data][:users][:online] = users[2] if ssid.kind_of? Array
+      locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
       locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
       locals[:local_data][:applications] = Mazi::Model::Application.all
       locals[:local_data][:notifications]  = Mazi::Model::Notification.all
@@ -296,6 +305,15 @@ class MaziApp < Sinatra::Base
       end
       {result: res, id: id}.to_json
     end
+  end
+
+  # application counter +1
+  put '/application/:id/click_counter/?' do |id|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
+    app = Mazi::Model::Application.find(id: id)
+    app.click_counter = app.click_counter + 1
+    app.save
+    {result: 'OK', id: id}.to_json
   end
 
   # admin create notification

@@ -1,4 +1,5 @@
- 
+require "helpers/mazi_exec_cmd"
+
 module Mazi::Model
   class Application < Sequel::Model
     # validate if there is something missing in the 
@@ -43,14 +44,55 @@ module Mazi::Model
     end
 
     def status
-      "ON"
+      case self.name.downcase 
+      when 'nextcloud'
+        return 'ON'
+      when 'guestbook'
+        nm = 'mazi-board'
+      else
+        nm = self.name.downcase
+      end
+
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-app.sh', ['-a', 'status', nm], ['mazi-app.sh'], 'normal')
+      lines = ex.exec_command
+      case lines.first
+      when 'active'
+        return 'ON'
+      when 'inactive'
+        return 'OFF'
+      end
+      return 'FAIL'
     end
 
     def start
+      case self.name.downcase 
+      when 'nextcloud'
+        return 'ON'
+      when 'guestbook'
+        nm = 'mazi-board'
+      else
+        nm = self.name.downcase
+      end
+
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-app.sh', ['-a', 'start', nm], ['mazi-app.sh'], 'normal')
+      ex.exec_command
+
       "OK"
     end
 
     def stop
+      case self.name.downcase 
+      when 'nextcloud'
+        return 'ON'
+      when 'guestbook'
+        nm = 'mazi-board'
+      else
+        nm = self.name.downcase
+      end
+
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-app.sh', ['-a', 'stop', nm], ['mazi-app.sh'], 'normal')
+      ex.exec_command
+
       "OK"
     end
   end

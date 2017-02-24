@@ -263,8 +263,8 @@ ul.alert-dropdown {
 }
 
 .panel-desc {
-  height: 50px;
   padding-top: 5px;
+  display: inline-block;
 }
 
 /*additions*/
