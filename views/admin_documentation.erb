@@ -10,7 +10,7 @@
         <ul class="nav nav-tabs" id="myTabs">
           <li class="active"><a href="#p1" data-toggle="tab"><strong>EtherPad</strong></a></li>
           <li><a href="#p2" data-toggle="tab"><strong>NextCloud</strong></a></li>
-          <li><a href="#p3" data-toggle="tab"><strong>Application 3</strong></a></li>
+          <li><a href="#p3" data-toggle="tab"><strong>Guest Book</strong></a></li>
         </ul>
       </div>
     </div>
@@ -52,7 +52,7 @@
           <div class="col-sm-12 col-md-12 col-lg-12">
             <h4>Description</h4>
             <p>
-              Nextcloud is a private file sync & share and communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
+              Nextcloud is a private file sync and share communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
             </p>
             <h4>Administration Guide</h4>
             <p>
@@ -90,33 +90,40 @@
           <div class="col-sm-12 col-md-12 col-lg-12">
             <h4>Description</h4>
             <p>
-              Nextcloud is a private file sync & share and communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
+              The MAZI Guest Book is an open source application that can used in events enabling the audience to share their thoughts, photos, etc
             </p>
+            <img src="images/guestbook_doc.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel" style='padding-bottom: 10px'>
             <h4>Administration Guide</h4>
             <p>
-              You will find admin panel at <b>local.mazizone.eu/nextcloud</b></br>
-              <b>User Name :</b> admin</br>
-              <b>Password :</b> mazizone
+              Log in to your Raspberry Pi, and then:
             </p>
-            <img src="images/nextcloud_doc.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel" style='padding-bottom: 10px'>
             <p>
-              To access your personal settings:</br>
-                1. Clicking on admin in the top, right corner of your nextCloud instance. The Personal Settings Menu opens.
-            </p>
-            <img src="images/nextcloud_doc2.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel 2">
-            <p>
-              2. Choose Personal from the drop down menu.
-
-              Some of the features you will see include the following.
+              To configure the Guest Book application:</br>
               <ul>
-               <li> Usage and available quota</li>
-               <li> Manage your profile picture.</li>
-               <li> Full name. You can make this anything you want, as it is separate from your login name, which is unique and cannot be changed.</li>
-               <li> Email address.</li>
-               <li> Lists your Group memberships.</li>
-               <li> Manage your password. </li>
-               <li> Choose the language for your nextCloud interface. </li>
-               <li> Links to desktop and mobile apps.</li>
+                <li>
+                  1. In order to change tags, open the config.js(/var/www/html/mazi-board/src/www/js/config.js ) file with your favorite editor and change the names of tags 
+                  <pre><code>
+                    tags: ['tag1', 'tag2', 'tag3', 'tag4']
+                  </code></pre>
+                </li>
+                <li>
+                  2. In order to change the backgournd image,  save your image in images folder (/var/www/html/mazi-board/src/www/images), then edit this file (/var/www/html/mazi-board/src/www/js/template/header_tmp.html) and replace the header-img.jpg with your image name 
+                  <pre>
+                    <code>
+                      &lt;div class="header-bar"&gt;&lt;/div&gt;
+                      &lt;div class="header-image column"&gt;&lt;img src="images/header-img.jpg"&gt;&lt;/div&gt;
+                    </code>
+                  </pre>
+                </li>
+                  3. In order to change the admin password, open the config.js file (/var/www/html/mazi-board/src/node/config.js ) with your favourite editor and then change the authPassword: 
+                  <pre>
+                    <code>
+                      /* AUTH DATA */
+                        authName: 'admin',
+                        authPassword: 'password',
+                    </code>
+                  </pre>
+                </li>
               </ul>
             </p>
           </div>
