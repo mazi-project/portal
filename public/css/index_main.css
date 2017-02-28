@@ -154,6 +154,21 @@ ul.alert-dropdown {
   color: #fff;
 }
 
+/* Bottom Navigation */
+
+.bot-nav{
+  color: #999;
+  background-color: #222;
+}
+
+.bot-nav > div > div > p {
+  text-align: center;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+
 /* Flot Chart Containers */
 
 .flot-chart {

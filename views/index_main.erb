@@ -59,6 +59,10 @@
     .navbar-inverse .navbar-collapse, .navbar-inverse .navbar-form {
       background-color: #<%= local_data[:config_data][:top_panel_color]%> !important;
     }
+
+    .bot-nav{
+      background-color: #<%= local_data[:config_data][:top_panel_color]%> !important;
+    }
   </style>
 </head>
 
@@ -110,6 +114,14 @@
             <a href="index_statistics"><i class="fa fa-fw fa-dashboard"></i> Statistics</a>
           </li>
         </ul>
+      </div>
+      <div class="navbar navbar-fixed-bottom bot-nav">
+        <div class="row">
+          <div class="col-sm-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
+            <p>MAZI Project</p>
+            <p><small>This software has been developed with funds from the European Union’s H2020 Programme under grant agreement no 687983.</small></p>
+          </div>
+        </div>
       </div>
     </nav>
 
