@@ -27,7 +27,7 @@ TOPCOMMENTS = <<TEXT
 TEXT
 
 DEFAULTPORTALCONF = {title: 'Mazizone Portal', applications_title: 'Mazizone', applications_subtitle: 'Applications', applications_welcome_text: 'Welcome to the Mazizone Applications Portal, please
-    use the links bellow to navigate to the applications offered by Mazizone.', side_panel_color: '222', side_panel_active_color: '080808', top_panel_color:'222', top_panel_active_color: '080808'}
+    use the links bellow to navigate to the applications offered by this Mazizone.', side_panel_color: '222', side_panel_active_color: '080808', top_panel_color:'222', top_panel_active_color: '080808'}
 
 module MaziConfig
   # loads the configuration file
