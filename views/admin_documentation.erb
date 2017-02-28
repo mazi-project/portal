@@ -26,7 +26,7 @@
             </p>
             <h4>Administration Guide</h4>
             <p>
-              You will find admin panel at <b>local.mazizone.eu:9001/admin</b></br>
+              You will find admin page at the <b>local.mazizone.eu:9001/admin</b></br>
               <b>User Name :</b> admin</br>
               <b>Password :</b> mazizone
             </p>
@@ -95,27 +95,48 @@
             <img src="images/guestbook_doc.png" class="img-responsive center-block" alt="Image for NextCloud Admin Panel" style='padding-bottom: 10px'>
             <h4>Administration Guide</h4>
             <p>
-              Log in to your Raspberry Pi, and then:
+              To moderate the content, you go to <b>http://local.mazizone.eu:8081/#admin</b> (username: <b>admin</b> password: <b>mazizone</b>), where you can delete submission that are inappropriate
             </p>
             <p>
-              To configure the Guest Book application:</br>
-              <ul>
-                <li>
-                  1. In order to change tags, open the config.js(/var/www/html/mazi-board/src/www/js/config.js ) file with your favorite editor and change the names of tags 
+               For slideshow <b>http://local.mazizone.eu:8081/projection</b>
+            </p>
+              <h4>Useful Guidelines</h4>
+               <p>You can modify the appearance of the GuestBook</p>
+             <ul>
+                <li>Tags</li>
+                <li>Background Image</li>
+                <li>Admin Password</li>
+                <li>Message</li>
+             </ul>               
+              <p>
+                First logging into your Raspberry pi. The login for raspberry is</br> 
+                 <b>User Name:</b> pi</br>
+                 <b>Password:</b> mazizone
+                </p>
+                 <b>Tags</b>
+                 <p> 
+                  In order to change tags,Open the config.js file, which takes place in this path: /var/www/html/mazi-board/src/www/js/config.js</br> 
+                  You can remove or edit a tag as you wish in this code line</br>  
                   <pre><code>
-                    tags: ['tag1', 'tag2', 'tag3', 'tag4']
+                    tags: ['Artist', 'Activist', 'Male', 'Female', 'Student', 'Professor', 'DSIMaker', 'PolicyMaker']
                   </code></pre>
-                </li>
-                <li>
-                  2. In order to change the backgournd image,  save your image in images folder (/var/www/html/mazi-board/src/www/images), then edit this file (/var/www/html/mazi-board/src/www/js/template/header_tmp.html) and replace the header-img.jpg with your image name 
+                </p>
+                 <b>Backgournd Image</b>
+                 <p>
+                  In order to change the backgournd image,save the image you want in this following path:/var/www/html/mazi-board/src/www/images</br>
+                  Replace the DSI.jpg of the following code, with the name of your image.</br>
+                  This code path is placed to /var/www/html/mazi-board/src/www/js/templates/header_tmpl.html </br>  
                   <pre>
                     <code>
                       &lt;div class="header-bar"&gt;&lt;/div&gt;
-                      &lt;div class="header-image column"&gt;&lt;img src="images/header-img.jpg"&gt;&lt;/div&gt;
+                      &lt;div class="header-image column"&gt;&lt;img src="images/DSI.jpg"&gt;&lt;/div&gt;
                     </code>
                   </pre>
-                </li>
-                  3. In order to change the admin password, open the config.js file (/var/www/html/mazi-board/src/node/config.js ) with your favourite editor and then change the authPassword: 
+                </p>
+                 <b>Admin Password</b> 
+                 <p>
+                  In order to change the admin password, open the config.js file ,which takes place in this path: /var/www/html/mazi-board/src/node/config.js,</br>
+                  and then fill  the <b>authPassword</b> with the password you like. 
                   <pre>
                     <code>
                       /* AUTH DATA */
@@ -123,9 +144,13 @@
                         authPassword: 'password',
                     </code>
                   </pre>
-                </li>
-              </ul>
-            </p>
+                 </p>
+                 <b>Message</b>
+                 <p>
+                  In order to change the message, open the submission_input_tmpl.html file , which takes place in this path:/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html,</br> 
+                  and then change the message <b>(Click here to join the Guest Book...)</b> With the message you wish to be displayed  
+                 </p>
+              </p>
           </div>
           <div class="voffset9"></div>
         </div>
