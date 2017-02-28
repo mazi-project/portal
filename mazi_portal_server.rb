@@ -28,6 +28,12 @@ class MaziApp < Sinatra::Base
   # this is the main routing configuration that routes all the erb files
   get '/:index/?' do |index|
     MaziLogger.debug "request: get/#{index} from ip: #{request.ip}"
+    if session['uuid'].nil?
+      s = Mazi::Model::Session.create
+      s.ip = request.ip
+      s.save
+      session['uuid'] = s.uuid
+    end
     locals = {}
     locals[:local_data] = {}
     locals[:js] = []
