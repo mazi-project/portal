@@ -34,34 +34,34 @@ class MaziApp < Sinatra::Base
       s.save
       session['uuid'] = s.uuid
     end
-    locals = {}
-    locals[:local_data] = {}
+    locals                     = {}
+    locals[:local_data]        = {}
     locals[:local_data][:mode] = @config[:general][:mode]
-    locals[:js] = []
-    locals[:error_msg] = nil
+    locals[:js]                = []
+    locals[:error_msg]         = nil
     case index
     when 'index'
       session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
-      locals[:local_data][:applications] = Mazi::Model::Application.all
-      locals[:local_data][:notifications] = Mazi::Model::Notification.all
+      locals[:local_data][:applications]       = Mazi::Model::Application.all
+      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
-      locals[:local_data][:config_data] = @config[:portal_configuration]
+      locals[:local_data][:config_data]        = @config[:portal_configuration]
       erb :index_main, locals: locals
     when 'index_statistics'
       session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_statistics.js"
       locals[:main_body] = :index_statistics
-      locals[:local_data][:notifications] = Mazi::Model::Notification.all
+      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
-      locals[:local_data][:config_data] = @config[:portal_configuration]
+      locals[:local_data][:config_data]        = @config[:portal_configuration]
       ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       lines = ex.exec_command
       users = ex.parseFor('wifi users')
-      locals[:local_data][:users] = {}
+      locals[:local_data][:users]          = {}
       locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
-      locals[:local_data][:clicks] = 0
+      locals[:local_data][:clicks]         = 0
       Mazi::Model::Application.all.each do |app|
         locals[:local_data][:clicks] += app.click_counter
       end
@@ -85,11 +85,12 @@ class MaziApp < Sinatra::Base
       ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       lines = ex2.exec_command
       users = ex2.parseFor('wifi users')
-      locals[:local_data][:users] = {}
-      locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
+      locals[:local_data][:users]           = {}
+      locals[:local_data][:users][:online]  = users[2] if users.kind_of? Array
       locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
-      locals[:local_data][:applications] = Mazi::Model::Application.all
-      locals[:local_data][:notifications]  = Mazi::Model::Notification.all
+      locals[:local_data][:applications]    = Mazi::Model::Application.all
+      locals[:local_data][:notifications]   = Mazi::Model::Notification.all
+      locals[:local_data][:sessions]        = Mazi::Model::Session.all
       unless session['error'].nil?
         locals[:error_msg]  = session["error"]
         session[:error] = nil
@@ -148,8 +149,6 @@ class MaziApp < Sinatra::Base
         redirect '/admin_login'
       end
       locals[:js] << "js/admin_network.js"
-      # locals[:js] << "js/tinycolor-0.9.15.min.js"
-      # locals[:js] << "js/pick-a-color-1.2.3.min.js"
       locals[:js] << "js/jscolor.min.js"
       locals[:main_body] = :admin_configuration
       locals[:local_data][:portal_configuration] = @config[:portal_configuration]
@@ -162,7 +161,7 @@ class MaziApp < Sinatra::Base
       end
       locals[:js] << "js/admin_notification.js"
       locals[:main_body] = :admin_notification
-      locals[:local_data][:notifications]  = Mazi::Model::Notification.all
+      locals[:local_data][:notifications] = Mazi::Model::Notification.all
       unless session['error'].nil?
         locals[:error_msg]  = session["error"]
         session[:error] = nil
@@ -247,10 +246,10 @@ class MaziApp < Sinatra::Base
       session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
       redirect '/admin_application'
     end
-    app.name = params['name'] if params['name']
-    app.url = params['url'] if params['url']
+    app.name        = params['name'] if params['name']
+    app.url         = params['url'] if params['url']
     app.description = params['description'] if params['description']
-    app.enabled = params['enabled'] if params['enabled']
+    app.enabled     = params['enabled'] if params['enabled']
     app.save
     redirect '/admin_application'
   end
@@ -345,9 +344,9 @@ class MaziApp < Sinatra::Base
       redirect '/admin_login'
     end
     id = params['id']
-    notif =  Mazi::Model::Notification.find(id: params['id'].to_i)
-    notif.title = params['title'] if params['title']
-    notif.body = params['body'] if params['body']
+    notif         =  Mazi::Model::Notification.find(id: params['id'].to_i)
+    notif.title   = params['title'] if params['title']
+    notif.body    = params['body'] if params['body']
     notif.enabled = params['enabled'] if params['enabled']
     notif.save
     redirect '/admin_notification'
@@ -449,14 +448,14 @@ class MaziApp < Sinatra::Base
       redirect '/admin_configuration'
     end
     data = {}
-    data[:title] = params['title'] unless params['title'].nil? || params['title'].empty?
-    data[:applications_title] = params['applications_title'] unless params['applications_title'].nil?  || params['applications_title'].empty?
-    data[:applications_subtitle] = params['applications_subtitle'] unless params['applications_subtitle'].nil?  || params['applications_subtitle'].empty?
+    data[:title]                     = params['title'] unless params['title'].nil? || params['title'].empty?
+    data[:applications_title]        = params['applications_title'] unless params['applications_title'].nil?  || params['applications_title'].empty?
+    data[:applications_subtitle]     = params['applications_subtitle'] unless params['applications_subtitle'].nil?  || params['applications_subtitle'].empty?
     data[:applications_welcome_text] = params['applications_welcome_text'] unless params['applications_welcome_text'].nil?  || params['applications_welcome_text'].empty?
-    data[:side_panel_color] = params['side_panel_color'] unless params['side_panel_color'].nil?  || params['side_panel_color'].empty?
-    data[:side_panel_active_color] = params['side_panel_active_color'] unless params['side_panel_active_color'].nil?  || params['side_panel_active_color'].empty?
-    data[:top_panel_color] = params['top_panel_color'] unless params['top_panel_color'].nil?  || params['top_panel_color'].empty?
-    data[:top_panel_active_color] = params['top_panel_active_color'] unless params['top_panel_active_color'].nil?  || params['top_panel_active_color'].empty?
+    data[:side_panel_color]          = params['side_panel_color'] unless params['side_panel_color'].nil?  || params['side_panel_color'].empty?
+    data[:side_panel_active_color]   = params['side_panel_active_color'] unless params['side_panel_active_color'].nil?  || params['side_panel_active_color'].empty?
+    data[:top_panel_color]           = params['top_panel_color'] unless params['top_panel_color'].nil?  || params['top_panel_color'].empty?
+    data[:top_panel_active_color]    = params['top_panel_active_color'] unless params['top_panel_active_color'].nil?  || params['top_panel_active_color'].empty?
     data.each do |key, value|
       changeConfigFile("portal_configuration->#{key}", value)
     end
@@ -475,14 +474,14 @@ class MaziApp < Sinatra::Base
       {error: 'Not Authorized!'}.to_json
     else
       data = {}
-      data[:title] = body['title'] unless body['title'].nil? || body['title'].empty?
-      data[:applications_title] = body['applications_title'] unless body['applications_title'].nil?  || body['applications_title'].empty?
-      data[:applications_subtitle] = body['applications_subtitle'] unless body['applications_subtitle'].nil?  || body['applications_subtitle'].empty?
+      data[:title]                     = body['title'] unless body['title'].nil? || body['title'].empty?
+      data[:applications_title]        = body['applications_title'] unless body['applications_title'].nil?  || body['applications_title'].empty?
+      data[:applications_subtitle]     = body['applications_subtitle'] unless body['applications_subtitle'].nil?  || body['applications_subtitle'].empty?
       data[:applications_welcome_text] = body['applications_welcome_text'] unless body['applications_welcome_text'].nil?  || body['applications_welcome_text'].empty?
-      data[:side_panel_color] = body['side_panel_color'] unless body['side_panel_color'].nil?  || body['side_panel_color'].empty?
-      data[:side_panel_active_color] = body['side_panel_active_color'] unless body['side_panel_active_color'].nil?  || body['side_panel_active_color'].empty?
-      data[:top_panel_color] = body['top_panel_color'] unless body['top_panel_color'].nil?  || body['top_panel_color'].empty?
-      data[:top_panel_active_color] = body['top_panel_active_color'] unless body['top_panel_active_color'].nil?  || body['top_panel_active_color'].empty?
+      data[:side_panel_color]          = body['side_panel_color'] unless body['side_panel_color'].nil?  || body['side_panel_color'].empty?
+      data[:side_panel_active_color]   = body['side_panel_active_color'] unless body['side_panel_active_color'].nil?  || body['side_panel_active_color'].empty?
+      data[:top_panel_color]           = body['top_panel_color'] unless body['top_panel_color'].nil?  || body['top_panel_color'].empty?
+      data[:top_panel_active_color]    = body['top_panel_active_color'] unless body['top_panel_active_color'].nil?  || body['top_panel_active_color'].empty?
       data.each do |key, value|
         changeConfigFile("portal_configuration->#{key}", value)
       end

@@ -70,6 +70,8 @@
         </div>
       </div>
 
+      <% clicks = 0 %>
+      <% applications.each {|app| clicks += app.click_counter} %>
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
@@ -79,11 +81,11 @@
           <div class="panel-body">
             <div class="row col-with-divider">
               <div class="col-xs-6 text-center"> 
-                <h2 class="no-margins">52</h2>
+                <h2 class="no-margins"><%= sessions.length %></h2>
                 <small>Overall Portal Visits</small>
               </div>
               <div class="col-xs-6 text-center"> 
-                <h2 class="no-margins">78</h2>
+                <h2 class="no-margins"><%= clicks %></h2>
                 <small>Application Visits</small>
               </div>
             </div>
