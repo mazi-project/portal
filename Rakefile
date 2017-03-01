@@ -1,6 +1,24 @@
 require 'rubygems'
+require 'fileutils'
 
 db = "sqlite://database/inventory.db"
+
+desc "Run migrations ('rake db:migrate' to run all migrations, 'rake db:migrate[10]'' to run the 10th migration, 'rake db:migrate[0] to reset the db)"
+task :init do
+  puts "Initializing"
+  unless File.directory?("/etc/mazi")
+    puts "Folder '/etc/mazi' does not exist. Generating."
+    FileUtils.mkdir_p("/etc/mazi")
+  end
+
+  unless File.exist?("/etc/mazi/config.yml")
+    puts "File '/etc/mazi/config.yml' does not exist. Generating."
+    FileUtils.cp 'etc/config.yml', '/etc/mazi/config.yml'
+  end
+
+  puts "done!"
+end
+
 
 namespace :db do
   desc "Run migrations ('rake db:migrate' to run all migrations, 'rake db:migrate[10]'' to run the 10th migration, 'rake db:migrate[0] to reset the db)"
