@@ -294,10 +294,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
-    elif @config[:general][:mode] == 'demo'
-      MaziLogger.debug "Demo mode app action"
-      session['error'] = nil
-      {error: "This portal runs on Demo mode! This action would have run the action '#{action}' to an existing application.", id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode app acion"
+      session['error'] = "This portal runs on Demo mode! This would have run the action '#{action}' to an existing application."
+      {error: "This portal runs on Demo mode! This would have run the action '#{action}' to an existing application.", id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       res = 'FAIL'
