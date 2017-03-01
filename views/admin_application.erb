@@ -26,7 +26,7 @@
     </thead>
     <tbody>
       <% applications.each do |app| %>
-        <% status = app.status %>
+        <% status = mode != 'demo' ? app.status : "ON" %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
         <td scope="row">
           <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">

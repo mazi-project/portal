@@ -36,6 +36,7 @@ class MaziApp < Sinatra::Base
     end
     locals = {}
     locals[:local_data] = {}
+    locals[:local_data][:mode] = @config[:general][:mode]
     locals[:js] = []
     locals[:error_msg] = nil
     case index
