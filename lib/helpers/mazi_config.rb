@@ -31,7 +31,7 @@ DEFAULTPORTALCONF = {title: 'Mazizone Portal', applications_title: 'Mazizone', a
 
 module MaziConfig
   # loads the configuration file
-  def loadConfigFile(file='etc/config.yml')
+  def loadConfigFile(file='/etc/mazi/config.yml')
     @config = YAML::load(File.open(file))
   end
 
@@ -57,7 +57,7 @@ module MaziConfig
   end
 
   # saves the changes on the current configuration file
-  def writeConfigFile(conf=nil, file='etc/config.yml')
+  def writeConfigFile(conf=nil, file='/etc/mazi/config.yml')
     @config = conf.nil? ? readConfigFile : conf
     File.open(file, 'w+') { |f| YAML.dump(@config, f) }
     f = File.open(file, "r+")
