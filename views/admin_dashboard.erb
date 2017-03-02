@@ -13,7 +13,7 @@
   </div>
   <% end %>
 
-  <div class="col-md-6">
+  <div class="col-md-4 col-lg-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Welcome</h3>
@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class='col-lg-6'>
+  <div class='col-md-8 col-lg-6'>
     <div class="row">
       <div class='col-md-6'>
         <div class="panel panel-default">
@@ -75,7 +75,17 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
-            <div class="panel-title">Traffic</div>
+            <div class="panel-title">Traffic
+              <div class="dropdown pull-right">
+                <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  <i class="fa fa-wrench"></i>
+                </div>
+                <ul class="dropdown-menu dropdown-user dropdown-menu-right">
+                  <li><a class="reset-app-clicks"><i class="fa fa-refresh"></i> Reset Application Clicks</a></li>
+                  <li><a class="reset-visits"><i class="fa fa-refresh"></i> Reset Visits</a></li>
+                </ul>
+              </div>
+            </div>
           </div> 
           <!-- panel body --> 
           <div class="panel-body">

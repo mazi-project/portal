@@ -322,6 +322,28 @@ class MaziApp < Sinatra::Base
     {result: 'OK', id: id}.to_json
   end
 
+  # application counter reset
+  delete '/application/:id/click_counter/?' do |id|
+    MaziLogger.debug "request: delete/application/click_counter from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', id: id}.to_json
+    end
+
+    if id == 'all'
+      Mazi::Model::Application.all.each do |app|
+        app.click_counter = 0
+        app.save
+      end
+    else
+      app = Mazi::Model::Application.find(id: id)
+      app.click_counter = 0
+      app.save
+    end
+    {result: 'OK', id: id}.to_json
+  end
+
   # admin create notification
   post '/notification/?' do
     MaziLogger.debug "request: post/notification from ip: #{request.ip} creds: #{params.inspect}"
@@ -488,6 +510,26 @@ class MaziApp < Sinatra::Base
       writeConfigFile
       {result: 'OK'}.to_json
     end
+  end
+
+  # application counter reset
+  delete '/session/:id/?' do |id|
+    MaziLogger.debug "request: delete/session from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', id: id}.to_json
+    end
+
+    if id == 'all'
+      Mazi::Model::Session.all.each do |ses|
+        ses.destroy
+      end
+    else
+      ses = Mazi::Model::Session.find(id: id)
+      ses.destroy
+    end
+    {result: 'OK', id: id}.to_json
   end
 end
 
