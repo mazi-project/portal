@@ -81,17 +81,18 @@
       </div>
       <%
         flag = false
+        nof_notifications_enabled = 0
         local_data[:notifications].each do |notification|
           if notification.enabled
             flag = true
-            break
+            nof_notifications_enabled += 1 unless local_data[:notifications_read].include?(notification.id)
           end
         end unless local_data[:notifications].nil? || local_data[:notifications].empty?
       %>
       <% if flag %>
       <ul class="nav navbar-right top-nav">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
             <% local_data[:notifications].each do |notification|%>
             <% next unless notification.enabled %>
