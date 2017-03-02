@@ -51,7 +51,7 @@
           <div class="container">
             <div class="fluid-row">
               <div class="col-xs-12">
-                <p>The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used channel to change it.</p>
+                <p>Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used channel to change it.</p>
               </div>
             </div>
           </div>
@@ -182,7 +182,7 @@
           <div class="form-group">
             <input type="hidden" name="env" value='sh'>
             <input type="hidden" name="cmd" value='wifiap.sh'>
-            <input type="text" name="password" class="form-control" value='<%= net_info[:password] %>' required autofocus>
+            <input type="text" name="password" class="form-control" value='<%= net_info[:password] == '-' ? '' : net_info[:password] %>' autofocus>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>
         </form>
@@ -218,7 +218,7 @@
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="mode" id="optionsRadios3" value="restricted" <%= 'checked' if net_info[:mode] == 'restricted' %>>restricted
+                    <input type="radio" name="mode" id="optionsRadios3" value="restricted" <%= 'checked' if net_info[:mode] == 'restricted' %> disabled>restricted
                   </label>
                 </div>
             </div>
