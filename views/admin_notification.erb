@@ -19,7 +19,7 @@
         <th>Status</th>
         <th>Title</th>
         <th>Body</th>
-        <th>Actions</th>
+        <th class='text-center'>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -35,11 +35,15 @@
         <td><%= notification.title %></td>
         <td><%= notification.body %></td>
         <td>
-          <a class="teal-text edit_notification" id='edit_notification_<%= notification.id %>' data-toggle="modal" data-target="#edit-notification-modal-<%= notification.id %>"><i class="fa fa-pencil"></i></a>
-          <a class="red-text del_notification" id='del_notification_<%= notification.id %>'><i class="fa fa-times"></i></a>
+          <div class="text-center">
+            <div class="btn-group pull-center">
+              <a class="btn btn-info edit_notification" id='edit_notification_<%= notification.id %>' data-toggle="modal" data-target="#edit-notification-modal-<%= notification.id %>"><i class="fa fa-pencil"></i></a>
+              <a class="btn btn-danger del_notification" id='del_notification_<%= notification.id %>'><i class="fa fa-times"></i></a>
+            </div>
+          </div>
         </td>
       </tr>
-      <% end %> 
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
@@ -47,7 +51,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="teal-text" data-toggle="modal" data-target="#new-notification-modal"><i class="fa fa-plus"></i></a></td>
+        <td><a class="btn btn-success pull-right" data-toggle="modal" data-target="#new-notification-modal"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
