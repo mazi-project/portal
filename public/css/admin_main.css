@@ -383,5 +383,15 @@ input:checked + .slider:before {
 }
 
 .reset-conf{
-  padding-left: 10px;
+  margin-right: 20px;
+  margin-left: 5px;
+}
+
+.save-conf{
+  margin-left: 20px;
+  margin-right: 5px;
+}
+
+#load-snapshot-submit{
+  margin-right: 10px;
 }

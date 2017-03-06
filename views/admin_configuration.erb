@@ -168,9 +168,17 @@
         </div>
       </li>
     </ul>
-    <div class="change-conf-div text-right">
-      <a data-toggle="modal" data-target="#reset-visual-configurations-modal" class="reset-conf pull-left"><i class="fa fa-refresh"></i> Reset configurations</a>
-      <a data-toggle="modal" data-target="#change-visual-configurations-modal">Change configurations <i class="fa fa-arrow-circle-right"></i></a>
+    <div class="row change-conf-div">
+      <span>
+        <a data-toggle="modal" data-target="#save-visual-configurations-modal" class="btn btn-primary conf-link save-conf pull-left"><i class="fa fa-save"></i> Save</a>
+        <% unless config_files.nil? || config_files.empty? %>
+        <a data-toggle="modal" data-target="#load-visual-configurations-modal" class="btn btn-primary conf-link load-conf pull-left"><i class="fa fa-upload"></i> Load</a>
+        <% end %>
+      </span>
+      <span>
+        <a data-toggle="modal" data-target="#reset-visual-configurations-modal"  class="btn btn-primary conf-link reset-conf pull-right"><i class="fa fa-refresh"></i> Reset</a>
+        <a data-toggle="modal" data-target="#change-visual-configurations-modal" class="btn btn-primary conf-link change-conf pull-right"><i class="fa fa-arrow-circle-right"></i> Change</a>
+      </span>
     </div>
   </div>
 </div>
@@ -183,7 +191,6 @@
   document.body.onmouseup = function() {
     var data = {};
     if(sidePanelColor != null){ 
-      console.log("aaa " + sidePanelColor);
       data.side_panel_color = sidePanelColor;
       sidePanelColor = null;
     }
@@ -261,7 +268,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Rest Visual Configurations</h4>
+        <h4 class="modal-title">Reset Visual Configurations</h4>
       </div>
       <div class="modal-body">
         <p>
@@ -271,6 +278,58 @@
           <div class="form-group">
             <input type="hidden" name="reset" class="form-control" value='true' autofocus="">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Reset</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- load visual configurations modal-->
+<div class="modal fade" id="load-visual-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Load Visual Configurations</h4>
+      </div>
+      <div class="modal-body">
+        <p>
+          Load one of the following configuration files
+        </p>
+        <form class="form-signin" action="/conf" method="post">
+          <div class="form-group">
+            <input type="hidden" name="load" class="form-control" value='true' autofocus="">
+            <select id="snapshot-select" name="filename" class="form-control">
+            <% config_files.each do |conf_file| %>
+              <%= "<option value='#{conf_file}'>#{conf_file.gsub('.yml', '')}</option>" %>
+            <% end %>
+            </select>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Load</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- save visual configurations modal-->
+<div class="modal fade" id="save-visual-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Save Visual Configurations</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post">
+          <div class="form-group">
+            <input type="hidden" name="save"   class="form-control" value='true'>
+            <input type="text" name="filename" class="form-control" id="filename" aria-describedby="filenameHelp" placeholder="Theme Name" autofocus="" required>
+            <small id="filenameHelp" class="form-text text-muted">Please enter the name of the new Theme.</small>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>
         </form>
       </div>

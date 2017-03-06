@@ -39,6 +39,10 @@ class MaziApp < Sinatra::Base
     locals[:local_data][:mode] = @config[:general][:mode]
     locals[:js]                = []
     locals[:error_msg]         = nil
+    unless session['error'].nil?
+      locals[:error_msg] = session["error"]
+      session[:error] = nil
+    end
     case index
     when 'index'
       session['notifications_read'] = [] if session['notifications_read'].nil?
@@ -91,10 +95,6 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:applications]    = Mazi::Model::Application.all
       locals[:local_data][:notifications]   = Mazi::Model::Notification.all
       locals[:local_data][:sessions]        = Mazi::Model::Session.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
@@ -105,10 +105,6 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_application.js"
       locals[:main_body] = :admin_application
       locals[:local_data][:applications]  = Mazi::Model::Application.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       erb :admin_main, locals: locals
     when 'admin_documentation'
       unless authorized?
@@ -126,15 +122,12 @@ class MaziApp < Sinatra::Base
       end
       locals[:js] << "js/admin_network.js"
       locals[:main_body] = :admin_network
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
       lines = ex.exec_command
       locals[:local_data][:net_info] = {}
       ssid = ex.parseFor('ssid')
-      locals[:local_data][:net_info][:ssid] = ssid[1] if ssid.kind_of? Array
+      ssid.shift
+      locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
       channel = ex.parseFor('channel')
       locals[:local_data][:net_info][:channel] = channel[1] if channel.kind_of? Array
       password = ex.parseFor('password')
@@ -152,6 +145,7 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/jscolor.min.js"
       locals[:main_body] = :admin_configuration
       locals[:local_data][:portal_configuration] = @config[:portal_configuration]
+      locals[:local_data][:config_files] = getAllConfigSaves
       erb :admin_main, locals: locals
     when 'admin_notification'
       unless authorized?
@@ -162,17 +156,18 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_notification.js"
       locals[:main_body] = :admin_notification
       locals[:local_data][:notifications] = Mazi::Model::Notification.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
+      erb :admin_main, locals: locals
+    when 'admin_snapshot'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
       end
+      locals[:js] << "js/admin_snapshot.js"
+      locals[:main_body] = :admin_snapshot
       erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       erb :admin_main, locals: locals
     when 'admin_logout'
       locals[:main_body] = :admin_login
@@ -430,7 +425,7 @@ class MaziApp < Sinatra::Base
         md, vl = params['ssid'] ? ['ssid', params['ssid']] : params['channel'] ? ['channel', params['channel']] : params['password'] ? ['password', params['password']] : ['wpa', 'off']
         session['error'] = "This portal runs on Demo mode! This action would have changed the '#{md}' to '#{vl}'"
       end
-      args << "-s #{params['ssid']}" if params['ssid']
+      args << "-s '#{params['ssid']}'" if params['ssid']
       args << "-c #{params['channel']}" if params['channel']
       args << "-p #{params['password']}" if params['password']
       args << "-w off" if args.empty? && (params['password'].nil? || params['password'].empty?)
@@ -458,7 +453,7 @@ class MaziApp < Sinatra::Base
 
   # saving configurations
   post '/conf/?' do
-    MaziLogger.debug "request: post/conf from ip: #{request.ip}"
+    MaziLogger.debug "request: post/conf from ip: #{request.ip} params: #{params.inspect}"
     unless authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
@@ -467,6 +462,12 @@ class MaziApp < Sinatra::Base
     if params['reset']
       changePortalConfigToDefault
       writeConfigFile
+      redirect '/admin_configuration'
+    elsif params['save']
+      saveTheme(params[:filename])
+      redirect '/admin_configuration'
+    elsif params['load']
+      loadTheme(params[:filename])
       redirect '/admin_configuration'
     end
     data = {}

@@ -26,9 +26,6 @@ TOPCOMMENTS = <<TEXT
 # - side_panel_active_color: top panel active and on hover color (hex value)
 TEXT
 
-DEFAULTPORTALCONF = {title: 'Mazizone Portal', applications_title: 'Mazizone', applications_subtitle: 'Applications', applications_welcome_text: 'Welcome to the Mazizone Applications Portal, please
-    use the links bellow to navigate to the applications offered by this Mazizone.', side_panel_color: '222', side_panel_active_color: '080808', top_panel_color:'222', top_panel_active_color: '080808'}
-
 module MaziConfig
   # loads the configuration file
   def loadConfigFile(file='/etc/mazi/config.yml')
@@ -74,6 +71,24 @@ module MaziConfig
   end
 
   def changePortalConfigToDefault
-    @config[:portal_configuration] = DEFAULTPORTALCONF
+    @config[:portal_configuration] = {title: 'Mazizone Portal', applications_title: 'Mazizone', applications_subtitle: 'Applications', applications_welcome_text: 'Welcome to the Mazizone Applications Portal, please use the links bellow to navigate to the applications offered by this Mazizone.', side_panel_color: '222', side_panel_active_color: '080808', top_panel_color:'222', top_panel_active_color: '080808'}
+  end
+
+  def getAllConfigSaves
+    files = Dir.entries("/etc/mazi/snapshots/")
+    out = []
+    files.each {|file| out << file if file.include?('.yml') && file != 'default.yml'}
+    out
+  end
+
+  def saveTheme(filename)
+    FileUtils.cp "/etc/mazi/config.yml", "/etc/mazi/snapshots/#{filename}.yml"
+  end
+
+  def loadTheme(filename)
+    YAML::load(File.open("/etc/mazi/snapshots/#{filename}"))[:portal_configuration].each do |key, value|
+      changeConfigFile("portal_configuration->#{key}", value)
+    end
+    writeConfigFile
   end
 end
