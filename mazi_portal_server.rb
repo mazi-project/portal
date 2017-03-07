@@ -480,6 +480,10 @@ class MaziApp < Sinatra::Base
     data[:side_panel_active_color]   = params['side_panel_active_color'] unless params['side_panel_active_color'].nil?  || params['side_panel_active_color'].empty?
     data[:top_panel_color]           = params['top_panel_color'] unless params['top_panel_color'].nil?  || params['top_panel_color'].empty?
     data[:top_panel_active_color]    = params['top_panel_active_color'] unless params['top_panel_active_color'].nil?  || params['top_panel_active_color'].empty?
+    # unless params['applications_background_image'].nil? || params['applications_background_image'].empty?
+    #   tempfile = params['applications_background_image'][:tempfile]
+    #   filename = params['applications_background_image'][:filename]
+    # end
     data.each do |key, value|
       changeConfigFile("portal_configuration->#{key}", value)
     end

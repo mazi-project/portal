@@ -238,7 +238,7 @@
 </script>
 
 <!-- change visual configurations modal-->
-<div class="modal fade" id="change-visual-configurations-modal" role="dialog">
+<div class="modal fade" id="change-visual-configurations-modal" role="dialog" enctype="multipart/form-data">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -252,6 +252,7 @@
             <input type="text" name="title" class="form-control" value='<%= portal_configuration[:title] %>' autofocus="">
             <input type="text" name="applications_title" class="form-control" value='<%= portal_configuration[:applications_title] %>'>
             <input type="text" name="applications_subtitle" class="form-control" value='<%= portal_configuration[:applications_subtitle] %>'>
+            <!-- <input type="file" name="applications_background_image" class="form-control file"> -->
             <textarea name="applications_welcome_text" class="form-control" rows="5" id="comment" maxlength="300"><%= portal_configuration[:applications_welcome_text] %></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>

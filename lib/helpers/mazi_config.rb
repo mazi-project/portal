@@ -30,6 +30,8 @@ module MaziConfig
   # loads the configuration file
   def loadConfigFile(file='/etc/mazi/config.yml')
     @config = YAML::load(File.open(file))
+    @config[:portal_configuration][:applications_background_image] = 'mazi-background.jpg' if @config[:portal_configuration][:applications_background_image].nil?
+    @config
   end
 
   # returns the current configuration (in memory)
