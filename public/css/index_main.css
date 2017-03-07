@@ -187,8 +187,18 @@ ul.alert-dropdown {
   font-size: 40px;
 }
 
+.app-link,
+.app-link:hover,
+.app-link:visited{
+  color: #fff;
+}
+
 .panel-green {
   border-color: #5cb85c;
+}
+
+.app-panel > .panel-heading:hover{
+  opacity: 0.80;
 }
 
 .panel-green > .panel-heading {
