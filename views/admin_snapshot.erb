@@ -12,14 +12,21 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
-            <div class="panel-title">Save Database
+            <div class="panel-title">Export Snapshot
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to take a snapshot."></i>
             </div>
           </div> 
           <!-- panel body --> 
           <div class="panel-body">
             <div class="row">
-              
+              <form id="save-snapshot-form" action="/snapshot" method="post">
+                <div class="form-group">
+                <input type="hidden" name="save" class="form-control" value='true' autofocus="">
+                <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+                <small id="snapshotLoadHelp" class="form-text text-muted">Please enter the name of the new Snapshot.</small>
+                </div>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> Save</button>
+              </form>
             </div>
           </div> 
         </div>
@@ -28,23 +35,29 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
-            <div class="panel-title">Load Database
+            <div class="panel-title">Import Snapshot
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to load a snapshot."></i>
             </div>
           </div> 
           <!-- panel body --> 
           <div class="panel-body">
             <div class="row">
-              <form id="load-snapshot-form" method="post">
-                <div class="form-group col-md-12">
-                  <select id="snapshot-select" name="snapshot-name" class="form-control">
-                    <option value='name1'>name1</option>
-                    <option value='name2'>name2</option>
-                    <option value='name3'>name3</option>
+              <% unless dbs.nil? || dbs.empty? %>
+              <form id="load-snapshot-form" action="/snapshot" method="post">
+                <div class="form-group">
+                  <input type="hidden" name="load" class="form-control" value='true' autofocus="">
+                  <select id="snapshot-select" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
+                    <% dbs.each do |db| %>
+                    <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
+                    <% end %>
                   </select>
+                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load.</small>
                 </div>
                 <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> Load</button>
               </form>
+              <% else %>
+              <p class="text-center">Currently, there are no snapshots saved.</p>
+              <% end %>
             </div>
           </div> 
         </div>

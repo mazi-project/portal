@@ -91,4 +91,45 @@ module MaziConfig
     end
     writeConfigFile
   end
+
+  def getAllDBSnapshots
+    files = Dir.entries("/etc/mazi/snapshots/")
+    out = []
+    files.each {|file| out << file if file.include?('.db')}
+    out
+  end
+
+  def takeDBSnapshot(filename)
+    FileUtils.cp "database/inventory.db", "/etc/mazi/snapshots/#{filename}.db"
+    ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command.join("\n")
+    File.open("/etc/mazi/snapshots/#{filename}.net", 'w') { |file| file.write(lines) }
+  end
+
+  def loadDBSnapshot(filename)
+    FileUtils.cp "/etc/mazi/snapshots/#{filename}.db", "database/inventory.db"
+    args = []
+    File.readlines("/etc/mazi/snapshots/#{filename}.net").each do |line|
+      line = line.split
+      case line.shift
+      when 'ssid'
+        arg = line.join(' ')
+        args << "-s '#{arg}'"
+      when 'channel'
+        arg = line.join(' ')
+        args << "-c '#{arg}'"
+      when 'password'
+        arg = line.join(' ')
+        args << (arg == '-' ? "-w off" : "-p #{arg}")   
+      when 'mode'
+        arg = line.join(' ')
+        MaziExecCmd.new('sh', '/root/back-end/', 'internet.sh', ["-m #{arg}"], @config[:scripts][:enabled_scripts]).exec_command
+      end
+    end
+    MaziExecCmd.new('sh', '/root/back-end/', 'wifiap.sh', args, @config[:scripts][:enabled_scripts]).exec_command
+  end
+
+  def changeSnapshotToDefault
+    
+  end
 end

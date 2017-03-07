@@ -165,6 +165,7 @@ class MaziApp < Sinatra::Base
       end
       locals[:js] << "js/admin_snapshot.js"
       locals[:main_body] = :admin_snapshot
+      locals[:local_data][:dbs] = getAllDBSnapshots
       erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
@@ -531,6 +532,25 @@ class MaziApp < Sinatra::Base
       ses.destroy
     end
     {result: 'OK', id: id}.to_json
+  end
+
+   # taking/loading snapshots
+  post '/snapshot/?' do
+    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+    if params['save']
+      takeDBSnapshot(params[:snapshotname])
+      redirect '/admin_snapshot'
+    elsif params['load']
+      loadDBSnapshot(params[:snapshotname])
+      redirect '/admin_snapshot'
+    end
+
+    redirect '/admin_snapshot'
   end
 end
 
