@@ -92,6 +92,26 @@
           </div>
         </div>
       </li>
+       <li class="list-group-item toggle" data-toggle="detail-5">
+        <div class="row" id="dropdown-detail-5">
+          <div class="col-xs-10">
+              <p><b>Application Background Image:</b> <img height="30px" width="auto" src="images/<%= portal_configuration[:applications_background_image] %>"> <%= portal_configuration[:applications_background_image] %></p>
+          </div>
+          <div class="col-xs-2">
+            <i class="fa fa-info-circle fa-2x pull-right"></i>
+          </div>
+        </div>
+        <div id="detail-5">
+          <hr></hr>
+          <div class="container">
+            <div class="fluid-row">
+              <div class="col-xs-12">
+                <p>This value configures the background image for the applications page.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
      <!--  <li class="list-group-item toggle" data-toggle="detail-5">
         <div class="row" id="dropdown-detail-5">
           <div class="col-xs-10">
@@ -238,7 +258,7 @@
 </script>
 
 <!-- change visual configurations modal-->
-<div class="modal fade" id="change-visual-configurations-modal" role="dialog" enctype="multipart/form-data">
+<div class="modal fade" id="change-visual-configurations-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -247,12 +267,12 @@
         <h4 class="modal-title">Change Visual Configurations</h4>
       </div>
       <div class="modal-body">
-        <form class="form-signin" action="/conf" method="post">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="text" name="title" class="form-control" value='<%= portal_configuration[:title] %>' autofocus="">
             <input type="text" name="applications_title" class="form-control" value='<%= portal_configuration[:applications_title] %>'>
             <input type="text" name="applications_subtitle" class="form-control" value='<%= portal_configuration[:applications_subtitle] %>'>
-            <!-- <input type="file" name="applications_background_image" class="form-control file"> -->
+            <input type="file" name="applications_background_image" class="form-control filestyle" data-buttonText="Browse">
             <textarea name="applications_welcome_text" class="form-control" rows="5" id="comment" maxlength="300"><%= portal_configuration[:applications_welcome_text] %></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>

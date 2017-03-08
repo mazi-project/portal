@@ -17,6 +17,7 @@
 # - applications_title: title on the applications body page
 # - applications_subtitle: subtitle on the applications body page
 # - applications_welcome_text: welcome text on the applications body page
+# - applications_background_image: background image on the applications body page.
 # - side_panel_color: side panel main color (hex value)
 # - side_panel_active_color: side panel active and on hover color (hex value)
 # - top_panel_color: top panel main color (hex value)
