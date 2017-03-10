@@ -48,10 +48,11 @@ class MaziApp < Sinatra::Base
       session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
-      locals[:local_data][:applications]       = Mazi::Model::Application.all
-      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
-      locals[:local_data][:notifications_read] = session['notifications_read']
-      locals[:local_data][:config_data]        = @config[:portal_configuration]
+      locals[:local_data][:applications]          = Mazi::Model::Application.all
+      locals[:local_data][:notifications]         = Mazi::Model::Notification.all
+      locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
+      locals[:local_data][:notifications_read]    = session['notifications_read']
+      locals[:local_data][:config_data]           = @config[:portal_configuration]
       erb :index_main, locals: locals
     when 'index_statistics'
       session['notifications_read'] = [] if session['notifications_read'].nil?
@@ -105,6 +106,7 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_application.js"
       locals[:main_body] = :admin_application
       locals[:local_data][:applications]  = Mazi::Model::Application.all
+      locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
       erb :admin_main, locals: locals
     when 'admin_documentation'
       unless authorized?
@@ -205,19 +207,35 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       redirect '/admin_login'
     end
-    e = Mazi::Model::Application.validate(params)
-    unless e.nil?
-      MaziLogger.debug "invalid param #{e}"
-      session['error'] = e
-      redirect '/admin_application'
-    end
-    if @config[:general][:mode] == 'demo'
-      MaziLogger.debug "Demo mode create app"
-      session['error'] = "This portal runs on Demo mode! This action would have created a new application."
-      redirect '/admin_application'
-    end
+    if params['instance']
+      e = Mazi::Model::ApplicationInstance.validate(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode create app"
+        session['error'] = "This portal runs on Demo mode! This action would have created a new application."
+        redirect '/admin_application'
+      end
 
-    a =  Mazi::Model::Application.create(params)
+      a =  Mazi::Model::ApplicationInstance.create(params)
+    else
+      e = Mazi::Model::Application.validate(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode create app"
+        session['error'] = "This portal runs on Demo mode! This action would have created a new application."
+        redirect '/admin_application'
+      end
+
+      a =  Mazi::Model::Application.create(params)
+    end
     redirect '/admin_application'
   end
 
@@ -229,24 +247,45 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       redirect '/admin_login'
     end
-    e = Mazi::Model::Application.validate_edit(params)
-    unless e.nil?
-      MaziLogger.debug "invalid param #{e}"
-      session['error'] = e
-      redirect '/admin_application'
+    if params['instance']
+      e = Mazi::Model::ApplicationInstance.validate_edit(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      id = params['id']
+      app =  Mazi::Model::ApplicationInstance.find(id: params['id'].to_i)
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode edit app"
+        session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
+        redirect '/admin_application'
+      end
+      app.name        = params['name'] if params['name']
+      app.url         = params['url'] if params['url']
+      app.description = params['description'] if params['description']
+      app.enabled     = params['enabled'] if params['enabled']
+      app.save
+    else
+      e = Mazi::Model::Application.validate_edit(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      id = params['id']
+      app =  Mazi::Model::Application.find(id: params['id'].to_i)
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode edit app"
+        session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
+        redirect '/admin_application'
+      end
+      app.name        = params['name'] if params['name']
+      app.url         = params['url'] if params['url']
+      app.description = params['description'] if params['description']
+      app.enabled     = params['enabled'] if params['enabled']
+      app.save
     end
-    id = params['id']
-    app =  Mazi::Model::Application.find(id: params['id'].to_i)
-    if @config[:general][:mode] == 'demo'
-      MaziLogger.debug "Demo mode edit app"
-      session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
-      redirect '/admin_application'
-    end
-    app.name        = params['name'] if params['name']
-    app.url         = params['url'] if params['url']
-    app.description = params['description'] if params['description']
-    app.enabled     = params['enabled'] if params['enabled']
-    app.save
     redirect '/admin_application'
   end
 
@@ -268,6 +307,24 @@ class MaziApp < Sinatra::Base
     end
   end
 
+  # admin delete application
+  delete '/application/:id/instance/?' do |id| 
+    MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode delete app"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have deleted an existing application.", id: id}.to_json
+    else
+      app = Mazi::Model::ApplicationInstance.find(id: id)
+      app.destroy
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
   # toggles application enable disable
   put '/application/:id/?' do |id|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
@@ -277,6 +334,21 @@ class MaziApp < Sinatra::Base
       {error: 'Not Authorized!', id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
+      app.enabled = !app.enabled 
+      app.save
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles application enable disable
+  put '/application/:id/instance/?' do |id|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    else
+      app = Mazi::Model::ApplicationInstance.find(id: id)
       app.enabled = !app.enabled 
       app.save
       {result: 'OK', id: id}.to_json
@@ -312,7 +384,8 @@ class MaziApp < Sinatra::Base
   # application counter +1
   put '/application/:id/click_counter/?' do |id|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
-    app = Mazi::Model::Application.find(id: id)
+    app = Mazi::Model::ApplicationInstance.find(id: id)
+    app.application.click_counter += 1 
     app.click_counter = app.click_counter + 1
     app.save
     {result: 'OK', id: id}.to_json

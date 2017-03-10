@@ -48,10 +48,67 @@
               <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || app.name == 'NextCloud' %> title="Stop Application">
                 <i class="fa fa-stop"></i>
               </a>
-              <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
+<!--               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
                 <i class="fa fa-pencil"></i>
               </a>
               <a class="btn btn-danger del_app" id='del_app_<%= app.id %>' title="Delete Application">
+                <i class="fa fa-times"></i>
+              </a> -->
+            </div>
+          </div>
+        </td>
+      </tr>
+      <% end %> 
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a></td>
+      </tr>
+    </tfoot>
+</table>
+</div>
+
+<div class="row">
+  <h2>Application Instances</h2>
+  <table class="table">
+    <thead>
+      <tr>
+        <th title="toggle the application visibility on the Portal">Active</th>
+        <th title="the name of the application">Application Name</th>
+        <th title="the URL of the application">URL</th>
+        <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
+        <th title="the parent application">Parent Application</th>
+        <th title="overall clicks for the application">Click Counter</th>
+        <th title="actions that can be performed on the application" class='text-center'>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% application_instances.each do |app| %>
+      <tr class="app_inst_tr" id="app_tr_<%= app.id.to_s %>">
+        <td scope="row">
+          <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
+            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
+            <div class="slider round enabled-instance-switch" id='enabled-instance-switch_<%= app.id %>'></div>
+          </label>
+        </td>
+        <td><%= app.name %></td>
+        <td><%= app.url %></td>
+        <td><%= app.description %></td>
+        <td><%= app.application.name %></td>
+        <td><%= app.click_counter %></td>
+        <td>
+          <div class="text-center">
+            <div class="btn-group pull-center">
+              <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="Edit Application">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a class="btn btn-danger del_app_inst" id='del_app_inst_<%= app.id %>' title="Delete Application Instance">
                 <i class="fa fa-times"></i>
               </a>
             </div>
@@ -68,7 +125,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a></td>
+        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-instance-modal"  title="Create New Application Instance"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
@@ -125,4 +182,64 @@
 
 <div id="delete-dialog-confirm" title="Empty the recycle bin?">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This application will be permanently deleted from the database. Do you wish to proceed?</p>
+</div>
+
+<!-- create application instance modal-->
+<div class="modal fade" id="new-application-instance-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Create new Application Instance</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/application" method="post">
+          <div class="form-group">
+            <input type="hidden" name="instance" value='true'>
+            <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
+            <input type="text" name="url" class="form-control" placeholder="URL" required>
+            <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
+            <select class="form-control" name='application'>
+            <% applications.each do |app| %>
+              <option value='<%= app.id%>'><%= app.name %></option>
+            <% end %>
+            </select>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% application_instances.each do |app| %>
+<!-- edit application modal-->
+<div class="modal fade" id="edit-application-instance-modal-<%= app.id %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Application Instance</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/application/edit" method="post">
+          <div class="form-group">
+            <input type="hidden" name="instance" value='true'>
+            <input type="hidden" name="id" value="<%= app.id %>">
+            <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
+            <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
+            <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
+<div id="delete-instance-dialog-confirm" title="Delete Application Instance?">
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This application instance will be permanently deleted from the database. Do you wish to proceed?</p>
 </div>
