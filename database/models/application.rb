@@ -48,6 +48,10 @@ module Mazi::Model
       case self.name.downcase 
       when 'nextcloud'
         return 'ON'
+      when 'wordpress'
+        return 'ON'
+      when 'framadate'
+        return 'ON'
       when 'guestbook'
         nm = 'mazi-board'
       else

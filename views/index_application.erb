@@ -24,7 +24,7 @@
   <% icons = ['search', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
   <% application_instances.each do |app| %>
   <% next if !app.enabled || !app.application.enabled %>
-  <% icon = app.application.name == 'EtherPad' ? 'file-text-o' : app.application.name == 'NextCloud' ? 'cloud' : app.application.name == 'GuestBook' ? 'book' : icons[cnt % icons.length]%>
+  <% icon = app.application.name == 'EtherPad' ? 'file-text-o' : app.application.name == 'NextCloud' ? 'cloud' : app.application.name == 'GuestBook' ? 'book' : app.application.name == 'WordPress' ? 'wordpress' : app.application.name == 'FramaDate' ? 'question' : icons[cnt % icons.length]  %>
   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
     <div class="panel panel-<%= colors[cnt % colors.length] %> app-panel">
       <div class="panel-heading">

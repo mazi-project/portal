@@ -27,6 +27,7 @@
     <tbody>
       <% applications.each do |app| %>
         <% status = mode != 'demo' ? app.status : "ON" %>
+        <% web_app = app.name == 'NextCloud' || app.name == 'FramaDate' || app.name == 'WordPress' ? true : false %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
         <td scope="row">
           <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
@@ -42,10 +43,10 @@
         <td>
           <div class="text-center">
             <div class="btn-group pull-center">
-              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || app.name == 'NextCloud' %> title="Start Application">
+              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || web_app %> title="<%= !web_app ? 'Start Application' : 'This is a web application, it always runs.' %>">
                 <i class="fa fa-play"></i>
               </a>
-              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || app.name == 'NextCloud' %> title="Stop Application">
+              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || web_app %> title="<%= !web_app ? 'Stop Application' : 'This is a web application, it always runs.' %>">
                 <i class="fa fa-stop"></i>
               </a>
 <!--               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
@@ -68,7 +69,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a></td>
+        <td><!-- <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a> --></td>
       </tr>
     </tfoot>
 </table>
