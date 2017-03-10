@@ -401,3 +401,7 @@ input:checked + .slider:before {
   margin-right: 5px;
   margin-left: 5px;
 }
+
+.connect-btn{
+  margin-right: 8px;
+}

@@ -107,6 +107,27 @@
   </div>
 </div>
 
+<% unless net_info[:second_antenna] == 'inactive' %> 
+<% status = net_info[:second_antenna] == 'active' ? 'Disconnected' :net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
+<div class="row">
+  <div class='col-lg-3 col-md-5'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Connect to WiFi Network</div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="col-xs-6 text-left"> 
+          <h2 class="no-margins"><%= status %></h2>
+          <small><%= status == 'Disconnected' ? 'from Wi-Fi Networks' : 'Wi-Fi Network' %></small></br>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-wifi"></i></br><button class="btn btn-primary pull-right connect-btn" data-toggle="modal" data-target="#connect-ssid-modal">Connect</button></div>
+      </div> 
+    </div>
+  </div>
+</div>
+<% end %>
+
 <!-- change ssid modal-->
 <div class="modal fade" id="change-ssid-modal" role="dialog">
   <div class="modal-dialog">
@@ -223,6 +244,39 @@
                 </div>
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- connect to ssid modal-->
+<div class="modal fade" id="connect-ssid-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Connect to Wi-Fi Network</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/exec" method="post">
+          <div class="form-group">
+            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="cmd" value='antenna.sh'>
+            <% if net_info[:available_ssids].nil? || net_info[:available_ssids].empty? %>
+            <input type="text" name="ssid" class="form-control" value='' required autofocus>
+            <% else %>
+            <label for="ssid">Select list:</label>
+            <select class="form-control" id="ssid" name='ssid'>
+              <% net_info[:available_ssids].each do |essid| %>
+                <option><%= essid %></option>
+              <% end%>
+            </select>
+            <% end %>
+            <input type="text" name="password" class="form-control" value='' required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
           </div>
         </form>
       </div>

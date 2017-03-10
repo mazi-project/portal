@@ -136,6 +136,12 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:net_info][:password] = password[1] if password.kind_of? Array
       mode = ex.parseFor('mode')
       locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
+      ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
+      locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
+      ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
+      locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
+      locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+      locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
       erb :admin_main, locals: locals
     when 'admin_configuration'
       unless authorized?
@@ -490,7 +496,6 @@ class MaziApp < Sinatra::Base
     env = params['env']
     path = params['path'] || @config[:scripts][:backend_scripts_folder]
     cmd = "#{params['cmd']}"
-    # args = params['args']
     case cmd
     when 'wifiap.sh'
       args = []
@@ -511,6 +516,14 @@ class MaziApp < Sinatra::Base
       end
       args << "-m #{params['mode']}" if params['mode']
       redirect '/admin_network' if args.empty?
+    when 'antenna.sh'
+      args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        session['error'] = "This portal runs on Demo mode! This action would have changed the 'network mode' to '#{params['mode']}'" if params['mode']
+      end
+      args << "-s #{params['ssid']}" if params['ssid']
+      args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
     else
       args = []
     end
