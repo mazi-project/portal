@@ -91,12 +91,13 @@ class MaziApp < Sinatra::Base
       ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       lines = ex2.exec_command
       users = ex2.parseFor('wifi users')
-      locals[:local_data][:users]           = {}
-      locals[:local_data][:users][:online]  = users[2] if users.kind_of? Array
-      locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
-      locals[:local_data][:applications]    = Mazi::Model::Application.all
-      locals[:local_data][:notifications]   = Mazi::Model::Notification.all
-      locals[:local_data][:sessions]        = Mazi::Model::Session.all
+      locals[:local_data][:users]                 = {}
+      locals[:local_data][:users][:online]        = users[2] if users.kind_of? Array
+      locals[:local_data][:net_info][:mode]       = mode[1] if mode.kind_of? Array
+      locals[:local_data][:applications]          = Mazi::Model::Application.all
+      locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
+      locals[:local_data][:notifications]         = Mazi::Model::Notification.all
+      locals[:local_data][:sessions]              = Mazi::Model::Session.all
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
@@ -409,6 +410,10 @@ class MaziApp < Sinatra::Base
 
     if id == 'all'
       Mazi::Model::Application.all.each do |app|
+        app.click_counter = 0
+        app.save
+      end
+      Mazi::Model::ApplicationInstance.all.each do |app|
         app.click_counter = 0
         app.save
       end

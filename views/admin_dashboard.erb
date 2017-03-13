@@ -82,7 +82,7 @@
       </div>
 
       <% clicks = 0 %>
-      <% applications.each {|app| clicks += app.click_counter} %>
+      <% application_instances.each {|app| clicks += app.click_counter} %>
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
