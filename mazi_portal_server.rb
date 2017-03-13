@@ -85,7 +85,8 @@ class MaziApp < Sinatra::Base
       lines = ex.exec_command
       locals[:local_data][:net_info] = {}
       ssid = ex.parseFor('ssid')
-      locals[:local_data][:net_info][:ssid] = ssid[1] if ssid.kind_of? Array
+      ssid.shift
+      locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
       mode = ex.parseFor('mode')
       ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       lines = ex2.exec_command
