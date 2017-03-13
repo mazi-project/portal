@@ -28,11 +28,9 @@
         </div>
         <div id="detail-1">
           <hr></hr>
-          <div class="container">
-            <div class="fluid-row">
-              <div class="col-xs-12">
-                <p>The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used ssid to change it.</p>
-              </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used ssid to change it.</p>
             </div>
           </div>
         </div>
@@ -48,11 +46,9 @@
         </div>
         <div id="detail-2">
           <hr></hr>
-          <div class="container">
-            <div class="fluid-row">
-              <div class="col-xs-12">
-                <p>Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used channel to change it.</p>
-              </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used channel to change it.</p>
             </div>
           </div>
         </div>
@@ -68,11 +64,9 @@
         </div>
         <div id="detail-3">
           <hr></hr>
-          <div class="container">
-            <div class="fluid-row">
-              <div class="col-xs-12">
-                <p>The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used password to change it.</p>
-              </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used password to change it.</p>
             </div>
           </div>
         </div>
@@ -88,17 +82,15 @@
         </div>
         <div id="detail-4">
           <hr></hr>
-          <div class="container">
-            <div class="fluid-row">
-              <div class="col-xs-12">
-                <p>
-                  The operation mode for the Wi-Fi network defines the way this network behaves in terms of allowing the users to access the internet or not. </br>
-                  <b style='padding-left: 5px'>offline</b> mode: Does not allow user to access the internet.</br>
-                  <b style='padding-left: 5px'>dual</b> mode: Allows users to access both local network and the internet.</br>
-                  <b style='padding-left: 5px'>restricted</b> mode: is a hybrid of offline and dual modes.</br>
-                  Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used password to change it.
-                </p>
-              </div>
+          <div class="row">
+            <div class="col-xs-12">
+              <p>
+                The operation mode for the Wi-Fi network defines the way this network behaves in terms of allowing the users to access the internet or not. </br>
+                <b style='padding-left: 5px'>offline</b> mode: Does not allow user to access the internet.</br>
+                <b style='padding-left: 5px'>dual</b> mode: Allows users to access both local network and the internet.</br>
+                <b style='padding-left: 5px'>restricted</b> mode: is a hybrid of offline and dual modes.</br>
+                Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used mode to change it.
+              </p>
             </div>
           </div>
         </div>
@@ -275,7 +267,7 @@
               <% end%>
             </select>
             <% end %>
-            <input type="text" name="password" class="form-control" value='' required>
+            <input type="text" name="password" class="form-control" placeholder="Password" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
           </div>
         </form>
