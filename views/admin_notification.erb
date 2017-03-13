@@ -15,7 +15,7 @@
   <table class="table">
     <thead>
       <tr>
-        <th>ID</th>
+        <!-- <th>ID</th> -->
         <th>Status</th>
         <th>Title</th>
         <th>Body</th>
@@ -25,7 +25,7 @@
     <tbody>
       <% notifications.each do |notification| %>
       <tr class="notification_tr" id="notification_tr_<%= notification.id.to_s %>">
-        <td scope="row"><%= notification.id %></td>
+        <!-- <td scope="row"><%= notification.id %></td> -->
         <td>
           <label class="switch">
             <input type="checkbox" <%= notification.enabled ? 'checked' : '' %>>
