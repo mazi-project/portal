@@ -15,12 +15,12 @@
   <table class="table">
     <thead>
       <tr>
-        <th title="toggle the application visibility on the Portal">Active</th>
+        <!-- <th title="toggle the application visibility on the Portal">Active</th> -->
         <th title="the opperation status of portal (running/stoppped)">Status</th>
         <th title="the name of the application">Application Name</th>
         <th title="the URL of the application">URL</th>
         <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
-        <th title="overall clicks for the application">Click Counter</th>
+        <!-- <th title="overall clicks for the application">Click Counter</th> -->
         <th title="actions that can be performed on the application" class='text-center'>Actions</th>
       </tr>
     </thead>
@@ -29,17 +29,17 @@
         <% status = mode != 'demo' ? app.status : "ON" %>
         <% web_app = app.name == 'NextCloud' || app.name == 'FramaDate' || app.name == 'WordPress' ? true : false %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
-        <td scope="row">
+        <!-- <td scope="row">
           <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
             <div class="slider round enabled-switch" id='enabled-switch_<%= app.id %>'></div>
           </label>
-        </td>
+        </td> -->
         <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
         <td><%= app.name %></td>
         <td><%= app.url %></td>
         <td><%= app.description %></td>
-        <td><%= app.click_counter %></td>
+        <!-- <td><%= app.click_counter %></td> -->
         <td>
           <div class="text-center">
             <div class="btn-group pull-center">
@@ -81,7 +81,7 @@
     <thead>
       <tr>
         <th title="toggle the application visibility on the Portal">Active</th>
-        <th title="the name of the application">Application Name</th>
+        <th title="the name of the application">Name</th>
         <th title="the URL of the application">URL</th>
         <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
         <th title="the parent application">Parent Application</th>
