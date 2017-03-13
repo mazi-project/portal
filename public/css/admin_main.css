@@ -405,3 +405,7 @@ input:checked + .slider:before {
 .connect-btn{
   margin-right: 8px;
 }
+
+.panel-body > div > div:nth-child(2) > h2{
+  font-size: 1.2vw;
+}
