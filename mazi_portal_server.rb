@@ -512,8 +512,11 @@ class MaziApp < Sinatra::Base
       end
       args << "-s '#{params['ssid']}'" if params['ssid']
       args << "-c #{params['channel']}" if params['channel']
-      args << "-p #{params['password']}" if params['password']
-      args << "-w off" if args.empty? && (params['password'].nil? || params['password'].empty?)
+      if params['password'].nil? || params['password'].empty? || params['password'] == '' || params['password'] == ' ' || params['password'] == '-'
+        args << "-w off"
+      elsif params['password']
+        args << "-p #{params['password']}" 
+      end
     when 'internet.sh'
       args = []
       if @config[:general][:mode] == 'demo'
