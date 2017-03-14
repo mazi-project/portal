@@ -515,6 +515,11 @@ class MaziApp < Sinatra::Base
       if params['password'].nil? || params['password'].empty? || params['password'] == '' || params['password'] == ' ' || params['password'] == '-'
         args << "-w off"
       elsif params['password']
+        if params['password'].length < 8
+          MaziLogger.debug "WiFi password must be more than 8 characters long"
+          session['error'] = "WiFi password must be more than 8 characters long"
+          redirect '/admin_network'
+        end
         args << "-p #{params['password']}" 
       end
     when 'internet.sh'
