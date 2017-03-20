@@ -100,7 +100,7 @@
 </div>
 
 <% unless net_info[:second_antenna] == 'inactive' %> 
-<% status = net_info[:second_antenna] == 'active' ? 'Disconnected' :net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
+<% status = net_info[:second_antenna] == 'active ESSID:off/any' ? 'Disconnected' : net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
 <div class="row">
   <div class='col-lg-3 col-md-5'>
     <div class="panel panel-default">
