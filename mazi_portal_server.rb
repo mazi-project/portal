@@ -544,6 +544,7 @@ class MaziApp < Sinatra::Base
     begin
       ex = MaziExecCmd.new(env, path, cmd, args, @config[:scripts][:enabled_scripts])
       lines = ex.exec_command
+      sleep 5 if cmd == 'antenna.sh'
       redirect '/admin_network'
     rescue ScriptNotEnabled => e
       MaziLogger.debug "Not enabled script '#{cmd}'"
@@ -653,6 +654,14 @@ class MaziApp < Sinatra::Base
       redirect '/admin_snapshot'
     elsif params['load']
       loadDBSnapshot(params[:snapshotname])
+      redirect '/admin_snapshot'
+    elsif params['download']
+      zip_snapshot(params[:snapshotname])
+      return {result: 'OK', file: "#{params[:snapshotname]}.zip"}
+    elsif params['upload']
+      tempfile = params['snapshot'][:tempfile]
+      filename = params['snapshot'][:filename]
+      unzip_snapshot(filename, tempfile)
       redirect '/admin_snapshot'
     end
 

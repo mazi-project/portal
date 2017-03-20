@@ -409,3 +409,7 @@ input:checked + .slider:before {
 .panel-body > div > div:nth-child(2) > h2{
   font-size: 1.2vw;
 }
+
+#upload-snapshot{
+  margin-right: 5px;
+}
