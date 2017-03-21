@@ -11,7 +11,7 @@ class MaziApp < Sinatra::Base
   include MaziConfig
   include Authorizer
 
-  use Rack::Session::Pool, :expire_after => 60 * 60 * 24
+  use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
 
   def initialize
     super
@@ -34,11 +34,12 @@ class MaziApp < Sinatra::Base
       s.save
       session['uuid'] = s.uuid
     end
-    locals                     = {}
-    locals[:local_data]        = {}
-    locals[:local_data][:mode] = @config[:general][:mode]
-    locals[:js]                = []
-    locals[:error_msg]         = nil
+    locals                           = {}
+    locals[:local_data]              = {}
+    locals[:local_data][:mode]       = @config[:general][:mode]
+    locals[:local_data][:authorized] = authorized?
+    locals[:js]                      = []
+    locals[:error_msg]               = nil
     unless session['error'].nil?
       locals[:error_msg] = session["error"]
       session[:error] = nil
@@ -98,6 +99,8 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
       locals[:local_data][:notifications]         = Mazi::Model::Notification.all
       locals[:local_data][:sessions]              = Mazi::Model::Session.all
+      locals[:local_data][:rasp_date]             = Time.now.strftime("%d %b %Y")
+      locals[:local_data][:rasp_time]             = Time.now.strftime("%H:%M")
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
@@ -177,6 +180,13 @@ class MaziApp < Sinatra::Base
       locals[:main_body] = :admin_snapshot
       locals[:local_data][:dbs] = getAllDBSnapshots
       erb :admin_main, locals: locals
+    when 'admin_set_date'
+      locals[:main_body] = :admin_set_time
+      locals[:local_data][:first_login] = false
+      locals[:js] << "js/jquery.datetimepicker.min.js"
+      locals[:js] << "js/admin_set_date.js"
+      locals[:main_body] = :admin_set_date
+      erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
       erb :admin_main, locals: locals
@@ -204,6 +214,14 @@ class MaziApp < Sinatra::Base
   # admin login post request
   delete '/admin_login/?' do
     session[:username] = nil
+    redirect '/admin'
+  end
+
+  # admin login post request
+  post '/set_date/?' do
+    MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
+    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command
     redirect '/admin'
   end
 

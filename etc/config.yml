@@ -37,6 +37,7 @@
   - mazi-app.sh
   - mazi-stat.sh
   - antenna.sh
+  - date
   - ls
 :portal_configuration:
   :title: Mazizone Portal

@@ -14,6 +14,7 @@
   <link href="css/admin_main.css" rel="stylesheet">
   <link href="css/plugins/morris.css" rel="stylesheet">
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="css/jquery.datetimepicker.css">
   <script src="js/jquery.js"></script>
   <script src="js/jquery-ui.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -33,20 +34,26 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="admin">Mazizone Portal Administration Panel</a>
-      </div>
+        <a class="navbar-brand" href="admin">Mazizone Administration Panel</a>
+      </div>      
       <ul class="nav navbar-right top-nav">
         <li>
           <a class="navbar-brand pull-right" target="_blank" href="index" style="font-size: 14px;">Portal</a>
         </li>
+        <% if local_data[:authorized] %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
           <ul class="dropdown-menu">
+            <li>
+              <a href="/admin_set_date"><i class="fa fa-fw fa-clock-o"></i> Set Date</a>
+            </li>
+            <li class="divider"></li>
             <li>
               <a href="/admin_logout"><i class="fa fa-fw fa-power-off admin-logout-button"></i> Log Out</a>
             </li>
           </ul>
         </li>
+        <% end %>
       </ul>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
