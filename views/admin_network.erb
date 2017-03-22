@@ -20,7 +20,7 @@
       <li class="list-group-item">
         <div class="row" id="dropdown-detail-1">
           <div class="col-xs-10">
-              <p><b>Name of the WiFi Network (SSID):</b> <%= net_info[:ssid] %> <a class="teal-text change-ssid" data-toggle="modal" data-target="#change-ssid-modal"><i class="fa fa-pencil"></i></a></p>
+              <p><b>Name of the WiFi Network (SSID):</b> <%= net_info[:ssid] %></p>
           </div>
           <div class="col-xs-2">
             <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-1"></i>
@@ -30,7 +30,7 @@
           <hr></hr>
           <div class="row">
             <div class="col-xs-12">
-              <p>The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used ssid to change it.</p>
+              <p>The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button <i class="fa fa-pencil"></i> bellowchange it.</p>
             </div>
           </div>
         </div>
@@ -38,7 +38,7 @@
       <li class="list-group-item">
         <div class="row" id="dropdown-detail-2">
           <div class="col-xs-10">
-              <p><b>Channel of the WiFi Network:</b> <%= net_info[:channel] %> <a class="teal-text change-channel" data-toggle="modal" data-target="#change-channel-modal"><i class="fa fa-pencil"></i></a></p>
+              <p><b>Channel of the WiFi Network:</b> <%= net_info[:channel] %></p>
           </div>
           <div class="col-xs-2">
             <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-2"></i>
@@ -48,7 +48,7 @@
           <hr></hr>
           <div class="row">
             <div class="col-xs-12">
-              <p>Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used channel to change it.</p>
+              <p>Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button <i class="fa fa-pencil"></i> bellowto change it.</p>
             </div>
           </div>
         </div>
@@ -56,7 +56,7 @@
       <li class="list-group-item">
         <div class="row" id="dropdown-detail-3">
           <div class="col-xs-10">
-              <p><b>Password of the WiFi Network:</b> <%= net_info[:password] == '-' ? "<i style='color:grey'>No Password</i>" : net_info[:password] %> <a class="teal-text change-password" data-toggle="modal" data-target="#change-password-modal"><i class="fa fa-pencil"></i></a></p>
+              <p><b>Password of the WiFi Network:</b> <%= net_info[:password] == '-' ? "<i style='color:grey'>No Password</i>" : net_info[:password] %></p>
           </div>
           <div class="col-xs-2">
             <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-3"></i>
@@ -66,12 +66,12 @@
           <hr></hr>
           <div class="row">
             <div class="col-xs-12">
-              <p>The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button <i class="fa fa-pencil"></i> on the right of the currently used password to change it.</p>
+              <p>The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button <i class="fa fa-pencil"></i> bellow to change it.</p>
             </div>
           </div>
         </div>
       </li>
-      <li class="list-group-item">
+      <!-- <li class="list-group-item">
         <div class="row" id="dropdown-detail-4">
           <div class="col-xs-10">
               <p><b>Mode of the WiFi Network:</b> <%= net_info[:mode] %> <a class="teal-text change-mode" data-toggle="modal" data-target="#change-mode-modal"><i class="fa fa-pencil"></i></a></p>
@@ -94,14 +94,34 @@
             </div>
           </div>
         </div>
-      </li>
+      </li> -->
     </ul>
+    <div class="row change-conf-div">
+      <span class='col-lg-12'>
+        <a data-toggle="modal" data-target="#edit-wifi-network-modal" class="btn btn-primary conf-link change-conf pull-right"><i class="fa fa-pencil"></i> Edit</a>
+      </span>
+    </div>
   </div>
 </div>
 
-<% unless net_info[:second_antenna] == 'inactive' %> 
-<% status = net_info[:second_antenna] == 'active ESSID:off/any' ? 'Disconnected' : net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
 <div class="row">
+  <div class='col-lg-3 col-md-5'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Internet Network Mode</div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="col-xs-6 text-left"> 
+          <h2 class="no-margins"><%= net_info[:mode] %></h2>
+          <small>Mode of the WiFi Network</small></br>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-globe"></i></br><button class="btn btn-primary pull-right connect-btn" data-toggle="modal" data-target="#change-mode-modal"><i class="fa fa-pencil"></i> Edit</button></div>
+      </div> 
+    </div>
+  </div>
+  <% unless net_info[:second_antenna] == 'inactive' %> 
+  <% status = net_info[:second_antenna] == 'active ESSID:off/any' ? 'Disconnected' : net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
   <div class='col-lg-3 col-md-5'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
@@ -117,11 +137,12 @@
       </div> 
     </div>
   </div>
+  <% end %>
 </div>
-<% end %>
 
-<!-- change ssid modal-->
-<div class="modal fade" id="change-ssid-modal" role="dialog">
+
+<!-- edit wifi network modal-->
+<div class="modal fade" id="edit-wifi-network-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
@@ -135,6 +156,47 @@
             <input type="hidden" name="env" value='sh'>
             <input type="hidden" name="cmd" value='wifiap.sh'>
             <input type="text" name="ssid" class="form-control" value='<%= net_info[:ssid] %>' required autofocus>
+            <select class="form-control" name='channel'>
+                <option value='1'>1</option>
+                <option value='2'>2</option>
+                <option value='3'>3</option>
+                <option value='4'>4</option>
+                <option value='5'>5</option>
+                <option value='6'>6</option>
+                <option value='7'>7</option>
+                <option value='8'>8</option>
+                <option value='9'>9</option>
+                <option value='10'>10</option>
+                <option value='11'>11</option>
+                <option value='12'>12</option>
+                <option value='13'>13</option>
+                <option value='14'>14</option>
+            </select>
+            <input type="text" name="password" class="form-control" value='<%= net_info[:password] == '-' ? '' : net_info[:password] %>'>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change ssid modal-->
+<div class="modal fade" id="change-ssid-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit WiFi Network Settings</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/exec" method="post">
+          <div class="form-group">
+            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="cmd" value='wifiap.sh'>
+            <input type="text" name="ssid" class="form-control" value='<%= net_info[:ssid] %>' required>
+            <input type="text" name="password" class="form-control" value='<%= net_info[:password] == '-' ? '' : net_info[:password] %>'>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>
         </form>
