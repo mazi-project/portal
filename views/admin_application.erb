@@ -6,77 +6,14 @@
   </div>
 </div>
 
-<div class="row">
-  <% unless error_msg.nil? %>
+<% unless error_msg.nil? %>
   <div class="alert alert-danger">
     <p><%= error_msg %></p>
   </div>
-  <% end %>
-  <table class="table">
-    <thead>
-      <tr>
-        <!-- <th title="toggle the application visibility on the Portal">Active</th> -->
-        <th title="the opperation status of portal (running/stoppped)">Status</th>
-        <th title="the name of the application">Application Name</th>
-        <th title="the URL of the application">URL</th>
-        <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
-        <!-- <th title="overall clicks for the application">Click Counter</th> -->
-        <th title="actions that can be performed on the application" class='text-center'>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% applications.each do |app| %>
-        <% status = mode != 'demo' ? app.status : "ON" %>
-        <% web_app = app.name == 'NextCloud' || app.name == 'FramaDate' || app.name == 'WordPress' ? true : false %>
-      <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
-        <!-- <td scope="row">
-          <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
-            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
-            <div class="slider round enabled-switch" id='enabled-switch_<%= app.id %>'></div>
-          </label>
-        </td> -->
-        <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
-        <td><%= app.name %></td>
-        <td><%= app.url %></td>
-        <td><%= app.description %></td>
-        <!-- <td><%= app.click_counter %></td> -->
-        <td>
-          <div class="text-center">
-            <div class="btn-group pull-center">
-              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || web_app %> title="<%= !web_app ? 'Start Application' : 'This is a web application, it always runs.' %>">
-                <i class="fa fa-play"></i>
-              </a>
-              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || web_app %> title="<%= !web_app ? 'Stop Application' : 'This is a web application, it always runs.' %>">
-                <i class="fa fa-stop"></i>
-              </a>
-<!--               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
-                <i class="fa fa-pencil"></i>
-              </a>
-              <a class="btn btn-danger del_app" id='del_app_<%= app.id %>' title="Delete Application">
-                <i class="fa fa-times"></i>
-              </a> -->
-            </div>
-          </div>
-        </td>
-      </tr>
-      <% end %> 
-    </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><!-- <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a> --></td>
-      </tr>
-    </tfoot>
-</table>
-</div>
+<% end %>
 
 <div class="row">
-  <h2>Application Instances</h2>
+  <h3>Application Instances</h3>
   <table class="table">
     <thead>
       <tr>
@@ -127,6 +64,75 @@
         <td></td>
         <td></td>
         <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-instance-modal"  title="Create New Application Instance"><i class="fa fa-plus"></i></a></td>
+      </tr>
+    </tfoot>
+</table>
+</div>
+
+<div class="row">
+  <h3>Installed Applications</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <!-- <th title="toggle the application visibility on the Portal">Active</th> -->
+        <th title="the opperation status of portal (running/stoppped)">Status</th>
+        <th title="the name of the application">Application Name</th>
+        <th title="the URL of the application">URL</th>
+        <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
+        <!-- <th title="overall clicks for the application">Click Counter</th> -->
+        <th title="actions that can be performed on the application" class='text-center'>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% applications.each do |app| %>
+        <% status = mode != 'demo' ? app.status : "ON" %>
+        <% web_app = app.name == 'NextCloud' || app.name == 'FramaDate' || app.name == 'WordPress' ? true : false %>
+      <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
+        <!-- <td scope="row">
+          <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
+            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
+            <div class="slider round enabled-switch" id='enabled-switch_<%= app.id %>'></div>
+          </label>
+        </td> -->
+        <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
+        <td><%= app.name %></td>
+        <td><%= app.url %></td>
+        <td><%= app.description %></td>
+        <!-- <td><%= app.click_counter %></td> -->
+        <td>
+          <div class="text-center">
+            <div class="btn-group pull-center">
+              <% if web_app %>
+                <i class="fa fa-info-circle fa-2x pull-right" title="Starting/Stopping this application will not affect the performance of your mazizone."></i>
+              <% else %>
+              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || web_app %> title="<%= !web_app ? 'Start Application' : 'This is a web application, it always runs.' %>">
+                <i class="fa fa-play"></i>
+              </a>
+              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || web_app %> title="<%= !web_app ? 'Stop Application' : 'This is a web application, it always runs.' %>">
+                <i class="fa fa-stop"></i>
+              </a>
+              <% end %>
+<!--               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
+                <i class="fa fa-pencil"></i>
+              </a>
+              <a class="btn btn-danger del_app" id='del_app_<%= app.id %>' title="Delete Application">
+                <i class="fa fa-times"></i>
+              </a> -->
+            </div>
+          </div>
+        </td>
+      </tr>
+      <% end %> 
+    </tbody>
+    <tfoot>
+      <tr>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><!-- <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a> --></td>
       </tr>
     </tfoot>
 </table>
