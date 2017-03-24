@@ -8,15 +8,80 @@
       <br><br>
       <div class="tabbable" >
         <ul class="nav nav-tabs" id="myTabs">
-          <li class="active"><a href="#p1" data-toggle="tab"><strong>Etherpad</strong></a></li>
-          <li><a href="#p2" data-toggle="tab"><strong>Nextcloud</strong></a></li>
-          <li><a href="#p3" data-toggle="tab"><strong>Guest Book</strong></a></li>
+          <li class="active"><a href="#p1" data-toggle="tab"><strong>Initial Configuration</strong></a></li>
+          <li><a href="#p2" data-toggle="tab"><strong>Etherpad</strong></a></li>
+          <li><a href="#p3" data-toggle="tab"><strong>Nextcloud</strong></a></li>
+          <li><a href="#p4" data-toggle="tab"><strong>Guest Book</strong></a></li>
+          <li><a href="#p5" data-toggle="tab"><strong>WordPress</strong></a></li>
+          <li><a href="#p6" data-toggle="tab"><strong>FramaDate</strong></a></li>
         </ul>
       </div>
     </div>
     <div class="panel-body">
       <div class="tab-content">
-        <div class="tab-pane fade in active " id="p1">
+      <div class="tab-pane fade in active " id="p1">
+          <h3 class="text-center" id="pg1"> Initial Configuration</h3>
+          <br>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <h4>Description</h4>
+            <p>
+              This is the admin documentation guide for the MAZI zone portal. Use the tabs above to navigate to the different sections of the documentation. The current tab 
+              describes the different actions an administrator might need, in order to configure the raspberry pi. While all the other tabs give information regarding the
+              administration of the supported applications.
+            </p>
+            <h4>Connecting through ssh</h4>
+            <p>
+              For the remote connection to the Raspberry through ssh you have to open a terminal and execute the following command:
+              <pre><code>
+                $ssh pi@local.mazizone.eu
+                password: mazizone
+              </code></pre>
+            </p>
+            <p>
+              If you want to change the password for the pi user do $passwd and follow the instructions.
+              <pre><code>
+                $ passwd
+              </code></pre>
+              This is the password for the ssh connection and is different from the admin account which you use to login the admin interface.
+            </p>
+
+            <h4>Raspbian Configuration</h4>
+            <p>
+              Once you successfully log in the Raspberry, start the rasbian configuration tool:
+              <pre><code>
+                $sudo raspi-config
+              </code></pre>
+              and navigate to the menu:
+              <ul>
+                <li>Re-size the file-system to use the entire SD card capacity</li>
+                <li>In the Internationalisation option, change:
+                  <ul>
+                    <li>the locale to match your location</li>
+                    <li>the timezone to match your location</li>
+                  </ul>
+                </li>
+              </ul>
+            </p>
+
+            <h4>Portal Configuration</h4>
+            <p>
+              Once you successfully log in the Raspberry, open the portal configuration file with an editor:
+              <pre><code>
+                $sudo nano /etc/mazi/config.yml
+              </code></pre>
+              You can change the admin username and password by editing these lines:
+              <pre><code>
+                :admin:
+                  :admin_username: mazi_admin
+                  :admin_password: '1234'
+              </code></pre>
+              Please ignore all other values, you can change them through the Mazizone Portal Administration Panel.
+            </p>
+          </div>
+          <div class="voffset9"></div>
+        </div>
+
+        <div class="tab-pane fade in" id="p2">
           <h3 class="text-center" id="pg1"> Etherpad</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -46,7 +111,7 @@
           <div class="voffset9"></div>
         </div>
         
-        <div class="tab-pane fade" id="p2">
+        <div class="tab-pane fade" id="p3">
           <h3 class="text-center" id="pg1"> Nextcloud</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -84,7 +149,7 @@
           </div>
           <div class="voffset9"></div>
         </div>
-        <div class="tab-pane fade" id="p3">
+        <div class="tab-pane fade" id="p4">
           <h3 class="text-center" id="pg1"> Guest Book</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
@@ -153,6 +218,43 @@
                   and then change the message <b>(Click here to join the Guest Book...)</b> with the message you wish to be displayed.
                  </p>
               </p>
+          </div>
+          <div class="voffset9"></div>
+        </div>
+
+        <div class="tab-pane fade" id="p5">
+          <h3 class="text-center" id="pg1"> WordPress</h3>
+          <br>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <h4>Description</h4>
+            <p>
+              WordPress is an open-source and free Web publishing application, content management system (CMS) and blogging tool built by a community of developers and contributors. WordPress allows users to build dynamic websites and blogs that may be updated, customized and managed from its back-end CMS and integrated application and components.
+            </p>
+            <h4>Administration Guide</h4>
+            <img src="images/wordpress_doc.png" class="img-responsive center-block" alt="Image for WordPress Admin Panel" style='padding-bottom: 10px'>
+            <p>
+              Fill out the information: give your site a title, create a username and password and enter your email address. Hit the Install WordPress button, then log in using the account you just created.
+            </p>
+          </div>
+          <div class="voffset9"></div>
+        </div>
+
+        <div class="tab-pane fade" id="p6">
+          <h3 class="text-center" id="pg1"> FramaDate</h3>
+          <br>
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <h4>Description</h4>
+            <img src="images/framadate_doc.png" class="img-responsive center-block" alt="Image for WordPress Admin Panel" style='padding-bottom: 10px'>
+            <p>
+              Framadate is an open-source and free application like Doodle. It’s easy to create an appointment or a survey without registration to invite your collaborations. </br>
+              Here is how to works :
+              <ul>
+                <li>Create a poll</li>
+                <li>Determine the dates or topics to choose</li>
+                <li>Send the survey link to your friends or colleagues </li>
+                <li>Discuss and make your decision </li>
+              </ul>
+            </p>
           </div>
           <div class="voffset9"></div>
         </div>

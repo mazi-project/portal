@@ -11,7 +11,7 @@ class MaziApp < Sinatra::Base
   include MaziConfig
   include Authorizer
 
-  use Rack::Session::Pool, :expire_after => 60 * 60 * 24
+  use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
 
   def initialize
     super
@@ -34,20 +34,26 @@ class MaziApp < Sinatra::Base
       s.save
       session['uuid'] = s.uuid
     end
-    locals                     = {}
-    locals[:local_data]        = {}
-    locals[:local_data][:mode] = @config[:general][:mode]
-    locals[:js]                = []
-    locals[:error_msg]         = nil
+    locals                           = {}
+    locals[:local_data]              = {}
+    locals[:local_data][:mode]       = @config[:general][:mode]
+    locals[:local_data][:authorized] = authorized?
+    locals[:js]                      = []
+    locals[:error_msg]               = nil
+    unless session['error'].nil?
+      locals[:error_msg] = session["error"]
+      session[:error] = nil
+    end
     case index
     when 'index'
       session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
-      locals[:local_data][:applications]       = Mazi::Model::Application.all
-      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
-      locals[:local_data][:notifications_read] = session['notifications_read']
-      locals[:local_data][:config_data]        = @config[:portal_configuration]
+      locals[:local_data][:applications]          = Mazi::Model::Application.all
+      locals[:local_data][:notifications]         = Mazi::Model::Notification.all
+      locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
+      locals[:local_data][:notifications_read]    = session['notifications_read']
+      locals[:local_data][:config_data]           = @config[:portal_configuration]
       erb :index_main, locals: locals
     when 'index_statistics'
       session['notifications_read'] = [] if session['notifications_read'].nil?
@@ -80,21 +86,21 @@ class MaziApp < Sinatra::Base
       lines = ex.exec_command
       locals[:local_data][:net_info] = {}
       ssid = ex.parseFor('ssid')
-      locals[:local_data][:net_info][:ssid] = ssid[1] if ssid.kind_of? Array
+      ssid.shift
+      locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
       mode = ex.parseFor('mode')
       ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       lines = ex2.exec_command
       users = ex2.parseFor('wifi users')
-      locals[:local_data][:users]           = {}
-      locals[:local_data][:users][:online]  = users[2] if users.kind_of? Array
-      locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
-      locals[:local_data][:applications]    = Mazi::Model::Application.all
-      locals[:local_data][:notifications]   = Mazi::Model::Notification.all
-      locals[:local_data][:sessions]        = Mazi::Model::Session.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
+      locals[:local_data][:users]                 = {}
+      locals[:local_data][:users][:online]        = users[2] if users.kind_of? Array
+      locals[:local_data][:net_info][:mode]       = mode[1] if mode.kind_of? Array
+      locals[:local_data][:applications]          = Mazi::Model::Application.all
+      locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
+      locals[:local_data][:notifications]         = Mazi::Model::Notification.all
+      locals[:local_data][:sessions]              = Mazi::Model::Session.all
+      locals[:local_data][:rasp_date]             = Time.now.strftime("%d %b %Y")
+      locals[:local_data][:rasp_time]             = Time.now.strftime("%H:%M")
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
@@ -105,10 +111,7 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_application.js"
       locals[:main_body] = :admin_application
       locals[:local_data][:applications]  = Mazi::Model::Application.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
+      locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
       erb :admin_main, locals: locals
     when 'admin_documentation'
       unless authorized?
@@ -126,21 +129,24 @@ class MaziApp < Sinatra::Base
       end
       locals[:js] << "js/admin_network.js"
       locals[:main_body] = :admin_network
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
       lines = ex.exec_command
       locals[:local_data][:net_info] = {}
       ssid = ex.parseFor('ssid')
-      locals[:local_data][:net_info][:ssid] = ssid[1] if ssid.kind_of? Array
+      ssid.shift
+      locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
       channel = ex.parseFor('channel')
       locals[:local_data][:net_info][:channel] = channel[1] if channel.kind_of? Array
       password = ex.parseFor('password')
       locals[:local_data][:net_info][:password] = password[1] if password.kind_of? Array
       mode = ex.parseFor('mode')
       locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
+      ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
+      locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
+      ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
+      locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
+      locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+      locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
       erb :admin_main, locals: locals
     when 'admin_configuration'
       unless authorized?
@@ -152,6 +158,7 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/jscolor.min.js"
       locals[:main_body] = :admin_configuration
       locals[:local_data][:portal_configuration] = @config[:portal_configuration]
+      locals[:local_data][:config_files] = getAllConfigSaves
       erb :admin_main, locals: locals
     when 'admin_notification'
       unless authorized?
@@ -162,17 +169,26 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_notification.js"
       locals[:main_body] = :admin_notification
       locals[:local_data][:notifications] = Mazi::Model::Notification.all
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
+      erb :admin_main, locals: locals
+    when 'admin_snapshot'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
       end
+      locals[:js] << "js/admin_snapshot.js"
+      locals[:main_body] = :admin_snapshot
+      locals[:local_data][:dbs] = getAllDBSnapshots
+      erb :admin_main, locals: locals
+    when 'admin_set_date'
+      locals[:main_body] = :admin_set_time
+      locals[:local_data][:first_login] = false
+      locals[:js] << "js/jquery.datetimepicker.min.js"
+      locals[:js] << "js/admin_set_date.js"
+      locals[:main_body] = :admin_set_date
       erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
-      unless session['error'].nil?
-        locals[:error_msg]  = session["error"]
-        session[:error] = nil
-      end
       erb :admin_main, locals: locals
     when 'admin_logout'
       locals[:main_body] = :admin_login
@@ -201,6 +217,14 @@ class MaziApp < Sinatra::Base
     redirect '/admin'
   end
 
+  # admin login post request
+  post '/set_date/?' do
+    MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
+    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command
+    redirect '/admin'
+  end
+
   # admin create application
   post '/application/?' do
     MaziLogger.debug "request: post/application from ip: #{request.ip} creds: #{params.inspect}"
@@ -209,19 +233,35 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       redirect '/admin_login'
     end
-    e = Mazi::Model::Application.validate(params)
-    unless e.nil?
-      MaziLogger.debug "invalid param #{e}"
-      session['error'] = e
-      redirect '/admin_application'
-    end
-    if @config[:general][:mode] == 'demo'
-      MaziLogger.debug "Demo mode create app"
-      session['error'] = "This portal runs on Demo mode! This action would have created a new application."
-      redirect '/admin_application'
-    end
+    if params['instance']
+      e = Mazi::Model::ApplicationInstance.validate(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode create app"
+        session['error'] = "This portal runs on Demo mode! This action would have created a new application."
+        redirect '/admin_application'
+      end
 
-    a =  Mazi::Model::Application.create(params)
+      a =  Mazi::Model::ApplicationInstance.create(params)
+    else
+      e = Mazi::Model::Application.validate(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode create app"
+        session['error'] = "This portal runs on Demo mode! This action would have created a new application."
+        redirect '/admin_application'
+      end
+
+      a =  Mazi::Model::Application.create(params)
+    end
     redirect '/admin_application'
   end
 
@@ -233,24 +273,45 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       redirect '/admin_login'
     end
-    e = Mazi::Model::Application.validate_edit(params)
-    unless e.nil?
-      MaziLogger.debug "invalid param #{e}"
-      session['error'] = e
-      redirect '/admin_application'
+    if params['instance']
+      e = Mazi::Model::ApplicationInstance.validate_edit(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      id = params['id']
+      app =  Mazi::Model::ApplicationInstance.find(id: params['id'].to_i)
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode edit app"
+        session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
+        redirect '/admin_application'
+      end
+      app.name        = params['name'] if params['name']
+      app.url         = params['url'] if params['url']
+      app.description = params['description'] if params['description']
+      app.enabled     = params['enabled'] if params['enabled']
+      app.save
+    else
+      e = Mazi::Model::Application.validate_edit(params)
+      unless e.nil?
+        MaziLogger.debug "invalid param #{e}"
+        session['error'] = e
+        redirect '/admin_application'
+      end
+      id = params['id']
+      app =  Mazi::Model::Application.find(id: params['id'].to_i)
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode edit app"
+        session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
+        redirect '/admin_application'
+      end
+      app.name        = params['name'] if params['name']
+      app.url         = params['url'] if params['url']
+      app.description = params['description'] if params['description']
+      app.enabled     = params['enabled'] if params['enabled']
+      app.save
     end
-    id = params['id']
-    app =  Mazi::Model::Application.find(id: params['id'].to_i)
-    if @config[:general][:mode] == 'demo'
-      MaziLogger.debug "Demo mode edit app"
-      session['error'] = "This portal runs on Demo mode! This action would have edited the '#{app.name}' application."
-      redirect '/admin_application'
-    end
-    app.name        = params['name'] if params['name']
-    app.url         = params['url'] if params['url']
-    app.description = params['description'] if params['description']
-    app.enabled     = params['enabled'] if params['enabled']
-    app.save
     redirect '/admin_application'
   end
 
@@ -272,6 +333,24 @@ class MaziApp < Sinatra::Base
     end
   end
 
+  # admin delete application
+  delete '/application/:id/instance/?' do |id| 
+    MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode delete app"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have deleted an existing application.", id: id}.to_json
+    else
+      app = Mazi::Model::ApplicationInstance.find(id: id)
+      app.destroy
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
   # toggles application enable disable
   put '/application/:id/?' do |id|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
@@ -281,6 +360,21 @@ class MaziApp < Sinatra::Base
       {error: 'Not Authorized!', id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
+      app.enabled = !app.enabled 
+      app.save
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles application enable disable
+  put '/application/:id/instance/?' do |id|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    else
+      app = Mazi::Model::ApplicationInstance.find(id: id)
       app.enabled = !app.enabled 
       app.save
       {result: 'OK', id: id}.to_json
@@ -316,9 +410,36 @@ class MaziApp < Sinatra::Base
   # application counter +1
   put '/application/:id/click_counter/?' do |id|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
-    app = Mazi::Model::Application.find(id: id)
+    app = Mazi::Model::ApplicationInstance.find(id: id)
+    app.application.click_counter += 1 
     app.click_counter = app.click_counter + 1
     app.save
+    {result: 'OK', id: id}.to_json
+  end
+
+  # application counter reset
+  delete '/application/:id/click_counter/?' do |id|
+    MaziLogger.debug "request: delete/application/click_counter from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', id: id}.to_json
+    end
+
+    if id == 'all'
+      Mazi::Model::Application.all.each do |app|
+        app.click_counter = 0
+        app.save
+      end
+      Mazi::Model::ApplicationInstance.all.each do |app|
+        app.click_counter = 0
+        app.save
+      end
+    else
+      app = Mazi::Model::Application.find(id: id)
+      app.click_counter = 0
+      app.save
+    end
     {result: 'OK', id: id}.to_json
   end
 
@@ -399,7 +520,6 @@ class MaziApp < Sinatra::Base
     env = params['env']
     path = params['path'] || @config[:scripts][:backend_scripts_folder]
     cmd = "#{params['cmd']}"
-    # args = params['args']
     case cmd
     when 'wifiap.sh'
       args = []
@@ -408,10 +528,18 @@ class MaziApp < Sinatra::Base
         md, vl = params['ssid'] ? ['ssid', params['ssid']] : params['channel'] ? ['channel', params['channel']] : params['password'] ? ['password', params['password']] : ['wpa', 'off']
         session['error'] = "This portal runs on Demo mode! This action would have changed the '#{md}' to '#{vl}'"
       end
-      args << "-s #{params['ssid']}" if params['ssid']
+      args << "-s '#{params['ssid']}'" if params['ssid']
       args << "-c #{params['channel']}" if params['channel']
-      args << "-p #{params['password']}" if params['password']
-      args << "-w off" if args.empty? && (params['password'].nil? || params['password'].empty?)
+      if params['password'].nil? || params['password'].empty? || params['password'] == '' || params['password'] == ' ' || params['password'] == '-'
+        args << "-w off"
+      elsif params['password']
+        if params['password'].length < 8
+          MaziLogger.debug "WiFi password must be more than 8 characters long"
+          session['error'] = "WiFi password must be more than 8 characters long"
+          redirect '/admin_network'
+        end
+        args << "-p #{params['password']}" 
+      end
     when 'internet.sh'
       args = []
       if @config[:general][:mode] == 'demo'
@@ -420,12 +548,21 @@ class MaziApp < Sinatra::Base
       end
       args << "-m #{params['mode']}" if params['mode']
       redirect '/admin_network' if args.empty?
+    when 'antenna.sh'
+      args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        session['error'] = "This portal runs on Demo mode! This action would have changed the 'network mode' to '#{params['mode']}'" if params['mode']
+      end
+      args << "-s #{params['ssid']}" if params['ssid']
+      args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
     else
       args = []
     end
     begin
       ex = MaziExecCmd.new(env, path, cmd, args, @config[:scripts][:enabled_scripts])
       lines = ex.exec_command
+      sleep 5 if cmd == 'antenna.sh'
       redirect '/admin_network'
     rescue ScriptNotEnabled => e
       MaziLogger.debug "Not enabled script '#{cmd}'"
@@ -436,7 +573,7 @@ class MaziApp < Sinatra::Base
 
   # saving configurations
   post '/conf/?' do
-    MaziLogger.debug "request: post/conf from ip: #{request.ip}"
+    MaziLogger.debug "request: post/conf from ip: #{request.ip} params: #{params.inspect}"
     unless authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
@@ -445,6 +582,12 @@ class MaziApp < Sinatra::Base
     if params['reset']
       changePortalConfigToDefault
       writeConfigFile
+      redirect '/admin_configuration'
+    elsif params['save']
+      saveTheme(params[:filename])
+      redirect '/admin_configuration'
+    elsif params['load']
+      loadTheme(params[:filename])
       redirect '/admin_configuration'
     end
     data = {}
@@ -456,6 +599,12 @@ class MaziApp < Sinatra::Base
     data[:side_panel_active_color]   = params['side_panel_active_color'] unless params['side_panel_active_color'].nil?  || params['side_panel_active_color'].empty?
     data[:top_panel_color]           = params['top_panel_color'] unless params['top_panel_color'].nil?  || params['top_panel_color'].empty?
     data[:top_panel_active_color]    = params['top_panel_active_color'] unless params['top_panel_active_color'].nil?  || params['top_panel_active_color'].empty?
+    unless params['applications_background_image'].nil? || params['applications_background_image'].empty?
+      tempfile = params['applications_background_image'][:tempfile]
+      filename = params['applications_background_image'][:filename]
+      data[:applications_background_image] = filename
+      FileUtils.cp tempfile.path, "public/images/#{filename}"
+    end
     data.each do |key, value|
       changeConfigFile("portal_configuration->#{key}", value)
     end
@@ -488,6 +637,53 @@ class MaziApp < Sinatra::Base
       writeConfigFile
       {result: 'OK'}.to_json
     end
+  end
+
+  # application counter reset
+  delete '/session/:id/?' do |id|
+    MaziLogger.debug "request: delete/session from ip: #{request.ip} creds: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', id: id}.to_json
+    end
+
+    if id == 'all'
+      Mazi::Model::Session.all.each do |ses|
+        ses.destroy
+      end
+    else
+      ses = Mazi::Model::Session.find(id: id)
+      ses.destroy
+    end
+    {result: 'OK', id: id}.to_json
+  end
+
+   # taking/loading snapshots
+  post '/snapshot/?' do
+    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      redirect '/admin_login'
+    end
+    if params['save']
+      takeDBSnapshot(params[:snapshotname])
+      redirect '/admin_snapshot'
+    elsif params['load']
+      loadDBSnapshot(params[:snapshotname])
+      redirect '/admin_snapshot'
+    elsif params['download']
+      zip_snapshot(params[:snapshotname])
+      return {result: 'OK', file: "#{params[:snapshotname]}.zip"}
+    elsif params['upload']
+      tempfile = params['snapshot'][:tempfile]
+      filename = params['snapshot'][:filename]
+      unzip_snapshot(filename, tempfile)
+      redirect '/admin_snapshot'
+    end
+
+    redirect '/admin_snapshot'
   end
 end
 

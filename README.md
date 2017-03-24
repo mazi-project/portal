@@ -13,7 +13,7 @@ Install the following packages:
 
 Also install the following gems:
 
-    $ gem install sinatra sequel sqlite3 rake thin --no-ri --no-rdoc
+    $ gem install sinatra sequel sqlite3 rake thin rubyzip --no-ri --no-rdoc
 
 And download the back-end scripts
 

@@ -13,19 +13,30 @@
   </div>
   <% end %>
 
-  <div class="col-md-6">
+  <div class="col-md-4 col-lg-6">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Welcome</h3>
       </div>
       <div class="panel-body">
-        <p><strong>Lorem Ipsum is simply</strong> dummy text of the printing and typesetting industry. Lorem Ipsum has been the <em>industry's standard</em> dummy text ever since the 1500s, <code>code</code> when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-        <p><abbr title="HyperText Markup Language" class="initialism">HTML</abbr> It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        <p>
+          <strong>The Mazizone Administration panel</strong> is the main tool, used to <strong>manage</strong> this Mazizone portal, as well as the networking aspect of this Mazizone.
+        </p>
+        <p>
+          Please use the menu to navigate to the various tools, which can:
+          <ul>
+            <li> Manage the supported Applications</li>
+            <li> Configure the Mazizone network</li>
+            <li> Configure the visual representation of the portal</li>
+            <li> Add/remove notifications on the portal</li>
+            <li> Export/import snapshots</li>
+          </ul> 
+        </p>
       </div>
     </div>
   </div>
 
-  <div class='col-lg-6'>
+  <div class='col-md-8 col-lg-6'>
     <div class="row">
       <div class='col-md-6'>
         <div class="panel panel-default">
@@ -71,11 +82,21 @@
       </div>
 
       <% clicks = 0 %>
-      <% applications.each {|app| clicks += app.click_counter} %>
+      <% application_instances.each {|app| clicks += app.click_counter} %>
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading"> 
-            <div class="panel-title">Traffic</div>
+            <div class="panel-title">Traffic
+              <div class="dropdown pull-right">
+                <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                  <i class="fa fa-wrench"></i>
+                </div>
+                <ul class="dropdown-menu dropdown-user dropdown-menu-right">
+                  <li><a class="reset-app-clicks"><i class="fa fa-refresh"></i> Reset Application Clicks</a></li>
+                  <li><a class="reset-visits"><i class="fa fa-refresh"></i> Reset Visits</a></li>
+                </ul>
+              </div>
+            </div>
           </div> 
           <!-- panel body --> 
           <div class="panel-body">
@@ -108,6 +129,27 @@
                 <small>Active Portal Notifications</small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-bell"></i></div>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Mazizone Time/Date
+              <a href="admin_set_date" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6 text-left"> 
+                <h4 class="no-margins"><%= rasp_date %></h4>
+                <h4 class="no-margins"><%= rasp_time %></h4>
+                <small>Current Date/Time</small>
+              </div>
+              <div class="pull-right"><i class="fa fa-fw fa-5x fa-clock-o"></i></div>
             </div>
           </div> 
         </div>

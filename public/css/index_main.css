@@ -187,8 +187,26 @@ ul.alert-dropdown {
   font-size: 40px;
 }
 
+.app-link,
+.app-link:hover,
+.app-link:visited{
+  color: #fff;
+}
+
+.app-row{
+  padding-top: 50px; 
+  padding-bottom: 20px; 
+  margin-bottom: 50px; 
+  background-size: cover;
+  background: url('images/mazi-background.jpg');
+}
+
 .panel-green {
   border-color: #5cb85c;
+}
+
+.app-panel > .panel-heading:hover{
+  opacity: 0.80;
 }
 
 .panel-green > .panel-heading {

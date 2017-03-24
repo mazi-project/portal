@@ -17,6 +17,7 @@
 # - applications_title: title on the applications body page
 # - applications_subtitle: subtitle on the applications body page
 # - applications_welcome_text: welcome text on the applications body page
+# - applications_background_image: background image on the applications body page.
 # - side_panel_color: side panel main color (hex value)
 # - side_panel_active_color: side panel active and on hover color (hex value)
 # - top_panel_color: top panel main color (hex value)
@@ -35,6 +36,8 @@
   - internet.sh
   - mazi-app.sh
   - mazi-stat.sh
+  - antenna.sh
+  - date
   - ls
 :portal_configuration:
   :title: Mazizone Portal
@@ -43,6 +46,7 @@
   :applications_welcome_text: |-
     Welcome to the Mazizone Applications Portal, please
         use the links bellow to navigate to the applications offered by this Mazizone.
+  :applications_background_image: mazi-background.jpg
   :side_panel_color: '222'
   :side_panel_active_color: 080808
   :top_panel_color: '222'

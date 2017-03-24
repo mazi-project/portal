@@ -50,6 +50,8 @@ class MaziExecCmd
       'OK'
     when 'internet.sh'
       'OK'
+    when 'antenna.sh'
+      'OK'
     when 'mazi-app.sh'
       'OK'
     when 'mazi-stat.sh'
@@ -73,6 +75,8 @@ class MaziExecCmd
         return ['mode', 'offline']
       end
     when 'internet.sh'
+      'OK'
+    when 'antenna.sh'
       'OK'
     when 'mazi-app.sh'
       'OK'

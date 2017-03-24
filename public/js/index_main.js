@@ -12,6 +12,11 @@ $( document ).ready(function() {
         console.log($(this));
         elem.children('span').text('Read');
         elem.children('span').addClass('label-default').removeClass('label-success')
+        var nof_notif = Number($(".notif-span").text()) - 1;
+        if (nof_notif <= 0){
+          nof_notif = '';
+        }
+        $(".notif-span").text( nof_notif);
       }
     });
   });

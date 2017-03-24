@@ -1,0 +1,128 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Mazizone <small>Snapshots</small>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <p>
+      You can use the tools bellow to take a snapshot of the current configuration of this Mazizone. This includes everything (network configurations, applications, application instances, notifications, etc) except the visual configurations, which can be saved as a theme on the appearance configurations menu <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i></a>.
+    </p>
+  </div>
+  <div class='col-md-8 col-lg-6'>
+    <div class="row">
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Save Snapshot
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to take a snapshot."></i>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <form id="save-snapshot-form" action="/snapshot" method="post">
+                <div class="form-group">
+                <input type="hidden" name="save" class="form-control" value='true' autofocus="">
+                <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+                <small id="snapshotLoadHelp" class="form-text text-muted">Please enter the name of the new Snapshot.</small>
+                </div>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> Save</button>
+              </form>
+            </div>
+          </div> 
+        </div>
+      </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Load Snapshot
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to load a snapshot."></i>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <% unless dbs.nil? || dbs.empty? %>
+              <form id="load-snapshot-form" action="/snapshot" method="post">
+                <div class="form-group">
+                  <input type="hidden" name="load" class="form-control" value='true' autofocus="">
+                  <select id="snapshot-select" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
+                    <% dbs.each do |db| %>
+                    <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
+                    <% end %>
+                  </select>
+                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load.</small>
+                </div>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> Load</button>
+              </form>
+              <% else %>
+              <p class="text-center">Currently, there are no snapshots saved.</p>
+              <% end %>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-8 col-lg-6'>
+    <div class="row">
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Import/Export Snapshot
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to export a snapshot to a zip file. Or import a zip file as a snapshot."></i>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row" style="margin-right: -11px; margin-left: -11px;">
+              <% unless dbs.nil? || dbs.empty? %>
+              <form id="export-snapshot-form" action="/snapshot" method="post">
+                <div class="form-group">
+                  <select id="snapshot-select-download" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
+                    <% dbs.each do |db| %>
+                    <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
+                    <% end %>
+                  </select>
+                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load.</small>
+                </div>
+                <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> Export</button>
+              </form>
+              <% else %>
+              <p class="text-center">Currently, there are no snapshots saved.</p>
+              <% end %>
+              <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> Import</a>
+            </div>
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload snapshots modal-->
+<div class="modal fade" id="upload-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Import Snapshot</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="upload" class="form-control" value='true'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

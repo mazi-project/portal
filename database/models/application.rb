@@ -2,6 +2,7 @@ require "helpers/mazi_exec_cmd"
 
 module Mazi::Model
   class Application < Sequel::Model
+    one_to_many :application_instances
     # validate if there is something missing in the 
     # returns nil if it is OK, else it returns the key that is missing
     def self.validate(description={})
@@ -46,6 +47,10 @@ module Mazi::Model
     def status
       case self.name.downcase 
       when 'nextcloud'
+        return 'ON'
+      when 'wordpress'
+        return 'ON'
+      when 'framadate'
         return 'ON'
       when 'guestbook'
         nm = 'mazi-board'

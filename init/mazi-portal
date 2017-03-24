@@ -1,0 +1,35 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:          
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts Mazizone Portal Server 
+# Description:       Mazizone portal
+### END INIT INFO
+
+
+
+case "$1" in
+  start)
+        cd /root/portal
+        nohup ruby -I lib/ -I database/ mazi_portal_server.rb > /var/log/mazi-portal.log&
+        ;;
+  stop)
+        id=$(ps aux | grep mazi_portal | grep root | awk '{print $2}') 
+	if [ "$id" ];
+		then sudo kill $id
+	fi
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+exit 0
+
