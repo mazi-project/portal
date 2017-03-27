@@ -425,3 +425,7 @@ input:checked + .slider:before {
 #upload-snapshot{
   margin-right: 5px;
 }
+
+.panel-min-height{
+  min-height: 100px
+}
