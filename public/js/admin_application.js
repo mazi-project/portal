@@ -84,6 +84,10 @@ $( document ).ready(function() {
       type: 'PUT',
       success: function(result) {
         id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        if (error != null){
+          location.reload();
+        }
       }
     });
   });
@@ -96,6 +100,10 @@ $( document ).ready(function() {
       type: 'PUT',
       success: function(result) {
         id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        if (error != null){
+          location.reload();
+        }
       }
     });
   });
@@ -112,7 +120,12 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         console.log(result);
-        window.setTimeout(function(){location.reload()},3000);
+        if (error != null){
+          location.reload();
+        }
+        else{
+          window.setTimeout(function(){location.reload()},3000);
+        }
       }
     });
   });
@@ -129,7 +142,12 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         console.log(result);
-        window.setTimeout(function(){location.reload()},3000);
+        if (error != null){
+          location.reload();
+        }
+        else{
+          window.setTimeout(function(){location.reload()},3000);
+        }
       }
     });
   });

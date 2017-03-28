@@ -15,7 +15,13 @@ $( document ).ready(function() {
           type: 'DELETE',
           success: function(result) {
             id = JSON.parse(result).id;
-            $('#app_tr_' + id).remove();
+            error = JSON.parse(result).error;
+            if (error != null){
+              $("<div class='alert alert-danger'><p>" +  error + "</p></div>").prependTo('#page-wrapper > div > div:nth-child(2)');
+            }
+            else{
+              $('#notification_tr_' + id).remove();
+            }
           }
         });
         $( this ).dialog( "close" );
@@ -40,7 +46,12 @@ $( document ).ready(function() {
       url: '/notification/' + appId,
       type: 'PUT',
       success: function(result) {
+        console.log(result);
         id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        if (error != null){
+          location.reload();
+        }
       }
     });
   });

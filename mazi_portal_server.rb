@@ -197,7 +197,16 @@ class MaziApp < Sinatra::Base
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
     end
-  end 
+  end
+
+  get '/snapshots/mazi-snapshot.zip' do
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode download snapshot"
+      session['error'] = "This portal runs on Demo mode! This action would have downloaded a snapshot."
+      redirect back
+    end
+    send_file File.join('public/snapshots/', 'mazi-snapshot.zip')
+  end
 
   # admin login post request
   post '/admin_login/?' do
@@ -220,6 +229,11 @@ class MaziApp < Sinatra::Base
   # admin login post request
   post '/set_date/?' do
     MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode set app"
+      session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the mazizone."
+      redirect back
+    end
     ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command
     redirect '/admin'
@@ -358,6 +372,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode toggle enabled"
+      session['error'] = "This portal runs on Demo mode! This action would have toggled application visibility on the portal."
+      {error: "This portal runs on Demo mode! This action would have toggled application visibility on the portal.", id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
       app.enabled = !app.enabled 
@@ -373,6 +391,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode toggle enabled on instance"
+      session['error'] = "This portal runs on Demo mode! This action would have toggled application instance visibility on the portal."
+      {error: "This portal runs on Demo mode! This action would have toggled application instance visibility on the portal.", id: id}.to_json
     else
       app = Mazi::Model::ApplicationInstance.find(id: id)
       app.enabled = !app.enabled 
@@ -425,7 +447,11 @@ class MaziApp < Sinatra::Base
       session['error'] = nil
       return {error: 'Not Authorized!', id: id}.to_json
     end
-
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode reset counter"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have reseted a click counter."}.to_json
+    end
     if id == 'all'
       Mazi::Model::Application.all.each do |app|
         app.click_counter = 0
@@ -446,6 +472,11 @@ class MaziApp < Sinatra::Base
   # admin create notification
   post '/notification/?' do
     MaziLogger.debug "request: post/notification from ip: #{request.ip} creds: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode create notification"
+      session['error'] = "This portal runs on Demo mode! This action would have created a notification."
+      redirect '/admin_notification'
+    end
     unless authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
@@ -459,6 +490,11 @@ class MaziApp < Sinatra::Base
   # admin edit notification
   post '/notification/edit/?' do
     MaziLogger.debug "request: put/notification from ip: #{request.ip} params: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode edit notification"
+      session['error'] = "This portal runs on Demo mode! This action would have editted a notification."
+      redirect '/admin_notification'
+    end
     unless authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
@@ -466,8 +502,8 @@ class MaziApp < Sinatra::Base
     end
     id = params['id']
     notif         =  Mazi::Model::Notification.find(id: params['id'].to_i)
-    notif.title   = params['title'] if params['title']
-    notif.body    = params['body'] if params['body']
+    notif.title   = params['name'] if params['name']
+    notif.body    = params['description'] if params['description']
     notif.enabled = params['enabled'] if params['enabled']
     notif.save
     redirect '/admin_notification'
@@ -480,6 +516,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode delete notification"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have deleted a notification.", id: id}.to_json
     else
       notif = Mazi::Model::Notification.find(id: id)
       notif.destroy
@@ -494,6 +534,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode toggle notification enabled."
+      session['error'] = "This portal runs on Demo mode! This action would have toggled notification visibility on the portal"
+      {error: "This portal runs on Demo mode! This action would have toggled notification visibility on the portal", id: id}.to_json
     else
       notif = Mazi::Model::Notification.find(id: id)
       notif.enabled = !notif.enabled 
@@ -525,8 +569,9 @@ class MaziApp < Sinatra::Base
       args = []
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
-        md, vl = params['ssid'] ? ['ssid', params['ssid']] : params['channel'] ? ['channel', params['channel']] : params['password'] ? ['password', params['password']] : ['wpa', 'off']
-        session['error'] = "This portal runs on Demo mode! This action would have changed the '#{md}' to '#{vl}'"
+        # md, vl = params['ssid'] ? ['ssid', params['ssid']] : params['channel'] ? ['channel', params['channel']] : params['password'] ? ['password', params['password']] : ['wpa', 'off']
+        session['error'] = "This portal runs on Demo mode! This action would have changed the WiFi network parameters."
+        redirect '/admin_network'
       end
       args << "-s '#{params['ssid']}'" if params['ssid']
       args << "-c #{params['channel']}" if params['channel']
@@ -545,6 +590,7 @@ class MaziApp < Sinatra::Base
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
         session['error'] = "This portal runs on Demo mode! This action would have changed the 'network mode' to '#{params['mode']}'" if params['mode']
+        redirect '/admin_network'
       end
       args << "-m #{params['mode']}" if params['mode']
       redirect '/admin_network' if args.empty?
@@ -552,7 +598,8 @@ class MaziApp < Sinatra::Base
       args = []
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
-        session['error'] = "This portal runs on Demo mode! This action would have changed the 'network mode' to '#{params['mode']}'" if params['mode']
+        session['error'] = "This portal runs on Demo mode! This action would have connected the second wireless interface to a wireless network." 
+        redirect '/admin_network'
       end
       args << "-s #{params['ssid']}" if params['ssid']
       args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
@@ -580,14 +627,34 @@ class MaziApp < Sinatra::Base
       redirect '/admin_login'
     end
     if params['reset']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode saving configuration"
+        session['error'] = "This portal runs on Demo mode! This action would have reset the theme."
+        redirect '/admin_configuration'
+      end
       changePortalConfigToDefault
       writeConfigFile
       redirect '/admin_configuration'
     elsif params['save']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode saving configuration"
+        session['error'] = "This portal runs on Demo mode! This action would have saved a theme."
+        redirect '/admin_configuration'
+      end
       saveTheme(params[:filename])
       redirect '/admin_configuration'
     elsif params['load']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode saving configuration"
+        session['error'] = "This portal runs on Demo mode! This action would have loaded a theme."
+        redirect '/admin_configuration'
+      end
       loadTheme(params[:filename])
+      redirect '/admin_configuration'
+    end
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode saving configuration"
+      session['error'] = "This portal runs on Demo mode! This action would have made a theme change."
       redirect '/admin_configuration'
     end
     data = {}
@@ -621,6 +688,10 @@ class MaziApp < Sinatra::Base
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       {error: 'Not Authorized!'}.to_json
+    elsif  @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode save configuration"
+      session['error'] = nil
+      {error: "This portal runs on Demo mode! This action would have made a theme change."}.to_json
     else
       data = {}
       data[:title]                     = body['title'] unless body['title'].nil? || body['title'].empty?
@@ -639,13 +710,18 @@ class MaziApp < Sinatra::Base
     end
   end
 
-  # application counter reset
+  # session counter reset
   delete '/session/:id/?' do |id|
     MaziLogger.debug "request: delete/session from ip: #{request.ip} creds: #{params.inspect}"
     unless authorized?
       MaziLogger.debug "Not authorized"
       session['error'] = nil
       return {error: 'Not Authorized!', id: id}.to_json
+    end
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode delete session"
+      session['error'] = "This portal runs on Demo mode! This action would have reseted portal visits."
+      redirect '/admin_snapshot'
     end
 
     if id == 'all'
@@ -668,15 +744,35 @@ class MaziApp < Sinatra::Base
       redirect '/admin_login'
     end
     if params['save']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode save snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have saved a snapshot."
+        redirect '/admin_snapshot'
+      end
       takeDBSnapshot(params[:snapshotname])
       redirect '/admin_snapshot'
     elsif params['load']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode load snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have loaded a snapshot."
+        redirect '/admin_snapshot'
+      end
       loadDBSnapshot(params[:snapshotname])
       redirect '/admin_snapshot'
     elsif params['download']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode download snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have downoloaded a snapshot."
+        redirect '/admin_snapshot'
+      end
       zip_snapshot(params[:snapshotname])
       return {result: 'OK', file: "#{params[:snapshotname]}.zip"}
     elsif params['upload']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode upload snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have uploaded a snapshot."
+        redirect '/admin_snapshot'
+      end
       tempfile = params['snapshot'][:tempfile]
       filename = params['snapshot'][:filename]
       unzip_snapshot(filename, tempfile)
