@@ -12,49 +12,51 @@
     <p><%= error_msg %></p>
   </div>
   <% end %>
-  <table class="table">
-    <thead>
-      <tr>
-        <!-- <th>ID</th> -->
-        <th>Status</th>
-        <th>Title</th>
-        <th>Body</th>
-        <th class='text-center'>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% notifications.each do |notification| %>
-      <tr class="notification_tr" id="notification_tr_<%= notification.id.to_s %>">
-        <!-- <td scope="row"><%= notification.id %></td> -->
-        <td>
-          <label class="switch">
-            <input type="checkbox" <%= notification.enabled ? 'checked' : '' %>>
-            <div class="slider round enabled-switch" id='enabled-switch_<%= notification.id %>'></div>
-          </label>
-        </td>
-        <td><%= notification.title %></td>
-        <td><%= notification.body %></td>
-        <td>
-          <div class="text-center">
-            <div class="btn-group pull-center">
-              <a class="btn btn-info edit_notification" id='edit_notification_<%= notification.id %>' data-toggle="modal" data-target="#edit-notification-modal-<%= notification.id %>"><i class="fa fa-pencil"></i></a>
-              <a class="btn btn-danger del_notification" id='del_notification_<%= notification.id %>'><i class="fa fa-times"></i></a>
+  <div class='col-lg-12'>
+    <table class="table table-responsive">
+      <thead>
+        <tr>
+          <!-- <th>ID</th> -->
+          <th>Status</th>
+          <th>Title</th>
+          <th>Body</th>
+          <th class='text-center'>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% notifications.each do |notification| %>
+        <tr class="notification_tr" id="notification_tr_<%= notification.id.to_s %>">
+          <!-- <td scope="row"><%= notification.id %></td> -->
+          <td>
+            <label class="switch">
+              <input type="checkbox" <%= notification.enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-switch" id='enabled-switch_<%= notification.id %>'></div>
+            </label>
+          </td>
+          <td><%= notification.title %></td>
+          <td><%= notification.body %></td>
+          <td>
+            <div class="text-center">
+              <div class="btn-group pull-center">
+                <a class="btn btn-info edit_notification" id='edit_notification_<%= notification.id %>' data-toggle="modal" data-target="#edit-notification-modal-<%= notification.id %>"><i class="fa fa-pencil"></i></a>
+                <a class="btn btn-danger del_notification" id='del_notification_<%= notification.id %>'><i class="fa fa-times"></i></a>
+              </div>
             </div>
-          </div>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td><a class="btn btn-success pull-right" data-toggle="modal" data-target="#new-notification-modal"><i class="fa fa-plus"></i></a></td>
-      </tr>
-    </tfoot>
-</table>
+          </td>
+        </tr>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <tr>
+<!--           <td></td> -->
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><a class="btn btn-success pull-right" data-toggle="modal" data-target="#new-notification-modal"><i class="fa fa-plus"></i></a></td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
 </div>
 
 <!-- create notification modal-->
