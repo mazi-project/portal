@@ -79,6 +79,9 @@ module MaziConfig
   end
 
   def getAllConfigSaves
+    if @config[:general][:mode] == 'demo'
+      return ['black-white.yml']
+    end
     files = Dir.entries("/etc/mazi/snapshots/")
     out = []
     files.each {|file| out << file if file.include?('.yml') && file != 'default.yml'}
@@ -97,6 +100,9 @@ module MaziConfig
   end
 
   def getAllDBSnapshots
+    if @config[:general][:mode] == 'demo'
+      return ['mazi-snapshot.db']
+    end
     files = Dir.entries("/etc/mazi/snapshots/")
     out = []
     files.each {|file| out << file if file.include?('.db')}

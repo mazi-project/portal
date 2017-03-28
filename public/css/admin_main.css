@@ -117,7 +117,7 @@ ul.alert-dropdown {
     position: fixed;
     top: 51px;
     left: 225px;
-    width: 225px;
+    width: 180px;
     margin-left: -225px;
     border: none;
     border-radius: 0;
@@ -129,7 +129,7 @@ ul.alert-dropdown {
   }
 
   .side-nav>li>a {
-    width: 225px;
+    width: 180px;
   }
 
   .side-nav li a:hover,
@@ -156,6 +156,18 @@ ul.alert-dropdown {
 
 .activated{
   background-color: #000;
+}
+
+.version-footer{
+  position: fixed;
+  bottom: 0;
+  color: #999;
+  margin-left: 135px;
+}
+
+.version-footer > p{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
 }
 
 /* Flot Chart Containers */
@@ -412,4 +424,8 @@ input:checked + .slider:before {
 
 #upload-snapshot{
   margin-right: 5px;
+}
+
+.panel-min-height{
+  min-height: 100px
 }

@@ -6,6 +6,13 @@
     </h1>
   </div>
 </div>
+
+<% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+<% end %>
+
 <div class="row">
   <div class="panel panel-default">
     <div class="panel-heading">
@@ -236,6 +243,10 @@
       data: JSON.stringify(data),
       success: function(result) {
         console.log(result);
+        error = JSON.parse(result).error;
+        if (error != null){
+          $("<div class='alert alert-danger'><p>" +  error + "</p></div>").prependTo('#page-wrapper > div > div:nth-child(2)');
+        }
       }
     });
   }
