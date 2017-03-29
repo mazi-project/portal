@@ -440,7 +440,7 @@ input:checked + .slider:before {
 }
 
 .panel-min-height{
-  min-height: 100px
+  min-height: 110px
 }
 
 .form-signin > div > label{
