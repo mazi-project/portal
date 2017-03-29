@@ -83,6 +83,7 @@
 
 .top-nav>.open>.dropdown-menu>li>a {
   white-space: normal;
+  width: 180px;
 }
 
 ul.message-dropdown {
@@ -428,4 +429,8 @@ input:checked + .slider:before {
 
 .panel-min-height{
   min-height: 100px
+}
+
+.form-signin > div > label{
+  margin-top: 5px;
 }
