@@ -171,6 +171,18 @@ ul.alert-dropdown {
   margin-bottom: 0px;
 }
 
+@media(max-width:768px){
+  .version-footer{
+    display: none;
+  }
+}
+
+@media(min-width:768px){
+  .version-footer{
+    display: block;
+  }
+}
+
 /* Flot Chart Containers */
 
 .flot-chart {
