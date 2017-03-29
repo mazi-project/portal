@@ -769,7 +769,7 @@ class MaziApp < Sinatra::Base
     elsif params['download']
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode download snapshot"
-        session['error'] = "This portal runs on Demo mode! This action would have downoloaded a snapshot."
+        session['error'] = "This portal runs on Demo mode! This action would have downloaded a snapshot."
         redirect '/admin_snapshot'
       end
       zip_snapshot(params[:snapshotname])
@@ -791,6 +791,11 @@ class MaziApp < Sinatra::Base
 
   post '/admin_change_password' do
     MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode change password"
+      session['error'] = "This portal runs on Demo mode! This action would have changed the admin password."
+      redirect '/admin_change_password'
+    end
     unless valid_password?(params['old-password'])
       MaziLogger.debug "Incorrect old password"
       session['error'] = "Incorrect old password"
