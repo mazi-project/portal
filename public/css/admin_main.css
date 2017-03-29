@@ -83,6 +83,7 @@
 
 .top-nav>.open>.dropdown-menu>li>a {
   white-space: normal;
+  width: 180px;
 }
 
 ul.message-dropdown {
@@ -168,6 +169,18 @@ ul.alert-dropdown {
 .version-footer > p{
   padding-bottom: 0px;
   margin-bottom: 0px;
+}
+
+@media(max-width:768px){
+  .version-footer{
+    display: none;
+  }
+}
+
+@media(min-width:768px){
+  .version-footer{
+    display: block;
+  }
 }
 
 /* Flot Chart Containers */
@@ -427,5 +440,9 @@ input:checked + .slider:before {
 }
 
 .panel-min-height{
-  min-height: 100px
+  min-height: 110px
+}
+
+.form-signin > div > label{
+  margin-top: 5px;
 }

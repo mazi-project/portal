@@ -31,12 +31,6 @@ Installation
     $ rake init
     $ rake db:migrate
 
-Configuration
--------------
-
-Edit the configuration file (/etc/mazi/config.yml) with an editor
-
-    $ nano /etc/mazi/config.yml
 
 Execution
 ---------
@@ -48,12 +42,10 @@ Update
 
 In order to update, you need to execute the following commands:
 
+    $ sudo su
     $ cd /root/portal
     $ git pull origin master
     $ rake db:migrate
     $ cp /etc/mazi/config.yml /etc/mazi/config.yml.bu
     $ cp etc/config.yml /etc/mazi/config.yml
 
-And open the configuration file (/etc/mazi/config.yml) with an editor
-
-    $ nano /etc/mazi/config.yml

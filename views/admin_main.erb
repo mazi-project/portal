@@ -40,20 +40,23 @@
         <li>
           <a class="navbar-brand pull-right" target="_blank" href="index" style="font-size: 14px;">Portal</a>
         </li>
-        <% if local_data[:authorized] %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
               <a href="/admin_set_date"><i class="fa fa-fw fa-clock-o"></i> Set Date</a>
             </li>
+            <% if local_data[:authorized] %>
+            <li>
+              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> Change Password</a>
+            </li>
             <li class="divider"></li>
             <li>
               <a href="/admin_logout"><i class="fa fa-fw fa-power-off admin-logout-button"></i> Log Out</a>
             </li>
+            <% end %>
           </ul>
         </li>
-        <% end %>
       </ul>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
@@ -81,7 +84,7 @@
         </ul>
       </div>
       <div class="version-footer">
-        <p>v1.5.2</p>
+        <p>v1.5.3</p>
       </div>
     </nav>
 

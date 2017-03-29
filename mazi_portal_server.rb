@@ -187,13 +187,20 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_set_date.js"
       locals[:main_body] = :admin_set_date
       erb :admin_main, locals: locals
+    when 'admin_change_password'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:main_body] = :admin_change_password
+      erb :admin_main, locals: locals
     when 'admin_login'
       locals[:main_body] = :admin_login
       erb :admin_main, locals: locals
     when 'admin_logout'
-      locals[:main_body] = :admin_login
       session[:username] = nil
-      erb :admin_main, locals: locals
+      redirect '/admin_login'
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
     end
@@ -780,6 +787,25 @@ class MaziApp < Sinatra::Base
     end
 
     redirect '/admin_snapshot'
+  end
+
+  post '/admin_change_password' do
+    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    unless valid_password?(params['old-password'])
+      MaziLogger.debug "Incorrect old password"
+      session['error'] = "Incorrect old password"
+      redirect '/admin_change_password'
+    end
+    unless params['new-password'] == params['new-password-confirm']
+      MaziLogger.debug "Password confirmation missmatch"
+      session['error'] = "Password confirmation missmatch"
+      redirect '/admin_change_password'
+    end
+    changeConfigFile("admin->admin_password", params['new-password'])
+    writeConfigFile
+    session['error'] = nil
+    session[:username] = nil
+    redirect '/admin_login'
   end
 end
 
