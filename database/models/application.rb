@@ -54,6 +54,8 @@ module Mazi::Model
         return 'ON'
       when 'guestbook'
         nm = 'mazi-board'
+      when 'interview-archive'
+        nm = 'mazi-princess'
       else
         nm = self.name.downcase
       end
@@ -75,6 +77,8 @@ module Mazi::Model
         return 'ON'
       when 'guestbook'
         nm = 'mazi-board'
+      when 'interview-archive'
+        nm = 'mazi-princess'
       else
         nm = self.name.downcase
       end
@@ -91,6 +95,8 @@ module Mazi::Model
         return 'ON'
       when 'guestbook'
         nm = 'mazi-board'
+      when 'interview-archive'
+        nm = 'mazi-princess'
       else
         nm = self.name.downcase
       end
