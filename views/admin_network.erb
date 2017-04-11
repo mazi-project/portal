@@ -138,6 +138,20 @@
       </div> 
     </div>
   </div>
+  <% else %>
+  <div class='col-lg-3 col-md-5'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Connect to Wi-Fi Network</div>
+      </div> 
+      <div class="panel-body">
+        <div class="col-xs-6 text-left"> 
+          <small>Please plugin an extra USB Wi-Fi dongle to your rasberry pi to enable this feature. Suggested USB dongles <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a></small>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-wifi"></i></br><button class="btn btn-primary pull-right connect-btn" data-toggle="modal" data-target="#connect-ssid-modal" disabled>Connect</button></div>
+      </div> 
+    </div>
+  </div>  
   <% end %>
 </div>
 
