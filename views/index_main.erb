@@ -90,6 +90,9 @@
       </div>
       <% if flag %>
       <ul class="nav navbar-right top-nav">
+        <li>
+          <a class="navbar-brand pull-right" target="_blank" href="http://mazizone.eu/mazi-toolkit" style="font-size: 14px;">MAZI Project</a>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
@@ -108,21 +111,24 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :index_application %>>
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> Aplications</a>
+            <a href="index"><i class="fa fa-fw fa-dashboard"></i> Applications</a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
             <a href="index_statistics"><i class="fa fa-fw fa-dashboard"></i> Statistics</a>
           </li>
         </ul>
       </div>
-      <div class="navbar navbar-fixed-bottom bot-nav">
+      <!-- <div class="navbar navbar-fixed-bottom bot-nav">
         <div class="row">
           <div class="col-sm-12 col-md-8 col-lg-6 col-md-offset-2 col-lg-offset-3">
             <p>MAZI Project</p>
             <p><small>This software has been developed with funds from the European Union’s H2020 Programme under grant agreement no 687983.</small></p>
           </div>
         </div>
-      </div>
+      </div> -->
+      <!-- <div class="mazi-link-footer">
+        <a href="http://mazizone.eu/toolkit" target="_blank">MAZI Project</a>
+      </div> -->
     </nav>
 
     <div id="page-wrapper">
