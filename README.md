@@ -1,7 +1,11 @@
-Mazizone Portal
+MAZI Portal
 =================
 
-This repository contains 
+This repository contains the Portal of the MAZI toolkit. It is comprised of the user interface which enables users to interact with the available applications and the admin interface which enables the administrator of the Mazizone to customize the appearance of the Portal, configure important networking parameters (network name, SSID etc.), observe statistics of the Mazizone and much more.
+
+You can find a detailed documentation for the usage of the Portal in the wiki of this repository https://github.com/mazi-project/portal/wiki.
+
+Or in the MAZI guides repository https://github.com/mazi-project/guides/wiki.
 
 Prerequirements
 ---------------
@@ -49,3 +53,6 @@ In order to update, you need to execute the following commands:
     $ cp /etc/mazi/config.yml /etc/mazi/config.yml.bu
     $ cp etc/config.yml /etc/mazi/config.yml
 
+## License
+
+See the [LICENSE] (https://github.com/mazi-project/portal/blob/master/LICENSE) file for license rights and limitations (MIT).
