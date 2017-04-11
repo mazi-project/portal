@@ -175,6 +175,29 @@ ul.alert-dropdown {
   }
 }
 
+.mazi-link-footer{
+  position: fixed;
+  bottom: 0;
+  color: #999;
+  margin-left: 50px;
+}
+
+.mazi-link-footer > p{
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+@media(max-width:768px){
+  .mazi-link-footer{
+    display: none;
+  }
+}
+
+@media(min-width:768px){
+  .mazi-link-footer{
+    display: block;
+  }
+}
 
 /* Flot Chart Containers */
 
