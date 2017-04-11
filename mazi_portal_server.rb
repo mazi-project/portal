@@ -196,9 +196,19 @@ class MaziApp < Sinatra::Base
       locals[:main_body] = :admin_change_password
       erb :admin_main, locals: locals
     when 'admin_login'
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode download snapshot"
+        session['error'] = "This portal runs on Demo mode!"
+        redirect back
+      end
       locals[:main_body] = :admin_login
       erb :admin_main, locals: locals
     when 'admin_logout'
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode download snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have logged you out."
+        redirect back
+      end
       session[:username] = nil
       redirect '/admin_login'
     else
@@ -229,6 +239,12 @@ class MaziApp < Sinatra::Base
 
   # admin login post request
   delete '/admin_login/?' do
+    MaziLogger.debug "request: delete/admin_login from ip: #{request.ip} creds: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode download snapshot"
+      session['error'] = "This portal runs on Demo mode! This action would have logged you out."
+      redirect back
+    end
     session[:username] = nil
     redirect '/admin'
   end
