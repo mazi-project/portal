@@ -72,6 +72,13 @@ class MaziApp < Sinatra::Base
         locals[:local_data][:clicks] += app.click_counter
       end
       erb :index_main, locals: locals
+    when 'index_documentation'
+      session['notifications_read'] = [] if session['notifications_read'].nil?
+      locals[:main_body] = :index_documentation
+      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
+      locals[:local_data][:notifications_read] = session['notifications_read']
+      locals[:local_data][:config_data]        = @config[:portal_configuration]
+      erb :index_main, locals: locals
     when 'admin'
       redirect 'admin_dashboard'
     when 'admin_dashboard'
