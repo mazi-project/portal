@@ -3,15 +3,15 @@
   <div class="col-md-12 col-lg-12 panel">  
     <br>
     <div class="panel-heading" id="syllabus">
-      <h1 class="text-center text-primary hidden-xs" style="font-size:400%"><span class="glyphicon glyphicon-book"></span>Documentation</h1>
-      <h1 class="text-center text-primary visible-xs"><span class="glyphicon glyphicon-book"></span>Documentation</h1>
+      <h1 class="text-center text-primary hidden-xs" style="font-size:400%"><span class="glyphicon glyphicon-book"></span> Admin Documentation</h1>
+      <h1 class="text-center text-primary visible-xs"><span class="glyphicon glyphicon-book"></span> Admin Documentation</h1>
       <br><br>
       <div class="tabbable" >
         <ul class="nav nav-tabs" id="myTabs">
           <li class="active"><a href="#p1" data-toggle="tab"><strong>Initial Configuration</strong></a></li>
           <li><a href="#p2" data-toggle="tab"><strong>Etherpad</strong></a></li>
           <li><a href="#p3" data-toggle="tab"><strong>Nextcloud</strong></a></li>
-          <li><a href="#p4" data-toggle="tab"><strong>Guest Book</strong></a></li>
+          <li><a href="#p4" data-toggle="tab"><strong>Guestbook</strong></a></li>
           <li><a href="#p5" data-toggle="tab"><strong>WordPress</strong></a></li>
           <li><a href="#p6" data-toggle="tab"><strong>FramaDate</strong></a></li>
         </ul>
@@ -92,6 +92,17 @@
               </code></pre>
             </p>
             <img src="images/etherpad_doc.png" class="img-responsive center-block" alt="Image for Etherpad Admin Panel">
+
+            <h4>Useful tips:</h4>
+            <p>
+              It will make it easier for your MAZI zone users if you create an index pad yourself and make it the "default" etherpad page by changing the URL in the applications area of the admin panel, when you manage to login. People could be invited to create their own pads, and add their link in that index page, which will be also "commentable" and make it easier to navigate the available pads on the server.
+            </p>
+            <p>
+              For example, <a href='http://portal.mazizone.eu/p/unmonastery-index' target='_blank'>http://portal.mazizone.eu/p/unmonastery-index</a>
+            </p>
+            <p>
+              Etherpad works well when there is someone that "cleans" the text from time to time and if there are suitable "index" pages that organize the different available pads.
+            </p>
           </div>
           <div class="voffset9"></div>
         </div>
@@ -131,78 +142,97 @@
                <li> Links to desktop and mobile apps</li>
               </ul>
             </p>
+            </br>
+            <h4>Useful tips:</h4>
+            <p>
+              An easy way to introduce your users to the Nextcloud application is to create a shared editable folder and create a direct link to it, as a separate   application, that will allow anyone to share easily files without having to enter a username and password.
+            </p>
+            <p>
+              It might also help to create separate folder for different types of files (photos, slides, videos) to make it easier to direct people on what type of content is expected and make it easier to browse.
+            </p>
           </div>
           <div class="voffset9"></div>
         </div>
         <div class="tab-pane fade" id="p4">
-          <h3 class="text-center" id="pg1"> Guest Book</h3>
+          <h3 class="text-center" id="pg1"> Guestbook</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
             <h4>Description</h4>
             <p>
-              The MAZI Guest Book is an open source application that can used in events enabling the audience to share their thoughts, photos, etc.
+              The MAZI Guestbook is an open source application that can used in events enabling the audience to share their thoughts, photos, etc.
             </p>
-            <img src="images/guestbook_doc.png" class="img-responsive center-block" alt="Image for Nextcloud Admin Panel" style='padding-bottom: 10px'>
+            
             <h4>Administration Guide</h4>
             <p>
-              To moderate the content, you go to <b><a target="_blank" href="http://local.mazizone.eu:8081/#admin" class="app-link" >local.mazizone.eu:8081/#admin</a></b></br> (username: <b>admin</b> password: <b>mazizone</b>), where you can delete any submission that is inappropriate.
+              To moderate the content, you go to <b><a target="_blank" href="http://portal.mazizone.eu:8081/#admin" class="app-link" >local.mazizone.eu:8081/#admin</a></b></br> (username: <b>admin</b> password: <b>mazizone</b>), where you can delete any submission that is inappropriate.
+            </p>
+
+            <h4>Alternative views of content</h4>
+            <p>
+              As well as standard web browser presentation of content, GuestBook supports two other views of content
+            </p>
+            <p><b>Slideshow view:</b> <a href="http://portal.mazizone.eu:8081/#projection" target='_blank'>http://portal.mazizone.eu:8081/#projection</a> *</p>
+            <p><b>Tablet view:</b> <a href="http://portal.mazizone.eu:8081/#tablet" target='_blank'>http://portal.mazizone.eu:8081/#tablet</a> *</p>
+            <p>* all links work when you are connected to your MAZI Zone.</p>
+
+            <h4>Tags</h4>
+            <p>
+              When contributing a post, users are offered predefined tag boxes to select to give profile information. These can be edited by the administrator. In order to change tags, open the config.js file, which is held here: <b>/var/www/html/mazi-board/src/www/js/config.js</b> You can remove or edit a tag as you wish in this code line
+            </p>
+            <pre><code>
+              $tags: ['Tag1', 'Tag2', 'Tag3', 'Tag4']
+            </code></pre>
+
+            <h4>Background Image</h4>
+            <p>
+              In order to change the background image, save the image you want in the following path: <b>/var/www/html/mazi-board/src/www/images</b> Replace the DSI.jpg of the following code, with the name of your image. You can find the code in the following path: <b>/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html</b>
+            </p>
+            <pre><code>
+              &ltdiv class="header-bar"&gt&lt/div&gt
+              &ltdiv class="header-image column"&gt&ltimg src="images/DSI.jpg"&gt&lt/div&gt
+            </code></pre>
+            <p>
+              Alternatively, you could just replace the file "header-img.png" with the new image file. If you have a hybrid letterbox, in the same folder you can also replace the "logo" image by replacing the file "logo.png" in the same repository.
+            </p>
+
+            <h4>Appearance and input</h4>
+            <p>
+              You can further modify the appearance of the GuestBook manually by editing the various templates here: <b>/var/www/html/mazi-board/src/www/js/templates/</b>
+            </p>
+
+            <h4>Admin Password</h4>
+            <p>
+              In order to change the admin password, open the config.js file ,which takes place in this path: <b>/var/www/html/mazi-board/src/node/config.js</b>, and then fill the authPassword with the password you like.
+            </p>
+            <pre><code>
+              /* AUTH DATA */
+              authName: 'admin',
+              authPassword: 'password',
+            </code></pre>
+
+            <h4>Message</h4>
+            <p>
+              In order to change the message, open the submission_input_tmpl.html file , which takes place in this path: <b>/var/www/html/mazi-board/src/www/js/templates/</b>submission_input_tmpl.html, and then change the message (i.e., "Click here to join the Guestbook" ...) with the message you wish to be displayed.
+            </p>
+
+            <h4>Setting upload size of files and formats</h4>
+            <p>
+              To customise the file upload size and file formats allowed, edit the following file:</br>
+              <b>/var/www/html/mazi-board/src/node/config.js</b>
             </p>
             <p>
-               For slideshow <b><a target="_blank" href="http://local.mazizone.eu:8081/#projection" class="app-link" >local.mazizone.eu:8081/#projection</a></b>
+              By default, the maximum file upload size is 1024 x 1024 x 2 bytes (2 Mb). The following file types are allowed: 'image/jpg','image/jpeg','image/png','image/gif'
             </p>
-              <h4>Useful Guidelines</h4>
-               <p>You can modify the appearance of the GuestBook</p>
-             <ul>
-                <li>Tags</li>
-                <li>Background Image</li>
-                <li>Admin Password</li>
-                <li>Message</li>
-             </ul>               
-              <p>
-                First connect to your Raspberry pi. The credentials are:</br> 
-                  <pre><code>
-                    # ssh pi@local.mazizone.eu
-                    password: mazizone                    
-                  </code></pre>
-                </p>
-                 <b>Tags</b>
-                 <p> 
-                  In order to change tags, open the config.js file, which takes place in this path: /var/www/html/mazi-board/src/www/js/config.js</br> 
-                  You can remove or edit a tag as you wish in this code line</br>  
-                  <pre><code>
-                    tags: ['Artist', 'Activist', 'Male', 'Female', 'Student', 'Professor', 'DSIMaker', 'PolicyMaker']
-                  </code></pre>
-                </p>
-                 <b>Background Image</b>
-                 <p>
-                  In order to change the background image, save the image you want in the following path: /var/www/html/mazi-board/src/www/images</br>
-                  Replace the DSI.jpg of the following code, with the name of your image.</br>
-                  You can find the code in the following path: /var/www/html/mazi-board/src/www/js/templates/header_tmpl.html </br>  
-                  <pre>
-                    <code>
-                      &lt;div class="header-bar"&gt;&lt;/div&gt;
-                      &lt;div class="header-image column"&gt;&lt;img src="images/DSI.jpg"&gt;&lt;/div&gt;
-                    </code>
-                  </pre>
-                </p>
-                 <b>Admin Password</b> 
-                 <p>
-                  In order to change the admin password, open the config.js file ,which takes place in this path: /var/www/html/mazi-board/src/node/config.js,</br>
-                  and then fill  the <b>authPassword</b> with the password you like. 
-                  <pre>
-                    <code>
-                      /* AUTH DATA */
-                        authName: 'admin',
-                        authPassword: 'password',
-                    </code>
-                  </pre>
-                 </p>
-                 <b>Message</b>
-                 <p>
-                  In order to change the message, open the submission_input_tmpl.html file , which takes place in this path: /var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html,</br> 
-                  and then change the message <b>(Click here to join the Guest Book...)</b> with the message you wish to be displayed.
-                 </p>
-              </p>
+
+            <h4>Changing font colours</h4>
+            <p>
+              The main css is available at: <b>/var/www/html/mazi-board/src/www/css/</b>
+            </p>
+            
+            <h4>Saving the content of a MAZI Zone deployment</h4>
+            <p>
+              If you want to record the input of a specific MAZI Zone deployment for future use or archiving, and until the corresponding admin function is properly implemented, you can copy the folder "/var/files/" to another folder (e.g., "cp -r ./files files_[date]_[place]"). This new folder can be compressed and transferred to a local storage.
+            </p>
           </div>
           <div class="voffset9"></div>
         </div>
