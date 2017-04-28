@@ -71,7 +71,7 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:users]          = {}
       locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
       locals[:local_data][:clicks]         = 0
-      Mazi::Model::Application.all.each do |app|
+      Mazi::Model::ApplicationInstance.all.each do |app|
         locals[:local_data][:clicks] += app.click_counter
       end
       erb :index_main, locals: locals
