@@ -34,6 +34,9 @@ class MaziApp < Sinatra::Base
       s.save
       session['uuid'] = s.uuid
     end
+    if first_time? && index != 'setup'
+      redirect '/setup'
+    end
     locals                           = {}
     locals[:local_data]              = {}
     locals[:local_data][:mode]       = @config[:general][:mode]
@@ -73,12 +76,17 @@ class MaziApp < Sinatra::Base
       end
       erb :index_main, locals: locals
     when 'index_documentation'
-      session['notifications_read'] = [] if session['notifications_read'].nil?
-      locals[:main_body] = :index_documentation
+      session['notifications_read']            = [] if session['notifications_read'].nil?
+      locals[:main_body]                       = :index_documentation
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
       erb :index_main, locals: locals
+    when 'setup'
+      locals[:main_body] = :setup
+      locals[:js] << "js/setup.js"
+      locals[:js] << "js/jquery.datetimepicker.min.js"
+      erb :setup, locals: locals
     when 'admin'
       redirect 'admin_dashboard'
     when 'admin_dashboard'
@@ -831,6 +839,56 @@ class MaziApp < Sinatra::Base
     end
     changeConfigFile("admin->admin_password", params['new-password'])
     writeConfigFile
+    session['error'] = nil
+    session[:username] = nil
+    redirect '/admin_login'
+  end
+
+  post '/setup' do
+    MaziLogger.debug "request: post/setup from ip: #{request.ip} creds: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode exec script"
+      session['error'] = "This portal runs on Demo mode! This action would have initiated the setup mechanism."
+      redirect '/admin'
+    end
+    if params['password'].nil? || params['password'].empty?
+      session['error'] = "Field Password is mandatory! Please try again."
+      redirect '/setup'
+    end
+    if params['confirm-password'].nil? || params['confirm-password'].empty?
+      session['error'] = "Field Confirm Password is mandatory! Please try again."
+      redirect '/setup'
+    end
+    if params['confirm-password'] != params['password']
+      session['error'] = "Password and confirm Password fields missmatch! Please try again."
+      redirect '/setup'
+    end
+    if params['password'] == '1234'
+      session['error'] = "Password 1234 cannot be used! Please try again."
+      redirect '/setup'
+    end
+    if params['date'].nil? || params['date'].empty?
+      session['error'] = "Field Date is mandatory! Please try again."
+      redirect '/setup'
+    end
+
+    changeConfigFile("admin->admin_password", params['password'])
+    writeConfigFile
+
+    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command
+
+    unless params['ssid'].nil? || params['ssid'].empty?
+      env = 'sh'
+      path = @config[:scripts][:backend_scripts_folder]
+      cmd = "wifiap.sh"
+      args = []
+      args << "-s '#{params['ssid']}'" if params['ssid']
+
+      ex1 = MaziExecCmd.new(env, path, cmd, args, @config[:scripts][:enabled_scripts])
+      lines = ex1.exec_command
+    end
+
     session['error'] = nil
     session[:username] = nil
     redirect '/admin_login'
