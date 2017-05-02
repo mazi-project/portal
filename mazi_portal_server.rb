@@ -796,6 +796,7 @@ class MaziApp < Sinatra::Base
         redirect '/admin_snapshot'
       end
       loadDBSnapshot(params[:snapshotname])
+      loadTheme("#{params[:snapshotname]}.yml")
       redirect '/admin_snapshot'
     elsif params['download']
       if @config[:general][:mode] == 'demo'
@@ -814,6 +815,7 @@ class MaziApp < Sinatra::Base
       tempfile = params['snapshot'][:tempfile]
       filename = params['snapshot'][:filename]
       unzip_snapshot(filename, tempfile)
+      loadTheme(filename.gsub('.zip', '.yml'))
       redirect '/admin_snapshot'
     end
 

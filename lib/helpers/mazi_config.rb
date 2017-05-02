@@ -111,6 +111,7 @@ module MaziConfig
 
   def takeDBSnapshot(filename)
     FileUtils.cp "database/inventory.db", "/etc/mazi/snapshots/#{filename}.db"
+    FileUtils.cp "/etc/mazi/config.yml", "/etc/mazi/snapshots/#{filename}.yml"
     ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command.join("\n")
     File.open("/etc/mazi/snapshots/#{filename}.net", 'w') { |file| file.write(lines) }
@@ -146,7 +147,7 @@ module MaziConfig
   def zip_snapshot(snapshot_name)
     File.delete("public/snapshots/#{snapshot_name}.zip") if File.exist?("public/snapshots/#{snapshot_name}.zip")
     folder = "/etc/mazi/snapshots/"
-    input_filenames = ["#{snapshot_name}.db", "#{snapshot_name}.net"]
+    input_filenames = ["#{snapshot_name}.db", "#{snapshot_name}.net", "#{snapshot_name}.yml"]
 
     Zip.on_exists_proc = false
     Zip::File.open("public/snapshots/#{snapshot_name}.zip", Zip::File::CREATE) do |zipfile|
