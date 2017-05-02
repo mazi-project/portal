@@ -20,13 +20,13 @@
         <h3 class="panel-title">Theme Configurations</h3>
       </div>
       <ul class="list-group">
-        <li class="list-group-item toggle" data-toggle="detail-1">
+        <li class="list-group-item">
           <div class="row" id="dropdown-detail-1">
             <div class="col-xs-10">
-                <p><b>Portal title:</b> <%= portal_configuration[:title] %></i></a></p>
+                <p><b>Portal title:</b> <%= portal_configuration[:title] %> <a class="teal-text" data-toggle="modal" data-target="#change-title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-1"></i>
             </div>
           </div>
           <div id="detail-1">
@@ -40,13 +40,13 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item toggle" data-toggle="detail-2">
+        <li class="list-group-item">
           <div class="row" id="dropdown-detail-2">
             <div class="col-xs-10">
-                <p><b>Home page title:</b> <%= portal_configuration[:applications_title] %></p>
+                <p><b>Home page title:</b> <%= portal_configuration[:applications_title] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-2"></i>
             </div>
           </div>
           <div id="detail-2">
@@ -60,13 +60,13 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item toggle" data-toggle="detail-3">
+        <li class="list-group-item">
           <div class="row" id="dropdown-detail-3">
             <div class="col-xs-10">
-                <p><b>Home page subtitle:</b> <%= portal_configuration[:applications_subtitle] %></p>
+                <p><b>Home page subtitle:</b> <%= portal_configuration[:applications_subtitle] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_subtitle-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-3"></i>
             </div>
           </div>
           <div id="detail-3">
@@ -80,13 +80,13 @@
             </div>
           </div>
         </li>
-        <li class="list-group-item toggle" data-toggle="detail-4">
+        <li class="list-group-item">
           <div class="row" id="dropdown-detail-4">
             <div class="col-xs-10">
-                <p><b>Application Welcome Message:</b> <%= portal_configuration[:applications_welcome_text] %></p>
+                <p><b>Application Welcome Message:</b> <%= portal_configuration[:applications_welcome_text] %> <a class="teal-text" data-toggle="modal" data-target="#change-welcome_message-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-4"></i>
             </div>
           </div>
           <div id="detail-4">
@@ -100,13 +100,13 @@
             </div>
           </div>
         </li>
-         <li class="list-group-item toggle" data-toggle="detail-5">
+        <li class="list-group-item">
           <div class="row" id="dropdown-detail-5">
             <div class="col-xs-10">
-                <p><b>Application Background Image:</b> <img height="30px" width="auto" src="images/<%= portal_configuration[:applications_background_image] %>"> <%= portal_configuration[:applications_background_image] %></p>
+                <p><b>Application Background Image:</b> <img height="30px" width="auto" src="images/<%= portal_configuration[:applications_background_image] %>"> <%= portal_configuration[:applications_background_image] %> <a class="teal-text" data-toggle="modal" data-target="#change-background_image-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-5"></i>
             </div>
           </div>
           <div id="detail-5">
@@ -120,43 +120,6 @@
             </div>
           </div>
         </li>
-       <!--  <li class="list-group-item toggle" data-toggle="detail-5">
-          <div class="row" id="dropdown-detail-5">
-            <div class="col-xs-10">
-              <div class="row">
-                <span class="col-lg-2">
-                  <span class='color-picker-label'>Side panel main color:</span> 
-                  <input value="222" type="text" class="pick-a-color form-control" id="side-color">
-                </span>
-                <span class="col-lg-2">
-                  <span class='color-picker-label'>Side panel active color:</span> 
-                  <input value="551033" type="text" class="pick-a-color form-control" id="side-color-active">
-                </span>
-                <span class="col-lg-2">
-                  <span class='color-picker-label'>Top panel main color:</span> 
-                  <input value="222" type="text" class="pick-a-color form-control" id="top-color">
-                </span>
-                <span class="col-lg-2">
-                  <span class='color-picker-label'>Top panel active color:</span> 
-                  <input value="551033" type="text" class="pick-a-color form-control" id="top-color-active">
-                </span>
-              </div>
-            </div>
-            <div class="col-xs-2">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
-            </div>
-          </div>
-          <div id="detail-5">
-            <hr></hr>
-            <div class="container">
-              <div class="fluid-row">
-                <div class="col-xs-12">
-                  <p>The values above configure various colors of the portal.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </li> -->
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-6">
             <div class="col-xs-10">
@@ -180,8 +143,8 @@
                 </span>
               </div>
             </div>
-            <div class="col-xs-2 toggle" data-toggle="detail-6">
-              <i class="fa fa-info-circle fa-2x pull-right"></i>
+            <div class="col-xs-2">
+              <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-6"></i>
             </div>
           </div>
           <div id="detail-6">
@@ -205,7 +168,7 @@
         </span>
         <span>
           <a data-toggle="modal" data-target="#reset-visual-configurations-modal"  class="btn btn-primary conf-link reset-conf pull-right"><i class="fa fa-refresh"></i> Reset</a>
-          <a data-toggle="modal" data-target="#change-visual-configurations-modal" class="btn btn-primary conf-link change-conf pull-right"><i class="fa fa-pencil"></i> Edit</a>
+          <!-- <a data-toggle="modal" data-target="#change-visual-configurations-modal" class="btn btn-primary conf-link change-conf pull-right"><i class="fa fa-pencil"></i> Edit</a> -->
         </span>
       </div>
     </div>
@@ -295,7 +258,112 @@
   </div>
 </div>
 
-<!-- change visual configurations modal-->
+<!-- change title configurations modal-->
+<div class="modal fade" id="change-title-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Title</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="text" name="title" class="form-control" value='<%= portal_configuration[:title] %>' autofocus="">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change application title configurations modal-->
+<div class="modal fade" id="change-application_title-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Home Page Title</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="text" name="applications_title" class="form-control" value='<%= portal_configuration[:applications_title] %>' autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change application subtitle configurations modal-->
+<div class="modal fade" id="change-application_subtitle-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Home Page Subtitle</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="text" name="applications_subtitle" class="form-control" value='<%= portal_configuration[:applications_subtitle] %>' autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change welcome message configurations modal-->
+<div class="modal fade" id="change-welcome_message-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Welcome Message</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <textarea name="applications_welcome_text" class="form-control" rows="5" id="comment" maxlength="300"><%= portal_configuration[:applications_welcome_text] %></textarea>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change background image configurations modal-->
+<div class="modal fade" id="change-background_image-configurations-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Edit Background Image</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="file" name="applications_background_image" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- reset visual configurations modal-->
 <div class="modal fade" id="reset-visual-configurations-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
