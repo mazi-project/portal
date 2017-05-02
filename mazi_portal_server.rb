@@ -3,6 +3,7 @@ require 'helpers/mazi_logger'
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
+require 'helpers/mazi_version'
 require 'thin'
 require 'json'
 require 'sequel'
@@ -10,6 +11,7 @@ require 'sequel'
 class MaziApp < Sinatra::Base
   include MaziConfig
   include Authorizer
+  include MaziVersion
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
 
@@ -41,6 +43,7 @@ class MaziApp < Sinatra::Base
     locals[:local_data]              = {}
     locals[:local_data][:mode]       = @config[:general][:mode]
     locals[:local_data][:authorized] = authorized?
+    locals[:version]                 = getVersion
     locals[:js]                      = []
     locals[:error_msg]               = nil
     unless session['error'].nil?
