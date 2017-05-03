@@ -5,8 +5,12 @@ module MaziVersion
     VERSION
   end
 
-  def current?
+  def fetch
     `git fetch`
+  end
+
+  def current?
+    fetch
     status = `git status`
     status.split("\n").each do |line|
       if line.start_with? "Your branch"
@@ -17,7 +21,7 @@ module MaziVersion
   end
 
   def difference
-    `git fetch`
+    fetch
     status = `git status`
     status.split("\n").each do |line|
       if line.start_with? "Your branch"
@@ -27,11 +31,18 @@ module MaziVersion
     end
   end
 
+  def staged?
+    fetch
+    status = `git status`
+    status.split("\n").each do |line|
+      return true  if line.start_with? "Changes not staged for commit:"
+    end
+    false
+  end
 
   # On branch master
   #   Your branch is ahead of 'origin/master' by 11 commits.
   #     (use "git push" to publish your local commits)
-
   #   nothing to commit, working directory clean
   # On branch master
   #   Your branch is up-to-date with 'origin/master'.
@@ -41,10 +52,20 @@ module MaziVersion
 
   #     modified:   README.md
   #     modified:   lib/helpers/mazi_version.rb
-
   #   no changes added to commit (use "git add" and/or "git commit -a")
+  # On branch master
+  #   Your branch is up-to-date with 'origin/master'.
+  #   nothing to commit, working directory clean
   def update
-
+    fetch
+    diff   = difference
+    staged = staged?
+    puts "#{diff} - #{staged}"
+    if diff > 0 && !staged
+      `git pull`
+      `cd /root/back-end && git pull`
+    end
+    nil
   end
 end
 
@@ -58,4 +79,6 @@ puts o.getVersion
 
 puts o.current?
 
-puts o.diffirence
+puts o.difference
+
+puts o.update
