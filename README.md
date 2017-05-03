@@ -52,6 +52,9 @@ In order to update, you need to execute the following commands:
     $ rake db:migrate
     $ cp /etc/mazi/config.yml /etc/mazi/config.yml.bu
     $ cp etc/config.yml /etc/mazi/config.yml
+    $ cd /root/back-end
+    $ git pull origin master
+    $ service mazi-portal restart
 
 ## License
 
