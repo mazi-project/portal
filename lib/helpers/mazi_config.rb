@@ -167,4 +167,15 @@ module MaziConfig
       end
     end
   end
+
+  def update_config_file(file='/etc/mazi/config.yml')
+    `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
+    newfile = YAML.load_file 'etc/config.yml'
+    oldfile = YAML.load_file '/etc/mazi/config.yml.bu'
+    newfile.keys.each do |key|
+      newfile[key].merge! oldfile[key]
+    end
+
+    writeConfigFile(newfile, '/etc/mazi/config.yml')
+  end
 end

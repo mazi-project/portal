@@ -62,8 +62,10 @@ module MaziVersion
     staged = staged?
     puts "#{diff} - #{staged}"
     if diff > 0 && !staged
-      `git pull`
-      `cd /root/back-end && git pull`
+      `git pull origin master`
+      `rake db:migrate`
+      `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
+      `cd /root/back-end && git pull origin master`
     end
     nil
   end

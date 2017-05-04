@@ -907,8 +907,17 @@ class MaziApp < Sinatra::Base
   end
 
   put '/update/?' do
-    puts 'aaaaaaaaaaaaaaaaaaaa'
-    {}.to_json
+    MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
+
+    version_update
+    update_config_file
+
+    Thread.new do
+      sleep 2
+      `service mazi-portal restart`
+    end
+
+    {status: "restarting"}.to_json
   end
 end
 
