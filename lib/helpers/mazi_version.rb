@@ -26,6 +26,7 @@ module MaziVersion
     status.split("\n").each do |line|
       if line.start_with? "Your branch"
         return 0 if line.include? "up-to-date"
+        return line.split[7] if line.include? 'fast-forwarded'
         return line.split[-2]
       end
     end
