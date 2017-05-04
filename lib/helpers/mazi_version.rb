@@ -9,7 +9,7 @@ module MaziVersion
     `git fetch`
   end
 
-  def current?
+  def current_version?
     fetch
     status = `git status`
     status.split("\n").each do |line|
@@ -20,7 +20,7 @@ module MaziVersion
     end
   end
 
-  def difference
+  def version_difference
     fetch
     status = `git status`
     status.split("\n").each do |line|
@@ -56,9 +56,9 @@ module MaziVersion
   # On branch master
   #   Your branch is up-to-date with 'origin/master'.
   #   nothing to commit, working directory clean
-  def update
+  def version_update
     fetch
-    diff   = difference
+    diff   = version_difference
     staged = staged?
     puts "#{diff} - #{staged}"
     if diff > 0 && !staged
@@ -69,16 +69,16 @@ module MaziVersion
   end
 end
 
-class TestVersion
-  include MaziVersion
-end
+# class TestVersion
+#   include MaziVersion
+# end
 
-o = TestVersion.new
+# o = TestVersion.new
 
-puts o.getVersion
+# puts o.getVersion
 
-puts o.current?
+# puts o.current_version?
 
-puts o.difference
+# puts o.version_difference
 
-puts o.update
+# puts o.version_update

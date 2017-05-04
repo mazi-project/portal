@@ -229,6 +229,9 @@ class MaziApp < Sinatra::Base
       end
       session[:username] = nil
       redirect '/admin_login'
+    when 'update'
+      return {error: 'Staged code exist in the repository.', code: -1}.to_json if staged?
+      return {current_version: getVersion, commits_behind: version_difference}.to_json
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
     end
@@ -901,6 +904,11 @@ class MaziApp < Sinatra::Base
     session['error'] = nil
     session[:username] = nil
     redirect '/admin_login'
+  end
+
+  put '/update' do
+    puts 'aaaaaaaaaaaaaaaaaaaa'
+    {}.to_json
   end
 end
 
