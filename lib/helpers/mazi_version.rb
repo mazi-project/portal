@@ -26,7 +26,7 @@ module MaziVersion
     status.split("\n").each do |line|
       if line.start_with? "Your branch"
         return 0 if line.include? "up-to-date"
-        return line.split[7] if line.include? 'fast-forwarded'
+        return line.split[6] if line.include? 'fast-forwarded'
         return line.split[-2]
       end
     end
@@ -62,7 +62,7 @@ module MaziVersion
     diff   = version_difference
     staged = staged?
     puts "#{diff} - #{staged}"
-    if diff > 0 && !staged
+    if diff.to_i > 0 && !staged
       `git pull origin master`
       `rake db:migrate`
       `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
