@@ -71,17 +71,3 @@ module MaziVersion
     nil
   end
 end
-
-# class TestVersion
-#   include MaziVersion
-# end
-
-# o = TestVersion.new
-
-# puts o.getVersion
-
-# puts o.current_version?
-
-# puts o.version_difference
-
-# puts o.version_update
