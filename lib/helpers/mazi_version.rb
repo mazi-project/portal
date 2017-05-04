@@ -41,22 +41,6 @@ module MaziVersion
     false
   end
 
-  # On branch master
-  #   Your branch is ahead of 'origin/master' by 11 commits.
-  #     (use "git push" to publish your local commits)
-  #   nothing to commit, working directory clean
-  # On branch master
-  #   Your branch is up-to-date with 'origin/master'.
-  #   Changes not staged for commit:
-  #     (use "git add <file>..." to update what will be committed)
-  #     (use "git checkout -- <file>..." to discard changes in working directory)
-
-  #     modified:   README.md
-  #     modified:   lib/helpers/mazi_version.rb
-  #   no changes added to commit (use "git add" and/or "git commit -a")
-  # On branch master
-  #   Your branch is up-to-date with 'origin/master'.
-  #   nothing to commit, working directory clean
   def version_update
     fetch
     diff   = version_difference
