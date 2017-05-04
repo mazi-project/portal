@@ -906,7 +906,7 @@ class MaziApp < Sinatra::Base
     redirect '/admin_login'
   end
 
-  put '/update' do
+  put '/update/?' do
     puts 'aaaaaaaaaaaaaaaaaaaa'
     {}.to_json
   end
