@@ -26,11 +26,14 @@ $( document ).ready(function() {
             show('.staged-error');
           }
         }
-        else if(res.commits_behind){
+        else if(res.current_version){
+          console.log('test 1');
           if(res.commits_behind == 0){
+            console.log('test 2');
             show('.up2date');
           }
           else{
+            console.log('test 3');
             $('.update-ready > p').text('Your server is ' + res.commits_behind + ' commits behind. Please use the button bellow to start the update proccess.');
             show('.update-ready');
           }
