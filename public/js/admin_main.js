@@ -1,6 +1,7 @@
 function show(tag){
   $('.checking4updates').hide();
   $('.staged-error').hide();
+  $('.no-internet-error').hide();
   $('.up2date').hide();
   $('.update-ready').hide();
   $('.updating').hide();
@@ -20,21 +21,20 @@ $( document ).ready(function() {
       type: 'GET',
       success: function(result) {
         res = JSON.parse(result);
-        console.log(res);
         if(res.error){
           if(res.code == -1){
             show('.staged-error');
           }
+          if(res.code == -2){
+            show('.no-internet-error');
+          }
         }
         else if(res.current_version){
-          console.log('test 1');
           if(res.commits_behind == 0){
-            console.log('test 2');
             show('.up2date');
           }
           else{
-            console.log('test 3');
-            $('.update-ready > p').text('Your server is ' + res.commits_behind + ' commits behind. Please use the button bellow to start the update proccess.');
+            $('.update-ready > p').text('Your server is <b>' + res.commits_behind + '</b> commits behind. Please use the button bellow to start the update proccess.');
             show('.update-ready');
           }
         }
@@ -49,7 +49,6 @@ $( document ).ready(function() {
       type: 'PUT',
       success: function(result) {
         res = JSON.parse(result);
-        console.log(res);
         if(res.error){
           if(res.code == -1){
             show('.staged-error');

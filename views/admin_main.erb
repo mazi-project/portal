@@ -114,26 +114,30 @@
           <div class="container-fluid">
             <div class="row">
               <div class="col-m-12 checking4updates">
-                <p><i class="fa fa-spin fa-circle-o-notch"></i> Checking for updates. Please wait...</p>
+                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> Checking for updates. Please wait...</p>
               </div>
               <div class="col-m-12 staged-error" hidden>
-                <p> Your local repository has been edited. This causes the update function to mailfunction. Please revert those changes in the local repository, by using 'git checkout -- &ltfile&gt' for the edited files.</p>
+                <p class="alert alert-danger"> Your local repository has been edited. This causes the update function to mailfunction. Please revert those changes in the local repository, by using 'git checkout -- &ltfile&gt' for the edited files.</p>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+              </div>
+              <div class="col-m-12 no-internet-error" hidden>
+                <p class="alert alert-danger"> There is no active connection to the internet. Plese connect this mazizone to the internet and try again later.</p>
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
               </div>
               <div class="col-m-12 up2date" hidden>
-                <p>The portal is up-to-date, there is no need for an update.</p>
+                <p class="alert alert-success">The portal is up-to-date, there is no need for an update.</p>
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
               </div>
               <div class="col-m-12 update-ready" hidden>
                 <p class='update-ready'></p>
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary update-btn pull-right">Save changes</button>
+                <button type="button" class="btn btn-primary update-btn pull-right">Update</button>
               </div>
               <div class="col-m-12 updating" hidden>
-                <p class='updating'><i class="fa fa-spin fa-circle-o-notch"></i> The system is updating. Please wait...</p>
+                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> The system is updating. Please wait...</p>
               </div>
               <div class="col-m-12 update-done" hidden>
-                <p>Update proccess was complete. The server is going to restart for the update to take effect. Please refresh the page after a couple of minutes.</p>
+                <p class="alert alert-success">Update proccess was complete. The server is going to restart for the update to take effect. Please refresh the page after a couple of minutes.</p>
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
               </div>
             </div>
