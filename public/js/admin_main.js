@@ -2,6 +2,7 @@ function show(tag){
   $('.checking4updates').hide();
   $('.staged-error').hide();
   $('.no-internet-error').hide();
+  $('.demo-mode-error').hide();
   $('.up2date').hide();
   $('.update-ready').hide();
   $('.updating').hide();
@@ -28,6 +29,9 @@ $( document ).ready(function() {
           if(res.code == -2){
             show('.no-internet-error');
           }
+          if(res.code == -3){
+            show('.demo-mode-error');
+          }
         }
         else if(res.current_version){
           if(res.commits_behind == 0){
@@ -53,14 +57,13 @@ $( document ).ready(function() {
           if(res.code == -1){
             show('.staged-error');
           }
+          if(res.code == -2){
+            show('.no-internet-error');
+          }
         }
         else if(res.commits_behind){
-          if(res.commits_behind == 0){
-            show('.up2date');
-          }
-          else{
-            $('.update-ready > p').text('Your server is ' + res.commits_behind + ' commits behind. Please use the button bellow to start the update proccess.');
-            show('.update-ready');
+          if(res.status == 'restarting'){
+            show('.update-done');
           }
         }
       }

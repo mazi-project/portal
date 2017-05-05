@@ -41,11 +41,20 @@ module MaziVersion
     false
   end
 
+  def no_internet?
+    `ping github.com -c 3 -W 1`.split("\n").each do |line|
+      if line.include? 'packets transmitted'
+        return true if line.split[3] == '0'
+        break
+      end
+    end
+    false
+  end
+
   def version_update
     fetch
     diff   = version_difference
     staged = staged?
-    puts "#{diff} - #{staged}"
     if diff.to_i > 0 && !staged
       `git pull origin master`
       `rake db:migrate`
