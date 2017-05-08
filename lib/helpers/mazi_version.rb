@@ -54,14 +54,22 @@ module MaziVersion
   end
 
   def version_update
+    MaziLogger.debug "Version Update Started"
     fetch
+    MaziLogger.debug "Fetch done."
     diff   = version_difference
     staged = staged?
     if diff.to_i > 0 && !staged
+      MaziLogger.debug "pull origin master"
       `git pull origin master`
+      MaziLogger.debug "done."
+      MaziLogger.debug "db migrate"
       `rake db:migrate`
+      MaziLogger.debug "done."
       `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
+      MaziLogger.debug "Updating back-end scripts"
       `cd /root/back-end && git pull origin master`
+      MaziLogger.debug "done."
     end
     nil
   end
