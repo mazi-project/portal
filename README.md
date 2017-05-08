@@ -44,7 +44,8 @@ Execution
 Update
 -------
 
-In order to update, you need to execute the following commands:
+Since version 1.6.4 there is an update function to the admin menu. 
+In order to update using the command line, you need to execute the following commands:
 
     $ sudo su
     $ cd /root/portal
