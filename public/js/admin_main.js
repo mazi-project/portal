@@ -53,6 +53,7 @@ $( document ).ready(function() {
       type: 'PUT',
       success: function(result) {
         res = JSON.parse(result);
+        console.log(res);
         if(res.error){
           if(res.code == -1){
             show('.staged-error');
@@ -61,10 +62,8 @@ $( document ).ready(function() {
             show('.no-internet-error');
           }
         }
-        else if(res.commits_behind){
-          if(res.status == 'restarting'){
-            show('.update-done');
-          }
+        else if(res.status == 'restarting'){
+          show('.update-done');
         }
       }
     });
