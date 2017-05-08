@@ -38,7 +38,7 @@ $( document ).ready(function() {
             show('.up2date');
           }
           else{
-            $('.update-ready > p').text('Your server is <b>' + res.commits_behind + '</b> commits behind. Please use the button bellow to start the update proccess.');
+            $('.update-ready > p').text('Your server is ' + res.commits_behind + ' commits behind. Please use the button bellow to start the update proccess.');
             show('.update-ready');
           }
         }
