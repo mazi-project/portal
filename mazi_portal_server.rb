@@ -916,7 +916,7 @@ class MaziApp < Sinatra::Base
 
     Thread.new do
       sleep 2
-      MaziLogger.debug 'Restarting Now'
+      MaziLogger.debug 'Restarting'
       `service mazi-portal restart`
     end
 
