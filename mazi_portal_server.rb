@@ -77,6 +77,20 @@ class MaziApp < Sinatra::Base
       Mazi::Model::ApplicationInstance.all.each do |app|
         locals[:local_data][:clicks] += app.click_counter
       end
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      lines = ex.exec_command
+      temp = ex.parseFor("'C").first.split('=').last
+      locals[:local_data][:temp] = temp
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-c'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      cpu = ex.exec_command.first
+      locals[:local_data][:cpu] = cpu
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-r'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      ram = ex.exec_command.first
+      locals[:local_data][:ram] = ram
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      storage = ex.exec_command.first
+      locals[:local_data][:storage] = storage
+      puts locals
       erb :index_main, locals: locals
     when 'index_documentation'
       session['notifications_read']            = [] if session['notifications_read'].nil?
@@ -119,6 +133,8 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:sessions]              = Mazi::Model::Session.all
       locals[:local_data][:rasp_date]             = Time.now.strftime("%d %b %Y")
       locals[:local_data][:rasp_time]             = Time.now.strftime("%H:%M")
+      locals[:local_data][:version]               = getVersion
+      locals[:local_data][:version_difference]    = version_difference
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
