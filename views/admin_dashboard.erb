@@ -166,7 +166,7 @@
             <div class="row">
               <div class="col-xs-6 text-left panel-min-height"> 
                 <h3 class="no-margins">Version <%= version %></h2>
-                <small><%= version_difference > 0 ? "'#{version_difference}' commits behind" : "Up to Date"%></small>
+                <small><%= version_difference.to_i > 0 ? "This Portal is `#{version_difference} commits` behind" : "Up to Date"%></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-tag"></i></div>
             </div>
