@@ -24,7 +24,7 @@
 # - side_panel_active_color: top panel active and on hover color (hex value)
 ---
 :general:
-  :mode: demo
+  :mode: normal
 :admin:
   :admin_username: mazi_admin
   :admin_password: '1234'
