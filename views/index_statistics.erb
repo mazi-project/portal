@@ -17,13 +17,61 @@
       </div>
     </div>
   </div>
-   
+  
   <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="circle-tile ">
-      <a href="#"><div class="circle-tile-heading red"><i class="fa fa-users fa-fw fa-3x"></i></div></a>
-      <div class="circle-tile-content red">
+      <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-hand-pointer-o fa-fw fa-3x"></i></div></a>
+      <div class="circle-tile-content dark-blue">
         <div class="circle-tile-description text-faded"> Application Clicks </div>
         <div class="circle-tile-number text-faded "><%= clicks %></div>
+        <a class="circle-tile-footer"><i class="fa fa-minus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <% color = temp.gsub("'C", '').to_f > 70.0 ? 'red' : 'green' %>
+  <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="circle-tile ">
+      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-thermometer fa-fw fa-3x"></i></div></a>
+      <div class="circle-tile-content <%= color %>">
+        <div class="circle-tile-description text-faded"> Temperature </div>
+        <div class="circle-tile-number text-faded "><%= temp %></div>
+        <a class="circle-tile-footer"><i class="fa fa-minus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <% color = cpu.gsub("%", '').to_f > 80.0 ? 'red' : 'green' %>
+  <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="circle-tile ">
+      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-microchip fa-fw fa-3x"></i></div></a>
+      <div class="circle-tile-content <%= color %>">
+        <div class="circle-tile-description text-faded"> CPU </div>
+        <div class="circle-tile-number text-faded "><%= cpu %></div>
+        <a class="circle-tile-footer"><i class="fa fa-minus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <% color = ram.gsub("%", '').to_f > 80.0 ? 'red' : 'green' %>
+  <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="circle-tile ">
+      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-server fa-fw fa-3x"></i></div></a>
+      <div class="circle-tile-content <%= color %>">
+        <div class="circle-tile-description text-faded"> RAM </div>
+        <div class="circle-tile-number text-faded "><%= ram %></div>
+        <a class="circle-tile-footer"><i class="fa fa-minus"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <% color = storage.gsub("%", '').to_f > 80.0 ? 'red' : 'green' %>
+  <div class="col-lg-2 col-md-3 col-sm-4">
+    <div class="circle-tile ">
+      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-hdd-o fa-fw fa-3x"></i></div></a>
+      <div class="circle-tile-content <%= color %>">
+        <div class="circle-tile-description text-faded"> Storage </div>
+        <div class="circle-tile-number text-faded "><%= storage %></div>
         <a class="circle-tile-footer"><i class="fa fa-minus"></i></a>
       </div>
     </div>

@@ -3,6 +3,7 @@ require 'helpers/mazi_logger'
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
+require 'helpers/mazi_version'
 require 'thin'
 require 'json'
 require 'sequel'
@@ -10,6 +11,7 @@ require 'sequel'
 class MaziApp < Sinatra::Base
   include MaziConfig
   include Authorizer
+  include MaziVersion
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
 
@@ -34,10 +36,14 @@ class MaziApp < Sinatra::Base
       s.save
       session['uuid'] = s.uuid
     end
+    if first_time? && index != 'setup'
+      redirect '/setup'
+    end
     locals                           = {}
     locals[:local_data]              = {}
     locals[:local_data][:mode]       = @config[:general][:mode]
     locals[:local_data][:authorized] = authorized?
+    locals[:version]                 = getVersion
     locals[:js]                      = []
     locals[:error_msg]               = nil
     unless session['error'].nil?
@@ -68,17 +74,36 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:users]          = {}
       locals[:local_data][:users][:online] = users[2] if users.kind_of? Array
       locals[:local_data][:clicks]         = 0
-      Mazi::Model::Application.all.each do |app|
+      Mazi::Model::ApplicationInstance.all.each do |app|
         locals[:local_data][:clicks] += app.click_counter
       end
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      lines = ex.exec_command
+      temp = ex.parseFor("'C").first.split('=').last
+      locals[:local_data][:temp] = temp
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-c'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      cpu = ex.exec_command.first
+      locals[:local_data][:cpu] = cpu
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-r'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      ram = ex.exec_command.first
+      locals[:local_data][:ram] = ram
+      ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+      storage = ex.exec_command.first
+      locals[:local_data][:storage] = storage
+      puts locals
       erb :index_main, locals: locals
     when 'index_documentation'
-      session['notifications_read'] = [] if session['notifications_read'].nil?
-      locals[:main_body] = :index_documentation
+      session['notifications_read']            = [] if session['notifications_read'].nil?
+      locals[:main_body]                       = :index_documentation
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
       erb :index_main, locals: locals
+    when 'setup'
+      locals[:main_body] = :setup
+      locals[:js] << "js/setup.js"
+      locals[:js] << "js/jquery.datetimepicker.min.js"
+      erb :setup, locals: locals
     when 'admin'
       redirect 'admin_dashboard'
     when 'admin_dashboard'
@@ -108,6 +133,8 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:sessions]              = Mazi::Model::Session.all
       locals[:local_data][:rasp_date]             = Time.now.strftime("%d %b %Y")
       locals[:local_data][:rasp_time]             = Time.now.strftime("%H:%M")
+      locals[:local_data][:version]               = getVersion
+      locals[:local_data][:version_difference]    = version_difference
       erb :admin_main, locals: locals
     when 'admin_application'
       unless authorized?
@@ -218,6 +245,11 @@ class MaziApp < Sinatra::Base
       end
       session[:username] = nil
       redirect '/admin_login'
+    when 'update'
+      return {error: 'No active internet connection.', code: -2}.to_json        if no_internet?
+      return {error: 'Staged code exist in the repository.', code: -1}.to_json  if staged?
+      return {error: 'Demo mode.', code: -3}.to_json                            if @config[:general][:mode] == 'demo'
+      return {current_version: getVersion, commits_behind: version_difference}.to_json
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
     end
@@ -788,6 +820,7 @@ class MaziApp < Sinatra::Base
         redirect '/admin_snapshot'
       end
       loadDBSnapshot(params[:snapshotname])
+      loadTheme("#{params[:snapshotname]}.yml")
       redirect '/admin_snapshot'
     elsif params['download']
       if @config[:general][:mode] == 'demo'
@@ -806,6 +839,7 @@ class MaziApp < Sinatra::Base
       tempfile = params['snapshot'][:tempfile]
       filename = params['snapshot'][:filename]
       unzip_snapshot(filename, tempfile)
+      loadTheme(filename.gsub('.zip', '.yml'))
       redirect '/admin_snapshot'
     end
 
@@ -814,6 +848,10 @@ class MaziApp < Sinatra::Base
 
   post '/admin_change_password' do
     MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    if params['password'] == '1234'
+      session['error'] = "Password 1234 cannot be used! Please try again."
+      redirect '/admin_change_password'
+    end
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode change password"
       session['error'] = "This portal runs on Demo mode! This action would have changed the admin password."
@@ -834,6 +872,71 @@ class MaziApp < Sinatra::Base
     session['error'] = nil
     session[:username] = nil
     redirect '/admin_login'
+  end
+
+  post '/setup' do
+    MaziLogger.debug "request: post/setup from ip: #{request.ip} creds: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode exec script"
+      session['error'] = "This portal runs on Demo mode! This action would have initiated the setup mechanism."
+      redirect '/admin'
+    end
+    if params['password'].nil? || params['password'].empty?
+      session['error'] = "Field Password is mandatory! Please try again."
+      redirect '/setup'
+    end
+    if params['confirm-password'].nil? || params['confirm-password'].empty?
+      session['error'] = "Field Confirm Password is mandatory! Please try again."
+      redirect '/setup'
+    end
+    if params['confirm-password'] != params['password']
+      session['error'] = "Password and confirm Password fields missmatch! Please try again."
+      redirect '/setup'
+    end
+    if params['password'] == '1234'
+      session['error'] = "Password 1234 cannot be used! Please try again."
+      redirect '/setup'
+    end
+    if params['date'].nil? || params['date'].empty?
+      session['error'] = "Field Date is mandatory! Please try again."
+      redirect '/setup'
+    end
+
+    changeConfigFile("admin->admin_password", params['password'])
+    writeConfigFile
+
+    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command
+
+    unless params['ssid'].nil? || params['ssid'].empty?
+      env = 'sh'
+      path = @config[:scripts][:backend_scripts_folder]
+      cmd = "wifiap.sh"
+      args = []
+      args << "-s '#{params['ssid']}'" if params['ssid']
+
+      ex1 = MaziExecCmd.new(env, path, cmd, args, @config[:scripts][:enabled_scripts])
+      lines = ex1.exec_command
+    end
+
+    session['error'] = nil
+    session[:username] = nil
+    redirect '/admin_login'
+  end
+
+  put '/update/?' do
+    MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
+
+    version_update
+    update_config_file
+
+    Thread.new do
+      sleep 2
+      MaziLogger.debug 'Restarting'
+      `service mazi-portal restart`
+    end
+
+    {status: "restarting"}.to_json
   end
 end
 

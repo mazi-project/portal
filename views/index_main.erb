@@ -18,6 +18,7 @@
   <script src="js/jquery-ui.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
   <script src="js/index_main.js"></script>
+  <script src="js/moment.js"></script>
   <% js.each do |j| %>
   <script src="<%= j %>"></script>
   <% end %>
@@ -96,6 +97,9 @@
         <li>
           <a class="navbar-brand pull-right" target="_blank" href="http://mazizone.eu/toolkit" style="font-size: 14px;">MAZI Project</a>
         </li>
+        <li>
+          <div class="navbar-brand pull-right" id="time"></div>
+        </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
@@ -117,7 +121,7 @@
             <a href="index"><i class="fa fa-fw fa-dashboard"></i> Applications</a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_statistics"><i class="fa fa-fw fa-dashboard"></i> Statistics</a>
+            <a href="index_statistics"><i class="fa fa-fw fa-area-chart"></i> Statistics</a>
           </li>
         </ul>
       </div>
@@ -167,5 +171,15 @@
     </div>
     <% end %>
   </div>
+<script type="text/javascript">
+  var server_date = Date.parse('<%= Time.now %>');
+  var mom = moment(server_date);
+  function showDate(date, o){
+    var newdate = moment(date).add(o, 'milliseconds');
+    $("#time").text(newdate.format("D MMM YYYY HH:mm zz"));
+    setTimeout(function () { showDate(newdate, 10000); }, 10000);
+  }
+  showDate(mom, 0);
+</script>
 </body>
 </html>

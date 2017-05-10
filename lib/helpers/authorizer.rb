@@ -20,4 +20,8 @@ module Authorizer
     end
     password == readConfigFile[:admin][:admin_password]
   end
+
+  def first_time?
+    readConfigFile[:admin][:admin_password] == '1234'
+  end
 end

@@ -154,6 +154,25 @@
           </div> 
         </div>
       </div>
+
+      <div class='col-md-6'>
+        <div class="panel panel-default">
+          <div class="panel-heading"> 
+            <div class="panel-title">Mazizone Version </a>
+            </div>
+          </div> 
+          <!-- panel body --> 
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-xs-6 text-left panel-min-height"> 
+                <h3 class="no-margins">Version <%= version %></h2>
+                <small><%= version_difference.to_i > 0 ? "This Portal is `#{version_difference} commits` behind" : "Up to Date"%></small>
+              </div>
+              <div class="pull-right"><i class="fa fa-fw fa-5x fa-tag"></i></div>
+            </div>
+          </div> 
+        </div>
+      </div>
     </div>
   </div>
 </div>

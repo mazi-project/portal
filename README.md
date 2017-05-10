@@ -44,7 +44,8 @@ Execution
 Update
 -------
 
-In order to update, you need to execute the following commands:
+Since version 1.6.4 there is an update function to the admin menu. 
+In order to update using the command line, you need to execute the following commands:
 
     $ sudo su
     $ cd /root/portal
@@ -52,6 +53,9 @@ In order to update, you need to execute the following commands:
     $ rake db:migrate
     $ cp /etc/mazi/config.yml /etc/mazi/config.yml.bu
     $ cp etc/config.yml /etc/mazi/config.yml
+    $ cd /root/back-end
+    $ git pull origin master
+    $ service mazi-portal restart
 
 ## License
 

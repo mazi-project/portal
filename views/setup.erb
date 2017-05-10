@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mazi Portal">
+    <meta name="author" content="nitlab">
+
+    <title>Mazizone Portal</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/jquery-ui.min.css" rel="stylesheet">
+    <link href="css/admin_main.css" rel="stylesheet">
+    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/jquery.datetimepicker.css">
+    <link href="css/setup.css" rel="stylesheet" type="text/css">
+    <script src="js/jquery.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <% js.each do |j| %>
+      <script src="<%= j %>"></script>
+    <% end %>
+  </head>
+
+  <body>
+    <div id="wrapper" style="padding-left: 0px">
+      <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="admin">Mazizone Setup Panel</a>
+        </div>      
+      </nav>
+
+      <div id="page-wrapper">
+        <div class="container">
+          <div class="row">
+            <section style="border-style: solid; border-color: #e0e0e0">
+              <div class="wizard">
+                <div class="wizard-inner">
+                  <div class="connecting-line"></div>
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li role="presentation" class="active">
+                      <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                        <span class="round-tab">
+                          <i class="glyphicon glyphicon-user"></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                      <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                        <span class="round-tab">
+                          <i class="glyphicon glyphicon-calendar"></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                      <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                        <span class="round-tab">
+                          <i class="glyphicon glyphicon-signal"></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li role="presentation" class="disabled">
+                      <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                        <span class="round-tab">
+                          <i class="glyphicon glyphicon-ok"></i>
+                        </span>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+
+                <% unless error_msg.nil? %>
+                <div class="alert alert-danger">
+                  <p><%= error_msg %></p>
+                </div>
+                <% end %>
+
+                <form role='form' class="form-signin" action="/setup" method="post">
+                  <div class="tab-content">
+                    <div class="tab-pane active" role="tabpanel" id="step1">
+                      <h3>Admin Password Setup</h3>
+                      <p>Use the form bellow the setup the admin password for this mazi portal.</p>
+                      <input type="password" name="password" class="form-control" placeholder="New Password" autofocus>
+                      <input type="password" name="confirm-password" class="form-control" placeholder="Confirm Password">
+                      <ul class="list-inline pull-right">
+                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                      </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step2" >
+                      <h3>Time/Date setup</h3>
+                      <p>Please use the form bellow to change the Mazizone Time/Date.</p>
+                      <input id="datetimepicker" type="text" name='date' class="form-control">
+                      <ul class="list-inline pull-right" style='margin-top: 10px;'>
+                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                      </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step3">
+                      <h3>Wireless Interface Setup</h3>
+                      <p>Please use the form bellow to change the Mazizone SSID.</p>
+                      <input id="ssid" type="text" name='ssid' class="form-control">
+                      <ul class="list-inline pull-right" style='margin-top: 10px;'>
+                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                      </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="complete">
+                      <h3>Complete</h3>
+                      <p>You have successfully completed all steps. Please submit this form.</p>
+                      <ul class="list-inline pull-right" style='margin-top: 10px;'>
+                        <li><button type="submit" class="btn btn-primary next-step">Submit</button></li>
+                      </ul>
+                    </div>
+                    <div class="clearfix"></div>
+                  </div>
+                </form>
+              </div>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
