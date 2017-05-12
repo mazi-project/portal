@@ -110,6 +110,10 @@ ul.alert-dropdown {
   width: 200px;
 }
 
+#time{
+  font-size: 14px;
+}
+
 /* Side Navigation */
 
 @media(min-width:768px) {
