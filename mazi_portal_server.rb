@@ -4,6 +4,7 @@ require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
 require 'helpers/mazi_version'
+require 'helpers/mazi_sensors'
 require 'thin'
 require 'json'
 require 'sequel'
@@ -12,6 +13,7 @@ class MaziApp < Sinatra::Base
   include MaziConfig
   include Authorizer
   include MaziVersion
+  include MaziSensors
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
 
@@ -21,6 +23,7 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "INIT with config: #{@config}"
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
+    init_sensors
   end
 
   get '/' do
@@ -91,6 +94,20 @@ class MaziApp < Sinatra::Base
       storage = ex.exec_command.first
       locals[:local_data][:storage] = storage
       puts locals
+      erb :index_main, locals: locals
+    when 'index_sensors'
+      MaziLogger.debug "params: #{params.inspect}"
+      session['notifications_read']            = [] if session['notifications_read'].nil?
+      locals[:js] << "js/plugins/morris/raphael.min.js"
+      locals[:js] << "js/plugins/morris/morris.min.js"
+      locals[:js] << "js/jquery.datetimepicker.min.js"
+      locals[:js] << "js/index_sensors.js"
+      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
+      locals[:local_data][:notifications_read] = session['notifications_read']
+      locals[:local_data][:config_data]        = @config[:portal_configuration]
+      locals[:local_data][:temperatures]       = getTemperatures(params['start_date'], params['end_date'])
+      locals[:local_data][:humidity]           = getHumidities(params['start_date'], params['end_date'])
+      locals[:main_body] = :index_sensors
       erb :index_main, locals: locals
     when 'index_documentation'
       session['notifications_read']            = [] if session['notifications_read'].nil?

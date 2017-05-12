@@ -13,11 +13,11 @@ Prerequirements
 Install the following packages:
 
     $ apt-get update
-    $ apt-get install build-essential git-core libsqlite3-dev ruby ruby-dev
+    $ apt-get install build-essential git-core libsqlite3-dev ruby ruby-dev libmysqlclient-dev
 
 Also install the following gems:
 
-    $ gem install sinatra sequel sqlite3 rake thin rubyzip --no-ri --no-rdoc
+    $ gem install sinatra sequel sqlite3 rake thin rubyzip mysql --no-ri --no-rdoc
 
 And download the back-end scripts
 

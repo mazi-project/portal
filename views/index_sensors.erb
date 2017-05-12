@@ -1,0 +1,65 @@
+<script type="text/javascript">
+  var temperature_data = JSON.parse('<%= temperatures.to_json %>');
+  var humidity_data    = JSON.parse('<%= humidity.to_json %>');
+</script>
+
+<div class="jumbotron">
+    <h1>Sensor Measurements</h1>
+    <p>On this page you can see the measurements of various sensors connected to this Mazizone. You can also use the button bellow to request for measurements from a specific period.</p>
+    <p>
+      <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
+        <i class="fa fa-calendar"> Choose a timeslot</i>
+      </a>
+    </p>
+</div>
+
+<div class="col-lg-6 col-sm-12">
+  <div class="panel panel-green">
+    <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature</h3>
+    </div>
+    <div class="panel-body">
+      <div id="morris-line-chart-temp"></div>
+      <div class="text-right">
+        <a class="export-temperatures"><i class="fa fa-download"> Export to CSV file</i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="col-lg-6 col-sm-12">
+  <div class="panel panel-blue">
+    <div class="panel-heading">
+    <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity</h3>
+    </div>
+    <div class="panel-body">
+      <div id="morris-line-chart-hum"></div>
+      <div class="text-right">
+        <a class="export-humidity"><i class="fa fa-download"> Export to CSV file</i></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- choose timeslot modal-->
+<div class="modal fade" id="choose-timeslot-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Choose a timeslot</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/index_sensors" method="get">
+          <div class="form-group">
+            <p>Please use the form bellow to select a timeslot.</p>
+            <input id="datetimepicker_start" type="text" name='start_date' class="form-control">
+            <input id="datetimepicker_end" type="text" name='end_date' class="form-control">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Choose</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
