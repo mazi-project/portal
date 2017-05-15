@@ -49,6 +49,7 @@ class MaziApp < Sinatra::Base
     locals[:version]                 = getVersion
     locals[:js]                      = []
     locals[:error_msg]               = nil
+    locals[:sensors_enabled]         = sensors_enabled?
     unless session['error'].nil?
       locals[:error_msg] = session["error"]
       session[:error] = nil
@@ -97,6 +98,7 @@ class MaziApp < Sinatra::Base
       erb :index_main, locals: locals
     when 'index_sensors'
       MaziLogger.debug "params: #{params.inspect}"
+      redirect back unless sensors_enabled?
       session['notifications_read']            = [] if session['notifications_read'].nil?
       locals[:js] << "js/plugins/morris/raphael.min.js"
       locals[:js] << "js/plugins/morris/morris.min.js"
@@ -269,6 +271,7 @@ class MaziApp < Sinatra::Base
       return {current_version: getVersion, commits_behind: version_difference}.to_json
     else
       MaziLogger.warn "#{index} is not supported." unless index == 'favicon.ico'
+      redirect back unless index == 'favicon.ico'
     end
   end
 

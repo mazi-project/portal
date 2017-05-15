@@ -1,22 +1,22 @@
 require 'mysql'
 
-SENSORS_DB_IP      = '10.64.45.90' #this should be localhost
-SELECT_QUERY_LIMIT = 'GROUP BY id DESC LIMIT 50'
+SENSORS_DB_IP      = '10.64.45.90'               # this should be localhost
+SELECT_QUERY_LIMIT = 'GROUP BY id DESC LIMIT 50' # default query for the select on the sensors db
+SENSORS_ENABLED    = false                       # a quick way to disable the sensors module
 
 module MaziSensors
   def init_sensors
-    # @sensors_con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
-    # a = @sensors_con.query("SELECT * FROM sensor_1 GROUP BY id DESC LIMIT 10")
-    # puts "== #{a.inspect}"
-    # # a.times do 
-    # #   puts "-- #{a.fetch_hash.inspect}"
-    # # end
-    # a.each_hash do |h|
-    #   puts "-- #{h.inspect}"
-    # end
-  # rescue Mysql::Error => ex
-  #   MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
-  #   @sensors_con = nil
+    con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
+    @sensors_enabled = true
+  rescue Mysql::Error => ex
+    MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
+    @sensors_enabled = false
+  ensure
+    con.close if con
+  end
+
+  def sensors_enabled?
+    SENSORS_ENABLED && @sensors_enabled
   end
 
   def getTemperatures(start_time=nil, end_time=nil)

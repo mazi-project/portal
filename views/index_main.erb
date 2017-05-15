@@ -124,9 +124,11 @@
           <li <%= 'class="active"' if main_body == :index_statistics %>>
             <a href="index_statistics"><i class="fa fa-fw fa-area-chart"></i> Statistics</a>
           </li>
+          <% if sensors_enabled %>
           <li <%= 'class="active"' if main_body == :index_sensors %>>
             <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> Sensors</a>
           </li>
+          <% end %>
         </ul>
       </div>
       <!-- <div class="navbar navbar-fixed-bottom bot-nav">
