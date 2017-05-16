@@ -110,6 +110,35 @@
     </div>
   </div>
 </div>
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <h3>Application snapshots</h3>
+    <p>Use the panels bellow to Import/Export snapshots for the applications supported by this mazizone.</p>
+  </div>
+  <div class='col-lg-3 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Interview
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
+        </div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="export_app" class="form-control" value='true'>
+              <input type="hidden" name="application" class="form-control" value='Interview'>
+              <input type="text" name="snapshotname" class="form-control" id="interview-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-interview-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> Import</a>
+            <button type="button" class="btn btn-success pull-right" id="download-interview-snapshot"><i class="fa fa-download"></i> Export</button>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
 
 <!-- upload snapshots modal-->
 <div class="modal fade" id="upload-snapshots-modal" role="dialog">
@@ -124,6 +153,29 @@
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="hidden" name="upload" class="form-control" value='true'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload interview snapshots modal-->
+<div class="modal fade" id="upload-interview-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Import Snapshot for Interview</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="import_app" class="form-control" value='true'>
+            <input type="hidden" name="application" class="form-control" value='Interview'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
           </div>

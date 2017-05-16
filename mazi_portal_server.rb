@@ -861,6 +861,24 @@ class MaziApp < Sinatra::Base
       unzip_snapshot(filename, tempfile)
       loadTheme(filename.gsub('.zip', '.yml'))
       redirect '/admin_snapshot'
+    elsif params['export_app']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode upload snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have imported an application snapshot."
+        redirect '/admin_snapshot'
+      end
+      zip_app_snapshot(params[:application], params['snapshotname'])
+      return {result: 'OK', file: "#{params[:snapshotname]}_#{params[:application]}.zip"}
+    elsif params['import_app']
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode upload snapshot"
+        session['error'] = "This portal runs on Demo mode! This action would have exported an application snapshot."
+        redirect '/admin_snapshot'
+      end
+      tempfile = params['snapshot'][:tempfile]
+      filename = params['snapshot'][:filename]
+      unzip_app_snapshot(params[:application], filename, tempfile)
+      redirect '/admin_snapshot'
     end
 
     redirect '/admin_snapshot'
