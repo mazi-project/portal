@@ -179,11 +179,18 @@
   </div>
 
   <script type="text/javascript">
-    var mom = moment('<%= Time.now.strftime("%Y-%M-%d %H:%M:%S%z") %>');
     function showDate(date, o){
       var newdate = moment(date).add(o, 'milliseconds');
       $("#time").text(newdate.format("D MMM YYYY HH:mm zz"));
       setTimeout(function () { showDate(newdate, 10000); }, 10000);
+    }
+
+    var mom = null;
+    if(navigator.userAgent.indexOf("Firefox") != -1 ){
+      mom = moment('<%= Time.now.strftime("%Y-%m-%d %H:%M:%S%z") %>');
+    }
+    else{
+      mom = moment(Date.parse('<%= Time.now %>'));
     }
     showDate(mom, 0);
   </script>
