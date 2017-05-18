@@ -248,6 +248,14 @@ class MaziApp < Sinatra::Base
       end
       locals[:main_body] = :admin_change_password
       erb :admin_main, locals: locals
+     when 'admin_change_username'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:main_body] = :admin_change_username
+      erb :admin_main, locals: locals
     when 'admin_login'
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode download snapshot"
@@ -683,7 +691,14 @@ class MaziApp < Sinatra::Base
         session['error'] = "This portal runs on Demo mode! This action would have connected the second wireless interface to a wireless network." 
         redirect '/admin_network'
       end
-      args << "-s #{params['ssid']}" if params['ssid']
+      # ssid = params['ssid'].nil? || params['ssid'].empty? ? params['hidden-ssid'] : params['ssid']
+      unless params['ssid'].nil? || params['ssid'].empty?
+        args << "-s #{params['ssid']}"
+      else
+        unless params['hidden-ssid'].nil? || params['hidden-ssid'].empty?
+          args << "-s #{params['hidden-ssid']} -h"
+        end
+      end
       args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
     else
       args = []
@@ -882,6 +897,36 @@ class MaziApp < Sinatra::Base
     end
 
     redirect '/admin_snapshot'
+  end
+
+  delete '/snapshot/?' do 
+    MaziLogger.debug "request: delete/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    deleteDBSnapshot(params['snapshotname'])
+    {result: "OK"}.to_json
+  end
+
+  post '/admin_change_username' do
+    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode change username"
+      session['error'] = "This portal runs on Demo mode! This action would have changed the admin username."
+      redirect '/admin_change_username'
+    end
+    unless params['old-username'] == @config[:admin][:admin_username]
+      MaziLogger.debug "Incorrect old username"
+      session['error'] = "Incorrect old username"
+      redirect '/admin_change_username'
+    end
+    unless valid_admin_credentials?(params['old-username'], params['password'])
+      MaziLogger.debug "Password confirmation missmatch"
+      session['error'] = "Password confirmation missmatch"
+      redirect '/admin_change_username'
+    end
+    changeConfigFile("admin->admin_username", params['new-username'])
+    writeConfigFile
+    session['error'] = nil
+    session[:username] = nil
+    redirect '/admin_login'
   end
 
   post '/admin_change_password' do

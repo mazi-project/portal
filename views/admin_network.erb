@@ -339,16 +339,21 @@
             <input type="hidden" name="env" value='sh'>
             <input type="hidden" name="cmd" value='antenna.sh'>
             <% if net_info[:available_ssids].nil? || net_info[:available_ssids].empty? %>
+            <label for="ssid">Select Wi-Fi name:</label>
             <input type="text" name="ssid" class="form-control" value='' required autofocus>
             <% else %>
-            <label for="ssid">Select list:</label>
+            <label for="ssid">Select Wi-Fi name:</label>
             <select class="form-control" id="ssid" name='ssid'>
+              <option></option>
               <% net_info[:available_ssids].each do |essid| %>
                 <option><%= essid %></option>
               <% end%>
             </select>
             <% end %>
-            <input type="text" name="password" class="form-control" placeholder="Password" required>
+            <label for="ssid">Or type it here if it is hidden:</label>
+            <input type="text" name="hidden-ssid" class="form-control" value=''>
+            <label for="ssid">Type the password for the Wi-Fi network:</label>
+            <input type="text" name="password" class="form-control" placeholder="Password" value=''>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Connect</button>
           </div>
         </form>

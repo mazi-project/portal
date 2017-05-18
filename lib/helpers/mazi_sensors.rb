@@ -1,6 +1,6 @@
 require 'mysql'
 
-SENSORS_DB_IP      = '10.64.45.90'               # this should be localhost
+SENSORS_DB_IP      = 'localhost'                 # this should be localhost
 SELECT_QUERY_LIMIT = 'GROUP BY id DESC LIMIT 50' # default query for the select on the sensors db
 SENSORS_ENABLED    = false                       # a quick way to disable the sensors module
 

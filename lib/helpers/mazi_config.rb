@@ -117,6 +117,12 @@ module MaziConfig
     File.open("/etc/mazi/snapshots/#{filename}.net", 'w') { |file| file.write(lines) }
   end
 
+  def deleteDBSnapshot(filename)
+    File.delete("/etc/mazi/snapshots/#{filename}.db") if File.exist?("/etc/mazi/snapshots/#{filename}.db")
+    File.delete("/etc/mazi/snapshots/#{filename}.yml") if File.exist?("/etc/mazi/snapshots/#{filename}.yml")
+    File.delete("/etc/mazi/snapshots/#{filename}.net") if File.exist?("/etc/mazi/snapshots/#{filename}.net")
+  end
+
   def loadDBSnapshot(filename)
     FileUtils.cp "/etc/mazi/snapshots/#{filename}.db", "database/inventory.db"
     args = []

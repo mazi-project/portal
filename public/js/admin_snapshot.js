@@ -13,6 +13,20 @@ $( document ).ready(function() {
     });
   });
 
+  $('#delete-snapshot').click(function(){
+    var snapshot_name = $( "#snapshot-select").val();
+    console.log( "delete snapshot" + snapshot_name + "!" );
+    $.ajax({
+      url: '/snapshot/',
+      type: 'DELETE',
+      data: {snapshotname: snapshot_name},
+      success: function(result) {
+        console.log(result);
+        location.reload();
+      }
+    });
+  });
+
   $('#download-interview-snapshot').click(function(){
     var snapshot_name = $( "#interview-snapshotname").val();
     console.log( "aaa!" +  snapshot_name);
