@@ -1010,6 +1010,7 @@ class MaziApp < Sinatra::Base
   put '/update/?' do
     MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
 
+    update_dependencies
     version_update
     update_config_file
 
