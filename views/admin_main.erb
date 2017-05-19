@@ -55,11 +55,17 @@
               <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> Change Password</a>
             </li>
             <li class="check-updates-menu">
-              <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-refresh"></i> Check for updates</a>
+              <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-history"></i> Check for updates</a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="/admin_logout"><i class="fa fa-fw fa-power-off admin-logout-button"></i> Log Out</a>
+              <a href="#" data-toggle="modal" data-target="#reboot-modal"><i class="fa fa-fw fa-refresh"></i> Reboot</a>
+            </li>
+            <li>
+              <a href="#" data-toggle="modal" data-target="#shutdown-modal"><i class="fa fa-fw fa-power-off"></i> Shutdown</a>
+            </li>
+            <li>
+              <a href="/admin_logout"><i class="fa fa-fw fa-sign-out admin-logout-button"></i> Log Out</a>
             </li>
             <% end %>
           </ul>
@@ -150,6 +156,57 @@
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- shutdown modal-->
+  <div class="modal fade" id="shutdown-modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Shutdown?</h4>
+        </div>
+        <form class="form-signin" action="/action/shutdown" method="post">
+          <div class="modal-body">
+            <div class="form-group">
+              <p>Mazizone will now Shutdown, this will cause this site to be unreachable and you will need to manually reboot this Mazizone. Procced?</p>
+              <input type="hidden" name="shutdown" value='true'>
+              
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+            <button class="btn btn-primary pull-right" type="submit">Shutdown</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- reboot modal-->
+  <div class="modal fade" id="reboot-modal" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reboot?</h4>
+        </div>
+        <form class="form-signin" action="/action/reboot" method="post">
+          <div class="form-group">
+            <div class="modal-body">
+              <p>Mazizone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutres. Procced?</p>
+              <input type="hidden" name="reboot" value='true'>
+            </div>
+            <div class='modal-footer'>
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
+              <button class="btn btn-primary pull-right" type="submit">Reboot</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
   </div>

@@ -23,6 +23,7 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "INIT with config: #{@config}"
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
+    update_dependencies
     init_sensors
   end
 
@@ -1010,7 +1011,6 @@ class MaziApp < Sinatra::Base
   put '/update/?' do
     MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
 
-    update_dependencies
     version_update
     update_config_file
 
@@ -1021,6 +1021,37 @@ class MaziApp < Sinatra::Base
     end
 
     {status: "restarting"}.to_json
+  end
+
+  post '/action/:action/?' do |action|
+    MaziLogger.debug "request: put/action from ip: #{request.ip} action: #{action}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', action: action}.to_json
+    end
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode exec script"
+      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarded'} this Mazizone."
+      redirect back
+    end
+
+    if action == 'shutdown'
+      Thread.new do
+        sleep 2
+        MaziLogger.debug 'Shutting down'
+        `shutdown -h now`
+      end
+    elsif action == 'restart' || action == 'reboot'
+      Thread.new do
+        sleep 2
+        MaziLogger.debug 'Restarting'
+        `reboot`
+      end
+    else
+      return {error: 'Invalid action', action: action}.to_json
+    end
+    redirect '/admin'
   end
 end
 

@@ -1,11 +1,10 @@
-require 'mysql'
-
 SENSORS_DB_IP      = 'localhost'                 # this should be localhost
 SELECT_QUERY_LIMIT = 'GROUP BY id DESC LIMIT 50' # default query for the select on the sensors db
-SENSORS_ENABLED    = false                       # a quick way to disable the sensors module
+SENSORS_ENABLED    = true                        # a quick way to disable the sensors module
 
 module MaziSensors
   def init_sensors
+    require 'mysql'
     con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     @sensors_enabled = true
   rescue Mysql::Error => ex
