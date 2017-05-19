@@ -36,7 +36,7 @@
           </label>
         </td>
         <td><%= app.name %></td>
-        <td><%= app.url %></td>
+        <td><a href='<%= app.url %>' target="_blank"><%= app.url %></a></td>
         <td><%= app.description %></td>
         <td><%= app.application.name %></td>
         <td><%= app.click_counter %></td>
@@ -96,14 +96,14 @@
         </td> -->
         <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
         <td><%= app.name %></td>
-        <td><%= app.url %></td>
+        <td><a href='<%= app.url %>' target="_blank"><%= app.url %></a></td>
         <td><%= app.description %></td>
         <!-- <td><%= app.click_counter %></td> -->
         <td>
           <div class="text-center">
             <div class="btn-group pull-center">
               <% if web_app %>
-                <i class="fa fa-info-circle fa-2x pull-right" title="Starting/Stopping this application will not affect the performance of your mazizone."></i>
+              <i class="fa fa-info-circle fa-2x pull-right web-app-info" title="Starting/Stopping this application will not affect the performance of your mazizone." data-toggle="modal" data-target="#web-app-info-modal"></i>
               <% else %>
               <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || web_app %> title="<%= !web_app ? 'Start Application' : 'This is a web application, it always runs.' %>">
                 <i class="fa fa-play"></i>
@@ -249,4 +249,23 @@
 
 <div id="delete-instance-dialog-confirm" title="Delete Application Instance?">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This application instance will be permanently deleted from the database. Do you wish to proceed?</p>
+</div>
+
+<!-- web app info modal-->
+<div class="modal fade" id="web-app-info-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Web Application</h4>
+      </div>
+      <div class="modal-body">
+        <p>This is a WEB application so Starting/Stopping this application will not affect the performance of your mazizone.</p>
+      </div>
+      <div class='modal-footer'>
+        <button class="btn btn-primary pull-right" type="button" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
 </div>
