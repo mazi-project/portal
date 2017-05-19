@@ -74,7 +74,7 @@ module MaziVersion
     nil
   end
 
-  def update_dependencies
+  def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
     begin
       Gem::Specification.find_by_name("mysql")# version 1.6.6 requires mysql gem

@@ -1,9 +1,10 @@
 require 'sinatra/base'
 require 'helpers/mazi_logger'
+require 'helpers/mazi_version'
+MaziVersion.update_dependencies
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
-require 'helpers/mazi_version'
 require 'helpers/mazi_sensors'
 require 'thin'
 require 'json'
@@ -23,7 +24,6 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "INIT with config: #{@config}"
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
-    update_dependencies
     init_sensors
   end
 
