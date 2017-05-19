@@ -80,19 +80,23 @@ module MaziVersion
       Gem::Specification.find_by_name("mysql")# version 1.6.6 requires mysql gem
     rescue Gem::LoadError
        MaziLogger.debug "mysql gem not found. Installing."
+       MaziLogger.debug "updating."
         `apt-get -y update`
         MaziLogger.debug "Installing mysql library."
         `apt-get -y install libmysqlclient-dev`
         MaziLogger.debug "Installing mysql gem."
         `gem install mysql --no-ri --no-rdoc`
+        MaziLogger.debug "done"
     rescue
       unless Gem.available?("mysql")
         MaziLogger.debug "mysql gem not found. Installing."
+        MaziLogger.debug "updating."
         `apt-get -y update`
         MaziLogger.debug "Installing mysql library."
         `apt-get -y install libmysqlclient-dev`
         MaziLogger.debug "Installing mysql gem."
         `gem install mysql --no-ri --no-rdoc`
+        MaziLogger.debug "done"
       end
     end
   end
