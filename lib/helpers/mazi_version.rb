@@ -87,7 +87,7 @@ module MaziVersion
         MaziLogger.debug "Installing mysql gem."
         `gem install mysql --no-ri --no-rdoc`
         MaziLogger.debug "done"
-        `service nitos-portal restart`
+        `service mazi-portal restart`
     rescue
       unless Gem.available?("mysql")
         MaziLogger.debug "mysql gem not found. Installing."
@@ -98,7 +98,7 @@ module MaziVersion
         MaziLogger.debug "Installing mysql gem."
         `gem install mysql --no-ri --no-rdoc`
         MaziLogger.debug "done"
-        `service nitos-portal restart`
+        `service mazi-portal restart`
       end
     end
   end
