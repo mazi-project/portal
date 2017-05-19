@@ -1032,7 +1032,7 @@ class MaziApp < Sinatra::Base
     end
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode exec script"
-      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarded'} this Mazizone."
+      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarted'} this Mazizone."
       redirect back
     end
 
