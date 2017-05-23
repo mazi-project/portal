@@ -5,10 +5,12 @@ MaziVersion.update_dependencies
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
+require 'mysql'
 require 'helpers/mazi_sensors'
 require 'thin'
 require 'json'
 require 'sequel'
+require 'date'
 
 class MaziApp < Sinatra::Base
   include MaziConfig
@@ -36,7 +38,7 @@ class MaziApp < Sinatra::Base
     end
     err
   end
-
+ 
   get '/' do
     redirect 'index'
   end
@@ -1063,7 +1065,57 @@ class MaziApp < Sinatra::Base
     end
     redirect '/admin'
   end
+   
+  post '/sensors/register/:name/?' do |name|
+    MaziLogger.debug "Register sensor: #{name}" 
+    
+    begin
+    #connect to DATABASE mydb
+    con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
+     
+    #create TABLE TYPE ==> | ID | NAME |
+    con.query("CREATE TABLE IF NOT EXISTS \
+       Type(Id INT PRIMARY KEY AUTO_INCREMENT,Name VARCHAR(10))")
+
+
+    con.query("INSERT INTO Type(NAME) VALUES('#{name}')")
+    id = con.query("SELECT max(Id) FROM Type")
+    return id.fetch_row       
+
+    rescue Mysql::Error => e
+      puts e    
+    ensure
+      con.close if con
+    end
+  end
+
+  post '/sensors/store/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')   
+    MaziLogger.debug "request: post/sensors [#{date.hour}:#{date.minute}:#{date.second}], from sensor_id: #{body["sensor_id"]}"
+
+    begin  
+    #connect to DATABASE mydb
+    con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
+
+    #Find the name of the sensor
+    name = con.query("SELECT Name FROM Type WHERE Id=#{body["sensor_id"]}").fetch_row.first
+    
+    case name
+    when "sth11"
+       #create TABLE "TABLE_SensorId" ==> | ID | DAY | TIME | TEMPORATURE | HUMIDITY |
+       con.query("CREATE TABLE IF NOT EXISTS \
+         TABLE_#{body["sensor_id"]}(Id INT PRIMARY KEY AUTO_INCREMENT, Day DATE, Time TIME, Temporature VARCHAR(4), Humidity VARCHAR(4))")       
+       con.query("INSERT INTO TABLE_#{body["sensor_id"]}(Day, Time, Temporature, Humidity) VALUES('#{date.year}-#{date.month}-#{date.day}', '#{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
+    end	
+
+    rescue Mysql::Error => e
+      puts e
+    ensure
+      con.close if con
+    end
+  end  
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
-

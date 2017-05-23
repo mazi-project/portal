@@ -4,7 +4,6 @@ SENSORS_ENABLED    = true                        # a quick way to disable the se
 
 module MaziSensors
   def init_sensors
-    require 'mysql'
     con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     @sensors_enabled = true
   rescue Mysql::Error => ex
