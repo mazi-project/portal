@@ -28,7 +28,7 @@
     </thead>
     <tbody>
       <% application_instances.each do |app| %>
-      <tr class="app_inst_tr" id="app_tr_<%= app.id.to_s %>">
+      <tr class="app_inst_tr" id="app_inst_tr_<%= app.id.to_s %>">
         <td scope="row">
           <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
