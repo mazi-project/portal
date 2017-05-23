@@ -8,22 +8,35 @@ class MaziLogger
       @logger.level = Logger::DEBUG
       @logger.datetime_format = '%Y-%m-%d %H:%M:%S '
     end
-    @logger
+    if @filelogger.nil?
+      @filelogger = Logger.new('/var/log/mazizone.log', 'daily')
+      @filelogger.level = Logger::DEBUG
+      @filelogger.datetime_format = '%Y-%m-%d %H:%M:%S '
+    end
+    [@logger, @filelogger]
   end
   
   def self.info(msg)
-    self.log.info(msg)
+    logger, filelogger = self.log
+    logger.info(msg)
+    filelogger.info(msg)
   end
   
   def self.debug(msg)
-    self.log.debug(msg)
+    logger, filelogger = self.log
+    logger.debug(msg)
+    filelogger.debug(msg)
   end
   
   def self.error(msg)
-    self.log.error(msg)
+    logger, filelogger = self.log
+    logger.error(msg)
+    filelogger.error(msg)
   end
   
   def self.warn(msg)
-    self.log.warn(msg)
+    logger, filelogger = self.log
+    logger.warn(msg)
+    filelogger.warn(msg)
   end
 end
