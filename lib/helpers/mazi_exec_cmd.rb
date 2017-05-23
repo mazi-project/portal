@@ -55,7 +55,17 @@ class MaziExecCmd
     when 'mazi-app.sh'
       'OK'
     when 'mazi-stat.sh'
-      'wifi users 3'
+      if @args.include? '-t'
+        'temp=68.2\'C'
+      elsif @args.include? '-c'
+        ['30.1%']
+      elsif @args.include? '-r'
+        ['49.5%']
+      elsif @args.include? '-s'
+        ['38.0%']
+      else
+        'wifi users 3'
+      end
     end
   end
 
@@ -81,7 +91,17 @@ class MaziExecCmd
     when 'mazi-app.sh'
       'OK'
     when 'mazi-stat.sh'
-      return ['wifi', 'users', '3']
+      if @args.include? '-t'
+        return ['temp=68.2', "C"]
+      elsif @args.include? '-c'
+        return ['30.1', '%']
+      elsif @args.include? '-r'
+        return ['49.5', '%']
+      elsif @args.include? '-s'
+        return ['38.0', '%']
+      else
+        return ['wifi', 'users', '3']
+      end
     end
   end
 end
