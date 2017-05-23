@@ -17,6 +17,8 @@ class MaziApp < Sinatra::Base
   include MaziSensors
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
+  configure {set :show_exceptions, false}
+  configure {set :dump_errors, false}
 
   def initialize
     super
@@ -25,6 +27,14 @@ class MaziApp < Sinatra::Base
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
     init_sensors
+  end
+
+  error do |err|
+    MaziLogger.error "#{err.message}"
+    err.backtrace.each do |trace|
+      MaziLogger.error "  #{trace}"
+    end
+    err
   end
 
   get '/' do
