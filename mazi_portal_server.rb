@@ -1102,13 +1102,10 @@ class MaziApp < Sinatra::Base
     #Find the name of the sensor
     name = con.query("SELECT name FROM type WHERE id=#{body["sensor_id"]}").fetch_row.first
     
-    case name
-    when "sth11"
-       #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-       con.query("CREATE TABLE IF NOT EXISTS \
-         sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
-       con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
-    end	
+    #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
+    con.query("CREATE TABLE IF NOT EXISTS \
+      sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
+    con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
 
     rescue Mysql::Error => e
       puts e
