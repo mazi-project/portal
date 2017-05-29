@@ -1066,19 +1066,21 @@ class MaziApp < Sinatra::Base
     redirect '/admin'
   end
    
-  post '/sensors/register/:name/?' do |name|
-    MaziLogger.debug "Register sensor: #{name}" 
+  post '/sensors/register/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    MaziLogger.debug "Register sensor: #{body["name"]} from ip: #{body["ip"]}" 
     
     begin
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
      
-    #create TABLE TYPE ==> | ID | NAME |
+    #create TABLE TYPE ==> | ID | NAME | IP
     con.query("CREATE TABLE IF NOT EXISTS \
-       type(id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(10))")
+       type(id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(10), ip VARCHAR(15))")
 
 
-    con.query("INSERT INTO type(NAME) VALUES('#{name}')")
+    con.query("INSERT INTO type(name, ip) VALUES('#{body["name"]}', '#{body["ip"]}')")
     id = con.query("SELECT max(id) FROM type")
     return id.fetch_row       
 
@@ -1094,7 +1096,6 @@ class MaziApp < Sinatra::Base
     body = JSON.parse(request.body.read)
     date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')   
     MaziLogger.debug "request: post/sensors [#{date.hour}:#{date.minute}:#{date.second}], from sensor_id: #{body["sensor_id"]}"
-
     begin  
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
@@ -1116,3 +1117,5 @@ class MaziApp < Sinatra::Base
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
+
+
