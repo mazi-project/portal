@@ -25,6 +25,16 @@ class MaziApp < Sinatra::Base
   def initialize
     super
     @config = loadConfigFile
+    if @config[:sensors].nil?
+      @config[:sensors] = {}
+      @config[:sensors][:enable] = false
+      writeConfigFile
+    end
+    if @config[:camera].nil?
+      @config[:camera] = {}
+      @config[:camera][:enable] = false
+      writeConfigFile
+    end
     MaziLogger.debug "INIT with config: #{@config}"
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
