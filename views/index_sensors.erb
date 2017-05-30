@@ -1,6 +1,10 @@
 <script type="text/javascript">
-  var temperature_data = JSON.parse('<%= temperatures.to_json %>');
-  var humidity_data    = JSON.parse('<%= humidity.to_json %>');
+  var temperature_data = {};
+  var humidity_data    = {};
+  <% sensors.each do |sensor| %>
+    temperature_data[<%=sensor[:id]%>] = JSON.parse('<%= sensor[:temperatures].to_json %>');
+    humidity_data[<%=sensor[:id]%>]    = JSON.parse('<%= sensor[:humidity].to_json %>');
+  <% end %>
 </script>
 
 <div class="jumbotron">
@@ -13,15 +17,16 @@
     </p>
 </div>
 
+<% sensors.each do |sensor| %>
 <div class="col-lg-6 col-sm-12">
   <div class="panel panel-green">
     <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature</h3>
+    <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature for <%= sensor[:type]%></h3>
     </div>
     <div class="panel-body">
-      <div id="morris-line-chart-temp"></div>
+      <div id="morris-line-chart-temp-<%= sensor[:id]%>"></div>
       <div class="text-right">
-        <a class="export-temperatures"><i class="fa fa-download"> Export to CSV file</i></a>
+        <a class="export-temperatures" id='export-temperatures-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
       </div>
     </div>
   </div>
@@ -30,16 +35,17 @@
 <div class="col-lg-6 col-sm-12">
   <div class="panel panel-blue">
     <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity</h3>
+    <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity for <%= sensor[:type]%></h3>
     </div>
     <div class="panel-body">
-      <div id="morris-line-chart-hum"></div>
+      <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
       <div class="text-right">
-        <a class="export-humidity"><i class="fa fa-download"> Export to CSV file</i></a>
+        <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
       </div>
     </div>
   </div>
 </div>
+<% end %>
 
 <!-- choose timeslot modal-->
 <div class="modal fade" id="choose-timeslot-modal" role="dialog">

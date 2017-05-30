@@ -1,0 +1,150 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      Mazizone <small>Devices</small>
+    </h1>
+  </div>
+</div>
+
+<% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <p>
+      You can use the tools bellow to controll the various supported devices that are connected to this Mazizone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
+    </p>
+  </div>
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Sensors
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control various sensors."></i>
+        </div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="enable/disable the portals sensors tab">
+              <input type="checkbox" <%= sensors_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-sensors-switch"></div>
+            </label>
+            <span class="device-enable-msg">Enable/disable the sensors tab on user portal.</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-md-12'>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th title="Sensor Name">Sensor</th>
+                  <th title="Sensor Type">Type</th>
+                  <th title="Sensor Status">Status</th>
+                  <th title="Number of measurements">Measurements</th>
+                  <th title="Actions that can be performed on the sensor" class='text-center'>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% available_sensors.each do |sensor| %>
+                <tr>
+                  <td>Sensor_<%= sensor[:id] %></td>
+                  <td><%= sensor[:type] %></td>
+                  <td><%= sensor[:status] %></td>
+                  <td><%= sensor[:nof_entries]%></td>
+                  <td>
+                     <div class="text-center">
+                      <div class="btn-group pull-center">
+                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="Start saving measurements">
+                          <i class="fa fa-play"> Start</i>
+                        </a>
+                        <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="Delete all saved measurements">
+                          <i class="fa fa-remove"> Clear</i>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6' hidden>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Camera
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        </div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="enable/disable the portals camera tab">
+              <input type="checkbox" <%= camera_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-camera-switch"></div>
+            </label>
+            <span class="device-enable-msg">Enable/disable the camera tab on user portal.</span>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+
+
+<% available_sensors.each do |sensor| %>
+<!-- start sensing modal-->
+<div class="modal fade" id="start-sensing-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start Sensor Measurements</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <label for='sensing_duration'>Duration (seconds):</label>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="300" required autofocus>
+            <label for='sensing_interval'>Interval (seconds):</label>
+            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete-sensing-measurements-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Sensor Measurements</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/<%= sensor[:type] %>/delete" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <p>Do you want to delete all saved measurements?</p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

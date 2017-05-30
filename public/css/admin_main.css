@@ -446,3 +446,9 @@ input:checked + .slider:before {
 .form-signin > div > label{
   margin-top: 5px;
 }
+
+.device-enable-msg{
+  position: absolute;
+  margin-left: 5px;
+  margin-top: 1px;
+}

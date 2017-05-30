@@ -120,8 +120,16 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
-      locals[:local_data][:temperatures]       = getTemperatures(params['start_date'], params['end_date'])
-      locals[:local_data][:humidity]           = getHumidities(params['start_date'], params['end_date'])
+      locals[:local_data][:sensors]            = []
+      getAllAvailableSensors.each do |sensor|
+        tmp                = {}
+        tmp[:id]           = sensor[:id]
+        tmp[:type]         = sensor[:type]
+        tmp[:temperatures] = getTemperatures(sensor[:id], params['start_date'], params['end_date'])
+        tmp[:humidity]     = getHumidities(sensor[:id], params['start_date'], params['end_date'])
+        next if tmp[:temperatures].empty? || tmp[:humidity].empty?
+        locals[:local_data][:sensors] << tmp
+      end
       locals[:main_body] = :index_sensors
       erb :index_main, locals: locals
     when 'index_documentation'
@@ -245,6 +253,18 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/admin_snapshot.js"
       locals[:main_body] = :admin_snapshot
       locals[:local_data][:dbs] = getAllDBSnapshots
+      erb :admin_main, locals: locals
+    when 'admin_devices'
+      unless authorized?
+        MaziLogger.debug "Not authorized"
+        session['error'] = nil
+        redirect '/admin_login'
+      end
+      locals[:js] << "js/admin_devices.js"
+      locals[:main_body] = :admin_devices
+      locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
+      locals[:local_data][:available_sensors] = getAllAvailableSensors
+      locals[:local_data][:camera_enabled]    = false
       erb :admin_main, locals: locals
     when 'admin_set_date'
       locals[:main_body] = :admin_set_time
@@ -1074,8 +1094,7 @@ class MaziApp < Sinatra::Base
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
      
     #create TABLE TYPE ==> | ID | NAME |
-    con.query("CREATE TABLE IF NOT EXISTS \
-       type(id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(10))")
+    con.query("CREATE TABLE IF NOT EXISTS type(id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(10))")
 
 
     con.query("INSERT INTO type(NAME) VALUES('#{name}')")
@@ -1083,7 +1102,7 @@ class MaziApp < Sinatra::Base
     return id.fetch_row       
 
     rescue Mysql::Error => e
-      puts e    
+      MaziLogger.error e.message 
     ensure
       con.close if con
     end
@@ -1103,19 +1122,60 @@ class MaziApp < Sinatra::Base
     name = con.query("SELECT name FROM type WHERE id=#{body["sensor_id"]}").fetch_row.first
     
     case name
-    when "sth11"
+    when "sht11"
        #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-       con.query("CREATE TABLE IF NOT EXISTS \
-         sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
+       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
+       con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
+    when "sensehat"
+       #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
+       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
        con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
     end	
 
     rescue Mysql::Error => e
-      puts e
+      MaziLogger.error e.message
     ensure
       con.close if con
     end
-  end  
+  end
+
+  post '/devices/:device/:action' do |device, action|
+    MaziLogger.debug "request: post/action from ip: #{request.ip} device: #{device} action: #{action} params: #{params.inspect}"
+    unless authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      return {error: 'Not Authorized!', device: device, action: action}.to_json
+    end
+    if @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode exec script"
+      session['error'] = "This portal runs on Demo mode! This action would have effected a device."
+      redirect back
+    end
+    # request.body.rewind
+    # body = JSON.parse(request.body.read)
+
+    case device
+    when 'sensors'
+      if action == 'toggle'
+        toggle_sensors_enabled
+      end
+    when 'camera'
+      if action == 'toggle'
+        current_value = @config[:camera][:enable]
+        changeConfigFile("camera->enable", !current_value)
+        writeConfigFile
+      end
+    when 'sht11', 'sensehat'
+      if action == 'start'
+        start_sensing(device, params['duration'], params['interval'])
+        redirect back
+      elsif action == 'delete'
+        delete_measurements(params['id'])
+        redirect back
+      end
+    end
+    {result: 'OK', device: device, action: action}.to_json
+  end
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567

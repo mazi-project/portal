@@ -40,50 +40,54 @@ function exportToCsv(filename, rows) {
 }
 
 $(function() {
-  Morris.Line({
-    element: 'morris-line-chart-temp',
-    data: temperature_data,
-    xkey: 'date',
-    ykeys: ['temp'],
-    labels: ['Date', 'Temperature (Celcius)'],
-    smooth: false,
-    resize: true,
-    ymax: 50,
-    ymin: -20,
-    hideHover: 'auto'
+  $.each(temperature_data, function (id, data) {
+    Morris.Line({
+      element: 'morris-line-chart-temp-' + id,
+      data: data,
+      xkey: 'date',
+      ykeys: ['temp'],
+      labels: ['Date', 'Temperature (Celcius)'],
+      smooth: false,
+      resize: true,
+      ymax: 50,
+      ymin: -20,
+      hideHover: 'auto'
+    });
+
+    $('#export-temperatures-' + id).click(function(){
+      var result = [['date', 'temperature']];
+      tLen = data.length;
+      for (i = 0; i < tLen; i++) {
+        result.push([data[i].date, data[i].temp]);
+      }
+      exportToCsv('temperatures.csv', result);
+    });
   });
 
-  Morris.Line({
-    element: 'morris-line-chart-hum',
-    data: humidity_data,
-    xkey: 'date',
-    ykeys: ['hum'],
-    labels: ['Date', 'Humidity (%)'],
-    smooth: false,
-    resize: true,
-    ymax: 100,
-    ymin: 0,
-    hideHover: 'auto'
+  $.each(humidity_data, function (id, data) {
+    Morris.Line({
+      element: 'morris-line-chart-hum-' + id,
+      data: data,
+      xkey: 'date',
+      ykeys: ['hum'],
+      labels: ['Date', 'Humidity (%)'],
+      smooth: false,
+      resize: true,
+      ymax: 100,
+      ymin: 0,
+      hideHover: 'auto'
+    });
+
+    $('#export-humidity-' + id).click(function(){
+      var result = [['date', 'humidity']];
+      tLen = data.length;
+      for (i = 0; i < tLen; i++) {
+        result.push([data[i].date, data[i].hum]);
+      }
+      exportToCsv('humidity.csv', result);
+    });
   });
 
-  $('.export-temperatures').click(function(){
-    var result = [['date', 'temperature']];
-    tLen = temperature_data.length;
-    for (i = 0; i < tLen; i++) {
-      result.push([temperature_data[i].date, temperature_data[i].temp]);
-    }
-    exportToCsv('temperatures.csv', result);
-  });
-
-  $('.export-humidity').click(function(){
-    var result = [['date', 'humidity']];
-    tLen = humidity_data.length;
-    for (i = 0; i < tLen; i++) {
-      result.push([humidity_data[i].date, humidity_data[i].hum]);
-    }
-    exportToCsv('humidity.csv', result);
-  });
-
-  jQuery('#datetimepicker_start').datetimepicker();
-  jQuery('#datetimepicker_end').datetimepicker();
+  $('#datetimepicker_start').datetimepicker();
+  $('#datetimepicker_end').datetimepicker();
 });

@@ -26,6 +26,10 @@ TOPCOMMENTS = <<TEXT
 # - side_panel_active_color: side panel active and on hover color (hex value)
 # - top_panel_color: top panel main color (hex value)
 # - side_panel_active_color: top panel active and on hover color (hex value)
+# On the sensors section:
+# - enable: true/force to enable/disable the sensors tab on the user portal
+# On the camera section:
+# - enable: true/force to enable/disable the camera tab on the user portal
 TEXT
 
 module MaziConfig
