@@ -215,7 +215,7 @@ module MaziConfig
     newfile = YAML.load_file 'etc/config.yml'
     oldfile = YAML.load_file '/etc/mazi/config.yml.bu'
     newfile.keys.each do |key|
-      newfile[key].merge! oldfile[key]
+      newfile[key].merge! oldfile[key] unless oldfile[key].nil? || oldfile[key].empty?
     end
 
     writeConfigFile(newfile, '/etc/mazi/config.yml')
