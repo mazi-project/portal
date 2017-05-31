@@ -1105,9 +1105,6 @@ class MaziApp < Sinatra::Base
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
      
-    con.query("CREATE TABLE IF NOT EXISTS type(id INT PRIMARY KEY AUTO_INCREMENT,name VARCHAR(10), ip VARCHAR(15))")
-
-
     con.query("INSERT INTO type(name, ip) VALUES('#{body["name"]}', '#{body["ip"]}')")
     id = con.query("SELECT max(id) FROM type")
     return id.fetch_row       
@@ -1118,6 +1115,28 @@ class MaziApp < Sinatra::Base
       con.close if con
     end
   end
+
+  get '/sensors/id/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"  
+    begin
+    #connect to DATABASE mydb
+    con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
+    id = con.query("SELECT id FROM type WHERE name LIKE '#{body["name"]}' AND ip='#{body["ip"]}'")
+    
+    if( id != nil )
+       return id.fetch_row
+    end
+    rescue Mysql::Error => e
+      MaziLogger.error e.message
+    ensure
+      con.close if con
+    end
+  end
+
+
+
 
   post '/sensors/store/?' do
     request.body.rewind
@@ -1189,5 +1208,4 @@ class MaziApp < Sinatra::Base
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
-
 
