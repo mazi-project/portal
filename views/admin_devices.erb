@@ -58,7 +58,7 @@
                   <td>
                      <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="Start saving measurements">
+                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="Start saving measurements" <%= 'disabled' if sensor[:status] == 'not found' || sensor[:status] == 'active' %>>
                           <i class="fa fa-play"> Start</i>
                         </a>
                         <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="Delete all saved measurements">

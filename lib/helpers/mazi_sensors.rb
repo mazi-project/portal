@@ -31,12 +31,15 @@ module MaziSensors
     sensors_con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     q = "SELECT * FROM type"
     a = sensors_con.query(q)
+    status = {}
+    `sh /root/back-end/mazi-sense.sh -a`.split("\n").each {|line| status[line.split()[0]] = line.split()[1]}
     result = []
     a.each_hash do |h|
       # TODO add status finder
       q2 = "SELECT * FROM sensor_#{h['id']}"
       a2 = sensors_con.query(q2)
-      result << {type: h['name'], status: 'active', id: h['id'], nof_entries: a2.num_rows}
+      stat = status[h['name']].nil? ? 'not found' : status[h['name']]
+      result << {type: h['name'], status: stat, id: h['id'], nof_entries: a2.num_rows}
     end
     return result
   rescue Mysql::Error => ex
