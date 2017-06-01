@@ -36,6 +36,7 @@
             <span class="device-enable-msg">Enable/disable the sensors tab on user portal.</span>
           </div>
         </div>
+        <% if sensors_db_exist %>
         <div class="row">
           <div class='col-md-12'>
             <table class="table">
@@ -73,6 +74,14 @@
             </table>
           </div>
         </div>
+        <% else %>
+        <div class="row">
+          <div class="col-lg-12">
+            <p>The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this Mazizone, please use the button bellow to initialize this module.</p>
+            <button class="btn btn-success pull-right init-sensor-db" data-toggle="modal" data-target="#init-sensor-db-modal" title="Start sensors initiliazation">Initiliaze</button>
+          </div>
+        </div>
+        <% end %>
       </div> 
     </div>
   </div>
@@ -100,6 +109,27 @@
   </div>
 </div>
 
+<div class="modal fade" id="init-sensor-db-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start Sensor Initiliazation</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/sensors/init" method="post">
+          <div class="form-group">
+            <label for='root-password'>mySQL root user password:</label>
+            <input type="text" id='root-password' name="root-password" class="form-control" value="m@z1">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form></br>
+        <small>Warning: this procedure may last up to 10 minutes. The portal might be behaving unexpectedly in the meantime.</small>
+      </div>
+    </div>
+  </div>
+</div>
 
 <% available_sensors.each do |sensor| %>
 <!-- start sensing modal-->

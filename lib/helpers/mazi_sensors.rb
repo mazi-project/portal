@@ -13,8 +13,38 @@ module MaziSensors
     con.close if con
   end
 
+  def initialize_sensors_module(password)
+    `sh /root/back-end/mazi-sense.sh --init #{password}`
+    con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
+    i = 1
+    `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
+      line = line.split
+      con.query("INSERT INTO type(name, ip) VALUES('#{line[0]}', '#{line[2]}')")
+      con.query("CREATE TABLE IF NOT EXISTS sensor_#{i}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+      i += 1
+    end
+    @sensors_enabled = true
+  rescue Mysql::Error => ex
+    MaziLogger.error "Cannot connect to mySQL."
+    @sensors_enabled = false
+  ensure
+    con.close if con
+  end
+
   def sensors_enabled?
     SENSORS_ENABLED && @config[:sensors] && @config[:sensors][:enable] && @sensors_enabled
+  end
+
+  def sensors_db_exist?
+    con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
+    @sensors_enabled = true
+    true
+  rescue Mysql::Error => ex
+    MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
+    @sensors_enabled = false
+    false
+  ensure
+    con.close if con
   end
 
   def toggle_sensors_enabled
@@ -25,28 +55,40 @@ module MaziSensors
 
   def getAllAvailableSensors
     if @config[:general][:mode] == 'demo'
-      return [{type: 'sensehat', status: 'active', id: 1, nof_entries: 12}, {type: 'sht11', status: 'not found', id: 2, nof_entries: 0}]
+      return [{type: 'sensehat', status: 'active', id: 1, ip: '10.0.0.1', nof_entries: 12}, {type: 'sht11', status: 'not found', id: 2, ip: '10.0.0.1', nof_entries: 0}]
     end
-    # return [{type: "sht11", status: 'found', id: 1},{type: 'sensehat', status: 'not found', id: 2}]
-    sensors_con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
-    q = "SELECT * FROM type"
-    a = sensors_con.query(q)
-    status = {}
-    `sh /root/back-end/mazi-sense.sh -a`.split("\n").each {|line| status[line.split()[0]] = line.split()[1]}
+    con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     result = []
-    a.each_hash do |h|
-      # TODO add status finder
-      q2 = "SELECT * FROM sensor_#{h['id']}"
-      a2 = sensors_con.query(q2)
-      stat = status[h['name']].nil? ? 'not found' : status[h['name']]
-      result << {type: h['name'], status: stat, id: h['id'], nof_entries: a2.num_rows}
+    `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
+      line = line.split
+      q = "SELECT * FROM type WHERE ip = '#{line[2]}'"
+      a = con.query(q)
+      entry_exists = false
+      a.each_hash do |h|
+        if h['name'] == line[0] # this is the type
+          entry_exists = true
+          q2 = "SELECT * FROM sensor_#{h['id']}"
+          a2 = con.query(q2)
+          result << {id: h['id'], type: h['name'], ip: h['ip'], status: line[1], nof_entries: a2.num_rows}
+        end
+      end
+      unless entry_exists
+        con.query("INSERT INTO type(name, ip) VALUES('#{line[0]}', '#{line[2]}')")
+        a = con.query("SELECT * FROM type WHERE ip = '#{line[2]}'")
+        a.each_hash do |h|
+          if h['name'] == line[0]
+            con.query("CREATE TABLE IF NOT EXISTS sensor_#{h['id']}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+            result << {id: h['id'], type: h['name'], ip: h['ip'], status: line[1], nof_entries: 0}
+          end
+        end
+      end
     end
     return result
   rescue Mysql::Error => ex
     MaziLogger.debug "mySQL error: #{ex.inspect}"
-    return nil
+    return []
   ensure 
-    sensors_con.close if sensors_con
+    con.close if con
   end
 
   def getTemperatures(id, start_time=nil, end_time=nil)
