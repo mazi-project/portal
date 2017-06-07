@@ -129,6 +129,11 @@
             <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> Sensors</a>
           </li>
           <% end %>
+          <% if camera_enabled %>
+          <li <%= 'class="active"' if main_body == :index_camera %>>
+            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> Camera</a>
+          </li>
+          <% end %>
         </ul>
       </div>
       <!-- <div class="navbar navbar-fixed-bottom bot-nav">

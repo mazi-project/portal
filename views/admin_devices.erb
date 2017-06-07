@@ -42,17 +42,15 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th title="Sensor Name">Sensor</th>
                   <th title="Sensor Type">Type</th>
                   <th title="Sensor Status">Status</th>
-                  <th title="Number of measurements">Measurements</th>
+                  <th title="Number of measurements">Entries</th>
                   <th title="Actions that can be performed on the sensor" class='text-center'>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <% available_sensors.each do |sensor| %>
                 <tr>
-                  <td>Sensor_<%= sensor[:id] %></td>
                   <td><%= sensor[:type] %></td>
                   <td><%= sensor[:status] %></td>
                   <td><%= sensor[:nof_entries]%></td>
@@ -60,10 +58,10 @@
                      <div class="text-center">
                       <div class="btn-group pull-center">
                         <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="Start saving measurements" <%= 'disabled' if sensor[:status] == 'not found' || sensor[:status] == 'active' %>>
-                          <i class="fa fa-play"> Start</i>
+                          <i class="fa fa-play"></i>
                         </a>
                         <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="Delete all saved measurements">
-                          <i class="fa fa-remove"> Clear</i>
+                          <i class="fa fa-remove"></i>
                         </a>
                       </div>
                     </div>
@@ -86,7 +84,7 @@
     </div>
   </div>
 
-  <div class='col-md-12 col-lg-6' hidden>
+  <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Camera
@@ -102,6 +100,60 @@
               <div class="slider round enabled-camera-switch"></div>
             </label>
             <span class="device-enable-msg">Enable/disable the camera tab on user portal.</span>
+            <div class="row">
+              <div class='col-md-12'>
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th title="Type"></th>
+                      <th title="Link">Link</th>
+                      <th title="Number of media found">Files</th>
+                      <th title="Actions that can be performed on the sensor" class='text-center'>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Photos</td>
+                      <td><a href="<%= photos_link%>" target="_blank">Go</a></td>
+                      <td><%= nof_photos %></td>
+                      <td>
+                         <div class="text-center">
+                          <form action="/devices/camera/capture" method="post">
+                            <div class="btn-group pull-center">
+                              <button class="btn btn-success capture_image" type="submit" title="Capture Image"><i class="fa fa-camera"></i></button>
+                              <a class="btn btn-success start_capturing_images" data-toggle="modal" data-target="#start-capturing-images-modal" title="Start capturing images">
+                              <i class="fa fa-play"></i>
+                              </a>
+                              <a class="btn btn-danger delete_images" data-toggle="modal" data-target="#delete-images-modal" title="Delete all captured images">
+                              <i class="fa fa-remove"></i>
+                              </a>
+                            
+                            </div>
+                          </form>
+                        </div>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Video</td>
+                      <td><a href="<%= video_link%>" target="_blank">Go</a></td>
+                      <td><%= nof_videos %></td>
+                      <td>
+                         <div class="text-center">
+                          <div class="btn-group pull-center">
+                            <a class="btn btn-success start_video" data-toggle="modal" data-target="#start-capturing-video-modal" title="Start capturing video">
+                              <i class="fa fa-play"></i>
+                            </a>
+                            <a class="btn btn-danger delete_videos" data-toggle="modal" data-target="#delete-videos-modal" title="Delete all captured videos">
+                              <i class="fa fa-remove"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
         </div>
       </div> 
@@ -109,46 +161,23 @@
   </div>
 </div>
 
-<div class="modal fade" id="init-sensor-db-modal" role="dialog">
+<!-- start capturing images modal-->
+<div class="modal fade" id="start-capturing-images-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start Sensor Initiliazation</h4>
+        <h4 class="modal-title">Start Capturing Images</h4>
       </div>
       <div class="modal-body">
-        <form class="form-signin" action="/devices/sensors/init" method="post">
+        <form class="form-signin" action="/devices/camera/start_capturing" method="post">
           <div class="form-group">
-            <label for='root-password'>mySQL root user password:</label>
-            <input type="text" id='root-password' name="root-password" class="form-control" value="m@z1">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
-          </div>
-        </form></br>
-        <small>Warning: this procedure may last up to 10 minutes. The portal might be behaving unexpectedly in the meantime.</small>
-      </div>
-    </div>
-  </div>
-</div>
-
-<% available_sensors.each do |sensor| %>
-<!-- start sensing modal-->
-<div class="modal fade" id="start-sensing-modal-<%= sensor[:id] %>" role="dialog">
-  <div class="modal-dialog">
-    <!-- Modal content-->
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start Sensor Measurements</h4>
-      </div>
-      <div class="modal-body">
-        <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
-          <div class="form-group">
-            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <input type="hidden" name="type" value="photos">
             <label for='sensing_duration'>Duration (seconds):</label>
-            <input type="text" id='sensing_duration' name="duration" class="form-control" value="300" required autofocus>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="30" required autofocus>
             <label for='sensing_interval'>Interval (seconds):</label>
-            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30">
+            <input type="text" id='sensing_interval' name="interval" class="form-control" value="5">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
           </div>
         </form>
@@ -157,19 +186,19 @@
   </div>
 </div>
 
-<div class="modal fade" id="delete-sensing-measurements-modal-<%= sensor[:id] %>" role="dialog">
+<div class="modal fade" id="delete-images-modal" role="dialog">
   <div class="modal-dialog">
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete Sensor Measurements</h4>
+        <h4 class="modal-title">Delete All Photos</h4>
       </div>
       <div class="modal-body">
-        <form class="form-signin" action="/devices/<%= sensor[:type] %>/delete" method="post">
+        <form class="form-signin" action="/devices/camera/delete" method="post">
           <div class="form-group">
-            <input type="hidden" name="id" value="<%= sensor[:id] %>">
-            <p>Do you want to delete all saved measurements?</p>
+            <input type="hidden" name="type" value="photos">
+            <p>Do you want to delete all captured photos?</p>
             <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
           </div>
         </form>
@@ -177,4 +206,47 @@
     </div>
   </div>
 </div>
-<% end %>
+
+<!-- start capturing videos modal-->
+<div class="modal fade" id="start-capturing-video-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start Capturing Video</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/camera/capture_video" method="post">
+          <div class="form-group">
+            <input type="hidden" name="type" value="video">
+            <label for='sensing_duration'>Duration (seconds):</label>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="30" required autofocus>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete-videos-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete All Videos</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/camera/delete" method="post">
+          <div class="form-group">
+            <input type="hidden" name="type" value="video">
+            <p>Do you want to delete all captured videos?</p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

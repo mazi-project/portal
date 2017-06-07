@@ -7,6 +7,7 @@ require 'helpers/mazi_exec_cmd'
 require 'helpers/mazi_config'
 require 'mysql'
 require 'helpers/mazi_sensors'
+require 'helpers/mazi_camera'
 require 'thin'
 require 'json'
 require 'sequel'
@@ -17,6 +18,7 @@ class MaziApp < Sinatra::Base
   include Authorizer
   include MaziVersion
   include MaziSensors
+  include MaziCamera
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
   configure {set :show_exceptions, false}
@@ -39,6 +41,7 @@ class MaziApp < Sinatra::Base
     Sequel.connect('sqlite://database/inventory.db')
     require 'models'
     init_sensors
+    init_camera
   end
 
   error do |err|
@@ -73,6 +76,7 @@ class MaziApp < Sinatra::Base
     locals[:js]                      = []
     locals[:error_msg]               = nil
     locals[:sensors_enabled]         = sensors_enabled?
+    locals[:camera_enabled]          = camera_enabled?
     unless session['error'].nil?
       locals[:error_msg] = session["error"]
       session[:error] = nil
@@ -148,6 +152,17 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
+      erb :index_main, locals: locals
+    when 'index_camera'
+      session['notifications_read']            = [] if session['notifications_read'].nil?
+      locals[:main_body]                       = :index_camera
+      locals[:local_data][:notifications]      = Mazi::Model::Notification.all
+      locals[:local_data][:notifications_read] = session['notifications_read']
+      locals[:local_data][:config_data]        = @config[:portal_configuration]
+      locals[:local_data][:photos_link]        = @config[:camera][:photos_link]
+      locals[:local_data][:nof_photos]         = number_of_photos
+      locals[:local_data][:video_link]         = @config[:camera][:video_link]
+      locals[:local_data][:nof_videos]         = number_of_videos
       erb :index_main, locals: locals
     when 'setup'
       locals[:main_body] = :setup
@@ -276,6 +291,10 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
       locals[:local_data][:available_sensors] = getAllAvailableSensors
       locals[:local_data][:camera_enabled]    = false
+      locals[:local_data][:photos_link]       = @config[:camera][:photos_link]
+      locals[:local_data][:nof_photos]        = number_of_photos
+      locals[:local_data][:video_link]        = @config[:camera][:video_link]
+      locals[:local_data][:nof_videos]        = number_of_videos
       erb :admin_main, locals: locals
     when 'admin_set_date'
       locals[:main_body] = :admin_set_time
@@ -1136,9 +1155,6 @@ class MaziApp < Sinatra::Base
     end
   end
 
-
-
-
   post '/sensors/store/?' do
     request.body.rewind
     body = JSON.parse(request.body.read)
@@ -1181,8 +1197,6 @@ class MaziApp < Sinatra::Base
       session['error'] = "This portal runs on Demo mode! This action would have effected a device."
       redirect back
     end
-    # request.body.rewind
-    # body = JSON.parse(request.body.read)
 
     case device
     when 'sensors'
@@ -1194,9 +1208,23 @@ class MaziApp < Sinatra::Base
       end
     when 'camera'
       if action == 'toggle'
-        current_value = @config[:camera][:enable]
-        changeConfigFile("camera->enable", !current_value)
-        writeConfigFile
+        toggle_camera_enabled
+      elsif action == 'init'
+        initialize_camera_module
+        redirect back
+      elsif action == 'capture'
+        capture_image
+        redirect back
+      elsif action == 'start_capturing'
+        start_image_capturing(params['duration'], params['interval'])
+        redirect back
+      elsif action == 'capture_video'
+        start_video_capturing(params['duration'])
+        redirect back  
+      elsif action == 'delete'
+        clear_photos if params['type'] == 'photos'
+        clear_videos if params['type'] == 'videos'
+        redirect back
       end
     when 'sht11', 'sensehat'
       if action == 'start'
@@ -1212,4 +1240,3 @@ class MaziApp < Sinatra::Base
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
-

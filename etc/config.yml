@@ -26,6 +26,10 @@
 # - enable: true/force to enable/disable the sensors tab on the user portal
 # On the camera section:
 # - enable: true/force to enable/disable the camera tab on the user portal
+# - photos_folder: the target nextcloud photos folder
+# - photos_link: the target nextcloud link for photos
+# - video_folder: the target nextcloud video folder
+# - video_link: the target nextcloud link for video
 ---
 :general:
   :mode: normal
@@ -59,3 +63,7 @@
   :enable: false
 :camera:
   :enable: false
+  :photos_folder: '/var/www/html/nextcloud/data/admin/files/Photos/camera/photos'
+  :photos_link: 'http://local.mazizone.eu/nextcloud/index.php/apps/gallery/s/NsrU0nd8iBdp2Is'
+  :video_folder: '/var/www/html/nextcloud/data/admin/files/Photos/camera/video'
+  :video_link: 'http://local.mazizone.eu/nextcloud/index.php/apps/gallery/s/NsrU0nd8iBdp2Is'
