@@ -161,6 +161,54 @@
   </div>
 </div>
 
+<% available_sensors.each do |sensor| %>
+<!-- start sensing modal-->
+<div class="modal fade" id="start-sensing-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start Sensor Measurements</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <label for='sensing_duration'>Duration (seconds):</label>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="300" required autofocus>
+            <label for='sensing_interval'>Interval (seconds):</label>
+            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete-sensing-measurements-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete Sensor Measurements</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/<%= sensor[:type] %>/delete" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <p>Do you want to delete all saved measurements?</p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
 <!-- start capturing images modal-->
 <div class="modal fade" id="start-capturing-images-modal" role="dialog">
   <div class="modal-dialog">
