@@ -156,6 +156,7 @@ class MaziApp < Sinatra::Base
     when 'index_camera'
       session['notifications_read']            = [] if session['notifications_read'].nil?
       locals[:main_body]                       = :index_camera
+      locals[:js]                              << "js/index_camera.js"
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
@@ -163,6 +164,7 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:nof_photos]         = number_of_photos
       locals[:local_data][:video_link]         = @config[:camera][:video_link]
       locals[:local_data][:nof_videos]         = number_of_videos
+      locals[:local_data][:rpi_files]          = rpi_saved_files
       erb :index_main, locals: locals
     when 'setup'
       locals[:main_body] = :setup
@@ -295,6 +297,7 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:nof_photos]        = number_of_photos
       locals[:local_data][:video_link]        = @config[:camera][:video_link]
       locals[:local_data][:nof_videos]        = number_of_videos
+      locals[:local_data][:media_link]        = rpi_base_link
       erb :admin_main, locals: locals
     when 'admin_set_date'
       locals[:main_body] = :admin_set_time
