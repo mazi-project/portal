@@ -88,11 +88,21 @@ module MaziCamera
   end
 
   def number_of_photos
-    `ls #{@config[:camera][:photos_folder]}`.split.size
+    response = 0
+    `ls /var/www/html/rpi_cam/media/`.split().each do |file|
+      next if file.include? ".th."
+      response += 1 if file.split('.')[1] == 'jpg'
+    end
+    response
   end
 
   def number_of_videos
-    `ls #{@config[:camera][:video_folder]}`.split.size
+    response = 0
+    `ls /var/www/html/rpi_cam/media/`.split().each do |file|
+      next if file.include? ".th."
+      response += 1 if file.split('.')[1] == '.mp4'
+    end
+    response
   end
 
   def clear_photos

@@ -63,7 +63,3 @@
   :enable: false
 :camera:
   :enable: false
-  :photos_folder: '/var/www/html/nextcloud/data/admin/files/Photos/camera/photos'
-  :photos_link: 'http://local.mazizone.eu/nextcloud/index.php/apps/gallery/s/NsrU0nd8iBdp2Is'
-  :video_folder: '/var/www/html/nextcloud/data/admin/files/Photos/camera/video'
-  :video_link: 'http://local.mazizone.eu/nextcloud/index.php/apps/gallery/s/NsrU0nd8iBdp2Is'

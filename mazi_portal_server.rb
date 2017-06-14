@@ -160,9 +160,7 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:notifications]      = Mazi::Model::Notification.all
       locals[:local_data][:notifications_read] = session['notifications_read']
       locals[:local_data][:config_data]        = @config[:portal_configuration]
-      locals[:local_data][:photos_link]        = @config[:camera][:photos_link]
       locals[:local_data][:nof_photos]         = number_of_photos
-      locals[:local_data][:video_link]         = @config[:camera][:video_link]
       locals[:local_data][:nof_videos]         = number_of_videos
       locals[:local_data][:rpi_files]          = rpi_saved_files
       erb :index_main, locals: locals
@@ -292,7 +290,7 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
       locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
       locals[:local_data][:available_sensors] = getAllAvailableSensors
-      locals[:local_data][:camera_enabled]    = false
+      locals[:local_data][:camera_enabled]    = @config[:camera][:enable]
       locals[:local_data][:photos_link]       = @config[:camera][:photos_link]
       locals[:local_data][:nof_photos]        = number_of_photos
       locals[:local_data][:video_link]        = @config[:camera][:video_link]

@@ -14,21 +14,24 @@
     <div class="panel panel-default">
       <div class="panel-heading">Media Library</div>
       <div class="panel-body">
-        
-        <div id="gallery" style="display:none;">
-          <% rpi_files[:photos].each do |file| %>
-            <img src="<%= "#{file}.i#{file.split('_')[2]}.th.jpg" %>"
-            data-image="<%= file %>"
-            data-description="">
-          <% end %>
-          <% rpi_files[:videos].each do |file| %>
-          <img alt="Html5 Video"
-            src="<%= "#{file}.v#{file.split('_')[2]}.th.jpg" %>"
-            data-type="html5video"
-            data-videomp4="<%= file %>"
-            data-description="">
-          <% end %>
-        </div>
+      <% if rpi_files[:photos].empty? && rpi_files[:videos].empty? %>
+        <p>Currently, there are no images or videos found in the library!</p>
+      <% else %>
+      <div id="gallery" style="display:none;">
+        <% rpi_files[:photos].each do |file| %>
+          <img src="<%= "#{file}.i#{file.split('_')[2]}.th.jpg" %>"
+          data-image="<%= file %>"
+          data-description="">
+        <% end %>
+        <% rpi_files[:videos].each do |file| %>
+        <img alt="Html5 Video"
+          src="<%= "#{file}.v#{file.split('_')[2]}.th.jpg" %>"
+          data-type="html5video"
+          data-videomp4="<%= file %>"
+          data-description="">
+        <% end %>
+      </div>
+      <% end %>
       </div>
     </div>
   </div>
