@@ -22,6 +22,14 @@ module MaziCamera
     CAMERA_ENABLED && @config[:camera] && @config[:camera][:enable]
   end
 
+  def camera_installed?
+    o = `vcgencmd get_camera`
+    o.split(' ').each do |line|
+      return false if line.split('=')[1] == '0'
+    end
+    true
+  end
+
   def rpi_enabled?
     ['/usr/src/RPi_Cam_Web_Interface/', '/var/www/html/rpi_cam/', '/run/shm/mjpeg/status_mjpeg.txt'].each do |item|
       if item[-1] == '/'
@@ -89,6 +97,7 @@ module MaziCamera
 
   def number_of_photos
     response = 0
+    return 0 unless File.directory?('/var/www/html/rpi_cam/media/')
     `ls /var/www/html/rpi_cam/media/`.split().each do |file|
       next if file.include? ".th."
       response += 1 if file.split('.')[1] == 'jpg'
@@ -98,6 +107,7 @@ module MaziCamera
 
   def number_of_videos
     response = 0
+    return 0 unless File.directory?('/var/www/html/rpi_cam/media/')
     `ls /var/www/html/rpi_cam/media/`.split().each do |file|
       next if file.include? ".th."
       response += 1 if file.split('.')[1] == '.mp4'

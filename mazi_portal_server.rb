@@ -163,6 +163,8 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:nof_photos]         = number_of_photos
       locals[:local_data][:nof_videos]         = number_of_videos
       locals[:local_data][:rpi_files]          = rpi_saved_files
+      locals[:local_data][:camera_installed]   = camera_installed?
+      locals[:local_data][:rpi_enabled]        = rpi_enabled?
       erb :index_main, locals: locals
     when 'setup'
       locals[:main_body] = :setup
@@ -291,11 +293,13 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
       locals[:local_data][:available_sensors] = getAllAvailableSensors
       locals[:local_data][:camera_enabled]    = @config[:camera][:enable]
+      locals[:local_data][:camera_installed]  = camera_installed?
       locals[:local_data][:photos_link]       = @config[:camera][:photos_link]
       locals[:local_data][:nof_photos]        = number_of_photos
       locals[:local_data][:video_link]        = @config[:camera][:video_link]
       locals[:local_data][:nof_videos]        = number_of_videos
       locals[:local_data][:media_link]        = rpi_base_link
+      locals[:local_data][:rpi_enabled]       = rpi_enabled?
       erb :admin_main, locals: locals
     when 'admin_set_date'
       locals[:main_body] = :admin_set_time

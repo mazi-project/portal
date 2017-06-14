@@ -15,7 +15,7 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to controll the various supported devices that are connected to this Mazizone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
+      You can use the tools bellow to control the various supported devices that are connected to this Mazizone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
     </p>
   </div>
   <div class='col-md-12 col-lg-6'>
@@ -152,9 +152,17 @@
                     </tr>
                   </tbody>
                 </table> -->
-                <div class="embed-responsive embed-responsive-4by3">
-                  <iframe src="<%= media_link %>"></iframe>
-                </div>
+                <% if camera_installed %>
+                  <% if rpi_enabled %>
+                  <div class="embed-responsive embed-responsive-4by3">
+                    <iframe src="<%= media_link %>"></iframe>
+                  </div>
+                  <% else %>
+                    <p>The Camera module is not properly installed on this image! Please use an image greater than 1.7.2 that is properly configured for this purpose.</p>
+                  <% end %>
+                <% else %>
+                  <p>There is no Camera connected to this MAZIzone!</p>
+                <% end %>
               </div>
             </div>
           </div>

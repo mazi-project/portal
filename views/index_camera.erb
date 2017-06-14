@@ -7,7 +7,13 @@
   <div class="col-lg-6 col-md-12">
     <div class="panel panel-default">
       <div class="panel-heading">Live Video Streaming</div>
-      <div class="panel-body"><div><img class="img-responsive center-block" id="mjpeg_dest"/></div></div>
+      <div class="panel-body">
+        <% if camera_installed && rpi_enabled %>
+        <div><img class="img-responsive center-block" id="mjpeg_dest"/></div>
+        <% else %>
+        <p>Currently, there is no camera properly installed on this Mazizone!</p>
+        <% end %>
+      </div>
     </div>
   </div>
   <div class="col-lg-6 col-md-12">
