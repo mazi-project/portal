@@ -121,7 +121,6 @@ class MaziApp < Sinatra::Base
       ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       storage = ex.exec_command.first
       locals[:local_data][:storage] = storage
-      puts locals
       erb :index_main, locals: locals
     when 'index_sensors'
       MaziLogger.debug "params: #{params.inspect}"
@@ -389,7 +388,7 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode set app"
-      session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the mazizone."
+      session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the MAZI Zone."
       redirect back
     end
     ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
@@ -1099,7 +1098,7 @@ class MaziApp < Sinatra::Base
     end
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode exec script"
-      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarted'} this Mazizone."
+      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarted'} this MAZI Zone."
       redirect back
     end
 

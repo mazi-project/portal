@@ -1,15 +1,17 @@
 <script type="text/javascript">
   var temperature_data = {};
   var humidity_data    = {};
+  <% no_sensor_data = true %>
   <% sensors.each do |sensor| %>
     temperature_data[<%=sensor[:id]%>] = JSON.parse('<%= sensor[:temperatures].to_json %>');
     humidity_data[<%=sensor[:id]%>]    = JSON.parse('<%= sensor[:humidity].to_json %>');
+    <% no_sensor_data = false unless sensor[:temperatures].nil? || sensor[:temperatures].empty? || sensor[:humidity].nil? || sensor[:humidity].empty? %>
   <% end %>
 </script>
 
 <div class="jumbotron">
     <h1>Sensor Measurements</h1>
-    <p>On this page you can see the measurements of various sensors connected to this Mazizone. You can also use the button bellow to request for measurements from a specific period.</p>
+    <p>On this page you can see the measurements of various sensors connected to this MAZI Zone. You can also use the button bellow to request for measurements from a specific period.</p>
     <p>
       <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
         <i class="fa fa-calendar"> Choose a timeslot</i>
@@ -17,34 +19,58 @@
     </p>
 </div>
 
-<% sensors.each do |sensor| %>
-<div class="col-lg-6 col-sm-12">
-  <div class="panel panel-green">
-    <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature for <%= sensor[:type]%></h3>
-    </div>
-    <div class="panel-body">
-      <div id="morris-line-chart-temp-<%= sensor[:id]%>"></div>
-      <div class="text-right">
-        <a class="export-temperatures" id='export-temperatures-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+<% if sensors.nil? || sensors.empty? %>
+  <div class="col-lg-12 col-sm-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-exclamation"></i> Warning</h3>
+      </div>
+      <div class="panel-body">
+        <p>Warning: Cannot detect a sensor device Connected to this MAZI Zone.</p>
       </div>
     </div>
   </div>
-</div>
+<% elsif no_sensor_data  %>
+  <div class="col-lg-12 col-sm-12">
+    <div class="panel panel-warning">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-exclamation"></i> Warning</h3>
+      </div>
+      <div class="panel-body">
+        <p>Warning: There are no sensor data stored on this MAZI Zone. A system administrator can enable to collection of sensor data.</p>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <% sensors.each do |sensor| %>
+  <div class="col-lg-6 col-sm-12">
+    <div class="panel panel-green">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature for <%= sensor[:type]%></h3>
+      </div>
+      <div class="panel-body">
+        <div id="morris-line-chart-temp-<%= sensor[:id]%>"></div>
+        <div class="text-right">
+          <a class="export-temperatures" id='export-temperatures-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+        </div>
+      </div>
+    </div>
+  </div>
 
-<div class="col-lg-6 col-sm-12">
-  <div class="panel panel-blue">
-    <div class="panel-heading">
-    <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity for <%= sensor[:type]%></h3>
-    </div>
-    <div class="panel-body">
-      <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
-      <div class="text-right">
-        <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+  <div class="col-lg-6 col-sm-12">
+    <div class="panel panel-blue">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity for <%= sensor[:type]%></h3>
+      </div>
+      <div class="panel-body">
+        <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
+        <div class="text-right">
+          <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+        </div>
       </div>
     </div>
   </div>
-</div>
+  <% end %>
 <% end %>
 
 <!-- choose timeslot modal-->

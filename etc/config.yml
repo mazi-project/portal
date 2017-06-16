@@ -1,8 +1,8 @@
-# This is the main configuration file for the mazizone portal.
+# This is the main configuration file for the MAZI Zone portal.
 # If you manually change some values on this file a server restart is
 # mandatory for the changes to take effect.
 # On the general section:
-# - mode: (normal/demo) mode determines if there is an actual mazizone 
+# - mode: (normal/demo) mode determines if there is an actual MAZI Zone 
 #         or this runs just for demo purposes
 # On the admin section:
 # - admin_username: admin username for the admin panel
@@ -48,12 +48,12 @@
   - date
   - ls
 :portal_configuration:
-  :title: Mazizone Portal
-  :applications_title: Mazizone
+  :title: MAZI Zone Portal
+  :applications_title: MAZI Zone
   :applications_subtitle: Applications
   :applications_welcome_text: |-
-    Welcome to the Mazizone Applications Portal, please
-        use the links bellow to navigate to the applications offered by this Mazizone.
+    Welcome to the MAZI Zone Applications Portal, please
+        use the links bellow to navigate to the applications offered by this MAZI Zone.
   :applications_background_image: mazi-background.jpg
   :side_panel_color: '222'
   :side_panel_active_color: 080808

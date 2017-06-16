@@ -10,8 +10,10 @@ module MaziCamera
 
   def initialize_rpi
     MaziLogger.debug "Initializing RPI"
-    `cd /tmp; /usr/src/RPi_Cam_Web_Interface/stop.sh`
-    `cd /tmp; /usr/src/RPi_Cam_Web_Interface/start.sh`
+    if camera_installed? && rpi_enabled?
+      `cd /tmp; /usr/src/RPi_Cam_Web_Interface/stop.sh > /dev/null 2>&1`
+      `cd /tmp; /usr/src/RPi_Cam_Web_Interface/start.sh > /dev/null 2>&1`
+    end
   end
 
   def rpi_base_link

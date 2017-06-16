@@ -4,7 +4,6 @@ $( document ).ready(function() {
       url: '/devices/sensors/toggle',
       type: 'POST',
       success: function(result) {
-        console.log(result);
         error = JSON.parse(result).error;
         if (error != null){
           location.reload();
@@ -18,7 +17,6 @@ $( document ).ready(function() {
       url: '/devices/camera/toggle',
       type: 'POST',
       success: function(result) {
-        console.log(result);
         error = JSON.parse(result).error;
         if (error != null){
           location.reload();

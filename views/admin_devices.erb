@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      Mazizone <small>Devices</small>
+      MAZI Zone <small>Devices</small>
     </h1>
   </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to control the various supported devices that are connected to this Mazizone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
+      You can use the tools bellow to control the various supported devices that are connected to this MAZI Zone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
     </p>
   </div>
   <div class='col-md-12 col-lg-6'>
@@ -75,7 +75,7 @@
         <% else %>
         <div class="row">
           <div class="col-lg-12">
-            <p>The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this Mazizone, please use the button bellow to initialize this module.</p>
+            <p>The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this MAZI Zone, please use the button bellow to initialize this module.</p>
             <button class="btn btn-success pull-right init-sensor-db" data-toggle="modal" data-target="#init-sensor-db-modal" title="Start sensors initiliazation">Initiliaze</button>
           </div>
         </div>
@@ -102,56 +102,6 @@
             <span class="device-enable-msg">Enable/disable the camera tab on user portal.</span>
             <div class="row">
               <div class='col-md-12'>
-                <!-- <table class="table">
-                  <thead>
-                    <tr>
-                      <th title="Type"></th>
-                      <th title="Link">Link</th>
-                      <th title="Number of media found">Files</th>
-                      <th title="Actions that can be performed on the sensor" class='text-center'>Actions</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>Photos</td>
-                      <td><a href="<%= photos_link%>" target="_blank">Go</a></td>
-                      <td><%= nof_photos %></td>
-                      <td>
-                         <div class="text-center">
-                          <form action="/devices/camera/capture" method="post">
-                            <div class="btn-group pull-center">
-                              <button class="btn btn-success capture_image" type="submit" title="Capture Image"><i class="fa fa-camera"></i></button>
-                              <a class="btn btn-success start_capturing_images" data-toggle="modal" data-target="#start-capturing-images-modal" title="Start capturing images">
-                              <i class="fa fa-play"></i>
-                              </a>
-                              <a class="btn btn-danger delete_images" data-toggle="modal" data-target="#delete-images-modal" title="Delete all captured images">
-                              <i class="fa fa-remove"></i>
-                              </a>
-                            
-                            </div>
-                          </form>
-                        </div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>Video</td>
-                      <td><a href="<%= video_link%>" target="_blank">Go</a></td>
-                      <td><%= nof_videos %></td>
-                      <td>
-                         <div class="text-center">
-                          <div class="btn-group pull-center">
-                            <a class="btn btn-success start_video" data-toggle="modal" data-target="#start-capturing-video-modal" title="Start capturing video">
-                              <i class="fa fa-play"></i>
-                            </a>
-                            <a class="btn btn-danger delete_videos" data-toggle="modal" data-target="#delete-videos-modal" title="Delete all captured videos">
-                              <i class="fa fa-remove"></i>
-                            </a>
-                          </div>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table> -->
                 <% if camera_installed %>
                   <% if rpi_enabled %>
                   <div class="embed-responsive embed-responsive-4by3">
@@ -161,7 +111,7 @@
                     <p>The Camera module is not properly installed on this image! Please use an image greater than 1.7.2 that is properly configured for this purpose.</p>
                   <% end %>
                 <% else %>
-                  <p>There is no Camera connected to this MAZIzone!</p>
+                  <p>There is no Camera connected to this MAZI Zone!</p>
                 <% end %>
               </div>
             </div>
