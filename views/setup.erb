@@ -87,16 +87,24 @@
                     <div class="tab-pane active" role="tabpanel" id="step1">
                       <h3>Admin Password Setup</h3>
                       <p>Use the form bellow the set the admin password for the MAZI Zone adminstration panel.</p>
-                      <input type="password" name="password" class="form-control" placeholder="New Password" autofocus>
+                      <input type="password" name="current-password" class="form-control" placeholder="Current Password" autofocus>
+                      <input type="password" name="password" class="form-control" placeholder="New Password">
                       <input type="password" name="confirm-password" class="form-control" placeholder="Confirm Password">
+                      <small>*hint: if this is a new MAZI Zone the current password is 1234</small>
                       <ul class="list-inline pull-right">
                         <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
                       </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2" >
                       <h3>Date/Time setup</h3>
-                      <p>Please use the form bellow to change the MAZI Zone Date/Time.</p>
+                      <p>Please use the form bellow to change Date/Time, as well as the timezone of this MAZI Zone.</p>
                       <input id="datetimepicker" type="text" name='date' class="form-control">
+                      <select class="form-control" name='timezone'>
+                        <option value=''></option>
+                        <% timezones.each do |timezone| %>
+                          <option value='<%= timezone %>'><%= timezone %></option>
+                        <% end %>
+                      </select>
                       <ul class="list-inline pull-right" style='margin-top: 10px;'>
                         <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
                         <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
