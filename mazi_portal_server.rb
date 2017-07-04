@@ -248,6 +248,13 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
       locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
       locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+      ex4 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
+      router_stat = ex4.exec_command.first.split
+      locals[:local_data][:net_info][:owrt_router_available] = router_stat.last
+      ex5 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-w'], @config[:scripts][:enabled_scripts])
+      cur_out = ex5.exec_command.first.split
+      locals[:local_data][:net_info][:current_wifi_interface] = cur_out[1]
+      puts locals.inspect
       erb :admin_main, locals: locals
     when 'admin_configuration'
       unless authorized?
@@ -288,6 +295,7 @@ class MaziApp < Sinatra::Base
         redirect '/admin_login'
       end
       locals[:js] << "js/admin_devices.js"
+      locals[:js] << "js/jquery.datetimepicker.min.js"
       locals[:main_body] = :admin_devices
       locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
       locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
@@ -768,6 +776,15 @@ class MaziApp < Sinatra::Base
         end
       end
       args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
+    when 'mazi-router.sh'
+      args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        session['error'] = "This portal runs on Demo mode! This action would have changed the Access Point Device." 
+        redirect '/admin_network'
+      end
+      args << '-a' if params['action'] == 'activate'
+      args << '-d' if params['action'] == 'deactivate'
     else
       args = []
     end
@@ -1233,7 +1250,24 @@ class MaziApp < Sinatra::Base
       end
     when 'sht11', 'sensehat'
       if action == 'start'
-        start_sensing(device, params['duration'], params['interval'])
+        duration = 0
+        if !params['duration'].nil? && !params['duration'].empty?
+          duration = params['duration']
+        elsif !params['until_date'].nil? || !params['until_date'].empty?
+          dt_now = DateTime.now
+          dt_target = DateTime.parse(params['until_date'])
+          duration = ((dt_target - dt_now) * 24 * 60 * 60).to_i
+        else
+          MaziLogger.debug "Sensing proccedure did not start. You need to specify either a duration or an end date."
+          session['error'] = "Sensing proccedure did not start. You need to specify either a duration or an end date."
+          redirect back
+        end
+        unless duration > 0
+          MaziLogger.debug "Duration cannot be zero or negative."
+          session['error'] = "Duration cannot be zero or negative."
+          redirect back
+        end
+        start_sensing(device, duration, params['interval'])
         redirect back
       elsif action == 'delete'
         delete_measurements(params['id'])

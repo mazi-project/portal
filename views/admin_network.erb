@@ -107,7 +107,7 @@
 </div>
 
 <div class="row">
-  <div class='col-lg-3 col-md-5'>
+  <div class='col-lg-4 col-md-6'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Internet Network Mode</div>
@@ -124,7 +124,7 @@
   </div>
   <% unless net_info[:second_antenna] == 'inactive' %> 
   <% status = net_info[:second_antenna] == 'active ESSID:off/any' ? 'Disconnected' : net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
-  <div class='col-lg-3 col-md-5'>
+  <div class='col-lg-4 col-md-6'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Connect to Wi-Fi Network</div>
@@ -139,7 +139,7 @@
     </div>
   </div>
   <% else %>
-  <div class='col-lg-3 col-md-5'>
+  <div class='col-lg-4 col-md-6'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Connect to Wi-Fi Network</div>
@@ -149,6 +149,47 @@
           <small>Please plugin an extra USB Wi-Fi dongle to your rasberry pi to enable this feature. Suggested USB dongles <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a></small>
         </div>
         <div class="pull-right"><i class="fa fa-fw fa-5x fa-wifi"></i></br><button class="btn btn-primary pull-right connect-btn" data-toggle="modal" data-target="#connect-ssid-modal" disabled>Connect</button></div>
+      </div> 
+    </div>
+  </div>  
+  <% end %>
+  <% if net_info[:owrt_router_available] == 'available' %> 
+  <% current_wifi_if = net_info[:current_wifi_interface] == 'Raspberry' ? 'Raspberry' : "External Router" %>
+  <% action = 'activate' if net_info[:current_wifi_interface] == 'Raspberry' %>
+  <% action = 'deactivate' if net_info[:current_wifi_interface] == 'OpenWrt' %>
+  <% action = 'deactivate' if net_info[:current_wifi_interface].nil?         %>
+  <div class='col-lg-4 col-md-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Wi-Fi Access Point</div>
+      </div> 
+      <div class="panel-body">
+        <div class="col-xs-6 text-left"> 
+          <h2 class="no-margins"><%= current_wifi_if %></h2>
+          <small>Wi-Fi Access Point in use</small></br>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-link"></i></br>
+          <form action="/exec" method="post">
+            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="cmd" value='mazi-router.sh'>
+            <input type="hidden" name="action" value='<%= action %>' required>
+            <button class="btn btn-primary pull-right connect-btn">Toggle Device</button>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
+  <% else %>
+  <div class='col-lg-4 col-md-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Wi-Fi Access Point</div>
+      </div> 
+      <div class="panel-body">
+        <div class="col-xs-6 text-left"> 
+          <small>Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your rasberry pi and toggle between devices. Suggested devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a></small>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-link"></i></br><button class="btn btn-primary pull-right connect-btn" disabled>Toggle Device</button></div>
       </div> 
     </div>
   </div>  

@@ -183,13 +183,16 @@
         <h4 class="modal-title">Start Sensor Measurements</h4>
       </div>
       <div class="modal-body">
+        <p>Please enter a Duration or a Date on the Calendar to define a timeslot in which the sensor will start taking measurements. Also, please use the Interval to define the frequency of the measurements.</p>
         <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= sensor[:id] %>">
             <label for='sensing_duration'>Duration (seconds):</label>
-            <input type="text" id='sensing_duration' name="duration" class="form-control" value="300" required autofocus>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="" autofocus>
+            <label for='datetimepicker'>Calendar (Date):</label>
+            <input id="datetimepicker" type="text" name='until_date' class="form-control">
             <label for='sensing_interval'>Interval (seconds):</label>
-            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30">
+            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30" required>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
           </div>
         </form>
