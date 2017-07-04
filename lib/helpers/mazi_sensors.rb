@@ -172,7 +172,6 @@ module MaziSensors
   
     sensors_con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     q = "TRUNCATE sensor_#{sensor_id}"
-    puts q
     sensors_con.query(q)
 
   rescue Mysql::Error => ex

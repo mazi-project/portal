@@ -121,7 +121,6 @@ class MaziApp < Sinatra::Base
       ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
       storage = ex.exec_command.first
       locals[:local_data][:storage] = storage
-      puts locals
       erb :index_main, locals: locals
     when 'index_sensors'
       MaziLogger.debug "params: #{params.inspect}"
@@ -170,6 +169,7 @@ class MaziApp < Sinatra::Base
       locals[:main_body] = :setup
       locals[:js] << "js/setup.js"
       locals[:js] << "js/jquery.datetimepicker.min.js"
+      locals[:timezones] = all_supported_timezones
       erb :setup, locals: locals
     when 'admin'
       redirect 'admin_dashboard'
@@ -315,6 +315,7 @@ class MaziApp < Sinatra::Base
       locals[:js] << "js/jquery.datetimepicker.min.js"
       locals[:js] << "js/admin_set_date.js"
       locals[:main_body] = :admin_set_date
+      locals[:local_data][:timezones] = all_supported_timezones
       erb :admin_main, locals: locals
     when 'admin_change_password'
       unless authorized?
@@ -397,10 +398,15 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode set app"
-      session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the mazizone."
+      session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the MAZI Zone."
       redirect back
     end
-    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    unless params['date'].nil? || params['date'].empty?
+      ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+    end
+    unless params['timezone'].nil? || params['timezone'].empty?
+      update_timezone(params['timezone'])
+    end
     lines = ex.exec_command
     redirect '/admin'
   end
@@ -1049,6 +1055,10 @@ class MaziApp < Sinatra::Base
       session['error'] = "This portal runs on Demo mode! This action would have initiated the setup mechanism."
       redirect '/admin'
     end
+    if params['current-password'].nil? || params['current-password'].empty?
+      session['error'] = "Field Current Password is mandatory! Please try again."
+      redirect '/setup'
+    end
     if params['password'].nil? || params['password'].empty?
       session['error'] = "Field Password is mandatory! Please try again."
       redirect '/setup'
@@ -1065,16 +1075,22 @@ class MaziApp < Sinatra::Base
       session['error'] = "Password 1234 cannot be used! Please try again."
       redirect '/setup'
     end
-    if params['date'].nil? || params['date'].empty?
-      session['error'] = "Field Date is mandatory! Please try again."
+    unless valid_password?(params['current-password'])
+      session['error'] = "Current Password missmatch! Please try again."
       redirect '/setup'
     end
 
     changeConfigFile("admin->admin_password", params['password'])
     writeConfigFile
 
-    ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
-    lines = ex.exec_command
+    unless params['date'].nil? || params['date'].empty?
+      ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])
+      lines = ex.exec_command
+    end
+
+    unless params['timezone'].nil? || params['timezone'].empty?
+      update_timezone(params['timezone'])
+    end
 
     unless params['ssid'].nil? || params['ssid'].empty?
       env = 'sh'
@@ -1116,7 +1132,7 @@ class MaziApp < Sinatra::Base
     end
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode exec script"
-      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarted'} this Mazizone."
+      session['error'] = "This portal runs on Demo mode! This action would have #{action == 'shutdown' ? 'shutted down' : 'restarted'} this MAZI Zone."
       redirect back
     end
 

@@ -66,19 +66,16 @@ $( document ).ready(function() {
 
   $('.del_app').click(function(){
     confirm_element_id = $(this).attr('id').split('_').pop();
-    console.log(confirm_element_id);
     $( "#delete-dialog-confirm" ).dialog( "open" );
   });
 
   $('.del_app_inst').click(function(){
     confirm_element_id = $(this).attr('id').split('_').pop();
-    console.log(confirm_element_id);
     $( "#delete-instance-dialog-confirm" ).dialog( "open" );
   });
 
   $('.enabled-switch').click(function(){
     var appId = $(this).attr('id').split('_').pop();
-    console.log(appId);
     $.ajax({
       url: '/application/' + appId,
       type: 'PUT',
@@ -94,7 +91,6 @@ $( document ).ready(function() {
 
   $('.enabled-instance-switch').click(function(){
     var appId = $(this).attr('id').split('_').pop();
-    console.log(appId);
     $.ajax({
       url: '/application/' + appId + '/instance/',
       type: 'PUT',
@@ -119,7 +115,6 @@ $( document ).ready(function() {
       success: function(result) {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
-        console.log(result);
         if (error != null){
           location.reload();
         }
@@ -141,7 +136,6 @@ $( document ).ready(function() {
       success: function(result) {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
-        console.log(result);
         if (error != null){
           location.reload();
         }

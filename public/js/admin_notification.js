@@ -1,5 +1,4 @@
 $( document ).ready(function() {
-  console.log( "ready!" );
   var confirm_element_id = null;
 
   $( "#delete-dialog-confirm" ).dialog({
@@ -35,18 +34,15 @@ $( document ).ready(function() {
 
   $('.del_notification').click(function(){
     confirm_element_id = $(this).attr('id').split('_').pop();
-    console.log(confirm_element_id);
     $( "#delete-dialog-confirm" ).dialog( "open" );
   });
 
   $('.enabled-switch').click(function(){
     var appId = $(this).attr('id').split('_').pop();
-    console.log(appId);
     $.ajax({
       url: '/notification/' + appId,
       type: 'PUT',
       success: function(result) {
-        console.log(result);
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
