@@ -45,6 +45,7 @@
   - mazi-app.sh
   - mazi-stat.sh
   - mazi-router.sh
+  - mazi-domain.sh
   - antenna.sh
   - date
   - ls

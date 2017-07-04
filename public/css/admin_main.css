@@ -337,6 +337,10 @@ ul.alert-dropdown {
   padding-right: 8px;
 }
 
+.change-conf{
+  margin-right: 15px;
+}
+
 .switch {
   position: relative;
   display: inline-block;
@@ -427,8 +431,20 @@ input:checked + .slider:before {
   margin-left: 5px;
 }
 
+.mode-btn{
+  margin-right: 11px;
+}
+
 .connect-btn{
-  margin-right: 8px;
+  margin-right: 7px;
+}
+
+.toggle-ap-btn{
+  margin-right: 10px;
+}
+
+.domain-btn{
+  margin-right: 12px;
 }
 
 .panel-body > div > div:nth-child(2) > h2{

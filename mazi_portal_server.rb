@@ -254,6 +254,9 @@ class MaziApp < Sinatra::Base
       ex5 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-w'], @config[:scripts][:enabled_scripts])
       cur_out = ex5.exec_command.first.split
       locals[:local_data][:net_info][:current_wifi_interface] = cur_out[1]
+      ex6 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
+      cur_out = ex6.exec_command.first.split
+      locals[:local_data][:net_info][:domain] = cur_out[1]
       puts locals.inspect
       erb :admin_main, locals: locals
     when 'admin_configuration'
@@ -791,6 +794,14 @@ class MaziApp < Sinatra::Base
       end
       args << '-a' if params['action'] == 'activate'
       args << '-d' if params['action'] == 'deactivate'
+    when 'mazi-domain.sh'
+      args = []
+      if @config[:general][:mode] == 'demo'
+        MaziLogger.debug "Demo mode exec script"
+        session['error'] = "This portal runs on Demo mode! This action would have changed the Portal's Domain." 
+        redirect '/admin_network'
+      end
+      args << "-d #{params['domain']}" unless params['domain'].nil? || params['domain'].empty?
     else
       args = []
     end
