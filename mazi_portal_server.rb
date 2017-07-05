@@ -1008,7 +1008,7 @@ class MaziApp < Sinatra::Base
   end
 
   post '/admin_change_username' do
-    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    MaziLogger.debug "request: post/admin_change_username from ip: #{request.ip} params: #{params.inspect}"
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode change username"
       session['error'] = "This portal runs on Demo mode! This action would have changed the admin username."
@@ -1032,7 +1032,7 @@ class MaziApp < Sinatra::Base
   end
 
   post '/admin_change_password' do
-    MaziLogger.debug "request: post/snapshot from ip: #{request.ip} params: #{params.inspect}"
+    MaziLogger.debug "request: post/admin_change_password from ip: #{request.ip} params: #{params.inspect}"
     if params['password'] == '1234'
       session['error'] = "Password 1234 cannot be used! Please try again."
       redirect '/admin_change_password'
