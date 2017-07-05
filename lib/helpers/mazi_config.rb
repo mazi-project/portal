@@ -254,7 +254,11 @@ module MaziConfig
             `mongoimport --db letterbox --collection submissions --drop --file /tmp/#{entry.name}`
             `rm /tmp/#{entry.name}`
           else
-            File.delete("#{path}/#{entry.name}") if File.exist?("#{path}/#{entry.name}")
+            if File.directory?("#{path}/#{entry.name}")
+              FileUtils.rm_rf("#{path}/#{entry.name}")
+            elsif File.exist?("#{path}/#{entry.name}")
+              File.delete("#{path}/#{entry.name}") 
+            end
             entry.extract("#{path}/#{entry.name}")
           end
         end
