@@ -284,7 +284,7 @@ module MaziConfig
     oldfile = YAML.load_file '/etc/mazi/config.yml.bu'
     excluded_keys = [:admin, :scripts]
     newfile.keys.each do |key|
-      next if excluded_keys.inlcude? key
+      next if excluded_keys.include? key
       newfile[key].merge! oldfile[key] unless oldfile[key].nil? || oldfile[key].empty?
     end
 
