@@ -1279,7 +1279,7 @@ class MaziApp < Sinatra::Base
       if action == 'start'
         duration = 0
         if !params['duration'].nil? && !params['duration'].empty?
-          duration = params['duration']
+          duration = params['duration'].to_i
         elsif !params['until_date'].nil? || !params['until_date'].empty?
           dt_now = DateTime.now
           dt_target = DateTime.parse(params['until_date'])
