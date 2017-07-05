@@ -142,6 +142,51 @@
       </div> 
     </div>
   </div>
+<!--   <div class='col-lg-3 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">Etherpad
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
+        </div>
+      </div> 
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="export_app" class="form-control" value='true'>
+              <input type="hidden" name="application" class="form-control" value='Etherpad'>
+              <input type="text" name="snapshotname" class="form-control" id="etherpad-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-etherpad-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> Import</a>
+            <button type="button" class="btn btn-success pull-right" id="download-etherpad-snapshot"><i class="fa fa-download"></i> Export</button>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div> -->
+  <div class='col-lg-3 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading"> 
+        <div class="panel-title">GuestBook
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
+        </div>
+      </div> 
+      <!-- panel body --> 
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="export_app" class="form-control" value='true'>
+              <input type="hidden" name="application" class="form-control" value='GuestBook'>
+              <input type="text" name="snapshotname" class="form-control" id="guestbook-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-guestbook-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> Import</a>
+            <button type="button" class="btn btn-success pull-right" id="download-guestbook-snapshot"><i class="fa fa-download"></i> Export</button>
+          </form>
+        </div>
+      </div> 
+    </div>
+  </div>
 </div>
 
 <!-- upload snapshots modal-->
@@ -180,6 +225,52 @@
           <div class="form-group">
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='Interview'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload etherpad snapshots modal-->
+<div class="modal fade" id="upload-etherpad-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Import Snapshot for Etherpad</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="import_app" class="form-control" value='true'>
+            <input type="hidden" name="application" class="form-control" value='Etherpad'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload guestbook snapshots modal-->
+<div class="modal fade" id="upload-guestbook-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Import Snapshot for GuestBook</h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="import_app" class="form-control" value='true'>
+            <input type="hidden" name="application" class="form-control" value='GuestBook'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
             <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
           </div>

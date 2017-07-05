@@ -34,4 +34,28 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('#download-etherpad-snapshot').click(function(){
+    var snapshot_name = $( "#etherpad-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'etherpad'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '_etherpad.zip';
+      }
+    });
+  });
+
+  $('#download-guestbook-snapshot').click(function(){
+    var snapshot_name = $( "#guestbook-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'guestbook'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '_guestbook.zip';
+      }
+    });
+  });
 });
