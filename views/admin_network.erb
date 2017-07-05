@@ -83,14 +83,14 @@
 </div>
 
 <div class="row">
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Internet Network Mode</div>
       </div> 
       <!-- panel body --> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <h2 class="no-margins"><%= net_info[:mode] %></h2>
           <small>Mode of the Wi-Fi Network</small></br>
         </div>
@@ -100,13 +100,13 @@
   </div>
   <% unless net_info[:second_antenna] == 'inactive' %> 
   <% status = net_info[:second_antenna] == 'active ESSID:off/any' ? 'Disconnected' : net_info[:second_antenna].split(' ').last.gsub('ESSID:', '').gsub('"', '') %>
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Connect to Wi-Fi Network</div>
       </div> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <h2 class="no-margins"><%= status %></h2>
           <small><%= status == 'Disconnected' ? 'from Wi-Fi Networks' : 'Wi-Fi Network' %></small></br>
         </div>
@@ -115,13 +115,13 @@
     </div>
   </div>
   <% else %>
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Connect to Wi-Fi Network</div>
       </div> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <small>Please plugin an extra USB Wi-Fi dongle to your rasberry pi to enable this feature. Suggested USB dongles <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a></small>
         </div>
         <div class="pull-right"><i class="fa fa-fw fa-5x fa-wifi"></i></br><button class="btn btn-primary pull-right connect-btn" data-toggle="modal" data-target="#connect-ssid-modal" disabled>Connect</button></div>
@@ -134,35 +134,30 @@
   <% action = 'activate' if net_info[:current_wifi_interface] == 'Raspberry' %>
   <% action = 'deactivate' if net_info[:current_wifi_interface] == 'OpenWrt' %>
   <% action = 'deactivate' if net_info[:current_wifi_interface].nil?         %>
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Wi-Fi Access Point</div>
       </div> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <h2 class="no-margins"><%= current_wifi_if %></h2>
           <small>Wi-Fi Access Point in use</small></br>
         </div>
         <div class="pull-right"><i class="fa fa-fw fa-5x fa-link"></i></br>
-          <form action="/exec" method="post">
-            <input type="hidden" name="env" value='sh'>
-            <input type="hidden" name="cmd" value='mazi-router.sh'>
-            <input type="hidden" name="action" value='<%= action %>' required>
-            <button class="btn btn-primary pull-right connect-btn">Toggle Device</button>
-          </form>
+          <button class="btn btn-primary pull-right toggel-ap-btn" data-toggle="modal" data-target="#toggle-ap-modal">Toggle Device</button>
         </div>
       </div> 
     </div>
   </div>
   <% else %>
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Wi-Fi Access Point</div>
       </div> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <small>Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your rasberry pi and toggle between devices. Suggested devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a></small>
         </div>
         <div class="pull-right"><i class="fa fa-fw fa-5x fa-link"></i></br><button class="btn btn-primary pull-right toggle-ap-btn" disabled>Toggle Device</button></div>
@@ -170,14 +165,14 @@
     </div>
   </div>  
   <% end %>
-  <div class='col-lg-4 col-md-6'>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
     <div class="panel panel-default">
       <div class="panel-heading"> 
         <div class="panel-title">Portal Domain</div>
       </div> 
       <!-- panel body --> 
       <div class="panel-body">
-        <div class="col-xs-6 text-left"> 
+        <div class="col-xs-6 text-left network-panel-min-height"> 
           <h2 class="no-margins"><%= net_info[:domain] %></h2>
           <small>Current Portal Domain</small></br>
         </div>
@@ -217,9 +212,6 @@
                 <option value='9'>9</option>
                 <option value='10'>10</option>
                 <option value='11'>11</option>
-                <option value='12'>12</option>
-                <option value='13'>13</option>
-                <option value='14'>14</option>
             </select>
             <label for='password'>Password: </label>
             <input type="text" name="password" class="form-control" value='<%= net_info[:password] == '-' ? '' : net_info[:password] %>'>
@@ -405,6 +397,7 @@
         <h4 class="modal-title">Edit Portal Domain</h4>
       </div>
       <div class="modal-body">
+        <p>This action will change the domain of the Portal. Please make sure it is a valid domain (e.g. at least one '.' character).</p>
         <form class="form-signin" action="/exec" method="post">
           <div class="form-group">
             <input type="hidden" name="env" value='sh'>
@@ -413,6 +406,30 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
           </div>
         </form>
+        <small>** Warning: If you set an invalid Domain, the Portal will be unreachable. However, you can access the Admin Panel through this URL: local.mazizone.eu:4567/admin</small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- toggel ap modal-->
+<div class="modal fade" id="toggle-ap-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Toggle Wi-Fi Access Point Device</h4>
+      </div>
+      <div class="modal-body">
+        <p>This action will change the Wi-Fi Access Point Device. This action will cause you to loose access to this portal and you will need to reconnect to the new Wi-Fi network. </br>Are you sure you wish to continue?</p>
+        <form action="/exec" method="post">
+          <input type="hidden" name="env" value='sh'>
+          <input type="hidden" name="cmd" value='mazi-router.sh'>
+          <input type="hidden" name="action" value='<%= action %>'>
+          <button class="btn btn-primary pull-right">Toggle Device</button>
+        </form>
+        </br></br>
       </div>
     </div>
   </div>

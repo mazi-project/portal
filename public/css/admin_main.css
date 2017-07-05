@@ -459,6 +459,10 @@ input:checked + .slider:before {
   min-height: 110px
 }
 
+.network-panel-min-height{
+  min-height: 120px
+}
+
 .form-signin > div > label{
   margin-top: 5px;
 }
