@@ -106,7 +106,7 @@ module MaziVersion
     MaziLogger.debug "  Checking sshpass package"
     unless `dpkg -s sshpass | grep Status`.include? "install ok installed"
       MaziLogger.debug "sshpass package not found. Installing."
-      `/root/back-end/update.sh`
+      `sh /root/back-end/update.sh`
     end
   end
 end
