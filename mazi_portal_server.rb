@@ -364,6 +364,7 @@ class MaziApp < Sinatra::Base
   end
 
   get '/snapshots/mazi-snapshot.zip' do
+    MaziLogger.debug "request: get/snapshots/mazi-snapshot.zip: #{request.ip}"
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode download snapshot"
       session['error'] = "This portal runs on Demo mode! This action would have downloaded a snapshot."
