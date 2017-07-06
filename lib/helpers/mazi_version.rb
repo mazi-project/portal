@@ -1,5 +1,15 @@
 VERSION = '1.8'
 
+class ConfigCaller
+  include MaziConfig
+  def update_config
+    @config = loadConfigFile
+    @config[:scripts][:enabled_scripts] << 'mazi-router.sh' unless @config[:scripts][:enabled_scripts].include? 'mazi-router.sh'
+    @config[:scripts][:enabled_scripts] << 'mazi-domain.sh' unless @config[:scripts][:enabled_scripts].include? 'mazi-domain.sh'
+    writeConfigFile
+  end
+end
+
 module MaziVersion
   def getVersion
     VERSION
@@ -107,6 +117,9 @@ module MaziVersion
     unless `dpkg -s sshpass | grep Status`.include? "install ok installed"
       MaziLogger.debug "sshpass package not found. Installing."
       `sh /root/back-end/update.sh`
+      MaziLogger.debug "Done Installing sshpass."
+      ConfigCaller.new.update_config
     end
   end
 end
+

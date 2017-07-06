@@ -1,10 +1,10 @@
 require 'sinatra/base'
 require 'helpers/mazi_logger'
+require 'helpers/mazi_config'
 require 'helpers/mazi_version'
 MaziVersion.update_dependencies
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
-require 'helpers/mazi_config'
 require 'mysql'
 require 'helpers/mazi_sensors'
 require 'helpers/mazi_camera'
