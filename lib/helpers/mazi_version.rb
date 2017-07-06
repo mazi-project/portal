@@ -77,6 +77,7 @@ module MaziVersion
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
     begin
+      MaziLogger.debug "  Checking MySQL gem"
       Gem::Specification.find_by_name("mysql")# version 1.6.6 requires mysql gem
     rescue Gem::LoadError
        MaziLogger.debug "mysql gem not found. Installing."
@@ -102,7 +103,8 @@ module MaziVersion
       end
     end
 
-    if `apt-cache search sshpass`.split("\n").empty?
+    MaziLogger.debug "  Checking sshpass package"
+    unless `dpkg -s sshpass | grep Status`.include? "install ok installed"
       MaziLogger.debug "sshpass package not found. Installing."
       `/root/back-end/update.sh`
     end
