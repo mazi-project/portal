@@ -101,5 +101,10 @@ module MaziVersion
         `service mazi-portal restart`
       end
     end
+
+    if `apt-cache search sshpass`.split("\n").empty?
+      MaziLogger.debug "sshpass package not found. Installing."
+      `/root/back-end/update.sh`
+    end
   end
 end
