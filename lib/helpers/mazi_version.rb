@@ -1,4 +1,4 @@
-VERSION = '1.8'
+VERSION = '1.8.5'
 
 class ConfigCaller
   include MaziConfig
