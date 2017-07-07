@@ -30,6 +30,9 @@ module MaziCamera
       return false if line.split('=')[1] == '0'
     end
     true
+  rescue Errno::ENOENT => ex
+    MaziLogger.error "vcgencmd not installed"
+    false
   end
 
   def rpi_enabled?

@@ -363,14 +363,14 @@ class MaziApp < Sinatra::Base
     end
   end
 
-  get '/snapshots/mazi-snapshot.zip' do
-    MaziLogger.debug "request: get/snapshots/mazi-snapshot.zip: #{request.ip}"
+  get '/snapshots/:file' do |file|
+    MaziLogger.debug "request: get/snapshots/#{file}: #{request.ip}"
     if @config[:general][:mode] == 'demo'
       MaziLogger.debug "Demo mode download snapshot"
       session['error'] = "This portal runs on Demo mode! This action would have downloaded a snapshot."
       redirect back
     end
-    send_file File.join('public/snapshots/', 'mazi-snapshot.zip')
+    send_file File.join('public/snapshots/', file)
   end
 
   # admin login post request
@@ -982,7 +982,7 @@ class MaziApp < Sinatra::Base
     elsif params['export_app']
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode upload snapshot"
-        session['error'] = "This portal runs on Demo mode! This action would have imported an application snapshot."
+        session['error'] = "This portal runs on Demo mode! This action would have exported an application snapshot."
         redirect '/admin_snapshot'
       end
       zip_app_snapshot(params[:application], params['snapshotname'])
@@ -990,7 +990,7 @@ class MaziApp < Sinatra::Base
     elsif params['import_app']
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode upload snapshot"
-        session['error'] = "This portal runs on Demo mode! This action would have exported an application snapshot."
+        session['error'] = "This portal runs on Demo mode! This action would have imported an application snapshot."
         redirect '/admin_snapshot'
       end
       tempfile = params['snapshot'][:tempfile]
