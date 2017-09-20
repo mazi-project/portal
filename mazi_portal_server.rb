@@ -51,7 +51,7 @@ class MaziApp < Sinatra::Base
     end
     err
   end
- 
+
   get '/' do
     redirect 'index'
   end
@@ -83,6 +83,10 @@ class MaziApp < Sinatra::Base
     end
     case index
     when 'index'
+      app = Mazi::Model::ApplicationInstance.find(splash_screen: true)
+      unless app.nil?
+        redirect app.url
+      end
       session['notifications_read'] = [] if session['notifications_read'].nil?
       locals[:js] << "js/index_application.js"
       locals[:main_body] = :index_application
@@ -378,7 +382,7 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "request: post/admin_login from ip: #{request.ip} creds: #{params.inspect}"
     unless valid_admin_credentials?(params['username'], params['password'])
       session['error'] = 'Password and username missmatch!'
-      redirect '/admin_login' 
+      redirect '/admin_login'
     end
     MaziLogger.debug "valid credential"
     session[:username] = params['username']
@@ -506,7 +510,7 @@ class MaziApp < Sinatra::Base
   end
 
   # admin delete application
-  delete '/application/:id/?' do |id| 
+  delete '/application/:id/?' do |id|
     MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
     if !authorized?
       MaziLogger.debug "Not authorized"
@@ -524,7 +528,7 @@ class MaziApp < Sinatra::Base
   end
 
   # admin delete application
-  delete '/application/:id/instance/?' do |id| 
+  delete '/application/:id/instance/?' do |id|
     MaziLogger.debug "request: delete/application from ip: #{request.ip} id: #{id}"
     if !authorized?
       MaziLogger.debug "Not authorized"
@@ -554,7 +558,7 @@ class MaziApp < Sinatra::Base
       {error: "This portal runs on Demo mode! This action would have toggled application visibility on the portal.", id: id}.to_json
     else
       app = Mazi::Model::Application.find(id: id)
-      app.enabled = !app.enabled 
+      app.enabled = !app.enabled
       app.save
       {result: 'OK', id: id}.to_json
     end
@@ -573,7 +577,31 @@ class MaziApp < Sinatra::Base
       {error: "This portal runs on Demo mode! This action would have toggled application instance visibility on the portal.", id: id}.to_json
     else
       app = Mazi::Model::ApplicationInstance.find(id: id)
-      app.enabled = !app.enabled 
+      app.enabled = !app.enabled
+      app.save
+      {result: 'OK', id: id}.to_json
+    end
+  end
+
+  # toggles application enable disable
+  put '/application/:id/instance/splash/?' do |id|
+    MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
+    if !authorized?
+      MaziLogger.debug "Not authorized"
+      session['error'] = nil
+      {error: 'Not Authorized!', id: id}.to_json
+    elsif @config[:general][:mode] == 'demo'
+      MaziLogger.debug "Demo mode toggle enabled on instance"
+      session['error'] = "This portal runs on Demo mode! This action would have toggled application instance as a splash screen on the portal."
+      {error: "This portal runs on Demo mode! This action would have toggled application instance visibility on the portal.", id: id}.to_json
+    else
+      app = Mazi::Model::ApplicationInstance.find(id: id)
+      Mazi::Model::ApplicationInstance.all.each do |inst|
+        next if inst.id == app.id
+        inst.splash_screen = false
+        inst.save
+      end
+      app.splash_screen = !app.splash_screen
       app.save
       {result: 'OK', id: id}.to_json
     end
@@ -609,7 +637,7 @@ class MaziApp < Sinatra::Base
   put '/application/:id/click_counter/?' do |id|
     MaziLogger.debug "request: put/application from ip: #{request.ip} id: #{id}"
     app = Mazi::Model::ApplicationInstance.find(id: id)
-    app.application.click_counter += 1 
+    app.application.click_counter += 1
     app.click_counter = app.click_counter + 1
     app.save
     {result: 'OK', id: id}.to_json
@@ -686,7 +714,7 @@ class MaziApp < Sinatra::Base
   end
 
   # admin delete notification
-  delete '/notification/:id/?' do |id| 
+  delete '/notification/:id/?' do |id|
     MaziLogger.debug "request: delete/notification from ip: #{request.ip} id: #{id}"
     if !authorized?
       MaziLogger.debug "Not authorized"
@@ -716,7 +744,7 @@ class MaziApp < Sinatra::Base
       {error: "This portal runs on Demo mode! This action would have toggled notification visibility on the portal", id: id}.to_json
     else
       notif = Mazi::Model::Notification.find(id: id)
-      notif.enabled = !notif.enabled 
+      notif.enabled = !notif.enabled
       notif.save
       {result: 'OK', id: id}.to_json
     end
@@ -759,7 +787,7 @@ class MaziApp < Sinatra::Base
           session['error'] = "WiFi password must be more than 8 characters long"
           redirect '/admin_network'
         end
-        args << "-p #{params['password']}" 
+        args << "-p #{params['password']}"
       end
     when 'internet.sh'
       args = []
@@ -774,7 +802,7 @@ class MaziApp < Sinatra::Base
       args = []
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
-        session['error'] = "This portal runs on Demo mode! This action would have connected the second wireless interface to a wireless network." 
+        session['error'] = "This portal runs on Demo mode! This action would have connected the second wireless interface to a wireless network."
         redirect '/admin_network'
       end
       # ssid = params['ssid'].nil? || params['ssid'].empty? ? params['hidden-ssid'] : params['ssid']
@@ -790,7 +818,7 @@ class MaziApp < Sinatra::Base
       args = []
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
-        session['error'] = "This portal runs on Demo mode! This action would have changed the Access Point Device." 
+        session['error'] = "This portal runs on Demo mode! This action would have changed the Access Point Device."
         redirect '/admin_network'
       end
       args << '-a' if params['action'] == 'activate'
@@ -799,7 +827,7 @@ class MaziApp < Sinatra::Base
       args = []
       if @config[:general][:mode] == 'demo'
         MaziLogger.debug "Demo mode exec script"
-        session['error'] = "This portal runs on Demo mode! This action would have changed the Portal's Domain." 
+        session['error'] = "This portal runs on Demo mode! This action would have changed the Portal's Domain."
         redirect '/admin_network'
       end
       args << "-d #{params['domain']}" unless params['domain'].nil? || params['domain'].empty?
@@ -1002,7 +1030,7 @@ class MaziApp < Sinatra::Base
     redirect '/admin_snapshot'
   end
 
-  delete '/snapshot/?' do 
+  delete '/snapshot/?' do
     MaziLogger.debug "request: delete/snapshot from ip: #{request.ip} params: #{params.inspect}"
     deleteDBSnapshot(params['snapshotname'])
     {result: "OK"}.to_json
@@ -1165,22 +1193,22 @@ class MaziApp < Sinatra::Base
     end
     redirect '/admin'
   end
-   
+
   post '/sensors/register/?' do
     request.body.rewind
     body = JSON.parse(request.body.read)
-    MaziLogger.debug "Register sensor: #{body["name"]} from ip: #{body["ip"]}" 
-    
+    MaziLogger.debug "Register sensor: #{body["name"]} from ip: #{body["ip"]}"
+
     begin
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
-     
+
     con.query("INSERT INTO type(name, ip) VALUES('#{body["name"]}', '#{body["ip"]}')")
     id = con.query("SELECT max(id) FROM type")
-    return id.fetch_row       
+    return id.fetch_row
 
     rescue Mysql::Error => e
-      MaziLogger.error e.message 
+      MaziLogger.error e.message
     ensure
       con.close if con
     end
@@ -1189,12 +1217,12 @@ class MaziApp < Sinatra::Base
   get '/sensors/id/?' do
     request.body.rewind
     body = JSON.parse(request.body.read)
-    MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"  
+    MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"
     begin
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
     id = con.query("SELECT id FROM type WHERE name LIKE '#{body["name"]}' AND ip='#{body["ip"]}'")
-    
+
     if( id != nil )
        return id.fetch_row
     end
@@ -1208,9 +1236,9 @@ class MaziApp < Sinatra::Base
   post '/sensors/store/?' do
     request.body.rewind
     body = JSON.parse(request.body.read)
-    date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')   
+    date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
     MaziLogger.debug "request: post/sensors [#{date.hour}:#{date.minute}:#{date.second}], from sensor_id: #{body["sensor_id"]}"
-    begin  
+    begin
     #connect to DATABASE mydb
     con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
 
@@ -1220,13 +1248,13 @@ class MaziApp < Sinatra::Base
     case name
     when "sht11"
        #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
+       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
        con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
     when "sensehat"
        #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
+       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
        con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
-    end	
+    end
 
     rescue Mysql::Error => e
       MaziLogger.error e.message
@@ -1270,7 +1298,7 @@ class MaziApp < Sinatra::Base
         redirect back
       elsif action == 'capture_video'
         start_video_capturing(params['duration'])
-        redirect back  
+        redirect back
       elsif action == 'delete'
         clear_photos if params['type'] == 'photos'
         clear_videos if params['type'] == 'videos'

@@ -18,6 +18,7 @@
     <thead>
       <tr>
         <th title="toggle the application visibility on the Portal">Active</th>
+        <th title="use this application as the splash page of the Portal">Splash Page</th>
         <th title="the name of the application">Name</th>
         <th title="the URL of the application">URL</th>
         <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
@@ -33,6 +34,12 @@
           <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
             <div class="slider round enabled-instance-switch" id='enabled-instance-switch_<%= app.id %>'></div>
+          </label>
+        </td>
+        <td scope="row">
+          <label class="switch" title="<%= app.splash_screen ? 'disable' : 'enable' %> the application">
+            <input type="checkbox" <%= app.splash_screen ? 'checked' : '' %>>
+            <div class="slider round splash-instance-switch" id='splash-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
         <td><%= app.name %></td>
@@ -53,7 +60,7 @@
           </div>
         </td>
       </tr>
-      <% end %> 
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
@@ -115,7 +122,7 @@
           </div>
         </td>
       </tr>
-      <% end %> 
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
@@ -126,8 +133,8 @@
         <td></td>
         <td></td>
         <td>
-        <% if enable_application_editing %> 
-        <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a> 
+        <% if enable_application_editing %>
+        <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a>
         <% end %>
         </td>
       </tr>
