@@ -104,6 +104,19 @@ $( document ).ready(function() {
     });
   });
 
+  $('.splash-instance-switch').click(function(){
+    var appId = $(this).attr('id').split('_').pop();
+    $.ajax({
+      url: '/application/' + appId + '/instance/splash',
+      type: 'PUT',
+      success: function(result) {
+        id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        location.reload();
+      }
+    });
+  });
+
   $('.start_app').click(function(){
     if ($(this).attr('disabled')){
       return;
