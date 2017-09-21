@@ -1328,6 +1328,41 @@ class MaziApp < Sinatra::Base
     end
   end
 
+  post '/create/etherpad/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    MaziLogger.debug "Create etherpad table in #{body["deployment"]} Database if doesn't exists"
+    begin
+     con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+     con.query("CREATE TABLE IF NOT EXISTS etherpad(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
+                pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes')")
+    rescue Mysql::Error => e
+      MaziLogger.error e.message
+    ensure
+      con.close if con
+    end
+  end
+
+  post '/update/etherpad/?' do
+    request.body.rewind
+    body = JSON.parse(request.body.read)
+    date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+    MaziLogger.debug "Update etherpad table in #{body["deployment"]} Database"
+    begin
+     con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+     con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize)
+                VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                       '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}')")
+    rescue Mysql::Error => e
+      MaziLogger.error e.message
+    ensure
+      con.close if con
+    end
+  end
+
+
+
+
   post '/create/statistics/?' do
     request.body.rewind
     body = JSON.parse(request.body.read)
@@ -1373,8 +1408,8 @@ class MaziApp < Sinatra::Base
      client.query("CREATE DATABASE IF NOT EXISTS #{body["deployment"]}")
      client.close
      con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
-     con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(20), administrator VARCHAR(10),
-                title VARCHAR(10), description VARCHAR(50), location VARCHAR(50) )")
+     con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), administrator VARCHAR(50),
+                title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
      con.query("INSERT INTO devices(deployment, administrator, title, description, location)
                 VALUES('#{body["deployment"]}', '#{body["admin"]}', '#{body["title"]}', '#{body["description"]}', '#{body["loc"]}')")
      id = con.query("SELECT max(id) FROM devices")
