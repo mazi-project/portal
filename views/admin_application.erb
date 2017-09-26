@@ -24,7 +24,7 @@
         <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
         <th title="the parent application">Parent Application</th>
         <th title="overall clicks for the application">Click Counter</th>
-        <th title="actions that can be performed on the application" class='text-center'>Actions</th>
+        <th title="actions that can be performed on the application" class='text-center' style='width: 130px'>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -53,6 +53,11 @@
               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="Edit Application">
                 <i class="fa fa-pencil"></i>
               </a>
+              <% if app.name == 'GuestBook' %>
+              <a class="btn btn-success admin_app" id='edit_app_<%= app.id %>' title="Guestbook Admin Panel" href="/admin_guestbook">
+                <i class="fa fa-asterisk"></i>
+              </a>
+              <% end %>
               <a class="btn btn-danger del_app_inst" id='del_app_inst_<%= app.id %>' title="Delete Application Instance">
                 <i class="fa fa-times"></i>
               </a>

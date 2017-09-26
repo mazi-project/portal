@@ -316,6 +316,12 @@ class MaziApp < Sinatra::Base
       locals[:local_data][:media_link]        = rpi_base_link
       locals[:local_data][:rpi_enabled]       = rpi_enabled?
       erb :admin_main, locals: locals
+    when 'admin_guestbook'
+      locals[:js] << "js/admin_guestbook.js"
+      locals[:js] << "js/tag-it.js"
+      locals[:main_body] = :admin_guestbook
+      locals[:local_data][:tags] = get_guestbook_tags
+      erb :admin_main, locals: locals
     when 'admin_set_date'
       locals[:main_body] = :admin_set_time
       locals[:local_data][:first_login] = false
@@ -1252,8 +1258,8 @@ class MaziApp < Sinatra::Base
        con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
     when "sensehat"
        #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")       
-       con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', 
+       con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+       con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                  '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
     end
 
@@ -1429,7 +1435,7 @@ class MaziApp < Sinatra::Base
     MaziLogger.debug "Search for device ID in #{body["deployment"]} database"
     begin
     con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
-    id = con.query("SELECT id FROM devices WHERE title LIKE '#{body["title"]}'AND administrator='#{body["admin"]}' 
+    id = con.query("SELECT id FROM devices WHERE title LIKE '#{body["title"]}'AND administrator='#{body["admin"]}'
                     AND description='#{body["description"]}' AND location='#{body["loc"]}' ")
     if( id != nil )
        return id.fetch_row
@@ -1440,7 +1446,7 @@ class MaziApp < Sinatra::Base
       con.close if con
     end
   end
-  
+
 
   post '/devices/:device/:action' do |device, action|
     MaziLogger.debug "request: post/action from ip: #{request.ip} device: #{device} action: #{action} params: #{params.inspect}"
@@ -1510,6 +1516,23 @@ class MaziApp < Sinatra::Base
       end
     end
     {result: 'OK', device: device, action: action}.to_json
+  end
+
+  post '/application_admin/:application/:action/?' do |application, action|
+    MaziLogger.debug "request: post/application_admin from ip: #{request.ip} application: #{application} action: #{action} params: #{params.inspect}"
+
+    case application
+    when 'guestbook'
+      case action
+      when 'tags'
+        save_guestbook_tags(params['tags'])
+      end
+      redirect 'admin_guestbook'
+    else
+      MaziLogger.debug "Application '#{application}' not supported."
+      session['error'] = "Application '#{application}' not supported by this action."
+      redirect back
+    end
   end
 end
 

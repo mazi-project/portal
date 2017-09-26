@@ -1,0 +1,60 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      MAZI Zone <small>Guestbook Admin</small>
+    </h1>
+  </div>
+</div>
+<% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <p>
+      You can use the tools bellow to perform various administrative actions for the MAZI Guestbook application.
+    </p>
+  </div>
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Moderate Posted Content
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to moderate the posted content."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>Use the button bellow to go to the appropriate page in order to moderate the posted content of the Guestbook application (default username: admin, default password: mazizone).</p>
+            <a class="btn btn-success pull-right" title="Moderate posted content" href="http://local.mazizone.eu:8081/#admin" target="_blank">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Tags
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to add/remove tags."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the input feild bellow to add/remove tags. Then use the button bellow to save the tags for the Guestbook application.</p>
+            <form action="/application_admin/guestbook/tags" method="post">
+              <input name="tags" id="singleFieldTags2" value="<%= tags %>">
+              <input type="submit" class="btn btn-success pull-right" value="Save" title="Save tags"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
