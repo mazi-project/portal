@@ -317,8 +317,66 @@ module MaziConfig
         lines += line
       end
     end
-    puts lines
     File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
+  end
+
+  def upload_guestbook_background_image(filename, file)
+    FileUtils.cp file.path, "/var/www/html/mazi-board/src/www/images/#{filename}"
+
+    lines = ''
+    old_image = ''
+    File.readlines('/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html').each do |line|
+      if line.include? 'header-image'
+        old_image = line.split('"')[3].split('/').last
+        lines += line.split('src=').first + "src=\"images/#{filename}\"></div>"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html', "w") {|file| file.puts lines }
+    File.delete("/var/www/html/mazi-board/src/www/images/#{old_image}") if File.file?("/var/www/html/mazi-board/src/www/images/#{old_image}") && old_image != "toolkit.fw.png"
+  end
+
+  def get_guestbook_maxfilesize
+    File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
+      line = line.strip
+      if line.start_with? 'maxFileSize:'
+        return line.split(',').first.split('*').last
+      end
+    end
+  end
+
+  def set_guestbook_maxfilesize(maxfilesize)
+    lines = ''
+    File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
+      if line.strip.start_with? 'maxFileSize:'
+        lines += line.split(':').first + ": 1024*1024*#{maxfilesize}, //in bytes\n"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/mazi-board/src/node/config.js', "w") {|file| file.puts lines }
+  end
+
+  def get_guestbook_welcome_message
+    File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+      line = line.strip
+      if line.include? 'submission-headline'
+        return line.split('>')[2].split('<').first
+      end
+    end
+  end
+
+  def set_guestbook_welcome_message(welcome_message)
+    lines = ''
+    File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+      if line.strip.include? 'submission-headline'
+        lines += line.split('<h1>').first + "<h1> #{welcome_message}<span class=\"blinking-cursor\">|</span></h1></div>\n"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html', "w") {|file| file.puts lines }
   end
 
   def all_supported_timezones

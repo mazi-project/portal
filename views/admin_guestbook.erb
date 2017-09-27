@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Guestbook Admin</small>
+      MAZI Zone <small>GuestBook Admin</small>
     </h1>
   </div>
 </div>
@@ -14,7 +14,7 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to perform various administrative actions for the MAZI Guestbook application.
+      You can use the tools bellow to perform various administrative actions for the MAZI GuestBook application.
     </p>
   </div>
   <div class='col-md-12 col-lg-6'>
@@ -28,8 +28,80 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
-            <p>Use the button bellow to go to the appropriate page in order to moderate the posted content of the Guestbook application (default username: admin, default password: mazizone).</p>
+            <p>Use the button bellow to go to the appropriate page in order to moderate the posted content of the GuestBook application (default username: admin, default password: mazizone).</p>
             <a class="btn btn-success pull-right" title="Moderate posted content" href="http://local.mazizone.eu:8081/#admin" target="_blank">Go</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Welcome Message
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to change the maximum file size."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the form bellow to change the welcome message in the GuestBook application. </br>The current welcome message is: <b> <%= welcomeMessage %></b></p>
+            <form action="/application_admin/guestbook/welcome_message" method="post">
+              <div class="form-group">
+                <input type="text" name="welcome_message" value="<%= welcomeMessage %>" style="width: 100%; margin-bottom: 8px">
+                <input type="submit" class="btn btn-success pull-right" value="Save" title="Save welcome message"/>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Background Image
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to upload a new background image."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the form bellow to upload a new background image for the GuestBook application.</p>
+            <form action="/application_admin/guestbook/background_image" method="post" enctype="multipart/form-data">
+              <div class="form-group">
+                <input type="file" name="guestbook_background_image" class="form-control filestyle" data-buttonText="Browse">
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Maximum File Size for uploads
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to change the maximum file size."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the form bellow to change the maximum file size for uploads in the GuestBook application. </br>The current maximum file size is: <b> <%= maximumFileSize %> MBytes</b></p>
+            <form action="/application_admin/guestbook/maxfilesize" method="post">
+              <div class="form-group">
+                <input type="text" name="maxfilesize" value="<%= maximumFileSize %>" style="width: 100%; margin-bottom: 8px">
+                <input type="submit" class="btn btn-success pull-right" value="Save" title="Save max file size" style="margin-bottom: 7px"/>
+              </div>
+            </form>
           </div>
         </div>
       </div>
@@ -47,7 +119,7 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
-            <p>You can use the input feild bellow to add/remove tags. Then use the button bellow to save the tags for the Guestbook application.</p>
+            <p>You can use the input feild bellow to add/remove tags. Then use the button bellow to save the tags for the GuestBook application.</p>
             <form action="/application_admin/guestbook/tags" method="post">
               <input name="tags" id="singleFieldTags2" value="<%= tags %>">
               <input type="submit" class="btn btn-success pull-right" value="Save" title="Save tags"/>
