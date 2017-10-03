@@ -38,7 +38,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_configuration'
             end
             if params['reset']
               if @config[:general][:mode] == 'demo'
@@ -130,7 +130,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_snapshot'
             end
             if params['save']
               if @config[:general][:mode] == 'demo'

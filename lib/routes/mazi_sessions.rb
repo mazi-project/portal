@@ -13,7 +13,11 @@ module Sinatra
             end
             MaziLogger.debug "valid credential"
             session[:username] = params['username']
-            redirect '/admin'
+            if params['goto']
+              redirect "/#{params['goto']}"
+            else
+              redirect '/admin'
+            end
           end
 
           # admin login post request

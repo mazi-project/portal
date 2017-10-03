@@ -10,7 +10,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_application'
             end
             if params['instance']
               e = Mazi::Model::ApplicationInstance.validate(params)
@@ -50,7 +50,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_application'
             end
             if params['instance']
               e = Mazi::Model::ApplicationInstance.validate_edit(params)

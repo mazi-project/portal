@@ -10,7 +10,7 @@ module Sinatra
 
           # this is the main routing configuration that routes all the erb files
           app.get '/:index/?' do |index|
-            MaziLogger.debug "request: get/#{index} from ip: #{request.ip}"
+            MaziLogger.debug "request: get/#{index} from ip: #{request.ip} params: #{params.inspect}"
             if session['uuid'].nil?
               s = Mazi::Model::Session.create
               s.ip = request.ip
@@ -133,7 +133,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login"
               end
               locals[:js] << "js/admin_dashboard.js"
               locals[:main_body] = :admin_dashboard
@@ -163,7 +163,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_application.js"
               locals[:main_body] = :admin_application
@@ -174,7 +174,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_documentation
               erb :admin_main, locals: locals
@@ -182,7 +182,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_network.js"
               locals[:main_body] = :admin_network
@@ -219,7 +219,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_network.js"
               locals[:js] << "js/jscolor.min.js"
@@ -231,7 +231,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_notification.js"
               locals[:main_body] = :admin_notification
@@ -241,7 +241,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_snapshot.js"
               locals[:main_body] = :admin_snapshot
@@ -251,7 +251,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_devices.js"
               locals[:js] << "js/jquery.datetimepicker.min.js"
@@ -288,7 +288,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_change_password
               erb :admin_main, locals: locals
@@ -296,7 +296,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_change_username
               erb :admin_main, locals: locals
@@ -307,6 +307,7 @@ module Sinatra
                 redirect back
               end
               locals[:main_body] = :admin_login
+              locals[:local_data][:goto] = params['goto']
               erb :admin_main, locals: locals
             when 'admin_logout'
               if @config[:general][:mode] == 'demo'
