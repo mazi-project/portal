@@ -5,6 +5,8 @@ module Sinatra
 
         def self.registered(app)
           app.post '/sensors/register/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)            
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Register sensor: #{body["name"]} from ip: #{body["ip"]}"
@@ -25,6 +27,8 @@ module Sinatra
           end
 
           app.get '/sensors/id/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"
@@ -44,6 +48,8 @@ module Sinatra
           end
 
           app.post '/sensors/store/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
@@ -75,11 +81,13 @@ module Sinatra
           end
 
           app.post '/create/framadate/?' do
+ 	    file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create framadate table in #{body["deployment"]} Database if doesn't exists"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS framadate(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
                         polls  INT(4), votes INT(4), comments INT(4), datasize INT(8) COMMENT 'Bytes')")
             rescue Mysql::Error => e
@@ -90,12 +98,14 @@ module Sinatra
           end
 
           app.post '/update/framadate/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
             MaziLogger.debug "Update framadate table in #{body["deployment"]} Database"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments, datasize)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}', '#{body["datasize"]}')")
@@ -107,11 +117,13 @@ module Sinatra
           end
 
           app.post '/create/guestbook/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create guestbook table in #{body["deployment"]} Database if doesn't exists"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS guestbook(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
                         submissions INT(4),comments INT(4), images INT(4), datasize INT(8) COMMENT 'Bytes')")
             rescue Mysql::Error => e
@@ -122,12 +134,14 @@ module Sinatra
           end
 
           app.post '/update/guestbook/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)    
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
             MaziLogger.debug "Update guestbook table in #{body["deployment"]} Database"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}')")
@@ -139,11 +153,13 @@ module Sinatra
           end
 
           app.post '/create/etherpad/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create etherpad table in #{body["deployment"]} Database if doesn't exists"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS etherpad(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
                         pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes')")
             rescue Mysql::Error => e
@@ -154,12 +170,14 @@ module Sinatra
           end
 
           app.post '/update/etherpad/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
             MaziLogger.debug "Update etherpad table in #{body["deployment"]} Database"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}')")
@@ -171,11 +189,13 @@ module Sinatra
           end
 
           app.post '/create/statistics/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create table statistics in #{body["deployment"]} Database if doesn't exists"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS statistics(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
                         online_users INT(4), cpu_temperature FLOAT(3,1) COMMENT 'Celsius' , cpu_usage FLOAT(3,1) COMMENT 'percentage %',
                         ram_usage FLOAT(3,1) COMMENT 'percentage %', storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1),
@@ -188,12 +208,14 @@ module Sinatra
           end
 
           app.post '/update/statistics/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
             MaziLogger.debug "Update statistics table in #{body["deployment"]} Database"
             begin
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("INSERT INTO statistics(device_id, timestamp, online_users, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download,
                        download_unit) VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                              '#{body["users"]}', '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}',
@@ -207,14 +229,16 @@ module Sinatra
           end
 
           app.post '/deployment/register/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create #{body["deployment"]} Database and devices table"
             begin
-             client = Mysql.new('localhost', 'root', 'm@z1')
+             client = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}")
              client.query("CREATE DATABASE IF NOT EXISTS #{body["deployment"]}")
              client.close
-             con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), administrator VARCHAR(50),
                         title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
              con.query("INSERT INTO devices(deployment, administrator, title, description, location)
@@ -231,11 +255,13 @@ module Sinatra
           end
 
           app.get '/device/id/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Search for device ID in #{body["deployment"]} database"
             begin
-            con = Mysql.new('localhost', 'root', 'm@z1', "#{body["deployment"]}")
+            con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
             id = con.query("SELECT id FROM devices WHERE title LIKE '#{body["title"]}'AND administrator='#{body["admin"]}'
                             AND description='#{body["description"]}' AND location='#{body["loc"]}' ")
             if( id != nil )
