@@ -89,7 +89,7 @@ module Sinatra
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
              con.query("CREATE TABLE IF NOT EXISTS framadate(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        polls  INT(4), votes INT(4), comments INT(4), datasize INT(8) COMMENT 'Bytes')")
+                        polls  INT(4), votes INT(4), comments INT(4))")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -106,9 +106,9 @@ module Sinatra
             MaziLogger.debug "Update framadate table in #{body["deployment"]} Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
-             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments, datasize)
+             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}', '#{body["datasize"]}')")
+                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}')")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
