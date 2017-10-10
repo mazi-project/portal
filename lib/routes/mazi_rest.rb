@@ -193,13 +193,16 @@ module Sinatra
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
-            MaziLogger.debug "Create table statistics in #{body["deployment"]} Database if doesn't exists"
+            MaziLogger.debug "Create tables statistics and users in #{body["deployment"]} Database if doesn't exists"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
-             con.query("CREATE TABLE IF NOT EXISTS statistics(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        online_users INT(4), cpu_temperature FLOAT(3,1) COMMENT 'Celsius' , cpu_usage FLOAT(3,1) COMMENT 'percentage %',
-                        ram_usage FLOAT(3,1) COMMENT 'percentage %', storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1),
-                        upload_unit VARCHAR(10), download FLOAT(3,1), download_unit VARCHAR(10) )")
+             con.query("CREATE TABLE IF NOT EXISTS users(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
+                        online_users INT(4))")
+             con.query("CREATE TABLE IF NOT EXISTS statistics(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME, cpu_temperature FLOAT(3,1) COMMENT 'Celsius',
+                        cpu_usage FLOAT(3,1) COMMENT 'percentage %',ram_usage FLOAT(3,1) COMMENT 'percentage %',
+                        storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1), upload_unit VARCHAR(10), 
+                        download FLOAT(3,1), download_unit VARCHAR(10) )")
+            con.query ("ALTER TABLE statistics ADD UNIQUE KEY (device_id)")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -213,14 +216,21 @@ module Sinatra
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update statistics table in #{body["deployment"]} Database"
+            MaziLogger.debug "Update statistics and users tables in #{body["deployment"]} Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
-             con.query("INSERT INTO statistics(device_id, timestamp, online_users, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download,
-                       download_unit) VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                                             '#{body["users"]}', '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}',
-                                             '#{body["network"]["upload"]}','#{body["network"]["upload_unit"]}','#{body["network"]["download"]}',
-                                             '#{body["network"]["download_unit"]}')")
+             con.query("INSERT INTO users(device_id, timestamp, online_users) 
+                        VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}','#{body["users"]}')")
+          
+             con.query("INSERT INTO statistics(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit) 
+                        VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                                             '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}','#{body["network"]["upload"]}',
+                                             '#{body["network"]["upload_unit"]}','#{body["network"]["download"]}',
+                                             '#{body["network"]["download_unit"]}') 
+                        ON DUPLICATE KEY UPDATE timestamp = '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', cpu_temperature = '#{body["temp"]}',
+                                                cpu_usage = '#{body["cpu"]}', ram_usage = '#{body["ram"]}', storage = '#{body["storage"]}', upload = '#{body["network"]["upload"]}',
+                                                upload_unit = '#{body["network"]["upload_unit"]}', download = '#{body["network"]["download"]}', download_unit = '#{body["network"]["download_unit"]}' ; ")
+
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
