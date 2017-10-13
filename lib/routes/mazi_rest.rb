@@ -4,26 +4,98 @@ module Sinatra
       module MaziRest
 
         def self.registered(app)
-          app.post '/sensors/register/?' do
+          app.post '/create/sensehat/?' do
             file = File.read('/etc/mazi/sql.json')
-            data = JSON.parse(file)            
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
-            MaziLogger.debug "Register sensor: #{body["name"]} from ip: #{body["ip"]}"
-
+            MaziLogger.debug "Create sensehat table in #{body["deployment"]} Database if doesn't exists"
             begin
-            #connect to DATABASE mydb
-            con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
-
-            con.query("INSERT INTO type(name, ip) VALUES('#{body["name"]}', '#{body["ip"]}')")
-            id = con.query("SELECT max(id) FROM type")
-            return id.fetch_row
-
+             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("CREATE TABLE IF NOT EXISTS sensehat(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
               con.close if con
             end
+          end
+
+          app.post '/update/sensehat/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+            MaziLogger.debug "Update sensehat table "
+            begin
+             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("INSERT INTO sensehat(sensor_id, time, temperature, humidity)
+                        VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                               '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/create/sht11/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Create sht11 table in #{body["deployment"]} Database if doesn't exists"
+            begin
+             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("CREATE TABLE IF NOT EXISTS sht11(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+
+          app.post '/update/sht11/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+            MaziLogger.debug "Update sht11 table "
+            begin
+             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("INSERT INTO sht11(sensor_id, time, temperature, humidity)
+                        VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                               '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/sensor/register/?' do
+            file = File.read('/etc/mazi/sql.json')
+            data = JSON.parse(file)            
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Register sensor: #{body["sensor_name"]} from ip: #{body["ip"]}"
+            begin
+              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+              con.query("CREATE TABLE IF NOT EXISTS sensors(id INT PRIMARY KEY AUTO_INCREMENT, sensor_name VARCHAR(50), ip VARCHAR(15), device_id INT(4))")
+ 
+              con.query("INSERT INTO sensors(sensor_name, ip, device_id)
+                        VALUES('#{body["sensor_name"]}', '#{body["ip"]}', '#{body["device_id"]}')")
+              id = con.query("SELECT max(id) FROM sensors")
+              return id.fetch_row
+            
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+
           end
 
           app.get '/sensors/id/?' do
@@ -33,46 +105,11 @@ module Sinatra
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"
             begin
-            #connect to DATABASE mydb
-            con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
-            id = con.query("SELECT id FROM type WHERE name LIKE '#{body["name"]}' AND ip='#{body["ip"]}'")
-
+            con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+            id = con.query("SELECT id FROM sensors WHERE sensor_name LIKE '#{body["sensor_name"]}'AND ip='#{body["ip"]}'")
             if( id != nil )
                return id.fetch_row
             end
-            rescue Mysql::Error => e
-              MaziLogger.error e.message
-            ensure
-              con.close if con
-            end
-          end
-
-          app.post '/sensors/store/?' do
-            file = File.read('/etc/mazi/sql.json')
-            data = JSON.parse(file)
-            request.body.rewind
-            body = JSON.parse(request.body.read)
-            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "request: post/sensors [#{date.hour}:#{date.minute}:#{date.second}], from sensor_id: #{body["sensor_id"]}"
-            begin
-            #connect to DATABASE mydb
-            con = Mysql.new('localhost', 'mazi_user', '1234', 'sensors')
-
-            #Find the name of the sensor
-            name = con.query("SELECT name FROM type WHERE id=#{body["sensor_id"]}").fetch_row.first
-
-            case name
-            when "sht11"
-               #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-               con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
-               con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
-            when "sensehat"
-               #create TABLE "sensor_SensorId" ==> | ID | TIME | TEMPERATURE | HUMIDITY |
-               con.query("CREATE TABLE IF NOT EXISTS sensor_#{body["sensor_id"]}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
-               con.query("INSERT INTO sensor_#{body["sensor_id"]}(time, temperature, humidity) VALUES('#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                         '#{body["value"]["temp"]}', '#{body["value"]["hum"]}')")
-            end
-
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
