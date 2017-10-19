@@ -269,12 +269,46 @@ module Sinatra
               locals[:local_data][:rpi_enabled]       = rpi_enabled?
               erb :admin_main, locals: locals
             when 'admin_guestbook'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
               locals[:js] << "js/admin_guestbook.js"
               locals[:js] << "js/tag-it.js"
               locals[:main_body] = :admin_guestbook
               locals[:local_data][:tags] = get_guestbook_tags
               locals[:local_data][:maximumFileSize] = get_guestbook_maxfilesize
               locals[:local_data][:welcomeMessage] = get_guestbook_welcome_message
+              erb :admin_main, locals: locals
+            when 'admin_monitor'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/admin_monitor.js"
+              locals[:main_body] = :admin_monitor
+              locals[:local_data][:monitoring_enabled]              = @config[:monitoring][:enable]
+              locals[:local_data][:monitoring_hardware_enabled]     = @config[:monitoring][:hardware_enable]
+              locals[:local_data][:monitoring_applications_enabled] = @config[:monitoring][:applications_enable]
+              locals[:local_data][:details]                         = get_monitoring_details
+              locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
+              locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
+              # locals[:local_data][:hardware_details] = {}
+              # ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              # lines   = ex.exec_command
+              # users   = ex.parseFor('wifi users')
+              # temp    = ex.parseFor('temp').last
+              # cpu     = ex.parseFor('cpu').last
+              # ram     = ex.parseFor('ram').last
+              # storage = ex.parseFor('storage').last
+              # locals[:local_data][:hardware_details][:users] = users[2] if users.kind_of? Array
+              # locals[:local_data][:hardware_details][:temp]  = temp
+              # locals[:local_data][:hardware_details][:cpu]   = cpu
+              # locals[:local_data][:hardware_details][:ram] = ram
+              # locals[:local_data][:hardware_details][:storage] = storage
+
               erb :admin_main, locals: locals
             when 'admin_set_date'
               locals[:main_body] = :admin_set_time

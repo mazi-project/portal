@@ -1,0 +1,349 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      MAZI Zone <small>Monitoring</small>
+    </h1>
+  </div>
+</div>
+
+<% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+<% end %>
+
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <p>
+      You can use the tools bellow to control the the way your MAZI zone can collect and send data to a central point.
+    </p>
+  </div>
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Details
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to enable/disable the monitoring feature."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="enable/disable the monitoring feature">
+              <input type="checkbox" <%= monitoring_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-monitoring-switch"></div>
+            </label>
+            <span class="device-enable-msg">Enable/disable the monitoring feature.</span>
+          </div>
+        </div>
+        <% if monitoring_enabled %>
+        <div class="row">
+          <div class='col-md-12'>
+            <p>Bellow you can see the details for this MAZI zone, you can change everything by pressing the edit button on the bottom.</p>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Deployment: </td>
+                  <td><%= details[:deployment] %></td>
+                </tr>
+                <tr>
+                  <td>Administrator: </td>
+                  <td><%= details[:admin] %></td>
+                </tr>
+                <tr>
+                  <td>Title: </td>
+                  <td><%= details[:title] %></td>
+                </tr>
+                <tr>
+                  <td>Description: </td>
+                  <td><%= details[:description] %></td>
+                </tr>
+                <tr>
+                  <td>Location (lat, long): </td>
+                  <td><%= details[:loc] %></td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-primary edit-details pull-right" id='edit-monitoring-details' data-toggle="modal" data-target="#edit-details-modal"><i class="fa fa-edit"> Edit</i>
+            </a>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <% if monitoring_enabled %>
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Statistics
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <p>You can start/stop sending hardware and application monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow.</p>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th title="current status">Status</th>
+                  <th title="a description">Description</th>
+                  <th title="the action" class='text-center' style='width: 130px'>Action</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="app_inst_tr">
+                  <td><%= hardware_monitoring_status == 'active' ? '<span class="label label-success">active</span>' : '<span class="label label-danger">inactive</span>' %></td>
+                  <td>Monitoring of hardware data.</td>
+                  <td>
+                    <div class="text-center">
+                      <div class="btn-group pull-center">
+                        <a class="btn btn-primary start-hardware-data" title="Start hardware monitoring"id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal"><i class="fa fa-play"></i></a>
+                        <a class="btn btn-danger stop-hardware-monitoring-data-button" title="Stop hardware monitoring"><i class="fa fa-stop"></i></a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="app_inst_tr">
+                  <td><%= application_monitoring_status == 'active' ? '<span class="label label-success">active</span>' : '<span class="label label-danger">inactive</span>' %></td>
+                  <td>Monitoring of application data.</td>
+                  <td>
+                    <div class="text-center">
+                      <div class="btn-group pull-center">
+                        <a class="btn btn-primary start-application-data" title="Start application monitoring"id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal"><i class="fa fa-play"></i></a>
+                        <a class="btn btn-danger stop-application-monitoring-data-button" title="Stop application monitoring"><i class="fa fa-stop"></i></a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+              <tr></tr>
+              <tfoot>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- <div class='col-md-12 col-lg-7'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Hardware Statistics
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="enable/disable monitoring for hardware Statistics">
+              <input type="checkbox" <%= monitoring_hardware_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-hardware-monitoring-switch"></div>
+            </label>
+            <span class="device-enable-msg">Enable/disable monitoring for hardware Statistics.</span>
+          </div>
+        </div>
+        <% if monitoring_hardware_enabled %>
+        <div class="row">
+          <div class='col-md-12'>
+            <p>You can start/stop sending hardware monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow.</p>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Temperature: </td>
+                  <td><%= 'hardware_details[:temp]' %></td>
+                </tr>
+                <tr>
+                  <td>WiFi users: </td>
+                  <td><%= 'hardware_details[:users]' %></td>
+                </tr>
+                <tr>
+                  <td>CPU load: </td>
+                  <td><%= 'hardware_details[:cpu]' %></td>
+                </tr>
+                <tr>
+                  <td>RAM load: </td>
+                  <td><%= 'hardware_details[:ram]' %></td>
+                </tr>
+                <tr>
+                  <td>Storage load: </td>
+                  <td><%= 'hardware_details[:storage]' %></td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-danger stop-hardware-monitoring-data-button pull-right"><i class="fa fa-stop"> Stop</i></a>
+            <a class="btn btn-primary start-hardware-data pull-right" id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal"><i class="fa fa-play"> Start</i>
+            </a>
+
+          </div>
+        </div>
+        <% end %>
+        <% if monitoring_applications_enabled %>
+        <div class="row">
+          <div class='col-md-12'>
+            <p>You can start/stop sending application monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow.</p>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Guestbook: </td>
+                  <td><%= %></td>
+                </tr>
+                <tr>
+                  <td>Etherpad: </td>
+                  <td><%=  %></td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-danger stop-application-monitoring-data-button pull-right"><i class="fa fa-stop"> Stop</i></a>
+            <a class="btn btn-primary start-application-data pull-right" id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal"><i class="fa fa-play"> Start</i>
+            </a>
+
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class='col-md-12 col-lg-7'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Application Statistics
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="enable/disable monitoring for application Statistics">
+              <input type="checkbox" <%= monitoring_applications_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-applications-monitoring-switch"></div>
+            </label>
+            <span class="device-enable-msg">Enable/disable monitoring for application Statistics.</span>
+            </div>
+        </div>
+        <% if monitoring_applications_enabled %>
+        <div class="row">
+          <div class='col-md-12'>
+            <p>You can start/stop sending application monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow.</p>
+            <table class="table table-striped">
+              <tbody>
+                <tr>
+                  <td>Guestbook: </td>
+                  <td><%= %></td>
+                </tr>
+                <tr>
+                  <td>Etherpad: </td>
+                  <td><%=  %></td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btn btn-danger stop-application-monitoring-data-button pull-right"><i class="fa fa-stop"> Stop</i></a>
+            <a class="btn btn-primary start-application-data pull-right" id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal"><i class="fa fa-play"> Start</i>
+            </a>
+
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div> -->
+  <% end %>
+</div>
+
+<!-- change monitoring details modal-->
+<div class="modal fade" id="edit-details-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change monitoring details</h4>
+      </div>
+      <div class="modal-body">
+        <p>Use the form bellow to change the monitoring details of the modal</p>
+        <form class="form-signin" action="/monitor/change/details" method="post">
+          <div class="form-group">
+            <label for='monitor_deployment'>Deployment:</label>
+            <input type="text" id='monitor_deployment' name="deployment" class="form-control" value="<%= details[:deployment] %>" autofocus>
+            <label for='monitor_admin_name'>Administrator:</label>
+            <input type="text" id='monitor_admin_name' name="admin" class="form-control" value="<%= details[:admin] %>" required>
+            <label for='monitor_title'>Title:</label>
+            <input type="text" id='monitor_title' name="title" class="form-control" value="<%= details[:title] %>" required>
+            <label for='monitor_description'>Description:</label>
+            <input type="text" id='monitor_description' name="description" class="form-control" value="<%= details[:description] %>" required>
+            <label for='monitor_location'>Location (lat, long):</label>
+            <input type="text" id='monitor_location' name="loc" class="form-control" value="<%= details[:loc] %>" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- start hardware monitoring data modal-->
+<div class="modal fade" id="start-hardware-data-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start hardware monitoring data</h4>
+      </div>
+      <div class="modal-body">
+        <p>Use the form bellow to start sending hardware monitoring data</p>
+        <form class="form-signin" action="/monitor/start/hardware_data" method="post">
+          <div class="form-group">
+            <label for='monitor_end_point'>Target Server:</label>
+            <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
+            <input type="checkbox" id='monitor_temperature' name="temp" checked="checked">
+            <label for='monitor_temperature'>Temperature </label></br>
+            <input type="checkbox" id='monitor_users' name="users" checked="checked">
+            <label for='monitor_users'>WiFi users </label></br>
+            <input type="checkbox" id='monitor_cpu' name="cpu" checked="checked">
+            <label for='monitor_cpu'>CPU load</label></br>
+            <input type="checkbox" id='monitor_ram' name="ram" checked="checked">
+            <label for='monitor_ram'>Ram load</label></br>
+            <input type="checkbox" id='monitor_storage' name="storage" checked="checked">
+            <label for='monitor_storage'>Storage load</label></br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- start application monitoring data modal-->
+<div class="modal fade" id="start-application-data-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Start application monitoring data</h4>
+      </div>
+      <div class="modal-body">
+        <p>Use the form bellow to start sending hardware monitoring data</p>
+        <form class="form-signin" action="/monitor/start/application_data" method="post">
+          <div class="form-group">
+            <label for='monitor_end_point'>Target Server:</label>
+            <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
+            <input type="checkbox" id='monitor_etherpad' name="etherpad" checked="checked">
+            <label for='monitor_etherpad'>Etherpad application</label></br>
+            <input type="checkbox" id='monitor_guestbook' name="guestbook" checked="checked">
+            <label for='monitor_guestbook'>Guestbook application</label></br>
+            <input type="checkbox" id='monitor_framadate' name="framadate" checked="checked">
+            <label for='monitor_framadate'>Framadate application</label></br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
