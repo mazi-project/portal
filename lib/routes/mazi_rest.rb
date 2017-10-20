@@ -38,6 +38,8 @@ module Sinatra
               con.close if con
             end
           end
+ 
+
 
           app.post '/create/sht11/?' do
             file = File.read('/etc/mazi/sql.conf')
@@ -153,6 +155,22 @@ module Sinatra
             end
           end
 
+          app.post '/flush/framadate/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush framadate table for divice_id #{body["device_id"]} in #{body["deployment"]} Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("DELETE FROM framadate WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
           app.post '/create/guestbook/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -189,6 +207,23 @@ module Sinatra
             end
           end
 
+          app.post '/flush/guestbook/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush guestbook table for divice_id #{body["device_id"]} in #{body["deployment"]} Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("DELETE FROM guestbook WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+
           app.post '/create/etherpad/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -224,6 +259,23 @@ module Sinatra
               con.close if con
             end
           end
+
+          app.post '/flush/etherpad/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush etherpad table for divice_id #{body["device_id"]} in #{body["deployment"]} Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("DELETE FROM etherpad WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
 
           app.post '/create/statistics/?' do
             file = File.read('/etc/mazi/sql.conf')
@@ -274,6 +326,25 @@ module Sinatra
               con.close if con
             end
           end
+
+         app.post '/flush/statistics/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush statistics and users table for divice_id #{body["device_id"]} in #{body["deployment"]} Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{body["deployment"]}")
+             con.query("DELETE FROM statistics WHERE device_id LIKE '#{body["device_id"]}'")
+             con.query("DELETE FROM users WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+
 
           app.post '/deployment/register/?' do
             file = File.read('/etc/mazi/sql.conf')
