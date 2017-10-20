@@ -5,7 +5,7 @@ module Sinatra
 
         def self.registered(app)
           app.post '/create/sensehat/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -21,7 +21,7 @@ module Sinatra
           end
 
           app.post '/update/sensehat/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -40,7 +40,7 @@ module Sinatra
           end
 
           app.post '/create/sht11/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -57,7 +57,7 @@ module Sinatra
 
 
           app.post '/update/sht11/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -76,7 +76,7 @@ module Sinatra
           end
 
           app.post '/sensor/register/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)            
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -99,7 +99,7 @@ module Sinatra
           end
 
           app.get '/sensors/id/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -118,7 +118,7 @@ module Sinatra
           end
 
           app.post '/create/framadate/?' do
- 	    file = File.read('/etc/mazi/sql.json')
+ 	    file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -135,7 +135,7 @@ module Sinatra
           end
 
           app.post '/update/framadate/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -154,7 +154,7 @@ module Sinatra
           end
 
           app.post '/create/guestbook/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -171,7 +171,7 @@ module Sinatra
           end
 
           app.post '/update/guestbook/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)    
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -190,7 +190,7 @@ module Sinatra
           end
 
           app.post '/create/etherpad/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -207,7 +207,7 @@ module Sinatra
           end
 
           app.post '/update/etherpad/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -226,7 +226,7 @@ module Sinatra
           end
 
           app.post '/create/statistics/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -248,7 +248,7 @@ module Sinatra
           end
 
           app.post '/update/statistics/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -276,7 +276,7 @@ module Sinatra
           end
 
           app.post '/deployment/register/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
@@ -302,7 +302,7 @@ module Sinatra
           end
 
           app.get '/device/id/?' do
-            file = File.read('/etc/mazi/sql.json')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
