@@ -129,6 +129,10 @@ module MaziVersion
       `apt-get -y install jq`
       MaziLogger.debug "Done Installing jq."
     end
+    unless File.exists?('/usr/bin/install-wifi')
+      `wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi`
+      `chmod +x /usr/bin/install-wifi`
+    end
   end
 end
 
