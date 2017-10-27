@@ -55,11 +55,11 @@ class MaziApp < Sinatra::Base
       @config[:monitoring][:applications_enable] = true
       writeConfigFile
     end
-    unless File.exists?('/etc/mazi/sql.json')
+    unless File.exists?('/etc/mazi/sql.conf')
       tmp = {}
       tmp[:username] = 'root'
       tmp[:password] = 'mazizone'
-      File.open("/etc/mazi/sql.json","w") do |f|
+      File.open("/etc/mazi/sql.conf","w") do |f|
         f.write(tmp.to_json)
       end
     end
