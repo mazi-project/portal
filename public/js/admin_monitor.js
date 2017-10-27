@@ -1,5 +1,4 @@
-$( document ).ready(function() {
-  $('.enabled-monitoring-switch').click(function(){
+$( document ).ready(function() {  $('.enabled-monitoring-switch').click(function(){
     $.ajax({
       url: '/monitor/toggle/overall',
       type: 'POST',
@@ -30,21 +29,23 @@ $( document ).ready(function() {
   });
 
   $('.stop-hardware-monitoring-data-button').click(function(){
+    $(this).attr('disabled', true);
     $.ajax({
       url: '/monitor/stop/hardware_data',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        setTimeout(location.reload.bind(location), 1500);
       }
     });
   });
 
   $('.stop-application-monitoring-data-button').click(function(){
+    $(this).attr('disabled', true);
     $.ajax({
       url: '/monitor/stop/application_data',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        setTimeout(location.reload.bind(location), 1500);
       }
     });
   });

@@ -200,10 +200,14 @@ module Sinatra
               locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
               ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
               locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
-              ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
-              locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
-              locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
-              locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+              if locals[:local_data][:net_info][:second_antenna] == 'inactive'
+                locals[:local_data][:net_info][:available_ssids] = []
+              else
+                ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
+                locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
+                locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+                locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+              end
               ex4 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
               router_stat = ex4.exec_command.first.split
               locals[:local_data][:net_info][:owrt_router_available] = router_stat.last
@@ -213,7 +217,6 @@ module Sinatra
               ex6 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
               cur_out = ex6.exec_command.first.split
               locals[:local_data][:net_info][:domain] = cur_out[1]
-              puts locals.inspect
               erb :admin_main, locals: locals
             when 'admin_configuration'
               unless authorized?
@@ -295,19 +298,8 @@ module Sinatra
               locals[:local_data][:details]                         = get_monitoring_details
               locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
               locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
-              # locals[:local_data][:hardware_details] = {}
-              # ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              # lines   = ex.exec_command
-              # users   = ex.parseFor('wifi users')
-              # temp    = ex.parseFor('temp').last
-              # cpu     = ex.parseFor('cpu').last
-              # ram     = ex.parseFor('ram').last
-              # storage = ex.parseFor('storage').last
-              # locals[:local_data][:hardware_details][:users] = users[2] if users.kind_of? Array
-              # locals[:local_data][:hardware_details][:temp]  = temp
-              # locals[:local_data][:hardware_details][:cpu]   = cpu
-              # locals[:local_data][:hardware_details][:ram] = ram
-              # locals[:local_data][:hardware_details][:storage] = storage
+              locals[:local_data][:hardware_nof_entries]            = get_nof_hardware_data_entries
+              locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
 
               erb :admin_main, locals: locals
             when 'admin_set_date'
@@ -325,6 +317,14 @@ module Sinatra
                 redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_change_password
+              erb :admin_main, locals: locals
+            when 'admin_change_mysql_password'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:main_body] = :admin_change_mysql_password
               erb :admin_main, locals: locals
              when 'admin_change_username'
               unless authorized?

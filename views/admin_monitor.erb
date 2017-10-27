@@ -95,25 +95,41 @@
               </thead>
               <tbody>
                 <tr class="app_inst_tr">
-                  <td><%= hardware_monitoring_status == 'active' ? '<span class="label label-success">active</span>' : '<span class="label label-danger">inactive</span>' %></td>
+                  <% if hardware_monitoring_status['overall'] %>
+                    <% hardware_label_title_message = '' %>
+                    <% hardware_monitoring_status.each do |key, value| %>
+                      <% next if key == 'overall' || key == 'network'%>
+                      <% hardware_label_title_message += "#{key} : #{value} \n" %>
+                    <% end %>
+                  <% end %>
+                  <td><%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' title='#{hardware_label_title_message}'>active</span>" : '<span class="label label-danger" title="No hardware monitoring tasks currently running.">inactive</span>' %></td>
                   <td>Monitoring of hardware data.</td>
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-hardware-data" title="Start hardware monitoring"id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal"><i class="fa fa-play"></i></a>
-                        <a class="btn btn-danger stop-hardware-monitoring-data-button" title="Stop hardware monitoring"><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-primary start-hardware-data" title="Start hardware monitoring" id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal" <%= 'disabled' if hardware_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-warning stop-hardware-monitoring-data-button" title="Stop hardware monitoring" <%= 'disabled' unless hardware_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-danger flush-hardware-monitoring-data-button" title="Delete all hardware monitoring data from the local database" id='flush-monitoring-hardware-data' data-toggle="modal" data-target="#flush-hardware-data-modal"><i class="fa fa-remove"></i></a>
                       </div>
                     </div>
                   </td>
                 </tr>
                 <tr class="app_inst_tr">
-                  <td><%= application_monitoring_status == 'active' ? '<span class="label label-success">active</span>' : '<span class="label label-danger">inactive</span>' %></td>
+                  <% if application_monitoring_status['overall'] %>
+                    <% application_label_title_message = '' %>
+                    <% application_monitoring_status.each do |key, value| %>
+                      <% next if key == 'overall' || key == 'network'%>
+                      <% application_label_title_message += "#{key} : #{value} \n" %>
+                    <% end %>
+                  <% end %>
+                  <td><%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' title='#{application_label_title_message}'>active</span>" : '<span class="label label-danger" title="No application monitoring tasks currently running.">inactive</span>' %></td>
                   <td>Monitoring of application data.</td>
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-application-data" title="Start application monitoring"id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal"><i class="fa fa-play"></i></a>
-                        <a class="btn btn-danger stop-application-monitoring-data-button" title="Stop application monitoring"><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-primary start-application-data" title="Start application monitoring"id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal" <%= 'disabled' if application_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-warning stop-application-monitoring-data-button" title="Stop application monitoring" <%= 'disabled' unless application_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-danger flush-application-monitoring-data-button" id='flush-monitoring-application-data' data-toggle="modal" data-target="#flush-application-data-modal" title="Delete all application monitoring data from the local database"><i class="fa fa-remove"></i></a>
                       </div>
                     </div>
                   </td>
@@ -219,6 +235,106 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Show hardware monitoring information modal-->
+<div class="modal fade" id="hw-monitoring-info-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Harware monitoring information</h4>
+      </div>
+      <div class="modal-body">
+        <p>Current status for hardware monitoring proccesses: </p>
+        <p>
+          Temperature  : <%= hardware_monitoring_status['temperature'] %>
+        </p>
+        <p>
+          WiFi users   : <%= hardware_monitoring_status['users'] %>
+        </p>
+        <p>
+          CPU load     : <%= hardware_monitoring_status['cpu'] %>
+        </p>
+        <p>
+          RAM load     : <%= hardware_monitoring_status['ram'] %>
+        </p>
+        <p>
+          Storage load : <%= hardware_monitoring_status['storage'] %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Show application monitoring information modal-->
+<div class="modal fade" id="app-monitoring-info-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Application monitoring information</h4>
+      </div>
+      <div class="modal-body">
+        <p>Current status for hardware monitoring proccesses: </p>
+        <p>
+          Guest Book : <%= application_monitoring_status['guestbook'] %>
+        </p>
+        <p>
+          Etherpad   : <%= application_monitoring_status['etherpad'] %>
+        </p>
+        <p>
+          Framadate  : <%= application_monitoring_status['framadate'] %>
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- flush hardware monitoring data modal-->
+<div class="modal fade" id="flush-hardware-data-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete hardware monitoring data</h4>
+      </div>
+      <div class="modal-body">
+        <p>Use the button bellow to delete all hardware monitoring data from the local database. Currently there are <b><%= hardware_nof_entries["statistics"].to_i + hardware_nof_entries["users"].to_i %></b> entries in the database.</p>
+        <form class="form-signin" action="/monitor/flush/hardware_data" method="post">
+          <div class="form-group">
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Remove</button>
+          </div>
+        </form>
+        <small>*this action will take several seconds to be fully executed, so please wait before refreshing the page. </small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- flush application monitoring data modal-->
+<div class="modal fade" id="flush-application-data-modal" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Delete application monitoring data</h4>
+      </div>
+      <div class="modal-body">
+        <p>Use the button bellow to delete all hardware monitoring data from the local database. Currently there are <b><%= application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i %></b> entries in the database.</p>
+        <form class="form-signin" action="/monitor/flush/application_data" method="post">
+          <div class="form-group">
+            <button class="btn btn-lg btn-danger btn-block" type="submit">Remove</button>
+          </div>
+        </form>
+        <small>*this action will take several seconds to be fully executed, so please wait before refreshing the page. </small>
       </div>
     </div>
   </div>

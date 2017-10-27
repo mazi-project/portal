@@ -23,10 +23,8 @@ module Sinatra
               disable_monitorings
             when "applications"
               toggle_applications_monitoring_enable
-              puts @config
             when "hardware"
               toggle_hardware_monitoring_enable
-              puts @config
             else
 
             end
@@ -62,7 +60,6 @@ module Sinatra
             end
             case type
             when 'hardware_data'
-              puts "Hardware start"
               if params['end_point'].nil? || params['end_point'].empty?
                 MaziLogger.debug "End point url not specified."
                 session['error'] = "Target server is mandatory, plese try again and make sure you specify the target server!"
@@ -84,19 +81,19 @@ module Sinatra
 
               start_hardware_monitoring(url, arguements)
             when 'application_data'
-              puts "Application start"
               if params['end_point'].nil? || params['end_point'].empty?
                 MaziLogger.debug "End point url not specified."
                 session['error'] = "Target server is mandatory, plese try again and make sure you specify the target server!"
                 redirect back
               end
               url = params['end_point']
-              arguements = ""
-              arguements += "-n guestbook " if params[:guestbook] == 'on'
-              arguements += "-n etherpad "  if params[:etherpad]  == 'on'
-              arguements += "-n framadate " if params[:framadate] == 'on'
+              arguements = "-n '"
+              arguements += "guestbook " if params[:guestbook] == 'on'
+              arguements += "etherpad "  if params[:etherpad]  == 'on'
+              arguements += "framadate " if params[:framadate] == 'on'
+              arguements += "'"
 
-              if arguements == ""
+              if arguements == "-n ''"
                 MaziLogger.debug "No metrics selected."
                 session['error'] = "At least one metric must be selected."
                 redirect back
@@ -124,6 +121,27 @@ module Sinatra
               stop_hardware_monitoring
             when 'application_data'
               stop_application_monitoring
+            end
+            redirect "/admin_monitor"
+          end
+
+          app.post '/monitor/flush/:type/?' do |type|
+            MaziLogger.debug "request: post/monitor/flush/data from ip: #{request.ip} type: #{type} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              return {error: 'Not Authorized!', action: action}.to_json
+            end
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode exec script"
+              session['error'] = "This portal runs on Demo mode! This action would have toggled the monitoring feature."
+              redirect back
+            end
+            case type
+            when 'hardware_data'
+              flush_hardware_data
+            when 'application_data'
+              flush_application_data
             end
             redirect "/admin_monitor"
           end
