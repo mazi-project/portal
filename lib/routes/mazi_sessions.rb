@@ -108,8 +108,29 @@ module Sinatra
             session[:username] = nil
             redirect '/admin_login'
           end
-        end
 
+          app.post '/admin_change_mysql_password' do
+            MaziLogger.debug "request: post/admin_change_mysql_password from ip: #{request.ip} params: #{params.inspect}"
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode change password"
+              session['error'] = "This portal runs on Demo mode! This action would have changed the admin password on the MySQL server."
+              redirect '/admin_change_mysql_password'
+            end
+            unless valid_mysql_password?(params['old-password'])
+              MaziLogger.debug "Incorrect old password"
+              session['error'] = "Incorrect old password"
+              redirect '/admin_change_mysql_password'
+            end
+            unless params['new-password'] == params['new-password-confirm']
+              MaziLogger.debug "Password confirmation missmatch"
+              session['error'] = "Password confirmation missmatch"
+              redirect '/admin_change_mysql_password'
+            end
+            change_mysql_password(params['old-password'], params['new-password'])
+            session['error'] = nil
+            redirect '/admin'
+          end
+        end
       end
     end
   end

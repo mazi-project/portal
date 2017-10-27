@@ -307,6 +307,15 @@ module MaziConfig
     writeConfigFile(newfile, '/etc/mazi/config.yml')
   end
 
+  def change_mysql_password(old_password, new_password)
+    `mysqladmin -u root -p'#{old_password}' password #{new_password}`
+    old_details = JSON.parse(File.read('/etc/mazi/sql.conf'), symbolize_names: true)
+    old_details[:password] = new_password
+    File.open("/etc/mazi/sql.conf","w") do |f|
+      f.write(old_details.to_json)
+    end
+  end
+
   def update_timezone(timezone)
     `echo "#{timezone}" > /etc/timezone`
     `dpkg-reconfigure -f noninteractive tzdata`
