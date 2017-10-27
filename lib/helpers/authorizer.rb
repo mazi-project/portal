@@ -28,9 +28,6 @@ module Authorizer
   def valid_mysql_password?(password)
     file  = File.read('/etc/mazi/sql.conf')
     data  = JSON.parse(file)
-    puts data
-    puts data['password'], password
-    puts data["password"] == password
     data["password"] == password
   end
 end
