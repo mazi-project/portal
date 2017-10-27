@@ -113,6 +113,14 @@ module MaziVersion
       end
     end
 
+    # version 2.0
+    unless File.exists?('/usr/bin/install-wifi')
+      MaziLogger.debug "install-wifi script not found. Installing."
+      `wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi`
+      `chmod +x /usr/bin/install-wifi`
+      MaziLogger.debug "Done Installing install-wifi script."
+    end
+
     # version 1.8.5
     MaziLogger.debug "  Checking sshpass package"
     unless `dpkg -s sshpass | grep Status`.include? "install ok installed"
@@ -128,10 +136,6 @@ module MaziVersion
       MaziLogger.debug "jq package not found. Installing."
       `apt-get -y install jq`
       MaziLogger.debug "Done Installing jq."
-    end
-    unless File.exists?('/usr/bin/install-wifi')
-      `wget http://www.fars-robotics.net/install-wifi -O /usr/bin/install-wifi`
-      `chmod +x /usr/bin/install-wifi`
     end
   end
 end
