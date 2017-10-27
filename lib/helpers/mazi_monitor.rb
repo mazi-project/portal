@@ -100,9 +100,12 @@ module MaziMonitor
     data  = JSON.parse(file)
     file2 = File.read('/etc/mazi/mazi.conf')
     data2 = JSON.parse(file2)
-    output = {}
+    output              = {}
+    output['guestbook'] = '0'
+    output['etherpad']  = '0'
+    output['framadate'] = '0'
     begin
-      con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{data2["deployment"]}")
+      con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
       results = con.query("SHOW TABLE STATUS")
       results.each do | row |
         output[row.first] = row[4] if row.first == 'etherpad' || row.first == 'guestbook' || row.first == 'framadate'
@@ -110,6 +113,7 @@ module MaziMonitor
       return output
     rescue Mysql::Error => e
       MaziLogger.error e.message
+      return output
     ensure
       con.close if con
     end
@@ -120,9 +124,11 @@ module MaziMonitor
     data  = JSON.parse(file)
     file2 = File.read('/etc/mazi/mazi.conf')
     data2 = JSON.parse(file2)
-    output = {}
+    output               = {}
+    output['statistics'] = '0'
+    output['users']      = '0'
     begin
-      con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "#{data2["deployment"]}")
+      con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
       results = con.query("SHOW TABLE STATUS")
       results.each do | row |
         output[row.first] = row[4] if row.first == 'statistics' || row.first == 'users'
@@ -130,6 +136,7 @@ module MaziMonitor
       return output
     rescue Mysql::Error => e
       MaziLogger.error e.message
+      return output
     ensure
       con.close if con
     end

@@ -55,6 +55,34 @@ class MaziApp < Sinatra::Base
       @config[:monitoring][:applications_enable] = true
       writeConfigFile
     end
+    unless File.exists?('/etc/mazi/mazi.conf')
+      tmp = {}
+      tmp[:deployment]  = 'MAZI Zone'
+      tmp[:admin]       = 'John Doe'
+      tmp[:title]       = 'Default MAZI Zone'
+      tmp[:description] = 'This is a default MAZI Zone'
+      tmp[:loc]         = '0.000000, 0.000000'
+      tmp[:mode]        = 'offline'
+      File.open("/etc/mazi/mazi.conf","w") do |f|
+        f.write(tmp.to_json)
+      end
+    else
+      mode = File.read('/etc/mazi/mazi.conf')
+      begin
+        JSON.parse(mode)
+      rescue JSON::ParserError
+        tmp = {}
+        tmp[:deployment]  = 'MAZI Zone'
+        tmp[:admin]       = 'John Doe'
+        tmp[:title]       = 'Default MAZI Zone'
+        tmp[:description] = 'This is a default MAZI Zone'
+        tmp[:loc]         = '0.000000, 0.000000'
+        tmp[:mode]        = mode.strip
+        File.open("/etc/mazi/mazi.conf","w") do |f|
+          f.write(tmp.to_json)
+        end
+      end
+    end
     unless File.exists?('/etc/mazi/sql.conf')
       tmp = {}
       tmp[:username] = 'root'
