@@ -143,14 +143,14 @@ module MaziMonitor
     sleep 5
   end
 
-  def flush_application_data
+  def flush_application_data(guestbook, etherpad, framadate)
     command1 = "sh /root/back-end/mazi-appstat.sh -n etherpad --store flush"
     command2 = "sh /root/back-end/mazi-appstat.sh -n guestbook --store flush"
     command3 = "sh /root/back-end/mazi-appstat.sh -n framadate --store flush"
     Thread.new do
-      `#{command1}`
-      `#{command2}`
-      `#{command3}`
+      `#{command1}` if etherpad == 'on'
+      `#{command2}` if guestbook == 'on'
+      `#{command3}` if framadate == 'on'
     end
     sleep 5
   end

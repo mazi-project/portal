@@ -49,4 +49,14 @@ $( document ).ready(function() {  $('.enabled-monitoring-switch').click(function
       }
     });
   });
+
+  $('.hw-mon-stat-lab').click(function(){
+    console.log('aa');
+    $('#hw-monitoring-info-modal').modal('show');
+  });
+
+  $('.app-mon-stat-lab').click(function(){
+    console.log('aa');
+    $('#app-monitoring-info-modal').modal('show');
+  });
 });

@@ -141,7 +141,7 @@ module Sinatra
             when 'hardware_data'
               flush_hardware_data
             when 'application_data'
-              flush_application_data
+              flush_application_data(params['guestbook'], params['etherpad'], params['framadate'])
             end
             redirect "/admin_monitor"
           end
