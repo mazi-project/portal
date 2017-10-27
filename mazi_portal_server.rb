@@ -86,7 +86,7 @@ class MaziApp < Sinatra::Base
     unless File.exists?('/etc/mazi/sql.conf')
       tmp = {}
       tmp[:username] = 'root'
-      tmp[:password] = 'mazizone'
+      tmp[:password] = 'm@z1'
       File.open("/etc/mazi/sql.conf","w") do |f|
         f.write(tmp.to_json)
       end
