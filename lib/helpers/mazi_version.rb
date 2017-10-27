@@ -128,6 +128,7 @@ module MaziVersion
       `sh /root/back-end/update.sh`
       MaziLogger.debug "Done Installing sshpass."
       ConfigCaller.new.update_config
+      `service mazi-portal restart`
     end
 
     # version 2.0
@@ -136,6 +137,7 @@ module MaziVersion
       MaziLogger.debug "jq package not found. Installing."
       `apt-get -y install jq`
       MaziLogger.debug "Done Installing jq."
+      `service mazi-portal restart`
     end
   end
 end
