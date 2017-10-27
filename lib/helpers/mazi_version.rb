@@ -113,12 +113,21 @@ module MaziVersion
       end
     end
 
+    # version 1.8.5
     MaziLogger.debug "  Checking sshpass package"
     unless `dpkg -s sshpass | grep Status`.include? "install ok installed"
       MaziLogger.debug "sshpass package not found. Installing."
       `sh /root/back-end/update.sh`
       MaziLogger.debug "Done Installing sshpass."
       ConfigCaller.new.update_config
+    end
+
+    # version 2.0
+    MaziLogger.debug "  Checking jq package"
+    unless `dpkg -s jq | grep Status`.include? "install ok installed"
+      MaziLogger.debug "jq package not found. Installing."
+      `apt-get -y install jq`
+      MaziLogger.debug "Done Installing jq."
     end
   end
 end
