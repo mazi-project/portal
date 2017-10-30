@@ -190,7 +190,7 @@ module Sinatra
               password = ex.parseFor('password')
               locals[:local_data][:net_info][:password] = password[1] if password.kind_of? Array
               mode = ex.parseFor('mode')
-              locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
+              locals[:local_data][:net_info][:mode] = mode[1].gsub('"', '') if mode.kind_of? Array
               ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
               locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
               if locals[:local_data][:net_info][:second_antenna] == 'inactive'
