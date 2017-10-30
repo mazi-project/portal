@@ -64,19 +64,12 @@ module Sinatra
               Mazi::Model::ApplicationInstance.all.each do |app|
                 locals[:local_data][:clicks] += app.click_counter
               end
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              lines = ex.exec_command
-              temp = ex.parseFor("'C").first.split('=').last
-              locals[:local_data][:temp] = temp
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-c'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              cpu = ex.exec_command.first
-              locals[:local_data][:cpu] = cpu
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-r'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              ram = ex.exec_command.first
-              locals[:local_data][:ram] = ram
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              storage = ex.exec_command.first
-              locals[:local_data][:storage] = storage
+              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex.exec_command
+              locals[:local_data][:temp]     = ex.parseFor("temp:").last
+              locals[:local_data][:cpu]      = ex.parseFor("cpu:").last
+              locals[:local_data][:ram]      = ex.parseFor("ram:").last
+              locals[:local_data][:storage]  = ex.parseFor("storage:").last
               erb :index_main, locals: locals
             when 'index_sensors'
               MaziLogger.debug "params: #{params.inspect}"
