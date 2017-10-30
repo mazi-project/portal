@@ -260,11 +260,10 @@ module Sinatra
           app.put '/update/?' do
             MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
 
-            version_update
-            update_config_file
-
             Thread.new do
-              sleep 2
+              sleep 1
+              version_update
+              update_config_file
               MaziLogger.debug 'Restarting'
               `service mazi-portal restart`
             end
