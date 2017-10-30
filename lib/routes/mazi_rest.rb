@@ -8,7 +8,6 @@ module Sinatra
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-#            body = JSON.parse(request.body.read)
             MaziLogger.debug "Create sensehat table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -45,7 +44,6 @@ module Sinatra
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-#            body = JSON.parse(request.body.read)
             MaziLogger.debug "Create sht11 table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -123,7 +121,6 @@ module Sinatra
  	    file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-     #       body = JSON.parse(request.body.read)
             MaziLogger.debug "Create framadate table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -175,7 +172,6 @@ module Sinatra
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-          #  body = JSON.parse(request.body.read)
             MaziLogger.debug "Create guestbook table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -228,7 +224,6 @@ module Sinatra
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-          #  body = JSON.parse(request.body.read)
             MaziLogger.debug "Create etherpad table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -281,7 +276,6 @@ module Sinatra
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-#            body = JSON.parse(request.body.read)
             MaziLogger.debug "Create tables statistics and users in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
@@ -305,12 +299,9 @@ module Sinatra
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update statistics and users tables in monitoring Database"
+            MaziLogger.debug "Update statistics table in monitoring Database"
             begin
-             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO users(device_id, timestamp, online_users) 
-                        VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}','#{body["users"]}')")
-          
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")          
              con.query("INSERT INTO statistics(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit) 
                         VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                              '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}','#{body["network"]["upload"]}',
@@ -327,15 +318,49 @@ module Sinatra
             end
           end
 
+         app.post '/update/users/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+            MaziLogger.debug "Update users table in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("INSERT INTO users(device_id, timestamp, online_users)
+                        VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}','#{body["users"]}')" )
+          
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+         end
+
          app.post '/flush/statistics/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
-            MaziLogger.debug "Flush statistics and users table for divice_id #{body["device_id"]} in monitoring Database"
+            MaziLogger.debug "Flush statistics table for divice_id #{body["device_id"]} in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("DELETE FROM statistics WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+         app.post '/flush/users/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush users table for divice_id #{body["device_id"]} in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("DELETE FROM users WHERE device_id LIKE '#{body["device_id"]}'")
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -359,11 +384,19 @@ module Sinatra
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
             
              con.query("CREATE TABLE IF NOT EXISTS deployments(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50))")
-             con.query("INSERT INTO deployments(deployment) VALUES('#{body["deployment"]}')")
-             id = con.query("SELECT max(id) FROM deployments")
-             deployment_id = id.fetch_row.join.to_i  
-             
 
+             id = con.query("SELECT id FROM deployments WHERE deployment LIKE '#{body["deployment"]}'")
+             deployment_id = id.fetch_row
+             
+             unless deployment_id.nil?
+                deployment_id = deployment_id.first
+               
+             else
+                con.query("INSERT INTO deployments(deployment) VALUES('#{body["deployment"]}')")
+                id = con.query("SELECT max(id) FROM deployments")
+                deployment_id = id.fetch_row.first
+             end
+                                   
              con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment_id INT(4), administrator VARCHAR(50),
                         title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
              con.query("INSERT INTO devices(deployment_id, administrator, title, description, location)
@@ -388,8 +421,16 @@ module Sinatra
             MaziLogger.debug "Search for device ID in monitoring database"
             begin
             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+           
+            id = con.query("SELECT id FROM deployments WHERE deployment LIKE '#{body["deployment"]}'")
+            deployment_id = id.fetch_row
+            unless deployment_id.nil?
+               deployment_id = deployment_id.first
+            end        
+
             id = con.query("SELECT id FROM devices WHERE title LIKE '#{body["title"]}'AND administrator='#{body["admin"]}'
-                            AND description='#{body["description"]}' AND location='#{body["loc"]}' ")
+                            AND description='#{body["description"]}' AND location='#{body["loc"]}' AND deployment_id=#{deployment_id}")
+
             if( id != nil )
                return id.fetch_row
             end
@@ -405,4 +446,5 @@ module Sinatra
     end
   end
 end
+
 
