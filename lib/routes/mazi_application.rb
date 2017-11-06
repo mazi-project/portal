@@ -260,6 +260,16 @@ module Sinatra
 
           app.post '/application_admin/:application/:action/?' do |application, action|
             MaziLogger.debug "request: post/application_admin from ip: #{request.ip} application: #{application} action: #{action} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=admin_guestbook'
+            end
+            if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode application action"
+                session['error'] = "This portal runs on Demo mode! This action would have changed the configuration of #{application}."
+                redirect back
+              end
 
             case application
             when 'guestbook'
