@@ -22,12 +22,12 @@
     <div class="row">
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Save Snapshot
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to take a snapshot."></i>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
               <form id="save-snapshot-form" action="/snapshot" method="post">
@@ -39,18 +39,18 @@
                 <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> Save</button>
               </form>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Load Snapshot
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to load a snapshot."></i>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
               <% unless dbs.nil? || dbs.empty? %>
@@ -62,16 +62,16 @@
                     <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
                     <% end %>
                   </select>
-                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load.</small>
+                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load. MAZI portal will restart. </small>
                 </div>
                 <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-remove"></i> Delete</button>
                 <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> Load</button>
               </form>
               <% else %>
-              <p class="text-center">Currently, there are no snapshots saved.</p>
+              <p class="text-center" style="margin-bottom: 82px">Currently, there are no snapshots saved.</p>
               <% end %>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -80,12 +80,12 @@
     <div class="row">
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Import/Export Snapshot
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to export a snapshot to a zip file. Or import a zip file as a snapshot."></i>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row" style="margin-right: -11px; margin-left: -11px;">
               <% unless dbs.nil? || dbs.empty? %>
@@ -101,11 +101,11 @@
                 <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> Export</button>
               </form>
               <% else %>
-              <p class="text-center">Currently, there are no snapshots saved.</p>
+              <p class="text-center" style="margin-bottom: 48px">Currently, there are no snapshots saved.</p>
               <% end %>
               <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> Import</a>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
@@ -121,12 +121,12 @@
   </div>
   <div class='col-lg-3 col-md-6 col-sm-12'>
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <div class="panel-title">Interview
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
         </div>
-      </div> 
-      <!-- panel body --> 
+      </div>
+      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <form id="load-snapshot-form" action="/snapshot" method="post">
@@ -139,16 +139,16 @@
             <button type="button" class="btn btn-success pull-right" id="download-interview-snapshot"><i class="fa fa-download"></i> Export</button>
           </form>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 <!--   <div class='col-lg-3 col-md-6 col-sm-12'>
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <div class="panel-title">Etherpad
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
         </div>
-      </div> 
+      </div>
       <div class="panel-body">
         <div class="row">
           <form id="load-snapshot-form" action="/snapshot" method="post">
@@ -161,17 +161,17 @@
             <button type="button" class="btn btn-success pull-right" id="download-etherpad-snapshot"><i class="fa fa-download"></i> Export</button>
           </form>
         </div>
-      </div> 
+      </div>
     </div>
   </div> -->
   <div class='col-lg-3 col-md-6 col-sm-12'>
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <div class="panel-title">GuestBook
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
         </div>
-      </div> 
-      <!-- panel body --> 
+      </div>
+      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <form id="load-snapshot-form" action="/snapshot" method="post">
@@ -184,7 +184,7 @@
             <button type="button" class="btn btn-success pull-right" id="download-guestbook-snapshot"><i class="fa fa-download"></i> Export</button>
           </form>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>

@@ -4,6 +4,8 @@ module Sinatra
       module MaziConfig
 
         def self.registered(app)
+
+          # serve files on snapshots folder for dl
           app.get '/snapshots/:file' do |file|
             MaziLogger.debug "request: get/snapshots/#{file}: #{request.ip}"
             if @config[:general][:mode] == 'demo'
