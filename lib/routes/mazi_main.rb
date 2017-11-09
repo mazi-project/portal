@@ -295,6 +295,17 @@ module Sinatra
               locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
 
               erb :admin_main, locals: locals
+            when 'admin_logs'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/admin_logs.js"
+              locals[:main_body] = :admin_logs
+              locals[:local_data][:portal_log] = MaziLogger.read_log_file(500)
+
+              erb :admin_main, locals: locals
             when 'admin_set_date'
               locals[:main_body] = :admin_set_time
               locals[:local_data][:first_login] = false
