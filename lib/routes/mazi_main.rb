@@ -48,7 +48,7 @@ module Sinatra
               locals[:local_data][:notifications_read]    = session['notifications_read']
               locals[:local_data][:config_data]           = @config[:portal_configuration]
               erb :index_main, locals: locals
-            when 'index_statistics'
+            when 'index_system' #used to be statistics
               session['notifications_read'] = [] if session['notifications_read'].nil?
               locals[:js] << "js/index_statistics.js"
               locals[:main_body] = :index_statistics
@@ -162,6 +162,7 @@ module Sinatra
               locals[:main_body] = :admin_application
               locals[:local_data][:applications]  = Mazi::Model::Application.all
               locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
+              locals[:local_data][:can_have_multiple_instances] = ['NextCloud']
               erb :admin_main, locals: locals
             when 'admin_documentation'
               unless authorized?

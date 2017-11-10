@@ -43,8 +43,8 @@
       background-color: #<%= local_data[:config_data][:side_panel_color]%> !important;
     }
 
-    .navbar-inverse .navbar-nav > .active > a, 
-    .navbar-inverse .navbar-nav > .active > a:hover, 
+    .navbar-inverse .navbar-nav > .active > a,
+    .navbar-inverse .navbar-nav > .active > a:hover,
       .navbar-inverse .navbar-nav > .active > a:focus {
       background-color: #<%= local_data[:config_data][:side_panel_active_color]%> !important;
     }
@@ -112,7 +112,7 @@
             <% next unless notification.enabled %>
             <li>
               <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
-                <%= local_data[:notifications_read].include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %> 
+                <%= local_data[:notifications_read].include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %>
               </a>
             </li>
             <% end %>
@@ -126,7 +126,7 @@
             <a href="index"><i class="fa fa-fw fa-dashboard"></i> Applications</a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_statistics"><i class="fa fa-fw fa-area-chart"></i> Statistics</a>
+            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> System</a>
           </li>
           <% if sensors_enabled %>
           <li <%= 'class="active"' if main_body == :index_sensors %>>

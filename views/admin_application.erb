@@ -1,3 +1,10 @@
+<script type="text/javascript">
+  <% applications.each do |app| %>
+  var <%= "#{app.name.gsub('-', '_').downcase}_name = '#{app.name}'" %>;
+  var <%= "#{app.name.gsub('-', '_').downcase}_url  = '#{app.url}'" %>;
+  <% end %>
+</script>
+
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
@@ -213,17 +220,21 @@
         <form class="form-signin" action="/application" method="post">
           <div class="form-group">
             <input type="hidden" name="instance" value='true'>
-            <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
-            <input type="text" name="url" class="form-control" placeholder="URL" required>
-            <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
-            <select class="form-control" name='application'>
+            <select class="form-control" id="create_inst_app_name_sl" name='application'>
+            <% first_app_url = nil %>
             <% applications.each do |app| %>
+              <% next unless can_have_multiple_instances.include?(app.name) || app.application_instances.length < 1 %>
               <option value='<%= app.id%>'><%= app.name %></option>
+              <% first_app_url = app.url if first_app_url.nil?%>
             <% end %>
             </select>
+            <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
+            <input type="text" name="url" class="form-control" id="create_inst_app_url_in" placeholder="URL" value='<%= first_app_url %>' required>
+            <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
           </div>
         </form>
+        <small>Help: Some applications cannot have multiple instances for the moment, this is the reason some of them might be missing.</small>
       </div>
     </div>
   </div>

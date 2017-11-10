@@ -132,7 +132,7 @@ $( document ).ready(function() {
           location.reload();
         }
         else{
-          window.setTimeout(function(){location.reload()},3000);
+          window.setTimeout(function(){location.reload()}, 3000);
         }
       }
     });
@@ -153,9 +153,15 @@ $( document ).ready(function() {
           location.reload();
         }
         else{
-          window.setTimeout(function(){location.reload()},3000);
+          window.setTimeout(function(){location.reload()}, 3000);
         }
       }
     });
+  });
+
+  $("#create_inst_app_name_sl").change(function() {
+    optionSelected = $("option:selected", this).text();
+    new_url = eval(optionSelected.toLowerCase().replace('-', '_') + "_url");
+    $("#create_inst_app_url_in").val(new_url);
   });
 });
