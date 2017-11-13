@@ -137,11 +137,14 @@ module Sinatra
               ssid.shift
               locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
               mode = ex.parseFor('mode')
-              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              lines = ex2.exec_command
-              users = ex2.parseFor('wifi users')
+              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex2.exec_command
               locals[:local_data][:users]                 = {}
-              locals[:local_data][:users][:online]        = users[2] if users.kind_of? Array
+              locals[:local_data][:users][:online]        = ex2.parseFor('wifi users').last
+              locals[:local_data][:temp]                  = ex2.parseFor("temp:").last
+              locals[:local_data][:cpu]                   = ex2.parseFor("cpu:").last
+              locals[:local_data][:ram]                   = ex2.parseFor("ram:").last
+              locals[:local_data][:storage]               = ex2.parseFor("storage:").last
               locals[:local_data][:net_info][:mode]       = mode[1] if mode.kind_of? Array
               locals[:local_data][:applications]          = Mazi::Model::Application.all
               locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all

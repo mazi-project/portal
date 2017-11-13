@@ -14,24 +14,47 @@
   <% end %>
 
   <div class="col-md-4 col-lg-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Welcome</h3>
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Welcome</h3>
+        </div>
+        <div class="panel-body">
+          <p>
+            <strong>The MAZI Zone Administration panel</strong> is the main tool, used to <strong>manage</strong> this MAZI Zone portal, as well as the networking aspect of this MAZI Zone.
+          </p>
+          <p>
+            Please use the menu to navigate to the various tools, which can:
+            <ul>
+              <li> Manage the supported Applications</li>
+              <li> Configure the MAZI Zone network</li>
+              <li> Configure the visual representation of the portal</li>
+              <li> Add/remove notifications on the portal</li>
+              <li> Export/import snapshots</li>
+            </ul>
+          </p>
+        </div>
       </div>
-      <div class="panel-body">
-        <p>
-          <strong>The MAZI Zone Administration panel</strong> is the main tool, used to <strong>manage</strong> this MAZI Zone portal, as well as the networking aspect of this MAZI Zone.
-        </p>
-        <p>
-          Please use the menu to navigate to the various tools, which can:
-          <ul>
-            <li> Manage the supported Applications</li>
-            <li> Configure the MAZI Zone network</li>
-            <li> Configure the visual representation of the portal</li>
-            <li> Add/remove notifications on the portal</li>
-            <li> Export/import snapshots</li>
-          </ul> 
-        </p>
+    </div>
+    <div class="row">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">MAZI Zone Hardware Information</h3>
+        </div>
+        <div class="list-group">
+          <a class="list-group-item">
+            <i class="fa fa-thermometer"></i> System Temperature <span class="label <%= temp.gsub("'C", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= temp %></span>
+          </a>
+          <a class="list-group-item">
+            <i class="fa fa-microchip"></i> CPU Load <span class="label <%= cpu.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= cpu %></span>
+          </a>
+          <a class="list-group-item">
+            <i class="fa fa-server"></i> RAM Load <span class="label <%= ram.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= ram %></span>
+          </a>
+          <a class="list-group-item">
+            <i class="fa fa-hdd-o"></i> Storage Load <span class="label <%= storage.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -40,44 +63,44 @@
     <div class="row">
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Networking
               <a href="admin_network" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row col-with-divider">
-              <div class="col-xs-6 text-center panel-min-height"> 
+              <div class="col-xs-6 text-center panel-min-height">
                 <h2><%= users[:online] %></h2>
                 <small>Users Online Now</small>
               </div>
-              <div class="col-xs-6 text-center"> 
+              <div class="col-xs-6 text-center">
                 <h2><%= net_info[:ssid] %></h2>
                 <small>Wi-Fi Network Info </small>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Applications
               <a href="admin_application" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-6 text-left panel-min-height"> 
+              <div class="col-xs-6 text-left panel-min-height">
                 <h2 class="no-margins"><%= applications.length %></h2>
                 <small>Applications Installed</small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-laptop"></i></div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
@@ -85,7 +108,7 @@
       <% application_instances.each {|app| clicks += app.click_counter} %>
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Traffic
               <div class="dropdown pull-right">
                 <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -97,80 +120,80 @@
                 </ul>
               </div>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row col-with-divider">
-              <div class="col-xs-6 text-center panel-min-height"> 
+              <div class="col-xs-6 text-center panel-min-height">
                 <h2 class="no-margins"><%= sessions.length %></h2>
                 <small>Overall Portal Visits</small>
               </div>
-              <div class="col-xs-6 text-center"> 
+              <div class="col-xs-6 text-center">
                 <h2 class="no-margins"><%= clicks %></h2>
                 <small>Application Visits</small>
               </div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">Notifications
               <a href="admin_notification" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-6 text-left panel-min-height"> 
+              <div class="col-xs-6 text-left panel-min-height">
                 <h2 class="no-margins"><%= notifications.length %></h2>
                 <small>Active Portal Notifications</small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-bell"></i></div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">MAZI Zone Time/Date
               <a href="admin_set_date" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-6 text-left panel-min-height"> 
+              <div class="col-xs-6 text-left panel-min-height">
                 <h4 class="no-margins"><%= rasp_date %></h4>
                 <h4 class="no-margins"><%= rasp_time %></h4>
                 <small>Current Date/Time</small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-clock-o"></i></div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
 
       <div class='col-md-6'>
         <div class="panel panel-default">
-          <div class="panel-heading"> 
+          <div class="panel-heading">
             <div class="panel-title">MAZI Zone Version </a>
             </div>
-          </div> 
-          <!-- panel body --> 
+          </div>
+          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
-              <div class="col-xs-6 text-left panel-min-height"> 
+              <div class="col-xs-6 text-left panel-min-height">
                 <h3 class="no-margins">Version <%= version %></h2>
                 <small><%= version_difference.to_i > 0 ? "This Portal is `#{version_difference} commits` behind" : "Up to Date"%></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-tag"></i></div>
             </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
