@@ -165,7 +165,7 @@ module Sinatra
               locals[:main_body] = :admin_application
               locals[:local_data][:applications]  = Mazi::Model::Application.all
               locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
-              locals[:local_data][:can_have_multiple_instances] = ['NextCloud', 'Etherpad']
+              locals[:local_data][:can_have_multiple_instances] = ['NextCloud', 'Etherpad', 'FramaDate']
               erb :admin_main, locals: locals
             when 'admin_documentation'
               unless authorized?
