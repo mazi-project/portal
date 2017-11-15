@@ -24,4 +24,16 @@ $( document ).ready(function() {
   maxHeight = Math.max.apply(null, heights);
 
   $(".panel-desc-txt-block").height(maxHeight);
+
+  $('.language-button').click(function(){
+    var appId = $(this).attr('id').split('-')[0];
+    console.log('aaa');
+    $.ajax({
+      url: '/locales/' + appId,
+      type: 'POST',
+      success: function(result) {
+        location.reload();
+      }
+    });
+  });
 });

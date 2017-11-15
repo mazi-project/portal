@@ -9,6 +9,9 @@ require 'mysql'
 require 'helpers/mazi_sensors'
 require 'helpers/mazi_camera'
 require 'helpers/mazi_monitor'
+require 'i18n'
+require 'i18n/backend/fallbacks'
+require 'helpers/mazi_locales'
 require 'thin'
 require 'json'
 require 'sequel'
@@ -22,6 +25,7 @@ require 'routes/mazi_notification'
 require 'routes/mazi_exec'
 require 'routes/mazi_devices'
 require 'routes/mazi_monitor'
+require 'routes/mazi_locales'
 
 class MaziApp < Sinatra::Base
   include MaziConfig
@@ -30,6 +34,7 @@ class MaziApp < Sinatra::Base
   include MaziSensors
   include MaziCamera
   include MaziMonitor
+  include MaziLocales
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
   configure {set :show_exceptions, false}
@@ -96,6 +101,7 @@ class MaziApp < Sinatra::Base
     require 'models'
     init_sensors
     init_camera
+    init_locales
   end
 
   error do |err|
@@ -115,6 +121,7 @@ class MaziApp < Sinatra::Base
   register Sinatra::MaziApp::Routing::MaziExec
   register Sinatra::MaziApp::Routing::MaziDevices
   register Sinatra::MaziApp::Routing::MaziMonitor
+  register Sinatra::MaziApp::Routing::MaziLocales
 
 end
 

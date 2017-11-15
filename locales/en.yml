@@ -1,0 +1,38 @@
+en:
+  general:
+    buttons:
+      edit: "Edit"
+      cancel: "Cancel"
+      ok: "OK"
+      create: "Create"
+      start: "Start"
+      stop: "Stop"
+      choose: 'Choose'
+      choose-timeslot: "Choose a timeslot"
+      export-to-csv: "Export to CSV file"
+    messages:
+      warning: "Warning"
+  portal:
+    top-menu:
+      documentation: "Documentation"
+    side-menu:
+      applications: "Applications"
+      system: "System"
+      sensors: "Sensors"
+      camera: "Camera"
+    system-page:
+      subheader: "System Info"
+      users: "Users Online"
+      app-clicks: "Application Clicks"
+      temperature: "Temperature"
+      cpu: "CPU"
+      ram: "RAM"
+      storage: "Storage"
+    sensors-page:
+      header: "Sensor Measurements"
+      header-message: "On this page you can see the measurements of various sensors connected to this MAZI Zone. You can also use the button bellow to request for measurements from a specific period."
+      temperature-for: "Temperature for"
+      humidity-for: "Humidity for"
+      no-sensors-warn: "Warning: Either there are no measurements in the database or a sensor device is not connected to this MAZI Zone."
+      no-sensor-data-warn: "Warning: There are no sensor data stored on this MAZI Zone. A system administrator can enable to collection of sensor data."
+      choose-timeslot-message: "Please use the form bellow to select a timeslot."

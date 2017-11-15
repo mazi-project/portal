@@ -22,6 +22,7 @@
   <script src="js/moment.js"></script>
   <script type='text/javascript' src='js/plugins/unitegallery/js/unitegallery.min.js'></script>
   <link rel='stylesheet' href='js/plugins/unitegallery/css/unite-gallery.css' type='text/css' />
+  <link rel='stylesheet' href='css/languages.min.css' type='text/css' />
   <script type='text/javascript' src='js/plugins/unitegallery/themes/default/ug-theme-default.js'></script>
   <link rel='stylesheet' href='js/plugins/unitegallery/themes/default/ug-theme-default.css' type='text/css' />
   <% js.each do |j| %>
@@ -97,7 +98,7 @@
       <% if flag %>
       <ul class="nav navbar-right top-nav">
         <li>
-          <a class="navbar-brand pull-right" target="_blank" href="/index_documentation" style="font-size: 14px;">Documentation</a>
+          <a class="navbar-brand pull-right" target="_blank" href="/index_documentation" style="font-size: 14px;"> <%= I18n.translate("portal.top-menu.documentation") %></a>
         </li>
         <li>
           <a class="navbar-brand pull-right" target="_blank" href="http://mazizone.eu/toolkit" style="font-size: 14px;">MAZI Project</a>
@@ -118,24 +119,34 @@
             <% end %>
           </ul>
         </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
+          <ul class="dropdown-menu alert-dropdown">
+            <% locales.each do |lc|%>
+            <li>
+              <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
       </ul>
       <% end %>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :index_application %>>
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> Applications</a>
+            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> System</a>
+            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
           </li>
           <% if sensors_enabled %>
           <li <%= 'class="active"' if main_body == :index_sensors %>>
-            <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> Sensors</a>
+            <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> <%= I18n.translate("portal.side-menu.sensors") %></a>
           </li>
           <% end %>
           <% if camera_enabled %>
           <li <%= 'class="active"' if main_body == :index_camera %>>
-            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> Camera</a>
+            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> <%= I18n.translate("portal.side-menu.camera") %></a>
           </li>
           <% end %>
         </ul>

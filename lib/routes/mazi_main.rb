@@ -20,6 +20,10 @@ module Sinatra
             if first_time? && index != 'setup'
               redirect '/setup'
             end
+            if session['locale'].nil?
+              session['locale'] = :en
+            end
+            set_locale(session['locale'])
             locals                           = {}
             locals[:local_data]              = {}
             locals[:local_data][:mode]       = @config[:general][:mode]
@@ -29,6 +33,8 @@ module Sinatra
             locals[:error_msg]               = nil
             locals[:sensors_enabled]         = sensors_enabled?
             locals[:camera_enabled]          = camera_enabled?
+            locals[:locale]                  = session['locale']
+            locals[:locales]                 = I18n.available_locales
             unless session['error'].nil?
               locals[:error_msg] = session["error"]
               session[:error] = nil
