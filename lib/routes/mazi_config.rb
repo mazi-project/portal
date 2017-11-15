@@ -272,8 +272,25 @@ module Sinatra
 
             {status: "restarting"}.to_json
           end
-        end
 
+          app.post '/expand/storage/?' do
+            MaziLogger.debug "request: post/expand/storage from ip: #{request.ip} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=admin_dashboard'
+            end
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode exec script"
+              session['error'] = "This portal runs on Demo mode! This action would have initiated the expand storage mechanism."
+              redirect '/admin_dashboard'
+            end
+
+            `raspi-config nonint do_expand_rootfs`
+
+            redirect '/admin_dashboard'
+          end
+        end
       end
     end
   end
