@@ -8,7 +8,7 @@
   <meta name="description" content="Mazi Portal">
   <meta name="author" content="nitlab">
 
-  <title>MAZI Zone Administration Panel</title>
+  <title><%= I18n.translate("admin.top-menu.header") %></title>
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/jquery-ui.min.css" rel="stylesheet">
   <link href="css/admin_main.css" rel="stylesheet">
@@ -17,6 +17,7 @@
   <link href="css/jquery.tagit.css" rel="stylesheet" type="text/css">
   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link rel="stylesheet" href="css/jquery.datetimepicker.css">
+  <link rel='stylesheet' href='css/languages.min.css' type='text/css' />
   <script src="js/jquery.js"></script>
   <script src="js/jquery-ui.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -37,40 +38,50 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
         </button>
-        <a class="navbar-brand" href="admin">MAZI Zone Administration Panel</a>
+        <a class="navbar-brand" href="admin"><%= I18n.translate("admin.top-menu.header") %></a>
       </div>
       <ul class="nav navbar-right top-nav">
         <li>
-          <a class="navbar-brand pull-right" target="_blank" href="index" style="font-size: 14px;">Portal</a>
+          <a class="navbar-brand pull-right" target="_blank" href="index" style="font-size: 14px;"><%= I18n.translate("admin.top-menu.portal") %></a>
         </li>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Admin <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
+          <ul class="dropdown-menu alert-dropdown">
+            <% locales.each do |lc|%>
+            <li>
+              <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= I18n.translate("admin.top-menu.admin") %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <a href="/admin_set_date"><i class="fa fa-fw fa-clock-o"></i> Set Date</a>
+              <a href="/admin_set_date"><i class="fa fa-fw fa-clock-o"></i> <%= I18n.translate("admin.top-menu.set-date") %></a>
             </li>
             <% if local_data[:authorized] %>
             <li>
-              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> Username</a>
+              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.username") %></a>
             </li>
             <li>
-              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> Password</a>
+              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.password") %></a>
             </li>
             <li>
-              <a href="/admin_change_mysql_password"><i class="fa fa-fw fa-exchange"></i> MySQL Password</a>
+              <a href="/admin_change_mysql_password"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.mysql-password") %></a>
             </li>
             <li class="check-updates-menu">
-              <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-history"></i> Check for updates</a>
+              <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-history"></i> <%= I18n.translate("admin.top-menu.check-updates") %></a>
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#" data-toggle="modal" data-target="#reboot-modal"><i class="fa fa-fw fa-refresh"></i> Reboot</a>
+              <a href="#" data-toggle="modal" data-target="#reboot-modal"><i class="fa fa-fw fa-refresh"></i> <%= I18n.translate("general.buttons.reboot") %></a>
             </li>
             <li>
-              <a href="#" data-toggle="modal" data-target="#shutdown-modal"><i class="fa fa-fw fa-power-off"></i> Shutdown</a>
+              <a href="#" data-toggle="modal" data-target="#shutdown-modal"><i class="fa fa-fw fa-power-off"></i> <%= I18n.translate("general.buttons.shutdown") %></a>
             </li>
             <li>
-              <a href="/admin_logout"><i class="fa fa-fw fa-sign-out admin-logout-button"></i> Log Out</a>
+              <a href="/admin_logout"><i class="fa fa-fw fa-sign-out admin-logout-button"></i> <%= I18n.translate("general.buttons.logout") %></a>
             </li>
             <% end %>
           </ul>
@@ -79,34 +90,34 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :admin_dashboard %> >
-            <a href="admin_dashboard"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            <a href="admin_dashboard"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("admin.side-menu.dashboard") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_application %>>
-            <a href="admin_application"><i class="fa fa-fw fa-laptop"></i> Applications</a>
+            <a href="admin_application"><i class="fa fa-fw fa-laptop"></i> <%= I18n.translate("admin.side-menu.applications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_network %>>
-            <a href="admin_network"><i class="fa fa-fw fa-wifi"></i> Networking</a>
+            <a href="admin_network"><i class="fa fa-fw fa-wifi"></i> <%= I18n.translate("admin.side-menu.networking") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_configuration %>>
-            <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i> Appearance</a>
+            <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i> <%= I18n.translate("admin.side-menu.appearance") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_devices %>>
-            <a href="admin_devices"><i class="fa fa-fw fa-building-o"></i> Devices</a>
+            <a href="admin_devices"><i class="fa fa-fw fa-building-o"></i> <%= I18n.translate("admin.side-menu.devices") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_monitor %>>
-            <a href="admin_monitor"><i class="fa fa-fw fa-building-o"></i> Monitoring</a>
+            <a href="admin_monitor"><i class="fa fa-fw fa-building-o"></i> <%= I18n.translate("admin.side-menu.monitoring") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_notification %>>
-            <a href="admin_notification"><i class="fa fa-fw fa-bell-o"></i> Notifications</a>
+            <a href="admin_notification"><i class="fa fa-fw fa-bell-o"></i> <%= I18n.translate("admin.side-menu.notifications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_snapshot %>>
-            <a href="admin_snapshot"><i class="fa fa-fw fa-photo"></i> Export/Import</a>
+            <a href="admin_snapshot"><i class="fa fa-fw fa-photo"></i> <%= I18n.translate("admin.side-menu.export-import") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_logs %>>
-            <a href="admin_logs"><i class="fa fa-fw fa-file-text-o"></i> Logs</a>
+            <a href="admin_logs"><i class="fa fa-fw fa-file-text-o"></i> <%= I18n.translate("admin.side-menu.logs") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_documentation %>>
-            <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> Documentation</a>
+            <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> <%= I18n.translate("admin.side-menu.documentation") %></a>
           </li>
         </ul>
       </div>
@@ -131,42 +142,42 @@
       <!-- Modal content-->
       <div class="modal-content">
         <div class="modal-header">
-          <h4 class="modal-title">Check for updates</h4>
+          <h4 class="modal-title"><%= I18n.translate("admin.top-menu.check-updates") %></h4>
         </div>
         <div class="modal-body">
           <div class="container-fluid">
             <div class="row">
               <div class="col-m-12 checking4updates">
-                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> Checking for updates. Please wait...</p>
+                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> <%= I18n.translate("admin.updates.checking-updates") %></p>
               </div>
               <div class="col-m-12 staged-error" hidden>
-                <p class="alert alert-danger"> Your local repository has been edited. This causes the update function to malfunction. Please revert those changes in the local repository, by using 'git checkout -- &ltfile&gt' for the edited files.</p>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                <p class="alert alert-danger"> <%= I18n.translate("admin.updates.alert-message-1-1") %> 'git checkout -- &ltfile&gt' <%= I18n.translate("admin.updates.alert-message-1-2") %></p>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
               </div>
               <div class="col-m-12 no-internet-error" hidden>
-                <p class="alert alert-danger"> There is no active connection to the internet. Please connect this MAZI Zone to the internet and try again.</p>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                <p class="alert alert-danger"> <%= I18n.translate("admin.updates.update-message-1") %></p>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
               </div>
               <div class="col-m-12 demo-mode-error" hidden>
-                <p class="alert alert-danger"> This portal runs on Demo mode! This action would have started an update proccess.</p>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                <p class="alert alert-danger"> <%= I18n.translate("admin.updates.update-message-2") %></p>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
               </div>
               <div class="col-m-12 up2date" hidden>
-                <p class="alert alert-success">The portal is up-to-date, there is no need for an update.</p>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                <p class="alert alert-success"> <%= I18n.translate("admin.updates.update-message-3") %></p>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
               </div>
               <div class="col-m-12 update-ready" hidden>
                 <p class='update-ready'></p>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary update-btn pull-right">Update</button>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
+                <button type="button" class="btn btn-primary update-btn pull-right"><%= I18n.translate("general.buttons.update") %></button>
               </div>
               <div class="col-m-12 updating" hidden>
-                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> The system is updating. Please wait...</p>
+                <p class="alert alert-success"><i class="fa fa-spin fa-circle-o-notch"></i> <%= I18n.translate("admin.updates.update-message-4") %></p>
               </div>
               <div class="col-m-12 update-done" hidden>
-                <p class="alert alert-success">Update proccess was complete. The Portal is going to restart for the update to take effect. Please refresh the page after a couple of minutes.</p>
-                <small>Hint: if you experience a faulty behavior reboot your device.</small>
-                <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
+                <p class="alert alert-success"> <%= I18n.translate("admin.updates.update-message-5") %></p>
+                <small><%= I18n.translate("admin.updates.update-hint") %></small>
+                <button type="button" class="btn btn-default pull-right" data-dismiss="modal"><%= I18n.translate("general.buttons.close") %></button>
               </div>
             </div>
           </div>
@@ -182,18 +193,18 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Shutdown?</h4>
+          <h4 class="modal-title"><%= I18n.translate("admin.general.shutdown-modal-title") %></h4>
         </div>
         <form class="form-signin" action="/action/shutdown" method="post">
           <div class="modal-body">
             <div class="form-group">
-              <p>MAZI Zone will now Shutdown, this will cause this site to be unreachable and you will need to manually reboot this MAZI Zone. Procced?</p>
+              <p><%= I18n.translate("admin.general.shutdown-modal-message") %></p>
               <input type="hidden" name="shutdown" value='true'>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-            <button class="btn btn-primary pull-right" type="submit">Shutdown</button>
+            <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><%= I18n.translate("general.buttons.cancel") %></button>
+            <button class="btn btn-primary pull-right" type="submit"><%= I18n.translate("general.buttons.shutdown") %></button>
           </div>
         </form>
       </div>
@@ -207,22 +218,27 @@
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Reboot?</h4>
+          <h4 class="modal-title"><%= I18n.translate("admin.general.reboot-modal-title") %></h4>
         </div>
         <form class="form-signin" action="/action/reboot" method="post">
           <div class="form-group">
             <div class="modal-body">
-              <p>MAZI Zone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutres. Procced?</p>
+              <p><%= I18n.translate("admin.general.reboot-modal-message") %></p>
               <input type="hidden" name="reboot" value='true'>
             </div>
             <div class='modal-footer'>
-              <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Cancel</button>
-              <button class="btn btn-primary pull-right" type="submit">Reboot</button>
+              <button type="button" class="btn btn-default pull-left" data-dismiss="modal"><%= I18n.translate("general.buttons.cancel") %></button>
+              <button class="btn btn-primary pull-right" type="submit"><%= I18n.translate("general.buttons.reboot") %></button>
             </div>
           </div>
         </form>
       </div>
     </div>
   </div>
+
+  <script type="text/javascript">
+    var update_message_1 = "<%= I18n.translate("admin.updates.update-message-6") %>";
+    var update_message_2 = "<%= I18n.translate("admin.updates.update-message-7") %>";
+  </script>
 </body>
 </html>

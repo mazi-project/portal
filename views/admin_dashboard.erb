@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Dashboard</small>
+      MAZI Zone <small><%= I18n.translate("admin.dashboard-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -17,20 +17,18 @@
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <h3 class="panel-title">Welcome</h3>
+          <h3 class="panel-title"><%= I18n.translate("general.messages.welcome") %></h3>
         </div>
         <div class="panel-body">
+          <p><strong><%= I18n.translate("admin.general.admin-panel") %></strong> <%= I18n.translate("admin.dashboard-page.welcome.message-1") %></p>
           <p>
-            <strong>The MAZI Zone Administration panel</strong> is the main tool, used to <strong>manage</strong> this MAZI Zone portal, as well as the networking aspect of this MAZI Zone.
-          </p>
-          <p>
-            Please use the menu to navigate to the various tools, which can:
+            <%= I18n.translate("admin.dashboard-page.welcome.message-2") %>
             <ul>
-              <li> Manage the supported Applications</li>
-              <li> Configure the MAZI Zone network</li>
-              <li> Configure the visual representation of the portal</li>
-              <li> Add/remove notifications on the portal</li>
-              <li> Export/import snapshots</li>
+              <li> <%= I18n.translate("admin.dashboard-page.welcome.message-list-1") %></li>
+              <li> <%= I18n.translate("admin.dashboard-page.welcome.message-list-2") %></li>
+              <li> <%= I18n.translate("admin.dashboard-page.welcome.message-list-3") %></li>
+              <li> <%= I18n.translate("admin.dashboard-page.welcome.message-list-4") %></li>
+              <li> <%= I18n.translate("admin.dashboard-page.welcome.message-list-5") %></li>
             </ul>
           </p>
         </div>
@@ -39,7 +37,7 @@
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title">MAZI Zone Hardware Information
+          <div class="panel-title"><%= I18n.translate("admin.dashboard-page.hardware-info.header") %>
             <!-- <div class="dropdown pull-right">
               <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                 <i class="fa fa-wrench"></i>
@@ -52,16 +50,16 @@
         </div>
         <div class="list-group">
           <a class="list-group-item">
-            <i class="fa fa-thermometer"></i> System Temperature <span class="label <%= temp.gsub("'C", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= temp %></span>
+            <i class="fa fa-thermometer"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.system-temperature") %> <span class="label <%= temp.gsub("'C", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= temp %></span>
           </a>
           <a class="list-group-item">
-            <i class="fa fa-microchip"></i> CPU Load <span class="label <%= cpu.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= cpu %></span>
+            <i class="fa fa-microchip"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.cpu-load") %> <span class="label <%= cpu.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= cpu %></span>
           </a>
           <a class="list-group-item">
-            <i class="fa fa-server"></i> RAM Load <span class="label <%= ram.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= ram %></span>
+            <i class="fa fa-server"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.ram-load") %> <span class="label <%= ram.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= ram %></span>
           </a>
           <a class="list-group-item">
-            <i class="fa fa-hdd-o"></i> Storage Load <span class="label <%= storage.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
+            <i class="fa fa-hdd-o"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.storage-load") %> <span class="label <%= storage.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
           </a>
         </div>
       </div>
@@ -73,7 +71,7 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Networking
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.networking.header") %>
               <a href="admin_network" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
           </div>
@@ -82,11 +80,11 @@
             <div class="row col-with-divider">
               <div class="col-xs-6 text-center panel-min-height">
                 <h2><%= users[:online] %></h2>
-                <small>Users Online Now</small>
+                <small><%= I18n.translate("admin.dashboard-page.networking.users-online") %></small>
               </div>
               <div class="col-xs-6 text-center">
                 <h2><%= net_info[:ssid] %></h2>
-                <small>Wi-Fi Network Info </small>
+                <small><%= I18n.translate("admin.dashboard-page.networking.wifi-info") %> </small>
               </div>
             </div>
           </div>
@@ -96,7 +94,7 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Applications
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.applications.header") %>
               <a href="admin_application" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
           </div>
@@ -105,7 +103,7 @@
             <div class="row">
               <div class="col-xs-6 text-left panel-min-height">
                 <h2 class="no-margins"><%= applications.length %></h2>
-                <small>Applications Installed</small>
+                <small><%= I18n.translate("admin.dashboard-page.applications.applications-installed") %></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-laptop"></i></div>
             </div>
@@ -118,14 +116,14 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Traffic
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.traffic.header") %>
               <div class="dropdown pull-right">
                 <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                   <i class="fa fa-wrench"></i>
                 </div>
                 <ul class="dropdown-menu dropdown-user dropdown-menu-right">
-                  <li><a class="reset-app-clicks"><i class="fa fa-refresh"></i> Reset Application Clicks</a></li>
-                  <li><a class="reset-visits"><i class="fa fa-refresh"></i> Reset Visits</a></li>
+                  <li><a class="reset-app-clicks"><i class="fa fa-refresh"></i> <%= I18n.translate("admin.dashboard-page.traffic.reset-application-clicks") %></a></li>
+                  <li><a class="reset-visits"><i class="fa fa-refresh"></i> <%= I18n.translate("admin.dashboard-page.traffic.reset-visits") %></a></li>
                 </ul>
               </div>
             </div>
@@ -135,11 +133,11 @@
             <div class="row col-with-divider">
               <div class="col-xs-6 text-center panel-min-height">
                 <h2 class="no-margins"><%= sessions.length %></h2>
-                <small>Overall Portal Visits</small>
+                <small><%= I18n.translate("admin.dashboard-page.traffic.portal-visits") %></small>
               </div>
               <div class="col-xs-6 text-center">
                 <h2 class="no-margins"><%= clicks %></h2>
-                <small>Application Visits</small>
+                <small><%= I18n.translate("admin.dashboard-page.traffic.application-visits") %></small>
               </div>
             </div>
           </div>
@@ -149,7 +147,7 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Notifications
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.notifications.header") %>
               <a href="admin_notification" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
           </div>
@@ -158,7 +156,7 @@
             <div class="row">
               <div class="col-xs-6 text-left panel-min-height">
                 <h2 class="no-margins"><%= notifications.length %></h2>
-                <small>Active Portal Notifications</small>
+                <small><%= I18n.translate("admin.dashboard-page.notifications.notifications") %></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-bell"></i></div>
             </div>
@@ -169,7 +167,7 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">MAZI Zone Time/Date
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.time-date.header") %>
               <a href="admin_set_date" class='pull-right'><i class="fa fa-fw fa-cog"></i></a>
             </div>
           </div>
@@ -179,7 +177,7 @@
               <div class="col-xs-6 text-left panel-min-height">
                 <h4 class="no-margins"><%= rasp_date %></h4>
                 <h4 class="no-margins"><%= rasp_time %></h4>
-                <small>Current Date/Time</small>
+                <small><%= I18n.translate("admin.dashboard-page.time-date.current") %></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-clock-o"></i></div>
             </div>
@@ -190,15 +188,15 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">MAZI Zone Version </a>
+            <div class="panel-title"><%= I18n.translate("admin.dashboard-page.version.header") %> </a>
             </div>
           </div>
           <!-- panel body -->
           <div class="panel-body">
             <div class="row">
               <div class="col-xs-6 text-left panel-min-height">
-                <h3 class="no-margins">Version <%= version %></h2>
-                <small><%= version_difference.to_i > 0 ? "This Portal is `#{version_difference} commits` behind" : "Up to Date"%></small>
+                <h3 class="no-margins"><%= I18n.translate("general.messages.version") %> <%= version %></h2>
+                <small><%= version_difference.to_i > 0 ? "#{I18n.translate("admin.dashboard-page.version.version-message-1")} `#{version_difference} #{I18n.translate("admin.dashboard-page.version.version-message-2")}" : "#{I18n.translate("admin.dashboard-page.version.up-to-date")}"%></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-tag"></i></div>
             </div>

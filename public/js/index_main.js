@@ -27,7 +27,6 @@ $( document ).ready(function() {
 
   $('.language-button').click(function(){
     var appId = $(this).attr('id').split('-')[0];
-    console.log('aaa');
     $.ajax({
       url: '/locales/' + appId,
       type: 'POST',
