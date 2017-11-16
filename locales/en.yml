@@ -36,3 +36,10 @@ en:
       no-sensors-warn: "Warning: Either there are no measurements in the database or a sensor device is not connected to this MAZI Zone."
       no-sensor-data-warn: "Warning: There are no sensor data stored on this MAZI Zone. A system administrator can enable to collection of sensor data."
       choose-timeslot-message: "Please use the form bellow to select a timeslot."
+    camera-page:
+      header: "Camera"
+      subheader: "On this page you can see the photos and videos captured by the camera that is connected to this MAZI Zone."
+      live-stream-header: "Live Video Streaming"
+      no-camera-warn: "Currently, there is no camera properly installed on this MAZI Zone!"
+      media-library-header: "Media Library"
+      no-media-warn: "Currently, there are no images or videos found in the library!"
