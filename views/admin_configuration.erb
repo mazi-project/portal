@@ -2,7 +2,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Appearance</small>
+      MAZI Zone <small><%= I18n.translate("admin.appearance-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -17,13 +17,13 @@
   <div class='col-lg-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3 class="panel-title">Theme Configurations</h3>
+        <h3 class="panel-title"><%= I18n.translate("admin.appearance-page.theme-panel.header") %></h3>
       </div>
       <ul class="list-group">
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-1">
             <div class="col-xs-10">
-                <p><b>Portal title:</b> <%= portal_configuration[:title] %> <a class="teal-text" data-toggle="modal" data-target="#change-title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
+                <p><b><%= I18n.translate("admin.appearance-page.theme-panel.portal-title-label") %>:</b> <%= portal_configuration[:title] %> <a class="teal-text" data-toggle="modal" data-target="#change-title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
               <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-1"></i>
@@ -34,7 +34,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>This value configures both the title on the top left corner and the html head title.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.portal-title-hint") %></p>
                 </div>
               </div>
             </div>
@@ -43,7 +43,7 @@
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-2">
             <div class="col-xs-10">
-                <p><b>Home page title:</b> <%= portal_configuration[:applications_title] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
+                <p><b><%= I18n.translate("admin.appearance-page.theme-panel.home-page-label") %>:</b> <%= portal_configuration[:applications_title] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_title-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
               <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-2"></i>
@@ -54,7 +54,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>This value configures the body title for portals home page.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.home-page-hint") %></p>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-3">
             <div class="col-xs-10">
-                <p><b>Home page subtitle:</b> <%= portal_configuration[:applications_subtitle] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_subtitle-configurations-modal"><i class="fa fa-pencil"></i></a></p>
+                <p><b><%= I18n.translate("admin.appearance-page.theme-panel.home-subtitle-label") %>:</b> <%= portal_configuration[:applications_subtitle] %> <a class="teal-text" data-toggle="modal" data-target="#change-application_subtitle-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
               <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-3"></i>
@@ -74,7 +74,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>This value configures the body subtitle for portals home page.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.home-subtitle-hint") %></p>
                 </div>
               </div>
             </div>
@@ -83,7 +83,7 @@
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-4">
             <div class="col-xs-10">
-                <p><b>Application Welcome Message:</b> <%= portal_configuration[:applications_welcome_text] %> <a class="teal-text" data-toggle="modal" data-target="#change-welcome_message-configurations-modal"><i class="fa fa-pencil"></i></a></p>
+                <p><b><%= I18n.translate("admin.appearance-page.theme-panel.welcome-message-label") %>:</b> <%= portal_configuration[:applications_welcome_text] %> <a class="teal-text" data-toggle="modal" data-target="#change-welcome_message-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
               <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-4"></i>
@@ -94,7 +94,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>This value configures the body welcome message for the applications page.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.welcome-message-hint") %></p>
                 </div>
               </div>
             </div>
@@ -103,7 +103,7 @@
         <li class="list-group-item">
           <div class="row" id="dropdown-detail-5">
             <div class="col-xs-10">
-                <p><b>Application Background Image:</b> <img height="30px" width="auto" src="images/<%= portal_configuration[:applications_background_image] %>"> <%= portal_configuration[:applications_background_image] %> <a class="teal-text" data-toggle="modal" data-target="#change-background_image-configurations-modal"><i class="fa fa-pencil"></i></a></p>
+                <p><b><%= I18n.translate("admin.appearance-page.theme-panel.background-image-label") %>:</b> <img height="30px" width="auto" src="images/<%= portal_configuration[:applications_background_image] %>"> <%= portal_configuration[:applications_background_image] %> <a class="teal-text" data-toggle="modal" data-target="#change-background_image-configurations-modal"><i class="fa fa-pencil"></i></a></p>
             </div>
             <div class="col-xs-2">
               <i class="fa fa-info-circle fa-2x pull-right toggle" data-toggle="detail-5"></i>
@@ -114,7 +114,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>This value configures the background image for the applications page.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.background-image-hint") %></p>
                 </div>
               </div>
             </div>
@@ -129,16 +129,16 @@
                 </span>
                 <span class="col-lg-6">
                   <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelColor(this)', value:'<%= portal_configuration[:side_panel_color] %>'}">
-                    Side panel main color
+                    <%= I18n.translate("admin.appearance-page.theme-panel.side-main-color") %>
                   </button>
                   <button class="jscolor {valueElement:'chosen-value', onFineChange:'setSidePanelActiveColor(this)', value:'<%= portal_configuration[:side_panel_active_color] %>'}">
-                    Side panel active color
+                    <%= I18n.translate("admin.appearance-page.theme-panel.side-active-color") %>
                   </button>
                   <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelColor(this)', value:'<%= portal_configuration[:top_panel_color] %>'}">
-                    Top panel main color
+                    <%= I18n.translate("admin.appearance-page.theme-panel.top-main-color") %>
                   </button>
                   <button class="jscolor {valueElement:'chosen-value', onFineChange:'setTopPanelActiveColor(this)', value:'<%= portal_configuration[:top_panel_active_color] %>'}">
-                    Top panel active color
+                    <%= I18n.translate("admin.appearance-page.theme-panel.top-active-color") %>
                   </button>
                 </span>
               </div>
@@ -152,7 +152,7 @@
             <div class="container">
               <div class="fluid-row">
                 <div class="col-xs-12">
-                  <p>The values above configure various colors of the portal.</p>
+                  <p><%= I18n.translate("admin.appearance-page.theme-panel.colors-hint") %></p>
                 </div>
               </div>
             </div>
@@ -161,7 +161,7 @@
       </ul>
       <div class="row change-conf-div">
         <span>
-          <a data-toggle="modal" data-target="#reset-visual-configurations-modal"  class="btn btn-primary conf-link reset-conf pull-right"><i class="fa fa-refresh"></i> Reset</a>
+          <a data-toggle="modal" data-target="#reset-visual-configurations-modal"  class="btn btn-primary conf-link reset-conf pull-right"><i class="fa fa-refresh"></i> <%= I18n.translate("general.buttons.reset") %></a>
         </span>
       </div>
     </div>
@@ -175,26 +175,26 @@
   var topPanelActiveColor = null;
   document.body.onmouseup = function() {
     var data = {};
-    if(sidePanelColor != null){ 
+    if(sidePanelColor != null){
       data.side_panel_color = sidePanelColor;
       sidePanelColor = null;
     }
-    else if(sidePanelActiveColor != null){ 
+    else if(sidePanelActiveColor != null){
       data.side_panel_active_color = sidePanelActiveColor;
       sidePanelActiveColor = null;
     }
-    else if(topPanelColor != null){ 
+    else if(topPanelColor != null){
       data.top_panel_color = topPanelColor;
       topPanelColor = null;
     }
-    else if(topPanelActiveColor != null){ 
+    else if(topPanelActiveColor != null){
       data.top_panel_active_color = topPanelActiveColor;
       topPanelActiveColor = null;
     }
     else {
       return;
     }
-    console.log(data);
+
     $.ajax({
       url: '/conf/',
       type: 'PUT',
@@ -233,7 +233,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Theme</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-theme-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
@@ -243,7 +243,7 @@
             <input type="text" name="applications_subtitle" class="form-control" value='<%= portal_configuration[:applications_subtitle] %>'>
             <input type="file" name="applications_background_image" class="form-control filestyle" data-buttonText="Browse">
             <textarea name="applications_welcome_text" class="form-control" rows="5" id="comment" maxlength="300"><%= portal_configuration[:applications_welcome_text] %></textarea>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -258,13 +258,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Title</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-title-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="text" name="title" class="form-control" value='<%= portal_configuration[:title] %>' autofocus="">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -279,13 +279,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Home Page Title</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-home-title-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="text" name="applications_title" class="form-control" value='<%= portal_configuration[:applications_title] %>' autofocus>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -300,13 +300,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Home Page Subtitle</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-home-subtitle-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="text" name="applications_subtitle" class="form-control" value='<%= portal_configuration[:applications_subtitle] %>' autofocus>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -321,13 +321,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Welcome Message</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-welcome-message-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <textarea name="applications_welcome_text" class="form-control" rows="5" id="comment" maxlength="300"><%= portal_configuration[:applications_welcome_text] %></textarea>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -342,13 +342,13 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Background Image</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.edit-background-image-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="file" name="applications_background_image" class="form-control filestyle" data-buttonText="Browse">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -363,16 +363,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Reset Theme</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.reset-theme-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>
-          This action will reset all the visual configurations to default values.
-        </p>
+        <p><%= I18n.translate("admin.appearance-page.popups.reset-theme-message") %></p>
         <form class="form-signin" action="/conf" method="post">
           <div class="form-group">
             <input type="hidden" name="reset" class="form-control" value='true' autofocus="">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Reset</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.reset") %></button>
           </div>
         </form>
       </div>
@@ -387,12 +385,10 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Load Theme</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.load-theme-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>
-          Load one of the following configuration files
-        </p>
+        <p><%= I18n.translate("admin.appearance-page.popups.load-theme-message") %></p>
         <form class="form-signin" action="/conf" method="post">
           <div class="form-group">
             <input type="hidden" name="load" class="form-control" value='true' autofocus="">
@@ -401,7 +397,7 @@
               <%= "<option value='#{conf_file}'>#{conf_file.gsub('.yml', '')}</option>" %>
             <% end %>
             </select>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Load</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.load") %></button>
           </div>
         </form>
       </div>
@@ -416,15 +412,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Save Theme</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.appearance-page.popups.save-theme-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/conf" method="post">
           <div class="form-group">
             <input type="hidden" name="save"   class="form-control" value='true'>
             <input type="text" name="filename" class="form-control" id="filename" aria-describedby="filenameHelp" placeholder="Theme Name" autofocus="" required>
-            <small id="filenameHelp" class="form-text text-muted">Please enter the name of the new Theme.</small>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <small id="filenameHelp" class="form-text text-muted"><%= I18n.translate("admin.appearance-page.popups.save-theme-message") %></small>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>

@@ -8,7 +8,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Applications</small>
+      MAZI Zone <small><%= I18n.translate("admin.application-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -20,32 +20,32 @@
 <% end %>
 
 <div class="row">
-  <h3>Application Instances</h3>
+  <h3><%= I18n.translate("admin.application-page.instances-menu.header") %></h3>
   <table class="table">
     <thead>
       <tr>
-        <th title="toggle the application visibility on the Portal">Active</th>
-        <th title="use this application as the splash page of the Portal">Splash Page</th>
-        <th title="the name of the application">Name</th>
-        <th title="the URL of the application">URL</th>
-        <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
-        <th title="the parent application">Parent Application</th>
-        <th title="overall clicks for the application">Click Counter</th>
-        <th title="actions that can be performed on the application" class='text-center' style='width: 130px'>Actions</th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.active-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.splash-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.splash-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.name-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.name-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.url-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.url-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.description-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.parent-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.parent-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.clicks-hint") %>"><%= I18n.translate("admin.application-page.instances-menu.click-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.instances-menu.actions-hint") %>" class='text-center' style='width: 130px'><%= I18n.translate("admin.application-page.instances-menu.actions-column") %></th>
       </tr>
     </thead>
     <tbody>
       <% application_instances.each do |app| %>
       <tr class="app_inst_tr" id="app_inst_tr_<%= app.id.to_s %>">
         <td scope="row">
-          <label class="switch" title="<%= app.enabled ? 'disable' : 'enable' %> the application">
-            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
+          <label class="switch" title="<%= app.enabled ? I18n.translate("general.messages.enable") : I18n.translate("general.messages.disable") %> the application">
+            <input type="checkbox" <%= app.enabled ? I18n.translate("general.messages.checked") : '' %>>
             <div class="slider round enabled-instance-switch" id='enabled-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
         <td scope="row">
           <label class="switch" title="<%= app.splash_screen ? 'disable' : 'enable' %> the application">
-            <input type="checkbox" <%= app.splash_screen ? 'checked' : '' %>>
+            <input type="checkbox" <%= app.splash_screen ? I18n.translate("general.messages.checked") : '' %>>
             <div class="slider round splash-instance-switch" id='splash-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
@@ -57,15 +57,15 @@
         <td>
           <div class="text-center">
             <div class="btn-group pull-center">
-              <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="Edit Application">
+              <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="<%= I18n.translate("admin.application-page.instances-menu.edit-instance-hint") %>">
                 <i class="fa fa-pencil"></i>
               </a>
               <% if app.name == 'GuestBook' %>
-              <a class="btn btn-success admin_app" id='edit_app_<%= app.id %>' title="Guestbook Admin Panel" href="/admin_guestbook">
+              <a class="btn btn-success admin_app" id='edit_app_<%= app.id %>' title="<%= I18n.translate("admin.application-page.instances-menu.guestbook-admin-hint") %>" href="/admin_guestbook">
                 <i class="fa fa-asterisk"></i>
               </a>
               <% end %>
-              <a class="btn btn-danger del_app_inst" id='del_app_inst_<%= app.id %>' title="Delete Application Instance">
+              <a class="btn btn-danger del_app_inst" id='del_app_inst_<%= app.id %>' title="<%= I18n.translate("admin.application-page.instances-menu.delete-instance-hint") %>">
                 <i class="fa fa-times"></i>
               </a>
             </div>
@@ -82,22 +82,22 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-instance-modal"  title="Create New Application Instance"><i class="fa fa-plus"></i></a></td>
+        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-instance-modal"  title="<%= I18n.translate("admin.application-page.instances-menu.create-instance-hint") %>"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
 </div>
 
 <div class="row">
-  <h3>Installed Applications</h3>
+  <h3><%= I18n.translate("admin.application-page.applications-menu.header") %></h3>
   <table class="table">
     <thead>
       <tr>
-        <th title="the opperation status of portal (running/stoppped)">Status</th>
-        <th title="the name of the application">Application Name</th>
-        <th title="the URL of the application">URL</th>
-        <th title="the desciption that will be shown on the application tile on the Portal">Description</th>
-        <th title="actions that can be performed on the application" class='text-center'>Actions</th>
+        <th title="<%= I18n.translate("admin.application-page.applications-menu.status-application-hint") %>"><%= I18n.translate("admin.application-page.applications-menu.status-application-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.applications-menu.name-application-hint") %>"><%= I18n.translate("admin.application-page.applications-menu.name-application-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.applications-menu.url-application-hint") %>"><%= I18n.translate("admin.application-page.applications-menu.url-application-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.applications-menu.description-application-hint") %>"><%= I18n.translate("admin.application-page.applications-menu.description-application-column") %></th>
+        <th title="<%= I18n.translate("admin.application-page.applications-menu.actions-application-hint") %>" class='text-center'><%= I18n.translate("admin.application-page.applications-menu.actions-application-column") %></th>
       </tr>
     </thead>
     <tbody>
