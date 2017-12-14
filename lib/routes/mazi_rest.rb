@@ -1,3 +1,4 @@
+
 module Sinatra
   module MaziApp
     module Routing
@@ -31,9 +32,11 @@ module Sinatra
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("INSERT INTO sensehat(sensor_id, time, temperature, humidity)
                         VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
+                              '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
+              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
+              return e.message 
             ensure
               con.close if con
             end
@@ -319,10 +322,11 @@ module Sinatra
                         ON DUPLICATE KEY UPDATE timestamp = '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', cpu_temperature = '#{body["temp"]}',
                                                 cpu_usage = '#{body["cpu"]}', ram_usage = '#{body["ram"]}', storage = '#{body["storage"]}', upload = '#{body["network"]["upload"]}',
                                                 upload_unit = '#{body["network"]["upload_unit"]}', download = '#{body["network"]["download"]}', download_unit = '#{body["network"]["download_unit"]}' ; ")
-
+              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
-            ensure
+              return e.message
+             ensure
               con.close if con
             end
           end
