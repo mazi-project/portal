@@ -51,10 +51,13 @@
             </li>
             <% if local_data[:authorized] %>
             <li>
-              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> Change Username</a>
+              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> Username</a>
             </li>
             <li>
-              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> Change Password</a>
+              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> Password</a>
+            </li>
+            <li>
+              <a href="/admin_change_mysql_password"><i class="fa fa-fw fa-exchange"></i> MySQL Password</a>
             </li>
             <li class="check-updates-menu">
               <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-history"></i> Check for updates</a>
@@ -90,11 +93,17 @@
           <li <%= 'class="active"' if main_body == :admin_devices %>>
             <a href="admin_devices"><i class="fa fa-fw fa-building-o"></i> Devices</a>
           </li>
+          <li <%= 'class="active"' if main_body == :admin_monitor %>>
+            <a href="admin_monitor"><i class="fa fa-fw fa-building-o"></i> Monitoring</a>
+          </li>
           <li <%= 'class="active"' if main_body == :admin_notification %>>
             <a href="admin_notification"><i class="fa fa-fw fa-bell-o"></i> Notifications</a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_snapshot %>>
             <a href="admin_snapshot"><i class="fa fa-fw fa-photo"></i> Export/Import</a>
+          </li>
+          <li <%= 'class="active"' if main_body == :admin_logs %>>
+            <a href="admin_logs"><i class="fa fa-fw fa-file-text-o"></i> Logs</a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_documentation %>>
             <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> Documentation</a>
@@ -156,6 +165,7 @@
               </div>
               <div class="col-m-12 update-done" hidden>
                 <p class="alert alert-success">Update proccess was complete. The Portal is going to restart for the update to take effect. Please refresh the page after a couple of minutes.</p>
+                <small>Hint: if you experience a faulty behavior reboot your device.</small>
                 <button type="button" class="btn btn-default pull-right" data-dismiss="modal">Close</button>
               </div>
             </div>

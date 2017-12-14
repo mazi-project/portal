@@ -10,7 +10,7 @@ module Sinatra
 
           # this is the main routing configuration that routes all the erb files
           app.get '/:index/?' do |index|
-            MaziLogger.debug "request: get/#{index} from ip: #{request.ip}"
+            MaziLogger.debug "request: get/#{index} from ip: #{request.ip} params: #{params.inspect}"
             if session['uuid'].nil?
               s = Mazi::Model::Session.create
               s.ip = request.ip
@@ -48,7 +48,7 @@ module Sinatra
               locals[:local_data][:notifications_read]    = session['notifications_read']
               locals[:local_data][:config_data]           = @config[:portal_configuration]
               erb :index_main, locals: locals
-            when 'index_statistics'
+            when 'index_system' #used to be statistics
               session['notifications_read'] = [] if session['notifications_read'].nil?
               locals[:js] << "js/index_statistics.js"
               locals[:main_body] = :index_statistics
@@ -64,19 +64,12 @@ module Sinatra
               Mazi::Model::ApplicationInstance.all.each do |app|
                 locals[:local_data][:clicks] += app.click_counter
               end
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              lines = ex.exec_command
-              temp = ex.parseFor("'C").first.split('=').last
-              locals[:local_data][:temp] = temp
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-c'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              cpu = ex.exec_command.first
-              locals[:local_data][:cpu] = cpu
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-r'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              ram = ex.exec_command.first
-              locals[:local_data][:ram] = ram
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              storage = ex.exec_command.first
-              locals[:local_data][:storage] = storage
+              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex.exec_command
+              locals[:local_data][:temp]     = ex.parseFor("temp:").last
+              locals[:local_data][:cpu]      = ex.parseFor("cpu:").last
+              locals[:local_data][:ram]      = ex.parseFor("ram:").last
+              locals[:local_data][:storage]  = ex.parseFor("storage:").last
               erb :index_main, locals: locals
             when 'index_sensors'
               MaziLogger.debug "params: #{params.inspect}"
@@ -133,7 +126,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login"
               end
               locals[:js] << "js/admin_dashboard.js"
               locals[:main_body] = :admin_dashboard
@@ -144,11 +137,14 @@ module Sinatra
               ssid.shift
               locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
               mode = ex.parseFor('mode')
-              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-              lines = ex2.exec_command
-              users = ex2.parseFor('wifi users')
+              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex2.exec_command
               locals[:local_data][:users]                 = {}
-              locals[:local_data][:users][:online]        = users[2] if users.kind_of? Array
+              locals[:local_data][:users][:online]        = ex2.parseFor('wifi users').last
+              locals[:local_data][:temp]                  = ex2.parseFor("temp:").last
+              locals[:local_data][:cpu]                   = ex2.parseFor("cpu:").last
+              locals[:local_data][:ram]                   = ex2.parseFor("ram:").last
+              locals[:local_data][:storage]               = ex2.parseFor("storage:").last
               locals[:local_data][:net_info][:mode]       = mode[1] if mode.kind_of? Array
               locals[:local_data][:applications]          = Mazi::Model::Application.all
               locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
@@ -163,18 +159,19 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_application.js"
               locals[:main_body] = :admin_application
               locals[:local_data][:applications]  = Mazi::Model::Application.all
               locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
+              locals[:local_data][:can_have_multiple_instances] = ['NextCloud', 'Etherpad', 'FramaDate']
               erb :admin_main, locals: locals
             when 'admin_documentation'
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_documentation
               erb :admin_main, locals: locals
@@ -182,7 +179,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_network.js"
               locals[:main_body] = :admin_network
@@ -197,13 +194,17 @@ module Sinatra
               password = ex.parseFor('password')
               locals[:local_data][:net_info][:password] = password[1] if password.kind_of? Array
               mode = ex.parseFor('mode')
-              locals[:local_data][:net_info][:mode] = mode[1] if mode.kind_of? Array
+              locals[:local_data][:net_info][:mode] = mode[1].gsub('"', '') if mode.kind_of? Array
               ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
               locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
-              ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
-              locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
-              locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
-              locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+              if locals[:local_data][:net_info][:second_antenna] == 'inactive'
+                locals[:local_data][:net_info][:available_ssids] = []
+              else
+                ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
+                locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
+                locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+                locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+              end
               ex4 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
               router_stat = ex4.exec_command.first.split
               locals[:local_data][:net_info][:owrt_router_available] = router_stat.last
@@ -213,13 +214,12 @@ module Sinatra
               ex6 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
               cur_out = ex6.exec_command.first.split
               locals[:local_data][:net_info][:domain] = cur_out[1]
-              puts locals.inspect
               erb :admin_main, locals: locals
             when 'admin_configuration'
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_network.js"
               locals[:js] << "js/jscolor.min.js"
@@ -231,7 +231,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_notification.js"
               locals[:main_body] = :admin_notification
@@ -241,7 +241,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_snapshot.js"
               locals[:main_body] = :admin_snapshot
@@ -251,7 +251,7 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_devices.js"
               locals[:js] << "js/jquery.datetimepicker.min.js"
@@ -269,12 +269,46 @@ module Sinatra
               locals[:local_data][:rpi_enabled]       = rpi_enabled?
               erb :admin_main, locals: locals
             when 'admin_guestbook'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
               locals[:js] << "js/admin_guestbook.js"
               locals[:js] << "js/tag-it.js"
               locals[:main_body] = :admin_guestbook
               locals[:local_data][:tags] = get_guestbook_tags
               locals[:local_data][:maximumFileSize] = get_guestbook_maxfilesize
               locals[:local_data][:welcomeMessage] = get_guestbook_welcome_message
+              erb :admin_main, locals: locals
+            when 'admin_monitor'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/admin_monitor.js"
+              locals[:main_body] = :admin_monitor
+              locals[:local_data][:monitoring_enabled]              = @config[:monitoring][:enable]
+              locals[:local_data][:monitoring_hardware_enabled]     = @config[:monitoring][:hardware_enable]
+              locals[:local_data][:monitoring_applications_enabled] = @config[:monitoring][:applications_enable]
+              locals[:local_data][:details]                         = get_monitoring_details
+              locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
+              locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
+              locals[:local_data][:hardware_nof_entries]            = get_nof_hardware_data_entries
+              locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
+
+              erb :admin_main, locals: locals
+            when 'admin_logs'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/admin_logs.js"
+              locals[:main_body] = :admin_logs
+              locals[:local_data][:portal_log] = MaziLogger.read_log_file(500)
+
               erb :admin_main, locals: locals
             when 'admin_set_date'
               locals[:main_body] = :admin_set_time
@@ -288,15 +322,23 @@ module Sinatra
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_change_password
+              erb :admin_main, locals: locals
+            when 'admin_change_mysql_password'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:main_body] = :admin_change_mysql_password
               erb :admin_main, locals: locals
              when 'admin_change_username'
               unless authorized?
                 MaziLogger.debug "Not authorized"
                 session['error'] = nil
-                redirect '/admin_login'
+                redirect "/admin_login?goto=#{index}"
               end
               locals[:main_body] = :admin_change_username
               erb :admin_main, locals: locals
@@ -307,6 +349,7 @@ module Sinatra
                 redirect back
               end
               locals[:main_body] = :admin_login
+              locals[:local_data][:goto] = params['goto']
               erb :admin_main, locals: locals
             when 'admin_logout'
               if @config[:general][:mode] == 'demo'

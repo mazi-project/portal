@@ -4,6 +4,8 @@ module Sinatra
       module MaziConfig
 
         def self.registered(app)
+
+          # serve files on snapshots folder for dl
           app.get '/snapshots/:file' do |file|
             MaziLogger.debug "request: get/snapshots/#{file}: #{request.ip}"
             if @config[:general][:mode] == 'demo'
@@ -38,7 +40,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_configuration'
             end
             if params['reset']
               if @config[:general][:mode] == 'demo'
@@ -130,7 +132,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_snapshot'
             end
             if params['save']
               if @config[:general][:mode] == 'demo'
@@ -260,19 +262,35 @@ module Sinatra
           app.put '/update/?' do
             MaziLogger.debug "request: put/update from ip: #{request.ip} params: #{params.inspect}"
 
-            version_update
-            update_config_file
-
             Thread.new do
-              sleep 2
+              sleep 1
+              version_update
+              update_config_file
               MaziLogger.debug 'Restarting'
               `service mazi-portal restart`
             end
 
             {status: "restarting"}.to_json
           end
-        end
 
+          app.post '/expand/storage/?' do
+            MaziLogger.debug "request: post/expand/storage from ip: #{request.ip} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=admin_dashboard'
+            end
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode exec script"
+              session['error'] = "This portal runs on Demo mode! This action would have initiated the expand storage mechanism."
+              redirect '/admin_dashboard'
+            end
+
+            `raspi-config nonint do_expand_rootfs`
+
+            redirect '/admin_dashboard'
+          end
+        end
       end
     end
   end

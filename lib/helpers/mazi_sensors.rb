@@ -87,7 +87,7 @@ module MaziSensors
   rescue Mysql::Error => ex
     MaziLogger.debug "mySQL error: #{ex.inspect}"
     return []
-  ensure 
+  ensure
     con.close if con
   end
 
@@ -120,7 +120,7 @@ module MaziSensors
   rescue Mysql::Error => ex
     MaziLogger.debug "mySQL error: #{ex.inspect}"
     return nil
-  ensure 
+  ensure
     sensors_con.close if sensors_con
   end
 
@@ -154,22 +154,26 @@ module MaziSensors
     MaziLogger.debug "mySQL error: #{ex.inspect}"
     MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
     return nil
-  ensure 
+  ensure
     sensors_con.close if sensors_con
   end
 
-  def start_sensing(sensor_name, duration = 1800, interval = 30)
-    MaziLogger.debug "start sensing: #{sensor_name} - #{duration} - #{interval}"
+  def start_sensing(sensor_name, duration = 1800, interval = 30, end_point='localhost')
+    MaziLogger.debug "start sensing: #{sensor_name} - #{duration} - #{interval} - #{end_point}"
 
-    Thread.new do 
-      `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval}`
+    Thread.new do
+      if end_point == 'localhost'
+        `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval}`
+      else
+        `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval} -D #{end_point}`
+      end
     end
     sleep 1
     true
   end
 
   def delete_measurements(sensor_id)
-  
+
     sensors_con = Mysql.new(SENSORS_DB_IP, 'mazi_user', '1234', 'sensors')
     q = "TRUNCATE sensor_#{sensor_id}"
     sensors_con.query(q)
@@ -178,7 +182,7 @@ module MaziSensors
     MaziLogger.debug "mySQL error: #{ex.inspect}"
     MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
     return nil
-  ensure 
+  ensure
     sensors_con.close if sensors_con
   end
 end

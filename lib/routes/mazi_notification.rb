@@ -16,7 +16,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_notification'
             end
 
             a =  Mazi::Model::Notification.create(params)
@@ -34,7 +34,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              redirect '/admin_login'
+              redirect '/admin_login?goto=admin_notification'
             end
             id = params['id']
             notif         =  Mazi::Model::Notification.find(id: params['id'].to_i)

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="hidden-xs voffset6" ></div>
-  <div class="col-md-12 col-lg-12 panel">  
+  <div class="col-md-12 col-lg-12 panel">
     <br>
     <div class="panel-heading" id="syllabus">
       <h1 class="text-center text-primary hidden-xs" style="font-size:400%"><span class="glyphicon glyphicon-book"></span> Admin Documentation</h1>
@@ -25,7 +25,7 @@
           <div class="col-sm-12 col-md-12 col-lg-12">
             <h4>Description</h4>
             <p>
-              This is the admin documentation guide for the MAZI Zone portal. Use the tabs above to navigate to the different sections of the documentation. The current tab 
+              This is the admin documentation guide for the MAZI Zone portal. Use the tabs above to navigate to the different sections of the documentation. The current tab
               describes the different actions an administrator might need, in order to configure the raspberry pi. While all the other tabs give information regarding the
               administration of the supported applications.
             </p>
@@ -106,7 +106,7 @@
           </div>
           <div class="voffset9"></div>
         </div>
-        
+
         <div class="tab-pane fade" id="p3">
           <h3 class="text-center" id="pg1"> Nextcloud</h3>
           <br>
@@ -148,7 +148,20 @@
               An easy way to introduce your users to the Nextcloud application is to create a shared editable folder and create a direct link to it, as a separate   application, that will allow anyone to share easily files without having to enter a username and password.
             </p>
             <p>
+              More specifically, after you login as admin in Nextcloud, you click on the "sharing" panel of the folder and check the box "Share link", and then "Allow upload and editing" (see Figure below).
+            </p>
+            <img src="images/nextcloud-doc3.png" class="img-responsive center-block" alt="Image for Nextcloud Admin Panel 3">
+            <p>
+              The link that appears between these two checkboxes can now be pasted at the URL of a new application at the <a target="_blank" href="https://github.com/mazi-project/guides/wiki/Administrator-panel">Administrator panel</a>
+            </p>
+            <p>
               It might also help to create separate folder for different types of files (photos, slides, videos) to make it easier to direct people on what type of content is expected and make it easier to browse.
+            </p>
+            <p>
+              If you need to use the content uploaded to your shared nextcloud folder in other applications, the files are accessible through the following path: <b>/var/www/html/nextcloud/data/$user$/files/</b>. So, for example, for the user "mazi" and the folder audio/ the path would be: <b>/var/www/html/nextcloud/data/mazi/files/audio/</b>
+            </p>
+            <p>
+              In order to create new users in Nextcloud, you have to be connected to the Internet or manually synchronize the time and date between the Raspberry and the Nextcloud application.
             </p>
           </div>
           <div class="voffset9"></div>
@@ -161,43 +174,10 @@
             <p>
               The MAZI Guestbook is an open source application that can used in events enabling the audience to share their thoughts, photos, etc.
             </p>
-            
+
             <h4>Administration Guide</h4>
             <p>
-              To moderate the content, you go to <b><a target="_blank" href="http://portal.mazizone.eu:8081/#admin" class="app-link" >local.mazizone.eu:8081/#admin</a></b></br> (username: <b>admin</b> password: <b>mazizone</b>), where you can delete any submission that is inappropriate.
-            </p>
-
-            <h4>Alternative views of content</h4>
-            <p>
-              As well as standard web browser presentation of content, GuestBook supports two other views of content
-            </p>
-            <p><b>Slideshow view:</b> <a href="http://portal.mazizone.eu:8081/#projection" target='_blank'>http://portal.mazizone.eu:8081/#projection</a> *</p>
-            <p><b>Tablet view:</b> <a href="http://portal.mazizone.eu:8081/#tablet" target='_blank'>http://portal.mazizone.eu:8081/#tablet</a> *</p>
-            <p>* all links work when you are connected to your MAZI Zone.</p>
-
-            <h4>Tags</h4>
-            <p>
-              When contributing a post, users are offered predefined tag boxes to select to give profile information. These can be edited by the administrator. In order to change tags, open the config.js file, which is held here: <b>/var/www/html/mazi-board/src/www/js/config.js</b> You can remove or edit a tag as you wish in this code line
-            </p>
-            <pre><code>
-              $tags: ['Tag1', 'Tag2', 'Tag3', 'Tag4']
-            </code></pre>
-
-            <h4>Background Image</h4>
-            <p>
-              In order to change the background image, save the image you want in the following path: <b>/var/www/html/mazi-board/src/www/images</b> Replace the DSI.jpg of the following code, with the name of your image. You can find the code in the following path: <b>/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html</b>
-            </p>
-            <pre><code>
-              &ltdiv class="header-bar"&gt&lt/div&gt
-              &ltdiv class="header-image column"&gt&ltimg src="images/DSI.jpg"&gt&lt/div&gt
-            </code></pre>
-            <p>
-              Alternatively, you could just replace the file "header-img.png" with the new image file. If you have a hybrid letterbox, in the same folder you can also replace the "logo" image by replacing the file "logo.png" in the same repository.
-            </p>
-
-            <h4>Appearance and input</h4>
-            <p>
-              You can further modify the appearance of the GuestBook manually by editing the various templates here: <b>/var/www/html/mazi-board/src/www/js/templates/</b>
+              To configure/moderate the MAZI Guestbook application, you can go to <a target="_blank" href="http://portal.mazizone.eu/admin_guestbook" class="app-link" >portal.mazizone.eu/admin_guestbook</a>.
             </p>
 
             <h4>Admin Password</h4>
@@ -210,29 +190,13 @@
               authPassword: 'password',
             </code></pre>
 
-            <h4>Message</h4>
+            <h4>Alternative views of content</h4>
             <p>
-              In order to change the message, open the submission_input_tmpl.html file , which takes place in this path: <b>/var/www/html/mazi-board/src/www/js/templates/</b>submission_input_tmpl.html, and then change the message (i.e., "Click here to join the Guestbook" ...) with the message you wish to be displayed.
+              As well as standard web browser presentation of content, GuestBook supports two other views of content
             </p>
-
-            <h4>Setting upload size of files and formats</h4>
-            <p>
-              To customise the file upload size and file formats allowed, edit the following file:</br>
-              <b>/var/www/html/mazi-board/src/node/config.js</b>
-            </p>
-            <p>
-              By default, the maximum file upload size is 1024 x 1024 x 2 bytes (2 Mb). The following file types are allowed: 'image/jpg','image/jpeg','image/png','image/gif'
-            </p>
-
-            <h4>Changing font colours</h4>
-            <p>
-              The main css is available at: <b>/var/www/html/mazi-board/src/www/css/</b>
-            </p>
-            
-            <h4>Saving the content of a MAZI Zone deployment</h4>
-            <p>
-              If you want to record the input of a specific MAZI Zone deployment for future use or archiving, and until the corresponding admin function is properly implemented, you can copy the folder "/var/files/" to another folder (e.g., "cp -r ./files files_[date]_[place]"). This new folder can be compressed and transferred to a local storage.
-            </p>
+            <p><b>Slideshow view:</b> <a href="http://portal.mazizone.eu:8081/#projection" target='_blank'>http://portal.mazizone.eu:8081/#projection</a> *</p>
+            <p><b>Tablet view:</b> <a href="http://portal.mazizone.eu:8081/#tablet" target='_blank'>http://portal.mazizone.eu:8081/#tablet</a> *</p>
+            <p>* all links work when you are connected to your MAZI Zone.</p>
           </div>
           <div class="voffset9"></div>
         </div>

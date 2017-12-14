@@ -1,0 +1,52 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      MAZI Zone <small>Log viewer</small>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <div class='col-md-12'>
+    <p>
+      You can view MAZI Zone log files bellow:
+    </p>
+  </div>
+  <div class='col-md-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Portal Log File
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="Portal Log File."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-6'>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="error_enabled_cb" checked> Error messages
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="warn_enabled_cb" checked> Warn messages
+              </label>
+            </div>
+            <div class="form-check form-check-inline">
+              <label class="form-check-label">
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="debug_enabled_cb"> Debug messages
+              </label>
+            </div>
+          </div>
+          <div class='col-md-6'>
+            <button class="btn btn-success pull-right" id="refresh-log-btn"><i class="fa fa-refresh pull-right"> Refresh</i></button>
+          </div>
+          <div class='col-md-12'>
+            <pre class='log-wrapper'><%= portal_log %></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

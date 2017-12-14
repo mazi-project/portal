@@ -20,12 +20,12 @@
   </div>
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <div class="panel-title">Sensors
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control various sensors."></i>
         </div>
-      </div> 
-      <!-- panel body --> 
+      </div>
+      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
@@ -39,6 +39,7 @@
         <% if sensors_db_exist %>
         <div class="row">
           <div class='col-md-12'>
+            <% if available_sensors.length > 0 %>
             <table class="table">
               <thead>
                 <tr>
@@ -70,6 +71,9 @@
                 <% end %>
               </tbody>
             </table>
+            <% else %>
+              <p>Cannot find a connected sensor to this MAZI zone.</p>
+            <% end %>
           </div>
         </div>
         <% else %>
@@ -80,18 +84,18 @@
           </div>
         </div>
         <% end %>
-      </div> 
+      </div>
     </div>
   </div>
 
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
-      <div class="panel-heading"> 
+      <div class="panel-heading">
         <div class="panel-title">Camera
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
         </div>
-      </div> 
-      <!-- panel body --> 
+      </div>
+      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
@@ -117,7 +121,7 @@
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     </div>
   </div>
 </div>
@@ -133,13 +137,15 @@
         <h4 class="modal-title">Start Sensor Measurements</h4>
       </div>
       <div class="modal-body">
-        <p>Please enter a Duration or a Date on the Calendar to define a timeslot in which the sensor will start taking measurements. Also, please use the Interval to define the frequency of the measurements.</p>
+        <p>Please enter a Duration or a Date on the Calendar to define a timeslot to gather measurements. Also, please use the Interval to define the frequency of the measurements.</p>
         <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <label for='monitor_end_point'>Target Server:</label>
+            <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
             <label for='sensing_duration'>Duration (seconds):</label>
             <input type="text" id='sensing_duration' name="duration" class="form-control" value="" autofocus>
-            <label for='datetimepicker'>Calendar (Date):</label>
+            <label for='datetimepicker'>Calendar (end time/date):</label>
             <input id="datetimepicker" type="text" name='until_date' class="form-control">
             <label for='sensing_interval'>Interval (seconds):</label>
             <input type="text" id='sensing_interval' name="interval" class="form-control" value="30" required>

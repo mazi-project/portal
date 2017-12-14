@@ -50,7 +50,7 @@ module Sinatra
                 duration = 0
                 if !params['duration'].nil? && !params['duration'].empty?
                   duration = params['duration'].to_i
-                elsif !params['until_date'].nil? || !params['until_date'].empty?
+                elsif !params['until_date'].nil? && !params['until_date'].empty?
                   dt_now = DateTime.now
                   dt_target = DateTime.parse(params['until_date'])
                   duration = ((dt_target - dt_now) * 24 * 60 * 60).to_i
@@ -64,7 +64,7 @@ module Sinatra
                   session['error'] = "Duration cannot be zero or negative."
                   redirect back
                 end
-                start_sensing(device, duration, params['interval'])
+                start_sensing(device, duration, params['interval'], params['end_point'])
                 redirect back
               elsif action == 'delete'
                 delete_measurements(params['id'])

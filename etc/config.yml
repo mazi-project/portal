@@ -2,15 +2,15 @@
 # If you manually change some values on this file a server restart is
 # mandatory for the changes to take effect.
 # On the general section:
-# - mode: (normal/demo) mode determines if there is an actual MAZI Zone 
+# - mode: (normal/demo) mode determines if there is an actual MAZI Zone
 #         or this runs just for demo purposes
 # On the admin section:
 # - admin_username: admin username for the admin panel
 # - admin_password: admin password for the admin panel.
 # On the scripts section:
-# - backend_scripts_folder: the folder that contains the scripts that the portal 
+# - backend_scripts_folder: the folder that contains the scripts that the portal
 #                           will need to execute for various actions
-# - enabled_scripts: the scripts that are allowed to be executed by the 
+# - enabled_scripts: the scripts that are allowed to be executed by the
 #                    backend (for security reasons)
 # On the portal configuration section:
 # - title: the title on both the top left corner and on browser title
@@ -25,11 +25,13 @@
 # On the sensors section:
 # - enable: true/force to enable/disable the sensors tab on the user portal
 # On the camera section:
-# - enable: true/force to enable/disable the camera tab on the user portal
+# - enable: true/false to enable/disable the camera tab on the user portal
 # - photos_folder: the target nextcloud photos folder
 # - photos_link: the target nextcloud link for photos
 # - video_folder: the target nextcloud video folder
 # - video_link: the target nextcloud link for video
+# On the monitoring section:
+# - enable: true/false to enable/disable the monitoring feature
 ---
 :general:
   :mode: normal
@@ -64,4 +66,6 @@
 :sensors:
   :enable: false
 :camera:
+  :enable: false
+:monitoring:
   :enable: false
