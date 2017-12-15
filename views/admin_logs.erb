@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Log viewer</small>
+      MAZI Zone <small><%= I18n.translate("admin.logs-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -9,14 +9,14 @@
 <div class="row">
   <div class='col-md-12'>
     <p>
-      You can view MAZI Zone log files bellow:
+      <%= I18n.translate("admin.logs-page.message") %>:
     </p>
   </div>
   <div class='col-md-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Portal Log File
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="Portal Log File."></i>
+        <div class="panel-title"><%= I18n.translate("admin.logs-page.portal-log-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.logs-page.portal-log-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
@@ -25,22 +25,22 @@
           <div class='col-md-6'>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input msg-lvl-cb" type="checkbox" id="error_enabled_cb" checked> Error messages
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="error_enabled_cb" checked> <%= I18n.translate("admin.logs-page.portal-log-panel.filter-label1") %>
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input msg-lvl-cb" type="checkbox" id="warn_enabled_cb" checked> Warn messages
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="warn_enabled_cb" checked> <%= I18n.translate("admin.logs-page.portal-log-panel.filter-label2") %>
               </label>
             </div>
             <div class="form-check form-check-inline">
               <label class="form-check-label">
-                <input class="form-check-input msg-lvl-cb" type="checkbox" id="debug_enabled_cb"> Debug messages
+                <input class="form-check-input msg-lvl-cb" type="checkbox" id="debug_enabled_cb"> <%= I18n.translate("admin.logs-page.portal-log-panel.filter-label3") %>
               </label>
             </div>
           </div>
           <div class='col-md-6'>
-            <button class="btn btn-success pull-right" id="refresh-log-btn"><i class="fa fa-refresh pull-right"> Refresh</i></button>
+            <button class="btn btn-success pull-right" id="refresh-log-btn"><i class="fa fa-refresh pull-right"> <%= I18n.translate("general.buttons.refresh") %></i></button>
           </div>
           <div class='col-md-12'>
             <pre class='log-wrapper'><%= portal_log %></pre>
