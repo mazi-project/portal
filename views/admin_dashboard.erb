@@ -49,18 +49,26 @@
           </div>
         </div>
         <div class="list-group">
+          <% unless temp.nil? %>
           <a class="list-group-item">
             <i class="fa fa-thermometer"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.system-temperature") %> <span class="label <%= temp.gsub("'C", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= temp %></span>
           </a>
+          <% end %>
+          <% unless cpu.nil? %>
           <a class="list-group-item">
             <i class="fa fa-microchip"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.cpu-load") %> <span class="label <%= cpu.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= cpu %></span>
           </a>
+          <% end %>
+          <% unless ram.nil? %>
           <a class="list-group-item">
             <i class="fa fa-server"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.ram-load") %> <span class="label <%= ram.gsub("%", '').to_f > 80 ? "label-danger" : "label-success" %> pull-right"> <%= ram %></span>
           </a>
+          <% end %>
+          <% unless storage.nil? %>
           <a class="list-group-item">
-            <i class="fa fa-hdd-o"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.storage-load") %> <span class="label <%= storage.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
+            <i class="fa fa-hdd-o"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.storage-load") %> <span class="label <%= storage.split('(').last.split(')').first.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
           </a>
+          <% end %>
         </div>
       </div>
     </div>
