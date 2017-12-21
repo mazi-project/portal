@@ -1,4 +1,4 @@
-
+\
 module Sinatra
   module MaziApp
     module Routing
@@ -35,7 +35,14 @@ module Sinatra
               return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
-              return e.message 
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227            
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
             ensure
               con.close if con
             end
@@ -148,8 +155,17 @@ module Sinatra
              con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}')")
+             return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
             ensure
               con.close if con
             end
@@ -199,8 +215,17 @@ module Sinatra
              con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}')")
+             return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
             ensure
               con.close if con
             end
@@ -251,8 +276,17 @@ module Sinatra
              con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}')")
+             return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
             ensure
               con.close if con
             end
@@ -316,7 +350,14 @@ module Sinatra
               return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
-              return e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
              ensure
               con.close if con
             end
@@ -333,9 +374,17 @@ module Sinatra
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("INSERT INTO users(device_id, timestamp, online_users)
                         VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}','#{body["users"]}')" )
-          
+             return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
             ensure
               con.close if con
             end
