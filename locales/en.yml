@@ -21,7 +21,7 @@ en:
       update:          "Update"
       connect:         "Connect"
       disconnect:      "Disconnect"
-      toggle-device:   "Toggle Device"
+      toggle-device:   "Switch Device"
       initialize:      "Initialize"
       remove:          "Remove"
       load:            "Load"
@@ -45,6 +45,7 @@ en:
       offline:      "offline"
       dual:         "dual"
       restricted:   "restricted"
+      managed:      "managed"
       active:       "active"
       inactive:     "inactive"
   portal:
@@ -113,7 +114,7 @@ en:
       update-message-2:  "This portal runs on Demo mode! This action would have started an update proccess."
       update-message-3:  "The portal is up-to-date, there is no need for an update."
       update-message-4:  "The system is updating. Please wait..."
-      update-message-5:  "Update proccess was complete. The Portal is going to restart for the update to take effect. Please refresh the page after a couple of minutes."
+      update-message-5:  "Update proccess is almost complete. One last step is required, please wait several minutes and then refresh the page."
       update-message-6:  "Your server is"
       update-message-7:  "commits behind. Please use the button bellow to start the update proccess."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
@@ -219,14 +220,14 @@ en:
         header:    "Internet Network Mode"
         mode-hint: "Mode of the Wi-Fi Network"
       connect-wifi-panel:
-        header:              "Connect to Wi-Fi Network"
+        header:              "Connect to Wi-Fi for internet access"
         wifi-network-hint-1: "from Wi-Fi Networks"
         wifi-network-hint-2: "Wi-Fi Network"
         usb-dongle-message:  "Please plugin an extra USB Wi-Fi dongle to your rasberry pi to enable this feature. Suggested USB dongles"
       access-point-panel:
-        header:          "Wi-Fi Access Point"
+        header:          "Add router as Access Point"
         current-hint:    "Wi-Fi Access Point in use"
-        router-message:  "Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your rasberry pi and toggle between devices. Suggested devices"
+        router-message:  "Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your rasberry pi and move the Access Point there. Suggested devices"
       portal-domain-panel:
         header:      "Portal Domain"
         domain-hint: "Current Portal Domain"

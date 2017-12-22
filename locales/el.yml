@@ -21,7 +21,7 @@ el:
       update:          "Ενημέρωσε"
       connect:         "Σύνδεση"
       disconnect:      "Αποσύνδεση"
-      toggle-device:   "Αναλλαγή Συσκευής"
+      toggle-device:   "Eναλλαγή Συσκευής"
       initialize:      "Αρχικοποιήστε"
       remove:          "Αφαιρέστε"
       load:            "Φορτώστε"
@@ -45,6 +45,7 @@ el:
       offline:      "offline"
       dual:         "dual"
       restricted:   "restricted"
+      managed:      "managed"
       active:       "ενεργό"
       inactive:     "ανενεργό"
   portal:
@@ -219,14 +220,14 @@ el:
         header:    "Λειτουργία δικτύου Internet"
         mode-hint: "Λειτουργία του δικτύου Wi-Fi"
       connect-wifi-panel:
-        header:              "Συνδεθείτε στο Δίκτυο Wi-Fi"
+        header:              "Συνδεθείτε σε ένα Wi-Fi δίκτυο για σύνδεση στο Internet"
         wifi-network-hint-1: "από δίκτυα Wi-Fi"
         wifi-network-hint-2: "Δίκτυο Wi-Fi"
         usb-dongle-message:  "Παρακαλώ προσθέστε ένα πρόσθετο USB Wi-Fi dongle στο rasberry pi για να ενεργοποιήσετε αυτό το χαρακτηριστικό. Προτεινόμενα dongles USB"
       access-point-panel:
-        header:          "Σημείο πρόσβασης Wi-Fi"
+        header:          "Πόσθέστε μία συσκευή δρομολογητή ως Access Point"
         current-hint:    "Σημείο πρόσβασης Wi-Fi σε χρήση"
-        router-message:  "Η σύνδεση Wi-Fi Raspberry χρησιμοποιείται αυτή τη στιγμή. Μπορείτε να συνδέσετε έναν δρομολογητή OpenWRT στο ροζ rasberry σας και να εναλλάξετε μεταξύ των συσκευών. Προτεινόμενες συσκευές"
+        router-message:  "Η σύνδεση Wi-Fi Raspberry χρησιμοποιείται αυτή τη στιγμή. Μπορείτε να συνδέσετε έναν δρομολογητή OpenWRT στο rasberry pi σας και να μεταφέρετε εκεί το Access Point. Προτεινόμενες συσκευές"
       portal-domain-panel:
         header:      "Portal Domain"
         domain-hint: "Τρέχων Portal Domain"
