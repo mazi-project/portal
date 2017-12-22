@@ -39,13 +39,13 @@
       <tr class="app_inst_tr" id="app_inst_tr_<%= app.id.to_s %>">
         <td scope="row">
           <label class="switch" title="<%= app.enabled ? I18n.translate("general.messages.enable") : I18n.translate("general.messages.disable") %> the application">
-            <input type="checkbox" <%= app.enabled ? I18n.translate("general.messages.checked") : '' %>>
+            <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
             <div class="slider round enabled-instance-switch" id='enabled-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
         <td scope="row">
           <label class="switch" title="<%= app.splash_screen ? 'disable' : 'enable' %> the application">
-            <input type="checkbox" <%= app.splash_screen ? I18n.translate("general.messages.checked") : '' %>>
+            <input type="checkbox" <%= app.splash_screen ? 'checked' : '' %>>
             <div class="slider round splash-instance-switch" id='splash-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
