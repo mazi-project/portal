@@ -139,6 +139,26 @@ module MaziVersion
       MaziLogger.debug "Done Installing jq."
       `service mazi-portal restart`
     end
+
+    # version 2.2
+    begin
+      MaziLogger.debug "  Checking i18n gem"
+      Gem::Specification.find_by_name("i18n")# version 2.2 requires i18n gem
+    rescue Gem::LoadError
+      MaziLogger.debug "i18n gem not found. Installing."
+      MaziLogger.debug "Installing i18n gem."
+      `gem install i18n --no-ri --no-rdoc`
+      MaziLogger.debug "done"
+      `service mazi-portal restart`
+    rescue
+      unless Gem.available?("i18n")
+        MaziLogger.debug "i18n gem not found. Installing."
+        MaziLogger.debug "Installing i18n gem."
+        `gem install i18n --no-ri --no-rdoc`
+        MaziLogger.debug "done"
+        `service mazi-portal restart`
+      end
+    end
   end
 end
 
