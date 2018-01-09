@@ -5,14 +5,14 @@ module Sinatra
       module MaziRest
 
         def self.registered(app)
-          app.post '/create/sensehat/?' do
+          app.post '/create/measurements/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-            MaziLogger.debug "Create sensehat table in monitoring Database if doesn't exists"
+            MaziLogger.debug "Create measurements table in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("CREATE TABLE IF NOT EXISTS sensehat(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+             con.query("CREATE TABLE IF NOT EXISTS measurements(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -20,16 +20,16 @@ module Sinatra
             end
           end
 
-          app.post '/update/sensehat/?' do
+          app.post '/update/measurements/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update sensehat table "
+            MaziLogger.debug "Update measurements table "
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO sensehat(sensor_id, time, temperature, humidity)
+             con.query("INSERT INTO measurements(sensor_id, time, temperature, humidity)
                         VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                               '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
               return "OK"
@@ -49,7 +49,7 @@ module Sinatra
           end
  
 
-
+=begin
           app.post '/create/sht11/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -84,7 +84,7 @@ module Sinatra
               con.close if con
             end
           end
-
+=end
           app.post '/sensor/register/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)            
