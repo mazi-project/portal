@@ -50,6 +50,7 @@ $( document ).ready(function() {
       data: data,
       success: function(result) {
         $("#sensor_type_" + data['id'] + "_td").html('active');
+        $("#start_sensing_sensehat_" + data['id']).attr('disabled', true);
         var intervalID = setInterval(function(){
           $.ajax({
             url: '/devices/sensors/status/' + values.id,
@@ -60,10 +61,12 @@ $( document ).ready(function() {
                 clearInterval(intervalID);
                 $("#sensor_type_" + result2['id'] + "_td").html('inactive');
                 $("#sensor_entries_" + result2['id'] + "_td").html(result2['nof_entries']);
+                $("#start_sensing_sensehat_" + result2['id']).removeAttr('disabled');
               }
               else{
                 $("#sensor_type_" + result2['id'] + "_td").html('active');
                 $("#sensor_entries_" + result2['id'] + "_td").html(result2['nof_entries']);
+                $("#start_sensing_sensehat_" + result2['id']).attr('disabled', true);
               }
             }
           });
