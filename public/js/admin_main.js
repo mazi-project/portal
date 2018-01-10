@@ -38,7 +38,7 @@ $( document ).ready(function() {
             show('.up2date');
           }
           else{
-            $('.update-ready > p').text(update_message_1 + ' ' + res.commits_behind + ' ' + update_message_2);
+            $('.update-ready > p').text(update_message_1);
             show('.update-ready');
           }
         }

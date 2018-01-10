@@ -20,7 +20,7 @@
           <h3 class="panel-title"><%= I18n.translate("general.messages.welcome") %></h3>
         </div>
         <div class="panel-body">
-          <p><strong><%= I18n.translate("admin.general.admin-panel") %></strong> <%= I18n.translate("admin.dashboard-page.welcome.message-1") %></p>
+          <p><%= I18n.translate("admin.dashboard-page.welcome.message-1", panel: "<strong>#{I18n.translate("admin.general.admin-panel")}</strong>") %></p>
           <p>
             <%= I18n.translate("admin.dashboard-page.welcome.message-2") %>
             <ul>
