@@ -102,7 +102,7 @@
                       <% hardware_label_title_message += "#{key} : #{value} \n" %>
                     <% end %>
                   <% end %>
-                  <td><%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' title='#{hardware_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-hardware-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
+                  <td><%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' title='#{hardware_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger hw-mon-stat-lab' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-hardware-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
                   <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.hardware-description-message") %></td>
                   <td>
                     <div class="text-center">
@@ -122,7 +122,7 @@
                       <% application_label_title_message += "#{key} : #{value} \n" %>
                     <% end %>
                   <% end %>
-                  <td><%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' title='#{application_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-application-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
+                  <td><%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' title='#{application_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger app-mon-stat-lab' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-application-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
                   <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.application-description-message") %></td>
                   <td>
                     <div class="text-center">
@@ -189,7 +189,7 @@
       </div>
       <div class="modal-body">
         <p><%= I18n.translate("admin.monitoring-page.popups.start-hardware-message") %></p>
-        <form class="form-signin" action="/monitor/start/hardware_data" method="post">
+        <form class="form-signin start-hardware-data-form" action="/monitor/start/hardware_data" method="post">
           <div class="form-group">
             <label for='monitor_end_point'><%= I18n.translate("admin.monitoring-page.popups.hardware-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
@@ -222,16 +222,16 @@
       </div>
       <div class="modal-body">
         <p><%= I18n.translate("admin.monitoring-page.popups.start-application-message") %></p>
-        <form class="form-signin" action="/monitor/start/application_data" method="post">
+        <form class="form-signin start-application-data-form" action="/monitor/start/application_data" method="post">
           <div class="form-group">
             <label for='monitor_end_point'><%= I18n.translate("admin.monitoring-page.popups.application-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
             <input type="checkbox" id='monitor_etherpad' name="etherpad" checked="checked">
-            <label for='monitor_etherpad'><%= I18n.translate("admin.monitoring-page.popups.application-label1") %>:</label></br>
+            <label for='monitor_etherpad'><%= I18n.translate("admin.monitoring-page.popups.application-label2") %>:</label></br>
             <input type="checkbox" id='monitor_guestbook' name="guestbook" checked="checked">
-            <label for='monitor_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label1") %>:</label></br>
+            <label for='monitor_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %>:</label></br>
             <input type="checkbox" id='monitor_framadate' name="framadate" checked="checked">
-            <label for='monitor_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label1") %>:</label></br>
+            <label for='monitor_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %>:</label></br>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
@@ -306,7 +306,7 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-hardware-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.delete-hardware-message") %>: <b><%= hardware_nof_entries["statistics"].to_i + hardware_nof_entries["users"].to_i %></b></p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-hardware-message", entries: "<b>#{hardware_nof_entries["statistics"].to_i + hardware_nof_entries["users"].to_i}</b>") %></p>
         <form class="form-signin" action="/monitor/flush/hardware_data" method="post">
           <div class="form-group">
             <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.remove") %></button>
@@ -328,7 +328,7 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message") %>: <b><%= application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i %> (<%= "Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]}" %>)</b></p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i}(Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
         <form class="form-signin" action="/monitor/flush/application_data" method="post">
           <div class="form-group">
             <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">
@@ -345,3 +345,8 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var active_msg   = '<%= I18n.translate("general.messages.active") %>';
+  var inactive_msg = '<%= I18n.translate("general.messages.inactive") %>';
+</script>

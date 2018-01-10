@@ -51,12 +51,12 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              return {error: 'Not Authorized!', action: action}.to_json
+              return {error: 'Not Authorized!', type: type}.to_json
             end
             if @config[:general][:mode] == 'demo'
               MaziLogger.debug "Demo mode exec script"
               session['error'] = "This portal runs on Demo mode! This action would have toggled the monitoring feature."
-              redirect back
+              return {error: 'Demo!', type: type}.to_json
             end
             case type
             when 'hardware_data'
@@ -101,7 +101,7 @@ module Sinatra
 
               start_application_monitoring(url, arguements)
             end
-            redirect "/admin_monitor"
+            {status: 'OK'}.to_json
           end
 
           app.post '/monitor/stop/:type/?' do |type|
@@ -130,7 +130,7 @@ module Sinatra
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
-              return {error: 'Not Authorized!', action: action}.to_json
+              return {error: 'Not Authorized!', type: type}.to_json
             end
             if @config[:general][:mode] == 'demo'
               MaziLogger.debug "Demo mode exec script"
@@ -144,6 +144,28 @@ module Sinatra
               flush_application_data(params['guestbook'], params['etherpad'], params['framadate'])
             end
             redirect "/admin_monitor"
+          end
+
+          app.get '/monitor/status/:type/?' do |type|
+            MaziLogger.debug "request: get/monitor/status/type from ip: #{request.ip} type: #{type} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              return {error: 'Not Authorized!', type: type}.to_json
+            end
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode exec script"
+              session['error'] = "This portal runs on Demo mode! This action would have toggled the monitoring feature."
+              redirect back
+            end
+            case type
+            when 'hardware_data'
+              status = get_hardware_monitoring_status
+              {type: type, status: status}.to_json
+            when 'application_data'
+              status = get_application_monitoring_status
+              {type: type, status: status}.to_json
+            end
           end
         end
       end

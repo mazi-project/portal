@@ -47,7 +47,6 @@ module MaziMonitor
   def stop_hardware_monitoring
     command = "sh /root/back-end/mazi-stat.sh --store disable"
     Thread.new do
-      sleep 0.5
       `#{command}`
     end
     sleep 0.2
@@ -63,7 +62,6 @@ module MaziMonitor
   def stop_application_monitoring
     command = "sh /root/back-end/mazi-appstat.sh --store disable"
     Thread.new do
-      sleep 0.5
       `#{command}`
     end
     sleep 0.2
@@ -89,7 +87,7 @@ module MaziMonitor
     overall = false
     out.split("\n").each do |line|
       output[line.split.first] = line.split.last
-      overall = true if line.split.last == 'active'
+      overall = true if line.split[1] == 'active'
     end
     output['overall'] = overall
     output
