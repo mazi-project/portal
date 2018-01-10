@@ -46,7 +46,7 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-green">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for") %> <%= sensor[:type]%></h3>
+      <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-temp-<%= sensor[:id]%>"></div>
@@ -60,7 +60,7 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-blue">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for") %> <%= sensor[:type]%></h3>
+      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>

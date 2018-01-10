@@ -93,8 +93,8 @@ module Sinatra
                 tmp                = {}
                 tmp[:id]           = sensor[:id]
                 tmp[:type]         = sensor[:type]
-                tmp[:temperatures] = getTemperatures(sensor[:id], params['start_date'], params['end_date'])
-                tmp[:humidity]     = getHumidities(sensor[:id], params['start_date'], params['end_date'])
+                tmp[:temperatures] = getTemperatures(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
+                tmp[:humidity]     = getHumidities(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
                 next if tmp[:temperatures].empty? || tmp[:humidity].empty?
                 locals[:local_data][:sensors] << tmp
               end
@@ -268,7 +268,7 @@ module Sinatra
               locals[:js] << "js/jquery.datetimepicker.min.js"
               locals[:main_body] = :admin_devices
               locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
-              locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
+              locals[:local_data][:sensors_db_exist]  = true #sensors_db_exist?
               locals[:local_data][:available_sensors] = getAllAvailableSensors
               locals[:local_data][:camera_enabled]    = @config[:camera][:enable]
               locals[:local_data][:camera_installed]  = camera_installed?

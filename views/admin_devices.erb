@@ -33,7 +33,7 @@
               <input type="checkbox" <%= sensors_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-sensors-switch"></div>
             </label>
-            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %></span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank">here</a>)</span>
           </div>
         </div>
         <% if sensors_db_exist %>
@@ -53,8 +53,8 @@
                 <% available_sensors.each do |sensor| %>
                 <tr>
                   <td><%= sensor[:type] %></td>
-                  <td><%= sensor[:status] %></td>
-                  <td><%= sensor[:nof_entries]%></td>
+                  <td id="sensor_type_<%= sensor[:id] %>_td"><%= sensor[:status] %></td>
+                  <td id="sensor_entries_<%= sensor[:id] %>_td"><%= sensor[:nof_entries]%></td>
                   <td>
                      <div class="text-center">
                       <div class="btn-group pull-center">
@@ -103,7 +103,7 @@
               <input type="checkbox" <%= camera_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-camera-switch"></div>
             </label>
-            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-message") %></span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-message") %> (<a href="/index_camera" target="_blank">here</a>)</span>
             <div class="row">
               <div class='col-md-12'>
                 <% if camera_installed %>
@@ -138,9 +138,10 @@
       </div>
       <div class="modal-body">
         <p><%= I18n.translate("admin.devices-page.popups.start-sensing-message") %></p>
-        <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
+        <form class="form-signin start-sensing-form" action="/devices/<%= sensor[:type] %>/start" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <input type="hidden" name="type" value="<%= sensor[:type] %>">
             <label for='monitor_end_point'><%= I18n.translate("admin.devices-page.popups.start-sensing-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
             <label for='sensing_duration'><%= I18n.translate("admin.devices-page.popups.start-sensing-label2") %>:</label>

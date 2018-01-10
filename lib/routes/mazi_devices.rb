@@ -73,6 +73,16 @@ module Sinatra
             end
             {result: 'OK', device: device, action: action}.to_json
           end
+
+          app.get '/devices/sensors/status/:id/?' do |sensor_id|
+            MaziLogger.debug "request: post/devices/sensors/status from ip: #{request.ip} id: #{sensor_id} params: #{params.inspect}"
+            out               = {}
+            out[:id]          = sensor_id
+            out[:status]      = get_sensor_status(sensor_id)
+            out[:nof_entries] = get_nof_sensor_measurements(sensor_id)
+
+            out.to_json
+          end
         end
 
       end
