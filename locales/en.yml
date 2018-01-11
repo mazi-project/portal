@@ -48,6 +48,7 @@ en:
       managed:      "managed"
       active:       "active"
       inactive:     "inactive"
+      error:        "error"
   portal:
     top-menu:
       documentation: "Documentation"

@@ -38,10 +38,11 @@ $( document ).ready(function() {
     }
     var data = {};
     data['end_point'] = values.end_point;
-    data['temp']  = values.temp;
-    data['users'] = values.users;
-    data['cpu']   = values.cpu;
-    data['ram']   = values.ram;
+    data['temp']      = values.temp;
+    data['users']     = values.users;
+    data['cpu']       = values.cpu;
+    data['ram']       = values.ram;
+    data['storage']   = values.storage;
     $("#start-hardware-data-modal").modal('hide');
     $.ajax({
       url: '/monitor/start/hardware_data',
@@ -114,23 +115,63 @@ $( document ).ready(function() {
       type: 'GET',
       success: function(result2) {
         result2 = JSON.parse(result2);
+        if('error' in result2['status']){
+          if(result2['status']['overall']){
+            $("#start-monitoring-hardware-data").attr('disabled', true);
+            $(".stop-hardware-monitoring-data-button").removeAttr('disabled');
+          }
+          else{
+            $("#start-monitoring-hardware-data").removeAttr('disabled');
+            $(".stop-hardware-monitoring-data-button").attr('disabled', true);
+          }
+          $(".hw-mon-stat-lab").removeClass('label-warning');
+          $(".hw-mon-stat-lab").removeClass('label-danger');
+          $(".hw-mon-stat-lab").removeClass('label-success');
+          $(".hw-mon-stat-lab").addClass('label-danger');
+          $(".hw-error-p").show();
+          $(".hw-msg-p").hide();
+          $(".hw-msg-p").hide();
+          $(".hw-tmp-msg-p").hide();
+          $(".hw-users-msg-p").hide();
+          $(".hw-cpu-msg-p").hide();
+          $(".hw-ram-msg-p").hide();
+          $(".hw-storage-msg-p").hide();
+          $(".hw-mon-stat-lab").html(error_msg);
+          return;
+        }
+        $(".hw-error-p").hide();
+        $(".hw-msg-p").show();
+        $(".hw-tmp-msg-p").show();
+        $(".hw-users-msg-p").show();
+        $(".hw-cpu-msg-p").show();
+        $(".hw-ram-msg-p").show();
+        $(".hw-storage-msg-p").show();
+        $("#hw-mon-stat-temp").html(result2['status']['temperature']);
+        $("#hw-mon-stat-users").html(result2['status']['users']);
+        $("#hw-mon-stat-cpu").html(result2['status']['cpu']);
+        $("#hw-mon-stat-ram").html(result2['status']['ram']);
+        $("#hw-mon-stat-storage").html(result2['status']['storage']);
         if(result2['status']['overall']){
           $("#start-monitoring-hardware-data").attr('disabled', true);
           $(".stop-hardware-monitoring-data-button").removeAttr('disabled');
           $(".hw-mon-stat-lab").html(active_msg);
+          $(".hw-mon-stat-lab").removeClass('label-warning');
           $(".hw-mon-stat-lab").removeClass('label-danger');
+          $(".hw-mon-stat-lab").removeClass('label-success');
           $(".hw-mon-stat-lab").addClass('label-success');
         }
         else{
           $("#start-monitoring-hardware-data").removeAttr('disabled');
           $(".stop-hardware-monitoring-data-button").attr('disabled', true);
           $(".hw-mon-stat-lab").html(inactive_msg);
+          $(".hw-mon-stat-lab").removeClass('label-warning');
+          $(".hw-mon-stat-lab").removeClass('label-danger');
           $(".hw-mon-stat-lab").removeClass('label-success');
-          $(".hw-mon-stat-lab").addClass('label-danger');
+          $(".hw-mon-stat-lab").addClass('label-warning');
         }
       }
     });
-  }, 1000);
+  }, 2000);
 
   var intervalID2 = setInterval(function(){
     $.ajax({
@@ -138,10 +179,31 @@ $( document ).ready(function() {
       type: 'GET',
       success: function(result2) {
         result2 = JSON.parse(result2);
+        if(result2['status']['error']){
+          if(result2['status']['overall']){
+            $("#start-monitoring-application-data").attr('disabled', true);
+            $(".stop-application-monitoring-data-button").removeAttr('disabled');
+          }
+          else{
+            $("#start-monitoring-application-data").removeAttr('disabled');
+            $(".stop-application-monitoring-data-button").attr('disabled', true);
+          }
+          $(".app-mon-stat-lab").removeClass('label-warning');
+          $(".app-mon-stat-lab").removeClass('label-success');
+          $(".app-mon-stat-lab").removeClass('label-danger');
+          $(".app-mon-stat-lab").addClass('label-danger');
+          $(".app-mon-stat-lab").html(error_msg);
+          return;
+        }
+        $("#app-mon-stat-guestbook").html(result2['status']['guestbook']);
+        $("#app-mon-stat-etherpad").html(result2['status']['etherpad']);
+        $("#app-mon-stat-framadate").html(result2['status']['framadate']);
         if(result2['status']['overall']){
           $("#start-monitoring-application-data").attr('disabled', true);
           $(".stop-application-monitoring-data-button").removeAttr('disabled');
           $(".app-mon-stat-lab").html(active_msg);
+          $(".app-mon-stat-lab").removeClass('label-success');
+          $(".app-mon-stat-lab").removeClass('label-warning');
           $(".app-mon-stat-lab").removeClass('label-danger');
           $(".app-mon-stat-lab").addClass('label-success');
         }
@@ -149,10 +211,12 @@ $( document ).ready(function() {
           $("#start-monitoring-application-data").removeAttr('disabled');
           $(".stop-application-monitoring-data-button").attr('disabled', true);
           $(".app-mon-stat-lab").html(inactive_msg);
+          $(".app-mon-stat-lab").removeClass('label-warning');
           $(".app-mon-stat-lab").removeClass('label-success');
-          $(".app-mon-stat-lab").addClass('label-danger');
+          $(".app-mon-stat-lab").removeClass('label-danger');
+          $(".app-mon-stat-lab").addClass('label-warning');
         }
       }
     });
-  }, 1000);
+  }, 2000);
 });

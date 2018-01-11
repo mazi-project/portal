@@ -73,8 +73,13 @@ module MaziMonitor
     output = {}
     overall = false
     out.split("\n").each do |line|
-      output[line.split.first] = line.split.last
-      overall = true if line.split.last == 'active'
+      if line.split.first == 'hardware'
+        if line.split[2] == 'ERROR:'
+          output['error'] = line.split[2..-1].join(' ')
+        end
+      end
+      output[line.split.first] = line.split[1]
+      overall = true if line.split[1] == 'active'
     end
     output['overall'] = overall
     output
@@ -85,10 +90,18 @@ module MaziMonitor
     out = `#{command}`
     output = {}
     overall = false
+    error = false
     out.split("\n").each do |line|
-      output[line.split.first] = line.split.last
-      overall = true if line.split[1] == 'active'
+      if line.split[2] == "OK"
+        output[line.split.first] = line.split[1]
+        overall = true if line.split[1] == 'active'
+      else
+        output[line.split.first] = line.split[2..-1].join(' ')
+        overall = true if line.split[1] == 'active'
+        error = true
+      end
     end
+    output['error'] = error
     output['overall'] = overall
     output
   end

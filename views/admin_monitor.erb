@@ -95,15 +95,16 @@
               </thead>
               <tbody>
                 <tr class="app_inst_tr">
-                  <% if hardware_monitoring_status['overall'] %>
-                    <% hardware_label_title_message = '' %>
-                    <% hardware_monitoring_status.each do |key, value| %>
-                      <% next if key == 'overall' || key == 'network'%>
-                      <% hardware_label_title_message += "#{key} : #{value} \n" %>
-                    <% end %>
+                  <td>
+                  <% if hardware_monitoring_status['error'].nil? %>
+                    <%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning hw-mon-stat-lab'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                  <% else %>
+                    <span class='label label-danger hw-mon-stat-lab'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
-                  <td><%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' title='#{hardware_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger hw-mon-stat-lab' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-hardware-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
-                  <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.hardware-description-message") %></td>
+                  </td>
+                  <td>
+                    <%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.hardware-description-message") %>
+                  </td>
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
@@ -115,14 +116,13 @@
                   </td>
                 </tr>
                 <tr class="app_inst_tr">
-                  <% if application_monitoring_status['overall'] %>
-                    <% application_label_title_message = '' %>
-                    <% application_monitoring_status.each do |key, value| %>
-                      <% next if key == 'overall' || key == 'network'%>
-                      <% application_label_title_message += "#{key} : #{value} \n" %>
-                    <% end %>
+                  <td>
+                  <% if application_monitoring_status['error'].nil? %>
+                    <%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning app-mon-stat-lab'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                  <% else %>
+                    <span class='label label-danger app-mon-stat-lab'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
-                  <td><%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' title='#{application_label_title_message}'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-danger app-mon-stat-lab' title='#{I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.no-application-tasks-message")}'>#{I18n.translate("general.messages.inactive")}</span>" %></td>
+                  </td>
                   <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.application-description-message") %></td>
                   <td>
                     <div class="text-center">
@@ -250,21 +250,26 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.show-hardware-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.show-hardware-message") %>: </p>
-        <p>
-          <%= I18n.translate("admin.monitoring-page.popups.hardware-label1") %>  : <%= hardware_monitoring_status['temperature'] %>
+        <p class="hw-error-p" <%= "hidden" if hardware_monitoring_status['error'].nil? %>>
+          <%=hardware_monitoring_status['error']%>
         </p>
-        <p>
-          <%= I18n.translate("admin.monitoring-page.popups.hardware-label2") %>   : <%= hardware_monitoring_status['users'] %>
+        <p class="hw-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.show-hardware-message") %>:</b>
         </p>
-        <p>
-          <%= I18n.translate("admin.monitoring-page.popups.hardware-label3") %>     : <%= hardware_monitoring_status['cpu'] %>
+        <p class="hw-tmp-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label2") %> :</b> <span id="hw-mon-stat-temp"><%= hardware_monitoring_status['temperature'] %></span>
         </p>
-        <p>
-          <%= I18n.translate("admin.monitoring-page.popups.hardware-label4") %>     : <%= hardware_monitoring_status['ram'] %>
+        <p class="hw-users-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label3") %> :</b> <span id="hw-mon-stat-users"><%= hardware_monitoring_status['users'] %></span>
         </p>
-        <p>
-          <%= I18n.translate("admin.monitoring-page.popups.hardware-label5") %> : <%= hardware_monitoring_status['storage'] %>
+        <p class="hw-cpu-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label4") %> :</b> <span id="hw-mon-stat-cpu"><%= hardware_monitoring_status['cpu'] %></span>
+        </p>
+        <p class="hw-ram-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label5") %> :</b> <span id="hw-mon-stat-ram"><%= hardware_monitoring_status['ram'] %></span>
+        </p>
+        <p class="hw-storage-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label6") %> :</b> <span id="hw-mon-stat-storage"><%= hardware_monitoring_status['storage'] %></span>
         </p>
       </div>
     </div>
@@ -281,15 +286,15 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.show-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.show-application-message") %>: </p>
+        <p><b><%= I18n.translate("admin.monitoring-page.popups.show-application-message") %>:</b> </p>
         <p>
-          <%= I18n.translate("admin.monitoring-page.popups.application-label1") %> : <%= application_monitoring_status['guestbook'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label2") %> :</b> <span id="app-mon-stat-guestbook"><%= application_monitoring_status['guestbook'] %></span>
         </p>
         <p>
-          <%= I18n.translate("admin.monitoring-page.popups.application-label2") %>   : <%= application_monitoring_status['etherpad'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label3") %> :</b> <span id="app-mon-stat-etherpad"><%= application_monitoring_status['etherpad'] %></span>
         </p>
         <p>
-          <%= I18n.translate("admin.monitoring-page.popups.application-label3") %>  : <%= application_monitoring_status['framadate'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label4") %> :</b> <span id="app-mon-stat-framadate"><%= application_monitoring_status['framadate'] %></span>
         </p>
       </div>
     </div>
@@ -349,4 +354,5 @@
 <script type="text/javascript">
   var active_msg   = '<%= I18n.translate("general.messages.active") %>';
   var inactive_msg = '<%= I18n.translate("general.messages.inactive") %>';
+  var error_msg    = '<%= I18n.translate("general.messages.error") %>';
 </script>

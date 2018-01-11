@@ -48,6 +48,7 @@ el:
       managed:      "managed"
       active:       "ενεργό"
       inactive:     "ανενεργό"
+      error:        "σφάλμα"
   portal:
     top-menu:
       documentation: "Εγχειρίδιο Χρήσης"

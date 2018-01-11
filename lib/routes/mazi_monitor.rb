@@ -147,7 +147,6 @@ module Sinatra
           end
 
           app.get '/monitor/status/:type/?' do |type|
-            MaziLogger.debug "request: get/monitor/status/type from ip: #{request.ip} type: #{type} params: #{params.inspect}"
             unless authorized?
               MaziLogger.debug "Not authorized"
               session['error'] = nil
