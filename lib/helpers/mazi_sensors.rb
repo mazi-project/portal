@@ -6,6 +6,10 @@ MYSQL_PASS_FILE    = '/etc/mazi/sql.conf'        # the mysql creds file
 
 module MaziSensors
   def init_sensors
+    @sensehat_metrics = {}
+    @sensehat_metrics[:comp] = 0
+    @sensehat_metrics[:acc]  = [0, 0, 0]
+    @sensehat_metrics[:gyro] = [0, 0, 0]
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     @sensors_enabled = true
@@ -63,7 +67,6 @@ module MaziSensors
       return [{type: 'sensehat', status: 'active', id: 1, ip: '10.0.0.1', nof_entries: 12}, {type: 'sht11', status: 'not found', id: 2, ip: '10.0.0.1', nof_entries: 0}]
     end
     unless sensors_db_exist?
-      puts "aaa"
       sensors = []
       i = 0
       `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
@@ -240,5 +243,49 @@ module MaziSensors
     a.each_hash do |row|
       return row["COUNT(*)"]
     end
+  end
+
+  def start_sensehat_metrics
+    command = 'sh /root/back-end/mazi-sense.sh -n sensehat -m -ac -g'
+    Thread.new do
+      begin
+        PTY.spawn( command ) do |stdout, stdin, pid|
+          begin
+            stdin.close
+            stdout.each { |line|
+              line = line.split
+              if line.first == 'direction'
+                @sensehat_metrics[:comp] = line.last.to_f.round(2)
+              elsif line.first == 'pitch:'
+                @sensehat_metrics[:gyro][0] = line.last.to_f.round(2)
+              elsif line.first == 'yaw:'
+                @sensehat_metrics[:gyro][1] = line.last.to_f.round(2)
+              elsif line.first == 'roll:'
+                @sensehat_metrics[:gyro][2] = line.last.to_f.round(2)
+              elsif line.first == 'ac_x:'
+                @sensehat_metrics[:acc][0] = line.last.to_f.round(2)
+              elsif line.first == 'ac_y:'
+                @sensehat_metrics[:acc][1] = line.last.to_f.round(2)
+              elsif line.first == 'ac_z:'
+                @sensehat_metrics[:acc][2] = line.last.to_f.round(2)
+              end
+            }
+          rescue Errno::EIO
+            MaziLogger.error "Errno:EIO error, but this probably just means that the process has finished giving output"
+          end
+        end
+      rescue PTY::ChildExited
+        MaziLogger.debug "The child process exited!"
+      end
+    end
+  end
+
+  def stop_sensehat_metrics
+    pid = `ps aux | grep -v grep | grep 'sh /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
+    `kill -9 #{pid}`
+  end
+
+  def get_sensehat_metrics
+    @sensehat_metrics
   end
 end

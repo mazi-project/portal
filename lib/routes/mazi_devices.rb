@@ -83,6 +83,21 @@ module Sinatra
 
             out.to_json
           end
+
+          app.get '/devices/sensors/sensehat/get_metrics' do
+            # MaziLogger.debug "request: get/devices/sensors/sensehat/get_metrics from ip: #{request.ip} params: #{params.inspect}"
+            get_sensehat_metrics.to_json
+          end
+
+          app.post '/devices/sensors/sensehat/start_metrics' do
+            MaziLogger.debug "request: post/devices/sensors/sensehat/get_metrics from ip: #{request.ip} params: #{params.inspect}"
+            start_sensehat_metrics
+          end
+
+          app.delete '/devices/sensors/sensehat/stop_metrics' do
+            MaziLogger.debug "request: delete/devices/sensors/sensehat/get_metrics from ip: #{request.ip} params: #{params.inspect}"
+            stop_sensehat_metrics
+          end
         end
 
       end

@@ -24,7 +24,7 @@ function exportToCsv(filename, rows) {
   var blob = new Blob([csvFile], { type: 'text/csv;charset=utf-8;' });
   if (navigator.msSaveBlob) { // IE 10+
     navigator.msSaveBlob(blob, filename);
-  } 
+  }
   else {
     var link = document.createElement("a");
     if (link.download !== undefined) {
@@ -85,6 +85,61 @@ $(function() {
         result.push([data[i].date, data[i].hum]);
       }
       exportToCsv('humidity.csv', result);
+    });
+  });
+
+  $.ajax({
+    url: '/devices/sensors/sensehat/start_metrics',
+    type: 'POST',
+    success: function(result) {
+    }
+  });
+
+  var intervalID = setInterval(function(){
+    console.log('mpam');
+    $.ajax({
+      url: '/devices/sensors/sensehat/get_metrics',
+      type: 'GET',
+      success: function(result) {
+        if ($(".special-metrics-panel").length <= 0){
+          $.ajax({
+            url: '/devices/sensors/sensehat/stop_metrics',
+            type: 'DELETE',
+            success: function(result) {
+              clearInterval(intervalID);
+            }
+          });
+        }
+        result = JSON.parse(result);
+        $(".metrics-direction-span").html(result['comp']);
+        var compassDisc = document.getElementById("compassDiscImg");
+        compassDisc.style.webkitTransform = "rotate("+ result['comp'] +"deg)";
+        compassDisc.style.MozTransform = "rotate("+ result['comp'] +"deg)";
+        compassDisc.style.transform = "rotate("+ result['comp'] +"deg)";
+        $(".metrics-acceleration-span").html(result['acc'][0] + ', ' + result['acc'][1] + ', ' + result['acc'][2]);
+        $(".metrics-gyroscope-span").html(result['gyro'][0] + ', ' + result['gyro'][1] + ', ' + result['gyro'][2]);
+      }
+    });
+  }, 50);
+
+  $(window).bind('beforeunload', function(){
+    $.ajax({
+      url: '/devices/sensors/sensehat/stop_metrics',
+      type: 'DELETE',
+      success: function(result) {
+        clearInterval(intervalID);
+      }
+    });
+    return;
+  });
+
+  $( window ).unload(function() {
+    $.ajax({
+      url: '/devices/sensors/sensehat/stop_metrics',
+      type: 'DELETE',
+      success: function(result) {
+        clearInterval(intervalID);
+      }
     });
   });
 

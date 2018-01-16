@@ -228,9 +228,9 @@ ul.alert-dropdown {
 }
 
 .app-row{
-  padding-top: 50px; 
-  padding-bottom: 20px; 
-  margin-bottom: 50px; 
+  padding-top: 50px;
+  padding-bottom: 20px;
+  margin-bottom: 50px;
   background-size: cover;
   background: url('images/mazi-background.jpg');
 }
@@ -464,3 +464,39 @@ ul.alert-dropdown {
   color: rgba(255, 255, 255, 0.7);
 }
 
+/* Sensors page */
+
+.compass {
+  position: relative;
+  width: 260px;
+  height: 260px;
+  margin-left: 7px;
+  margin-top: -7px;
+  background: #222;
+  padding: 20px;
+  border-radius: 40px;
+  border: 5px solid #444;
+  overflow: hidden;
+}
+
+.compass .disc {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 200;
+  background: url('/images/compass.svg');
+  width: 240px;
+  height: 240px;
+  background-size: 100%;
+}
+
+.compass .arrow {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  z-index: 1000;
+  background: url('/images/arrow.svg');
+  width: 240px;
+  height: 240px;
+  background-size: 100%;
+}

@@ -10,13 +10,13 @@
 </script>
 
 <div class="jumbotron">
-    <h1><%= I18n.translate("portal.sensors-page.header") %></h1>
-    <p><%= I18n.translate("portal.sensors-page.header-message") %></p>
-    <p>
-      <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
-        <i class="fa fa-calendar"> <%= I18n.translate("general.buttons.choose-timeslot") %> </i>
-      </a>
-    </p>
+  <h1><%= I18n.translate("portal.sensors-page.header") %></h1>
+  <p><%= I18n.translate("portal.sensors-page.header-message") %></p>
+  <p>
+    <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
+      <i class="fa fa-calendar"> <%= I18n.translate("general.buttons.choose-timeslot") %> </i>
+    </a>
+  </p>
 </div>
 
 <% if sensors.nil? || sensors.empty? %>
@@ -60,12 +60,33 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-blue">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
+      <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
         <div class="text-right">
           <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> <%= I18n.translate("general.buttons.export-to-csv") %></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-sm-12 special-metrics-panel">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  sensor[:type]) %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row col-with-divider">
+          <div class="col-xs-6 compass pull-left">
+            <div class="arrow"></div>
+            <div class="disc" id="compassDiscImg"></div>
+          </div>
+          <div class="col-xs-6 text-left">
+            <p><b><%= I18n.translate("portal.sensors-page.direction") %>: </b><span class="metrics-direction-span"></span></p>
+            <p><b><%= I18n.translate("portal.sensors-page.acceleration") %>: </b><span class="metrics-acceleration-span"></span></p>
+            <p><b><%= I18n.translate("portal.sensors-page.gyroscope") %>: </b><span class="metrics-gyroscope-span"></span></p>
+          </div>
         </div>
       </div>
     </div>
