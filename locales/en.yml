@@ -28,6 +28,10 @@ en:
       import:          "Import"
       export:          "Export"
       refresh:         "Refresh"
+      continue:        "Continue"
+      next:            "Next"
+      previous:        "Previous"
+      submit:          "Submit"
     messages:
       warning:      "Warning"
       welcome:      "Welcome"
@@ -67,12 +71,16 @@ en:
       storage:     "Storage"
     sensors-page:
       header:                  "Sensor Measurements"
-      header-message:          "On this page you can see the measurements of various sensors connected to this MAZI Zone. You can also use the button bellow to request for measurements from a specific period."
+      header-message:          "On this page you can see the measurements of various sensors connected to this MAZI Zone. You can also use the button below to request for measurements from a specific period."
       temperature-for:         "Temperature from %{sensor}"
+      metrics-for:             "Direction, Acceleration and Gyroscope metrics from %{sensor}"
       humidity-for:            "Humidity from %{sensor}"
       no-sensors-warn:         "Warning: Either there are no measurements in the database or a sensor device is not connected to this MAZI Zone."
       no-sensor-data-warn:     "Warning: There are no sensor data stored on this MAZI Zone. A system administrator can enable to collection of sensor data."
-      choose-timeslot-message: "Please use the form bellow to select a timeslot."
+      choose-timeslot-message: "Please use the form below to select a timeslot."
+      direction:               "Direction (Degrees)"
+      acceleration:            "Acceleration (x, y, z)"
+      gyroscope:               "Gyroscope (pitch, yaw, roll)"
     camera-page:
       header:               "Camera"
       subheader:            "On this page you can see the photos and videos captured by the camera that is connected to this MAZI Zone."
@@ -84,9 +92,9 @@ en:
     general:
       admin-panel:            "The MAZI Zone Administration panel"
       shutdown-modal-title:   "Shutdown?"
-      shutdown-modal-message: "MAZI Zone will now Shutdown, this will cause this site to be unreachable and you will need to manually reboot this MAZI Zone. Procced?"
+      shutdown-modal-message: "MAZI Zone will now Shutdown, this will cause this site to be unreachable and you will need to manually reboot this MAZI Zone. Proceed?"
       reboot-modal-title:     "Reboot?"
-      reboot-modal-message:   "MAZI Zone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutres. Procced?"
+      reboot-modal-message:   "MAZI Zone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutres. Proceed?"
     top-menu:
       header:         "MAZI Zone Administration Panel"
       admin:          "Admin"
@@ -115,8 +123,21 @@ en:
       update-message-3:  "The portal is up-to-date, there is no need for an update."
       update-message-4:  "The system is updating. Please wait..."
       update-message-5:  "Update proccess is almost complete. One last step is required, please wait several minutes and then refresh the page."
-      update-message-6:  "There is an update available. Please use the button bellow to start the update proccess."
+      update-message-6:  "There is an update available. Please use the button below to start the update proccess."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
+    setup-page:
+      tog-nav:             "Toggle navigation"
+      setup-panel:         "MAZI Zone Setup Panel"
+      first-step-header:   "Admin Password Setup"
+      first-step-message:  "Use the form below the set the admin password for the MAZI Zone administration panel."
+      first-step-hint:     "hint: if this is a new MAZI Zone the current password is 1234"
+      second-step-header:  "Date/Time setup"
+      second-step-message: "Please use the form bellow to change Date/Time, as well as the timezone of this MAZI Zone."
+      third-step-header:   "Wireless Interface Setup"
+      third-step-message:  "Please use the form bellow to change the name for the Wi-Fi network (Optional)."
+      third-step-warning:  "Warning: If you change the name of your Wi-Fi network, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
+      last-step-header:    "Complete"
+      last-step-message:   "You have successfully completed all the set up steps. Please click on the submit button to save the changes."
     dashboard-page:
       subheader: "Dashboard"
       welcome:
@@ -210,11 +231,11 @@ en:
       network-settings-panel:
         header:                    "Wi-Fi Network Settings"
         ssid-name-label:           "Name of the Wi-Fi Network (SSID)"
-        ssid-name-description:     "The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button bellow to change it."
+        ssid-name-description:     "The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button below to change it."
         wifi-channel-label:        "Channel of the Wi-Fi Network"
-        wifi-channel-description:  "Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button bellow to change it."
+        wifi-channel-description:  "Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button below to change it."
         wifi-password-label:       "Password of the Wi-Fi Network"
-        wifi-password-description: "The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button bellow to change it."
+        wifi-password-description: "The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button below to change it."
       internet-panel:
         header:    "Internet Network Mode"
         mode-hint: "Mode of the Wi-Fi Network"
@@ -222,11 +243,11 @@ en:
         header:              "Connect to Wi-Fi for internet access"
         wifi-network-hint-1: "from Wi-Fi Networks"
         wifi-network-hint-2: "Wi-Fi Network"
-        usb-dongle-message:  "Please plugin an extra USB Wi-Fi dongle to your rasberry pi to enable this feature. Suggested USB dongles"
+        usb-dongle-message:  "Please plugin an extra USB Wi-Fi dongle to your Raspberry pi to enable this feature. Suggested USB dongles"
       access-point-panel:
         header:          "Add router as Access Point"
         current-hint:    "Wi-Fi Access Point in use"
-        router-message:  "Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your rasberry pi and move the Access Point there. Suggested devices"
+        router-message:  "Raspberry Wi-Fi interface is currently being used. You can plugin an OpenWRT router to your Raspberry pi and move the Access Point there. Suggested devices"
       portal-domain-panel:
         header:      "Portal Domain"
         domain-hint: "Current Portal Domain"
@@ -237,7 +258,7 @@ en:
         change-channel-header:       "Change Channel"
         change-password-header:      "Change Password"
         change-mode-header:          "Change Mode"
-        change-mode-message:         "Use the form bellow to choose the Network Mode for this MAZI Zone. If you wish to choose the dual mode, please make sure to have access to the Internet (either through an ethernet cable or a Wi-Fi dongle)."
+        change-mode-message:         "Use the form below to choose the Network Mode for this MAZI Zone. If you wish to choose the dual mode, please make sure to have access to the Internet (either through an ethernet cable or a Wi-Fi dongle)."
         connect-wifi-header:         "Connect to Wi-Fi Network"
         select-wifi-label:           "Select Wi-Fi name"
         type-wifi-label:             "Or type it here if it is hidden"
@@ -282,7 +303,7 @@ en:
         save-theme-message:           "Please enter the name of the new Theme."
     devices-page:
       subheader: "Devices"
-      message:   "You can use the tools bellow to control the various supported devices that are connected to this MAZI Zone (sensors, cameras, etc). You can find all the supported devices"
+      message:   "You can use the tools below to control the various supported devices that are connected to this MAZI Zone (sensors, cameras, etc). You can find all the supported devices"
       sensors-panel:
         header:                 "Sensors"
         header-hint:            "You can use this to control various sensors."
@@ -296,7 +317,7 @@ en:
           start-button-hint:  "Start saving measurements"
           delete-button-hint: "Delete all saved measurements"
         no-sensors-message:   "Cannot find a connected sensor to this MAZI zone."
-        init-sensors-message: "The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this MAZI Zone, please use the button bellow to initialize this module."
+        init-sensors-message: "The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this MAZI Zone, please use the button below to initialize this module."
         init-button-hint:     "Start sensors initiliazation"
       camera-panel:
         header:                 "Camera"
@@ -326,13 +347,13 @@ en:
         delete-videos-message:  "Do you want to delete all captured videos?"
     monitoring-page:
       subheader: "Monitoring"
-      message:   "You can use the tools bellow to control the the way your MAZI zone can collect and send data to a central point."
+      message:   "You can use the tools below to control the the way your MAZI zone can collect and send data to a central point."
       details-panel:
         header:                    "Details"
         header-hint:               "You can use this to enable/disable the monitoring feature."
         toggle-monitoring-message: "Enable/disable the monitoring feature."
         toggle-monitoring-hint:    "enable/disable the monitoring feature"
-        details-message:           "Bellow you can see the details for this MAZI zone, you can change everything by pressing the edit button on the bottom."
+        details-message:           "Below you can see the details for this MAZI zone, you can change everything by pressing the edit button on the bottom."
         table-label1:              "Deployment"
         table-label2:              "Administrator"
         table-label3:              "Title"
@@ -341,7 +362,7 @@ en:
       statistics-panel:
         header:      "Statistics"
         header-hint: "You can use this to control the camera."
-        message:     "You can start/stop sending hardware and application monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow."
+        message:     "You can start/stop sending hardware and application monitoring data to a remote (or a local) point by pressing the start/stop buttons below."
         statistics-table:
           status:                          "Status"
           description:                     "Description"
@@ -358,7 +379,7 @@ en:
           delete-application-data-hint:    "Delete all application monitoring data from the local database"
       popups:
         change-details-header:      "Change monitoring details"
-        change-details-message:     "Use the form bellow to change the monitoring details of the modal"
+        change-details-message:     "Use the form below to change the monitoring details of the modal"
         change-details-label1:      "Deployment"
         change-details-label2:      "Administrator"
         change-details-label3:      "Title"
@@ -375,18 +396,18 @@ en:
         application-label3:         "Guestbook application"
         application-label4:         "Framadate application"
         start-hardware-header:      "Start hardware monitoring data"
-        start-hardware-message:     "Use the form bellow to start sending hardware monitoring data"
+        start-hardware-message:     "Use the form below to start sending hardware monitoring data"
         start-application-header:   "Start application monitoring data"
-        start-application-message:  "Use the form bellow to start sending hardware monitoring data"
+        start-application-message:  "Use the form below to start sending hardware monitoring data"
         show-hardware-header:       "Hardware monitoring information"
         show-hardware-message:      "Current status for hardware monitoring proccesses"
         show-application-header:    "Application monitoring information"
         show-application-message:   "Current status for application monitoring proccesses"
         delete-hardware-header:     "Delete hardware monitoring data"
-        delete-hardware-message:    "Use the button bellow to delete all hardware monitoring data from the local database. Currently the number of entries in the database are %{entries}"
+        delete-hardware-message:    "Use the button below to delete all hardware monitoring data from the local database. Currently the number of entries in the database are %{entries}"
         delete-hardware-hint:       "this action will take several seconds to be fully executed, so please wait before refreshing the page."
         delete-application-header:  "Delete application monitoring data"
-        delete-application-message: "Use the button bellow to delete all application monitoring data from the local database. Currently the number of entries in the database are"
+        delete-application-message: "Use the button below to delete all application monitoring data from the local database. Currently the number of entries in the database are"
         delete-application-hint:    "this action will take several seconds to be fully executed, so please wait before refreshing the page."
     notifications-page:
       subheader: "Notifications"
@@ -401,7 +422,7 @@ en:
         delete-notification-message: "This notification will be permanently deleted from the database. Do you wish to proceed?"
     import-export-page:
       subheader: "Snapshots"
-      message:   "You can use the tools bellow to take a snapshot of the current configuration of this MAZI Zone. This includes everything (network configurations, applications, application instances, notifications, visual configurations, etc)."
+      message:   "You can use the tools below to take a snapshot of the current configuration of this MAZI Zone. This includes everything (network configurations, applications, application instances, notifications, visual configurations, etc)."
       warning:   "Warning: If you load a new snapshot with different Wi-Fi network settings, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
       save-snapshot-panel:
         header:           "Save Snapshot"
@@ -419,7 +440,7 @@ en:
         message:              "Please select a snapshot and press load."
         no-snapshots-message: "Currently, there are no snapshots saved."
       application-snapshots-header:   "Application snapshots"
-      application-snapshots-message:  "Use the panels bellow to Import/Export snapshots for the applications supported by this MAZI Zone."
+      application-snapshots-message:  "Use the panels below to Import/Export snapshots for the applications supported by this MAZI Zone."
       interview-panel:
         header-hint:      "You can use this to import/export a snapshot."
         form-placeholder: "Snapshot Name"
@@ -433,7 +454,7 @@ en:
         import-etherpad-header:  "Import Snapshot for Etherpad"
     logs-page:
       subheader: "Log Viewer"
-      message:   "You can view MAZI Zone log files bellow"
+      message:   "You can view MAZI Zone log files below"
       portal-log-panel:
         header: "Portal Log File"
         header-hint: "Portal Log File."
