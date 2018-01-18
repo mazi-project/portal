@@ -21,11 +21,11 @@ module MaziSensors
   end
 
   def initialize_sensors_module(password)
-    # `sh /root/back-end/mazi-sense.sh --init #{password}`
+    # `bash /root/back-end/mazi-sense.sh --init #{password}`
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     # i = 1
-    # `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
+    # `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
     #   line = line.split
     #   con.query("INSERT INTO type(name, ip) VALUES('#{line[0]}', '#{line[2]}')")
     #   con.query("CREATE TABLE IF NOT EXISTS sensor_#{i}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
@@ -69,7 +69,7 @@ module MaziSensors
     unless sensors_db_exist?
       sensors = []
       i = 0
-      `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
+      `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
         sensors << {id: i, type: line.split[0], status: line.split[1], ip: line.split[2], nof_entries: 0}
         i += 1
       end
@@ -78,7 +78,7 @@ module MaziSensors
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     result = []
-    `sh /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
+    `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
       line = line.split
       sensor_type = line[0]
       tmp = {}
@@ -177,15 +177,15 @@ module MaziSensors
     Thread.new do
       if sensor_name == "sensehat"
         if end_point == 'localhost'
-          `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -p -s -d #{duration} -i #{interval}`
+          `bash /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -p -s -d #{duration} -i #{interval}`
         else
-          `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -p -s -d #{duration} -i #{interval} -D #{end_point}`
+          `bash /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -p -s -d #{duration} -i #{interval} -D #{end_point}`
         end
       else
         if end_point == 'localhost'
-          `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval}`
+          `bash /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval}`
         else
-          `sh /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval} -D #{end_point}`
+          `bash /root/back-end/mazi-sense.sh -n #{sensor_name} -t -h -s -d #{duration} -i #{interval} -D #{end_point}`
         end
       end
     end
@@ -220,7 +220,7 @@ module MaziSensors
     a = sensors_con.query(q)
     a.each_hash do |h|
       type = h["sensor_name"]
-      `sh /root/back-end/mazi-sense.sh --status`.split("\n").each do |line|
+      `bash /root/back-end/mazi-sense.sh --status`.split("\n").each do |line|
         line = line.split
         if line[0] == type
           return line[1]
@@ -246,7 +246,7 @@ module MaziSensors
   end
 
   def start_sensehat_metrics
-    command = 'sh /root/back-end/mazi-sense.sh -n sensehat -m -ac -g'
+    command = 'bash /root/back-end/mazi-sense.sh -n sensehat -m -ac -g'
     Thread.new do
       begin
         PTY.spawn( command ) do |stdout, stdin, pid|
@@ -271,7 +271,7 @@ module MaziSensors
               end
             }
           rescue Errno::EIO
-            MaziLogger.error "Errno:EIO error, but this probably just means that the process has finished giving output"
+            MaziLogger.debug "bash /root/back-end/mazi-sense.sh Errno:EIO error, but this probably just means that the process has finished giving output"
           end
         end
       rescue PTY::ChildExited
@@ -281,7 +281,7 @@ module MaziSensors
   end
 
   def stop_sensehat_metrics
-    pid = `ps aux | grep -v grep | grep 'sh /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
+    pid = `ps aux | grep -v grep | grep 'bash /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
     `kill -9 #{pid}`
   end
 
