@@ -113,6 +113,12 @@ class MaziApp < Sinatra::Base
     err
   end
 
+  at_exit do
+    MaziLogger.debug "Exiting"
+    pid = `ps aux | grep -v grep | grep 'bash /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
+    `kill -9 #{pid}`
+  end
+
   register Sinatra::MaziApp::Routing::MaziMain
   register Sinatra::MaziApp::Routing::MaziConfig
   register Sinatra::MaziApp::Routing::MaziRest
@@ -123,7 +129,6 @@ class MaziApp < Sinatra::Base
   register Sinatra::MaziApp::Routing::MaziDevices
   register Sinatra::MaziApp::Routing::MaziMonitor
   register Sinatra::MaziApp::Routing::MaziLocales
-
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567
