@@ -33,7 +33,7 @@
               <input type="checkbox" <%= sensors_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-sensors-switch"></div>
             </label>
-            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank">here</a>)</span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
           </div>
         </div>
         <% if sensors_db_exist %>
@@ -71,6 +71,7 @@
                 <% end %>
               </tbody>
             </table>
+            <p><b>* Hint: </b><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.sensehat-calibration-hint") %> (<a href="https://www.raspberrypi.org/documentation/hardware/sense-hat/" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</p>
             <% else %>
               <p><%= I18n.translate("admin.devices-page.sensors-panel.no-sensors-message") %></p>
             <% end %>
@@ -103,7 +104,7 @@
               <input type="checkbox" <%= camera_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-camera-switch"></div>
             </label>
-            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-message") %> (<a href="/index_camera" target="_blank">here</a>)</span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-message") %> (<a href="/index_camera" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
             <div class="row">
               <div class='col-md-12'>
                 <% if camera_installed %>
