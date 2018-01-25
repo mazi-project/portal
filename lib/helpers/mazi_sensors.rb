@@ -12,46 +12,31 @@ module MaziSensors
     @sensehat_metrics[:gyro] = [0, 0, 0]
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
-    @sensors_enabled = true
   rescue Mysql::Error => ex
     MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
-    @sensors_enabled = false
   ensure
     con.close if con
   end
 
   def initialize_sensors_module(password)
-    # `bash /root/back-end/mazi-sense.sh --init #{password}`
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
-    # i = 1
-    # `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
-    #   line = line.split
-    #   con.query("INSERT INTO type(name, ip) VALUES('#{line[0]}', '#{line[2]}')")
-    #   con.query("CREATE TABLE IF NOT EXISTS sensor_#{i}(id INT PRIMARY KEY AUTO_INCREMENT, time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
-    #   i += 1
-    # end
-    @sensors_enabled = true
   rescue Mysql::Error => ex
     MaziLogger.error "Cannot connect to mySQL."
-    @sensors_enabled = false
   ensure
     con.close if con
   end
 
   def sensors_enabled?
-    sensors_db_exist?
-    SENSORS_ENABLED && @config[:sensors] && @config[:sensors][:enable] && @sensors_enabled
+    SENSORS_ENABLED && @config[:sensors] && @config[:sensors][:enable]
   end
 
   def sensors_db_exist?
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
-    @sensors_enabled = true
     true
   rescue Mysql::Error => ex
     MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
-    @sensors_enabled = false
     false
   ensure
     con.close if con
