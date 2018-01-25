@@ -244,10 +244,15 @@ module MaziVersion
       File.delete("/root/tmp_fe_config.js")
       File.delete("/root/tmp_be_config.js")
       File.delete("/root/tmp_header_tmpl.html")
+      `sudo pm2 stop main`
+      `sudo pm2 delete main`
+      `sudo pm2 save`
       lines = ''
       File.readlines('/etc/init.d/mazi-board').each do |line|
         if line.strip.start_with? 'sudo pm2 start main.js'
-          lines += line.gsub("--watch", "").gsub("\n", " --watch\n")
+          lines += "        sudo pm2 start main.config.js\n"
+        elsif line.strip.start_with? 'sudo pm2 stop main.js'
+          lines += "        sudo pm2 stop guestbook-back-end\n"
         else
           lines += line
         end
@@ -264,7 +269,7 @@ module MaziVersion
       File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
       `systemctl daemon-reload`
       MaziLogger.debug "done"
-      `service mazi-board restart`
+      `service mazi-board start`
     end
   end
 end
