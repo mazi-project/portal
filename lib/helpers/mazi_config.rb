@@ -217,6 +217,7 @@ module MaziConfig
         end
         zipfile.add("#{snapshot_name}_#{app_name}.json", "/tmp/#{snapshot_name}_#{app_name}.json")
         zipfile.add("config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+        zipfile.add("be_config.js", "/var/www/html/mazi-board/src/node/config.js")
         zipfile.add('submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
         zipfile.add('header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
         bgimgname = get_guestbook_background_image_name
@@ -274,7 +275,30 @@ module MaziConfig
             entry.extract("/var/www/html/mazi-board/src/www/images/#{img_name}")
           elsif entry.name == 'config.js'
             File.delete("/var/www/html/mazi-board/src/www/js/config.js") if File.exist?("/var/www/html/mazi-board/src/www/js/config.js")
-            entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
+            if get_guestbook_version == '0.1'
+              File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
+              entry.extract("/root/tmp_config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "front-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "front-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+              end
+              File.delete("/root/tmp_config.js")
+            else
+              entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
+            end
+          elsif entry.name == 'be_config.js'
+            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            if get_guestbook_version == '0.1'
+              File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
+              entry.extract("/root/tmp_config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/config.js")
+              end
+              File.delete("/root/tmp_config.js")
+            else
+              entry.extract("/var/www/html/mazi-board/src/node/config.js")
+            end
           elsif entry.name == 'submission_input_tmpl.html'
             File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
             entry.extract("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
@@ -363,7 +387,7 @@ module MaziConfig
     lines = ''
     File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
       if line.strip.start_with? 'tags:'
-        lines += line.split(':').first + ": [#{tags}]\n"
+        lines += line.split(':').first + ": [#{tags}],\n"
       else
         lines += line
       end
@@ -418,24 +442,144 @@ module MaziConfig
   end
 
   def get_guestbook_welcome_message
-    File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
-      line = line.strip
-      if line.include? 'submission-headline'
-        return line.split('>')[2].split('<').first
+    if get_guestbook_config_file_version("/var/www/html/mazi-board/src/www/js/config.js", 'front-end') == '0.0.1'
+      File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+        line = line.strip
+        if line.include? 'submission-headline'
+          return line.split('>')[2].split('<').first
+        end
+      end
+    else
+      File.readlines("/var/www/html/mazi-board/src/www/js/config.js").each do |line|
+        line = line.strip
+        if line.include? 'welcome_msg:'
+          return line.split(':').last.strip
+        end
       end
     end
   end
 
   def set_guestbook_welcome_message(welcome_message)
+    if get_guestbook_config_file_version("/var/www/html/mazi-board/src/www/js/config.js", 'front-end') == '0.0.1'
+      lines = ''
+      File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+        if line.strip.include? 'submission-headline'
+          lines += line.split('<h1>').first + "<h1> #{welcome_message}<span class=\"blinking-cursor\">|</span></h1></div>\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html', "w") {|file| file.puts lines }
+    else
+      lines = ''
+      File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
+        if line.strip.start_with? 'welcome_msg:'
+          lines += line.split(':').first + ": \"#{welcome_message}\",\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
+    end
+  end
+
+  def get_guestbook_auto_expand_comment
+    File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
+      line = line.strip
+      if line.start_with? 'auto_expand_comment:'
+        return line.split(':').last.strip!
+      end
+    end
+  end
+
+  def set_guestbook_auto_expand_comment(value)
     lines = ''
-    File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
-      if line.strip.include? 'submission-headline'
-        lines += line.split('<h1>').first + "<h1> #{welcome_message}<span class=\"blinking-cursor\">|</span></h1></div>\n"
+    File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
+      if line.strip.start_with? 'auto_expand_comment:'
+        lines += line.split(':').first + ": #{value}\n"
       else
         lines += line
       end
     end
-    File.open('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html', "w") {|file| file.puts lines }
+    File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
+  end
+
+  def get_guestbook_submission_name_req
+    File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
+      line = line.strip
+      if line.start_with? 'submission_name_required:'
+        return line.split(':').last.gsub(',', '').strip!
+      end
+    end
+  end
+
+  def set_guestbook_submission_name_req(value)
+    lines = ''
+    File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
+      if line.strip.start_with? 'submission_name_required:'
+        lines += line.gsub(',', '').split(':').first + ": #{value}\n"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/mazi-board/src/node/config.js', "w") {|file| file.puts lines }
+  end
+
+  def get_guestbook_config_file_version(filename, type)
+    case type
+    when 'front-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('welcome_msg')
+      end
+    when 'back-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('submission_name_required')
+      end
+    end
+    return "0.0.1"
+  end
+
+  def update_guestbook_config_file_version(filename, type)
+    lines = ''
+    case type
+    when 'front-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\t\tbackground_img: \"TODO\",\n"
+          lines += "\t\twelcome_msg: \"Click here to comment on the MAZI toolkit\",\n"
+          lines += "\t\tauto_expand_comment: false\n"
+          lines += line
+          flag = false
+        else
+          flag = true if line.strip.start_with? 'tags:'
+          lines += line
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    when 'back-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\n"
+          lines += "\tsubmission_name_required: true,\n"
+          lines += line
+          flag = false
+        else
+          if line.strip.start_with? 'testPort:'
+            flag = true
+            lines += line.gsub("\n", ",\n")
+          else
+            lines += line
+          end
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    end
+  end
+
+  def get_guestbook_version
+    JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
   end
 
   def all_supported_timezones

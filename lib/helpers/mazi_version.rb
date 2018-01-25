@@ -84,6 +84,67 @@ module MaziVersion
     nil
   end
 
+  def self.guestbook_version
+    JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
+  end
+
+  def self.get_guestbook_config_file_version(filename, type)
+    case type
+    when 'front-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('welcome_msg')
+      end
+    when 'back-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('submission_name_required')
+      end
+    end
+    return "0.0.1"
+  end
+
+  def self.update_guestbook_config_file_version(filename, type)
+    lines = ''
+    case type
+    when 'front-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\t\tbackground_img: \"TODO\",\n"
+          lines += "\t\twelcome_msg: \"Click here to comment on the MAZI toolkit\",\n"
+          lines += "\t\tauto_expand_comment: false\n"
+          lines += line
+          flag = false
+        else
+          if line.strip.start_with? 'tags:'
+            flag = true
+            lines += line.gsub("\n", ",\n")
+          else
+            lines += line
+          end
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    when 'back-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\n"
+          lines += "\tsubmission_name_required: true,\n"
+          lines += line
+          flag = false
+        else
+          if line.strip.start_with? 'testPort:'
+            flag = true
+            lines += line.gsub("\n", ",\n")
+          else
+            lines += line
+          end
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    end
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
     begin
@@ -158,6 +219,33 @@ module MaziVersion
         MaziLogger.debug "done"
         `service mazi-portal restart`
       end
+    end
+
+    # version 2.3
+    MaziLogger.debug "  Checking Guestbook version"
+    if self.guestbook_version == '0.0.1'
+      MaziLogger.debug "New Guestbook version found. Updating!!!"
+      FileUtils.cp("/var/www/html/mazi-board/src/www/js/config.js", "/root/tmp_fe_config.js")
+      FileUtils.cp("/var/www/html/mazi-board/src/node/config.js", "/root/tmp_be_config.js")
+      `cd /var/www/html/mazi-board/; git stash; git pull; git stash clear`
+      self.update_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') if self.get_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') == '0.0.1'
+      self.update_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') if self.get_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') == '0.0.1'
+      FileUtils.cp("/root/tmp_fe_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+      FileUtils.cp("/root/tmp_be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+      File.delete("/root/tmp_fe_config.js")
+      File.delete("/root/tmp_be_config.js")
+      lines = ''
+      File.readlines('/etc/init.d/mazi-board').each do |line|
+        if line.strip.start_with? 'sudo pm2 start main.js'
+          lines += line.gsub("--watch", "").gsub("\n", " --watch\n")
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/init.d/mazi-board', "w") {|file| file.puts lines }
+      `systemctl daemon-reload`
+      MaziLogger.debug "done"
+      `service mazi-board restart`
     end
   end
 end

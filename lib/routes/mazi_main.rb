@@ -288,9 +288,11 @@ module Sinatra
               locals[:js] << "js/admin_guestbook.js"
               locals[:js] << "js/tag-it.js"
               locals[:main_body] = :admin_guestbook
-              locals[:local_data][:tags] = get_guestbook_tags
-              locals[:local_data][:maximumFileSize] = get_guestbook_maxfilesize
-              locals[:local_data][:welcomeMessage] = get_guestbook_welcome_message
+              locals[:local_data][:tags]                = get_guestbook_tags
+              locals[:local_data][:maximumFileSize]     = get_guestbook_maxfilesize
+              locals[:local_data][:welcomeMessage]      = get_guestbook_welcome_message
+              locals[:local_data][:auto_expand_comment] = get_guestbook_auto_expand_comment
+              locals[:local_data][:submision_name_req]  = get_guestbook_submission_name_req
               erb :admin_main, locals: locals
             when 'admin_monitor'
               unless authorized?

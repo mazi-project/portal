@@ -284,6 +284,12 @@ module Sinatra
                 set_guestbook_maxfilesize(params['maxfilesize'])
               when 'welcome_message'
                 set_guestbook_welcome_message(params['welcome_message'])
+              when 'auto_expand_comment'
+                value = get_guestbook_auto_expand_comment
+                set_guestbook_auto_expand_comment(value == "false" ? "true" : "false")
+              when 'submission_name_req'
+                value = get_guestbook_submission_name_req
+                set_guestbook_submission_name_req(value == "false" ? "true" : "false")
               end
               redirect 'admin_guestbook'
             else
