@@ -268,7 +268,7 @@ module MaziVersion
       File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
       `systemctl daemon-reload`
       MaziLogger.debug "done"
-      `service mazi-board start`
+      `cd /var/www/html/mazi-board/src/node/; sudo pm2 start main.config.js`
       `sudo pm2 save`
     end
   end
