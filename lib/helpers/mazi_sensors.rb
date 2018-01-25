@@ -76,8 +76,13 @@ module MaziSensors
       return sensors
     end
     mysql_username, mysql_password = mysql_creds
-    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    begin
+      con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    rescue Mysql::Error => ex
+      con = nil
+    end
     result = []
+    i = 0
     `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
       line = line.split
       sensor_type = line[0]
@@ -85,18 +90,21 @@ module MaziSensors
       tmp[:type]   = line[0]
       tmp[:status] = line[1]
       tmp[:ip]     = line[2]
-      q = "SELECT COUNT(*), sensors.id FROM sensors INNER JOIN measurements ON sensors.id = measurements.sensor_id AND sensors.ip = '#{tmp[:ip]}' AND sensors.sensor_name = '#{tmp[:type]}'"
-      a = con.query(q)
-      a.each_hash do |row|
-        tmp[:nof_entries] = row["COUNT(*)"]
-        tmp[:id]          = row["id"]
+      if con.nil?
+        tmp[:nof_entries] = 0
+        tmp[:id]          = i
+        i += 1
+      else
+        q = "SELECT COUNT(*), sensors.id FROM sensors INNER JOIN measurements ON sensors.id = measurements.sensor_id AND sensors.ip = '#{tmp[:ip]}' AND sensors.sensor_name = '#{tmp[:type]}'"
+        a = con.query(q)
+        a.each_hash do |row|
+          tmp[:nof_entries] = row["COUNT(*)"]
+          tmp[:id]          = row["id"]
+        end
       end
       result << tmp
     end
     return result
-  rescue Mysql::Error => ex
-    MaziLogger.debug "mySQL error: #{ex.inspect}"
-    return []
   ensure
     con.close if con
   end
