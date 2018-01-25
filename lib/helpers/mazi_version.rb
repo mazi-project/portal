@@ -227,13 +227,23 @@ module MaziVersion
       MaziLogger.debug "New Guestbook version found. Updating!!!"
       FileUtils.cp("/var/www/html/mazi-board/src/www/js/config.js", "/root/tmp_fe_config.js")
       FileUtils.cp("/var/www/html/mazi-board/src/node/config.js", "/root/tmp_be_config.js")
+      FileUtils.cp("/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html", "/root/tmp_header_tmpl.html")
+      welcome_msg = ""
+      File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+        line = line.strip
+        if line.include? 'submission-headline'
+          welcome_msg = line.split('>')[2].split('<').first
+        end
+      end
       `cd /var/www/html/mazi-board/; git stash; git pull; git stash clear`
       self.update_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') if self.get_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') == '0.0.1'
       self.update_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') if self.get_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') == '0.0.1'
       FileUtils.cp("/root/tmp_fe_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
       FileUtils.cp("/root/tmp_be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+      FileUtils.cp("/root/tmp_header_tmpl.html", "/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html")
       File.delete("/root/tmp_fe_config.js")
       File.delete("/root/tmp_be_config.js")
+      File.delete("/root/tmp_header_tmpl.html")
       lines = ''
       File.readlines('/etc/init.d/mazi-board').each do |line|
         if line.strip.start_with? 'sudo pm2 start main.js'
@@ -243,6 +253,15 @@ module MaziVersion
         end
       end
       File.open('/etc/init.d/mazi-board', "w") {|file| file.puts lines }
+      lines = ''
+      File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
+        if line.strip.start_with? 'welcome_msg:'
+          lines += line.split(':').first + ": \"#{welcome_msg}\",\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
       `systemctl daemon-reload`
       MaziLogger.debug "done"
       `service mazi-board restart`
