@@ -37,16 +37,7 @@
     <div class="row">
       <div class="panel panel-default">
         <div class="panel-heading">
-          <div class="panel-title"><%= I18n.translate("admin.dashboard-page.hardware-info.header") %>
-            <!-- <div class="dropdown pull-right">
-              <div class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                <i class="fa fa-wrench"></i>
-              </div>
-              <ul class="dropdown-menu dropdown-user dropdown-menu-right">
-                <li><a class="expand-storage" data-toggle="modal" data-target="#expand-storage-modal"><i class="fa fa-refresh"></i> Expand Storage</a></li>
-              </ul>
-            </div> -->
-          </div>
+          <div class="panel-title"><%= I18n.translate("admin.dashboard-page.hardware-info.header") %></div>
         </div>
         <div class="list-group">
           <% unless temp.nil? %>
@@ -66,7 +57,14 @@
           <% end %>
           <% unless storage.nil? %>
           <a class="list-group-item">
-            <i class="fa fa-hdd-o"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.storage-load") %> <span class="label <%= storage.split('(').last.split(')').first.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
+            <i class="fa fa-hdd-o"></i> <%= I18n.translate("admin.dashboard-page.hardware-info.storage-load") %>
+            <span class="label <%= storage.split('(').last.split(')').first.gsub("%", '').to_f > 75 ? "label-danger" : "label-success" %> pull-right"> <%= storage %></span>
+          </a>
+          <% end %>
+          <% if expanded == 'No' %>
+          <a class="list-group-item">
+            <i class="fa fa-hdd-o"></i>
+            <button class="btn btn-info btn-xs pull-right expand-storage" data-toggle="modal" data-target="#expand-storage-modal"><%= I18n.translate("general.buttons.expand-storage") %></button>
           </a>
           <% end %>
         </div>
@@ -216,21 +214,21 @@
 </div>
 
 <!-- expand storage modal-->
-<!-- <div class="modal fade" id="expand-storage-modal" role="dialog">
+<div class="modal fade" id="expand-storage-modal" role="dialog">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Expand Storage</h4>
+        <h4 class="modal-title"><%= I18n.translate("general.buttons.expand-storage") %></h4>
       </div>
       <div class="modal-body">
-        <p> You can expand the MAZI Zone storage to the maximum capacity of your SD card by using the button bellow. You will need to reboot the device for this to take effect.</p>
+        <p> <%= I18n.translate("admin.dashboard-page.popups.expand-storage-message") %></p>
         <form class="form-signin" action="/expand/storage" method="post">
           <div class="form-group">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Expand</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.expand") %></button>
           </div>
         </form>
       </div>
     </div>
   </div>
-</div> -->
+</div>

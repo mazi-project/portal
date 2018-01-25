@@ -14,6 +14,7 @@ el:
       choose-timeslot: "Επιλογή χρονοθήκης"
       export-to-csv:   "Εξαγωγή σε αρχείο CSV"
       expand:          "Επέκταση"
+      expand-storage:  "Επέκταση Αποθηκευτικού Χώρου"
       reboot:          "Επανεκκίνηση"
       reset:           "Επαναφορά"
       shutdown:        "Τερματισμός"
@@ -179,6 +180,8 @@ el:
         version-message-1: "Αυτό το Portal είναι "
         version-message-2: "commits` πίσω."
         up-to-date:        "Ενημερωμένο"
+      popups:
+        expand-storage-message: "Μπορείτε να επεκτείνετε το χώρο αποθήκευσης της ζώνης MAZI στη μέγιστη χωρητικότητα της κάρτας SD σας χρησιμοποιώντας το παρακάτω κουμπί. Θα χρειαστεί να κάνετε επανεκκίνηση της συσκευής για να τεθεί σε ισχύ."
     applications-page:
       subheader: "Εφαρμογές"
       instances-menu:

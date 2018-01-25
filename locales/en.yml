@@ -14,6 +14,7 @@ en:
       choose-timeslot: "Choose a timeslot"
       export-to-csv:   "Export to CSV file"
       expand:          "Expand"
+      expand-storage:  "Expand Storage"
       reboot:          "Reboot"
       reset:           "Reset"
       shutdown:        "Shutdown"
@@ -179,6 +180,8 @@ en:
         version-message-1: "This Portal is "
         version-message-2: "commits` behind."
         up-to-date:        "Up to Date"
+      popups:
+        expand-storage-message: "You can expand the MAZI Zone storage to the maximum capacity of your SD card by using the button bellow. You will need to reboot the device for this to take effect."
     applications-page:
       subheader: "Applications"
       instances-menu:
