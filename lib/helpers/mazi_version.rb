@@ -246,7 +246,6 @@ module MaziVersion
       File.delete("/root/tmp_header_tmpl.html")
       `sudo pm2 stop main`
       `sudo pm2 delete main`
-      `sudo pm2 save`
       lines = ''
       File.readlines('/etc/init.d/mazi-board').each do |line|
         if line.strip.start_with? 'sudo pm2 start main.js'
@@ -270,6 +269,7 @@ module MaziVersion
       `systemctl daemon-reload`
       MaziLogger.debug "done"
       `service mazi-board start`
+      `sudo pm2 save`
     end
   end
 end
