@@ -36,7 +36,6 @@
             <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
           </div>
         </div>
-        <% if sensors_db_exist %>
         <div class="row">
           <div class='col-md-12'>
             <% if available_sensors.length > 0 %>
@@ -77,14 +76,6 @@
             <% end %>
           </div>
         </div>
-        <% else %>
-        <div class="row">
-          <div class="col-lg-12">
-            <p><%= I18n.translate("admin.devices-page.sensors-panel.init-sensors-message") %></p>
-            <button class="btn btn-success pull-right init-sensor-db" data-toggle="modal" data-target="#init-sensor-db-modal" title="<%= I18n.translate("admin.devices-page.sensors-panel.init-button-hint") %>"><%= I18n.translate("general.buttons.initialize") %></button>
-          </div>
-        </div>
-        <% end %>
       </div>
     </div>
   </div>
