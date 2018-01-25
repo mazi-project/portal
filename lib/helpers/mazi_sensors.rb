@@ -40,6 +40,7 @@ module MaziSensors
   end
 
   def sensors_enabled?
+    sensors_db_exist?
     SENSORS_ENABLED && @config[:sensors] && @config[:sensors][:enable] && @sensors_enabled
   end
 
