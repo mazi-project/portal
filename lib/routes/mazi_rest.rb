@@ -8,11 +8,21 @@ module Sinatra
           app.post '/create/measurements/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
+            body = JSON.parse(request.body.read)
             request.body.rewind
-            MaziLogger.debug "Create measurements table in monitoring Database if doesn't exists"
+            MaziLogger.debug "Create measurements table in monitoring Database if doesn't exists."
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("CREATE TABLE IF NOT EXISTS measurements(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
+             con.query("CREATE TABLE IF NOT EXISTS measurements(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME)")
+             
+             body["senstypes"].each do |i|
+               id = con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'measurements' AND column_name = '#{i}'")
+               exists = id.fetch_row
+               if exists.nil? 
+                 con.query("ALTER TABLE measurements ADD #{i} varchar(4) NOT NULL default '0';")  
+               end
+             end
+ 
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -25,13 +35,10 @@ module Sinatra
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
-            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update measurements table "
+            MaziLogger.debug "Update measurements table"
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO measurements(sensor_id, time, temperature, humidity)
-                        VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                              '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
+             con.query("INSERT INTO measurements(#{body.keys.join(",")}) VALUES(#{body.values.map { |e| "\"#{e}\"" }.join(',')})")
               return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
