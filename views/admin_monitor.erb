@@ -333,7 +333,7 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i}(Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i} (Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
         <form class="form-signin" action="/monitor/flush/application_data" method="post">
           <div class="form-group">
             <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">

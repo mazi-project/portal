@@ -412,7 +412,7 @@ en:
         delete-hardware-message:    "Use the button below to delete all hardware monitoring data from the local database. Currently the number of entries in the database are %{entries}"
         delete-hardware-hint:       "this action will take several seconds to be fully executed, so please wait before refreshing the page."
         delete-application-header:  "Delete application monitoring data"
-        delete-application-message: "Use the button below to delete all application monitoring data from the local database. Currently the number of entries in the database are"
+        delete-application-message: "Use the button below to delete all application monitoring data from the local database. Currently the number of entries in the database are %{entries}"
         delete-application-hint:    "this action will take several seconds to be fully executed, so please wait before refreshing the page."
     notifications-page:
       subheader: "Notifications"
