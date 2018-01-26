@@ -80,6 +80,7 @@ $( document ).ready(function() {
   });
 
   $('.stop-hardware-monitoring-data-button').click(function(){
+    if ($(this).attr('disabled')){return false;}
     $(this).attr('disabled', true);
     $.ajax({
       url: '/monitor/stop/hardware_data',
@@ -91,6 +92,7 @@ $( document ).ready(function() {
   });
 
   $('.stop-application-monitoring-data-button').click(function(){
+    if ($(this).attr('disabled')){return false;}
     $(this).attr('disabled', true);
     $.ajax({
       url: '/monitor/stop/application_data',
@@ -99,6 +101,16 @@ $( document ).ready(function() {
         // setTimeout(location.reload.bind(location), 1500);
       }
     });
+  });
+
+  $('.start-hardware-data').click(function(){
+    if ($(this).attr('disabled')){return false;}
+    $('#start-hardware-data-modal').modal('show');
+  });
+
+  $('.start-application-data').click(function(){
+    if ($(this).attr('disabled')){return false;}
+    $('#start-application-data-modal').modal('show');
   });
 
   $('.hw-mon-stat-lab').click(function(){

@@ -108,7 +108,7 @@
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-hardware-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-hardware-task-hint") %>" id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal" <%= 'disabled' if hardware_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-primary start-hardware-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-hardware-task-hint") %>" id='start-monitoring-hardware-data' <%= 'disabled' if hardware_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
                         <a class="btn btn-warning stop-hardware-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.stop-hardware-task-hint") %>" <%= 'disabled' unless hardware_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
                         <a class="btn btn-danger flush-hardware-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.delete-hardware-data-hint") %>" id='flush-monitoring-hardware-data' data-toggle="modal" data-target="#flush-hardware-data-modal"><i class="fa fa-remove"></i></a>
                       </div>
@@ -127,7 +127,7 @@
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-application-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-application-task-hint") %>" id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal" <%= 'disabled' if application_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-primary start-application-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-application-task-hint") %>" id='start-monitoring-application-data' <%= 'disabled' if application_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
                         <a class="btn btn-warning stop-application-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.stop-application-task-hint") %>" <%= 'disabled' unless application_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
                         <a class="btn btn-danger flush-application-monitoring-data-button" id='flush-monitoring-application-data' data-toggle="modal" data-target="#flush-application-data-modal" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.delete-application-data-hint") %>"><i class="fa fa-remove"></i></a>
                       </div>
