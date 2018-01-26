@@ -288,10 +288,10 @@
       <div class="modal-body">
         <p><b><%= I18n.translate("admin.monitoring-page.popups.show-application-message") %>:</b> </p>
         <p>
-          <b><%= I18n.translate("admin.monitoring-page.popups.application-label3") %> :</b> <span id="app-mon-stat-guestbook"><%= application_monitoring_status['guestbook'] %></span>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label2") %> :</b> <span id="app-mon-stat-etherpad"><%= application_monitoring_status['etherpad'] %></span>
         </p>
         <p>
-          <b><%= I18n.translate("admin.monitoring-page.popups.application-label2") %> :</b> <span id="app-mon-stat-etherpad"><%= application_monitoring_status['etherpad'] %></span>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label3") %> :</b> <span id="app-mon-stat-guestbook"><%= application_monitoring_status['guestbook'] %></span>
         </p>
         <p>
           <b><%= I18n.translate("admin.monitoring-page.popups.application-label4") %> :</b> <span id="app-mon-stat-framadate"><%= application_monitoring_status['framadate'] %></span>
@@ -336,10 +336,10 @@
         <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i} (Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
         <form class="form-signin" action="/monitor/flush/application_data" method="post">
           <div class="form-group">
-            <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">
-            <label for='flush_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %></label></br>
             <input type="checkbox" id='flush_etherpad' name="etherpad" checked="checked">
             <label for='flush_etherpad'><%= I18n.translate("admin.monitoring-page.popups.application-label2") %></label></br>
+            <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">
+            <label for='flush_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %></label></br>
             <input type="checkbox" id='flush_framadate' name="framadate" checked="checked">
             <label for='flush_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %></label></br>
             <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.remove") %></button>
