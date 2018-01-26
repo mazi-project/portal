@@ -117,7 +117,7 @@
                 </tr>
                 <tr class="app_inst_tr">
                   <td>
-                  <% if application_monitoring_status['error'].nil? %>
+                  <% unless application_monitoring_status['error'] %>
                     <%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning app-mon-stat-lab'>#{I18n.translate("general.messages.inactive")}</span>" %>
                   <% else %>
                     <span class='label label-danger app-mon-stat-lab'><%=I18n.translate("general.messages.error")%></span>
