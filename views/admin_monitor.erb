@@ -97,9 +97,9 @@
                 <tr class="app_inst_tr">
                   <td>
                   <% if hardware_monitoring_status['error'].nil? %>
-                    <%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning hw-mon-stat-lab'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                    <%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning hw-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.inactive")}</span>" %>
                   <% else %>
-                    <span class='label label-danger hw-mon-stat-lab'><%=I18n.translate("general.messages.error")%></span>
+                    <span class='label label-danger hw-mon-stat-lab' style='cursor: pointer;'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
                   </td>
                   <td>
@@ -118,9 +118,9 @@
                 <tr class="app_inst_tr">
                   <td>
                   <% unless application_monitoring_status['error'] %>
-                    <%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning app-mon-stat-lab'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                    <%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning app-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.inactive")}</span>" %>
                   <% else %>
-                    <span class='label label-danger app-mon-stat-lab'><%=I18n.translate("general.messages.error")%></span>
+                    <span class='label label-danger app-mon-stat-lab' style='cursor: pointer;'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
                   </td>
                   <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.application-description-message") %></td>
