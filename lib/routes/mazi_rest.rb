@@ -123,7 +123,7 @@ module Sinatra
             MaziLogger.debug "Search ID for sensor: #{body["name"]} with ip: #{body["ip"]}"
             begin
             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-            id = con.query("SELECT id FROM sensors WHERE sensor_name LIKE '#{body["sensor_name"]}'AND ip='#{body["ip"]}'")
+            id = con.query("SELECT id FROM sensors WHERE sensor_name LIKE '#{body["sensor_name"]}'AND ip='#{body["ip"]}' AND device_id='#{body["device_id"]}'")
             if( id != nil )
                return id.fetch_row
             end
