@@ -92,7 +92,7 @@ module MaziMonitor
     overall = false
     error = false
     out.split("\n").each do |line|
-      if line.split[2] == "OK"
+      if line.split[2].nil? || line.split[2] == "OK"
         output[line.split.first] = line.split[1]
         overall = true if line.split[1] == 'active'
       else
