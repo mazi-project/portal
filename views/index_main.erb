@@ -74,84 +74,15 @@
 </head>
 
 <body>
-<%
-  flag = false
-  nof_notifications_enabled = 0
-  local_data[:notifications].each do |notification|
-    if notification.enabled
-      flag = true
-      nof_notifications_enabled += 1 unless local_data[:notifications_read].include?(notification.id)
-    end
-  end unless local_data[:notifications].nil? || local_data[:notifications].empty?
-%>
+
   <div id="wrapper">
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <a class="navbar-brand" href="index"><%= local_data[:config_data][:title] %></a>
-      </div>
-      <% if flag %>
-      <ul class="nav navbar-right top-nav">
-        <li>
-          <a class="navbar-brand pull-right" target="_blank" href="/index_documentation" style="font-size: 14px;"> <%= I18n.translate("portal.top-menu.documentation") %></a>
-        </li>
-        <li>
-          <a class="navbar-brand pull-right" target="_blank" href="http://mazizone.eu/toolkit" style="font-size: 14px;">MAZI Project</a>
-        </li>
-        <li>
-          <div class="navbar-brand pull-right" id="time"></div>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
-          <ul class="dropdown-menu alert-dropdown">
-            <% local_data[:notifications].each do |notification|%>
-            <% next unless notification.enabled %>
-            <li>
-              <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
-                <%= local_data[:notifications_read].include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %>
-              </a>
-            </li>
-            <% end %>
-          </ul>
-        </li>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
-          <ul class="dropdown-menu alert-dropdown">
-            <% locales.each do |lc|%>
-            <li>
-              <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
-            </li>
-            <% end %>
-          </ul>
-        </li>
-      </ul>
-      <% end %>
-      <div class="collapse navbar-collapse navbar-ex1-collapse">
-        <ul class="nav navbar-nav side-nav">
-          <li <%= 'class="active"' if main_body == :index_application %>>
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
-          </li>
-          <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
-          </li>
-          <% if sensors_enabled %>
-          <li <%= 'class="active"' if main_body == :index_sensors %>>
-            <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> <%= I18n.translate("portal.side-menu.sensors") %></a>
-          </li>
-          <% end %>
-          <% if camera_enabled %>
-          <li <%= 'class="active"' if main_body == :index_camera %>>
-            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> <%= I18n.translate("portal.side-menu.camera") %></a>
-          </li>
-          <% end %>
-        </ul>
-      </div>
-    </nav>
+
+    <% local_data[:main_body]       = main_body %>
+    <% local_data[:locale]          = locale %>
+    <% local_data[:locales]         = locales %>
+    <% local_data[:sensors_enabled] = sensors_enabled %>
+    <% local_data[:camera_enabled]  = camera_enabled %>
+    <%= erb :index_main_menu, locals: local_data %>
 
     <div id="page-wrapper">
       <div class="container-fluid">
@@ -191,6 +122,7 @@
     function showDate(date, o){
       var newdate = moment(date).add(o, 'milliseconds');
       $("#time").text(newdate.format("D MMM YYYY HH:mm zz"));
+      $("#time2").text(newdate.format("D MMM YYYY HH:mm zz"));
       setTimeout(function () { showDate(newdate, 10000); }, 10000);
     }
 

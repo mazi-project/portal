@@ -141,6 +141,14 @@ ul.alert-dropdown {
     outline: none;
     background-color: #000 !important;
   }
+
+  #wide-navigation{
+    display: all;
+  }
+
+  #narrow-navigation{
+    display: none;
+  }
 }
 
 .side-nav>li>ul {
@@ -176,6 +184,14 @@ ul.alert-dropdown {
 @media(max-width:768px) {
   .bot-nav {
     display: none;
+  }
+
+  #wide-navigation{
+    display: none;
+  }
+
+  #narrow-navigation{
+    display: all;
   }
 }
 

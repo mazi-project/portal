@@ -1,0 +1,146 @@
+<%
+  flag = false
+  nof_notifications_enabled = 0
+  unless notifications.nil? || notifications.empty?
+    notifications.each do |notification|
+      if notification.enabled
+        flag = true
+        nof_notifications_enabled += 1 unless notifications_read.include?(notification.id)
+      end
+    end
+  end
+%>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="wide-navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index"><%= config_data[:title] %></a>
+      </div>
+      <% if flag %>
+      <ul class="nav navbar-right top-nav">
+        <li>
+          <a class="navbar-brand pull-right" target="_blank" href="/index_documentation" style="font-size: 14px;"> <%= I18n.translate("portal.top-menu.documentation") %></a>
+        </li>
+        <li>
+          <a class="navbar-brand pull-right" target="_blank" href="http://mazizone.eu/toolkit" style="font-size: 14px;">MAZI Project</a>
+        </li>
+        <li>
+          <div class="navbar-brand pull-right" id="time"></div>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
+          <ul class="dropdown-menu alert-dropdown">
+            <% notifications.each do |notification|%>
+            <% next unless notification.enabled %>
+            <li>
+              <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
+                <%= notifications_read.include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %>
+              </a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
+          <ul class="dropdown-menu alert-dropdown">
+            <% locales.each do |lc|%>
+            <li>
+              <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+      </ul>
+      <% end %>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+          <li <%= 'class="active"' if main_body == :index_application %>>
+            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
+          </li>
+          <li <%= 'class="active"' if main_body == :index_statistics %>>
+            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
+          </li>
+          <% if sensors_enabled %>
+          <li <%= 'class="active"' if main_body == :index_sensors %>>
+            <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> <%= I18n.translate("portal.side-menu.sensors") %></a>
+          </li>
+          <% end %>
+          <% if camera_enabled %>
+          <li <%= 'class="active"' if main_body == :index_camera %>>
+            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> <%= I18n.translate("portal.side-menu.camera") %></a>
+          </li>
+          <% end %>
+        </ul>
+      </div>
+    </nav>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="narrow-navigation">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index"><%= config_data[:title] %></a>
+        <ul class="nav navbar-right top-nav pull-right">
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm" lang="<%= locale %>"></span></a>
+            <ul class="dropdown-menu alert-dropdown">
+              <% locales.each do |lc|%>
+              <li>
+                <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
+              </li>
+              <% end %>
+            </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="collapse navbar-collapse navbar-ex1-collapse">
+        <ul class="nav navbar-nav side-nav">
+          <li <%= 'class="active"' if main_body == :index_application %>>
+            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
+          </li>
+          <li <%= 'class="active"' if main_body == :index_statistics %>>
+            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
+          </li>
+          <% if sensors_enabled %>
+          <li <%= 'class="active"' if main_body == :index_sensors %>>
+            <a href="index_sensors"><i class="fa fa-fw fa-thermometer"></i> <%= I18n.translate("portal.side-menu.sensors") %></a>
+          </li>
+          <% end %>
+          <% if camera_enabled %>
+          <li <%= 'class="active"' if main_body == :index_camera %>>
+            <a href="index_camera"><i class="fa fa-fw fa-camera"></i> <%= I18n.translate("portal.side-menu.camera") %></a>
+          </li>
+          <% end %>
+          <li>
+            <a target="_blank" href="/index_documentation"><i class="fa fa-fw fa-book"></i> <%= I18n.translate("portal.top-menu.documentation") %></a>
+          </li>
+          <li>
+            <a target="_blank" href="http://mazizone.eu/toolkit"><i class="fa fa-fw fa-external-link-square"></i> MAZI Project</a>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
+            <ul class="dropdown-menu alert-dropdown">
+              <% notifications.each do |notification|%>
+              <% next unless notification.enabled %>
+              <li>
+                <a href="#" class="show-notification-button" id="show-notification-button-<%= notification.id %>" data-toggle="modal" data-target="#show-notification-modal-<%= notification.id %>">
+                  <%= notifications_read.include?(notification.id) ? '<span class="label label-default">Read</span>' : '<span class="label label-success">New</span>'%> <%= notification.title %>
+                </a>
+              </li>
+              <% end %>
+            </ul>
+          </li>
+          <li>
+            <div id="time2" style="color:  white; padding-right: 10px;" class="pull-right"></div>
+          </li>
+        </ul>
+      </div>
+    </nav>
