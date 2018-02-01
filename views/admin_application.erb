@@ -60,7 +60,7 @@
               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="<%= I18n.translate("admin.applications-page.instances-menu.edit-instance-hint") %>">
                 <i class="fa fa-pencil"></i>
               </a>
-              <% if app.name == 'GuestBook' %>
+              <% if app.application.name == 'GuestBook' %>
               <a class="btn btn-success admin_app" id='edit_app_<%= app.id %>' title="<%= I18n.translate("admin.applications-page.instances-menu.guestbook-admin-hint") %>" href="/admin_guestbook">
                 <i class="fa fa-asterisk"></i>
               </a>
