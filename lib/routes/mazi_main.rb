@@ -359,6 +359,20 @@ module Sinatra
               end
               locals[:main_body] = :admin_change_username
               erb :admin_main, locals: locals
+            when 'admin_settings'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/jquery.datetimepicker.min.js"
+              locals[:js] << "js/admin_settings.js"
+              locals[:main_body]                        = :admin_settings
+              locals[:local_data][:rasp_date]           = Time.now.strftime("%d %b %Y")
+              locals[:local_data][:rasp_time]           = Time.now.strftime("%H:%M")
+              locals[:local_data][:apache_max_filesize] = get_apache_max_filesize
+              locals[:local_data][:timezones]           = all_supported_timezones
+              erb :admin_main, locals: locals
             when 'admin_login'
               if @config[:general][:mode] == 'demo'
                 MaziLogger.debug "Demo mode download snapshot"

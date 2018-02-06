@@ -33,6 +33,7 @@ el:
       next:            "Επόμενο"
       previous:        "Προηγούμενο"
       submit:          "Υποβολή"
+      change:          "Αλλαγή"
     messages:
       warning:      "Προσοχή"
       welcome:      "Καλώς Ήρθατε"
@@ -106,6 +107,7 @@ el:
       password:       "Κωδικός"
       mysql-password: "Κωδικός MySQL"
       check-updates:  "Έλεγχος για Ενημερώσεις"
+      settings:       "Ρυθμίσεις"
     side-menu:
       dashboard:     "Κεντρικό Ταμπλό"
       applications:  "Εφαρμογές"
@@ -544,3 +546,20 @@ el:
         paragraph4:  "Προσδιορίστε τις ημερομηνίες ή τα θέματα για να επιλέξετε "
         paragraph5:  "Αποστολή του συνδέσμου έρευνας στους φίλους ή τους συναδέλφους σας "
         paragraph6:  "Συζητήστε και κάντε την απόφασή σας "
+    settings-page:
+      subheader: "Ρυθμίσεις"
+      message:   "Μπορείτε να χρησιμοποιήσετε την παρούσα σελίδα για να τροποποιήσετε διάφορες ρυθμίσεις στην ζώνη ΜΑΖΙ σας."
+      panel-header: "System settings"
+      time-date:
+        header: "Time/Date"
+      mysql-password:
+        header: "MySQL Password"
+      apache-filesize:
+        header: "Apache max file size"
+      popups:
+        change-time-date-title:         "Change Time/Date"
+        change-time-date-message:       "Please use the form bellow to change the MAZI Zone Time/Date."
+        change-mysql-password-title:    "Change MySQL password"
+        change-mysql-password-message:  "Please use the form bellow to change the MySQL password for this MAZI Zone."
+        change-apache-filesize-title:   "Change Apache max upload filesize"
+        change-apache-filesize-message: "Please use the form bellow to change the Apache max upload filesize for this MAZI Zone."

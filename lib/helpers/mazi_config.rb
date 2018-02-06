@@ -364,6 +364,15 @@ module MaziConfig
     File.open("/etc/mazi/sql.conf","w") do |f|
       f.write(old_details.to_json)
     end
+    lines = ''
+    File.readlines('/var/www/html/wordpress/wp-config.php').each do |line|
+      if line.strip.start_with? "define('DB_PASSWORD',"
+        lines += "define('DB_PASSWORD', '#{new_password}');"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/wordpress/wp-config.php', "w") {|file| file.puts lines }
   end
 
   def update_timezone(timezone)
@@ -580,6 +589,40 @@ module MaziConfig
 
   def get_guestbook_version
     JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
+  end
+
+  def get_apache_max_filesize
+    output = '0M'
+    File.readlines('/etc/php5/apache2/php.ini').each do |line|
+      output = line.split('=').last.strip if line.start_with?('upload_max_filesize')
+      output = line.split('=').last.strip if line.start_with?('post_max_size')
+    end
+    output
+  end
+
+  def set_apache_max_filesize(size)
+    lines = ''
+    File.readlines('/etc/php5/apache2/php.ini').each do |line|
+      if line.start_with?('upload_max_filesize')
+        lines += "upload_max_filesize = #{size}M\n"
+      elsif line.start_with?('post_max_size')
+        lines += "post_max_size = #{size}M\n"
+      else
+        lines += line
+      end
+    end
+    File.open('/etc/php5/apache2/php.ini', "w") {|file| file.puts lines }
+    lines = ''
+    File.readlines('/var/www/html/nextcloud/.htaccess').each do |line|
+      if line.include?('upload_max_filesize')
+        lines += "  php_value upload_max_filesize = #{size}M\n"
+      elsif line.include?('post_max_size')
+        lines += "  php_value post_max_size = #{size}M\n"
+      else
+        lines += line
+      end
+    end
+    File.open('/var/www/html/nextcloud/.htaccess', "w") {|file| file.puts lines }
   end
 
   def all_supported_timezones

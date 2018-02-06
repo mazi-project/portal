@@ -1,0 +1,114 @@
+<div class="row">
+  <div class="col-lg-12">
+    <h1 class="page-header">
+      MAZI Zone <small><%= I18n.translate("admin.settings-page.subheader") %></small>
+    </h1>
+  </div>
+</div>
+
+<div class="row">
+  <% unless error_msg.nil? %>
+  <div class="alert alert-danger">
+    <p><%= error_msg %></p>
+  </div>
+  <% end %>
+
+  <div class='col-md-12 col-lg-12'>
+    <p>
+      <%= I18n.translate("admin.settings-page.message") %></a>
+    </p>
+  </div>
+
+  <div class='col-md-6 col-lg-4'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.settings-page.panel-header") %></div>
+      </div>
+      <div class="list-group">
+        <li class="list-group-item">
+          <i class="fa fa-clock-o"></i> <b><%= I18n.translate("admin.settings-page.time-date.header") %>:</b> <%= rasp_date %> <%= rasp_time %>
+          <a data-toggle="modal" data-target="#change-time-date-modal" class="btn btn-info btn-xs pull-right">
+            <i class="fa fa-edit"></i> <%= I18n.translate("general.buttons.edit") %>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <i class="fa fa-exchange"></i> <b><%= I18n.translate("admin.settings-page.mysql-password.header") %>:</b> ********
+          <a data-toggle="modal" data-target="#change-mysql-password-modal" class="btn btn-info btn-xs pull-right">
+            <i class="fa fa-edit"></i> <%= I18n.translate("general.buttons.edit") %>
+          </a>
+        </li>
+        <li class="list-group-item">
+          <i class="fa fa-cog"></i> <b><%= I18n.translate("admin.settings-page.apache-filesize.header") %>:</b> <%= apache_max_filesize %>
+          <a data-toggle="modal" data-target="#change-apache-filesize-modal" class="btn btn-info btn-xs pull-right">
+            <i class="fa fa-edit"></i> <%= I18n.translate("general.buttons.edit") %>
+          </a>
+        </li>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change time date modal -->
+<div class="modal fade" id="change-time-date-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.settings-page.popups.change-time-date-title") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/set_date" method="post">
+          <p><%= I18n.translate("admin.settings-page.popups.change-time-date-message") %></p>
+          <input id="datetimepicker" type="text" name='date' class="form-control">
+          <select class="form-control" name='timezone'>
+            <option value=''></option>
+            <% timezones.each do |timezone| %>
+              <option value='<%= timezone %>'><%= timezone %></option>
+            <% end %>
+          </select>
+          <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.change") %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change mysql password modal -->
+<div class="modal fade" id="change-mysql-password-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.settings-page.popups.change-mysql-password-title") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/admin_change_mysql_password" method="post">
+          <p><%= I18n.translate("admin.settings-page.popups.change-mysql-password-message") %></p>
+          <input type="password" name="old-password" class="form-control" placeholder="Old Password" required autofocus>
+          <input type="password" name="new-password" class="form-control" placeholder="New Password" required>
+          <input type="password" name="new-password-confirm" class="form-control" placeholder="Password Confirmation" required>
+          <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.change") %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- change mysql password modal -->
+<div class="modal fade" id="change-apache-filesize-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.settings-page.popups.change-apache-filesize-title") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/change_apache_filesize" method="post">
+          <p><%= I18n.translate("admin.settings-page.popups.change-apache-filesize-message") %></p>
+          <input type="text" name="filesize" class="form-control" placeholder="Filesize (Mb)" required autofocus>
+          <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.change") %></button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

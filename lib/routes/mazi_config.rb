@@ -19,6 +19,11 @@ module Sinatra
           # admin login post request
           app.post '/set_date/?' do
             MaziLogger.debug "request: post/set_date from ip: #{request.ip} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=admin_settings'
+            end
             if @config[:general][:mode] == 'demo'
               MaziLogger.debug "Demo mode set app"
               session['error'] = "This portal runs on Demo mode! This action would have changed the time/date of the MAZI Zone."
@@ -31,7 +36,27 @@ module Sinatra
               update_timezone(params['timezone'])
             end
             lines = ex.exec_command
-            redirect '/admin'
+            redirect '/admin_settings'
+          end
+
+          # admin login post request
+          app.post '/change_apache_filesize/?' do
+            MaziLogger.debug "request: post/change_apache_filesize from ip: #{request.ip} params: #{params.inspect}"
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=admin_settings'
+            end
+            if @config[:general][:mode] == 'demo'
+              MaziLogger.debug "Demo mode set app"
+              session['error'] = "This portal runs on Demo mode! This action would have changed the max size for uploading files of the Apache server on this MAZI Zone."
+              redirect back
+            end
+            unless params['filesize'].nil? || params['filesize'].empty?
+              set_apache_max_filesize(params['filesize'])
+              `service apache2 restart`
+            end
+            redirect '/admin_settings'
           end
 
           # saving configurations

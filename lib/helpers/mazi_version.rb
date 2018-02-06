@@ -88,6 +88,12 @@ module MaziVersion
     JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
   end
 
+  def self.nextcloud_version
+    File.readlines('/var/www/html/nextcloud/version.php').each do |line|
+      return line.split('=').last.strip if line.start_with?('$OC_VersionString')
+    end
+  end
+
   def self.get_guestbook_config_file_version(filename, type)
     case type
     when 'front-end'
@@ -270,6 +276,14 @@ module MaziVersion
       MaziLogger.debug "done"
       `cd /var/www/html/mazi-board/src/node/; sudo pm2 start main.config.js`
       `sudo pm2 save`
+    end
+
+    # version 2.4
+    MaziLogger.debug "  Checking Nextcloud version"
+    if self.nextcloud_version == "'11.0.1';"
+      MaziLogger.debug "New Nextcloud version found. Updating!!!"
+
+      `cd /var/www/html/nextcloud/updater; sudo -u www-data php updater.phar --no-interaction`
     end
   end
 end

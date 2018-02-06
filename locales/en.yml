@@ -33,6 +33,7 @@ en:
       next:            "Next"
       previous:        "Previous"
       submit:          "Submit"
+      change:          "Change"
     messages:
       warning:      "Warning"
       welcome:      "Welcome"
@@ -106,6 +107,7 @@ en:
       password:       "Password"
       mysql-password: "MySQL Password"
       check-updates:  "Check for Updates"
+      settings:       "Settings"
     side-menu:
       dashboard:     "Dashboard"
       applications:  "Applications"
@@ -544,3 +546,20 @@ en:
         paragraph4:  "Determine the dates or topics to choose"
         paragraph5:  "Send the survey link to your friends or colleagues"
         paragraph6:  "Discuss and make your decision"
+    settings-page:
+      subheader: "Settings"
+      message:   "You can use this page to alter various configuration settings on your MAZI Zone."
+      panel-header: "System settings"
+      time-date:
+        header: "Time/Date"
+      mysql-password:
+        header: "MySQL Password"
+      apache-filesize:
+        header: "Apache max file size"
+      popups:
+        change-time-date-title:         "Change Time/Date"
+        change-time-date-message:       "Please use the form bellow to change the MAZI Zone Time/Date."
+        change-mysql-password-title:    "Change MySQL password"
+        change-mysql-password-message:  "Please use the form bellow to change the MySQL password for this MAZI Zone."
+        change-apache-filesize-title:   "Change Apache max upload filesize"
+        change-apache-filesize-message: "Please use the form bellow to change the Apache max upload filesize for this MAZI Zone."
