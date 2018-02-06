@@ -27,16 +27,13 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= I18n.translate("admin.top-menu.admin") %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <a href="/admin_set_date"><i class="fa fa-fw fa-clock-o"></i> <%= I18n.translate("admin.top-menu.set-date") %></a>
-            </li>
-            <li>
               <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.username") %></a>
             </li>
             <li>
               <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.password") %></a>
             </li>
             <li>
-              <a href="/admin_change_mysql_password"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.mysql-password") %></a>
+              <a href="/admin_settings"><i class="fa fa-fw fa-cog"></i> <%= I18n.translate("admin.top-menu.settings") %></a>
             </li>
             <li class="check-updates-menu">
               <a href="#" data-toggle="modal" data-target="#update-version-modal" data-backdrop="static" data-keyboard="false"><i class="fa fa-fw fa-history"></i> <%= I18n.translate("admin.top-menu.check-updates") %></a>
