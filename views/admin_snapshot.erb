@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Snapshots</small>
+      MAZI Zone <small><%= I18n.translate("admin.import-export-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -15,7 +15,7 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to take a snapshot of the current configuration of this MAZI Zone. This includes everything (network configurations, applications, application instances, notifications, visual configurations, etc).
+      <%= I18n.translate("admin.import-export-page.message") %>
     </p>
   </div>
   <div class='col-md-8 col-lg-6'>
@@ -23,8 +23,8 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Save Snapshot
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to take a snapshot."></i>
+            <div class="panel-title"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.header") %>
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.header-hint") %>"></i>
             </div>
           </div>
           <!-- panel body -->
@@ -33,10 +33,10 @@
               <form id="save-snapshot-form" action="/snapshot" method="post">
                 <div class="form-group">
                 <input type="hidden" name="save" class="form-control" value='true' autofocus="">
-                <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
-                <small id="snapshotLoadHelp" class="form-text text-muted">Please enter the name of the new Snapshot.</small>
+                <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
+                <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
                 </div>
-                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> Save</button>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i><%= I18n.translate("general.buttons.save") %></button>
               </form>
             </div>
           </div>
@@ -46,8 +46,8 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Load Snapshot
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to load a snapshot."></i>
+            <div class="panel-title"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.header") %>
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.load-snapshot-panel.header-hint") %>"></i>
             </div>
           </div>
           <!-- panel body -->
@@ -62,13 +62,13 @@
                     <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
                     <% end %>
                   </select>
-                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load. MAZI portal will restart. </small>
+                  <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.message") %></small>
                 </div>
-                <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-remove"></i> Delete</button>
-                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> Load</button>
+                <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-remove"></i> <%= I18n.translate("general.buttons.delete") %></button>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.load") %></button>
               </form>
               <% else %>
-              <p class="text-center" style="margin-bottom: 82px">Currently, there are no snapshots saved.</p>
+              <p class="text-center" style="margin-bottom: 82px"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.no-snapshots-message") %></p>
               <% end %>
             </div>
           </div>
@@ -81,8 +81,8 @@
       <div class='col-md-6'>
         <div class="panel panel-default">
           <div class="panel-heading">
-            <div class="panel-title">Import/Export Snapshot
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to export a snapshot to a zip file. Or import a zip file as a snapshot."></i>
+            <div class="panel-title"><%= I18n.translate("admin.import-export-page.import-export-panel.header") %>
+              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.import-export-panel.header-hint") %>"></i>
             </div>
           </div>
           <!-- panel body -->
@@ -96,14 +96,14 @@
                     <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
                     <% end %>
                   </select>
-                  <small id="snapshotSaveHelp" class="form-text text-muted">Please select a snapshot and press load.</small>
+                  <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.import-export-panel.message") %></small>
                 </div>
-                <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> Export</button>
+                <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
               </form>
               <% else %>
-              <p class="text-center" style="margin-bottom: 48px">Currently, there are no snapshots saved.</p>
+              <p class="text-center" style="margin-bottom: 48px"><%= I18n.translate("admin.import-export-page.import-export-panel.no-snapshots-message") %></p>
               <% end %>
-              <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> Import</a>
+              <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
             </div>
           </div>
         </div>
@@ -112,18 +112,18 @@
   </div>
 </div>
 
-<small>* Warning: If you load a new snapshot with different Wi-Fi network settings, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network.</small></br>
+<small>* <%= I18n.translate("admin.import-export-page.warning") %></small></br>
 
 <div class="row">
   <div class='col-md-12 col-lg-12'>
-    <h3>Application snapshots</h3>
-    <p>Use the panels bellow to Import/Export snapshots for the applications supported by this MAZI Zone.</p>
+    <h3><%= I18n.translate("admin.import-export-page.application-snapshots-header") %></h3>
+    <p><%= I18n.translate("admin.import-export-page.application-snapshots-message") %></p>
   </div>
   <div class='col-lg-3 col-md-6 col-sm-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Interview
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.interview-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
@@ -133,10 +133,10 @@
             <div class="form-group">
               <input type="hidden" name="export_app" class="form-control" value='true'>
               <input type="hidden" name="application" class="form-control" value='Interview'>
-              <input type="text" name="snapshotname" class="form-control" id="interview-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+              <input type="text" name="snapshotname" class="form-control" id="interview-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
             </div>
-            <a data-toggle="modal" data-target="#upload-interview-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> Import</a>
-            <button type="button" class="btn btn-success pull-right" id="download-interview-snapshot"><i class="fa fa-download"></i> Export</button>
+            <a data-toggle="modal" data-target="#upload-interview-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-interview-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
           </form>
         </div>
       </div>
@@ -168,7 +168,7 @@
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">GuestBook
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to import/export a snapshot."></i>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.guestbook-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
@@ -178,10 +178,10 @@
             <div class="form-group">
               <input type="hidden" name="export_app" class="form-control" value='true'>
               <input type="hidden" name="application" class="form-control" value='GuestBook'>
-              <input type="text" name="snapshotname" class="form-control" id="guestbook-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="Snapshot Name" autofocus="" required>
+              <input type="text" name="snapshotname" class="form-control" id="guestbook-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.guestbook-panel.form-placeholder") %>" autofocus="" required>
             </div>
-            <a data-toggle="modal" data-target="#upload-guestbook-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> Import</a>
-            <button type="button" class="btn btn-success pull-right" id="download-guestbook-snapshot"><i class="fa fa-download"></i> Export</button>
+            <a data-toggle="modal" data-target="#upload-guestbook-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-guestbook-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
           </form>
         </div>
       </div>
@@ -196,14 +196,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Import Snapshot</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="hidden" name="upload" class="form-control" value='true'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
         </form>
       </div>
@@ -218,7 +218,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Import Snapshot for Interview</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -226,7 +226,7 @@
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='Interview'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
         </form>
       </div>
@@ -241,7 +241,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Import Snapshot for Etherpad</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -249,7 +249,7 @@
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='Etherpad'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
         </form>
       </div>
@@ -264,7 +264,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Import Snapshot for GuestBook</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -272,7 +272,7 @@
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='GuestBook'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Import</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
         </form>
       </div>

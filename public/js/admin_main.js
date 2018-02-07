@@ -38,7 +38,7 @@ $( document ).ready(function() {
             show('.up2date');
           }
           else{
-            $('.update-ready > p').text('Your server is ' + res.commits_behind + ' commits behind. Please use the button bellow to start the update proccess.');
+            $('.update-ready > p').text(update_message_1);
             show('.update-ready');
           }
         }
@@ -64,6 +64,17 @@ $( document ).ready(function() {
         else if(res.status == 'restarting'){
           show('.update-done');
         }
+      }
+    });
+  });
+
+  $('.language-button').click(function(){
+    var appId = $(this).attr('id').split('-')[0];
+    $.ajax({
+      url: '/locales/' + appId,
+      type: 'POST',
+      success: function(result) {
+        location.reload();
       }
     });
   });

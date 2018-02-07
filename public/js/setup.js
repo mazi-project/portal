@@ -1,7 +1,7 @@
 $(document).ready(function () {
   //Initialize tooltips
   $('.nav-tabs > li a[title]').tooltip();
-  
+
   //Wizard
   $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
     var $target = $(e.target);
@@ -20,6 +20,17 @@ $(document).ready(function () {
   $(".prev-step").click(function (e) {
     var $active = $('.wizard .nav-tabs li.active');
     prevTab($active);
+  });
+
+  $('.language-button').click(function(){
+    var appId = $(this).attr('id').split('-')[0];
+    $.ajax({
+      url: '/locales/' + appId,
+      type: 'POST',
+      success: function(result) {
+        location.reload();
+      }
+    });
   });
 
   jQuery('#datetimepicker').datetimepicker();

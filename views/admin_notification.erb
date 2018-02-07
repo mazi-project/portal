@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Notifications</small>
+      MAZI Zone <small><%= I18n.translate("admin.notifications-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -17,10 +17,10 @@
       <thead>
         <tr>
           <!-- <th>ID</th> -->
-          <th>Status</th>
-          <th>Title</th>
-          <th>Body</th>
-          <th class='text-center'>Actions</th>
+          <th><%= I18n.translate("admin.notifications-page.notifications-table.header1") %></th>
+          <th><%= I18n.translate("admin.notifications-page.notifications-table.header2") %>itle</th>
+          <th><%= I18n.translate("admin.notifications-page.notifications-table.header3") %></th>
+          <th class='text-center'><%= I18n.translate("admin.notifications-page.notifications-table.header4") %></th>
         </tr>
       </thead>
       <tbody>
@@ -66,7 +66,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Create new notification</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.notifications-page.popups.create-notification-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/notification" method="post">
@@ -89,7 +89,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Edit Notification</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.notifications-page.popups.edit-notification-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/notification/edit" method="post">
@@ -107,5 +107,5 @@
 <% end %>
 
 <div id="delete-dialog-confirm" title="Empty the recycle bin?">
-  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This notification will be permanently deleted from the database. Do you wish to proceed?</p>
+  <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span><%= I18n.translate("admin.notifications-page.popups.delete-notification-message") %></p>
 </div>

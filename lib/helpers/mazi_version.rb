@@ -1,4 +1,4 @@
-VERSION = '2.1.0'
+VERSION = '2.3.1'
 
 class ConfigCaller
   include MaziConfig
@@ -84,6 +84,67 @@ module MaziVersion
     nil
   end
 
+  def self.guestbook_version
+    JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
+  end
+
+  def self.get_guestbook_config_file_version(filename, type)
+    case type
+    when 'front-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('welcome_msg')
+      end
+    when 'back-end'
+      File.readlines(filename).each do |line|
+        return "0.1" if line.include?('submission_name_required')
+      end
+    end
+    return "0.0.1"
+  end
+
+  def self.update_guestbook_config_file_version(filename, type)
+    lines = ''
+    case type
+    when 'front-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\t\tbackground_img: \"TODO\",\n"
+          lines += "\t\twelcome_msg: \"Click here to comment on the MAZI toolkit\",\n"
+          lines += "\t\tauto_expand_comment: false\n"
+          lines += line
+          flag = false
+        else
+          if line.strip.start_with? 'tags:'
+            flag = true
+            lines += line.gsub("\n", ",\n")
+          else
+            lines += line
+          end
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    when 'back-end'
+      flag = false
+      File.readlines(filename).each do |line|
+        if flag
+          lines += "\n"
+          lines += "\tsubmission_name_required: true,\n"
+          lines += line
+          flag = false
+        else
+          if line.strip.start_with? 'testPort:'
+            flag = true
+            lines += line.gsub("\n", ",\n")
+          else
+            lines += line
+          end
+        end
+      end
+      File.open(filename, "w") {|file| file.puts lines }
+    end
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
     begin
@@ -138,6 +199,77 @@ module MaziVersion
       `apt-get -y install jq`
       MaziLogger.debug "Done Installing jq."
       `service mazi-portal restart`
+    end
+
+    # version 2.2
+    begin
+      MaziLogger.debug "  Checking i18n gem"
+      Gem::Specification.find_by_name("i18n")# version 2.2 requires i18n gem
+    rescue Gem::LoadError
+      MaziLogger.debug "i18n gem not found. Installing."
+      MaziLogger.debug "Installing i18n gem."
+      `gem install i18n --no-ri --no-rdoc`
+      MaziLogger.debug "done"
+      `service mazi-portal restart`
+    rescue
+      unless Gem.available?("i18n")
+        MaziLogger.debug "i18n gem not found. Installing."
+        MaziLogger.debug "Installing i18n gem."
+        `gem install i18n --no-ri --no-rdoc`
+        MaziLogger.debug "done"
+        `service mazi-portal restart`
+      end
+    end
+
+    # version 2.3
+    MaziLogger.debug "  Checking Guestbook version"
+    if self.guestbook_version == '0.0.1'
+      MaziLogger.debug "New Guestbook version found. Updating!!!"
+      FileUtils.cp("/var/www/html/mazi-board/src/www/js/config.js", "/root/tmp_fe_config.js")
+      FileUtils.cp("/var/www/html/mazi-board/src/node/config.js", "/root/tmp_be_config.js")
+      FileUtils.cp("/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html", "/root/tmp_header_tmpl.html")
+      welcome_msg = ""
+      File.readlines('/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html').each do |line|
+        line = line.strip
+        if line.include? 'submission-headline'
+          welcome_msg = line.split('>')[2].split('<').first
+        end
+      end
+      `cd /var/www/html/mazi-board/; git stash; git pull; git stash clear`
+      self.update_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') if self.get_guestbook_config_file_version("/root/tmp_fe_config.js", 'front-end') == '0.0.1'
+      self.update_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') if self.get_guestbook_config_file_version("/root/tmp_be_config.js", 'back-end') == '0.0.1'
+      FileUtils.cp("/root/tmp_fe_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+      FileUtils.cp("/root/tmp_be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+      FileUtils.cp("/root/tmp_header_tmpl.html", "/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html")
+      File.delete("/root/tmp_fe_config.js")
+      File.delete("/root/tmp_be_config.js")
+      File.delete("/root/tmp_header_tmpl.html")
+      `sudo pm2 stop main`
+      `sudo pm2 delete main`
+      lines = ''
+      File.readlines('/etc/init.d/mazi-board').each do |line|
+        if line.strip.start_with? 'sudo pm2 start main.js'
+          lines += "        sudo pm2 start main.config.js\n"
+        elsif line.strip.start_with? 'sudo pm2 stop main.js'
+          lines += "        sudo pm2 stop guestbook-back-end\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/init.d/mazi-board', "w") {|file| file.puts lines }
+      lines = ''
+      File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
+        if line.strip.start_with? 'welcome_msg:'
+          lines += line.split(':').first + ": \"#{welcome_msg}\",\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/var/www/html/mazi-board/src/www/js/config.js', "w") {|file| file.puts lines }
+      `systemctl daemon-reload`
+      MaziLogger.debug "done"
+      `cd /var/www/html/mazi-board/src/node/; sudo pm2 start main.config.js`
+      `sudo pm2 save`
     end
   end
 end

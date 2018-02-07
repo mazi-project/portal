@@ -10,23 +10,23 @@
 </script>
 
 <div class="jumbotron">
-    <h1>Sensor Measurements</h1>
-    <p>On this page you can see the measurements of various sensors connected to this MAZI Zone. You can also use the button bellow to request for measurements from a specific period.</p>
-    <p>
-      <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
-        <i class="fa fa-calendar"> Choose a timeslot</i>
-      </a>
-    </p>
+  <h1><%= I18n.translate("portal.sensors-page.header") %></h1>
+  <p><%= I18n.translate("portal.sensors-page.header-message") %></p>
+  <p>
+    <a class="btn btn-info" data-toggle="modal" data-target="#choose-timeslot-modal" title="Choose Timeslot">
+      <i class="fa fa-calendar"> <%= I18n.translate("general.buttons.choose-timeslot") %> </i>
+    </a>
+  </p>
 </div>
 
 <% if sensors.nil? || sensors.empty? %>
   <div class="col-lg-12 col-sm-12">
     <div class="panel panel-warning">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-exclamation"></i> Warning</h3>
+      <h3 class="panel-title"><i class="fa fa-exclamation"></i> <%= I18n.translate("general.messages.warning") %></h3>
       </div>
       <div class="panel-body">
-        <p>Warning: Either there are no measurements in the database or a sensor device is not connected to this MAZI Zone.</p>
+        <p><%= I18n.translate("portal.sensors-page.no-sensors-warn") %></p>
       </div>
     </div>
   </div>
@@ -34,10 +34,10 @@
   <div class="col-lg-12 col-sm-12">
     <div class="panel panel-warning">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-exclamation"></i> Warning</h3>
+      <h3 class="panel-title"><i class="fa fa-exclamation"></i> <%= I18n.translate("general.messages.warning") %> </h3>
       </div>
       <div class="panel-body">
-        <p>Warning: There are no sensor data stored on this MAZI Zone. A system administrator can enable to collection of sensor data.</p>
+        <p><%= I18n.translate("portal.sensors-page.no-sensor-data-warn") %></p>
       </div>
     </div>
   </div>
@@ -46,12 +46,12 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-green">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-thermometer"></i> Temperature for <%= sensor[:type]%></h3>
+      <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-temp-<%= sensor[:id]%>"></div>
         <div class="text-right">
-          <a class="export-temperatures" id='export-temperatures-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+          <a class="export-temperatures" id='export-temperatures-<%= sensor[:id]%>'><i class="fa fa-download"> <%= I18n.translate("general.buttons.export-to-csv") %></i></a>
         </div>
       </div>
     </div>
@@ -60,12 +60,34 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-blue">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-tachometer"></i> Humidity for <%= sensor[:type]%></h3>
+      <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
         <div class="text-right">
-          <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> Export to CSV file</i></a>
+          <a class="export-humidity" id='export-humidity-<%= sensor[:id]%>'><i class="fa fa-download"> <%= I18n.translate("general.buttons.export-to-csv") %></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-lg-6 col-sm-12 special-metrics-panel">
+    <div class="panel panel-yellow">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  sensor[:type]) %></h3>
+      </div>
+      <div class="panel-body">
+        <div class="row col-with-divider">
+          <div class="col-xs-6 compass pull-left">
+            <div class="arrow"></div>
+            <div class="disc" id="compassDiscImg"></div>
+          </div>
+          <div class="col-xs-6 text-left">
+            <p><b><%= I18n.translate("portal.sensors-page.direction") %>: </b><span class="metrics-direction-span"></span></p>
+            <p><b><%= I18n.translate("portal.sensors-page.acceleration") %>: </b><span class="metrics-acceleration-span"></span></p>
+            <p><b><%= I18n.translate("portal.sensors-page.gyroscope") %>: </b><span class="metrics-gyroscope-span"></span></p>
+            <p><b>* Hint: </b><%= I18n.translate("portal.sensors-page.sensors-hint") %></p>
+          </div>
         </div>
       </div>
     </div>
@@ -80,15 +102,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Choose a timeslot</h4>
+        <h4 class="modal-title"><%= I18n.translate("general.buttons.choose-timeslot") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/index_sensors" method="get">
           <div class="form-group">
-            <p>Please use the form bellow to select a timeslot.</p>
+            <p><%= I18n.translate("portal.sensors-page.choose-timeslot-message") %></p>
             <input id="datetimepicker_start" type="text" name='start_date' class="form-control">
             <input id="datetimepicker_end" type="text" name='end_date' class="form-control">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Choose</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.choose") %></button>
           </div>
         </form>
       </div>

@@ -129,4 +129,46 @@
       </div>
     </div>
   </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Auto Expand Comment
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to change the auto expand comment feature."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the button bellow to change the auto expand comment feature. The current value is: <b><%= auto_expand_comment %></b></p>
+            <form action="/application_admin/guestbook/auto_expand_comment" method="post">
+              <input type="submit" class="btn btn-success pull-right" value="Change"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Submision Name Requirement
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to change the wether the name is required or not."></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class="col-lg-12">
+            <p>You can use the button bellow to change the requirement of the name for a new post. The current value is: <b><%= submision_name_req %></b></p>
+            <form action="/application_admin/guestbook/submission_name_req" method="post">
+              <input type="submit" class="btn btn-success pull-right" value="Change"/>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

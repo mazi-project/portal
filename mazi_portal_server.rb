@@ -2,6 +2,8 @@ require 'sinatra/base'
 require 'helpers/mazi_logger'
 require 'helpers/mazi_config'
 require 'helpers/mazi_version'
+require 'json'
+require 'fileutils'
 MaziVersion.update_dependencies
 require 'helpers/authorizer'
 require 'helpers/mazi_exec_cmd'
@@ -9,10 +11,13 @@ require 'mysql'
 require 'helpers/mazi_sensors'
 require 'helpers/mazi_camera'
 require 'helpers/mazi_monitor'
+require 'i18n'
+require 'i18n/backend/fallbacks'
+require 'helpers/mazi_locales'
 require 'thin'
-require 'json'
 require 'sequel'
 require 'date'
+require 'pty'
 require 'routes/mazi_main'
 require 'routes/mazi_sessions'
 require 'routes/mazi_config'
@@ -22,6 +27,7 @@ require 'routes/mazi_notification'
 require 'routes/mazi_exec'
 require 'routes/mazi_devices'
 require 'routes/mazi_monitor'
+require 'routes/mazi_locales'
 
 class MaziApp < Sinatra::Base
   include MaziConfig
@@ -30,6 +36,7 @@ class MaziApp < Sinatra::Base
   include MaziSensors
   include MaziCamera
   include MaziMonitor
+  include MaziLocales
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
   configure {set :show_exceptions, false}
@@ -96,6 +103,7 @@ class MaziApp < Sinatra::Base
     require 'models'
     init_sensors
     init_camera
+    init_locales
   end
 
   error do |err|
@@ -104,6 +112,12 @@ class MaziApp < Sinatra::Base
       MaziLogger.error "  #{trace}"
     end
     err
+  end
+
+  at_exit do
+    MaziLogger.debug "Exiting"
+    pid = `ps aux | grep -v grep | grep 'bash /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
+    `kill -9 #{pid}`
   end
 
   register Sinatra::MaziApp::Routing::MaziMain
@@ -115,7 +129,7 @@ class MaziApp < Sinatra::Base
   register Sinatra::MaziApp::Routing::MaziExec
   register Sinatra::MaziApp::Routing::MaziDevices
   register Sinatra::MaziApp::Routing::MaziMonitor
-
+  register Sinatra::MaziApp::Routing::MaziLocales
 end
 
 Thin::Server.start MaziApp, '0.0.0.0', 4567

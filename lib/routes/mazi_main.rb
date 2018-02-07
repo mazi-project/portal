@@ -20,6 +20,10 @@ module Sinatra
             if first_time? && index != 'setup'
               redirect '/setup'
             end
+            if session['locale'].nil?
+              session['locale'] = :en
+            end
+            set_locale(session['locale'])
             locals                           = {}
             locals[:local_data]              = {}
             locals[:local_data][:mode]       = @config[:general][:mode]
@@ -29,6 +33,8 @@ module Sinatra
             locals[:error_msg]               = nil
             locals[:sensors_enabled]         = sensors_enabled?
             locals[:camera_enabled]          = camera_enabled?
+            locals[:locale]                  = session['locale']
+            locals[:locales]                 = I18n.available_locales
             unless session['error'].nil?
               locals[:error_msg] = session["error"]
               session[:error] = nil
@@ -87,9 +93,9 @@ module Sinatra
                 tmp                = {}
                 tmp[:id]           = sensor[:id]
                 tmp[:type]         = sensor[:type]
-                tmp[:temperatures] = getTemperatures(sensor[:id], params['start_date'], params['end_date'])
-                tmp[:humidity]     = getHumidities(sensor[:id], params['start_date'], params['end_date'])
-                next if tmp[:temperatures].empty? || tmp[:humidity].empty?
+                tmp[:temperatures] = getTemperatures(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
+                tmp[:humidity]     = getHumidities(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
+                next if tmp[:temperatures].nil? || tmp[:humidity].nil? || tmp[:temperatures].empty? || tmp[:humidity].empty?
                 locals[:local_data][:sensors] << tmp
               end
               locals[:main_body] = :index_sensors
@@ -137,14 +143,23 @@ module Sinatra
               ssid.shift
               locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
               mode = ex.parseFor('mode')
-              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s', '--sd'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
               ex2.exec_command
+              users_online = ex2.parseFor('wifi users') ? ex2.parseFor('wifi users').last : nil
+              temp         = ex2.parseFor("temp:") ? ex2.parseFor("temp:").last : nil
+              cpu          = ex2.parseFor("cpu:") ? ex2.parseFor("cpu:").last : nil
+              ram          = ex2.parseFor("ram:") ? ex2.parseFor("ram:").last : nil
+              storage      = ex2.parseFor("storage:") ? "#{ex2.parseFor("storage:")[-2]} #{ex2.parseFor("storage:")[-1]}" : nil
+              sd_size      = ex2.parseFor("ram:") ? ex2.parseFor("SD size:").last : nil
+              expanded     = ex2.parseFor("expand:") ? ex2.parseFor("expand:").last : nil
               locals[:local_data][:users]                 = {}
-              locals[:local_data][:users][:online]        = ex2.parseFor('wifi users').last
-              locals[:local_data][:temp]                  = ex2.parseFor("temp:").last
-              locals[:local_data][:cpu]                   = ex2.parseFor("cpu:").last
-              locals[:local_data][:ram]                   = ex2.parseFor("ram:").last
-              locals[:local_data][:storage]               = ex2.parseFor("storage:").last
+              locals[:local_data][:users][:online]        = users_online
+              locals[:local_data][:temp]                  = temp
+              locals[:local_data][:cpu]                   = cpu
+              locals[:local_data][:ram]                   = ram
+              locals[:local_data][:storage]               = storage
+              locals[:local_data][:sd_size]               = sd_size
+              locals[:local_data][:expanded]              = expanded
               locals[:local_data][:net_info][:mode]       = mode[1] if mode.kind_of? Array
               locals[:local_data][:applications]          = Mazi::Model::Application.all
               locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
@@ -257,7 +272,7 @@ module Sinatra
               locals[:js] << "js/jquery.datetimepicker.min.js"
               locals[:main_body] = :admin_devices
               locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
-              locals[:local_data][:sensors_db_exist]  = sensors_db_exist?
+              locals[:local_data][:sensors_db_exist]  = true #sensors_db_exist?
               locals[:local_data][:available_sensors] = getAllAvailableSensors
               locals[:local_data][:camera_enabled]    = @config[:camera][:enable]
               locals[:local_data][:camera_installed]  = camera_installed?
@@ -277,9 +292,11 @@ module Sinatra
               locals[:js] << "js/admin_guestbook.js"
               locals[:js] << "js/tag-it.js"
               locals[:main_body] = :admin_guestbook
-              locals[:local_data][:tags] = get_guestbook_tags
-              locals[:local_data][:maximumFileSize] = get_guestbook_maxfilesize
-              locals[:local_data][:welcomeMessage] = get_guestbook_welcome_message
+              locals[:local_data][:tags]                = get_guestbook_tags
+              locals[:local_data][:maximumFileSize]     = get_guestbook_maxfilesize
+              locals[:local_data][:welcomeMessage]      = get_guestbook_welcome_message
+              locals[:local_data][:auto_expand_comment] = get_guestbook_auto_expand_comment
+              locals[:local_data][:submision_name_req]  = get_guestbook_submission_name_req
               erb :admin_main, locals: locals
             when 'admin_monitor'
               unless authorized?

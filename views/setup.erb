@@ -8,13 +8,14 @@
     <meta name="description" content="Mazi Portal">
     <meta name="author" content="nitlab">
 
-    <title>MAZI Zone Portal</title>
+    <title><%= I18n.translate("admin.top-menu.header") %></title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/jquery-ui.min.css" rel="stylesheet">
     <link href="css/admin_main.css" rel="stylesheet">
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/jquery.datetimepicker.css">
     <link href="css/setup.css" rel="stylesheet" type="text/css">
+    <link rel='stylesheet' href='css/languages.min.css' type='text/css' />
     <script src="js/jquery.js"></script>
     <script src="js/jquery-ui.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -28,13 +29,25 @@
       <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-            <span class="sr-only">Toggle navigation</span>
+            <span class="sr-only"><%= I18n.translate("admin.setup-page.tog-nav") %></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="admin">MAZI Zone Setup Panel</a>
-        </div>      
+          <a class="navbar-brand" href="admin"><%= I18n.translate("admin.setup-page.setup-panel") %></a>
+        </div>
+        <ul class="nav navbar-right top-nav">
+          <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
+          <ul class="dropdown-menu alert-dropdown">
+            <% locales.each do |lc|%>
+            <li>
+              <a href="#" class="language-button" id="<%= lc %>-language-button" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= lc %>"></span></a>
+            </li>
+            <% end %>
+          </ul>
+        </li>
+        </ul>
       </nav>
 
       <div id="page-wrapper">
@@ -85,19 +98,19 @@
                 <form role='form' class="form-signin" action="/setup" method="post">
                   <div class="tab-content">
                     <div class="tab-pane active" role="tabpanel" id="step1">
-                      <h3>Admin Password Setup</h3>
-                      <p>Use the form bellow the set the admin password for the MAZI Zone adminstration panel.</p>
+                      <h3><%= I18n.translate("admin.setup-page.first-step-header") %></h3>
+                      <p><%= I18n.translate("admin.setup-page.first-step-message") %></p>
                       <input type="password" name="current-password" class="form-control" placeholder="Current Password" autofocus>
                       <input type="password" name="password" class="form-control" placeholder="New Password">
                       <input type="password" name="confirm-password" class="form-control" placeholder="Confirm Password">
-                      <small>*hint: if this is a new MAZI Zone the current password is 1234</small>
+                      <small>*<%= I18n.translate("admin.setup-page.first-step-hint") %></small>
                       <ul class="list-inline pull-right">
-                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                        <li><button type="button" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.continue") %></button></li>
                       </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step2" >
-                      <h3>Date/Time setup</h3>
-                      <p>Please use the form bellow to change Date/Time, as well as the timezone of this MAZI Zone.</p>
+                      <h3><%= I18n.translate("admin.setup-page.second-step-header") %></h3>
+                      <p><%= I18n.translate("admin.setup-page.second-step-message") %></p>
                       <input id="datetimepicker" type="text" name='date' class="form-control">
                       <select class="form-control" name='timezone'>
                         <option value=''></option>
@@ -106,25 +119,25 @@
                         <% end %>
                       </select>
                       <ul class="list-inline pull-right" style='margin-top: 10px;'>
-                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                        <li><button type="button" class="btn btn-default prev-step"><%= I18n.translate("general.buttons.previous") %></button></li>
+                        <li><button type="button" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.continue") %></button></li>
                       </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="step3">
-                      <h3>Wireless Interface Setup</h3>
-                      <p>Please use the form bellow to change the name for the Wi-Fi network (Optional).</p>
+                      <h3><%= I18n.translate("admin.setup-page.third-step-header") %></h3>
+                      <p><%= I18n.translate("admin.setup-page.third-step-message") %></p>
                       <input id="ssid" type="text" name='ssid' class="form-control">
-                      <small>* Warning: If you change the name of your Wi-Fi network, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network.</small>
+                      <small>* <%= I18n.translate("admin.setup-page.third-step-warning") %></small>
                       <ul class="list-inline pull-right" style='margin-top: 10px;'>
-                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
-                        <li><button type="button" class="btn btn-primary next-step">Continue</button></li>
+                        <li><button type="button" class="btn btn-default prev-step"><%= I18n.translate("general.buttons.previous") %></button></li>
+                        <li><button type="button" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.continue") %></button></li>
                       </ul>
                     </div>
                     <div class="tab-pane" role="tabpanel" id="complete">
-                      <h3>Complete</h3>
-                      <p>You have successfully completed all the set up steps. Please click on the submit button to save the changes.</p>
+                      <h3><%= I18n.translate("admin.setup-page.last-step-header") %></h3>
+                      <p><%= I18n.translate("admin.setup-page.last-step-message") %></p>
                       <ul class="list-inline pull-right" style='margin-top: 10px;'>
-                        <li><button type="submit" class="btn btn-primary next-step">Submit</button></li>
+                        <li><button type="submit" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.submit") %></button></li>
                       </ul>
                     </div>
                     <div class="clearfix"></div>

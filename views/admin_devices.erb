@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Devices</small>
+      MAZI Zone <small><%= I18n.translate("admin.devices-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -15,53 +15,52 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to control the various supported devices that are connected to this MAZI Zone (sensors, cameras, etc). You can find all the supported devices <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank">here</a>
+      <%= I18n.translate("admin.devices-page.message") %> <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank"><%= I18n.translate("general.messages.here") %></a>
     </p>
   </div>
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Sensors
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control various sensors."></i>
+        <div class="panel-title"><%= I18n.translate("admin.devices-page.sensors-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.devices-page.sensors-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
-            <label class="switch" title="enable/disable the portals sensors tab">
+            <label class="switch" title="<%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-hint") %>">
               <input type="checkbox" <%= sensors_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-sensors-switch"></div>
             </label>
-            <span class="device-enable-msg">Enable/disable the sensors tab on user portal.</span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
           </div>
         </div>
-        <% if sensors_db_exist %>
         <div class="row">
           <div class='col-md-12'>
             <% if available_sensors.length > 0 %>
             <table class="table">
               <thead>
                 <tr>
-                  <th title="Sensor Type">Type</th>
-                  <th title="Sensor Status">Status</th>
-                  <th title="Number of measurements">Entries</th>
-                  <th title="Actions that can be performed on the sensor" class='text-center'>Actions</th>
+                  <th title="Sensor Type"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.type") %></th>
+                  <th title="Sensor Status"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.status") %></th>
+                  <th title="Number of measurements"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.entries") %></th>
+                  <th title="Actions that can be performed on the sensor" class='text-center'><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.actions") %></th>
                 </tr>
               </thead>
               <tbody>
                 <% available_sensors.each do |sensor| %>
                 <tr>
                   <td><%= sensor[:type] %></td>
-                  <td><%= sensor[:status] %></td>
-                  <td><%= sensor[:nof_entries]%></td>
+                  <td id="sensor_type_<%= sensor[:id] %>_td"><%= sensor[:status] %></td>
+                  <td id="sensor_entries_<%= sensor[:id] %>_td"><%= sensor[:nof_entries]%></td>
                   <td>
                      <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="Start saving measurements" <%= 'disabled' if sensor[:status] == 'not found' || sensor[:status] == 'active' %>>
+                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="<%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.start-button-hint") %>" <%= 'disabled' if sensor[:status] == 'not found' || sensor[:status] == 'active' %>>
                           <i class="fa fa-play"></i>
                         </a>
-                        <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="Delete all saved measurements">
+                        <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="<%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.delete-button-hint") %>">
                           <i class="fa fa-remove"></i>
                         </a>
                       </div>
@@ -71,19 +70,12 @@
                 <% end %>
               </tbody>
             </table>
+            <p><b>* Hint: </b><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.sensehat-calibration-hint") %> (<a href="https://www.raspberrypi.org/documentation/hardware/sense-hat/" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</p>
             <% else %>
-              <p>Cannot find a connected sensor to this MAZI zone.</p>
+              <p><%= I18n.translate("admin.devices-page.sensors-panel.no-sensors-message") %></p>
             <% end %>
           </div>
         </div>
-        <% else %>
-        <div class="row">
-          <div class="col-lg-12">
-            <p>The initialization proccedure for the sensors module has not been executed yet. If you wish to use a sensor device connected to this MAZI Zone, please use the button bellow to initialize this module.</p>
-            <button class="btn btn-success pull-right init-sensor-db" data-toggle="modal" data-target="#init-sensor-db-modal" title="Start sensors initiliazation">Initiliaze</button>
-          </div>
-        </div>
-        <% end %>
       </div>
     </div>
   </div>
@@ -91,19 +83,19 @@
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Camera
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        <div class="panel-title"><%= I18n.translate("admin.devices-page.camera-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.devices-page.camera-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
-            <label class="switch" title="enable/disable the portals camera tab">
+            <label class="switch" title="<%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-hint") %>">
               <input type="checkbox" <%= camera_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-camera-switch"></div>
             </label>
-            <span class="device-enable-msg">Enable/disable the camera tab on user portal.</span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.camera-panel.toggle-camera-message") %> (<a href="/index_camera" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
             <div class="row">
               <div class='col-md-12'>
                 <% if camera_installed %>
@@ -112,10 +104,10 @@
                     <iframe src="<%= media_link %>"></iframe>
                   </div>
                   <% else %>
-                    <p>The Camera module is not properly installed on this image! Please use an image greater than 1.7.2 that is properly configured for this purpose.</p>
+                    <p><%= I18n.translate("admin.devices-page.camera-panel.camera-version-message") %></p>
                   <% end %>
                 <% else %>
-                  <p>There is no Camera connected to this MAZI Zone!</p>
+                  <p><%= I18n.translate("admin.devices-page.camera-panel.no-camera-message") %></p>
                 <% end %>
               </div>
             </div>
@@ -134,25 +126,26 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start Sensor Measurements</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.start-sensing-title") %></h4>
       </div>
       <div class="modal-body">
-        <p>Please enter a Duration or a Date on the Calendar to define a timeslot to gather measurements. Also, please use the Interval to define the frequency of the measurements.</p>
-        <form class="form-signin" action="/devices/<%= sensor[:type] %>/start" method="post">
+        <p><%= I18n.translate("admin.devices-page.popups.start-sensing-message") %></p>
+        <form class="form-signin start-sensing-form" action="/devices/<%= sensor[:type] %>/start" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= sensor[:id] %>">
-            <label for='monitor_end_point'>Target Server:</label>
+            <input type="hidden" name="type" value="<%= sensor[:type] %>">
+            <label for='monitor_end_point'><%= I18n.translate("admin.devices-page.popups.start-sensing-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
-            <label for='sensing_duration'>Duration (seconds):</label>
+            <label for='sensing_duration'><%= I18n.translate("admin.devices-page.popups.start-sensing-label2") %>:</label>
             <input type="text" id='sensing_duration' name="duration" class="form-control" value="" autofocus>
-            <label for='datetimepicker'>Calendar (end time/date):</label>
+            <label for='datetimepicker'><%= I18n.translate("admin.devices-page.popups.start-sensing-label3") %>:</label>
             <input id="datetimepicker" type="text" name='until_date' class="form-control">
-            <label for='sensing_interval'>Interval (seconds):</label>
+            <label for='sensing_interval'><%= I18n.translate("admin.devices-page.popups.start-sensing-label4") %>:</label>
             <input type="text" id='sensing_interval' name="interval" class="form-control" value="30" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
-        <small>* Hint: If you use both the Duration and Calendar input boxes, the Calendar will be ignored!!!</small>
+        <small>* <%= I18n.translate("admin.devices-page.popups.start-sensing-hint") %></small>
       </div>
     </div>
   </div>
@@ -164,14 +157,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete Sensor Measurements</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.delete-sensing-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/devices/<%= sensor[:type] %>/delete" method="post">
           <div class="form-group">
             <input type="hidden" name="id" value="<%= sensor[:id] %>">
-            <p>Do you want to delete all saved measurements?</p>
-            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+            <p><%= I18n.translate("admin.devices-page.popups.delete-sensing-message") %></p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.delete") %></button>
           </div>
         </form>
       </div>
@@ -187,17 +180,17 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start Capturing Images</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.start-images-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/devices/camera/start_capturing" method="post">
           <div class="form-group">
             <input type="hidden" name="type" value="photos">
-            <label for='sensing_duration'>Duration (seconds):</label>
+            <label for='sensing_duration'><%= I18n.translate("admin.devices-page.popups.start-images-label1") %>:</label>
             <input type="text" id='sensing_duration' name="duration" class="form-control" value="30" required autofocus>
-            <label for='sensing_interval'>Interval (seconds):</label>
+            <label for='sensing_interval'><%= I18n.translate("admin.devices-page.popups.start-images-label2") %>:</label>
             <input type="text" id='sensing_interval' name="interval" class="form-control" value="5">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
       </div>
@@ -211,14 +204,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete All Photos</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.delete-images-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/devices/camera/delete" method="post">
           <div class="form-group">
             <input type="hidden" name="type" value="photos">
-            <p>Do you want to delete all captured photos?</p>
-            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+            <p><%= I18n.translate("admin.devices-page.popups.delete-images-message") %></p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.delete") %></button>
           </div>
         </form>
       </div>
@@ -233,15 +226,15 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start Capturing Video</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.start-videos-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/devices/camera/capture_video" method="post">
           <div class="form-group">
             <input type="hidden" name="type" value="video">
-            <label for='sensing_duration'>Duration (seconds):</label>
+            <label for='sensing_duration'><%= I18n.translate("admin.devices-page.popups.start-videos-label1") %>:</label>
             <input type="text" id='sensing_duration' name="duration" class="form-control" value="30" required autofocus>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
       </div>
@@ -255,14 +248,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete All Videos</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.delete-videos-title") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/devices/camera/delete" method="post">
           <div class="form-group">
             <input type="hidden" name="type" value="video">
-            <p>Do you want to delete all captured videos?</p>
-            <button class="btn btn-lg btn-danger btn-block" type="submit">Delete</button>
+            <p><%= I18n.translate("admin.devices-page.popups.delete-videos-message") %></p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.delete") %></button>
           </div>
         </form>
       </div>

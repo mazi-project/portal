@@ -1,27 +1,27 @@
 <div class="jumbotron">
-  <h1>Camera</h1>
-  <p>On this page you can see the photos and videos captured by the camera that is connected to this MAZI Zone.</p>
+  <h1><%= I18n.translate("portal.camera-page.header") %></h1>
+  <p><%= I18n.translate("portal.camera-page.subheader") %></p>
 </div>
 
 <div class="row">
   <div class="col-lg-6 col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Live Video Streaming</div>
+      <div class="panel-heading"><%= I18n.translate("portal.camera-page.live-stream-header") %></div>
       <div class="panel-body">
         <% if camera_installed && rpi_enabled %>
         <div><img class="img-responsive center-block" id="mjpeg_dest"/></div>
         <% else %>
-        <p>Currently, there is no camera properly installed on this MAZI Zone!</p>
+        <p><%= I18n.translate("portal.camera-page.no-camera-warn") %></p>
         <% end %>
       </div>
     </div>
   </div>
   <div class="col-lg-6 col-md-12">
     <div class="panel panel-default">
-      <div class="panel-heading">Media Library</div>
+      <div class="panel-heading"><%= I18n.translate("portal.camera-page.media-library-header") %></div>
       <div class="panel-body">
       <% if rpi_files[:photos].empty? && rpi_files[:videos].empty? %>
-        <p>Currently, there are no images or videos found in the library!</p>
+        <p><%= I18n.translate("portal.camera-page.no-media-warn") %></p>
       <% else %>
       <div id="gallery" style="display:none;">
         <% rpi_files[:photos].each do |file| %>

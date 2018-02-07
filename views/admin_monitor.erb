@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
-      MAZI Zone <small>Monitoring</small>
+      MAZI Zone <small><%= I18n.translate("admin.monitoring-page.subheader") %></small>
     </h1>
   </div>
 </div>
@@ -15,56 +15,56 @@
 <div class="row">
   <div class='col-md-12 col-lg-12'>
     <p>
-      You can use the tools bellow to control the the way your MAZI zone can collect and send data to a central point.
+      <%= I18n.translate("admin.monitoring-page.message") %>
     </p>
   </div>
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Details
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to enable/disable the monitoring feature."></i>
+        <div class="panel-title"><%= I18n.translate("admin.monitoring-page.details-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.monitoring-page.details-panel.header-hint") %>"></i>
         </div>
       </div>
       <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
-            <label class="switch" title="enable/disable the monitoring feature">
+            <label class="switch" title="<%= I18n.translate("admin.monitoring-page.details-panel.toggle-monitoring-hint") %>">
               <input type="checkbox" <%= monitoring_enabled ? 'checked' : '' %>>
               <div class="slider round enabled-monitoring-switch"></div>
             </label>
-            <span class="device-enable-msg">Enable/disable the monitoring feature.</span>
+            <span class="device-enable-msg"><%= I18n.translate("admin.monitoring-page.details-panel.toggle-monitoring-message") %></span>
           </div>
         </div>
         <% if monitoring_enabled %>
         <div class="row">
           <div class='col-md-12'>
-            <p>Bellow you can see the details for this MAZI zone, you can change everything by pressing the edit button on the bottom.</p>
+            <p><%= I18n.translate("admin.monitoring-page.details-panel.details-message") %></p>
             <table class="table table-striped">
               <tbody>
                 <tr>
-                  <td>Deployment: </td>
+                  <td><%= I18n.translate("admin.monitoring-page.details-panel.table-label1") %>: </td>
                   <td><%= details[:deployment] %></td>
                 </tr>
                 <tr>
-                  <td>Administrator: </td>
+                  <td><%= I18n.translate("admin.monitoring-page.details-panel.table-label2") %>: </td>
                   <td><%= details[:admin] %></td>
                 </tr>
                 <tr>
-                  <td>Title: </td>
+                  <td><%= I18n.translate("admin.monitoring-page.details-panel.table-label3") %>: </td>
                   <td><%= details[:title] %></td>
                 </tr>
                 <tr>
-                  <td>Description: </td>
+                  <td><%= I18n.translate("admin.monitoring-page.details-panel.table-label4") %>: </td>
                   <td><%= details[:description] %></td>
                 </tr>
                 <tr>
-                  <td>Location (lat, long): </td>
+                  <td><%= I18n.translate("admin.monitoring-page.details-panel.table-label5") %>: </td>
                   <td><%= details[:loc] %></td>
                 </tr>
               </tbody>
             </table>
-            <a class="btn btn-primary edit-details pull-right" id='edit-monitoring-details' data-toggle="modal" data-target="#edit-details-modal"><i class="fa fa-edit"> Edit</i>
+            <a class="btn btn-primary edit-details pull-right" id='edit-monitoring-details' data-toggle="modal" data-target="#edit-details-modal"><i class="fa fa-edit"> <%= I18n.translate("general.buttons.edit") %></i>
             </a>
           </div>
         </div>
@@ -77,59 +77,59 @@
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Statistics
-          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="You can use this to control the camera."></i>
+        <div class="panel-title"><%= I18n.translate("admin.monitoring-page.statistics-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.header-hint") %>"></i>
         </div>
       </div>
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
-            <p>You can start/stop sending hardware and application monitoring data to a remote (or a local) point by pressing the start/stop buttons bellow.</p>
+            <p><%= I18n.translate("admin.monitoring-page.statistics-panel.message") %></p>
             <table class="table">
               <thead>
                 <tr>
-                  <th title="current status">Status</th>
-                  <th title="a description">Description</th>
-                  <th title="the action" class='text-center' style='width: 130px'>Action</th>
+                  <th title="current status"><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.status") %></th>
+                  <th title="a description"><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.description") %></th>
+                  <th title="the action" class='text-center' style='width: 130px'><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.action") %></th>
                 </tr>
               </thead>
               <tbody>
                 <tr class="app_inst_tr">
-                  <% if hardware_monitoring_status['overall'] %>
-                    <% hardware_label_title_message = '' %>
-                    <% hardware_monitoring_status.each do |key, value| %>
-                      <% next if key == 'overall' || key == 'network'%>
-                      <% hardware_label_title_message += "#{key} : #{value} \n" %>
-                    <% end %>
+                  <td>
+                  <% if hardware_monitoring_status['error'].nil? %>
+                    <%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning hw-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                  <% else %>
+                    <span class='label label-danger hw-mon-stat-lab' style='cursor: pointer;'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
-                  <td><%= hardware_monitoring_status['overall'] ? "<span class='label label-success hw-mon-stat-lab' title='#{hardware_label_title_message}'>active</span>" : '<span class="label label-danger" title="No hardware monitoring tasks currently running.">inactive</span>' %></td>
-                  <td>Monitoring of hardware data.</td>
+                  </td>
+                  <td>
+                    <%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.hardware-description-message") %>
+                  </td>
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-hardware-data" title="Start hardware monitoring" id='start-monitoring-hardware-data' data-toggle="modal" data-target="#start-hardware-data-modal" <%= 'disabled' if hardware_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
-                        <a class="btn btn-warning stop-hardware-monitoring-data-button" title="Stop hardware monitoring" <%= 'disabled' unless hardware_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
-                        <a class="btn btn-danger flush-hardware-monitoring-data-button" title="Delete all hardware monitoring data from the local database" id='flush-monitoring-hardware-data' data-toggle="modal" data-target="#flush-hardware-data-modal"><i class="fa fa-remove"></i></a>
+                        <a class="btn btn-primary start-hardware-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-hardware-task-hint") %>" id='start-monitoring-hardware-data' <%= 'disabled' if hardware_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-warning stop-hardware-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.stop-hardware-task-hint") %>" <%= 'disabled' unless hardware_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-danger flush-hardware-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.delete-hardware-data-hint") %>" id='flush-monitoring-hardware-data' data-toggle="modal" data-target="#flush-hardware-data-modal"><i class="fa fa-remove"></i></a>
                       </div>
                     </div>
                   </td>
                 </tr>
                 <tr class="app_inst_tr">
-                  <% if application_monitoring_status['overall'] %>
-                    <% application_label_title_message = '' %>
-                    <% application_monitoring_status.each do |key, value| %>
-                      <% next if key == 'overall' || key == 'network'%>
-                      <% application_label_title_message += "#{key} : #{value} \n" %>
-                    <% end %>
+                  <td>
+                  <% unless application_monitoring_status['error'] %>
+                    <%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.active")}</span>" : "<span class='label label-warning app-mon-stat-lab' style='cursor: pointer;'>#{I18n.translate("general.messages.inactive")}</span>" %>
+                  <% else %>
+                    <span class='label label-danger app-mon-stat-lab' style='cursor: pointer;'><%=I18n.translate("general.messages.error")%></span>
                   <% end %>
-                  <td><%= application_monitoring_status['overall'] ? "<span class='label label-success app-mon-stat-lab' title='#{application_label_title_message}'>active</span>" : '<span class="label label-danger" title="No application monitoring tasks currently running.">inactive</span>' %></td>
-                  <td>Monitoring of application data.</td>
+                  </td>
+                  <td><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.application-description-message") %></td>
                   <td>
                     <div class="text-center">
                       <div class="btn-group pull-center">
-                        <a class="btn btn-primary start-application-data" title="Start application monitoring"id='start-monitoring-application-data' data-toggle="modal" data-target="#start-application-data-modal" <%= 'disabled' if application_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
-                        <a class="btn btn-warning stop-application-monitoring-data-button" title="Stop application monitoring" <%= 'disabled' unless application_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
-                        <a class="btn btn-danger flush-application-monitoring-data-button" id='flush-monitoring-application-data' data-toggle="modal" data-target="#flush-application-data-modal" title="Delete all application monitoring data from the local database"><i class="fa fa-remove"></i></a>
+                        <a class="btn btn-primary start-application-data" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.start-application-task-hint") %>" id='start-monitoring-application-data' <%= 'disabled' if application_monitoring_status['overall'] %>><i class="fa fa-play"></i></a>
+                        <a class="btn btn-warning stop-application-monitoring-data-button" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.stop-application-task-hint") %>" <%= 'disabled' unless application_monitoring_status['overall'] %>><i class="fa fa-stop"></i></a>
+                        <a class="btn btn-danger flush-application-monitoring-data-button" id='flush-monitoring-application-data' data-toggle="modal" data-target="#flush-application-data-modal" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.delete-application-data-hint") %>"><i class="fa fa-remove"></i></a>
                       </div>
                     </div>
                   </td>
@@ -154,23 +154,23 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Change monitoring details</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.change-details-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Use the form bellow to change the monitoring details of the modal</p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.change-details-message") %></p>
         <form class="form-signin" action="/monitor/change/details" method="post">
           <div class="form-group">
-            <label for='monitor_deployment'>Deployment:</label>
+            <label for='monitor_deployment'><%= I18n.translate("admin.monitoring-page.popups.change-details-label1") %>:</label>
             <input type="text" id='monitor_deployment' name="deployment" class="form-control" value="<%= details[:deployment] %>" autofocus>
-            <label for='monitor_admin_name'>Administrator:</label>
+            <label for='monitor_admin_name'><%= I18n.translate("admin.monitoring-page.popups.change-details-label2") %>:</label>
             <input type="text" id='monitor_admin_name' name="admin" class="form-control" value="<%= details[:admin] %>" required>
-            <label for='monitor_title'>Title:</label>
+            <label for='monitor_title'><%= I18n.translate("admin.monitoring-page.popups.change-details-label3") %>:</label>
             <input type="text" id='monitor_title' name="title" class="form-control" value="<%= details[:title] %>" required>
-            <label for='monitor_description'>Description:</label>
+            <label for='monitor_description'><%= I18n.translate("admin.monitoring-page.popups.change-details-label4") %>:</label>
             <input type="text" id='monitor_description' name="description" class="form-control" value="<%= details[:description] %>" required>
-            <label for='monitor_location'>Location (lat, long):</label>
+            <label for='monitor_location'><%= I18n.translate("admin.monitoring-page.popups.change-details-label5") %>:</label>
             <input type="text" id='monitor_location' name="loc" class="form-control" value="<%= details[:loc] %>" required>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Save</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>
       </div>
@@ -185,25 +185,25 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start hardware monitoring data</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.start-hardware-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Use the form bellow to start sending hardware monitoring data</p>
-        <form class="form-signin" action="/monitor/start/hardware_data" method="post">
+        <p><%= I18n.translate("admin.monitoring-page.popups.start-hardware-message") %></p>
+        <form class="form-signin start-hardware-data-form" action="/monitor/start/hardware_data" method="post">
           <div class="form-group">
-            <label for='monitor_end_point'>Target Server:</label>
+            <label for='monitor_end_point'><%= I18n.translate("admin.monitoring-page.popups.hardware-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
             <input type="checkbox" id='monitor_temperature' name="temp" checked="checked">
-            <label for='monitor_temperature'>Temperature </label></br>
+            <label for='monitor_temperature'><%= I18n.translate("admin.monitoring-page.popups.hardware-label2") %>: </label></br>
             <input type="checkbox" id='monitor_users' name="users" checked="checked">
-            <label for='monitor_users'>WiFi users </label></br>
+            <label for='monitor_users'><%= I18n.translate("admin.monitoring-page.popups.hardware-label3") %>: </label></br>
             <input type="checkbox" id='monitor_cpu' name="cpu" checked="checked">
-            <label for='monitor_cpu'>CPU load</label></br>
+            <label for='monitor_cpu'><%= I18n.translate("admin.monitoring-page.popups.hardware-label4") %>:</label></br>
             <input type="checkbox" id='monitor_ram' name="ram" checked="checked">
-            <label for='monitor_ram'>Ram load</label></br>
+            <label for='monitor_ram'><%= I18n.translate("admin.monitoring-page.popups.hardware-label5") %></label></br>
             <input type="checkbox" id='monitor_storage' name="storage" checked="checked">
-            <label for='monitor_storage'>Storage load</label></br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+            <label for='monitor_storage'><%= I18n.translate("admin.monitoring-page.popups.hardware-label6") %></label></br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
       </div>
@@ -218,21 +218,21 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Start application monitoring data</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.start-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Use the form bellow to start sending hardware monitoring data</p>
-        <form class="form-signin" action="/monitor/start/application_data" method="post">
+        <p><%= I18n.translate("admin.monitoring-page.popups.start-application-message") %></p>
+        <form class="form-signin start-application-data-form" action="/monitor/start/application_data" method="post">
           <div class="form-group">
-            <label for='monitor_end_point'>Target Server:</label>
+            <label for='monitor_end_point'><%= I18n.translate("admin.monitoring-page.popups.application-label1") %>:</label>
             <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
             <input type="checkbox" id='monitor_etherpad' name="etherpad" checked="checked">
-            <label for='monitor_etherpad'>Etherpad application</label></br>
+            <label for='monitor_etherpad'><%= I18n.translate("admin.monitoring-page.popups.application-label2") %>:</label></br>
             <input type="checkbox" id='monitor_guestbook' name="guestbook" checked="checked">
-            <label for='monitor_guestbook'>Guestbook application</label></br>
+            <label for='monitor_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %>:</label></br>
             <input type="checkbox" id='monitor_framadate' name="framadate" checked="checked">
-            <label for='monitor_framadate'>Framadate application</label></br>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Start</button>
+            <label for='monitor_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %>:</label></br>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
       </div>
@@ -247,24 +247,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Harware monitoring information</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.show-hardware-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Current status for hardware monitoring proccesses: </p>
-        <p>
-          Temperature  : <%= hardware_monitoring_status['temperature'] %>
+        <p class="hw-error-p" <%= "hidden" if hardware_monitoring_status['error'].nil? %>>
+          <%=hardware_monitoring_status['error']%>
         </p>
-        <p>
-          WiFi users   : <%= hardware_monitoring_status['users'] %>
+        <p class="hw-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.show-hardware-message") %>:</b>
         </p>
-        <p>
-          CPU load     : <%= hardware_monitoring_status['cpu'] %>
+        <p class="hw-tmp-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label2") %> :</b> <span id="hw-mon-stat-temp"><%= hardware_monitoring_status['temperature'] %></span>
         </p>
-        <p>
-          RAM load     : <%= hardware_monitoring_status['ram'] %>
+        <p class="hw-users-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label3") %> :</b> <span id="hw-mon-stat-users"><%= hardware_monitoring_status['users'] %></span>
         </p>
-        <p>
-          Storage load : <%= hardware_monitoring_status['storage'] %>
+        <p class="hw-cpu-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label4") %> :</b> <span id="hw-mon-stat-cpu"><%= hardware_monitoring_status['cpu'] %></span>
+        </p>
+        <p class="hw-ram-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label5") %> :</b> <span id="hw-mon-stat-ram"><%= hardware_monitoring_status['ram'] %></span>
+        </p>
+        <p class="hw-storage-msg-p" <%= "hidden" unless hardware_monitoring_status['error'].nil? %>>
+          <b><%= I18n.translate("admin.monitoring-page.popups.hardware-label6") %> :</b> <span id="hw-mon-stat-storage"><%= hardware_monitoring_status['storage'] %></span>
         </p>
       </div>
     </div>
@@ -278,18 +283,18 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Application monitoring information</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.show-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Current status for hardware monitoring proccesses: </p>
+        <p><b><%= I18n.translate("admin.monitoring-page.popups.show-application-message") %>:</b> </p>
         <p>
-          Guest Book : <%= application_monitoring_status['guestbook'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label2") %> :</b> <span id="app-mon-stat-etherpad"><%= application_monitoring_status['etherpad'] %></span>
         </p>
         <p>
-          Etherpad   : <%= application_monitoring_status['etherpad'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label3") %> :</b> <span id="app-mon-stat-guestbook"><%= application_monitoring_status['guestbook'] %></span>
         </p>
         <p>
-          Framadate  : <%= application_monitoring_status['framadate'] %>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label4") %> :</b> <span id="app-mon-stat-framadate"><%= application_monitoring_status['framadate'] %></span>
         </p>
       </div>
     </div>
@@ -303,16 +308,16 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete hardware monitoring data</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-hardware-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Use the button bellow to delete all hardware monitoring data from the local database. Currently there are <b><%= hardware_nof_entries["statistics"].to_i + hardware_nof_entries["users"].to_i %></b> entries in the database.</p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-hardware-message", entries: "<b>#{hardware_nof_entries["statistics"].to_i + hardware_nof_entries["users"].to_i}</b>") %></p>
         <form class="form-signin" action="/monitor/flush/hardware_data" method="post">
           <div class="form-group">
-            <button class="btn btn-lg btn-danger btn-block" type="submit">Remove</button>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.remove") %></button>
           </div>
         </form>
-        <small>*this action will take several seconds to be fully executed, so please wait before refreshing the page. </small>
+        <small>*<%= I18n.translate("admin.monitoring-page.popups.delete-hardware-hint") %> </small>
       </div>
     </div>
   </div>
@@ -325,23 +330,29 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Delete application monitoring data</h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p>Use the button bellow to delete application monitoring data from the local database. Currently there are <b><%= application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i %> (<%= "Guestbook: #{application_nof_entries["guestbook"]}, Etherpad: #{application_nof_entries["etherpad"]}, Framadate: #{application_nof_entries["framadate"]}" %>)</b> entries in the database.</p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i} (Etherpad: #{application_nof_entries["etherpad"]}, Guestbook: #{application_nof_entries["guestbook"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
         <form class="form-signin" action="/monitor/flush/application_data" method="post">
           <div class="form-group">
-            <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">
-            <label for='flush_guestbook'>Guestbook application</label></br>
             <input type="checkbox" id='flush_etherpad' name="etherpad" checked="checked">
-            <label for='flush_etherpad'>Etherpad application</label></br>
+            <label for='flush_etherpad'><%= I18n.translate("admin.monitoring-page.popups.application-label2") %></label></br>
+            <input type="checkbox" id='flush_guestbook' name="guestbook" checked="checked">
+            <label for='flush_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %></label></br>
             <input type="checkbox" id='flush_framadate' name="framadate" checked="checked">
-            <label for='flush_framadate'>Framadate application</label></br>
-            <button class="btn btn-lg btn-danger btn-block" type="submit">Remove</button>
+            <label for='flush_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %></label></br>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.remove") %></button>
           </div>
         </form>
-        <small>*this action will take several seconds to be fully executed, so please wait before refreshing the page. </small>
+        <small>*<%= I18n.translate("admin.monitoring-page.popups.delete-application-hint") %>. </small>
       </div>
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var active_msg   = '<%= I18n.translate("general.messages.active") %>';
+  var inactive_msg = '<%= I18n.translate("general.messages.inactive") %>';
+  var error_msg    = '<%= I18n.translate("general.messages.error") %>';
+</script>

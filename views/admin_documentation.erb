@@ -3,12 +3,12 @@
   <div class="col-md-12 col-lg-12 panel">
     <br>
     <div class="panel-heading" id="syllabus">
-      <h1 class="text-center text-primary hidden-xs" style="font-size:400%"><span class="glyphicon glyphicon-book"></span> Admin Documentation</h1>
-      <h1 class="text-center text-primary visible-xs"><span class="glyphicon glyphicon-book"></span> Admin Documentation</h1>
+      <h1 class="text-center text-primary hidden-xs" style="font-size:400%"><span class="glyphicon glyphicon-book"></span> <%= I18n.translate("admin.documentation-page.header") %></h1>
+      <h1 class="text-center text-primary visible-xs"><span class="glyphicon glyphicon-book"></span> <%= I18n.translate("admin.documentation-page.header") %></h1>
       <br><br>
       <div class="tabbable" >
         <ul class="nav nav-tabs" id="myTabs">
-          <li class="active"><a href="#p1" data-toggle="tab"><strong>Initial Configuration</strong></a></li>
+          <li class="active"><a href="#p1" data-toggle="tab"><strong><%= I18n.translate("admin.documentation-page.initial-configuration-tab.header") %></strong></a></li>
           <li><a href="#p2" data-toggle="tab"><strong>Etherpad</strong></a></li>
           <li><a href="#p3" data-toggle="tab"><strong>Nextcloud</strong></a></li>
           <li><a href="#p4" data-toggle="tab"><strong>Guestbook</strong></a></li>
@@ -20,44 +20,42 @@
     <div class="panel-body">
       <div class="tab-content">
       <div class="tab-pane fade in active " id="p1">
-          <h3 class="text-center" id="pg1"> Initial Configuration</h3>
+          <h3 class="text-center" id="pg1"> <%= I18n.translate("admin.documentation-page.initial-configuration-tab.header") %></h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.initial-configuration-tab.subheader1") %></h4>
             <p>
-              This is the admin documentation guide for the MAZI Zone portal. Use the tabs above to navigate to the different sections of the documentation. The current tab
-              describes the different actions an administrator might need, in order to configure the raspberry pi. While all the other tabs give information regarding the
-              administration of the supported applications.
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph1") %>
             </p>
-            <h4>Connecting through ssh</h4>
+            <h4><%= I18n.translate("admin.documentation-page.initial-configuration-tab.subheader2") %></h4>
             <p>
-              For the remote connection to the Raspberry through ssh you have to open a terminal and execute the following command:
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph2") %>:
               <pre><code>
                 $ssh pi@local.mazizone.eu
                 password: mazizone
               </code></pre>
             </p>
             <p>
-              If you want to change the password for the pi user do $passwd and follow the instructions.
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph3") %>
               <pre><code>
                 $ passwd
               </code></pre>
-              This is the password for the ssh connection and is different from the admin account which you use to login the admin interface.
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph4") %>
             </p>
 
-            <h4>Raspbian Configuration</h4>
+            <h4><%= I18n.translate("admin.documentation-page.initial-configuration-tab.subheader3") %></h4>
             <p>
-              Once you successfully log in the Raspberry, start the rasbian configuration tool:
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph5") %>:
               <pre><code>
                 $sudo raspi-config
               </code></pre>
-              and navigate to the menu:
+              <%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph6") %>:
               <ul>
-                <li>Re-size the file-system to use the entire SD card capacity</li>
-                <li>In the Internationalisation option, change:
+                <li><%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph7") %></li>
+                <li><%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph8") %>:
                   <ul>
-                    <li>the locale to match your location</li>
-                    <li>the timezone to match your location</li>
+                    <li><%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph9") %></li>
+                    <li><%= I18n.translate("admin.documentation-page.initial-configuration-tab.paragraph10") %></li>
                   </ul>
                 </li>
               </ul>
@@ -70,18 +68,18 @@
           <h3 class="text-center" id="pg1"> Etherpad</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.etherpad-tab.subheader1") %></h4>
             <p>
-              Etherpad allows you to edit documents collaboratively in real-time, much like a live multi-player editor that runs in your browser. Write articles, press releases, to-do lists, etc. together with your friends, fellow students or colleagues, all working on the same document at the same time.All instances provide access to all data through a well-documented API and supports import/export to many major data exchange formats. And if the built-in feature set isn't enough for you, there's tons of plugins that allow you to customize your instance to suit your needs.
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph1") %>
             </p>
-            <h4>Administration Guide</h4>
+            <h4><%= I18n.translate("admin.documentation-page.etherpad-tab.subheader2") %></h4>
             <p>
-              You will find an Admin page at the <b><a target="_blank" href="http://local.mazizone.eu:9001/admin" class="app-link" >local.mazizone.eu:9001/admin</a></b></br>
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph2") %> <b><a target="_blank" href="http://local.mazizone.eu:9001/admin" class="app-link" >local.mazizone.eu:9001/admin</a></b></br>
               <b>User Name :</b> admin</br>
               <b>Password :</b> mazizone
             </p>
             <p>
-              In order to change the admin password, in the Admin page select settings and change "mazizone" with your password.
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph3") %>
               <pre><code>
               "users": {
                 "admin": {
@@ -93,15 +91,15 @@
             </p>
             <img src="images/etherpad_doc.png" class="img-responsive center-block" alt="Image for Etherpad Admin Panel">
 
-            <h4>Useful tips:</h4>
+            <h4><%= I18n.translate("admin.documentation-page.etherpad-tab.subheader3") %>:</h4>
             <p>
-              It will make it easier for your MAZI Zone users if you create an index pad yourself and make it the "default" etherpad page by changing the URL in the applications area of the admin panel, when you manage to login. People could be invited to create their own pads, and add their link in that index page, which will be also "commentable" and make it easier to navigate the available pads on the server.
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph4") %>
             </p>
             <p>
-              For example, <a href='http://portal.mazizone.eu/p/unmonastery-index' target='_blank'>http://portal.mazizone.eu/p/unmonastery-index</a>
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph5") %> <a href='http://portal.mazizone.eu/p/unmonastery-index' target='_blank'>http://portal.mazizone.eu/p/unmonastery-index</a>
             </p>
             <p>
-              Etherpad works well when there is someone that "cleans" the text from time to time and if there are suitable "index" pages that organize the different available pads.
+              <%= I18n.translate("admin.documentation-page.etherpad-tab.paragraph6") %>
             </p>
           </div>
           <div class="voffset9"></div>
@@ -111,57 +109,57 @@
           <h3 class="text-center" id="pg1"> Nextcloud</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.nextcloud-tab.subheader1") %></h4>
             <p>
-              Nextcloud is a private file sync and share communication server. It is fully open source and you can host it yourself or pay a company to do it for you. That way, you are in control of your photos, your calendar and contact data, your documents and everything else.
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph1") %>
             </p>
-            <h4>Administration Guide</h4>
+            <h4><%= I18n.translate("admin.documentation-page.nextcloud-tab.subheader2") %></h4>
             <p>
-              You will find an Admin page at <b><a target="_blank" href="http://local.mazizone.eu/nextcloud" class="app-link" >local.mazizone.eu/nextcloud</a></b></br>
+             <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph2") %> <b><a target="_blank" href="http://local.mazizone.eu/nextcloud" class="app-link" >local.mazizone.eu/nextcloud</a></b></br>
               <b>User Name :</b> admin</br>
               <b>Password :</b> mazizone
             </p>
             <img src="images/nextcloud_doc.png" class="img-responsive center-block" alt="Image for Nextcloud Admin Panel" style='padding-bottom: 10px'>
             <p>
-              To access your personal settings:</br>
-                1. Clicking on admin in the top, right corner of your Nextcloud instance. The Personal Settings Menu opens.
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph3") %>:</br>
+                1. <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph4") %>
             </p>
             <img src="images/nextcloud_doc2.png" class="img-responsive center-block" alt="Image for Nextcloud Admin Panel 2">
             <p>
-              2. Choose Personal from the drop down menu.
+              2. <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph5") %>
 
-              Some of the features you will see include the following:
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph6") %>:
               <ul>
-               <li> Usage and available quota</li>
-               <li> Manage your profile picture</li>
-               <li> Full name You can make this anything you want, as it is separate from your login name, which is unique and cannot be changed</li>
-               <li> Email address</li>
-               <li> Lists your Group memberships</li>
-               <li> Manage your password</li>
-               <li> Choose the language for your Nextcloud interface</li>
-               <li> Links to desktop and mobile apps</li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph7") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph8") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph9") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph10") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph11") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph12") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph13") %></li>
+               <li> <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph14") %></li>
               </ul>
             </p>
             </br>
-            <h4>Useful tips:</h4>
+            <h4><%= I18n.translate("admin.documentation-page.nextcloud-tab.subheader3") %>:</h4>
             <p>
-              An easy way to introduce your users to the Nextcloud application is to create a shared editable folder and create a direct link to it, as a separate   application, that will allow anyone to share easily files without having to enter a username and password.
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph15") %>
             </p>
             <p>
-              More specifically, after you login as admin in Nextcloud, you click on the "sharing" panel of the folder and check the box "Share link", and then "Allow upload and editing" (see Figure below).
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph16") %>
             </p>
             <img src="images/nextcloud-doc3.png" class="img-responsive center-block" alt="Image for Nextcloud Admin Panel 3">
             <p>
-              The link that appears between these two checkboxes can now be pasted at the URL of a new application at the <a target="_blank" href="https://github.com/mazi-project/guides/wiki/Administrator-panel">Administrator panel</a>
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph17") %> <a target="_blank" href="https://github.com/mazi-project/guides/wiki/Administrator-panel">Administrator panel</a>
             </p>
             <p>
-              It might also help to create separate folder for different types of files (photos, slides, videos) to make it easier to direct people on what type of content is expected and make it easier to browse.
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph18") %>
             </p>
             <p>
-              If you need to use the content uploaded to your shared nextcloud folder in other applications, the files are accessible through the following path: <b>/var/www/html/nextcloud/data/$user$/files/</b>. So, for example, for the user "mazi" and the folder audio/ the path would be: <b>/var/www/html/nextcloud/data/mazi/files/audio/</b>
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph19") %>: <b>/var/www/html/nextcloud/data/$user$/files/</b>.<%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph20") %>: <b>/var/www/html/nextcloud/data/mazi/files/audio/</b>
             </p>
             <p>
-              In order to create new users in Nextcloud, you have to be connected to the Internet or manually synchronize the time and date between the Raspberry and the Nextcloud application.
+              <%= I18n.translate("admin.documentation-page.nextcloud-tab.paragraph21") %>
             </p>
           </div>
           <div class="voffset9"></div>
@@ -170,19 +168,19 @@
           <h3 class="text-center" id="pg1"> Guestbook</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.guestbook-tab.subheader1") %></h4>
             <p>
-              The MAZI Guestbook is an open source application that can used in events enabling the audience to share their thoughts, photos, etc.
+              <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph1") %>
             </p>
 
-            <h4>Administration Guide</h4>
+            <h4><%= I18n.translate("admin.documentation-page.guestbook-tab.subheader2") %></h4>
             <p>
-              To configure/moderate the MAZI Guestbook application, you can go to <a target="_blank" href="http://portal.mazizone.eu/admin_guestbook" class="app-link" >portal.mazizone.eu/admin_guestbook</a>.
+              <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph2") %> <a target="_blank" href="http://portal.mazizone.eu/admin_guestbook" class="app-link" >portal.mazizone.eu/admin_guestbook</a>.
             </p>
 
-            <h4>Admin Password</h4>
+            <h4><%= I18n.translate("admin.documentation-page.guestbook-tab.subheader3") %></h4>
             <p>
-              In order to change the admin password, open the config.js file ,which takes place in this path: <b>/var/www/html/mazi-board/src/node/config.js</b>, and then fill the authPassword with the password you like.
+              <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph3") %>: <b>/var/www/html/mazi-board/src/node/config.js</b>, <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph4") %>
             </p>
             <pre><code>
               /* AUTH DATA */
@@ -190,13 +188,13 @@
               authPassword: 'password',
             </code></pre>
 
-            <h4>Alternative views of content</h4>
+            <h4><%= I18n.translate("admin.documentation-page.guestbook-tab.subheader4") %></h4>
             <p>
-              As well as standard web browser presentation of content, GuestBook supports two other views of content
+              <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph5") %>
             </p>
-            <p><b>Slideshow view:</b> <a href="http://portal.mazizone.eu:8081/#projection" target='_blank'>http://portal.mazizone.eu:8081/#projection</a> *</p>
-            <p><b>Tablet view:</b> <a href="http://portal.mazizone.eu:8081/#tablet" target='_blank'>http://portal.mazizone.eu:8081/#tablet</a> *</p>
-            <p>* all links work when you are connected to your MAZI Zone.</p>
+            <p><b><%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph6") %>:</b> <a href="http://portal.mazizone.eu:8081/#projection" target='_blank'>http://portal.mazizone.eu:8081/#projection</a> *</p>
+            <p><b><%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph7") %>:</b> <a href="http://portal.mazizone.eu:8081/#tablet" target='_blank'>http://portal.mazizone.eu:8081/#tablet</a> *</p>
+            <p>* <%= I18n.translate("admin.documentation-page.guestbook-tab.paragraph8") %></p>
           </div>
           <div class="voffset9"></div>
         </div>
@@ -205,14 +203,14 @@
           <h3 class="text-center" id="pg1"> WordPress</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.wordpress-tab.subheader1") %></h4>
             <p>
-              WordPress is an open-source and free Web publishing application, content management system (CMS) and blogging tool built by a community of developers and contributors. WordPress allows users to build dynamic websites and blogs that may be updated, customized and managed from its back-end CMS and integrated application and components.
+              <%= I18n.translate("admin.documentation-page.wordpress-tab.paragraph1") %>
             </p>
-            <h4>Administration Guide</h4>
+            <h4><%= I18n.translate("admin.documentation-page.wordpress-tab.subheader2") %></h4>
             <img src="images/wordpress_doc.png" class="img-responsive center-block" alt="Image for WordPress Admin Panel" style='padding-bottom: 10px'>
             <p>
-              Fill out the information: give your site a title, create a username and password and enter your email address. Hit the Install WordPress button, then log in using the account you just created.
+              <%= I18n.translate("admin.documentation-page.wordpress-tab.paragraph2") %>
             </p>
           </div>
           <div class="voffset9"></div>
@@ -222,16 +220,16 @@
           <h3 class="text-center" id="pg1"> FramaDate</h3>
           <br>
           <div class="col-sm-12 col-md-12 col-lg-12">
-            <h4>Description</h4>
+            <h4><%= I18n.translate("admin.documentation-page.framadate-tab.subheader1") %></h4>
             <img src="images/framadate_doc.png" class="img-responsive center-block" alt="Image for WordPress Admin Panel" style='padding-bottom: 10px'>
             <p>
-              Framadate is an open-source and free application like Doodle. It’s easy to create an appointment or a survey without registration to invite your collaborations. </br>
-              Here is how to works :
+              <%= I18n.translate("admin.documentation-page.framadate-tab.paragraph1") %> </br>
+              <%= I18n.translate("admin.documentation-page.framadate-tab.paragraph2") %> :
               <ul>
-                <li>Create a poll</li>
-                <li>Determine the dates or topics to choose</li>
-                <li>Send the survey link to your friends or colleagues </li>
-                <li>Discuss and make your decision </li>
+                <li><%= I18n.translate("admin.documentation-page.framadate-tab.paragraph3") %></li>
+                <li><%= I18n.translate("admin.documentation-page.framadate-tab.paragraph4") %></li>
+                <li><%= I18n.translate("admin.documentation-page.framadate-tab.paragraph5") %></li>
+                <li><%= I18n.translate("admin.documentation-page.framadate-tab.paragraph6") %></li>
               </ul>
             </p>
           </div>
