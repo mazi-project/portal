@@ -81,11 +81,18 @@ module MaziSensors
         tmp[:id]          = i
         i += 1
       else
-        q = "SELECT COUNT(*), sensors.id FROM sensors INNER JOIN measurements ON sensors.id = measurements.sensor_id AND sensors.ip = '#{tmp[:ip]}' AND sensors.sensor_name = '#{tmp[:type]}'"
-        a = con.query(q)
-        a.each_hash do |row|
-          tmp[:nof_entries] = row["COUNT(*)"]
-          tmp[:id]          = row["id"]
+        begin
+          q = "SELECT COUNT(*), sensors.id FROM sensors INNER JOIN measurements ON sensors.id = measurements.sensor_id AND sensors.ip = '#{tmp[:ip]}' AND sensors.sensor_name = '#{tmp[:type]}'"
+          a = con.query(q)
+          a.each_hash do |row|
+            tmp[:nof_entries] = row["COUNT(*)"]
+            tmp[:id]          = row["id"]
+          end
+        rescue Mysql::Error => ex
+          puts ex.inspect
+          tmp[:nof_entries] = 0
+          tmp[:id]          = i
+          i += 1
         end
       end
       result << tmp
