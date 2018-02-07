@@ -57,6 +57,8 @@ module Sinatra
             when 'index_system' #used to be statistics
               session['notifications_read'] = [] if session['notifications_read'].nil?
               locals[:js] << "js/index_statistics.js"
+              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"
+              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-world-mill.js"
               locals[:main_body] = :index_statistics
               locals[:local_data][:notifications]      = Mazi::Model::Notification.all
               locals[:local_data][:notifications_read] = session['notifications_read']
