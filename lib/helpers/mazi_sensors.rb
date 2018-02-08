@@ -48,6 +48,66 @@ module MaziSensors
     writeConfigFile
   end
 
+  def getAllDevices
+    if @config[:general][:mode] == 'demo'
+      return [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
+    end
+    [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    q = "SELECT * FROM devices INNER JOIN deployments ON devices.deployment_id = deployments.id"
+    a = con.query(q)
+    out = []
+    a.each_hash do |row|
+      puts row
+      tmp               = {}
+      tmp[:id]          = row['id']
+      tmp[:name]        = row['title']
+      tmp[:latLng]      = row['location'].split(',')
+      tmp[:admin]       = row['administrator']
+      tmp[:description] = row['description']
+      tmp[:deployment]  = row['deployment']
+      out << tmp
+    end
+    out
+  rescue Mysql::Error => ex
+    MaziLogger.error "Cannot connect to mySQL"
+    []
+  ensure
+    con.close if con
+  end
+
+  def get_data_for_device(device, start_time=nil, end_time=nil)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id"
+    a = con.query(q)
+    a.each_hash do |row|
+      # {"id"=>"1", "sensor_id"=>"1", "device_id"=>"1", "deployment_id"=>"1",
+      # "time"=>"2018-02-08 00:06:01", "pressure"=>"1012", "humidity"=>"50.1", "temperature"=>"20.4",
+      #  "sensor_name"=>"sensehat", "ip"=>"10.0.0.1", "administrator"=>"Aris Dadoukis", "title"=>"GreatMazi",
+      # "description"=>"The great big Mazizone deployment", "location"=>"39.366071, 22.923611"}
+      output[row['device_id']] = {} unless output[row['device_id']]
+      unless output[row['device_id']][row['sensor_name']]
+        output[row['device_id']][row['sensor_name']] = {}
+        output[row['device_id']][row['sensor_name']][:temperatures] = []
+        output[row['device_id']][row['sensor_name']][:humidities]   = []
+        output[row['device_id']][row['sensor_name']][:pressures]    = []
+      end
+      output[row['device_id']][row['sensor_name']][:temperatures] << {date: row['time'], temp: row['temperature']} if row['temperature']
+      output[row['device_id']][row['sensor_name']][:humidities] << {date: row['time'], hum: row['humidity']} if row['humidity']
+      output[row['device_id']][row['sensor_name']][:pressures] << {date: row['time'], hum: row['pressure']} if row['pressure']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
   def getAllAvailableSensors
     if @config[:general][:mode] == 'demo'
       return [{type: 'sensehat', status: 'active', id: 1, ip: '10.0.0.1', nof_entries: 12}, {type: 'sht11', status: 'not found', id: 2, ip: '10.0.0.1', nof_entries: 0}]

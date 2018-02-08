@@ -78,11 +78,12 @@
 
   <div id="wrapper">
 
-    <% local_data[:main_body]       = main_body %>
-    <% local_data[:locale]          = locale %>
-    <% local_data[:locales]         = locales %>
-    <% local_data[:sensors_enabled] = sensors_enabled %>
-    <% local_data[:camera_enabled]  = camera_enabled %>
+    <% local_data[:main_body]          = main_body %>
+    <% local_data[:locale]             = locale %>
+    <% local_data[:locales]            = locales %>
+    <% local_data[:sensors_enabled]    = sensors_enabled %>
+    <% local_data[:camera_enabled]     = camera_enabled %>
+    <% local_data[:monitoring_enabled] = monitoring_enabled %>
     <%= erb :index_main_menu, locals: local_data %>
 
     <div id="page-wrapper">

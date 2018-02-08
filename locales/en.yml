@@ -63,6 +63,7 @@ en:
       system:       "System"
       sensors:      "Sensors"
       camera:       "Camera"
+      monitoring:   "Monitoring"
     system-page:
       subheader:   "System Info"
       users:       "Users Online"
@@ -91,6 +92,11 @@ en:
       no-camera-warn:       "Currently, there is no camera properly installed on this MAZI Zone!"
       media-library-header: "Media Library"
       no-media-warn:        "Currently, there are no images or videos found in the library!"
+    monitoring-page:
+      subheader:      "Monitoring"
+      header-message: "On this page you can see the measurements of various monitoring measurements of this or/and others MAZI Zones."
+      popups:
+        device: "Device"
   admin:
     general:
       admin-panel:            "The MAZI Zone Administration panel"

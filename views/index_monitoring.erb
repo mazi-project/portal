@@ -1,0 +1,82 @@
+<div class="jumbotron">
+  <h1><%= config_data[:applications_title]%> <small><%= I18n.translate("portal.monitoring-page.subheader") %></small></h1>
+  <p><%= I18n.translate("portal.monitoring-page.header-message") %></p>
+</div>
+
+<div class="row">
+  <div id="world-map-wrap">
+    <div id="world-map"></div>
+  </div>
+</div>
+
+<script type="text/javascript">
+  var points = <%= all_devices.to_json %>;
+  var temperature_data = {};
+  <% device_data.each do |data| %>
+    <% data[:data].each do |device_id, sensors| %>
+      if(temperature_data['<%=device_id%>'] == null){
+        temperature_data['<%=device_id%>'] = {};
+      }
+      <% sensors.each do |sensor_name, measurements| %>
+        temperature_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:temperatures].to_json %>');
+      <% end %>
+    <% end %>
+  <% end %>
+  console.log(temperature_data);
+</script>
+
+<% device_data.each do |data| %>
+  <% device = data[:device]%>
+<div class="modal fade" id="monitoring-modal-for-<%= device[:id]%>" role="dialog">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("portal.monitoring-page.popups.device")%> <%= device[:name] %></h4>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-6">
+              <p><b>Deployment:</b> <%= device[:deployment]%></p>
+            </div>
+            <div class="col-md-6">
+              <p><b>Administrator:</b> <%= device[:admin]%></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <p><b>Description:</b> <%= device[:description]%></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <p><b>Latitude:</b> <%= device[:latLng].first %></p>
+            </div>
+            <div class="col-md-6">
+              <p><b>Longitude:</b> <%= device[:latLng].last %></p>
+            </div>
+          </div>
+        </div>
+        <% data[:data].each do |device_id, sensors| %>
+          <% next unless device_id == device[:id] %>
+          <% sensors.each do |sensor_name, values|%>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-green">
+              <div class="panel-heading">
+              <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for", sensor:  sensor_name) %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-temp-<%= device_id %>-<%= sensor_name %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>

@@ -33,6 +33,7 @@ module Sinatra
             locals[:error_msg]               = nil
             locals[:sensors_enabled]         = sensors_enabled?
             locals[:camera_enabled]          = camera_enabled?
+            locals[:monitoring_enabled]      = true
             locals[:locale]                  = session['locale']
             locals[:locales]                 = I18n.available_locales
             unless session['error'].nil?
@@ -57,8 +58,6 @@ module Sinatra
             when 'index_system' #used to be statistics
               session['notifications_read'] = [] if session['notifications_read'].nil?
               locals[:js] << "js/index_statistics.js"
-              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"
-              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-world-mill.js"
               locals[:main_body] = :index_statistics
               locals[:local_data][:notifications]      = Mazi::Model::Notification.all
               locals[:local_data][:notifications_read] = session['notifications_read']
@@ -101,6 +100,28 @@ module Sinatra
                 locals[:local_data][:sensors] << tmp
               end
               locals[:main_body] = :index_sensors
+              erb :index_main, locals: locals
+            when 'index_monitoring'
+              session['notifications_read'] = [] if session['notifications_read'].nil?
+              locals[:js] << "js/index_monitoring.js"
+              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-2.0.3.min.js"
+              locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-world-mill.js"
+              locals[:js] << "js/plugins/morris/raphael.min.js"
+              locals[:js] << "js/plugins/morris/morris.min.js"
+              start_date = nil
+              end_date = nil
+              locals[:main_body]                       = :index_monitoring
+              locals[:local_data][:notifications]      = Mazi::Model::Notification.all
+              locals[:local_data][:notifications_read] = session['notifications_read']
+              locals[:local_data][:config_data]        = @config[:portal_configuration]
+              locals[:local_data][:all_devices]        = getAllDevices
+              locals[:local_data][:device_data]        = []
+              locals[:local_data][:all_devices].each do |device|
+                tmp = {}
+                tmp[:device] = device
+                tmp[:data]   = get_data_for_device(device, start_date, end_date)
+                locals[:local_data][:device_data] << tmp
+              end
               erb :index_main, locals: locals
             when 'index_documentation'
               session['notifications_read']            = [] if session['notifications_read'].nil?
@@ -180,8 +201,8 @@ module Sinatra
               end
               locals[:js] << "js/admin_application.js"
               locals[:main_body] = :admin_application
-              locals[:local_data][:applications]  = Mazi::Model::Application.all
-              locals[:local_data][:application_instances]  = Mazi::Model::ApplicationInstance.all
+              locals[:local_data][:applications]                = Mazi::Model::Application.all
+              locals[:local_data][:application_instances]       = Mazi::Model::ApplicationInstance.all
               locals[:local_data][:can_have_multiple_instances] = ['NextCloud', 'Etherpad', 'FramaDate']
               erb :admin_main, locals: locals
             when 'admin_documentation'

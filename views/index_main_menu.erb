@@ -75,6 +75,11 @@
             <a href="index_camera"><i class="fa fa-fw fa-camera"></i> <%= I18n.translate("portal.side-menu.camera") %></a>
           </li>
           <% end %>
+          <% if monitoring_enabled %>
+          <li <%= 'class="active"' if main_body == :index_monitoring %>>
+            <a href="index_monitoring"><i class="fa fa-fw fa-building-o"></i> <%= I18n.translate("portal.side-menu.monitoring") %></a>
+          </li>
+          <% end %>
         </ul>
       </div>
     </nav>

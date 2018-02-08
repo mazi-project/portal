@@ -96,7 +96,6 @@ $(function() {
   });
 
   var intervalID = setInterval(function(){
-    console.log('mpam');
     $.ajax({
       url: '/devices/sensors/sensehat/get_metrics',
       type: 'GET',
