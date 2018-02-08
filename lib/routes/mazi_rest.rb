@@ -142,7 +142,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS framadate(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        polls  INT(4), votes INT(4), comments INT(4))")
+                        polls  INT(4), votes INT(4), comments INT(4), click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'framadate' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE framadate ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -159,9 +162,9 @@ module Sinatra
             MaziLogger.debug "Update framadate table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments)
+             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}')")
+                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -202,7 +205,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS guestbook(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        submissions INT(4),comments INT(4), images INT(4), datasize INT(8) COMMENT 'Bytes')")
+                        submissions INT(4),comments INT(4), images INT(4), datasize INT(8) COMMENT 'Bytes', click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'guestbook' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE guestbook ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -219,9 +225,9 @@ module Sinatra
             MaziLogger.debug "Update guestbook table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize)
+             con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}')")
+                               '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -263,7 +269,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS etherpad(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes')")
+                        pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes', click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'etherpad' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE etherpad ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -280,9 +289,9 @@ module Sinatra
             MaziLogger.debug "Update etherpad table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize)
+             con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}')")
+                               '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
