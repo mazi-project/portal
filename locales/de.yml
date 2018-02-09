@@ -1,14 +1,14 @@
 en:
   general:
     buttons:
-      edit:            "Edit"
-      cancel:          "Cancel"
+      edit:            "Bearbeiten"
+      cancel:          "Abbrechen"
       ok:              "OK"
-      close:           "Close"
-      create:          "Create"
-      delete:          "Delete"
-      start:           "Start"
-      stop:            "Stop"
+      close:           "Schliessen"
+      create:          "Erstellt"
+      delete:          "Löschen"
+      start:           "Anfang"
+      stop:            "Zeigen"
       save:            "Save Changes"
       choose:          "Choose"
       choose-timeslot: "Choose a timeslot"
