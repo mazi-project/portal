@@ -55,7 +55,7 @@ module MaziSensors
     [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
-    q = "SELECT * FROM devices INNER JOIN deployments ON devices.deployment_id = deployments.id"
+    q = "SELECT * FROM deployments INNER JOIN devices ON devices.deployment_id = deployments.id"
     a = con.query(q)
     out = []
     a.each_hash do |row|
@@ -97,8 +97,65 @@ module MaziSensors
         output[row['device_id']][row['sensor_name']][:pressures]    = []
       end
       output[row['device_id']][row['sensor_name']][:temperatures] << {date: row['time'], temp: row['temperature']} if row['temperature']
-      output[row['device_id']][row['sensor_name']][:humidities] << {date: row['time'], hum: row['humidity']} if row['humidity']
-      output[row['device_id']][row['sensor_name']][:pressures] << {date: row['time'], hum: row['pressure']} if row['pressure']
+      output[row['device_id']][row['sensor_name']][:humidities]   << {date: row['time'], hum: row['humidity']} if row['humidity']
+      output[row['device_id']][row['sensor_name']][:pressures]    << {date: row['time'], pres: row['pressure']} if row['pressure']
+    end
+    q = "SELECT * FROM etherpad e INNER JOIN devices d ON e.device_id = d.id"
+    a = con.query(q)
+    a.each_hash do |row|
+      output[row['device_id']] = {} unless output[row['device_id']]
+      unless output[row['device_id']]['etherpad']
+        output[row['device_id']]['etherpad'] = {}
+        output[row['device_id']]['etherpad'][:pads]     = []
+        output[row['device_id']]['etherpad'][:users]    = []
+        output[row['device_id']]['etherpad'][:database] = []
+      end
+      output[row['device_id']]['etherpad'][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
+      output[row['device_id']]['etherpad'][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
+      output[row['device_id']]['etherpad'][:database] << {date: row['timestamp'], database: row['database']} if row['database']
+    end
+    q = "SELECT * FROM framadate f INNER JOIN devices d ON f.device_id = d.id"
+    a = con.query(q)
+    a.each_hash do |row|
+      output[row['device_id']] = {} unless output[row['device_id']]
+      unless output[row['device_id']]['framadate']
+        output[row['device_id']]['framadate'] = {}
+        output[row['device_id']]['framadate'][:polls]    = []
+        output[row['device_id']]['framadate'][:votes]    = []
+        output[row['device_id']]['framadate'][:database] = []
+      end
+      output[row['device_id']]['framadate'][:polls]    << {date: row['timestamp'], polls: row['polls']} if row['polls']
+      output[row['device_id']]['framadate'][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
+      output[row['device_id']]['framadate'][:database] << {date: row['timestamp'], database: row['database']} if row['database']
+    end
+    q = "SELECT * FROM guestbook f INNER JOIN devices d ON f.device_id = d.id"
+    a = con.query(q)
+    a.each_hash do |row|
+      output[row['device_id']] = {} unless output[row['device_id']]
+      unless output[row['device_id']]['guestbook']
+        output[row['device_id']]['guestbook'] = {}
+        output[row['device_id']]['guestbook'][:submissions] = []
+        output[row['device_id']]['guestbook'][:comments]    = []
+        output[row['device_id']]['guestbook'][:images]      = []
+        output[row['device_id']]['guestbook'][:datasize]    = []
+      end
+      output[row['device_id']]['guestbook'][:submissions] << {date: row['timestamp'], submissions: row['submissions']} if row['submissions']
+      output[row['device_id']]['guestbook'][:comments]    << {date: row['timestamp'], comments: row['comments']} if row['comments']
+      output[row['device_id']]['guestbook'][:images]      << {date: row['timestamp'], images: row['images']} if row['images']
+      output[row['device_id']]['guestbook'][:datasize]    << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+    end
+    q = "SELECT * FROM system s INNER JOIN devices d ON s.device_id = d.id"
+    a = con.query(q)
+    a.each_hash do |row|
+      output[row['device_id']] = {} unless output[row['device_id']]
+      unless output[row['device_id']]['system']
+        output[row['device_id']]['system'] = {}
+      end
+      output[row['device_id']]['system'][:timestamp] = row['timestamp']
+      output[row['device_id']]['system'][:cpu_temp]  = row['cpu_temperature']
+      output[row['device_id']]['system'][:cpu_usage] = row['cpu_usage']
+      output[row['device_id']]['system'][:ram_usage] = row['ram_usage']
+      output[row['device_id']]['system'][:storage]   = row['storage']
     end
     output
   rescue Mysql::Error => ex
