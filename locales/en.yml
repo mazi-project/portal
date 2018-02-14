@@ -109,8 +109,15 @@ en:
         ram_load:              "RAM Load"
         storage_use:           "Storage Load"
         etherpad-pads:         "Etherpad Pads"
-        guestbook-polls:       "Guestbook Polls"
-        framadate-submissions: "Framadate Submissions"
+        etherpad-users:        "Etherpad Users"
+        etherpad-datasize:     "Etherpad Datasize"
+        guestbook-submissions: "Guestbook Submissions"
+        guestbook-comments:    "Guestbook Comments"
+        guestbook-images:      "Guestbook Images"
+        guestbook-datasize:    "Guestbook Datasize"
+        framadate-polls:       "Framadate Polls"
+        framadate-votes:       "Framadate Votes"
+        framadate-comments:    "Framadate Comments"
   admin:
     general:
       admin-panel:            "The MAZI Zone Administration panel"

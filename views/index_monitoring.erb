@@ -187,15 +187,75 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-blue">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-users") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-etherpad-users-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-datasize") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-etherpad-datasize-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
             <% elsif sensor_name == 'guestbook' %>
         <div class="row">
           <div class="col-md-12">
             <div class="panel panel-green">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-polls") %></h3>
+                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-submissions") %></h3>
               </div>
               <div class="panel-body">
                 <div id="morris-line-chart-guestbook-submissions-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-blue">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-comments") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-guestbook-comments-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-images") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-guestbook-images-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-red">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-datasize") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-guestbook-datasize-<%= device_id %>"></div>
               </div>
             </div>
           </div>
@@ -205,10 +265,34 @@
           <div class="col-md-12">
             <div class="panel panel-green">
               <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-submissions") %></h3>
+                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-polls") %></h3>
               </div>
               <div class="panel-body">
                 <div id="morris-line-chart-framadate-polls-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-yellow">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-votes") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-framadate-votes-<%= device_id %>"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="panel panel-blue">
+              <div class="panel-heading">
+                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-comments") %></h3>
+              </div>
+              <div class="panel-body">
+                <div id="morris-line-chart-framadate-comments-<%= device_id %>"></div>
               </div>
             </div>
           </div>

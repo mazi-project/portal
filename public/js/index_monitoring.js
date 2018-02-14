@@ -19,7 +19,6 @@ $(document).ready(function () {
       var description = points[code]['description'];
       var admin = points[code]['admin'];
       var deployment = points[code]['deployment'];
-      console.log(id, name, description, admin, deployment);
       $('#monitoring-modal-for-' + id).modal('show');
     }
   });
@@ -27,7 +26,6 @@ $(document).ready(function () {
   $.each(temperature_data, function(device_id, sensors) {
     var charts = [];
     $.each(sensors, function(sensor_name, measurements){
-      console.log(sensor_name, device_id);
       var temp_chart = Morris.Line({
         element: 'morris-line-chart-temp-' + device_id + '-' + sensor_name,
         data: measurements,
@@ -82,11 +80,6 @@ $(document).ready(function () {
   $.each(pressure_data, function(device_id, sensors) {
     var charts = [];
     $.each(sensors, function(sensor_name, measurements){
-      console.log(sensor_name, device_id);
-      console.log(measurements);
-      // if (measurements == ){
-
-      // }
       var press_chart = Morris.Line({
         element: 'morris-line-chart-press-' + device_id + '-' + sensor_name,
         data: measurements,
@@ -130,8 +123,35 @@ $(document).ready(function () {
           });
           charts.push(pads_chart);
           break;
-        default:
-          // console.log(sensor_name);
+        case 'users':
+          var users_chart = Morris.Line({
+            element: 'morris-line-chart-etherpad-users-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['users'],
+            labels: ['Number of Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymax: 50,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(users_chart);
+          break;
+        case 'datasize':
+          var datasize_chart = Morris.Line({
+            element: 'morris-line-chart-etherpad-datasize-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['datasize'],
+            labels: ['Datasize', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(datasize_chart);
+          break;
       }
     });
 
@@ -145,9 +165,7 @@ $(document).ready(function () {
 
   $.each(guestbook_data, function(device_id, sensors) {
     var charts = [];
-    console.log(device_id, sensors);
     $.each(sensors, function(sensor_name, measurements){
-      console.log(sensor_name, measurements);
       switch(sensor_name) {
         case 'submissions':
           var submissions_chart = Morris.Line({
@@ -164,8 +182,50 @@ $(document).ready(function () {
           });
           charts.push(submissions_chart);
           break;
-        default:
-          // console.log(sensor_name);
+        case 'comments':
+          var comments_chart = Morris.Line({
+            element: 'morris-line-chart-guestbook-comments-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['comments'],
+            labels: ['Number of Comments', 'Date'],
+            smooth: true,
+            resize: true,
+            ymax: 50,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(comments_chart);
+          break;
+        case 'images':
+          var images_chart = Morris.Line({
+            element: 'morris-line-chart-guestbook-images-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['images'],
+            labels: ['Number of Images', 'Date'],
+            smooth: true,
+            resize: true,
+            ymax: 50,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(images_chart);
+          break;
+        case 'datasize':
+          var datasize_chart = Morris.Line({
+            element: 'morris-line-chart-guestbook-datasize-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['datasize'],
+            labels: ['Datasize', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(datasize_chart);
+          break;
       }
     });
 
@@ -190,14 +250,39 @@ $(document).ready(function () {
             labels: ['Number of Polls', 'Date'],
             smooth: true,
             resize: true,
-            ymax: 50,
             ymin: 0,
             hideHover: 'auto'
           });
           charts.push(polls_chart);
           break;
-        default:
-          // console.log(sensor_name);
+        case 'votes':
+          var votes_chart = Morris.Line({
+            element: 'morris-line-chart-framadate-votes-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['votes'],
+            labels: ['Number of Votes', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(votes_chart);
+          break;
+        case 'comments':
+          var comments_chart = Morris.Line({
+            element: 'morris-line-chart-framadate-comments-' + device_id,
+            data: measurements,
+            xkey: 'date',
+            ykeys: ['comments'],
+            labels: ['Number of Comments', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+          charts.push(comments_chart);
+          break;
       }
     });
 

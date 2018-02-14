@@ -52,14 +52,12 @@ module MaziSensors
     if @config[:general][:mode] == 'demo'
       return [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
     end
-    [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     q = "SELECT * FROM deployments INNER JOIN devices ON devices.deployment_id = deployments.id"
     a = con.query(q)
     out = []
     a.each_hash do |row|
-      puts row
       tmp               = {}
       tmp[:id]          = row['id']
       tmp[:name]        = row['title']
@@ -108,11 +106,11 @@ module MaziSensors
         output[row['device_id']]['etherpad'] = {}
         output[row['device_id']]['etherpad'][:pads]     = []
         output[row['device_id']]['etherpad'][:users]    = []
-        output[row['device_id']]['etherpad'][:database] = []
+        output[row['device_id']]['etherpad'][:datasize] = []
       end
       output[row['device_id']]['etherpad'][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
       output[row['device_id']]['etherpad'][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
-      output[row['device_id']]['etherpad'][:database] << {date: row['timestamp'], database: row['database']} if row['database']
+      output[row['device_id']]['etherpad'][:datasize] << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
     end
     q = "SELECT * FROM framadate f INNER JOIN devices d ON f.device_id = d.id"
     a = con.query(q)
@@ -122,11 +120,11 @@ module MaziSensors
         output[row['device_id']]['framadate'] = {}
         output[row['device_id']]['framadate'][:polls]    = []
         output[row['device_id']]['framadate'][:votes]    = []
-        output[row['device_id']]['framadate'][:database] = []
+        output[row['device_id']]['framadate'][:comments] = []
       end
       output[row['device_id']]['framadate'][:polls]    << {date: row['timestamp'], polls: row['polls']} if row['polls']
       output[row['device_id']]['framadate'][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
-      output[row['device_id']]['framadate'][:database] << {date: row['timestamp'], database: row['database']} if row['database']
+      output[row['device_id']]['framadate'][:comments] << {date: row['timestamp'], comments: row['comments']} if row['comments']
     end
     q = "SELECT * FROM guestbook f INNER JOIN devices d ON f.device_id = d.id"
     a = con.query(q)
@@ -206,7 +204,6 @@ module MaziSensors
             tmp[:id]          = row["id"]
           end
         rescue Mysql::Error => ex
-          puts ex.inspect
           tmp[:nof_entries] = 0
           tmp[:id]          = i
           i += 1
