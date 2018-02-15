@@ -34,6 +34,7 @@ el:
       previous:        "Προηγούμενο"
       submit:          "Υποβολή"
       change:          "Αλλαγή"
+      qrcode:          "QRcode"
     messages:
       warning:      "Προσοχή"
       welcome:      "Καλώς Ήρθατε"
@@ -288,6 +289,7 @@ el:
         edit-wifi-header:            "Επεξεργαστείτε τη διαμόρφωση Wi-Fi"
         edit-wifi-warning:           "Προειδοποίηση: Εάν αλλάξετε τυχόν τιμές διαμόρφωσης για αυτό το δίκτυο Wi-Fi, η ασύρματη σύνδεση σας σε αυτή τη ζώνη MAZI θα χαθεί και θα πρέπει να συνδεθείτε ξανά στο νέο δίκτυο Wi-Fi."
         edit-wifi-network-header:    "Επεξεργασία ρυθμίσεων δικτύου Wi-Fi"
+        show-qrcode-header:          "QRcode για το Wi-Fi δίκτυο"
         change-channel-header:       "Αλλάγη καναλιού"
         change-password-header:      "Αλλαγή κωδικού"
         change-mode-header:          "Αλλαγη Λειτουργίας"

@@ -1,3 +1,7 @@
+<script type="text/javascript">
+  var qrcodetext = "WIFI:S:<%= net_info[:ssid] %>;T:WPA;P:<%= net_info[:password] %>;H:false;";
+</script>
+
 <div class="row">
   <div class="col-lg-12">
     <h1 class="page-header">
@@ -74,7 +78,10 @@
         </li>
       </ul>
       <div class="row change-conf-div">
-        <span class='col-lg-12'>
+        <span class='col-lg-6'>
+          <a data-toggle="modal" data-target="#show-qrcode-modal" class="btn btn-primary pull-left" style="margin-left: 10px;"><i class="fa fa-barcode"></i> <%= I18n.translate("general.buttons.qrcode") %></a>
+        </span>
+        <span class='col-lg-6'>
           <a data-toggle="modal" data-target="#edit-wifi-network-modal" class="btn btn-primary conf-link change-conf pull-right"><i class="fa fa-pencil"></i> <%= I18n.translate("general.buttons.edit") %></a>
         </span>
       </div>
@@ -182,7 +189,6 @@
   </div>
 </div>
 
-
 <!-- edit wifi network modal-->
 <div class="modal fade" id="edit-wifi-network-modal" role="dialog">
   <div class="modal-dialog">
@@ -217,6 +223,25 @@
             <input type="text" name="password" class="form-control" value='<%= net_info[:password] == '-' ? '' : net_info[:password] %>'>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
             <small>* <%= I18n.translate("admin.network-page.popups.edit-wifi-warning") %></small>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- show qrcode modal-->
+<div class="modal fade" id="show-qrcode-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.network-page.popups.show-qrcode-header") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/exec" method="post">
+          <div class="form-group">
+            <div id="qrcodeCanvas"></div>
           </div>
         </form>
       </div>

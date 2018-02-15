@@ -5,4 +5,8 @@ $( document ).ready(function() {
     $target = $('#'+$input.attr('data-toggle'));
     $target.slideToggle();
   });
+
+  $('#qrcodeCanvas').qrcode({
+    text  : qrcodetext
+  });
 });

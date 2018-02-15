@@ -34,6 +34,7 @@ en:
       previous:        "Previous"
       submit:          "Submit"
       change:          "Change"
+      qrcode:          "QRcode"
     messages:
       warning:      "Warning"
       welcome:      "Welcome"
@@ -288,6 +289,7 @@ en:
         edit-wifi-header:            "Edit Wi-Fi configuration"
         edit-wifi-warning:           "Warning: If you change any configuration values for this Wi-Fi network, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
         edit-wifi-network-header:    "Edit Wi-Fi Network Settings"
+        show-qrcode-header:          "Wi-Fi network QRcode"
         change-channel-header:       "Change Channel"
         change-password-header:      "Change Password"
         change-mode-header:          "Change Mode"

@@ -220,6 +220,8 @@ module Sinatra
                 redirect "/admin_login?goto=#{index}"
               end
               locals[:js] << "js/admin_network.js"
+              locals[:js] << "js/plugins/qrcode/jquery.qrcode.js"
+              locals[:js] << "js/plugins/qrcode/qrcode.js"
               locals[:main_body] = :admin_network
               ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
               lines = ex.exec_command
