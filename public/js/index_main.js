@@ -8,8 +8,8 @@ $( document ).ready(function() {
       success: function(result) {
         id = JSON.parse(result).id;
         elem.children('span').text('Read');
-        elem.children('span').addClass('label-default').removeClass('label-success')
-        var nof_notif = Number($(".notif-span").text()) - 1;
+        elem.children('span').addClass('label-default').removeClass('label-success');
+        var nof_notif = Number($(".notif-span").first().text()) - 1;
         if (nof_notif <= 0){
           nof_notif = '';
         }

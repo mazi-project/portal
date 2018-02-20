@@ -21,7 +21,6 @@
         </button>
         <a class="navbar-brand" href="index"><%= config_data[:title] %></a>
       </div>
-      <% if flag %>
       <ul class="nav navbar-right top-nav">
         <li>
           <a class="navbar-brand pull-right" target="_blank" href="/index_documentation" style="font-size: 14px;"> <%= I18n.translate("portal.top-menu.documentation") %></a>
@@ -32,8 +31,9 @@
         <li>
           <div class="navbar-brand pull-right" id="time"></div>
         </li>
+        <% if flag %>
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" %> <b class="caret"></b></a>
           <ul class="dropdown-menu alert-dropdown">
             <% notifications.each do |notification|%>
             <% next unless notification.enabled %>
@@ -45,6 +45,7 @@
             <% end %>
           </ul>
         </li>
+        <% end %>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class="lang-sm lang-lbl" lang="<%= locale %>"></span></a>
           <ul class="dropdown-menu alert-dropdown">
@@ -56,7 +57,6 @@
           </ul>
         </li>
       </ul>
-      <% end %>
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :index_application %>>
@@ -135,8 +135,9 @@
           <li>
             <a target="_blank" href="http://mazizone.eu/toolkit"><i class="fa fa-fw fa-external-link-square"></i> MAZI Project</a>
           </li>
+          <% if flag %>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" if nof_notifications_enabled > 0 %> <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <%= "<span class='notif-span'>#{nof_notifications_enabled}</span>" %> <b class="caret"></b></a>
             <ul class="dropdown-menu alert-dropdown">
               <% notifications.each do |notification|%>
               <% next unless notification.enabled %>
@@ -148,6 +149,7 @@
               <% end %>
             </ul>
           </li>
+          <% end %>
           <li>
             <div id="time2" style="color:  white; padding-right: 10px;" class="pull-right"></div>
           </li>
