@@ -134,6 +134,70 @@ module Sinatra
             end
           end
 
+          app.post '/create/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            MaziLogger.debug "Create nextcloud table in monitoring Database if doesn't exists"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("CREATE TABLE IF NOT EXISTS nextcloud(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
+                         datasize INT(4), downloads INT(4), users INT(4), files INT(4), click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'nextcloud' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE nextcloud ADD click_counter INT(4) NOT NULL default '0';")
+             end
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/update/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+            MaziLogger.debug "Update nextcloud table in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("INSERT INTO nextcloud(device_id, timestamp, datasize, downloads, users, files,click_counter)
+                        VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                               '#{body["datasize"]}', '#{body["downloads"]}', '#{body["users"]}', '#{body["files"]}', '#{body["click_counter"]}')")
+             return "OK"
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/flush/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush nextcloud table for divice_id #{body["device_id"]} in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("DELETE FROM nextcloud WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+
           app.post '/create/framadate/?' do
  	    file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
