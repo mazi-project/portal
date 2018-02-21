@@ -114,6 +114,10 @@ ul.alert-dropdown {
   font-size: 14px;
 }
 
+.lang-lbl:after {
+  margin-left: 3px;
+}
+
 /* Side Navigation */
 
 @media(min-width:768px) {

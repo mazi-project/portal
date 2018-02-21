@@ -111,6 +111,10 @@ ul.alert-dropdown {
   width: 200px;
 }
 
+.lang-lbl:after {
+  margin-left: 3px;
+}
+
 /* Side Navigation */
 
 @media(min-width:768px) {
