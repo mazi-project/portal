@@ -134,6 +134,70 @@ module Sinatra
             end
           end
 
+          app.post '/create/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            MaziLogger.debug "Create nextcloud table in monitoring Database if doesn't exists"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("CREATE TABLE IF NOT EXISTS nextcloud(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
+                         datasize INT(4), downloads INT(4), users INT(4), files INT(4), click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'nextcloud' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE nextcloud ADD click_counter INT(4) NOT NULL default '0';")
+             end
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/update/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
+            MaziLogger.debug "Update nextcloud table in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("INSERT INTO nextcloud(device_id, timestamp, datasize, downloads, users, files,click_counter)
+                        VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
+                               '#{body["datasize"]}', '#{body["downloads"]}', '#{body["users"]}', '#{body["files"]}', '#{body["click_counter"]}')")
+             return "OK"
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+              case e.errno
+              when 1044, 1045, 1142, 1143,1227
+               return "Database Access Denied"
+              when 1037, 1038, 1041, 1135, 1257
+               return "Database Out of memory"
+              else
+               return "MySqlerror #{e.errno}"
+              end
+            ensure
+              con.close if con
+            end
+          end
+
+          app.post '/flush/nextcloud/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Flush nextcloud table for divice_id #{body["device_id"]} in monitoring Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("DELETE FROM nextcloud WHERE device_id LIKE '#{body["device_id"]}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+
           app.post '/create/framadate/?' do
  	    file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -142,7 +206,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS framadate(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        polls  INT(4), votes INT(4), comments INT(4))")
+                        polls  INT(4), votes INT(4), comments INT(4), click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'framadate' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE framadate ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -159,9 +226,9 @@ module Sinatra
             MaziLogger.debug "Update framadate table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments)
+             con.query("INSERT INTO framadate(device_id, timestamp, polls, votes, comments, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}')")
+                               '#{body["polls"]}', '#{body["votes"]}', '#{body["comments"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -202,7 +269,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS guestbook(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        submissions INT(4),comments INT(4), images INT(4), datasize INT(8) COMMENT 'Bytes')")
+                        submissions INT(4),comments INT(4), images INT(4), datasize INT(8) COMMENT 'Bytes', click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'guestbook' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE guestbook ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -219,9 +289,9 @@ module Sinatra
             MaziLogger.debug "Update guestbook table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize)
+             con.query("INSERT INTO guestbook(device_id, timestamp, submissions, comments, images, datasize, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}')")
+                               '#{body["submissions"]}', '#{body["comments"]}', '#{body["images"]}', '#{body["datasize"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -263,7 +333,10 @@ module Sinatra
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS etherpad(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
-                        pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes')")
+                        pads INT(4),users INT(4), datasize INT(8) COMMENT 'Bytes', click_counter INT(4))")
+             if con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'etherpad' AND column_name = 'click_counter'").fetch_row.nil?
+                 con.query("ALTER TABLE etherpad ADD click_counter INT(4) NOT NULL default '0';")
+             end
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -280,9 +353,9 @@ module Sinatra
             MaziLogger.debug "Update etherpad table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize)
+             con.query("INSERT INTO etherpad(device_id, timestamp, pads, users, datasize, click_counter)
                         VALUES('#{body["device_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}')")
+                               '#{body["pads"]}', '#{body["users"]}', '#{body["datasize"]}', '#{body["click_counter"]}')")
              return "OK"
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -316,20 +389,20 @@ module Sinatra
           end
 
 
-          app.post '/create/statistics/?' do
+          app.post '/create/system/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
-            MaziLogger.debug "Create tables statistics and users in monitoring Database if doesn't exists"
+            MaziLogger.debug "Create tables system and users in monitoring Database if doesn't exists"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS users(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME,
                         online_users INT(4))")
-             con.query("CREATE TABLE IF NOT EXISTS statistics(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME, cpu_temperature FLOAT(3,1) COMMENT 'Celsius',
+             con.query("CREATE TABLE IF NOT EXISTS system(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME, cpu_temperature FLOAT(3,1) COMMENT 'Celsius',
                         cpu_usage FLOAT(3,1) COMMENT 'percentage %',ram_usage FLOAT(3,1) COMMENT 'percentage %',
                         storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1), upload_unit VARCHAR(10), 
                         download FLOAT(3,1), download_unit VARCHAR(10) )")
-            con.query ("ALTER TABLE statistics ADD UNIQUE KEY (device_id)")
+            con.query ("ALTER TABLE system ADD UNIQUE KEY (device_id)")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -337,16 +410,16 @@ module Sinatra
             end
           end
 
-          app.post '/update/statistics/?' do
+          app.post '/update/system/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update statistics table in monitoring Database"
+            MaziLogger.debug "Update system table in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")          
-             con.query("INSERT INTO statistics(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit) 
+             con.query("INSERT INTO system(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit) 
                         VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                              '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}','#{body["network"]["upload"]}',
                                              '#{body["network"]["upload_unit"]}','#{body["network"]["download"]}',
@@ -397,15 +470,15 @@ module Sinatra
             end
          end
 
-         app.post '/flush/statistics/?' do
+         app.post '/flush/system/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
-            MaziLogger.debug "Flush statistics table for divice_id #{body["device_id"]} in monitoring Database"
+            MaziLogger.debug "Flush system table for divice_id #{body["device_id"]} in monitoring Database"
             begin
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("DELETE FROM statistics WHERE device_id LIKE '#{body["device_id"]}'")
+             con.query("DELETE FROM system WHERE device_id LIKE '#{body["device_id"]}'")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
