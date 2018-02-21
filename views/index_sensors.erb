@@ -42,7 +42,9 @@
     </div>
   </div>
 <% else %>
+  <% flag = false %>
   <% sensors.each do |sensor| %>
+    <% flag = true if sensor[:type] == 'sensehat' %>
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-green">
       <div class="panel-heading">
@@ -70,11 +72,13 @@
       </div>
     </div>
   </div>
+  <% end %>
 
+  <% if flag %>
   <div class="col-lg-6 col-sm-12 special-metrics-panel">
     <div class="panel panel-yellow">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  sensor[:type]) %></h3>
+      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  'sensehat') %></h3>
       </div>
       <div class="panel-body">
         <div class="row col-with-divider">

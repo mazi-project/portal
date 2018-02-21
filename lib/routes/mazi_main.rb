@@ -90,7 +90,7 @@ module Sinatra
               locals[:local_data][:notifications_read] = session['notifications_read']
               locals[:local_data][:config_data]        = @config[:portal_configuration]
               locals[:local_data][:sensors]            = []
-              getAllAvailableSensors.each do |sensor|
+              getAllAvailableSensorsFromDB.each do |sensor|
                 tmp                = {}
                 tmp[:id]           = sensor[:id]
                 tmp[:type]         = sensor[:type]
