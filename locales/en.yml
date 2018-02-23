@@ -35,6 +35,7 @@ en:
       submit:          "Submit"
       change:          "Change"
       qrcode:          "QRcode"
+      show:            "Show"
     messages:
       warning:      "Warning"
       welcome:      "Welcome"
@@ -99,6 +100,7 @@ en:
       header-message: "On this page you can see the measurements of various monitoring measurements of this or/and others MAZI Zones."
       popups:
         device:                "Device"
+        devices:               "Devices"
         deployment:            "Deployment"
         administrator:         "Administrator"
         description:           "Description"

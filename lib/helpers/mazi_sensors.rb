@@ -75,6 +75,164 @@ module MaziSensors
     con.close if con
   end
 
+  def getAllDeploymentsWithData
+    if @config[:general][:mode] == 'demo'
+      return [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
+    end
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    q = "SELECT * FROM deployments INNER JOIN devices ON devices.deployment_id = deployments.id"
+    a = con.query(q)
+    out = {}
+    a.each_hash do |row|
+      if out[row['deployment_id']].nil?
+        out[row['deployment_id']]              = {}
+        out[row['deployment_id']][:id]         = row['deployment_id']
+        out[row['deployment_id']][:deployment] = row['deployment']
+        out[row['deployment_id']][:devices]    = {}
+      end
+      if out[row['deployment_id']][:devices][row['id']].nil?
+        out[row['deployment_id']][:devices][row['id']]                 = {}
+        out[row['deployment_id']][:devices][row['id']][:id]            = row['id']
+        out[row['deployment_id']][:devices][row['id']][:administrator] = row['administrator']
+        out[row['deployment_id']][:devices][row['id']][:title]         = row['title']
+        out[row['deployment_id']][:devices][row['id']][:description]   = row['description']
+        out[row['deployment_id']][:devices][row['id']][:latLng]        = row['location'].split(',')
+        out[row['deployment_id']][:devices][row['id']][:sensors]       = {}
+        out[row['deployment_id']][:devices][row['id']][:applications]  = {}
+        out[row['deployment_id']][:devices][row['id']][:system]        = {}
+      end
+      out[row['deployment_id']][:devices][row['id']][:sensors]      = getSensorDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:applications] = getApplicationDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:system]       = getSystemDataForDevice(row['id'])
+    end
+    out
+  rescue Mysql::Error => ex
+    MaziLogger.error "Cannot connect to mySQL"
+    {}
+  ensure
+    con.close if con
+  end
+
+  def enrichDeployments(deployments)
+    deployments.each do |id, deployment|
+      if deployment[:devices].nil? || deployment[:devices].empty?
+        deployment[:latLng] = nil
+      else
+        deployment[:latLng] = deployment[:devices].values.first[:latLng]
+      end
+    end
+    deployments
+  end
+
+  def getSensorDataForDevice(device_id, start_time=nil, end_time=nil)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN sensors s ON s.device_id = d.id INNER JOIN measurements m ON m.sensor_id = s.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      if output[row['sensor_id']].nil?
+        output[row['sensor_id']]                       = {}
+        output[row['sensor_id']][:id]                  = row['sensor_id']
+        output[row['sensor_id']][:sensor_name]         = row['sensor_name']
+        output[row['sensor_id']][:data]                = {}
+        output[row['sensor_id']][:data][:temperatures] = []
+        output[row['sensor_id']][:data][:humidities]   = []
+        output[row['sensor_id']][:data][:pressures]    = []
+      end
+      output[row['sensor_id']][:data][:temperatures] << {date: row['time'], temp: row['temperature']} if row['temperature']
+      output[row['sensor_id']][:data][:humidities]   << {date: row['time'], hum: row['humidity']} if row['humidity']
+      output[row['sensor_id']][:data][:pressures]    << {date: row['time'], pres: row['pressure']} if row['pressure']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
+  def getApplicationDataForDevice(device_id, start_time=nil, end_time=nil)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN etherpad e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      if output['etherpad'].nil?
+        output['etherpad']                   = {}
+        output['etherpad'][:data]            = {}
+        output['etherpad'][:data][:pads]     = []
+        output['etherpad'][:data][:users]    = []
+        output['etherpad'][:data][:datasize] = []
+      end
+      output['etherpad'][:data][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
+      output['etherpad'][:data][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
+      output['etherpad'][:data][:datasize] << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+    end
+    q = "SELECT * FROM devices d INNER JOIN guestbook e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      if output['guestbook'].nil?
+        output['guestbook']                      = {}
+        output['guestbook'][:data]               = {}
+        output['guestbook'][:data][:submissions] = []
+        output['guestbook'][:data][:comments]    = []
+        output['guestbook'][:data][:images]      = []
+        output['guestbook'][:data][:datasize]    = []
+      end
+      output['guestbook'][:data][:submissions] << {date: row['timestamp'], submissions: row['submissions']} if row['submissions']
+      output['guestbook'][:data][:comments]    << {date: row['timestamp'], comments: row['comments']} if row['comments']
+      output['guestbook'][:data][:images]      << {date: row['timestamp'], images: row['images']} if row['images']
+      output['guestbook'][:data][:datasize]    << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+    end
+    q = "SELECT * FROM devices d INNER JOIN framadate e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      if output['framadate'].nil?
+        output['framadate']                      = {}
+        output['framadate'][:data]               = {}
+        output['framadate'][:data][:polls] = []
+        output['framadate'][:data][:votes]    = []
+        output['framadate'][:data][:comments]      = []
+      end
+      output['framadate'][:data][:polls] << {date: row['timestamp'], polls: row['polls']} if row['polls']
+      output['framadate'][:data][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
+      output['framadate'][:data][:comments]      << {date: row['timestamp'], comments: row['comments']} if row['comments']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
+  def getSystemDataForDevice(device_id, start_time=nil, end_time=nil)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN system s ON s.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output[:timestamp] = row['timestamp']
+      output[:cpu_temp]  = row['cpu_temperature']
+      output[:cpu_usage] = row['cpu_usage']
+      output[:ram_usage] = row['ram_usage']
+      output[:storage]   = row['storage']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
   def get_data_for_device(device, start_time=nil, end_time=nil)
     output = {}
     mysql_username, mysql_password = mysql_creds

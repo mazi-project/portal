@@ -114,14 +114,7 @@ module Sinatra
               locals[:local_data][:notifications]      = Mazi::Model::Notification.all
               locals[:local_data][:notifications_read] = session['notifications_read']
               locals[:local_data][:config_data]        = @config[:portal_configuration]
-              locals[:local_data][:all_devices]        = getAllDevices
-              locals[:local_data][:device_data]        = []
-              locals[:local_data][:all_devices].each do |device|
-                tmp = {}
-                tmp[:device] = device
-                tmp[:data]   = get_data_for_device(device, start_date, end_date)
-                locals[:local_data][:device_data] << tmp
-              end
+              locals[:local_data][:deployments]        = enrichDeployments(getAllDeploymentsWithData)
               erb :index_main, locals: locals
             when 'index_documentation'
               session['notifications_read']            = [] if session['notifications_read'].nil?

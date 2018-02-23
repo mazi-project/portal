@@ -10,88 +10,103 @@
 </div>
 
 <script type="text/javascript">
-  var points = <%= all_devices.to_json %>;
   var temperature_data = {};
   var humidity_data = {};
   var pressure_data = {};
   var etherpad_data = {};
   var guestbook_data = {};
   var framadate_data = {};
-  <% device_data.each do |data| %>
-    <% data[:data].each do |device_id, sensors| %>
-      <% next unless data[:device][:id] == device_id %>
-      <% sensors.each do |sensor_name, measurements| %>
-        <% if sensor_name == 'sensehat' %>
-    if(temperature_data['<%=device_id%>'] == null){
-      temperature_data['<%=device_id%>'] = {};
-    }
-    if(humidity_data['<%=device_id%>'] == null){
-      humidity_data['<%=device_id%>'] = {};
-    }
-    if(pressure_data['<%=device_id%>'] == null){
-      pressure_data['<%=device_id%>'] = {};
-    }
-    temperature_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:temperatures].to_json %>');
-    humidity_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:humidities].to_json %>');
-    pressure_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:pressures].to_json %>');
-        <% elsif sensor_name == 'sht11' %>
-    if(temperature_data['<%=device_id%>'] == null){
-      temperature_data['<%=device_id%>'] = {};
-    }
-    if(humidity_data['<%=device_id%>'] == null){
-      humidity_data['<%=device_id%>'] = {};
-    }
-    temperature_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:temperatures].to_json %>');
-    humidity_data['<%=device_id%>']['<%=sensor_name%>'] = JSON.parse('<%= measurements[:humidities].to_json %>');
-        <% elsif sensor_name == 'etherpad' %>
-    if(etherpad_data['<%=device_id%>'] == null){
-      etherpad_data['<%=device_id%>'] = {};
-    }
-    etherpad_data['<%=device_id%>']['pads'] = JSON.parse('<%= measurements[:pads].to_json %>');
-    etherpad_data['<%=device_id%>']['users'] = JSON.parse('<%= measurements[:users].to_json %>');
-    etherpad_data['<%=device_id%>']['datasize'] = JSON.parse('<%= measurements[:datasize].to_json %>');
-        <% elsif sensor_name == 'guestbook' %>
-    if(guestbook_data['<%=device_id%>'] == null){
-      guestbook_data['<%=device_id%>'] = {};
-    }
-    guestbook_data['<%=device_id%>']['submissions'] = JSON.parse('<%= measurements[:submissions].to_json %>');
-    guestbook_data['<%=device_id%>']['comments'] = JSON.parse('<%= measurements[:comments].to_json %>');
-    guestbook_data['<%=device_id%>']['images'] = JSON.parse('<%= measurements[:images].to_json %>');
-    guestbook_data['<%=device_id%>']['datasize'] = JSON.parse('<%= measurements[:datasize].to_json %>');
-        <% elsif sensor_name == 'framadate' %>
-    if(framadate_data['<%=device_id%>'] == null){
-      framadate_data['<%=device_id%>'] = {};
-    }
-    framadate_data['<%=device_id%>']['polls'] = JSON.parse('<%= measurements[:polls].to_json %>');
-    framadate_data['<%=device_id%>']['comments'] = JSON.parse('<%= measurements[:comments].to_json %>');
-    framadate_data['<%=device_id%>']['votes'] = JSON.parse('<%= measurements[:votes].to_json %>');
-        <% elsif sensor_name == 'system' %>
+  <% points = [] %>
+  <% device_ids = [] %>
+  <% deployments.each do |dep_id, deployment| %>
+    <% points << {id: deployment[:id], name: deployment[:deployment], latLng: deployment[:latLng]} %>
+    <% deployment[:devices].each do |dev_id, device| %>
+      <% device_ids << dev_id %>
+      <% device[:sensors].each do |sens_id, sensor| %>
+  temperature_data['<%=dev_id%>'] = {};
+  humidity_data['<%=dev_id%>'] = {};
+  temperature_data['<%=dev_id%>']['<%=sensor[:sensor_name]%>'] = <%= sensor[:data][:temperatures].to_json %>;
+  humidity_data['<%=dev_id%>']['<%=sensor[:sensor_name]%>'] = <%= sensor[:data][:humidities].to_json %>;
+        <% if sensor[:sensor_name] == 'sensehat' %>
+  pressure_data['<%=dev_id%>'] = {};
+  pressure_data['<%=dev_id%>']['<%=sensor[:sensor_name]%>'] = <%= sensor[:data][:pressures].to_json %>;
+        <% end %>
+      <% end %>
 
-        <% else %>
-          console.log("wwwooottt <%= sensor_name%>");
+      <% device[:applications].each do |app_name, application| %>
+        <% if app_name == 'etherpad' %>
+    etherpad_data['<%=dev_id%>'] = {};
+    etherpad_data['<%=dev_id%>']['pads'] = <%= application[:data][:pads].to_json %>;
+    etherpad_data['<%=dev_id%>']['users'] = <%= application[:data][:users].to_json %>;
+    etherpad_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
+        <% elsif app_name == 'guestbook' %>
+    guestbook_data['<%=dev_id%>'] = {};
+    guestbook_data['<%=dev_id%>']['submissions'] = <%= application[:data][:submissions].to_json %>;
+    guestbook_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
+    guestbook_data['<%=dev_id%>']['images'] = <%= application[:data][:images].to_json %>;
+    guestbook_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
+        <% elsif app_name == 'framadate' %>
+    framadate_data['<%=dev_id%>'] = {};
+    framadate_data['<%=dev_id%>']['polls'] = <%= application[:data][:polls].to_json %>;
+    framadate_data['<%=dev_id%>']['votes'] = <%= application[:data][:votes].to_json %>;
+    framadate_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
         <% end %>
       <% end %>
     <% end %>
   <% end %>
+  var points = <%= points.to_json %>;
+  var device_ids = <%= device_ids.to_json %>;
 </script>
 
-<% device_data.each do |data| %>
-  <% device = data[:device]%>
-<div class="modal fade" id="monitoring-modal-for-<%= device[:id]%>" role="dialog">
-  <div class="modal-dialog modal-lg">
+<% deployments.each do |dep_id, deployment| %>
+<div class="modal fade" id="deployment-modal-for-<%= dep_id %>" role="dialog">
+  <div class="modal-dialog modal-sm">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= I18n.translate("portal.monitoring-page.popups.device")%> <%= device[:name] %></h4>
+        <h4 class="modal-title"><%= I18n.translate("portal.monitoring-page.popups.deployment")%> <%= deployment[:deployment] %></h4>
       </div>
       <div class="modal-body">
         <div class="container-fluid">
           <div class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th><%= I18n.translate("portal.monitoring-page.popups.devices") %></th>
+                  <th class='text-center' style='width: 40px'><%= I18n.translate("admin.monitoring-page.statistics-panel.statistics-table.action") %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% deployment[:devices].each do |dev_id, device| %>
+                <tr>
+                  <td><%= device[:title] %></td>
+                  <td><a class="btn btn-info" id='open-device-<%= dev_id%>-btn'><%= I18n.translate("general.buttons.show") %></a></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+  <% deployment[:devices].each do |dev_id, device| %>
+<div class="modal fade" id="show-device-<%= dev_id %>-modal" role="dialog">
+  <div class="modal-dialog modal-lg" style="overflow-y: initial !important">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("portal.monitoring-page.popups.device")%> <%= device[:title] %></h4>
+      </div>
+      <div class="modal-body" style="max-height: calc(100vh - 200px); overflow-y: auto;">
+        <div class="container-fluid">
+          <div class="row">
             <div class="col-md-6">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.deployment")%>:</b> <%= device[:deployment]%></p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.deployment")%>:</b> <%= deployment[:deployment]%></p>
             </div>
             <div class="col-md-6">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.administrator")%>:</b> <%= device[:admin]%></p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.administrator")%>:</b> <%= device[:administrator]%></p>
             </div>
           </div>
           <div class="row">
@@ -107,9 +122,6 @@
               <p><b><%= I18n.translate("portal.monitoring-page.popups.longitude")%>:</b> <%= device[:latLng].last %></p>
             </div>
           </div>
-          <% data[:data].each do |device_id, sensors| %>
-            <% next unless device_id == device[:id] %>
-            <% unless sensors['system'].nil? || sensors['system'].empty? %>
           <div class="row">
             <div class="col-md-12">
               <p><b><%= I18n.translate("portal.monitoring-page.popups.system_info")%>:</b></p>
@@ -117,191 +129,189 @@
           </div>
           <div class="row">
             <div class="col-md-3">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.cpu_temp")%>:</b> <%= sensors['system'][:cpu_temp] %> °C</p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.cpu_temp")%>:</b> <%= device[:system][:cpu_temp] %> °C</p>
             </div>
             <div class="col-md-3">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.cpu_load")%>:</b> <%= sensors['system'][:cpu_usage] %>%</p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.cpu_load")%>:</b> <%= device[:system][:cpu_usage] %>%</p>
             </div>
             <div class="col-md-3">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.ram_load")%>:</b> <%= sensors['system'][:ram_usage] %>%</p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.ram_load")%>:</b> <%= device[:system][:ram_usage] %>%</p>
             </div>
             <div class="col-md-3">
-              <p><b><%= I18n.translate("portal.monitoring-page.popups.storage_use")%>:</b> <%= sensors['system'][:storage] %>%</p>
+              <p><b><%= I18n.translate("portal.monitoring-page.popups.storage_use")%>:</b> <%= device[:system][:storage] %>%</p>
             </div>
           </div>
-            <% end %>
-          <% end %>
-        </div>
-        <% data[:data].each do |device_id, sensors| %>
-          <% next unless device_id == device[:id] %>
-          <% sensors.each do |sensor_name, values|%>
-            <% if sensor_name == 'sensehat' || sensor_name == 'sht11' %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-green">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for", sensor:  sensor_name) %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-temp-<%= device_id %>-<%= sensor_name %>"></div>
+        <% device[:sensors].each do |sensor_id, sensor|%>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-green">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-thermometer"></i> <%= I18n.translate("portal.sensors-page.temperature-for", sensor:  sensor[:sensor_name]) %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-temp-<%= dev_id %>-<%= sensor[:sensor_name] %>"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor_name) %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-hum-<%= device_id %>-<%= sensor_name %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-              <% if sensor_name == 'sensehat' %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-yellow">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-bullseye"></i> <%= I18n.translate("portal.sensors-page.pressure-for", sensor:  sensor_name) %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-press-<%= device_id %>-<%= sensor_name %>"></div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:sensor_name]) %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-hum-<%= dev_id %>-<%= sensor[:sensor_name] %>"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-              <% end %>
-            <% elsif sensor_name == 'etherpad' %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-green">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-pads") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-etherpad-pads-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-users") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-etherpad-users-<%= device_id %>"></div>
+          <% if sensor[:sensor_name] == 'sensehat' %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-yellow">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-bullseye"></i> <%= I18n.translate("portal.sensors-page.pressure-for", sensor:  sensor[:sensor_name]) %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-press-<%= dev_id %>-<%= sensor[:sensor_name] %>"></div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-yellow">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-datasize") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-etherpad-datasize-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-            <% elsif sensor_name == 'guestbook' %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-green">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-submissions") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-guestbook-submissions-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-comments") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-guestbook-comments-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-yellow">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-images") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-guestbook-images-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-red">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-datasize") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-guestbook-datasize-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-            <% elsif sensor_name == 'framadate' %>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-green">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-polls") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-framadate-polls-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-yellow">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-votes") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-framadate-votes-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="panel panel-blue">
-              <div class="panel-heading">
-                <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-comments") %></h3>
-              </div>
-              <div class="panel-body">
-                <div id="morris-line-chart-framadate-comments-<%= device_id %>"></div>
-              </div>
-            </div>
-          </div>
-        </div>
-            <% end %>
           <% end %>
         <% end %>
+        <% device[:applications].each do |app_name, application|%>
+          <% if app_name == 'etherpad' %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-green">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-pads") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-etherpad-pads-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-users") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-etherpad-users-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-yellow">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-datasize") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-etherpad-datasize-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% elsif app_name == 'guestbook' %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-green">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-submissions") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-guestbook-submissions-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-comments") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-guestbook-comments-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-yellow">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-images") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-guestbook-images-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-red">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-datasize") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-guestbook-datasize-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% elsif app_name == 'framadate' %>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-green">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-polls") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-framadate-polls-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-yellow">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-votes") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-framadate-votes-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="panel panel-blue">
+                <div class="panel-heading">
+                  <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-comments") %></h3>
+                </div>
+                <div class="panel-body">
+                  <div id="morris-line-chart-framadate-comments-<%= dev_id %>"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% end %>
+        <% end %>
+        </div>
       </div>
     </div>
   </div>
 </div>
+  <% end %>
 <% end %>
+

@@ -35,6 +35,7 @@ el:
       submit:          "Υποβολή"
       change:          "Αλλαγή"
       qrcode:          "QRcode"
+      show:            "Εμφάνισε"
     messages:
       warning:      "Προσοχή"
       welcome:      "Καλώς Ήρθατε"
@@ -99,6 +100,7 @@ el:
       header-message: "Σε αυτή τη σελίδα μπορείτε να δείτε διάφορες μετρήσεις παρακολούθησης αυτής ή/και άλλων ζωνών MAZI."
       popups:
         device:                "Συσκευή"
+        devices:               "Συσκευές"
         deployment:            "Τοποθεσία"
         administrator:         "Διαχειριστής"
         description:           "Περιγραφή"
