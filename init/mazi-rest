@@ -1,0 +1,34 @@
+#!/bin/sh
+
+### BEGIN INIT INFO
+# Provides:
+# Required-Start:    $local_fs $remote_fs $network $syslog
+# Required-Stop:     $local_fs $remote_fs $network $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Starts Mazizone REST Service
+# Description:       Mazizone REST service
+### END INIT INFO
+
+
+
+case "$1" in
+  start)
+        cd /root/portal
+        nohup ruby -I lib/ mazi_rest_service.rb > /var/log/mazi-rest.log&
+        ;;
+  stop)
+        id=$(ps aux | grep mazi_rest_service | grep root | awk '{print $2}')
+  if [ "$id" ];
+    then sudo kill $id
+  fi
+        ;;
+  restart)
+        stop
+        start
+        ;;
+  *)
+        echo $"Usage: $0 {start|stop|restart}"
+        exit 1
+esac
+exit 0
