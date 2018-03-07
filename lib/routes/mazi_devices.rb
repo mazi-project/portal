@@ -45,7 +45,7 @@ module Sinatra
                 clear_videos if params['type'] == 'videos'
                 redirect back
               end
-            when 'sht11', 'sensehat'
+            when 'sht11', 'sensehat', 'sht22'
               if action == 'start'
                 duration = 0
                 if !params['duration'].nil? && !params['duration'].empty?

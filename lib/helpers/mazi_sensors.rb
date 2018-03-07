@@ -364,31 +364,23 @@ module MaziSensors
       con = nil
     end
     result = []
-    i = 0
     `bash /root/back-end/mazi-sense.sh -a`.split("\n").each do |line|
       line = line.split
       sensor_type = line[0]
       tmp = {}
-      tmp[:type]   = line[0]
-      tmp[:status] = line[1]
-      tmp[:ip]     = line[2]
-      if con.nil?
-        tmp[:nof_entries] = 0
-        tmp[:id]          = i
-        i += 1
-      else
-        begin
-          q = "SELECT COUNT(*), sensors.id FROM sensors INNER JOIN measurements ON sensors.id = measurements.sensor_id AND sensors.ip = '#{tmp[:ip]}' AND sensors.sensor_name = '#{tmp[:type]}'"
-          a = con.query(q)
-          a.each_hash do |row|
-            tmp[:nof_entries] = row["COUNT(*)"]
-            tmp[:id]          = row["id"]
-          end
-        rescue Mysql::Error => ex
-          tmp[:nof_entries] = 0
-          tmp[:id]          = i
-          i += 1
+      tmp[:type]        = line[0]
+      tmp[:status]      = line[1]
+      tmp[:ip]          = line[2]
+      tmp[:id]          = line[3]
+      tmp[:nof_entries] = 0
+      begin
+        q = "SELECT COUNT(*) FROM sensors s INNER JOIN measurements m ON m.sensor_id = '#{tmp[:id]}'"
+        a = con.query(q)
+        a.each_hash do |row|
+          tmp[:nof_entries] = row["COUNT(*)"]
         end
+      rescue Mysql::Error => ex
+        return result
       end
       result << tmp
     end
