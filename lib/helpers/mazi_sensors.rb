@@ -380,7 +380,7 @@ module MaziSensors
           tmp[:nof_entries] = row["COUNT(*)"]
         end
       rescue Mysql::Error => ex
-        return result
+        tmp[:nof_entries] = 0
       end
       result << tmp
     end
