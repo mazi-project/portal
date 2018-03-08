@@ -33,7 +33,7 @@ module Sinatra
             locals[:error_msg]               = nil
             locals[:sensors_enabled]         = sensors_enabled?
             locals[:camera_enabled]          = camera_enabled?
-            locals[:monitoring_enabled]      = true
+            locals[:monitoring_enabled]      = false
             locals[:locale]                  = session['locale']
             locals[:locales]                 = I18n.available_locales
             unless session['error'].nil?
@@ -108,6 +108,7 @@ module Sinatra
               locals[:js] << "js/plugins/jvectormap/jquery-jvectormap-world-mill.js"
               locals[:js] << "js/plugins/morris/raphael.min.js"
               locals[:js] << "js/plugins/morris/morris.min.js"
+              locals[:js] << "js/plugins/jq_responsive_tabs/jquery.responsiveTabs.min.js"
               start_date = nil
               end_date = nil
               locals[:main_body]                       = :index_monitoring
