@@ -319,6 +319,7 @@ module MaziVersion
       FileUtils.cp("/root/portal/init/mazi-rest", "/etc/init.d/mazi-rest")
       `chmod +x /etc/init.d/mazi-rest`
       `systemctl daemon-reload`
+      `service mazi-rest start`
     end
     unless captive_portal_updated?
       MaziLogger.debug "Old version of captive portal found. Updating!!!"
