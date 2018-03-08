@@ -54,7 +54,11 @@ module Sinatra
             end
             unless params['filesize'].nil? || params['filesize'].empty?
               set_apache_max_filesize(params['filesize'])
-              `service apache2 restart`
+              Thread.new do
+                sleep 3
+                `systemctl daemon-reload`
+                `service apache2 restart`
+              end
             end
             redirect '/admin_settings'
           end
