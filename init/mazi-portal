@@ -1,12 +1,12 @@
 #!/bin/sh
 
 ### BEGIN INIT INFO
-# Provides:          
+# Provides:          MAZI Portal
 # Required-Start:    $local_fs $remote_fs $network $syslog
 # Required-Stop:     $local_fs $remote_fs $network $syslog
 # Default-Start:     2 3 4 5
 # Default-Stop:      0 1 6
-# Short-Description: Starts Mazizone Portal Server 
+# Short-Description: Starts Mazizone Portal Server
 # Description:       Mazizone portal
 ### END INIT INFO
 
@@ -18,7 +18,7 @@ case "$1" in
         nohup ruby -I lib/ -I database/ mazi_portal_server.rb > /var/log/mazi-portal.log&
         ;;
   stop)
-        id=$(ps aux | grep mazi_portal | grep root | awk '{print $2}') 
+        id=$(ps aux | grep mazi_portal | grep root | awk '{print $2}')
 	if [ "$id" ];
 		then sudo kill $id
 	fi
