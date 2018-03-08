@@ -615,9 +615,9 @@ module MaziConfig
     lines = ''
     File.readlines('/var/www/html/nextcloud/.htaccess').each do |line|
       if line.include?('upload_max_filesize')
-        lines += "  php_value upload_max_filesize = #{size}M\n"
+        lines += "  php_value upload_max_filesize #{size}M\n"
       elsif line.include?('post_max_size')
-        lines += "  php_value post_max_size = #{size}M\n"
+        lines += "  php_value post_max_size #{size}M\n"
       else
         lines += line
       end
