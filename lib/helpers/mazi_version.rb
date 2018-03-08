@@ -94,6 +94,10 @@ module MaziVersion
     end
   end
 
+  def self.etherpad_version
+    JSON.parse(File.read('/var/www/html/etherpad-lite/src/package.json'))['version']
+  end
+
   def self.get_guestbook_config_file_version(filename, type)
     case type
     when 'front-end'
@@ -149,6 +153,14 @@ module MaziVersion
       end
       File.open(filename, "w") {|file| file.puts lines }
     end
+  end
+
+  def self.captive_portal_updated?
+    response = false
+    File.readlines("/var/www/html/index.html").each do |line|
+      response = true if line.include? "<title>Success"
+    end
+    response
   end
 
   def self.update_dependencies
@@ -284,6 +296,44 @@ module MaziVersion
       MaziLogger.debug "New Nextcloud version found. Updating!!!"
 
       `cd /var/www/html/nextcloud/updater; sudo -u www-data php updater.phar --no-interaction`
+      `cd /var/www/html/nextcloud/updater; sudo -u www-data php updater.phar --no-interaction`
+      `cd /var/www/html/nextcloud; sudo -u www-data php occ app:enable files_external`
+    elsif self.nextcloud_version == "'12.0.5';"
+      MaziLogger.debug "New Nextcloud version found. Updating!!!"
+
+      `cd /var/www/html/nextcloud/updater; sudo -u www-data php updater.phar --no-interaction`
+    end
+    if self.etherpad_version == '1.6.0'
+      Dir.chdir('/var/www/html/etherpad-lite/'){
+        `git fetch`
+        `git checkout master`
+        `git pull origin`
+        `npm install ep_page_view`
+        `git clone https://github.com/JohnMcLear/ep_comments.git node_modules/ep_comments_page`
+        `cd node_modules/ep_comments_page/; npm install`
+        `service etherpad-lite restart`
+      }
+    end
+    unless File.exists?('/etc/init.d/mazi-rest')
+      MaziLogger.debug "REST service not found. Installing!!!"
+      FileUtils.cp("/root/portal/init/mazi-rest", "/etc/init.d/mazi-rest")
+      `chmod +x /etc/init.d/mazi-rest`
+      `systemctl daemon-reload`
+    end
+    unless captive_portal_updated?
+      MaziLogger.debug "Old version of captive portal found. Updating!!!"
+      lines = ''
+      File.readlines("/var/www/html/index.html").each do |line|
+        if line.include? "<meta HTTP"
+          lines += "          <title>Success</title>\n"
+          lines += line
+        else
+          lines += line
+        end
+      end
+      File.open("/var/www/html/index.html", "w") {|file| file.puts lines }
+      MaziLogger.debug "done"
+      `service mazi-portal restart`
     end
   end
 end
