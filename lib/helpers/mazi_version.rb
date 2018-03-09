@@ -316,9 +316,13 @@ module MaziVersion
     end
     unless File.exists?('/etc/init.d/mazi-rest')
       MaziLogger.debug "REST service not found. Installing!!!"
+      FileUtils.cp("/root/portal/init/mazi-portal", "/etc/init.d/mazi-portal")
       FileUtils.cp("/root/portal/init/mazi-rest", "/etc/init.d/mazi-rest")
+      `chmod +x /etc/init.d/mazi-portal`
       `chmod +x /etc/init.d/mazi-rest`
       `systemctl daemon-reload`
+      `update-rc.d mazi-rest defaults`
+      `update-rc.d mazi-rest enable`
       `service mazi-rest start`
     end
     unless captive_portal_updated?
