@@ -66,6 +66,7 @@ en:
       sensors:      "Sensors"
       camera:       "Camera"
       monitoring:   "Monitoring"
+      devices:      "Devices"
     system-page:
       subheader:   "System Info"
       users:       "Users Online"
