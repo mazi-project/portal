@@ -593,25 +593,46 @@ module MaziConfig
 
   def get_apache_max_filesize
     output = '0M'
-    File.readlines('/etc/php5/apache2/php.ini').each do |line|
-      output = line.split('=').last.strip if line.start_with?('upload_max_filesize')
-      output = line.split('=').last.strip if line.start_with?('post_max_size')
+    begin
+      File.readlines('/etc/php5/apache2/php.ini').each do |line|
+        output = line.split('=').last.strip if line.start_with?('upload_max_filesize')
+        output = line.split('=').last.strip if line.start_with?('post_max_size')
+      end
+    rescue Errno::ENOENT => e
+      File.readlines('/etc/php/7.0/apache2/php.ini').each do |line|
+        output = line.split('=').last.strip if line.start_with?('upload_max_filesize')
+        output = line.split('=').last.strip if line.start_with?('post_max_size')
+      end
     end
     output
   end
 
   def set_apache_max_filesize(size)
     lines = ''
-    File.readlines('/etc/php5/apache2/php.ini').each do |line|
-      if line.start_with?('upload_max_filesize')
-        lines += "upload_max_filesize = #{size}M\n"
-      elsif line.start_with?('post_max_size')
-        lines += "post_max_size = #{size}M\n"
-      else
-        lines += line
+    filename = '/etc/php5/apache2/php.ini'
+    begin
+      File.readlines(filename).each do |line|
+        if line.start_with?('upload_max_filesize')
+          lines += "upload_max_filesize = #{size}M\n"
+        elsif line.start_with?('post_max_size')
+          lines += "post_max_size = #{size}M\n"
+        else
+          lines += line
+        end
+      end
+    rescue Errno::ENOENT => e
+      filename = '/etc/php/7.0/apache2/php.ini'
+      File.readlines(filename).each do |line|
+        if line.start_with?('upload_max_filesize')
+          lines += "upload_max_filesize = #{size}M\n"
+        elsif line.start_with?('post_max_size')
+          lines += "post_max_size = #{size}M\n"
+        else
+          lines += line
+        end
       end
     end
-    File.open('/etc/php5/apache2/php.ini', "w") {|file| file.puts lines }
+    File.open(filename, "w") {|file| file.puts lines }
     lines = ''
     File.readlines('/var/www/html/nextcloud/.htaccess').each do |line|
       if line.include?('upload_max_filesize')
