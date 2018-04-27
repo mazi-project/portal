@@ -117,6 +117,18 @@ module Sinatra
               locals[:local_data][:config_data]        = @config[:portal_configuration]
               locals[:local_data][:deployments]        = enrichDeployments(getAllDeploymentsWithData)
               erb :index_main, locals: locals
+            when 'index_devices_map'
+              session['notifications_read'] = [] if session['notifications_read'].nil?
+              locals[:js] << "js/index_devices_map.js"
+              locals[:js] << "http://www.openlayers.org/api/OpenLayers.js"
+              locals[:js] << "js/plugins/morris/raphael.min.js"
+              locals[:js] << "js/plugins/morris/morris.min.js"
+              locals[:main_body]                       = :monitoring_map
+              locals[:local_data][:deployments]        = enrichDeployments(getAllDeploymentsWithData)
+              locals[:local_data][:notifications]      = Mazi::Model::Notification.all
+              locals[:local_data][:notifications_read] = session['notifications_read']
+              locals[:local_data][:config_data]        = @config[:portal_configuration]
+              erb :index_main, locals: locals
             when 'index_documentation'
               session['notifications_read']            = [] if session['notifications_read'].nil?
               locals[:main_body]                       = :index_documentation
