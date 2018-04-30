@@ -67,6 +67,7 @@ $( document ).ready(function() {
     data['etherpad']  = values.etherpad;
     data['guestbook'] = values.guestbook;
     data['framadate'] = values.framadate;
+    data['nextcloud'] = values.nextcloud;
     $("#start-application-data-modal").modal('hide');
     $.ajax({
       url: '/monitor/start/application_data',

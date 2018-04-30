@@ -132,7 +132,6 @@ el:
         nextcloud-datasize:    "Δεδομένα Nextcloud"
         nextcloud-clicks:      "Nextcloud Clicks"
   admin:
-  admin:
     general:
       admin-panel: "Πίνακας Διαχείρισης Ζώνης MAZI"
       shutdown-modal-title:   "Τερματισμός?"
@@ -444,6 +443,7 @@ el:
         application-label2:         "Εφαρμογή Etherpad"
         application-label3:         "Εφαρμογή Guestbook"
         application-label4:         "Εφαρμογή Framadate"
+        application-label5:         "Εφαρμογή Nextcloud"
         start-hardware-header:      "Ξεκινήστε τα δεδομένα παρακολούθησης υλικού"
         start-hardware-message:     "Χρησιμοποιήστε την παρακάτω φόρμα για να ξεκινήσετε την αποστολή δεδομένων παρακολούθησης υλικού"
         start-application-header:   "Ξεκινήστε τα δεδομένα παρακολούθησης εφαρμογών"

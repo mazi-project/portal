@@ -443,6 +443,7 @@ en:
         application-label2:         "Etherpad application"
         application-label3:         "Guestbook application"
         application-label4:         "Framadate application"
+        application-label5:         "Nextcloud application"
         start-hardware-header:      "Start system activity monitoring data"
         start-hardware-message:     "Use the form below to start sending system activity monitoring data"
         start-application-header:   "Start application monitoring data"

@@ -232,6 +232,8 @@
             <label for='monitor_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %>:</label></br>
             <input type="checkbox" id='monitor_framadate' name="framadate" checked="checked">
             <label for='monitor_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %>:</label></br>
+            <input type="checkbox" id='monitor_nextcloud' name="nextcloud" checked="checked">
+            <label for='monitor_nextcloud'><%= I18n.translate("admin.monitoring-page.popups.application-label5") %>:</label></br>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
           </div>
         </form>
@@ -296,6 +298,9 @@
         <p>
           <b><%= I18n.translate("admin.monitoring-page.popups.application-label4") %> :</b> <span id="app-mon-stat-framadate"><%= application_monitoring_status['framadate'] %></span>
         </p>
+        <p>
+          <b><%= I18n.translate("admin.monitoring-page.popups.application-label5") %> :</b> <span id="app-mon-stat-nextcloud"><%= application_monitoring_status['nextcloud'] %></span>
+        </p>
       </div>
     </div>
   </div>
@@ -333,7 +338,7 @@
         <h4 class="modal-title"><%= I18n.translate("admin.monitoring-page.popups.delete-application-header") %></h4>
       </div>
       <div class="modal-body">
-        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i} (Etherpad: #{application_nof_entries["etherpad"]}, Guestbook: #{application_nof_entries["guestbook"]}, Framadate: #{application_nof_entries["framadate"]})</b>") %></p>
+        <p><%= I18n.translate("admin.monitoring-page.popups.delete-application-message", entries: "<b>#{application_nof_entries["guestbook"].to_i + application_nof_entries["etherpad"].to_i + application_nof_entries["framadate"].to_i + application_nof_entries["nextcloud"].to_i} (Etherpad: #{application_nof_entries["etherpad"]}, Guestbook: #{application_nof_entries["guestbook"]}, Framadate: #{application_nof_entries["framadate"]}, Nextcloud: #{application_nof_entries["nextcloud"]})</b>") %></p>
         <form class="form-signin" action="/monitor/flush/application_data" method="post">
           <div class="form-group">
             <input type="checkbox" id='flush_etherpad' name="etherpad" checked="checked">
@@ -342,6 +347,8 @@
             <label for='flush_guestbook'><%= I18n.translate("admin.monitoring-page.popups.application-label3") %></label></br>
             <input type="checkbox" id='flush_framadate' name="framadate" checked="checked">
             <label for='flush_framadate'><%= I18n.translate("admin.monitoring-page.popups.application-label4") %></label></br>
+            <input type="checkbox" id='flush_nextcloud' name="nextcloud" checked="checked">
+            <label for='flush_nextcloud'><%= I18n.translate("admin.monitoring-page.popups.application-label5") %></label></br>
             <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.remove") %></button>
           </div>
         </form>

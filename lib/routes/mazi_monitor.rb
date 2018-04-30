@@ -91,6 +91,7 @@ module Sinatra
               arguements += "guestbook " if params[:guestbook] == 'on'
               arguements += "etherpad "  if params[:etherpad]  == 'on'
               arguements += "framadate " if params[:framadate] == 'on'
+              arguements += "nextcloud " if params[:nextcloud] == 'on'
               arguements += "'"
 
               if arguements == "-n ''"
