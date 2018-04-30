@@ -76,9 +76,9 @@ module MaziSensors
   end
 
   def getAllDeploymentsWithData
-    if @config[:general][:mode] == 'demo'
-      return [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
-    end
+    # if @config[:general][:mode] == 'demo'
+    #   return [{latLng: [39.366071, 22.923611], name: 'Volos', status: "OK"}, {latLng: [34.366071, 19.923611], name: 'EU', status: "ERROR"}]
+    # end
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     q = "SELECT * FROM deployments INNER JOIN devices ON devices.deployment_id = deployments.id"
