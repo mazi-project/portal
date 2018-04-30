@@ -175,7 +175,7 @@ module MaziSensors
       output['etherpad'][:data][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
       output['etherpad'][:data][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
       output['etherpad'][:data][:datasize] << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
-      output['etherpad'][:data][:clicks]   << {date: row['timestamp'], datasize: row['click_counter']} if row['click_counter']
+      output['etherpad'][:data][:clicks]   << {date: row['timestamp'], clicks: row['click_counter']} if row['click_counter']
     end
     q = "SELECT * FROM devices d INNER JOIN guestbook e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
@@ -193,7 +193,7 @@ module MaziSensors
       output['guestbook'][:data][:comments]    << {date: row['timestamp'], comments: row['comments']} if row['comments']
       output['guestbook'][:data][:images]      << {date: row['timestamp'], images: row['images']} if row['images']
       output['guestbook'][:data][:datasize]    << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
-      output['guestbook'][:data][:clicks]      << {date: row['timestamp'], datasize: row['click_counter']} if row['click_counter']
+      output['guestbook'][:data][:clicks]      << {date: row['timestamp'], clicks: row['click_counter']} if row['click_counter']
     end
     q = "SELECT * FROM devices d INNER JOIN framadate e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
@@ -209,7 +209,7 @@ module MaziSensors
       output['framadate'][:data][:polls]    << {date: row['timestamp'], polls: row['polls']} if row['polls']
       output['framadate'][:data][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
       output['framadate'][:data][:comments] << {date: row['timestamp'], comments: row['comments']} if row['comments']
-      output['framadate'][:data][:clicks]   << {date: row['timestamp'], comments: row['click_counter']} if row['click_counter']
+      output['framadate'][:data][:clicks]   << {date: row['timestamp'], clicks: row['click_counter']} if row['click_counter']
     end
     q = "SELECT * FROM devices d INNER JOIN nextcloud e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
@@ -223,11 +223,11 @@ module MaziSensors
         output['nextcloud'][:data][:datasize]  = []
         output['nextcloud'][:data][:clicks]    = []
       end
-      output['nextcloud'][:data][:users]     << {date: row['timestamp'], polls: row['users']} if row['users']
-      output['nextcloud'][:data][:files]     << {date: row['timestamp'], votes: row['files']} if row['files']
-      output['nextcloud'][:data][:downloads] << {date: row['timestamp'], comments: row['downloads']} if row['downloads']
-      output['nextcloud'][:data][:datasize]  << {date: row['timestamp'], comments: row['datasize']} if row['datasize']
-      output['nextcloud'][:data][:clicks]    << {date: row['timestamp'], comments: row['click_counter']} if row['click_counter']
+      output['nextcloud'][:data][:users]     << {date: row['timestamp'], users: row['users']} if row['users']
+      output['nextcloud'][:data][:files]     << {date: row['timestamp'], files: row['files']} if row['files']
+      output['nextcloud'][:data][:downloads] << {date: row['timestamp'], downloads: row['downloads']} if row['downloads']
+      output['nextcloud'][:data][:datasize]  << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+      output['nextcloud'][:data][:clicks]    << {date: row['timestamp'], clicks: row['click_counter']} if row['click_counter']
     end
     output
   rescue Mysql::Error => ex

@@ -93,6 +93,19 @@
                 <% end %>
               <% end %>
 
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-chart"></i> <%= I18n.translate("portal.monitoring-page.popups.wifi-users") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-wifiusers-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               <% device[:applications].each do |app_name, application|%>
                 <% if app_name == 'etherpad' %>
               <div class="row">
@@ -131,7 +144,19 @@
                   </div>
                 </div>
               </div>
-              <% elsif app_name == 'guestbook' %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-clicks") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-etherpad-clicks-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <% elsif app_name == 'guestbook' %>
               <div class="row">
                 <div class="col-md-12">
                   <div class="panel panel-green">
@@ -180,7 +205,19 @@
                   </div>
                 </div>
               </div>
-              <% elsif app_name == 'framadate' %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-clicks") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-clicks-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                <% elsif app_name == 'framadate' %>
               <div class="row">
                 <div class="col-md-12">
                   <div class="panel panel-green">
@@ -217,6 +254,79 @@
                   </div>
                 </div>
               </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-clicks") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-framadate-clicks-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+                 <% elsif app_name == 'nextcloud' %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-green">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-users") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-users-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-yellow">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-files") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-files-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-blue">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-downloads") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-downloads-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-red">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-datasize") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-datasize-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-clicks") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-clicks-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
                 <% end %>
               <% end %>
             </div>
@@ -236,11 +346,13 @@
       }
 
       var temperature_data = {};
-      var humidity_data = {};
-      var pressure_data = {};
-      var etherpad_data = {};
-      var guestbook_data = {};
-      var framadate_data = {};
+      var humidity_data    = {};
+      var pressure_data    = {};
+      var wifi_users_data  = {};
+      var etherpad_data    = {};
+      var guestbook_data   = {};
+      var framadate_data   = {};
+      var nextcloud_data   = {};
       <% points = [] %>
       <% device_ids = [] %>
       <% deployments.each do |dep_id, deployment| %>
@@ -258,30 +370,42 @@
             <% end %>
           <% end %>
 
+      wifi_users_data['<%=dev_id%>'] = <%= device[:users].to_json %>;
+
           <% device[:applications].each do |app_name, application| %>
             <% if app_name == 'etherpad' %>
       etherpad_data['<%=dev_id%>'] = {};
-      etherpad_data['<%=dev_id%>']['pads'] = <%= application[:data][:pads].to_json %>;
-      etherpad_data['<%=dev_id%>']['users'] = <%= application[:data][:users].to_json %>;
+      etherpad_data['<%=dev_id%>']['pads']     = <%= application[:data][:pads].to_json %>;
+      etherpad_data['<%=dev_id%>']['users']    = <%= application[:data][:users].to_json %>;
       etherpad_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
+      etherpad_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
             <% elsif app_name == 'guestbook' %>
       guestbook_data['<%=dev_id%>'] = {};
       guestbook_data['<%=dev_id%>']['submissions'] = <%= application[:data][:submissions].to_json %>;
-      guestbook_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
-      guestbook_data['<%=dev_id%>']['images'] = <%= application[:data][:images].to_json %>;
-      guestbook_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
+      guestbook_data['<%=dev_id%>']['comments']    = <%= application[:data][:comments].to_json %>;
+      guestbook_data['<%=dev_id%>']['images']      = <%= application[:data][:images].to_json %>;
+      guestbook_data['<%=dev_id%>']['datasize']    = <%= application[:data][:datasize].to_json %>;
+      guestbook_data['<%=dev_id%>']['clicks']      = <%= application[:data][:clicks].to_json %>;
             <% elsif app_name == 'framadate' %>
       framadate_data['<%=dev_id%>'] = {};
-      framadate_data['<%=dev_id%>']['polls'] = <%= application[:data][:polls].to_json %>;
-      framadate_data['<%=dev_id%>']['votes'] = <%= application[:data][:votes].to_json %>;
+      framadate_data['<%=dev_id%>']['polls']    = <%= application[:data][:polls].to_json %>;
+      framadate_data['<%=dev_id%>']['votes']    = <%= application[:data][:votes].to_json %>;
       framadate_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
+      framadate_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
+            <% elsif app_name == 'nextcloud' %>
+            <% puts application%>
+      nextcloud_data['<%=dev_id%>'] = {};
+      nextcloud_data['<%=dev_id%>']['users']     = <%= application[:data][:users].to_json %>;
+      nextcloud_data['<%=dev_id%>']['files']     = <%= application[:data][:files].to_json %>;
+      nextcloud_data['<%=dev_id%>']['downloads'] = <%= application[:data][:downloads].to_json %>;
+      nextcloud_data['<%=dev_id%>']['datasize']  = <%= application[:data][:datasize].to_json %>;
+      nextcloud_data['<%=dev_id%>']['clicks']    = <%= application[:data][:clicks].to_json %>;
             <% end %>
           <% end %>
         <% end %>
       <% end %>
       var points = <%= points.to_json %>;
       var device_ids = <%= device_ids.to_json %>;
-      console.log(points);
       var zoom=4;
       var map = new OpenLayers.Map("mapdiv");
 
@@ -294,7 +418,6 @@
         var marker = new OpenLayers.Marker(lonLat);
         marker.id = point['id'];
         marker.events.register("click", marker, function() {
-          console.log("aaaa " + marker.id);
           $('.modal').modal('hide');
           $('#show-device-' + marker.id + '-modal').modal('show');
         });
@@ -359,6 +482,20 @@
         });
       });
 
+      $.each(wifi_users_data, function(device_id, measurements) {
+        Morris.Line({
+          element: 'morris-line-chart-wifiusers-' + device_id,
+          data: measurements,
+          xkey: 'date',
+          ykeys: ['online_users'],
+          labels: ['Number of WiFi Users', 'Date'],
+          smooth: true,
+          resize: true,
+          ymin: 0,
+          hideHover: 'auto'
+        });
+      });
+
       $.each(etherpad_data, function(device_id, sensors) {
         $.each(sensors, function(sensor_name, measurements){
           switch(sensor_name) {
@@ -397,6 +534,19 @@
                 xkey: 'date',
                 ykeys: ['datasize'],
                 labels: ['Datasize', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'clicks':
+              Morris.Line({
+                element: 'morris-line-chart-etherpad-clicks-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['clicks'],
+                labels: ['Number of Clicks', 'Date'],
                 smooth: true,
                 resize: true,
                 ymin: 0,
@@ -465,6 +615,19 @@
                 hideHover: 'auto'
               });
               break;
+            case 'clicks':
+              Morris.Line({
+                element: 'morris-line-chart-guestbook-clicks-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['clicks'],
+                labels: ['Number of Clicks', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
           }
         });
       });
@@ -505,6 +668,91 @@
                 xkey: 'date',
                 ykeys: ['comments'],
                 labels: ['Number of Comments', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'clicks':
+              Morris.Line({
+                element: 'morris-line-chart-framadate-clicks-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['clicks'],
+                labels: ['Number of Clicks', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+          }
+        });
+      });
+
+      $.each(nextcloud_data, function(device_id, sensors) {
+        $.each(sensors, function(sensor_name, measurements){
+          switch(sensor_name) {
+            case 'users':
+              Morris.Line({
+                element: 'morris-line-chart-nextcloud-users-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['users'],
+                labels: ['Number of Users', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'files':
+              Morris.Line({
+                element: 'morris-line-chart-nextcloud-files-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['files'],
+                labels: ['Number of Files', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'downloads':
+              Morris.Line({
+                element: 'morris-line-chart-nextcloud-downloads-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['downloads'],
+                labels: ['Number of Downloads', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'datasize':
+              Morris.Line({
+                element: 'morris-line-chart-nextcloud-datasize-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['datasize'],
+                labels: ['Datasize', 'Date'],
+                smooth: true,
+                resize: true,
+                ymin: 0,
+                hideHover: 'auto'
+              });
+              break;
+            case 'clicks':
+              Morris.Line({
+                element: 'morris-line-chart-nextcloud-clicks-' + device_id,
+                data: measurements,
+                xkey: 'date',
+                ykeys: ['clicks'],
+                labels: ['Number of Clicks', 'Date'],
                 smooth: true,
                 resize: true,
                 ymin: 0,
