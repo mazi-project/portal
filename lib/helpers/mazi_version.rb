@@ -341,5 +341,13 @@ module MaziVersion
       `service mazi-portal restart`
     end
   end
+
+   # version 2.4.3
+   MaziLogger.debug "  Checking sqlite3 package"
+   unless `dpkg -s sqlite3 | grep Status`.include? "install ok installed"
+     MaziLogger.debug "sqlite3 package not found. Installing."
+     `apt-get -y install sqlite3`
+     MaziLogger.debug "Done Installing sqlite3."
+   end
 end
 
