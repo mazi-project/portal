@@ -101,10 +101,12 @@ module MaziSensors
         out[row['deployment_id']][:devices][row['id']][:sensors]       = {}
         out[row['deployment_id']][:devices][row['id']][:applications]  = {}
         out[row['deployment_id']][:devices][row['id']][:system]        = {}
+        out[row['deployment_id']][:devices][row['id']][:users]         = {}
       end
       out[row['deployment_id']][:devices][row['id']][:sensors]      = getSensorDataForDevice(row['id'])
       out[row['deployment_id']][:devices][row['id']][:applications] = getApplicationDataForDevice(row['id'])
       out[row['deployment_id']][:devices][row['id']][:system]       = getSystemDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:users]        = getUserDataForDevice(row['id'])
     end
     out
   rescue Mysql::Error => ex
@@ -168,10 +170,12 @@ module MaziSensors
         output['etherpad'][:data][:pads]     = []
         output['etherpad'][:data][:users]    = []
         output['etherpad'][:data][:datasize] = []
+        output['etherpad'][:data][:clicks]   = []
       end
       output['etherpad'][:data][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
       output['etherpad'][:data][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
       output['etherpad'][:data][:datasize] << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+      output['etherpad'][:data][:clicks]   << {date: row['timestamp'], datasize: row['click_counter']} if row['click_counter']
     end
     q = "SELECT * FROM devices d INNER JOIN guestbook e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
@@ -183,25 +187,47 @@ module MaziSensors
         output['guestbook'][:data][:comments]    = []
         output['guestbook'][:data][:images]      = []
         output['guestbook'][:data][:datasize]    = []
+        output['guestbook'][:data][:clicks]      = []
       end
       output['guestbook'][:data][:submissions] << {date: row['timestamp'], submissions: row['submissions']} if row['submissions']
       output['guestbook'][:data][:comments]    << {date: row['timestamp'], comments: row['comments']} if row['comments']
       output['guestbook'][:data][:images]      << {date: row['timestamp'], images: row['images']} if row['images']
       output['guestbook'][:data][:datasize]    << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
+      output['guestbook'][:data][:clicks]      << {date: row['timestamp'], datasize: row['click_counter']} if row['click_counter']
     end
     q = "SELECT * FROM devices d INNER JOIN framadate e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
     a.each_hash do |row|
       if output['framadate'].nil?
-        output['framadate']                      = {}
-        output['framadate'][:data]               = {}
-        output['framadate'][:data][:polls] = []
+        output['framadate']                   = {}
+        output['framadate'][:data]            = {}
+        output['framadate'][:data][:polls]    = []
         output['framadate'][:data][:votes]    = []
-        output['framadate'][:data][:comments]      = []
+        output['framadate'][:data][:comments] = []
+        output['framadate'][:data][:clicks]   = []
       end
-      output['framadate'][:data][:polls] << {date: row['timestamp'], polls: row['polls']} if row['polls']
+      output['framadate'][:data][:polls]    << {date: row['timestamp'], polls: row['polls']} if row['polls']
       output['framadate'][:data][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
-      output['framadate'][:data][:comments]      << {date: row['timestamp'], comments: row['comments']} if row['comments']
+      output['framadate'][:data][:comments] << {date: row['timestamp'], comments: row['comments']} if row['comments']
+      output['framadate'][:data][:clicks]   << {date: row['timestamp'], comments: row['click_counter']} if row['click_counter']
+    end
+    q = "SELECT * FROM devices d INNER JOIN nextcloud e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      if output['nextcloud'].nil?
+        output['nextcloud']                    = {}
+        output['nextcloud'][:data]             = {}
+        output['nextcloud'][:data][:users]     = []
+        output['nextcloud'][:data][:files]     = []
+        output['nextcloud'][:data][:downloads] = []
+        output['nextcloud'][:data][:datasize]  = []
+        output['nextcloud'][:data][:clicks]    = []
+      end
+      output['nextcloud'][:data][:users]     << {date: row['timestamp'], polls: row['users']} if row['users']
+      output['nextcloud'][:data][:files]     << {date: row['timestamp'], votes: row['files']} if row['files']
+      output['nextcloud'][:data][:downloads] << {date: row['timestamp'], comments: row['downloads']} if row['downloads']
+      output['nextcloud'][:data][:datasize]  << {date: row['timestamp'], comments: row['datasize']} if row['datasize']
+      output['nextcloud'][:data][:clicks]    << {date: row['timestamp'], comments: row['click_counter']} if row['click_counter']
     end
     output
   rescue Mysql::Error => ex
@@ -224,6 +250,27 @@ module MaziSensors
       output[:cpu_usage] = row['cpu_usage']
       output[:ram_usage] = row['ram_usage']
       output[:storage]   = row['storage']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
+  def getUserDataForDevice(device_id, start_time=nil, end_time=nil)
+    output = []
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN users u ON u.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      tmp                = {}
+      tmp[:date]         = row['timestamp']
+      tmp[:online_users] = row['online_users']
+      output << tmp 
     end
     output
   rescue Mysql::Error => ex
