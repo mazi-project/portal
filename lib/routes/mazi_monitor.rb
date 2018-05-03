@@ -142,7 +142,7 @@ module Sinatra
             when 'hardware_data'
               flush_hardware_data
             when 'application_data'
-              flush_application_data(params['guestbook'], params['etherpad'], params['framadate'])
+              flush_application_data(params['guestbook'], params['etherpad'], params['framadate'], params['nextcloud'])
             end
             redirect "/admin_monitor"
           end

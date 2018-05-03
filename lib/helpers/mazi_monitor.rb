@@ -115,11 +115,12 @@ module MaziMonitor
     output['guestbook'] = '0'
     output['etherpad']  = '0'
     output['framadate'] = '0'
+    output['nextcloud'] = '0'
     begin
       con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
       results = con.query("SHOW TABLE STATUS")
       results.each do | row |
-        output[row.first] = row[4] if row.first == 'etherpad' || row.first == 'guestbook' || row.first == 'framadate'
+        output[row.first] = row[4] if row.first == 'etherpad' || row.first == 'guestbook' || row.first == 'framadate' || row.first == 'nextcloud'
       end
       return output
     rescue Mysql::Error => e
@@ -161,14 +162,16 @@ module MaziMonitor
     sleep 5
   end
 
-  def flush_application_data(guestbook, etherpad, framadate)
+  def flush_application_data(guestbook, etherpad, framadate, nextcloud)
     command1 = "sh /root/back-end/mazi-appstat.sh -n etherpad --store flush"
     command2 = "sh /root/back-end/mazi-appstat.sh -n guestbook --store flush"
     command3 = "sh /root/back-end/mazi-appstat.sh -n framadate --store flush"
+    command4 = "sh /root/back-end/mazi-appstat.sh -n nextcloud --store flush"
     Thread.new do
-      `#{command1}` if etherpad == 'on'
+      `#{command1}` if etherpad  == 'on'
       `#{command2}` if guestbook == 'on'
       `#{command3}` if framadate == 'on'
+      `#{command4}` if nextcloud == 'on'
     end
     sleep 5
   end
