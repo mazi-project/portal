@@ -57,9 +57,14 @@ class MaziApp < Sinatra::Base
     end
     if @config[:monitoring].nil?
       @config[:monitoring] = {}
-      @config[:monitoring][:enable] = false
-      @config[:monitoring][:hardware_enable] = true
-      @config[:monitoring][:applications_enable] = true
+      @config[:monitoring][:enable]              = false
+      @config[:monitoring][:hardware_enable]     = false
+      @config[:monitoring][:applications_enable] = false
+      @config[:monitoring][:map]                 = false
+      writeConfigFile
+    end
+    if @config[:monitoring][:map].nil?
+      @config[:monitoring][:map] = false
       writeConfigFile
     end
     unless File.exists?('/etc/mazi/mazi.conf')

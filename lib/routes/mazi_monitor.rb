@@ -25,6 +25,8 @@ module Sinatra
               toggle_applications_monitoring_enable
             when "hardware"
               toggle_hardware_monitoring_enable
+            when "map"
+              toggle_monitoring_map_enable
             else
 
             end

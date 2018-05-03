@@ -1,8 +1,21 @@
+MONITORING_ENABLED     = true
+MONITORING_MAP_ENABLED = true
+
 module MaziMonitor
   def toggle_monitoring_enable
     current_value = @config[:monitoring][:enable]
     changeConfigFile("monitoring->enable", !current_value)
+    changeConfigFile("sensors->enable", !current_value)
+    changeConfigFile("monitoring->map", !current_value)
     writeConfigFile
+  end
+
+  def monitoring_enabled?
+    MONITORING_ENABLED && @config[:monitoring] && @config[:monitoring][:enable]
+  end
+
+  def monitoring_map_enabled?
+    MONITORING_MAP_ENABLED && @config[:monitoring] && @config[:monitoring][:map]
   end
 
   def toggle_hardware_monitoring_enable
@@ -14,6 +27,12 @@ module MaziMonitor
   def toggle_applications_monitoring_enable
     current_value = @config[:monitoring][:applications_enable]
     changeConfigFile("monitoring->applications_enable", !current_value)
+    writeConfigFile
+  end
+
+  def toggle_monitoring_map_enable
+    current_value = @config[:monitoring][:map]
+    changeConfigFile("monitoring->map", !current_value)
     writeConfigFile
   end
 

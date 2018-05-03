@@ -9,6 +9,16 @@ $( document ).ready(function() {
     });
   });
 
+  $('.enabled-monitoring-map-switch').click(function(){
+    $.ajax({
+      url: '/monitor/toggle/map',
+      type: 'POST',
+      success: function(result) {
+        location.reload();
+      }
+    });
+  });
+
   $('.enabled-hardware-monitoring-switch').click(function(){
     $.ajax({
       url: '/monitor/toggle/hardware',
@@ -211,6 +221,7 @@ $( document ).ready(function() {
         $("#app-mon-stat-guestbook").html(result2['status']['guestbook']);
         $("#app-mon-stat-etherpad").html(result2['status']['etherpad']);
         $("#app-mon-stat-framadate").html(result2['status']['framadate']);
+        $("#app-mon-stat-nextcloud").html(result2['status']['nextcloud']);
         if(result2['status']['overall']){
           $("#start-monitoring-application-data").attr('disabled', true);
           $(".stop-application-monitoring-data-button").removeAttr('disabled');
@@ -232,4 +243,64 @@ $( document ).ready(function() {
       }
     });
   }, 2000);
+
+  $('.enabled-sensors-switch').click(function(){
+    $.ajax({
+      url: '/devices/sensors/toggle',
+      type: 'POST',
+      success: function(result) {
+        error = JSON.parse(result).error;
+        if (error != null){
+          location.reload();
+        }
+      }
+    });
+  });
+
+  $('.start-sensing-form').submit(function(){
+    var vals = $(this).serialize().split('&');
+    var values = {}
+    for(var i = 0; i < vals.length; i++){
+      tmp = vals[i].split('=');
+      values[tmp[0]] = tmp[1];
+    }
+    var data = {};
+    var type = values.type;
+    data['id'] = values.id;
+    data['duration'] = values.duration;
+    data['interval'] = values.interval;
+    data['end_point'] = values.end_point;
+    data['until_date'] = values.until_date;
+    $("#start-sensing-modal-" + values.id).modal('hide');
+    $.ajax({
+      url: '/devices/' + type + '/start',
+      type: 'POST',
+      data: data,
+      success: function(result) {
+        $("#sensor_type_" + data['id'] + "_td").html('active');
+        $("#start_sensing_sensehat_" + data['id']).attr('disabled', true);
+        var intervalID = setInterval(function(){
+          $.ajax({
+            url: '/devices/sensors/status/' + values.id,
+            type: 'GET',
+            success: function(result2) {
+              result2 = JSON.parse(result2);
+              if(result2['status'] == 'inactive'){
+                clearInterval(intervalID);
+                $("#sensor_type_" + result2['id'] + "_td").html('inactive');
+                $("#sensor_entries_" + result2['id'] + "_td").html(result2['nof_entries']);
+                $("#start_sensing_sensehat_" + result2['id']).removeAttr('disabled');
+              }
+              else{
+                $("#sensor_type_" + result2['id'] + "_td").html('active');
+                $("#sensor_entries_" + result2['id'] + "_td").html(result2['nof_entries']);
+                $("#start_sensing_sensehat_" + result2['id']).attr('disabled', true);
+              }
+            }
+          });
+        }, values.interval * 1000);
+      }
+    });
+    event.preventDefault();
+  });
 });

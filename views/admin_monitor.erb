@@ -36,7 +36,6 @@
             <span class="device-enable-msg"><%= I18n.translate("admin.monitoring-page.details-panel.toggle-monitoring-message") %></span>
           </div>
         </div>
-        <% if monitoring_enabled %>
         <div class="row">
           <div class='col-md-12'>
             <p><%= I18n.translate("admin.monitoring-page.details-panel.details-message") %></p>
@@ -68,7 +67,6 @@
             </a>
           </div>
         </div>
-        <% end %>
       </div>
     </div>
   </div>
@@ -84,6 +82,11 @@
       <div class="panel-body">
         <div class="row">
           <div class='col-md-12'>
+            <label class="switch" title="<%= I18n.translate("admin.monitoring-page.statistics-panel.toggle-monitoring-map-hint") %>">
+              <input type="checkbox" <%= monitoring_map_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-monitoring-map-switch"></div>
+            </label>
+            <span class="device-enable-msg"><%= I18n.translate("admin.monitoring-page.statistics-panel.toggle-monitoring-map-msg") %> (<a href="/index_monitoring_map" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
             <p><%= I18n.translate("admin.monitoring-page.statistics-panel.message") %></p>
             <table class="table">
               <thead>
@@ -143,8 +146,70 @@
         </div>
       </div>
     </div>
-    <% end %>
   </div>
+
+  <div class='col-md-12 col-lg-6'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.devices-page.sensors-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.devices-page.sensors-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <!-- panel body -->
+      <div class="panel-body">
+        <div class="row">
+          <div class='col-md-12'>
+            <label class="switch" title="<%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-hint") %>">
+              <input type="checkbox" <%= sensors_enabled ? 'checked' : '' %>>
+              <div class="slider round enabled-sensors-switch"></div>
+            </label>
+            <span class="device-enable-msg"><%= I18n.translate("admin.devices-page.sensors-panel.toggle-sensors-message") %> (<a href="/index_sensors" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</span>
+          </div>
+        </div>
+        <div class="row">
+          <div class='col-md-12'>
+            <% if available_sensors.length > 0 %>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th title="Sensor Type"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.type") %></th>
+                  <th title="Sensor Status"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.status") %></th>
+                  <th title="Number of measurements"><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.entries") %></th>
+                  <th title="Actions that can be performed on the sensor" class='text-center'><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.actions") %></th>
+                </tr>
+              </thead>
+              <tbody>
+                <% available_sensors.each do |sensor| %>
+                <tr>
+                  <td><%= sensor[:type] %></td>
+                  <td id="sensor_type_<%= sensor[:id] %>_td"><%= sensor[:status] %></td>
+                  <td id="sensor_entries_<%= sensor[:id] %>_td"><%= sensor[:nof_entries]%></td>
+                  <td>
+                     <div class="text-center">
+                      <div class="btn-group pull-center">
+                        <a class="btn btn-success start_sensing" id='start_sensing_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#start-sensing-modal-<%= sensor[:id] %>" title="<%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.start-button-hint") %>" <%= 'disabled' if sensor[:status] == 'not found' || sensor[:status] == 'active' %>>
+                          <i class="fa fa-play"></i>
+                        </a>
+                        <a class="btn btn-danger delete_sensor_data" id='delete_sensor_data_<%= sensor[:type] %>_<%= sensor[:id] %>' data-toggle="modal" data-target="#delete-sensing-measurements-modal-<%= sensor[:id] %>" title="<%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.delete-button-hint") %>">
+                          <i class="fa fa-remove"></i>
+                        </a>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+            <p><b>* Hint: </b><%= I18n.translate("admin.devices-page.sensors-panel.sensors-table.sensehat-calibration-hint") %> (<a href="https://www.raspberrypi.org/documentation/hardware/sense-hat/" target="_blank"><%= I18n.translate("general.messages.here") %></a>)</p>
+            <% else %>
+              <p><%= I18n.translate("admin.devices-page.sensors-panel.no-sensors-message") %></p>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <% end %>
 </div>
 
 <!-- change monitoring details modal-->
@@ -357,6 +422,62 @@
     </div>
   </div>
 </div>
+
+<% available_sensors.each do |sensor| %>
+<!-- start sensing modal-->
+<div class="modal fade" id="start-sensing-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.start-sensing-title") %></h4>
+      </div>
+      <div class="modal-body">
+        <p><%= I18n.translate("admin.devices-page.popups.start-sensing-message") %></p>
+        <form class="form-signin start-sensing-form" action="/devices/<%= sensor[:type] %>/start" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <input type="hidden" name="type" value="<%= sensor[:type] %>">
+            <label for='monitor_end_point'><%= I18n.translate("admin.devices-page.popups.start-sensing-label1") %>:</label>
+            <input type="text" id='monitor_end_point' name="end_point" class="form-control" value="localhost" autofocus required></br>
+            <label for='sensing_duration'><%= I18n.translate("admin.devices-page.popups.start-sensing-label2") %>:</label>
+            <input type="text" id='sensing_duration' name="duration" class="form-control" value="" autofocus>
+            <label for='datetimepicker'><%= I18n.translate("admin.devices-page.popups.start-sensing-label3") %>:</label>
+            <input id="datetimepicker" type="text" name='until_date' class="form-control">
+            <label for='sensing_interval'><%= I18n.translate("admin.devices-page.popups.start-sensing-label4") %>:</label>
+            <input type="text" id='sensing_interval' name="interval" class="form-control" value="30" required>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.start") %></button>
+          </div>
+        </form>
+        <small>* <%= I18n.translate("admin.devices-page.popups.start-sensing-hint") %></small>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="delete-sensing-measurements-modal-<%= sensor[:id] %>" role="dialog">
+  <div class="modal-dialog">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.devices-page.popups.delete-sensing-title") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/devices/<%= sensor[:type] %>/delete" method="post">
+          <div class="form-group">
+            <input type="hidden" name="id" value="<%= sensor[:id] %>">
+            <p><%= I18n.translate("admin.devices-page.popups.delete-sensing-message") %></p>
+            <button class="btn btn-lg btn-danger btn-block" type="submit"><%= I18n.translate("general.buttons.delete") %></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+
 
 <script type="text/javascript">
   var active_msg   = '<%= I18n.translate("general.messages.active") %>';

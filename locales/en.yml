@@ -408,9 +408,11 @@ en:
         table-label4:              "Description"
         table-label5:              "Location (lat, long)"
       statistics-panel:
-        header:      "Monitoring Data"
-        header-hint: "You can use this to control the monitoring activities."
-        message:     "You can start/stop sending system activity and application monitoring data to a remote (or a local) point by pressing the start/stop buttons below."
+        header:                     "Monitoring Data"
+        header-hint:                "You can use this to control the monitoring activities."
+        toggle-monitoring-map-msg:  "Enable/disable the monitoring tab on user portal"
+        toggle-monitoring-map-hint: "enable/disable the monitoring tab"
+        message:                    "You can start/stop sending system activity and application monitoring data to a remote (or a local) point by pressing the start/stop buttons below."
         statistics-table:
           status:                          "Status"
           description:                     "Description"

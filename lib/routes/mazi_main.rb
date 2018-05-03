@@ -33,7 +33,8 @@ module Sinatra
             locals[:error_msg]               = nil
             locals[:sensors_enabled]         = sensors_enabled?
             locals[:camera_enabled]          = camera_enabled?
-            locals[:monitoring_enabled]      = false
+            locals[:monitoring_enabled]      = monitoring_enabled?
+            locals[:monitoring_map_enabled]  = monitoring_map_enabled?
             locals[:locale]                  = session['locale']
             locals[:locales]                 = I18n.available_locales
             unless session['error'].nil?
@@ -90,7 +91,7 @@ module Sinatra
               locals[:local_data][:notifications_read] = session['notifications_read']
               locals[:local_data][:config_data]        = @config[:portal_configuration]
               locals[:local_data][:sensors]            = []
-              getAllAvailableSensorsFromDB.each do |sensor|
+              getDevicesAllAvailableSensorsFromDB.each do |sensor|
                 tmp                = {}
                 tmp[:id]           = sensor[:id]
                 tmp[:type]         = sensor[:type]
@@ -302,9 +303,6 @@ module Sinatra
               locals[:js] << "js/admin_devices.js"
               locals[:js] << "js/jquery.datetimepicker.min.js"
               locals[:main_body] = :admin_devices
-              locals[:local_data][:sensors_enabled]   = @config[:sensors][:enable]
-              locals[:local_data][:sensors_db_exist]  = true #sensors_db_exist?
-              locals[:local_data][:available_sensors] = getAllAvailableSensors
               locals[:local_data][:camera_enabled]    = @config[:camera][:enable]
               locals[:local_data][:camera_installed]  = camera_installed?
               locals[:local_data][:photos_link]       = @config[:camera][:photos_link]
@@ -340,11 +338,15 @@ module Sinatra
               locals[:local_data][:monitoring_enabled]              = @config[:monitoring][:enable]
               locals[:local_data][:monitoring_hardware_enabled]     = @config[:monitoring][:hardware_enable]
               locals[:local_data][:monitoring_applications_enabled] = @config[:monitoring][:applications_enable]
+              locals[:local_data][:monitoring_map_enabled]          = @config[:monitoring][:map]
               locals[:local_data][:details]                         = get_monitoring_details
               locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
               locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
               locals[:local_data][:hardware_nof_entries]            = get_nof_hardware_data_entries
               locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
+              locals[:local_data][:sensors_enabled]                 = @config[:sensors][:enable]
+              locals[:local_data][:sensors_db_exist]                = true #sensors_db_exist?
+              locals[:local_data][:available_sensors]               = getAllAvailableSensors
 
               erb :admin_main, locals: locals
             when 'admin_logs'

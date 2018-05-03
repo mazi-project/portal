@@ -270,7 +270,7 @@ module MaziSensors
       tmp                = {}
       tmp[:date]         = row['timestamp']
       tmp[:online_users] = row['online_users']
-      output << tmp 
+      output << tmp
     end
     output
   rescue Mysql::Error => ex
@@ -378,6 +378,28 @@ module MaziSensors
     sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     q = "SELECT * FROM sensors"
 
+    a = sensors_con.query(q)
+    result = []
+    a.each_hash do |h|
+      result << {type: h['sensor_name'], id: h['id'], ip: h['ip']}
+    end
+    return result
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return nil
+  ensure
+    sensors_con.close if sensors_con
+  end
+
+  def getDevicesAllAvailableSensorsFromDB
+    MaziLogger.debug("getDevicesAllAvailableSensorsFromDB")
+    if @config[:general][:mode] == 'demo'
+      return [{type: 'sensehat', status: 'active', id: 1, ip: '10.0.0.1', nof_entries: 12}, {type: 'sht11', status: 'not found', id: 2, ip: '10.0.0.1', nof_entries: 0}]
+    end
+    device_details = get_monitoring_details
+    mysql_username, mysql_password = mysql_creds
+    sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    q = "SELECT * FROM deployments e INNER JOIN devices d ON d.deployment_id = e.id INNER JOIN sensors s ON s.device_id = d.id WHERE e.deployment = '#{device_details[:deployment]}' AND d.administrator = '#{device_details[:admin]}' AND d.title = '#{device_details[:title]}' AND d.description = '#{device_details[:description]}' AND d.location = '#{device_details[:loc]}'"
     a = sensors_con.query(q)
     result = []
     a.each_hash do |h|

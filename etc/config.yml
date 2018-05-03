@@ -69,3 +69,6 @@
   :enable: false
 :monitoring:
   :enable: false
+  :applications_enable: false
+  :hardware_enable: false
+  :map: false

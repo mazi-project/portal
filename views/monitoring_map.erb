@@ -1,4 +1,4 @@
-  <div class='row mon_map_row' style="height: 1000px">  
+  <div class='row mon_map_row' style="height: 1000px">
     <div id="mapdiv" style="height: 100%"></div>
     <% deployments.each do |dep_id, deployment| %>
       <% deployment[:devices].each do |dev_id, device| %>
@@ -32,6 +32,7 @@
                   <p><b><%= I18n.translate("portal.monitoring-page.popups.longitude")%>:</b> <%= device[:latLng].last %></p>
                 </div>
               </div>
+              <% unless device[:system].nil? || device[:system].empty? %>
               <div class="row">
                 <div class="col-md-12">
                   <p><b><%= I18n.translate("portal.monitoring-page.popups.system_info")%>:</b></p>
@@ -51,7 +52,23 @@
                   <p><b><%= I18n.translate("portal.monitoring-page.popups.storage_use")%>:</b> <%= device[:system][:storage] %>%</p>
                 </div>
               </div>
-              
+              <% end %>
+
+              <% if device[:users] && !device[:users].empty? %>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="panel panel-purple">
+                    <div class="panel-heading">
+                      <h3 class="panel-title"><i class="fa fa-chart"></i> <%= I18n.translate("portal.monitoring-page.popups.wifi-users") %></h3>
+                    </div>
+                    <div class="panel-body">
+                      <div id="morris-line-chart-wifiusers-<%= dev_id %>"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+
               <% device[:sensors].each do |sensor_id, sensor|%>
               <div class="row">
                 <div class="col-md-12">
@@ -92,19 +109,6 @@
               </div>
                 <% end %>
               <% end %>
-
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="panel panel-purple">
-                    <div class="panel-heading">
-                      <h3 class="panel-title"><i class="fa fa-chart"></i> <%= I18n.translate("portal.monitoring-page.popups.wifi-users") %></h3>
-                    </div>
-                    <div class="panel-body">
-                      <div id="morris-line-chart-wifiusers-<%= dev_id %>"></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
 
               <% device[:applications].each do |app_name, application|%>
                 <% if app_name == 'etherpad' %>
@@ -337,152 +341,153 @@
       <% end %>
     <% end %>
   </div>
-    <script>
-      var degrees2meters = function(lon,lat) {
-        var x = lon * 20037508.34 / 180;
-        var y = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
-        y = y * 20037508.34 / 180;
-        return [x, y]
-      }
+  <script>
+    var degrees2meters = function(lon,lat) {
+      var x = lon * 20037508.34 / 180;
+      var y = Math.log(Math.tan((90 + lat) * Math.PI / 360)) / (Math.PI / 180);
+      y = y * 20037508.34 / 180;
+      return [x, y]
+    }
 
-      var temperature_data = {};
-      var humidity_data    = {};
-      var pressure_data    = {};
-      var wifi_users_data  = {};
-      var etherpad_data    = {};
-      var guestbook_data   = {};
-      var framadate_data   = {};
-      var nextcloud_data   = {};
-      <% points = [] %>
-      <% device_ids = [] %>
-      <% deployments.each do |dep_id, deployment| %>
-        <% deployment[:devices].each do |dev_id, device| %>
-          <% points << {id: device[:id], name: device[:title], latLng: device[:latLng]} %>
-          <% device_ids << dev_id %>
-      temperature_data['<%=dev_id%>'] = {};
-      humidity_data['<%=dev_id%>'] = {};
-          <% device[:sensors].each do |sens_id, sensor| %>
-      temperature_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:temperatures].to_json %>;
-      humidity_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:humidities].to_json %>;
-            <% if sensor[:sensor_name] == 'sensehat' %>
-      pressure_data['<%=dev_id%>'] = {};
-      pressure_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:pressures].to_json %>;
-            <% end %>
+    var temperature_data = {};
+    var humidity_data    = {};
+    var pressure_data    = {};
+    var wifi_users_data  = {};
+    var etherpad_data    = {};
+    var guestbook_data   = {};
+    var framadate_data   = {};
+    var nextcloud_data   = {};
+    <% points = [] %>
+    <% device_ids = [] %>
+    <% deployments.each do |dep_id, deployment| %>
+      <% deployment[:devices].each do |dev_id, device| %>
+        <% points << {id: device[:id], name: device[:title], latLng: device[:latLng]} %>
+        <% device_ids << dev_id %>
+    temperature_data['<%=dev_id%>'] = {};
+    humidity_data['<%=dev_id%>'] = {};
+        <% device[:sensors].each do |sens_id, sensor| %>
+    temperature_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:temperatures].to_json %>;
+    humidity_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:humidities].to_json %>;
+          <% if sensor[:sensor_name] == 'sensehat' %>
+    pressure_data['<%=dev_id%>'] = {};
+    pressure_data['<%=dev_id%>']['<%=sensor[:id]%>'] = <%= sensor[:data][:pressures].to_json %>;
           <% end %>
+        <% end %>
 
-      wifi_users_data['<%=dev_id%>'] = <%= device[:users].to_json %>;
+    wifi_users_data['<%=dev_id%>'] = <%= device[:users].to_json %>;
 
-          <% device[:applications].each do |app_name, application| %>
-            <% if app_name == 'etherpad' %>
-      etherpad_data['<%=dev_id%>'] = {};
-      etherpad_data['<%=dev_id%>']['pads']     = <%= application[:data][:pads].to_json %>;
-      etherpad_data['<%=dev_id%>']['users']    = <%= application[:data][:users].to_json %>;
-      etherpad_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
-      etherpad_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
-            <% elsif app_name == 'guestbook' %>
-      guestbook_data['<%=dev_id%>'] = {};
-      guestbook_data['<%=dev_id%>']['submissions'] = <%= application[:data][:submissions].to_json %>;
-      guestbook_data['<%=dev_id%>']['comments']    = <%= application[:data][:comments].to_json %>;
-      guestbook_data['<%=dev_id%>']['images']      = <%= application[:data][:images].to_json %>;
-      guestbook_data['<%=dev_id%>']['datasize']    = <%= application[:data][:datasize].to_json %>;
-      guestbook_data['<%=dev_id%>']['clicks']      = <%= application[:data][:clicks].to_json %>;
-            <% elsif app_name == 'framadate' %>
-      framadate_data['<%=dev_id%>'] = {};
-      framadate_data['<%=dev_id%>']['polls']    = <%= application[:data][:polls].to_json %>;
-      framadate_data['<%=dev_id%>']['votes']    = <%= application[:data][:votes].to_json %>;
-      framadate_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
-      framadate_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
-            <% elsif app_name == 'nextcloud' %>
-            <% puts application%>
-      nextcloud_data['<%=dev_id%>'] = {};
-      nextcloud_data['<%=dev_id%>']['users']     = <%= application[:data][:users].to_json %>;
-      nextcloud_data['<%=dev_id%>']['files']     = <%= application[:data][:files].to_json %>;
-      nextcloud_data['<%=dev_id%>']['downloads'] = <%= application[:data][:downloads].to_json %>;
-      nextcloud_data['<%=dev_id%>']['datasize']  = <%= application[:data][:datasize].to_json %>;
-      nextcloud_data['<%=dev_id%>']['clicks']    = <%= application[:data][:clicks].to_json %>;
-            <% end %>
+        <% device[:applications].each do |app_name, application| %>
+          <% if app_name == 'etherpad' %>
+    etherpad_data['<%=dev_id%>'] = {};
+    etherpad_data['<%=dev_id%>']['pads']     = <%= application[:data][:pads].to_json %>;
+    etherpad_data['<%=dev_id%>']['users']    = <%= application[:data][:users].to_json %>;
+    etherpad_data['<%=dev_id%>']['datasize'] = <%= application[:data][:datasize].to_json %>;
+    etherpad_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
+          <% elsif app_name == 'guestbook' %>
+    guestbook_data['<%=dev_id%>'] = {};
+    guestbook_data['<%=dev_id%>']['submissions'] = <%= application[:data][:submissions].to_json %>;
+    guestbook_data['<%=dev_id%>']['comments']    = <%= application[:data][:comments].to_json %>;
+    guestbook_data['<%=dev_id%>']['images']      = <%= application[:data][:images].to_json %>;
+    guestbook_data['<%=dev_id%>']['datasize']    = <%= application[:data][:datasize].to_json %>;
+    guestbook_data['<%=dev_id%>']['clicks']      = <%= application[:data][:clicks].to_json %>;
+          <% elsif app_name == 'framadate' %>
+    framadate_data['<%=dev_id%>'] = {};
+    framadate_data['<%=dev_id%>']['polls']    = <%= application[:data][:polls].to_json %>;
+    framadate_data['<%=dev_id%>']['votes']    = <%= application[:data][:votes].to_json %>;
+    framadate_data['<%=dev_id%>']['comments'] = <%= application[:data][:comments].to_json %>;
+    framadate_data['<%=dev_id%>']['clicks']   = <%= application[:data][:clicks].to_json %>;
+          <% elsif app_name == 'nextcloud' %>
+    nextcloud_data['<%=dev_id%>'] = {};
+    nextcloud_data['<%=dev_id%>']['users']     = <%= application[:data][:users].to_json %>;
+    nextcloud_data['<%=dev_id%>']['files']     = <%= application[:data][:files].to_json %>;
+    nextcloud_data['<%=dev_id%>']['downloads'] = <%= application[:data][:downloads].to_json %>;
+    nextcloud_data['<%=dev_id%>']['datasize']  = <%= application[:data][:datasize].to_json %>;
+    nextcloud_data['<%=dev_id%>']['clicks']    = <%= application[:data][:clicks].to_json %>;
           <% end %>
         <% end %>
       <% end %>
-      var points = <%= points.to_json %>;
-      var device_ids = <%= device_ids.to_json %>;
-      var zoom=4;
-      var map = new OpenLayers.Map("mapdiv");
+    <% end %>
+    var points = <%= points.to_json %>;
+    var device_ids = <%= device_ids.to_json %>;
+    var zoom=4;
+    var map = new OpenLayers.Map("mapdiv");
 
-      map.addLayer(new OpenLayers.Layer.OSM());
-      var markers = new OpenLayers.Layer.Markers( "Markers" );
-      map.addLayer(markers);
+    map.addLayer(new OpenLayers.Layer.OSM());
+    var markers = new OpenLayers.Layer.Markers( "Markers" );
+    map.addLayer(markers);
 
-      $.each(points, function(i, point){
-        var lonLat = new OpenLayers.LonLat( point.latLng[1], point.latLng[0] ).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
-        var marker = new OpenLayers.Marker(lonLat);
-        marker.id = point['id'];
-        marker.events.register("click", marker, function() {
-          $('.modal').modal('hide');
-          $('#show-device-' + marker.id + '-modal').modal('show');
-        });
-        markers.addMarker(marker);
-      }); 
+    $.each(points, function(i, point){
+      var lonLat = new OpenLayers.LonLat( point.latLng[1], point.latLng[0] ).transform(new OpenLayers.Projection("EPSG:4326"), map.getProjectionObject());
+      var marker = new OpenLayers.Marker(lonLat);
+      marker.id = point['id'];
+      marker.events.register("click", marker, function() {
+        $('.modal').modal('hide');
+        $('#show-device-' + marker.id + '-modal').modal('show');
+      });
+      markers.addMarker(marker);
+    });
 
-      map.setCenter(new OpenLayers.LonLat(0, 0), 0);
-      map.zoomToMaxExtent();
+    var newBound = markers.getDataExtent();
+    map.zoomToExtent(newBound);
 
-      $.each(temperature_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          Morris.Line({
-            element: 'morris-line-chart-temp-' + device_id + '-' + sensor_name,
-            data: measurements,
-            xkey: 'date',
-            ykeys: ['temp'],
-            labels: ['Temperature(Celcius)', 'Date'],
-            smooth: true,
-            resize: true,
-            ymax: 50,
-            ymin: -20,
-            hideHover: 'auto'
-          });
-        });
-
-        $('#show-device-' + device_id + '-modal').on('shown.bs.modal', function(e) {
-          $(window).trigger('resize');
+    $.each(temperature_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        Morris.Line({
+          element: 'morris-line-chart-temp-' + device_id + '-' + sensor_name,
+          data: measurements,
+          xkey: 'date',
+          ykeys: ['temp'],
+          labels: ['Temperature(Celcius)', 'Date'],
+          smooth: true,
+          resize: true,
+          ymax: 50,
+          ymin: -20,
+          hideHover: 'auto'
         });
       });
 
-      $.each(humidity_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          Morris.Line({
-            element: 'morris-line-chart-hum-' + device_id + '-' + sensor_name,
-            data: measurements,
-            xkey: 'date',
-            ykeys: ['hum'],
-            labels: ['Humidity(Percent)', 'Date'],
-            smooth: true,
-            resize: true,
-            ymax: 100,
-            ymin: 0,
-            hideHover: 'auto'
-          });
+      $('#show-device-' + device_id + '-modal').on('shown.bs.modal', function(e) {
+        $(window).trigger('resize');
+      });
+    });
+
+    $.each(humidity_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        Morris.Line({
+          element: 'morris-line-chart-hum-' + device_id + '-' + sensor_name,
+          data: measurements,
+          xkey: 'date',
+          ykeys: ['hum'],
+          labels: ['Humidity(Percent)', 'Date'],
+          smooth: true,
+          resize: true,
+          ymax: 100,
+          ymin: 0,
+          hideHover: 'auto'
         });
       });
+    });
 
-      $.each(pressure_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          Morris.Line({
-            element: 'morris-line-chart-press-' + device_id + '-' + sensor_name,
-            data: measurements,
-            xkey: 'date',
-            ykeys: ['pres'],
-            labels: ['Pressure(millibars)', 'Date'],
-            smooth: true,
-            resize: true,
-            ymax: 1200,
-            ymin: 800,
-            hideHover: 'auto'
-          });
+    $.each(pressure_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        Morris.Line({
+          element: 'morris-line-chart-press-' + device_id + '-' + sensor_name,
+          data: measurements,
+          xkey: 'date',
+          ykeys: ['pres'],
+          labels: ['Pressure(millibars)', 'Date'],
+          smooth: true,
+          resize: true,
+          ymax: 1200,
+          ymin: 800,
+          hideHover: 'auto'
         });
       });
+    });
 
-      $.each(wifi_users_data, function(device_id, measurements) {
+
+    $.each(wifi_users_data, function(device_id, measurements) {
+      if ($('#morris-line-chart-wifiusers-' + device_id).length > 0){
         Morris.Line({
           element: 'morris-line-chart-wifiusers-' + device_id,
           data: measurements,
@@ -494,273 +499,274 @@
           ymin: 0,
           hideHover: 'auto'
         });
-      });
+      }
+    });
 
-      $.each(etherpad_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          switch(sensor_name) {
-            case 'pads':
-              Morris.Line({
-                element: 'morris-line-chart-etherpad-pads-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['pads'],
-                labels: ['Number of Pads', 'Date'],
-                smooth: true,
-                resize: true,
-                ymax: 50,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'users':
-              Morris.Line({
-                element: 'morris-line-chart-etherpad-users-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['users'],
-                labels: ['Number of Users', 'Date'],
-                smooth: true,
-                resize: true,
-                ymax: 50,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'datasize':
-              Morris.Line({
-                element: 'morris-line-chart-etherpad-datasize-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['datasize'],
-                labels: ['Datasize', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'clicks':
-              Morris.Line({
-                element: 'morris-line-chart-etherpad-clicks-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['clicks'],
-                labels: ['Number of Clicks', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-          }
-        });
+    $.each(etherpad_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        switch(sensor_name) {
+          case 'pads':
+            Morris.Line({
+              element: 'morris-line-chart-etherpad-pads-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['pads'],
+              labels: ['Number of Pads', 'Date'],
+              smooth: true,
+              resize: true,
+              ymax: 50,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'users':
+            Morris.Line({
+              element: 'morris-line-chart-etherpad-users-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['users'],
+              labels: ['Number of Users', 'Date'],
+              smooth: true,
+              resize: true,
+              ymax: 50,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'datasize':
+            Morris.Line({
+              element: 'morris-line-chart-etherpad-datasize-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['datasize'],
+              labels: ['Datasize', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'clicks':
+            Morris.Line({
+              element: 'morris-line-chart-etherpad-clicks-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['clicks'],
+              labels: ['Number of Clicks', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+        }
       });
+    });
 
-      $.each(guestbook_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          switch(sensor_name) {
-            case 'submissions':
-              Morris.Line({
-                element: 'morris-line-chart-guestbook-submissions-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['submissions'],
-                labels: ['Number of Submissions', 'Date'],
-                smooth: true,
-                resize: true,
-                ymax: 50,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'comments':
-              Morris.Line({
-                element: 'morris-line-chart-guestbook-comments-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['comments'],
-                labels: ['Number of Comments', 'Date'],
-                smooth: true,
-                resize: true,
-                ymax: 50,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'images':
-              Morris.Line({
-                element: 'morris-line-chart-guestbook-images-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['images'],
-                labels: ['Number of Images', 'Date'],
-                smooth: true,
-                resize: true,
-                ymax: 50,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'datasize':
-              Morris.Line({
-                element: 'morris-line-chart-guestbook-datasize-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['datasize'],
-                labels: ['Datasize', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'clicks':
-              Morris.Line({
-                element: 'morris-line-chart-guestbook-clicks-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['clicks'],
-                labels: ['Number of Clicks', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-          }
-        });
+    $.each(guestbook_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        switch(sensor_name) {
+          case 'submissions':
+            Morris.Line({
+              element: 'morris-line-chart-guestbook-submissions-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['submissions'],
+              labels: ['Number of Submissions', 'Date'],
+              smooth: true,
+              resize: true,
+              ymax: 50,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'comments':
+            Morris.Line({
+              element: 'morris-line-chart-guestbook-comments-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['comments'],
+              labels: ['Number of Comments', 'Date'],
+              smooth: true,
+              resize: true,
+              ymax: 50,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'images':
+            Morris.Line({
+              element: 'morris-line-chart-guestbook-images-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['images'],
+              labels: ['Number of Images', 'Date'],
+              smooth: true,
+              resize: true,
+              ymax: 50,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'datasize':
+            Morris.Line({
+              element: 'morris-line-chart-guestbook-datasize-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['datasize'],
+              labels: ['Datasize', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'clicks':
+            Morris.Line({
+              element: 'morris-line-chart-guestbook-clicks-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['clicks'],
+              labels: ['Number of Clicks', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+        }
       });
+    });
 
-      $.each(framadate_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          switch(sensor_name) {
-            case 'polls':
-              Morris.Line({
-                element: 'morris-line-chart-framadate-polls-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['polls'],
-                labels: ['Number of Polls', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'votes':
-              Morris.Line({
-                element: 'morris-line-chart-framadate-votes-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['votes'],
-                labels: ['Number of Votes', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'comments':
-              Morris.Line({
-                element: 'morris-line-chart-framadate-comments-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['comments'],
-                labels: ['Number of Comments', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'clicks':
-              Morris.Line({
-                element: 'morris-line-chart-framadate-clicks-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['clicks'],
-                labels: ['Number of Clicks', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-          }
-        });
+    $.each(framadate_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        switch(sensor_name) {
+          case 'polls':
+            Morris.Line({
+              element: 'morris-line-chart-framadate-polls-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['polls'],
+              labels: ['Number of Polls', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'votes':
+            Morris.Line({
+              element: 'morris-line-chart-framadate-votes-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['votes'],
+              labels: ['Number of Votes', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'comments':
+            Morris.Line({
+              element: 'morris-line-chart-framadate-comments-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['comments'],
+              labels: ['Number of Comments', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'clicks':
+            Morris.Line({
+              element: 'morris-line-chart-framadate-clicks-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['clicks'],
+              labels: ['Number of Clicks', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+        }
       });
+    });
 
-      $.each(nextcloud_data, function(device_id, sensors) {
-        $.each(sensors, function(sensor_name, measurements){
-          switch(sensor_name) {
-            case 'users':
-              Morris.Line({
-                element: 'morris-line-chart-nextcloud-users-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['users'],
-                labels: ['Number of Users', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'files':
-              Morris.Line({
-                element: 'morris-line-chart-nextcloud-files-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['files'],
-                labels: ['Number of Files', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'downloads':
-              Morris.Line({
-                element: 'morris-line-chart-nextcloud-downloads-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['downloads'],
-                labels: ['Number of Downloads', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'datasize':
-              Morris.Line({
-                element: 'morris-line-chart-nextcloud-datasize-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['datasize'],
-                labels: ['Datasize', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-            case 'clicks':
-              Morris.Line({
-                element: 'morris-line-chart-nextcloud-clicks-' + device_id,
-                data: measurements,
-                xkey: 'date',
-                ykeys: ['clicks'],
-                labels: ['Number of Clicks', 'Date'],
-                smooth: true,
-                resize: true,
-                ymin: 0,
-                hideHover: 'auto'
-              });
-              break;
-          }
-        });
+    $.each(nextcloud_data, function(device_id, sensors) {
+      $.each(sensors, function(sensor_name, measurements){
+        switch(sensor_name) {
+          case 'users':
+            Morris.Line({
+              element: 'morris-line-chart-nextcloud-users-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['users'],
+              labels: ['Number of Users', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'files':
+            Morris.Line({
+              element: 'morris-line-chart-nextcloud-files-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['files'],
+              labels: ['Number of Files', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'downloads':
+            Morris.Line({
+              element: 'morris-line-chart-nextcloud-downloads-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['downloads'],
+              labels: ['Number of Downloads', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'datasize':
+            Morris.Line({
+              element: 'morris-line-chart-nextcloud-datasize-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['datasize'],
+              labels: ['Datasize', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+          case 'clicks':
+            Morris.Line({
+              element: 'morris-line-chart-nextcloud-clicks-' + device_id,
+              data: measurements,
+              xkey: 'date',
+              ykeys: ['clicks'],
+              labels: ['Number of Clicks', 'Date'],
+              smooth: true,
+              resize: true,
+              ymin: 0,
+              hideHover: 'auto'
+            });
+            break;
+        }
       });
+    });
 
-    </script>
+  </script>
