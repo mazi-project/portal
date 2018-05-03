@@ -97,6 +97,7 @@ module Sinatra
                 tmp[:type]         = sensor[:type]
                 tmp[:temperatures] = getTemperatures(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
                 tmp[:humidity]     = getHumidities(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
+                tmp[:pressures]    = getPressures(sensor[:id], sensor[:type], params['start_date'], params['end_date'])
                 next if tmp[:temperatures].nil? || tmp[:humidity].nil? || tmp[:temperatures].empty? || tmp[:humidity].empty?
                 locals[:local_data][:sensors] << tmp
               end

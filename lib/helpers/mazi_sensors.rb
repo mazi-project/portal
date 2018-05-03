@@ -528,6 +528,41 @@ module MaziSensors
     sensors_con.close if sensors_con
   end
 
+  def getPressures(id, type, start_time=nil, end_time=nil)
+    if @config[:general][:mode] == 'demo'
+      return [{date: '2012-10-01', pres: 1088}, {date: '2012-10-02', pres: 1087}, {date: '2012-10-03', pres: 1080}, {date: '2012-10-04', pres: 1092}, {date: '2012-10-05', pres: 1075}, {date: '2012-10-06', pres: 1088}, {date: '2012-10-07', pres: 1086}, {date: '2012-10-08',pres: 1080}, {date: '2012-10-09', pres: 1072}, {date: '2012-10-10', pres: 1099}, {date: '2012-10-11', pres: 1088}, {date: '2012-10-12', pres: 1087}, {date: '2012-10-13', pres: 1000}, {date: '2012-10-14', pres: 999}, {date: '2012-10-15', pres: 1050}, {date: '2012-10-16', pres: 1051}, {date: '2012-10-17', pres: 1055}, {date: '2012-10-18', pres: 1054}, { date: '2012-10-19', pres: 1056}, {date: '2012-10-20', pres: 1060}, {date: '2012-10-21', pres: 1072}, {date: '2012-10-22', pres: 1080}, {date: '2012-10-23', pres: 1088}, {date: '2012-10-24', pres: 1088}, {date: '2012-10-25', pres: 1088}, {date: '2012-10-26', pres: 1088}, {date: '2012-10-27', pres: 1088}, {date: '2012-10-28', pres: 1088}, {date: '2012-10-29', pres: 1088}, {date: '2012-10-30', pres: 1088}, {date: '2012-10-31', pres: 1088}]
+    end
+
+    mysql_username, mysql_password = mysql_creds
+    sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+    if start_time == '*' && end_time == '*'
+      q = "SELECT * FROM measurements"
+    elsif start_time == '*'
+      q = "SELECT * FROM measurements WHERE time <= '#{end_time}'"
+    elsif end_time == '*'
+      q = "SELECT * FROM measurements WHERE time >= '#{start_time}'"
+    elsif start_time.nil? && end_time.nil?
+      q = "SELECT * FROM measurements #{SELECT_QUERY_LIMIT}"
+    elsif start_time && end_time
+      q = "SELECT * FROM measurements WHERE time >= '#{start_time}' AND time <= '#{end_time}'"
+    else
+      q = "SELECT * FROM measurements"
+    end
+
+    a = sensors_con.query(q)
+    result = []
+    a.each_hash do |h|
+      result << {date: h['time'], pres: h['pressure']}
+    end
+    return result
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    MaziLogger.error "Cannot connect to mySQL, Sensor interface is disabled"
+    return nil
+  ensure
+    sensors_con.close if sensors_con
+  end
+
   def start_sensing(sensor_name, duration = 1800, interval = 30, end_point='localhost')
     MaziLogger.debug "start sensing: #{sensor_name} - #{duration} - #{interval} - #{end_point}"
 

@@ -1,10 +1,12 @@
 <script type="text/javascript">
   var temperature_data = {};
   var humidity_data    = {};
+  var pressure_data    = {};
   <% no_sensor_data = true %>
   <% sensors.each do |sensor| %>
     temperature_data[<%=sensor[:id]%>] = JSON.parse('<%= sensor[:temperatures].to_json %>');
     humidity_data[<%=sensor[:id]%>]    = JSON.parse('<%= sensor[:humidity].to_json %>');
+    pressure_data[<%=sensor[:id]%>]    = JSON.parse('<%= sensor[:pressures].to_json %>');
     <% no_sensor_data = false unless sensor[:temperatures].nil? || sensor[:temperatures].empty? || sensor[:humidity].nil? || sensor[:humidity].empty? %>
   <% end %>
 </script>
@@ -72,6 +74,21 @@
       </div>
     </div>
   </div>
+    <% if sensor[:type] == 'sensehat' %>
+  <div class="col-lg-6 col-sm-12">
+    <div class="panel panel-purple">
+      <div class="panel-heading">
+      <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.pressure-for", sensor:  sensor[:type]) %></h3>
+      </div>
+      <div class="panel-body">
+        <div id="morris-line-chart-pres-<%= sensor[:id]%>"></div>
+        <div class="text-right">
+          <a class="export-pressure" id='export-pressure-<%= sensor[:id]%>'><i class="fa fa-download"> <%= I18n.translate("general.buttons.export-to-csv") %></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+    <% end %>
   <% end %>
 
   <% if flag %>
