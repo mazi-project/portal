@@ -103,10 +103,10 @@ module MaziSensors
         out[row['deployment_id']][:devices][row['id']][:system]        = {}
         out[row['deployment_id']][:devices][row['id']][:users]         = {}
       end
-      out[row['deployment_id']][:devices][row['id']][:sensors]      = getSensorDataForDevice(row['id'])
-      out[row['deployment_id']][:devices][row['id']][:applications] = getApplicationDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:sensors]      = getSensorsForDevice(row['id'])#getSensorDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:applications] = getApplicationsForDevice(row['id'])#getApplicationDataForDevice(row['id'])
       out[row['deployment_id']][:devices][row['id']][:system]       = getSystemDataForDevice(row['id'])
-      out[row['deployment_id']][:devices][row['id']][:users]        = getUserDataForDevice(row['id'])
+      out[row['deployment_id']][:devices][row['id']][:users]        = getUsersForDevice(row['id'])
     end
     out
   rescue Mysql::Error => ex
@@ -125,6 +125,29 @@ module MaziSensors
       end
     end
     deployments
+  end
+
+  def getSensorsForDevice(device_id)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN sensors s ON s.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      puts "000 #{row}"
+      if output[row['id']].nil?
+        output[row['id']]               = {}
+        output[row['id']][:id]          = row['id']
+        output[row['id']][:sensor_name] = row['sensor_name']
+      end
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
   end
 
   def getSensorDataForDevice(device_id, start_time=nil, end_time=nil)
@@ -147,6 +170,43 @@ module MaziSensors
       output[row['sensor_id']][:data][:temperatures] << {date: row['time'], temp: row['temperature']} if row['temperature']
       output[row['sensor_id']][:data][:humidities]   << {date: row['time'], hum: row['humidity']} if row['humidity']
       output[row['sensor_id']][:data][:pressures]    << {date: row['time'], pres: row['pressure']} if row['pressure']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
+  def getApplicationsForDevice(device_id, start_time=nil, end_time=nil)
+    output = {}
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN etherpad e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output['etherpad'] = true
+      break
+    end
+    q = "SELECT * FROM devices d INNER JOIN guestbook e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output['guestbook'] = true
+      break
+    end
+    q = "SELECT * FROM devices d INNER JOIN framadate e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output['framadate'] = true
+      break
+    end
+    q = "SELECT * FROM devices d INNER JOIN nextcloud e ON e.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output['nextcloud'] = true
+      break
     end
     output
   rescue Mysql::Error => ex
@@ -250,6 +310,25 @@ module MaziSensors
       output[:cpu_usage] = row['cpu_usage']
       output[:ram_usage] = row['ram_usage']
       output[:storage]   = row['storage']
+    end
+    output
+  rescue Mysql::Error => ex
+    MaziLogger.debug "mySQL error: #{ex.inspect}"
+    return output
+  ensure
+    con.close if con
+  end
+
+  def getUsersForDevice(device_id, start_time=nil, end_time=nil)
+    output = false
+    mysql_username, mysql_password = mysql_creds
+    con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
+
+    q = "SELECT * FROM devices d INNER JOIN users u ON u.device_id = d.id WHERE d.id = #{device_id}"
+    a = con.query(q)
+    a.each_hash do |row|
+      output = true
+      break
     end
     output
   rescue Mysql::Error => ex
