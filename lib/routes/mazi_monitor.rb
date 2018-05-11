@@ -41,6 +41,21 @@ module Sinatra
             data.to_json
           end
 
+          app.get '/maps/device/:id/data/:type/?' do |id, type|
+            data = {}
+            case type
+            when 'wifi'
+              data = getUserDataForDevice(id)
+            end
+            data.to_json
+          end
+
+          app.get '/maps/device/:id/sensor/:sensor_id/data/:type/?' do |id, sensor_id, type|
+            sensor_data = getSensorDataForDevice(id)
+            data = sensor_data[sensor_id][:data][type.to_sym]
+            data.to_json
+          end
+
           app.post '/monitor/change/details/?' do
             MaziLogger.debug "request: post/monitor/details from ip: #{request.ip} params: #{params.inspect}"
             unless authorized?
