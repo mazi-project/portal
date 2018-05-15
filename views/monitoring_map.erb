@@ -115,155 +115,262 @@
                 </div>
                 <% end %>
               <% end %>
-            </div>
 
               <% device[:applications].each do |app_name, application|%>
                 <% if app_name == 'etherpad' %>
                 <div class="panel panel-green">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-pads") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-etherpad-pads-<%= dev_id %>" class="collapsed toggle-collapse-etherpad-pads" id="toggle-collapse-etherpad-pads-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-pads") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-etherpad-pads-<%= dev_id %>"></div>
+                  <div id="collapse-etherpad-pads-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-etherpad-pads-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-blue">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-users") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-etherpad-users-<%= dev_id %>" class="collapsed toggle-collapse-etherpad-users" id="toggle-collapse-etherpad-users-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-users") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-etherpad-users-<%= dev_id %>"></div>
+                  <div id="collapse-etherpad-users-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-etherpad-users-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-yellow">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-datasize") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-etherpad-datasize-<%= dev_id %>" class="collapsed toggle-collapse-etherpad-datasize" id="toggle-collapse-etherpad-datasize-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-datasize") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-etherpad-datasize-<%= dev_id %>"></div>
+                  <div id="collapse-etherpad-datasize-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-etherpad-datasize-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-purple">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-clicks") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-etherpad-clicks-<%= dev_id %>" class="collapsed toggle-collapse-etherpad-clicks" id="toggle-collapse-etherpad-clicks-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.etherpad-clicks") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-etherpad-clicks-<%= dev_id %>"></div>
+                  <div id="collapse-etherpad-clicks-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-etherpad-clicks-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <% elsif app_name == 'guestbook' %>
                 <div class="panel panel-green">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-submissions") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-guestbook-submissions-<%= dev_id %>" class="collapsed toggle-collapse-guestbook-submissions" id="toggle-collapse-guestbook-submissions-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-submissions") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-guestbook-submissions-<%= dev_id %>"></div>
+                  <div id="collapse-guestbook-submissions-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-submissions-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-blue">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-comments") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-guestbook-comments-<%= dev_id %>" class="collapsed toggle-collapse-guestbook-comments" id="toggle-collapse-guestbook-comments-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-comments") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-guestbook-comments-<%= dev_id %>"></div>
+                  <div id="collapse-guestbook-comments-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-comments-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-yellow">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-images") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-guestbook-images-<%= dev_id %>" class="collapsed toggle-collapse-guestbook-images" id="toggle-collapse-guestbook-images-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-images") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-guestbook-images-<%= dev_id %>"></div>
+                  <div id="collapse-guestbook-images-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-images-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-red">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-book"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-datasize") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-guestbook-datasize-<%= dev_id %>" class="collapsed toggle-collapse-guestbook-datasize" id="toggle-collapse-guestbook-datasize-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-datasize") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-guestbook-datasize-<%= dev_id %>"></div>
+                  <div id="collapse-guestbook-datasize-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-datasize-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-purple">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-clicks") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-guestbook-clicks-<%= dev_id %>" class="collapsed toggle-collapse-guestbook-clicks" id="toggle-collapse-guestbook-clicks-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.guestbook-clicks") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-guestbook-clicks-<%= dev_id %>"></div>
+                  <div id="collapse-guestbook-clicks-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-guestbook-clicks-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <% elsif app_name == 'framadate' %>
                 <div class="panel panel-green">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-polls") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-framadate-polls-<%= dev_id %>" class="collapsed toggle-collapse-framadate-polls" id="toggle-collapse-framadate-polls-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-polls") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-framadate-polls-<%= dev_id %>"></div>
+                  <div id="collapse-framadate-polls-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-framadate-polls-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-yellow">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-votes") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-framadate-votes-<%= dev_id %>" class="collapsed toggle-collapse-framadate-votes" id="toggle-collapse-framadate-votes-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-votes") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-framadate-votes-<%= dev_id %>"></div>
+                  <div id="collapse-framadate-votes-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-framadate-votes-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-blue">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-comments") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-framadate-comments-<%= dev_id %>" class="collapsed toggle-collapse-framadate-comments" id="toggle-collapse-framadate-comments-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-comments") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-framadate-comments-<%= dev_id %>"></div>
+                  <div id="collapse-framadate-comments-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-framadate-comments-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-purple">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-clicks") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-framadate-clicks-<%= dev_id %>" class="collapsed toggle-collapse-framadate-clicks" id="toggle-collapse-framadate-clicks-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.framadate-clicks") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-framadate-clicks-<%= dev_id %>"></div>
+                  <div id="collapse-framadate-clicks-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-framadate-clicks-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <% elsif app_name == 'nextcloud' %>
                 <div class="panel panel-green">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-users") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-nextcloud-users-<%= dev_id %>" class="collapsed toggle-collapse-nextcloud-users" id="toggle-collapse-nextcloud-users-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-users") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-nextcloud-users-<%= dev_id %>"></div>
+                  <div id="collapse-nextcloud-users-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-users-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-yellow">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-files") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-nextcloud-files-<%= dev_id %>" class="collapsed toggle-collapse-nextcloud-files" id="toggle-collapse-nextcloud-files-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-files") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-nextcloud-files-<%= dev_id %>"></div>
+                  <div id="collapse-nextcloud-files-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-files-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-blue">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-downloads") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-nextcloud-downloads-<%= dev_id %>" class="collapsed toggle-collapse-nextcloud-downloads" id="toggle-collapse-nextcloud-downloads-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-downloads") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-nextcloud-downloads-<%= dev_id %>"></div>
+                  <div id="collapse-nextcloud-downloads-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-downloads-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-red">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-question"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-datasize") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-nextcloud-datasize-<%= dev_id %>" class="collapsed toggle-collapse-nextcloud-datasize" id="toggle-collapse-nextcloud-datasize-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-datasize") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-nextcloud-datasize-<%= dev_id %>"></div>
+                  <div id="collapse-nextcloud-datasize-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-datasize-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <div class="panel panel-purple">
                   <div class="panel-heading">
-                    <h3 class="panel-title"><i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-clicks") %></h3>
+                    <h3 class="panel-title">
+                      <a data-toggle="collapse" data-target="#collapse-nextcloud-clicks-<%= dev_id %>" class="collapsed toggle-collapse-nextcloud-clicks" id="toggle-collapse-nextcloud-clicks-<%= dev_id %>" >
+                        <i class="fa fa-file-text-o"></i> <%= I18n.translate("portal.monitoring-page.popups.nextcloud-clicks") %>
+                      </a>
+                    </h3>
                   </div>
-                  <div class="panel-body">
-                    <div id="morris-line-chart-nextcloud-clicks-<%= dev_id %>"></div>
+                  <div id="collapse-nextcloud-clicks-<%= dev_id %>" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div id="morris-line-chart-nextcloud-clicks-<%= dev_id %>"></div>
+                    </div>
                   </div>
                 </div>
                 <% end %>
@@ -273,10 +380,12 @@
           </div>
         </div>
       </div>
+    </div>
       <% end %>
     <% end %>
   </div>
-  <script>
+
+  <script type="text/javascript">
     <% points = [] %>
     <% device_ids = [] %>
     <% deployments.each do |dep_id, deployment| %>
@@ -315,7 +424,6 @@
 
     $('.toggle-collapse-wifi').on('click', function(event){
       var device_id = event.target.id.split('-').pop();
-      console.log(device_id);
       $.ajax({
         url: '/maps/device/' + device_id + '/data/wifi',
         type: 'GET',
@@ -335,7 +443,6 @@
         type: 'GET',
         success: function(result) {
           result = JSON.parse(result);
-          console.log(result);
           drawTempGraphsFromResult(device_id, sensor_id, result);
         }
       });
@@ -350,7 +457,6 @@
         type: 'GET',
         success: function(result) {
           result = JSON.parse(result);
-          console.log(result);
           drawHumGraphsFromResult(device_id, sensor_id, result);
         }
       });
@@ -365,8 +471,223 @@
         type: 'GET',
         success: function(result) {
           result = JSON.parse(result);
-          console.log(result);
           drawPressGraphsFromResult(device_id, sensor_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-etherpad-pads').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/etherpad/data/pads',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawEtherpadPadsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-etherpad-users').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/etherpad/data/users',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawEtherpadUsersGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-etherpad-datasize').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/etherpad/data/datasize',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawEtherpadDatasizeGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-etherpad-clicks').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/etherpad/data/clicks',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawEtherpadClicksGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-guestbook-submissions').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/guestbook/data/submissions',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawGuestbookSubmissionsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-guestbook-comments').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/guestbook/data/comments',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawGuestbookCommentsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-guestbook-images').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/guestbook/data/images',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawGuestbookImagesGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-guestbook-datasize').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/guestbook/data/datasize',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawGuestbookDatasizeGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-guestbook-clicks').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/guestbook/data/clicks',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawGuestbookClicksGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-framadate-polls').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/framadate/data/polls',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawFramadatePollsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-framadate-votes').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/framadate/data/votes',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawFramadateVotesGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-framadate-comments').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/framadate/data/comments',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawFramadateCommentsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-framadate-clicks').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/framadate/data/clicks',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawFramadateClicksGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-nextcloud-users').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/nextcloud/data/users',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawNextcloudUsersGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-nextcloud-files').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/nextcloud/data/files',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawNextcloudFilesGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-nextcloud-downloads').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/nextcloud/data/downloads',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawNextcloudDownloadsGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-nextcloud-datasize').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/nextcloud/data/datasize',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawNextcloudDatasizeGraphFromResult(device_id, result);
+        }
+      });
+    });
+
+    $('.toggle-collapse-nextcloud-clicks').on('click', function(event){
+      var device_id = event.target.id.split('-').pop();
+      $.ajax({
+        url: '/maps/device/' + device_id + '/application/nextcloud/data/clicks',
+        type: 'GET',
+        success: function(result) {
+          result = JSON.parse(result);
+          drawNextcloudClicksGraphFromResult(device_id, result);
         }
       });
     });
@@ -428,11 +749,8 @@
     }
 
     function drawPressGraphsFromResult(device_id, sensor_id, data){
-      console.log(device_id, sensor_id, data);
       if(!$.isEmptyObject(data)){
-        console.log('aaa');
         if ($("#" + 'morris-line-chart-press-' + device_id + "-" + sensor_id).text().length == 0){
-          console.log('bbb');
           Morris.Line({
             element: 'morris-line-chart-press-' + device_id + '-' + sensor_id,
             data: data,
@@ -449,344 +767,327 @@
       }
     }
 
-    // function drawGraphsFromResult(device_id, result){
-    //   $.each(result["sensors"], function(sensor_id, sensor) {
-    //     if($("#" + 'morris-line-chart-temp-' + device_id + '-' + sensor_id).text().length == 0){
-    //       Morris.Line({
-    //         element: 'morris-line-chart-temp-' + device_id + '-' + sensor_id,
-    //         data: sensor['data']['temperatures'],
-    //         xkey: 'date',
-    //         ykeys: ['temp'],
-    //         labels: ['Temperature(Celcius)', 'Date'],
-    //         smooth: true,
-    //         resize: true,
-    //         ymax: 50,
-    //         ymin: -20,
-    //         hideHover: 'auto'
-    //       });
-    //       Morris.Line({
-    //         element: 'morris-line-chart-hum-' + device_id + '-' + sensor_id,
-    //         data: sensor['data']['humidities'],
-    //         xkey: 'date',
-    //         ykeys: ['hum'],
-    //         labels: ['Humidity(Percent)', 'Date'],
-    //         smooth: true,
-    //         resize: true,
-    //         ymax: 100,
-    //         ymin: 0,
-    //         hideHover: 'auto'
-    //       });
-    //       if(sensor['sensor_name'] == 'sensehat'){
-    //         Morris.Line({
-    //           element: 'morris-line-chart-press-' + device_id + '-' + sensor_id,
-    //           data: sensor['data']['pressures'],
-    //           xkey: 'date',
-    //           ykeys: ['pres'],
-    //           labels: ['Pressure(millibars)', 'Date'],
-    //           smooth: true,
-    //           resize: true,
-    //           ymax: 1200,
-    //           ymin: 800,
-    //           hideHover: 'auto'
-    //         });
-    //       }
-    //     }
-    //   });
-    //   if ($("#" + 'morris-line-chart-etherpad-pads-' + device_id).text().length == 0){
-    //     $.each(result["applications"], function(application_id, application) {
-    //       if(application_id == 'etherpad'){
-    //         $.each(application['data'], function(type, measurements) {
-    //           switch(type) {
-    //           case 'pads':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-etherpad-pads-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['pads'],
-    //               labels: ['Number of Pads', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymax: 50,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'users':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-etherpad-users-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['users'],
-    //               labels: ['Number of Users', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymax: 50,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'datasize':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-etherpad-datasize-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['datasize'],
-    //               labels: ['Datasize', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'clicks':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-etherpad-clicks-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['clicks'],
-    //               labels: ['Number of Clicks', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           }
-    //         });
-    //       }
-    //       else if(application_id == 'guestbook'){
-    //         $.each(application['data'], function(type, measurements) {
-    //           switch(type) {
-    //           case 'submissions':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-guestbook-submissions-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['submissions'],
-    //               labels: ['Number of Submissions', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymax: 50,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'comments':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-guestbook-comments-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['comments'],
-    //               labels: ['Number of Comments', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymax: 50,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'images':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-guestbook-images-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['images'],
-    //               labels: ['Number of Images', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymax: 50,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'datasize':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-guestbook-datasize-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['datasize'],
-    //               labels: ['Datasize', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'clicks':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-guestbook-clicks-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['clicks'],
-    //               labels: ['Number of Clicks', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           }
-    //         });
-    //       }
-    //       else if(application_id == 'framadate'){
-    //         $.each(application['data'], function(type, measurements) {
-    //           switch(type) {
-    //           case 'polls':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-framadate-polls-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['polls'],
-    //               labels: ['Number of Polls', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'votes':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-framadate-votes-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['votes'],
-    //               labels: ['Number of Votes', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'comments':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-framadate-comments-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['comments'],
-    //               labels: ['Number of Comments', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'clicks':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-framadate-clicks-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['clicks'],
-    //               labels: ['Number of Clicks', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           }
-    //         });
-    //       }
-    //       else if(application_id == 'nextcloud'){
-    //         $.each(application['data'], function(type, measurements) {
-    //           switch(type) {
-    //           case 'users':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-nextcloud-users-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['users'],
-    //               labels: ['Number of Users', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'files':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-nextcloud-files-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['files'],
-    //               labels: ['Number of Files', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'downloads':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-nextcloud-downloads-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['downloads'],
-    //               labels: ['Number of Downloads', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'datasize':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-nextcloud-datasize-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['datasize'],
-    //               labels: ['Datasize', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           case 'clicks':
-    //             Morris.Line({
-    //               element: 'morris-line-chart-nextcloud-clicks-' + device_id,
-    //               data: measurements,
-    //               xkey: 'date',
-    //               ykeys: ['clicks'],
-    //               labels: ['Number of Clicks', 'Date'],
-    //               smooth: true,
-    //               resize: true,
-    //               ymin: 0,
-    //               hideHover: 'auto'
-    //             });
-    //             break;
-    //           }
-    //         });
-    //       }
-    //     });
-    //   }
+    function drawEtherpadPadsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-etherpad-pads-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-etherpad-pads-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['pads'],
+            labels: ['Files', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
 
-    //   if(!$.isEmptyObject(result['users'])){
-    //     if ($("#" + 'morris-line-chart-wifiusers-' + device_id).text().length == 0){
-    //       Morris.Line({
-    //         element: 'morris-line-chart-wifiusers-' + device_id,
-    //         data: result['users'],
-    //         xkey: 'date',
-    //         ykeys: ['online_users'],
-    //         labels: ['Number of WiFi Users', 'Date'],
-    //         smooth: true,
-    //         resize: true,
-    //         ymin: 0,
-    //         hideHover: 'auto'
-    //       });
-    //     }
-    //   }
+    function drawEtherpadUsersGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-etherpad-users-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-etherpad-users-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['users'],
+            labels: ['Downloads', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
 
-    //   if(!$.isEmptyObject(result['system'])){
-    //     $('.system-row').show();
-    //     $('.system-temp').text(result['system']['cpu_temp']);
-    //     $('.system-cpu').text(result['system']['cpu_usage']);
-    //     $('.system-ram').text(result['system']['ram_usage']);
-    //     $('.system-stor').text(result['system']['storage']);
-    //   }
-    //   else{
-    //     $('.system-row').hide();
-    //   }
+    function drawEtherpadDatasizeGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-etherpad-datasize-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-etherpad-datasize-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['datasize'],
+            labels: ['Datasize', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
 
-    //   $(window).trigger('resize');
-    // }
+    function drawEtherpadClicksGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-etherpad-clicks-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-etherpad-clicks-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['clicks'],
+            labels: ['Number of Etherpad Clicks', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawGuestbookSubmissionsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-guestbook-submissions-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-guestbook-submissions-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['submissions'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawGuestbookCommentsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-guestbook-comments-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-guestbook-comments-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['comments'],
+            labels: ['Files', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawGuestbookImagesGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-guestbook-images-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-guestbook-images-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['images'],
+            labels: ['Downloads', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawGuestbookDatasizeGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-guestbook-datasize-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-guestbook-datasize-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['datasize'],
+            labels: ['Datasize', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawGuestbookClicksGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-guestbook-clicks-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-guestbook-clicks-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['clicks'],
+            labels: ['Number of Nextcloud Clicks', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawFramadatePollsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-framadate-polls-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-framadate-polls-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['polls'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawFramadateVotesGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-framadate-votes-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-framadate-votes-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['votes'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawFramadateCommentsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-framadate-comments-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-framadate-comments-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['comments'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawFramadateClicksGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-framadate-clicks-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-framadate-clicks-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['clicks'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawNextcloudUsersGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-nextcloud-users-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-nextcloud-users-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['users'],
+            labels: ['Users', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawNextcloudFilesGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-nextcloud-files-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-nextcloud-files-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['files'],
+            labels: ['Files', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawNextcloudDownloadsGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-nextcloud-downloads-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-nextcloud-downloads-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['downloads'],
+            labels: ['Downloads', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawNextcloudDatasizeGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-nextcloud-datasize-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-nextcloud-datasize-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['datasize'],
+            labels: ['Datasize', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
+
+    function drawNextcloudClicksGraphFromResult(device_id, data){
+      if(!$.isEmptyObject(data)){
+        if ($("#" + 'morris-line-chart-nextcloud-clicks-' + device_id).text().length == 0){
+          Morris.Line({
+            element: 'morris-line-chart-nextcloud-clicks-' + device_id,
+            data: data,
+            xkey: 'date',
+            ykeys: ['clicks'],
+            labels: ['Number of Nextcloud Clicks', 'Date'],
+            smooth: true,
+            resize: true,
+            ymin: 0,
+            hideHover: 'auto'
+          });
+        }
+      }
+    }
   </script>

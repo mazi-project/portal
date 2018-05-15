@@ -217,21 +217,39 @@ module MaziSensors
   end
 
   def getApplicationDataForDevice(device_id, start_time=nil, end_time=nil)
-    output = {}
+    output                                   = {}
+    output['etherpad']                       = {}
+    output['etherpad'][:data]                = {}
+    output['etherpad'][:data][:pads]         = []
+    output['etherpad'][:data][:users]        = []
+    output['etherpad'][:data][:datasize]     = []
+    output['etherpad'][:data][:clicks]       = []
+    output['guestbook']                      = {}
+    output['guestbook'][:data]               = {}
+    output['guestbook'][:data][:submissions] = []
+    output['guestbook'][:data][:comments]    = []
+    output['guestbook'][:data][:images]      = []
+    output['guestbook'][:data][:datasize]    = []
+    output['guestbook'][:data][:clicks]      = []
+    output['framadate']                      = {}
+    output['framadate'][:data]               = {}
+    output['framadate'][:data][:polls]       = []
+    output['framadate'][:data][:votes]       = []
+    output['framadate'][:data][:comments]    = []
+    output['framadate'][:data][:clicks]      = []
+    output['nextcloud']                      = {}
+    output['nextcloud'][:data]               = {}
+    output['nextcloud'][:data][:users]       = []
+    output['nextcloud'][:data][:files]       = []
+    output['nextcloud'][:data][:downloads]   = []
+    output['nextcloud'][:data][:datasize]    = []
+    output['nextcloud'][:data][:clicks]      = []
     mysql_username, mysql_password = mysql_creds
     con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
 
     q = "SELECT * FROM devices d INNER JOIN etherpad e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
     a.each_hash do |row|
-      if output['etherpad'].nil?
-        output['etherpad']                   = {}
-        output['etherpad'][:data]            = {}
-        output['etherpad'][:data][:pads]     = []
-        output['etherpad'][:data][:users]    = []
-        output['etherpad'][:data][:datasize] = []
-        output['etherpad'][:data][:clicks]   = []
-      end
       output['etherpad'][:data][:pads]     << {date: row['timestamp'], pads: row['pads']} if row['pads']
       output['etherpad'][:data][:users]    << {date: row['timestamp'], users: row['users']} if row['users']
       output['etherpad'][:data][:datasize] << {date: row['timestamp'], datasize: row['datasize']} if row['datasize']
@@ -240,15 +258,6 @@ module MaziSensors
     q = "SELECT * FROM devices d INNER JOIN guestbook e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
     a.each_hash do |row|
-      if output['guestbook'].nil?
-        output['guestbook']                      = {}
-        output['guestbook'][:data]               = {}
-        output['guestbook'][:data][:submissions] = []
-        output['guestbook'][:data][:comments]    = []
-        output['guestbook'][:data][:images]      = []
-        output['guestbook'][:data][:datasize]    = []
-        output['guestbook'][:data][:clicks]      = []
-      end
       output['guestbook'][:data][:submissions] << {date: row['timestamp'], submissions: row['submissions']} if row['submissions']
       output['guestbook'][:data][:comments]    << {date: row['timestamp'], comments: row['comments']} if row['comments']
       output['guestbook'][:data][:images]      << {date: row['timestamp'], images: row['images']} if row['images']
@@ -258,14 +267,6 @@ module MaziSensors
     q = "SELECT * FROM devices d INNER JOIN framadate e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
     a.each_hash do |row|
-      if output['framadate'].nil?
-        output['framadate']                   = {}
-        output['framadate'][:data]            = {}
-        output['framadate'][:data][:polls]    = []
-        output['framadate'][:data][:votes]    = []
-        output['framadate'][:data][:comments] = []
-        output['framadate'][:data][:clicks]   = []
-      end
       output['framadate'][:data][:polls]    << {date: row['timestamp'], polls: row['polls']} if row['polls']
       output['framadate'][:data][:votes]    << {date: row['timestamp'], votes: row['votes']} if row['votes']
       output['framadate'][:data][:comments] << {date: row['timestamp'], comments: row['comments']} if row['comments']
@@ -274,15 +275,6 @@ module MaziSensors
     q = "SELECT * FROM devices d INNER JOIN nextcloud e ON e.device_id = d.id WHERE d.id = #{device_id}"
     a = con.query(q)
     a.each_hash do |row|
-      if output['nextcloud'].nil?
-        output['nextcloud']                    = {}
-        output['nextcloud'][:data]             = {}
-        output['nextcloud'][:data][:users]     = []
-        output['nextcloud'][:data][:files]     = []
-        output['nextcloud'][:data][:downloads] = []
-        output['nextcloud'][:data][:datasize]  = []
-        output['nextcloud'][:data][:clicks]    = []
-      end
       output['nextcloud'][:data][:users]     << {date: row['timestamp'], users: row['users']} if row['users']
       output['nextcloud'][:data][:files]     << {date: row['timestamp'], files: row['files']} if row['files']
       output['nextcloud'][:data][:downloads] << {date: row['timestamp'], downloads: row['downloads']} if row['downloads']
