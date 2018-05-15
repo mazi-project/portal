@@ -546,17 +546,17 @@ module MaziSensors
     mysql_username, mysql_password = mysql_creds
     sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     if start_time == '*' && end_time == '*'
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time == '*'
-      q = "SELECT * FROM measurements WHERE time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time <= '#{end_time}'"
     elsif end_time == '*'
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}'"
     elsif start_time.nil? && end_time.nil?
-      q = "SELECT * FROM measurements #{SELECT_QUERY_LIMIT}"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time && end_time
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}' AND time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}' AND time <= '#{end_time}'"
     else
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     end
 
     a = sensors_con.query(q)
@@ -580,17 +580,17 @@ module MaziSensors
     mysql_username, mysql_password = mysql_creds
     sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     if start_time == '*' && end_time == '*'
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time == '*'
-      q = "SELECT * FROM measurements WHERE time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time <= '#{end_time}'"
     elsif end_time == '*'
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}'"
     elsif start_time.nil? && end_time.nil?
-      q = "SELECT * FROM measurements #{SELECT_QUERY_LIMIT}"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time && end_time
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}' AND time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}' AND time <= '#{end_time}'"
     else
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     end
 
     a = sensors_con.query(q)
@@ -615,17 +615,17 @@ module MaziSensors
     mysql_username, mysql_password = mysql_creds
     sensors_con = Mysql.new(SENSORS_DB_IP, mysql_username, mysql_password, MONITORING_DB)
     if start_time == '*' && end_time == '*'
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time == '*'
-      q = "SELECT * FROM measurements WHERE time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time <= '#{end_time}'"
     elsif end_time == '*'
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}'"
     elsif start_time.nil? && end_time.nil?
-      q = "SELECT * FROM measurements #{SELECT_QUERY_LIMIT}"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     elsif start_time && end_time
-      q = "SELECT * FROM measurements WHERE time >= '#{start_time}' AND time <= '#{end_time}'"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id} AND time >= '#{start_time}' AND time <= '#{end_time}'"
     else
-      q = "SELECT * FROM measurements"
+      q = "SELECT * FROM measurements m INNER JOIN sensors s ON m.sensor_id = s.id INNER JOIN devices d ON s.device_id = d.id WHERE s.id = #{id}"
     end
 
     a = sensors_con.query(q)

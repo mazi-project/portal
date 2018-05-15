@@ -89,25 +89,27 @@ $(function() {
   });
 
   $.each(pressure_data, function (id, data) {
-    Morris.Line({
-      element: 'morris-line-chart-pres-' + id,
-      data: data,
-      xkey: 'date',
-      ykeys: ['pres'],
-      labels: ['Pressure', 'Date'],
-      smooth: false,
-      resize: true,
-      hideHover: 'auto'
-    });
+    if($('#morris-line-chart-pres-' + id).length > 0){
+      Morris.Line({
+        element: 'morris-line-chart-pres-' + id,
+        data: data,
+        xkey: 'date',
+        ykeys: ['pres'],
+        labels: ['Pressure', 'Date'],
+        smooth: false,
+        resize: true,
+        hideHover: 'auto'
+      });
 
-    $('#export-pressure-' + id).click(function(){
-      var result = [['date', 'pressure']];
-      tLen = data.length;
-      for (i = 0; i < tLen; i++) {
-        result.push([data[i].date, data[i].hum]);
-      }
-      exportToCsv('pressure.csv', result);
-    });
+      $('#export-pressure-' + id).click(function(){
+        var result = [['date', 'pressure']];
+        tLen = data.length;
+        for (i = 0; i < tLen; i++) {
+          result.push([data[i].date, data[i].hum]);
+        }
+        exportToCsv('pressure.csv', result);
+      });
+    }
   });
 
   $.ajax({
