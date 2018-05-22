@@ -60,10 +60,10 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :index_application %>>
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
+            <a href="index"><i class="fa fa-fw fa-laptop"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
+            <a href="index_system"><i class="fa fa-fw fa-chart-bar"></i> <%= I18n.translate("portal.side-menu.system") %></a>
           </li>
           <% if sensors_enabled %>
           <li <%= 'class="active"' if main_body == :index_sensors %>>
@@ -109,10 +109,10 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :index_application %>>
-            <a href="index"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
+            <a href="index"><i class="fa fa-fw fa-laptop"></i> <%= I18n.translate("portal.side-menu.applications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :index_statistics %>>
-            <a href="index_system"><i class="fa fa-fw fa-bar-chart"></i> <%= I18n.translate("portal.side-menu.system") %></a>
+            <a href="index_system"><i class="fa fa-fw fa-chart-bar"></i> <%= I18n.translate("portal.side-menu.system") %></a>
           </li>
           <% if sensors_enabled %>
           <li <%= 'class="active"' if main_body == :index_sensors %>>

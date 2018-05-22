@@ -27,10 +27,10 @@
           <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <%= I18n.translate("admin.top-menu.admin") %> <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li>
-              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.username") %></a>
+              <a href="/admin_change_username"><i class="fa fa-fw fa-exchange-alt"></i> <%= I18n.translate("admin.top-menu.username") %></a>
             </li>
             <li>
-              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange"></i> <%= I18n.translate("admin.top-menu.password") %></a>
+              <a href="/admin_change_password"><i class="fa fa-fw fa-exchange-alt"></i> <%= I18n.translate("admin.top-menu.password") %></a>
             </li>
             <li>
               <a href="/admin_settings"><i class="fa fa-fw fa-cog"></i> <%= I18n.translate("admin.top-menu.settings") %></a>
@@ -40,13 +40,13 @@
             </li>
             <li class="divider"></li>
             <li>
-              <a href="#" data-toggle="modal" data-target="#reboot-modal"><i class="fa fa-fw fa-refresh"></i> <%= I18n.translate("general.buttons.reboot") %></a>
+              <a href="#" data-toggle="modal" data-target="#reboot-modal"><i class="fa fa-fw fa-undo-alt"></i> <%= I18n.translate("general.buttons.reboot") %></a>
             </li>
             <li>
               <a href="#" data-toggle="modal" data-target="#shutdown-modal"><i class="fa fa-fw fa-power-off"></i> <%= I18n.translate("general.buttons.shutdown") %></a>
             </li>
             <li>
-              <a href="/admin_logout"><i class="fa fa-fw fa-sign-out admin-logout-button"></i> <%= I18n.translate("general.buttons.logout") %></a>
+              <a href="/admin_logout"><i class="fa fa-fw fa-sign-out-alt admin-logout-button"></i> <%= I18n.translate("general.buttons.logout") %></a>
             </li>
           </ul>
         </li>
@@ -55,7 +55,7 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :admin_dashboard %> >
-            <a href="admin_dashboard"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("admin.side-menu.dashboard") %></a>
+            <a href="admin_dashboard"><i class="fa fa-fw fa-tachometer-alt"></i> <%= I18n.translate("admin.side-menu.dashboard") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_application %>>
             <a href="admin_application"><i class="fa fa-fw fa-laptop"></i> <%= I18n.translate("admin.side-menu.applications") %></a>
@@ -67,19 +67,19 @@
             <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i> <%= I18n.translate("admin.side-menu.appearance") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_devices %>>
-            <a href="admin_devices"><i class="fa fa-fw fa-building-o"></i> <%= I18n.translate("admin.side-menu.devices") %></a>
+            <a href="admin_devices"><i class="fa fa-fw fa-mobile"></i> <%= I18n.translate("admin.side-menu.devices") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_monitor %>>
             <a href="admin_monitor"><i class="fa fa-fw fa-database"></i> <%= I18n.translate("admin.side-menu.monitoring") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_notification %>>
-            <a href="admin_notification"><i class="fa fa-fw fa-bell-o"></i> <%= I18n.translate("admin.side-menu.notifications") %></a>
+            <a href="admin_notification"><i class="fa fa-fw fa-bell"></i> <%= I18n.translate("admin.side-menu.notifications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_snapshot %>>
-            <a href="admin_snapshot"><i class="fa fa-fw fa-photo"></i> <%= I18n.translate("admin.side-menu.export-import") %></a>
+            <a href="admin_snapshot"><i class="fa fa-fw fa-save"></i> <%= I18n.translate("admin.side-menu.export-import") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_logs %>>
-            <a href="admin_logs"><i class="fa fa-fw fa-file-text-o"></i> <%= I18n.translate("admin.side-menu.logs") %></a>
+            <a href="admin_logs"><i class="fa fa-fw fa-file-alt"></i> <%= I18n.translate("admin.side-menu.logs") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_documentation %>>
             <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> <%= I18n.translate("admin.side-menu.documentation") %></a>
@@ -104,7 +104,7 @@
       <div class="collapse navbar-collapse navbar-ex1-collapse">
         <ul class="nav navbar-nav side-nav">
           <li <%= 'class="active"' if main_body == :admin_dashboard %> >
-            <a href="admin_dashboard"><i class="fa fa-fw fa-dashboard"></i> <%= I18n.translate("admin.side-menu.dashboard") %></a>
+            <a href="admin_dashboard"><i class="fa fa-fw fa-tachometer-alt"></i> <%= I18n.translate("admin.side-menu.dashboard") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_application %>>
             <a href="admin_application"><i class="fa fa-fw fa-laptop"></i> <%= I18n.translate("admin.side-menu.applications") %></a>
@@ -116,19 +116,19 @@
             <a href="admin_configuration"><i class="fa fa-fw fa-cog"></i> <%= I18n.translate("admin.side-menu.appearance") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_devices %>>
-            <a href="admin_devices"><i class="fa fa-fw fa-building-o"></i> <%= I18n.translate("admin.side-menu.devices") %></a>
+            <a href="admin_devices"><i class="fa fa-fw fa-mobile"></i> <%= I18n.translate("admin.side-menu.devices") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_monitor %>>
             <a href="admin_monitor"><i class="fa fa-fw fa-database"></i> <%= I18n.translate("admin.side-menu.monitoring") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_notification %>>
-            <a href="admin_notification"><i class="fa fa-fw fa-bell-o"></i> <%= I18n.translate("admin.side-menu.notifications") %></a>
+            <a href="admin_notification"><i class="fa fa-fw fa-bell"></i> <%= I18n.translate("admin.side-menu.notifications") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_snapshot %>>
-            <a href="admin_snapshot"><i class="fa fa-fw fa-photo"></i> <%= I18n.translate("admin.side-menu.export-import") %></a>
+            <a href="admin_snapshot"><i class="fa fa-fw fa-save"></i> <%= I18n.translate("admin.side-menu.export-import") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_logs %>>
-            <a href="admin_logs"><i class="fa fa-fw fa-file-text-o"></i> <%= I18n.translate("admin.side-menu.logs") %></a>
+            <a href="admin_logs"><i class="fa fa-fw fa-file-alt"></i> <%= I18n.translate("admin.side-menu.logs") %></a>
           </li>
           <li <%= 'class="active"' if main_body == :admin_documentation %>>
             <a href="admin_documentation"><i class="fa fa-fw fa-book"></i> <%= I18n.translate("admin.side-menu.documentation") %></a>

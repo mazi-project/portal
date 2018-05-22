@@ -109,6 +109,37 @@ class MaziApp < Sinatra::Base
     init_sensors
     init_camera
     init_locales
+    Mazi::Model::Application.all.each do |app|
+      if app.icon.nil?
+        case app.name
+        when "Etherpad"
+          app.icon  = "fa fa-5x fa-file-alt"
+          app.color = "green"
+          app.type  = "standalone"
+        when "NextCloud"
+          app.icon  = "fa fa-5x fa-cloud"
+          app.color = "red"
+          app.type  = "web"
+        when "GuestBook"
+          app.icon  = "fa fa-5x fa-book"
+          app.color = "yellow"
+          app.type  = "standalone"
+        when "WordPress"
+          app.icon  = "fab fa-5x fa-wordpress-simple"
+          app.color = "blue"
+          app.type  = "web"
+        when "FramaDate"
+          app.icon  = "fa fa-5x fa-question"
+          app.color = "purple"
+          app.type  = "web"
+        when "Interview-archive"
+          app.icon  = "fa fa-5x fa-file-audio"
+          app.color = "teal"
+          app.type  = "standalone"
+        end
+        app.save
+      end
+    end
   end
 
   error do |err|

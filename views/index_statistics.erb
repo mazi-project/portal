@@ -20,7 +20,7 @@
 
   <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="circle-tile ">
-      <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-hand-pointer-o fa-fw fa-3x"></i></div></a>
+      <a href="#"><div class="circle-tile-heading dark-blue"><i class="fa fa-fw fa-hand-pointer fa-3x"></i></div></a>
       <div class="circle-tile-content dark-blue">
         <div class="circle-tile-description text-faded"> <%= I18n.translate("portal.system-page.app-clicks") %> </div>
         <div class="circle-tile-number text-faded "><%= clicks %></div>
@@ -68,7 +68,7 @@
   <% color = storage.gsub("%", '').to_f > 80.0 ? 'red' : 'green' %>
   <div class="col-lg-2 col-md-3 col-sm-4">
     <div class="circle-tile ">
-      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-hdd-o fa-fw fa-3x"></i></div></a>
+      <a href="#"><div class="circle-tile-heading <%= color %>"><i class="fa fa-hdd fa-fw fa-3x"></i></div></a>
       <div class="circle-tile-content <%= color %>">
         <div class="circle-tile-description text-faded"> <%= I18n.translate("portal.system-page.storage") %> </div>
         <div class="circle-tile-number text-faded "><%= storage %></div>

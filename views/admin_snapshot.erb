@@ -35,8 +35,7 @@
                 <input type="hidden" name="save" class="form-control" value='true' autofocus="">
                 <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
                 <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
-                </div>
-                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i><%= I18n.translate("general.buttons.save") %></button>
+                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> <%= I18n.translate("general.buttons.save") %></button>
               </form>
             </div>
           </div>
@@ -64,7 +63,7 @@
                   </select>
                   <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.message") %></small>
                 </div>
-                <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-remove"></i> <%= I18n.translate("general.buttons.delete") %></button>
+                <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-trash-alt"></i> <%= I18n.translate("general.buttons.delete") %></button>
                 <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.load") %></button>
               </form>
               <% else %>

@@ -64,7 +64,7 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-blue">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
+      <h3 class="panel-title"><i class="fa fa-tint"></i> <%= I18n.translate("portal.sensors-page.humidity-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-hum-<%= sensor[:id]%>"></div>
@@ -78,7 +78,7 @@
   <div class="col-lg-6 col-sm-12">
     <div class="panel panel-purple">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-line-chart"></i> <%= I18n.translate("portal.sensors-page.pressure-for", sensor:  sensor[:type]) %></h3>
+      <h3 class="panel-title"><i class="fa fa-chart-line"></i> <%= I18n.translate("portal.sensors-page.pressure-for", sensor:  sensor[:type]) %></h3>
       </div>
       <div class="panel-body">
         <div id="morris-line-chart-pres-<%= sensor[:id]%>"></div>
@@ -95,7 +95,7 @@
   <div class="col-lg-6 col-sm-12 special-metrics-panel">
     <div class="panel panel-yellow">
       <div class="panel-heading">
-      <h3 class="panel-title"><i class="fa fa-tachometer"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  'sensehat') %></h3>
+      <h3 class="panel-title"><i class="fa fa-tachometer-alt"></i> <%= I18n.translate("portal.sensors-page.metrics-for", sensor:  'sensehat') %></h3>
       </div>
       <div class="panel-body">
         <div class="row col-with-divider">

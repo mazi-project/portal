@@ -453,6 +453,7 @@ input:checked + .slider:before {
 
 .mode-btn{
   margin-right: 11px;
+  margin-top: 5px;
 }
 
 .connect-btn{
@@ -461,10 +462,11 @@ input:checked + .slider:before {
 
 .toggle-ap-btn{
   margin-right: 10px;
+  margin-top: 5px;
 }
 
 .domain-btn{
-  margin-right: 12px;
+  margin-right: 11px;
 }
 
 .panel-body > div > div:nth-child(2) > h2{
