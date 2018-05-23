@@ -1,7 +1,9 @@
 <script type="text/javascript">
   <% applications.each do |app| %>
-  var <%= "#{app.name.gsub('-', '_').downcase}_name = '#{app.name}'" %>;
-  var <%= "#{app.name.gsub('-', '_').downcase}_url  = '#{app.url}'" %>;
+  var <%= "#{app.name.gsub('-', '_').downcase}_name  = '#{app.name}'" %>;
+  var <%= "#{app.name.gsub('-', '_').downcase}_url   = '#{app.url}'" %>;
+  var <%= "#{app.name.gsub('-', '_').downcase}_icon  = '#{app.icon}'" %>;
+  var <%= "#{app.name.gsub('-', '_').downcase}_color = '#{app.color}'" %>;
   <% end %>
 </script>
 
@@ -26,12 +28,14 @@
       <tr>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.active-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.splash-page-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.splash-page-column") %></th>
+        <th title="<%= I18n.translate("admin.applications-page.applications-menu.color-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.color-column") %></th>
+        <th title="<%= I18n.translate("admin.applications-page.applications-menu.icon-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.icon-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.name-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.name-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.url-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.url-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.description-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.parent-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.parent-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.clicks-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.click-column") %></th>
-        <th title="<%= I18n.translate("admin.applications-page.instances-menu.actions-hint") %>" class='text-center' style='width: 130px'><%= I18n.translate("admin.applications-page.instances-menu.actions-column") %></th>
+        <th title="<%= I18n.translate("admin.applications-page.instances-menu.actions-hint") %>" class='text-center' style='width: 140px'><%= I18n.translate("admin.applications-page.instances-menu.actions-column") %></th>
       </tr>
     </thead>
     <tbody>
@@ -49,6 +53,10 @@
             <div class="slider round splash-instance-switch" id='splash-instance-switch_<%= app.id %>'></div>
           </label>
         </td>
+        <% color = app.color.nil? ? app.application.color : app.color %>
+        <td><div class="small-colored-square small-colored-square-<%= color %>"></div></td>
+        <% icon = app.icon.nil? ? app.application.icon : app.icon %>
+        <td><i class="<%= icon.gsub('fa-5x', '') %>"></i></td>
         <td><%= app.name %></td>
         <td><a href='<%= app.url %>' target="_blank"><%= app.url %></a></td>
         <td><%= app.description %></td>
@@ -58,7 +66,7 @@
           <div class="text-center">
             <div class="btn-group pull-center">
               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-instance-modal-<%= app.id %>" title="<%= I18n.translate("admin.applications-page.instances-menu.edit-instance-hint") %>">
-                <i class="fa fa-pencil"></i>
+                <i class="fa fa-pencil-alt"></i>
               </a>
               <% if app.application.name == 'GuestBook' %>
               <a class="btn btn-success admin_app" id='edit_app_<%= app.id %>' title="<%= I18n.translate("admin.applications-page.instances-menu.guestbook-admin-hint") %>" href="/admin_guestbook">
@@ -66,7 +74,7 @@
               </a>
               <% end %>
               <a class="btn btn-danger del_app_inst" id='del_app_inst_<%= app.id %>' title="<%= I18n.translate("admin.applications-page.instances-menu.delete-instance-hint") %>">
-                <i class="fa fa-times"></i>
+                <i class="fa fa-trash"></i>
               </a>
             </div>
           </div>
@@ -76,6 +84,9 @@
     </tbody>
     <tfoot>
       <tr>
+        <td></td>
+        <td></td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -94,6 +105,8 @@
     <thead>
       <tr>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.status-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.status-column") %></th>
+        <th title="<%= I18n.translate("admin.applications-page.applications-menu.color-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.color-column") %></th>
+        <th title="<%= I18n.translate("admin.applications-page.applications-menu.icon-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.icon-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.name-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.name-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.url-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.url-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.description-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.description-column") %></th>
@@ -103,33 +116,38 @@
     <tbody>
       <% applications.each do |app| %>
         <% status = mode != 'demo' ? app.status : "ON" %>
-        <% web_app = app.name == 'NextCloud' || app.name == 'FramaDate' || app.name == 'WordPress' ? true : false %>
       <tr class="app_tr" id="app_tr_<%= app.id.to_s %>">
-        <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : '<span class="label label-danger">stopped</span>' %></td>
+        <td><%= status == 'ON' ? '<span class="label label-success">running</span>' : status == 'N/A' ? '<span class="label label-warning">N/A</span>' : '<span class="label label-danger">stopped</span>' %></td>
+        <td><div class="small-colored-square small-colored-square-<%= app.color %>"></div></td>
+        <td><i class="<%= app.icon.gsub('fa-5x', '') %>"></i></td>
         <td><%= app.name %></td>
         <td><a href='<%= app.url %>' target="_blank"><%= app.url %></a></td>
         <td><%= app.description %></td>
         <td>
           <div class="text-center">
             <div class="btn-group pull-center">
-              <% if web_app %>
+            <% if app.type == 'web' %>
               <i class="fa fa-info-circle fa-2x pull-right web-app-info" title="Starting/Stopping this application will not affect the performance of your MAZI Zone." data-toggle="modal" data-target="#web-app-info-modal"></i>
-              <% else %>
-              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || web_app %> title="<%= !web_app ? 'Start Application' : 'This is a web application, it always runs.' %>">
+            <% elsif app.type == 'custom' %>
+              <a class="btn btn-danger del_app" id='del_app_<%= app.id %>' title="Delete Application">
+                <i class="fa fa-trash"></i>
+              </a>
+            <% else %>
+              <a class="btn btn-success start_app" id='start_app_<%= app.id %>' <%= 'disabled' if status == 'ON' || app.type == 'web' %> title="<%= !app.type == 'web' ? 'Start Application' : 'This is a web application, it always runs.' %>">
                 <i class="fa fa-play"></i>
               </a>
-              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || web_app %> title="<%= !web_app ? 'Stop Application' : 'This is a web application, it always runs.' %>">
+              <a class="btn btn-warning stop_app" id='stop_app_<%= app.id %>' <%= 'disabled' if status == 'OFF' || app.type == 'web' %> title="<%= !app.type == 'web' ? 'Stop Application' : 'This is a web application, it always runs.' %>">
                 <i class="fa fa-stop"></i>
               </a>
-              <% end %>
-              <% if enable_application_editing %>
+            <% end %>
+            <% if enable_application_editing %>
               <a class="btn btn-info edit_app" id='edit_app_<%= app.id %>' data-toggle="modal" data-target="#edit-application-modal-<%= app.id %>" title="Edit Application">
-                <i class="fa fa-pencil"></i>
+                <i class="fa fa-pencil-alt"></i>
               </a>
               <a class="btn btn-danger del_app" id='del_app_<%= app.id %>' title="Delete Application">
-                <i class="fa fa-times"></i>
+                <i class="fa fa-trash"></i>
               </a>
-              <% end %>
+            <% end %>
             </div>
           </div>
         </td>
@@ -144,11 +162,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td>
-        <% if enable_application_editing %>
-        <a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a>
-        <% end %>
-        </td>
+        <td><a class="btn btn-success teal-text pull-right" data-toggle="modal" data-target="#new-application-modal"  title="Create New Application"><i class="fa fa-plus"></i></a></td>
       </tr>
     </tfoot>
 </table>
@@ -168,6 +182,18 @@
           <div class="form-group">
             <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
             <input type="text" name="url" class="form-control" placeholder="URL" required>
+            <input type="text" name="icon" class="form-control" placeholder="icon" required>
+            <select name="color" class="form-control" required>
+              <option value="" disabled selected>Color</option>
+              <option value='green'>green</option>
+              <option value='yellow'>yellow</option>
+              <option value='red'>red</option>
+              <option value='blue'>blue</option>
+              <option value='purple'>purple</option>
+              <option value='teal'>teal</option>
+              <option value='navi'>navi</option>
+              <option value='lime'>lime</option>
+            </select>
             <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
           </div>
@@ -193,6 +219,17 @@
             <input type="hidden" name="id" value="<%= app.id %>">
             <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
             <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
+            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" required>
+            <select name="color" class="form-control" required>
+              <option value='green' <%= 'selected' if app.color == 'green' %>>green</option>
+              <option value='yellow' <%= 'selected' if app.color == 'yellow' %>yellow</option>
+              <option value='red' <%= 'selected' if app.color == 'red' %>red</option>
+              <option value='blue' <%= 'selected' if app.color == 'blue' %>blue</option>
+              <option value='purple' <%= 'selected' if app.color == 'purple' %>purple</option>
+              <option value='teal' <%= 'selected' if app.color == 'teal' %>teal</option>
+              <option value='navi' <%= 'selected' if app.color == 'navi' %>navi</option>
+              <option value='lime' <%= 'selected' if app.color == 'lime' %>lime</option>
+            </select>
             <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
           </div>
@@ -222,14 +259,28 @@
             <input type="hidden" name="instance" value='true'>
             <select class="form-control" id="create_inst_app_name_sl" name='application'>
             <% first_app_url = nil %>
+            <% first_app_icon = nil %>
             <% applications.each do |app| %>
-              <% next unless can_have_multiple_instances.include?(app.name) || app.application_instances.length < 1 %>
+              <% next unless can_have_multiple_instances.include?(app.name) || app.type == 'custom' || app.application_instances.length < 1 %>
               <option value='<%= app.id%>'><%= app.name %></option>
               <% first_app_url = app.url if first_app_url.nil?%>
+              <% first_app_icon = app.icon if first_app_icon.nil?%>
             <% end %>
             </select>
             <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
             <input type="text" name="url" class="form-control" id="create_inst_app_url_in" placeholder="URL" value='<%= first_app_url %>' required>
+            <input type="text" name="icon" class="form-control" id="create_inst_app_icon_in" placeholder="icon" value='<%= first_app_icon %>' required>
+            <select name="color" class="form-control" id="create_inst_app_color_sl" required>
+              <option value="" disabled selected>Color</option>
+              <option value='green'>green</option>
+              <option value='yellow'>yellow</option>
+              <option value='red'>red</option>
+              <option value='blue'>blue</option>
+              <option value='purple'>purple</option>
+              <option value='teal'>teal</option>
+              <option value='navi'>navi</option>
+              <option value='lime'>lime</option>
+            </select>
             <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
           </div>
@@ -257,6 +308,17 @@
             <input type="hidden" name="id" value="<%= app.id %>">
             <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
             <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
+            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" required>
+            <select name="color" class="form-control" required>
+              <option value='green' <%= 'selected' if app.color == 'green' %>>green</option>
+              <option value='yellow' <%= 'selected' if app.color == 'yellow' %>>yellow</option>
+              <option value='red' <%= 'selected' if app.color == 'red' %>>red</option>
+              <option value='blue' <%= 'selected' if app.color == 'blue' %>>blue</option>
+              <option value='purple' <%= 'selected' if app.color == 'purple' %>>purple</option>
+              <option value='teal' <%= 'selected' if app.color == 'teal' %>>teal</option>
+              <option value='navi' <%= 'selected' if app.color == 'navi' %>>navi</option>
+              <option value='lime' <%= 'selected' if app.color == 'lime' %>>lime</option>
+            </select>
             <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
           </div>

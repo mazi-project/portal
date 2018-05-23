@@ -15,6 +15,7 @@ module Mazi::Model
         description.delete_if {|k, v| !valid_keys.include?(k) }
       end
       description['click_counter'] = 0
+      description['enabled'] ||= true
       description['type'] ||= 'custom'
       nil
     end
@@ -46,6 +47,12 @@ module Mazi::Model
     end
 
     def status
+      if self.type == 'web'
+        return 'ON'
+      elsif self.type == 'custom'
+        return 'N/A'
+      end
+
       case self.name.downcase
       when 'nextcloud'
         return 'ON'

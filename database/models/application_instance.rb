@@ -5,11 +5,11 @@ module Mazi::Model
     # returns nil if it is OK, else it returns the key that is missing
     def self.validate(description={})
       description['application_id'] = description.delete('application') if description['application']
-      mandatory_keys = ['name', 'url', 'application_id']
+      mandatory_keys = ['name', 'url', 'application_id', 'color', 'icon']
       mandatory_keys.each do |key|
         return key if description[key].nil? || description[key].empty?
       end
-      valid_keys = ['name', 'description', 'url', 'application_id']
+      valid_keys = ['name', 'description', 'url', 'application_id', 'color', 'icon']
       description.each do |key|
         description.delete_if {|k, v| !valid_keys.include?(k) }
       end
@@ -21,11 +21,11 @@ module Mazi::Model
     # validate if there is something missing in the
     # returns nil if it is OK, else it returns the key that is missing
     def self.validate_edit(description={})
-      mandatory_keys = ['id', 'name', 'description', 'url']
+      mandatory_keys = ['id', 'name', 'description', 'url', 'color', 'icon']
       mandatory_keys.each do |key|
         return key if description[key].nil? || description[key].empty?
       end
-      valid_keys = ['id', 'name', 'description', 'url', 'enabled']
+      valid_keys = ['id', 'name', 'description', 'url', 'enabled', 'color', 'icon']
       description.each do |key|
         description.delete_if {|k, v| !valid_keys.include?(k) }
       end

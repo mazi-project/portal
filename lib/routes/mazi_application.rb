@@ -24,7 +24,8 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have created a new application."
                 redirect '/admin_application'
               end
-
+              params['icon'] = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
+              params['icon'] = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
               a =  Mazi::Model::ApplicationInstance.create(params)
             else
               e = Mazi::Model::Application.validate(params)
@@ -38,7 +39,8 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have created a new application."
                 redirect '/admin_application'
               end
-
+              params['icon'] = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
+              params['icon'] = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
               a =  Mazi::Model::Application.create(params)
             end
             redirect '/admin_application'
@@ -70,6 +72,10 @@ module Sinatra
               app.url         = params['url'] if params['url']
               app.description = params['description'] if params['description']
               app.enabled     = params['enabled'] if params['enabled']
+              app.icon        = params['icon'] if params['icon']
+              app.icon        = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
+              app.icon        = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
+              app.color       = params['color'] if params['color']
               app.save
             else
               e = Mazi::Model::Application.validate_edit(params)
@@ -89,6 +95,10 @@ module Sinatra
               app.url         = params['url'] if params['url']
               app.description = params['description'] if params['description']
               app.enabled     = params['enabled'] if params['enabled']
+              app.icon        = params['icon'] if params['icon']
+              app.icon        = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
+              app.icon        = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
+              app.color       = params['color'] if params['color']
               app.save
             end
             redirect '/admin_application'

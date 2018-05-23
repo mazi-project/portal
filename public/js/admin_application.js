@@ -161,7 +161,11 @@ $( document ).ready(function() {
 
   $("#create_inst_app_name_sl").change(function() {
     optionSelected = $("option:selected", this).text();
-    new_url = eval(optionSelected.toLowerCase().replace('-', '_') + "_url");
+    new_url        = eval(optionSelected.toLowerCase().replace('-', '_') + "_url");
+    new_icon       = eval(optionSelected.toLowerCase().replace('-', '_') + "_icon");
+    new_color      = eval(optionSelected.toLowerCase().replace('-', '_') + "_color");
     $("#create_inst_app_url_in").val(new_url);
+    $("#create_inst_app_icon_in").val(new_icon);
+    $("#create_inst_app_color_sl").val(new_color);
   });
 });

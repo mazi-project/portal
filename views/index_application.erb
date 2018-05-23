@@ -1,23 +1,23 @@
 <div class="jumbotron">
-  <h1><%= config_data[:applications_title]%> <small><%= config_data[:applications_subtitle]%></small></h1>      
+  <h1><%= config_data[:applications_title]%> <small><%= config_data[:applications_subtitle]%></small></h1>
   <p class='welcome-txt'> <%= config_data[:applications_welcome_text]%> </p>
 </div>
 
 
 <div class="row app-row" style="background: url('images/<%= config_data[:applications_background_image]%>'); background-size: cover;">
-  <% cnt = 0 %>
   <% colors = ['green', 'red', 'yellow', 'blue', 'purple']%>
   <% icons = ['search', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
   <% application_instances.each do |app| %>
-  <% next if !app.enabled || !app.application.enabled %>
-  <% icon = app.application.name == 'Etherpad' ? 'file-text-o' : app.application.name == 'NextCloud' ? 'cloud' : app.application.name == 'GuestBook' ? 'book' : app.application.name == 'WordPress' ? 'wordpress' : app.application.name == 'FramaDate' ? 'question' : app.application.name == 'Interview-archive' ? 'file-sound-o' : icons[cnt % icons.length]  %>
+    <% next if !app.enabled || !app.application.enabled %>
+    <% icon = app.icon ? app.icon : app.application.icon %>
+    <% color = app.color ? app.color : app.application.color %>
   <div class="col-xl-3 col-lg-3 col-md-4 col-sm-12">
-    <div class="panel panel-<%= colors[cnt % colors.length] %> app-panel">
+    <div class="panel panel-<%= color %> app-panel">
       <div class="panel-heading">
         <a target="_blank" href="<%= app.url %>" class="app-link" id="app_link_<%= app.id %>">
           <div class="row">
             <div class="col-xs-3">
-              <i class="fa fa-<%= icon %> fa-5x"></i>
+              <i class="<%= icon %>"></i>
             </div>
             <div class="col-xs-9 text-center">
               <div class="huge"><%= app.name %></div>
@@ -32,6 +32,5 @@
       </a>
     </div>
   </div>
-  <% cnt += 1 %>
   <% end %>
 </div>
