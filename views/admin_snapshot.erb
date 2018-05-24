@@ -27,14 +27,14 @@
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.header-hint") %>"></i>
             </div>
           </div>
-          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
               <form id="save-snapshot-form" action="/snapshot" method="post">
                 <div class="form-group">
-                <input type="hidden" name="save" class="form-control" value='true' autofocus="">
-                <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
-                <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
+                  <input type="hidden" name="save" class="form-control" value='true' autofocus="">
+                  <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
+                  <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
+                </div>
                 <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> <%= I18n.translate("general.buttons.save") %></button>
               </form>
             </div>
@@ -49,7 +49,6 @@
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.load-snapshot-panel.header-hint") %>"></i>
             </div>
           </div>
-          <!-- panel body -->
           <div class="panel-body">
             <div class="row">
               <% unless dbs.nil? || dbs.empty? %>
@@ -84,7 +83,6 @@
               <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.import-export-panel.header-hint") %>"></i>
             </div>
           </div>
-          <!-- panel body -->
           <div class="panel-body">
             <div class="row" style="margin-right: -11px; margin-left: -11px;">
               <% unless dbs.nil? || dbs.empty? %>
