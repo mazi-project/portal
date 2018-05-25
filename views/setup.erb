@@ -80,6 +80,13 @@
                       </a>
                     </li>
                     <li role="presentation" class="disabled">
+                      <a href="#step4" data-toggle="tab" aria-controls="step4" role="tab" title="Step 4">
+                        <span class="round-tab">
+                          <i class="glyphicon glyphicon-list-alt"></i>
+                        </span>
+                      </a>
+                    </li>
+                    <li role="presentation" class="disabled">
                       <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
                         <span class="round-tab">
                           <i class="glyphicon glyphicon-ok"></i>
@@ -128,6 +135,20 @@
                       <p><%= I18n.translate("admin.setup-page.third-step-message") %></p>
                       <input id="ssid" type="text" name='ssid' class="form-control">
                       <small>* <%= I18n.translate("admin.setup-page.third-step-warning") %></small>
+                      <ul class="list-inline pull-right" style='margin-top: 10px;'>
+                        <li><button type="button" class="btn btn-default prev-step"><%= I18n.translate("general.buttons.previous") %></button></li>
+                        <li><button type="button" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.continue") %></button></li>
+                      </ul>
+                    </div>
+                    <div class="tab-pane" role="tabpanel" id="step4">
+                       <h3><%= I18n.translate("admin.setup-page.fourth-step-header") %></h3>
+                      <p><%= I18n.translate("admin.setup-page.fourth-step-message") %></p>
+                      <input type="text" name="deployment" class="form-control" placeholder="Deployment Name" autofocus>
+                      <input type="text" name="admin" class="form-control" placeholder="Administrator Name">
+                      <input type="text" name="title" class="form-control" placeholder="Device's Title">
+                      <input type="text" name="description" class="form-control" placeholder="Device's Description">
+                      <input type="text" name="location" class="form-control" placeholder="Location (lat, long)">
+                      <small>* <%= I18n.translate("admin.setup-page.fourth-step-warning") %></small>
                       <ul class="list-inline pull-right" style='margin-top: 10px;'>
                         <li><button type="button" class="btn btn-default prev-step"><%= I18n.translate("general.buttons.previous") %></button></li>
                         <li><button type="button" class="btn btn-primary next-step"><%= I18n.translate("general.buttons.continue") %></button></li>

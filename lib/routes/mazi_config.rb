@@ -235,6 +235,11 @@ module Sinatra
               session['error'] = "This portal runs on Demo mode! This action would have initiated the setup mechanism."
               redirect '/admin'
             end
+            unless authorized?
+              MaziLogger.debug "Not authorized"
+              session['error'] = nil
+              redirect '/admin_login?goto=setup'
+            end
             if params['current-password'].nil? || params['current-password'].empty?
               session['error'] = "Field Current Password is mandatory! Please try again."
               redirect '/setup'
@@ -255,6 +260,30 @@ module Sinatra
               session['error'] = "Password 1234 cannot be used! Please try again."
               redirect '/setup'
             end
+            if params['deployment'].nil? || params['deployment'].empty?
+              session['error'] = "Field Deployment Name is mandatory! Please try again."
+              redirect '/setup'
+            end
+            if params['admin'].nil? || params['admin'].empty?
+              session['error'] = "Field Administrator Name is mandatory! Please try again."
+              redirect '/setup'
+            end
+            if params['title'].nil? || params['title'].empty?
+              session['error'] = "Field Device's Title is mandatory! Please try again."
+              redirect '/setup'
+            end
+            if params['descritpion'].nil? || params['descritpion'].empty?
+              session['error'] = "Field Device's Description is mandatory! Please try again."
+              redirect '/setup'
+            end
+            if params['location'].nil? || params['location'].empty?
+              session['error'] = "Field Location is mandatory! Please try again."
+              redirect '/setup'
+            end
+            unless valid_location?(params['location'])
+              session['error'] = "Invalid location! Please try again by using this format 'latitude, longitude'."
+              redirect '/setup'
+            end
             unless valid_password?(params['current-password'])
               session['error'] = "Current Password missmatch! Please try again."
               redirect '/setup'
@@ -262,6 +291,14 @@ module Sinatra
 
             changeConfigFile("admin->admin_password", params['password'])
             writeConfigFile
+
+            details               = {}
+            details[:deployment]  = params['deployment']
+            details[:admin]       = params['admin']
+            details[:title]       = params['title']
+            details[:description] = params['description']
+            details[:location]    = params['location']
+            write_monitoring_details(details)
 
             unless params['date'].nil? || params['date'].empty?
               ex = MaziExecCmd.new('', '', 'date', ['-s', "'#{params['date']}'"], @config[:scripts][:enabled_scripts])

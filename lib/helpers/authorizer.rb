@@ -21,6 +21,15 @@ module Authorizer
     password == readConfigFile[:admin][:admin_password]
   end
 
+  def valid_location?(location)
+    if @config[:general][:mode] == 'demo'
+      return true
+    end
+    return false if location.include?('(') || location.include?(')') || location.include?("'") || location.include?('"')
+    return false unless location.include?(', ') && location.include?('.')
+    true
+  end
+
   def first_time?
     readConfigFile[:admin][:admin_password] == '1234'
   end
