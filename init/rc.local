@@ -1,0 +1,72 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+
+# Print the IP address
+_IP=$(hostname -I) || true
+if [ "$_IP" ]; then
+  printf "My IP address is %s\n" "$_IP"
+fi
+
+
+##############################
+##### MAZI configuration######
+##############################
+
+# Internet forwarding
+echo "1"| sudo tee /proc/sys/net/ipv4/ip_forward
+
+
+/sbin/ifconfig wlan0 10.0.0.1
+#ifdown wlan0
+#sleep 1
+#hostapd -B /etc/hostapd/hostapd.conf
+#ifconfig wlan0 10.0.0.1
+
+#### OpenWrt ####
+
+FILE="/etc/mazi/update-lock"
+x=0
+#### Wait the Update to finish before you setup the Hostapd ####
+#### timeout in 1800sec=30min  ####
+while [ $x -lt 1800 ] && [ -e $FILE ]; do
+     x=$[$x+1]
+     sleep .1
+     #echo $x
+done
+if ! [ -e $FILE ]
+then
+   echo "Update finished"
+   sh /root/back-end/wifiap.sh
+else
+   echo "Update is not properly finished"
+fi
+
+echo '-------------------------------------------------------'
+##############################
+#START RASPIMJPEG SECTION
+mkdir -p /dev/shm/mjpeg
+chown www-data:www-data /dev/shm/mjpeg
+chmod 777 /dev/shm/mjpeg
+sleep 4;su -c 'raspimjpeg > /dev/null 2>&1 &' www-data
+
+if [ -e /etc/debian_version ]; then
+  sleep 4;su -c "php /var/www/html/schedule.php > /dev/null 2>&1 &" www-data
+  #sleep 4;su -c "/usr/src/RPi_Cam_Web_Interface/stop.sh" root
+  #sleep 1;su -c "/usr/src/RPi_Cam_Web_Interface/start.sh" root
+else
+  sleep 4;su -s '/bin/bash' -c "php /var/www/html/schedule.php > /dev/null 2>&1 &" www-data
+  #sleep 4;su -s '/bin/bash' -c "/usr/src/RPi_Cam_Web_Interface/stop.sh" root
+  #sleep 1;su -s '/bin/bash' -c "/usr/src/RPi_Cam_Web_Interface/start.sh" root
+fi
+#END RASPIMJPEG SECTION
+
+exit 0

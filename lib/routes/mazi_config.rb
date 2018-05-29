@@ -333,7 +333,7 @@ module Sinatra
               version_update
               update_config_file
               MaziLogger.debug 'Restarting'
-              `service mazi-portal restart`
+              `reboot`
             end
 
             {status: "restarting"}.to_json
@@ -355,6 +355,11 @@ module Sinatra
             `raspi-config nonint do_expand_rootfs`
 
             redirect '/admin_dashboard'
+          end
+
+          app.get '/get/version/?' do
+            MaziLogger.debug "request: get/get/version from ip: #{request.ip}"
+            {version: getVersion}.to_json
           end
         end
       end

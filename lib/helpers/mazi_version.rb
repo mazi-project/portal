@@ -70,6 +70,7 @@ module MaziVersion
     diff   = version_difference
     staged = staged?
     if diff.to_i > 0 && !staged
+      create_lock_update_file
       MaziLogger.debug "pull origin master"
       `git pull origin master`
       MaziLogger.debug "done."
@@ -82,6 +83,26 @@ module MaziVersion
       MaziLogger.debug "done."
     end
     nil
+  end
+
+  def create_lock_update_file
+    MaziLogger.debug "create update lock file"
+    `touch /etc/mazi/update-lock`
+    MaziLogger.debug "done."
+  end
+
+  def self.delete_lock_update_file
+    MaziLogger.debug "delete update lock file"
+    `rm /etc/mazi/update-lock`
+    MaziLogger.debug "done."
+  end
+
+  def self.rc_local_updated?
+    response = false
+    File.readlines("/etc/rc.local").each do |line|
+      response = true if line.include? 'FILE="/etc/mazi/update-lock"'
+    end
+    response
   end
 
   def self.guestbook_version
@@ -340,14 +361,24 @@ module MaziVersion
       MaziLogger.debug "done"
       `service mazi-portal restart`
     end
-  end
 
-   # version 2.4.3
-   MaziLogger.debug "  Checking sqlite3 package"
-   unless `dpkg -s sqlite3 | grep Status`.include? "install ok installed"
+    # version 2.4.3
+    MaziLogger.debug "  Checking sqlite3 package"
+    unless `dpkg -s sqlite3 | grep Status`.include? "install ok installed"
      MaziLogger.debug "sqlite3 package not found. Installing."
      `apt-get -y install sqlite3`
      MaziLogger.debug "Done Installing sqlite3."
-   end
+    end
+
+    # version 2.4.5
+    MaziLogger.debug "  Checking rc.local file"
+    unless rc_local_updated?
+    MaziLogger.debug "rc.local older version found. Updating."
+     `cp /root/portal/init/rc.local /etc/rc.local`
+     MaziLogger.debug "Done Updating rc.local."
+    end
+
+    delete_lock_update_file
+  end
 end
 
