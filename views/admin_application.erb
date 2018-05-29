@@ -242,6 +242,7 @@
 
 <div id="delete-dialog-confirm" title="Empty the recycle bin?">
   <p><span class="ui-icon ui-icon-alert" style="float:left; margin:12px 12px 20px 0;"></span>This application will be permanently deleted from the database. Do you wish to proceed?</p>
+  <p>Hint: You need to delete all application instances that are connected to this application before you can delete this application.</p>
 </div>
 
 <!-- create application instance modal-->
@@ -308,7 +309,7 @@
             <input type="hidden" name="id" value="<%= app.id %>">
             <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
             <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
-            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" required>
+            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" placeholder="Icon" required>
             <select name="color" class="form-control" required>
               <option value='green' <%= 'selected' if app.color == 'green' %>>green</option>
               <option value='yellow' <%= 'selected' if app.color == 'yellow' %>>yellow</option>
