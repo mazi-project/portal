@@ -166,7 +166,7 @@ en:
       update-message-2:  "This portal runs on Demo mode! This action would have started an update process."
       update-message-3:  "The portal is up-to-date, there is no need for an update."
       update-message-4:  "The system is updating. Please wait..."
-      update-message-5:  "Update process is almost complete. One last step is required, please wait several minutes and then refresh the page."
+      update-message-5:  "Update process is almost complete. Your MAZI Zone will be restarted in order to install missing dependencies. As soon as you see your WiFi network again, you are ready to connect to your updated MAZI Zone."
       update-message-6:  "There is an update available. Please use the button below to start the update process."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
     setup-page:
