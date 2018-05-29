@@ -378,6 +378,8 @@ module MaziVersion
      MaziLogger.debug "Done Updating rc.local."
     end
 
+    sleep 120
+
     delete_lock_update_file
   end
 end
