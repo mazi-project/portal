@@ -341,13 +341,16 @@ module Sinatra
               locals[:local_data][:monitoring_applications_enabled] = @config[:monitoring][:applications_enable]
               locals[:local_data][:monitoring_map_enabled]          = @config[:monitoring][:map]
               locals[:local_data][:details]                         = get_monitoring_details
-              locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
-              locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
-              locals[:local_data][:hardware_nof_entries]            = get_nof_hardware_data_entries
-              locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
-              locals[:local_data][:sensors_enabled]                 = @config[:sensors][:enable]
-              locals[:local_data][:sensors_db_exist]                = true #sensors_db_exist?
-              locals[:local_data][:available_sensors]               = getAllAvailableSensors
+              locals[:local_data][:details_changed]                 = details_changed?
+              if details_changed?
+                locals[:local_data][:hardware_monitoring_status]      = get_hardware_monitoring_status
+                locals[:local_data][:application_monitoring_status]   = get_application_monitoring_status
+                locals[:local_data][:hardware_nof_entries]            = get_nof_hardware_data_entries
+                locals[:local_data][:application_nof_entries]         = get_nof_application_data_entries
+                locals[:local_data][:sensors_enabled]                 = @config[:sensors][:enable]
+                locals[:local_data][:sensors_db_exist]                = true #sensors_db_exist?
+                locals[:local_data][:available_sensors]               = getAllAvailableSensors
+              end
 
               erb :admin_main, locals: locals
             when 'admin_logs'

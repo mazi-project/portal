@@ -30,7 +30,7 @@
         <div class="row">
           <div class='col-md-12'>
             <label class="switch" title="<%= I18n.translate("admin.monitoring-page.details-panel.toggle-monitoring-hint") %>">
-              <input type="checkbox" <%= monitoring_enabled ? 'checked' : '' %>>
+              <input type="checkbox" <%= monitoring_enabled && details_changed ? 'checked' : '' %>>
               <div class="slider round enabled-monitoring-switch"></div>
             </label>
             <span class="device-enable-msg"><%= I18n.translate("admin.monitoring-page.details-panel.toggle-monitoring-message") %></span>
@@ -63,6 +63,9 @@
                 </tr>
               </tbody>
             </table>
+            <% unless details_changed %>
+            <small>* <%= I18n.translate("admin.monitoring-page.details-panel.details-hint") %></small>
+            <% end %>
             <a class="btn btn-primary edit-details pull-right" id='edit-monitoring-details' data-toggle="modal" data-target="#edit-details-modal"><i class="fa fa-edit"> <%= I18n.translate("general.buttons.edit") %></i>
             </a>
           </div>
@@ -70,8 +73,8 @@
       </div>
     </div>
   </div>
-
-  <% if monitoring_enabled %>
+  <% if details_changed %>
+    <% if monitoring_enabled %>
   <div class='col-md-12 col-lg-6'>
     <div class="panel panel-default">
       <div class="panel-heading">
@@ -209,6 +212,7 @@
       </div>
     </div>
   </div>
+    <% end %>
   <% end %>
 </div>
 
@@ -242,7 +246,7 @@
     </div>
   </div>
 </div>
-
+<% if details_changed %>
 <!-- start hardware monitoring data modal-->
 <div class="modal fade" id="start-hardware-data-modal" role="dialog">
   <div class="modal-dialog">
@@ -423,7 +427,7 @@
   </div>
 </div>
 
-<% available_sensors.each do |sensor| %>
+  <% available_sensors.each do |sensor| %>
 <!-- start sensing modal-->
 <div class="modal fade" id="start-sensing-modal-<%= sensor[:id] %>" role="dialog">
   <div class="modal-dialog">
@@ -476,8 +480,8 @@
     </div>
   </div>
 </div>
+  <% end %>
 <% end %>
-
 
 <script type="text/javascript">
   var active_msg   = '<%= I18n.translate("general.messages.active") %>';

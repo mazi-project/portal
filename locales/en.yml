@@ -182,7 +182,7 @@ en:
       third-step-warning:  "Warning: If you change the name of your Wi-Fi network, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
       fourth-step-header:  "MAZI Zone details"
       fourth-step-message: "Please use the form below to change the details for your MAZI Zone"
-      fourth-step-warning: "Hint: You can use the google maps to find you location (lat, long) with right-click -> What's here. Then use the coordinates from the box that appears on the bottom of the screen (eg 39.379012, 22.902813)"
+      fourth-step-warning: "Hint: You can use the google maps to find your location (lat, long) with right-click -> What's here. Then use the coordinates from the box that appears at the bottom of the screen (eg 39.379012, 22.902813)"
       last-step-header:    "Complete"
       last-step-message:   "You have successfully completed all the set up steps. Please click on the submit button to save the changes."
     dashboard-page:
@@ -414,6 +414,7 @@ en:
         table-label3:              "Title"
         table-label4:              "Description"
         table-label5:              "Location (lat, long)"
+        details-hint:              "It is mandatory to change the monitoring details first, before enabling monitoring!"
       statistics-panel:
         header:                     "Monitoring Data"
         header-hint:                "You can use this to control the monitoring activities."

@@ -56,6 +56,13 @@ module MaziMonitor
     end
   end
 
+  def details_changed?
+    details = get_monitoring_details
+    return false if details[:admin] == 'John Doe'
+    return false if details[:location] == '0.000000, 0.000000'
+    true
+  end
+
   def start_hardware_monitoring(url, parameters)
     command = "sh /root/back-end/mazi-stat.sh #{parameters} --store enable #{"-d #{url}" unless url == 'localhost'}"
     Thread.new do

@@ -19,6 +19,11 @@ module Sinatra
 
             case action
             when "overall"
+              unless details_changed?
+                MaziLogger.debug "Monitoring details have not been changed!"
+                session['error'] = "It is mandatory to change the monitoring details first, before enabling monitoring!"
+                redirect back
+              end
               toggle_monitoring_enable
               disable_monitorings
             when "applications"
