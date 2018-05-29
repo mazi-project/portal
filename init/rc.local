@@ -38,11 +38,10 @@ x=0
 #### Wait the Update to finish before you setup the Hostapd ####
 #### timeout in 1800sec=30min  ####
 while [ $x -lt 1800 ] && [ -e $FILE ]; do
-     x=$[$x+1]
-     sleep .1
-     #echo $x
+     x=$((x+1))
+     sleep 1
 done
-if ! [ -e $FILE ]
+if [ ! -f $FILE ]
 then
    echo "Update finished"
    sh /root/back-end/wifiap.sh

@@ -93,7 +93,7 @@ module MaziVersion
 
   def self.delete_lock_update_file
     MaziLogger.debug "delete update lock file"
-    `rm /etc/mazi/update-lock`
+    `rm /etc/mazi/update-lock 2> /dev/null`
     MaziLogger.debug "done."
   end
 
