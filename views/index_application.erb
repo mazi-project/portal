@@ -3,7 +3,6 @@
   <p class='welcome-txt'> <%= config_data[:applications_welcome_text]%> </p>
 </div>
 
-
 <div class="row app-row" style="background: url('images/<%= config_data[:applications_background_image]%>'); background-size: cover;">
   <% colors = ['green', 'red', 'yellow', 'blue', 'purple']%>
   <% icons = ['search', 'tasks', 'ambulance', 'plane', 'shield', 'shopping-cart']%>
@@ -28,8 +27,8 @@
               <p class="panel-desc panel-desc-txt-block"><%= app.description %></p>
             </div>
           </div>
-        </div>
-      </a>
+        </a>
+      </div>
     </div>
   </div>
   <% end %>
