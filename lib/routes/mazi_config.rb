@@ -292,7 +292,7 @@ module Sinatra
             details[:admin]       = params['admin']
             details[:title]       = params['title']
             details[:description] = params['description']
-            details[:location]    = params['location']
+            details[:loc]         = params['location']
             write_monitoring_details(details)
 
             unless params['date'].nil? || params['date'].empty?
