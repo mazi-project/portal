@@ -231,37 +231,86 @@ module Sinatra
               locals[:js] << "js/plugins/qrcode/jquery.qrcode.js"
               locals[:js] << "js/plugins/qrcode/qrcode.js"
               locals[:main_body] = :admin_network
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
+              interfaces = {}
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-i', 'all', '-i', 'wifi', '-i', 'internet', '-i', 'mesh'], @config[:scripts][:enabled_scripts])
               lines = ex.exec_command
-              locals[:local_data][:net_info] = {}
-              ssid = ex.parseFor('ssid')
-              ssid.shift
-              locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
-              channel = ex.parseFor('channel')
-              locals[:local_data][:net_info][:channel] = channel[1] if channel.kind_of? Array
-              password = ex.parseFor('password')
-              locals[:local_data][:net_info][:password] = password[1] if password.kind_of? Array
-              mode = ex.parseFor('mode')
-              locals[:local_data][:net_info][:mode] = mode[1].gsub('"', '') if mode.kind_of? Array
-              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-a'], @config[:scripts][:enabled_scripts])
-              locals[:local_data][:net_info][:second_antenna] = ex2.exec_command.last
-              if locals[:local_data][:net_info][:second_antenna] == 'inactive'
-                locals[:local_data][:net_info][:available_ssids] = []
-              else
-                ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l'], @config[:scripts][:enabled_scripts])
-                locals[:local_data][:net_info][:available_ssids] = ex3.exec_command
-                locals[:local_data][:net_info][:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
-                locals[:local_data][:net_info][:available_ssids].reject! {|ssid| ssid.empty?}
+              wifi_if     = nil
+              internet_if = nil
+              mesh_if     = nil
+              ex.parseForAll('interface').each do |ifc|
+                case ifc.first
+                when 'interface'
+                  interfaces[ifc[1].to_sym]             = {}
+                  interfaces[ifc[1].to_sym][:interface] = ifc[1]
+                  interfaces[ifc[1].to_sym][:name]      = ifc[2] == 'raspberry' ? 'Raspberry WiFi' : "#{ifc[2].upcase} WiFi"
+                  interfaces[ifc[1].to_sym][:mode]      = nil
+                when 'wifi_interface'
+                  wifi_if = ifc[1] == '-' ? nil : ifc[1].to_sym
+                when 'internet_interface'
+                  internet_if = ifc[1] == '-' ? nil : ifc[1].to_sym
+                when 'mesh_interface'
+                  mesh_if = ifc[1] == '-' ? nil : ifc[1].to_sym
+                end
               end
-              ex4 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
-              router_stat = ex4.exec_command.first.split
+              interfaces[wifi_if][:mode] = 'wifi' unless wifi_if.nil? || interfaces[wifi_if].nil?
+              interfaces[internet_if][:mode] = 'internet' unless internet_if.nil? || interfaces[internet_if].nil?
+              interfaces[mesh_if][:mode] = 'mesh' unless mesh_if.nil? || interfaces[mesh_if].nil?
+
+              interfaces.each do |if_name, if_data|
+                case if_data[:mode]
+                when 'wifi'
+                  ex1 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c'], @config[:scripts][:enabled_scripts])
+                  lines = ex1.exec_command
+                  ssid = ex1.parseFor('ssid')
+                  ssid.shift
+                  if_data[:ssid] = ssid.join(' ') if ssid.kind_of? Array
+                  channel = ex1.parseFor('channel')
+                  if_data[:channel] = channel[1] if channel.kind_of? Array
+                  password = ex1.parseFor('password')
+                  if_data[:password] = password[1] if password.kind_of? Array
+                when 'internet'
+                  ex2 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-i', if_name.to_s, '-a'], @config[:scripts][:enabled_scripts])
+                  lines = ex2.exec_command
+                  puts lines.inspect
+                  if lines.nil? || lines.empty? || !lines.first.include?('ESSID')
+                    if_data[:mode] = nil
+                    session['error'] = "Interface #{if_name} has not been configured properly. Please make sure the details that you have provided are correct."
+                    `ifconfig #{if_name} down`
+                    `ifconfig #{if_name} up`
+                    `bash /root/back-end/antenna.sh -i #{if_name} -d`
+                    redirect "/admin_network"
+                  end
+                  ssid = ex2.parseFor('ESSID')
+                  if_data[:ssid] = ssid.last.split(':').last.gsub('"', '')
+                  if_data[:available_ssids] = []
+                  ex7 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+                  if_data[:available_ssids] = ex7.exec_command
+                  if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+                  if_data[:available_ssids].reject! {|ssid| ssid.empty?}
+                when 'mesh'
+
+                else
+                  if_data[:available_ssids] = []
+                  ex8 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+                  if_data[:available_ssids] = ex8.exec_command
+                  if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
+                  if_data[:available_ssids].reject! {|ssid| ssid.empty?}
+                end
+              end
+              locals[:local_data][:interfaces] = interfaces
+              locals[:local_data][:net_info]   = {}
+              ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
+              router_stat = ex3.exec_command.first.split
               locals[:local_data][:net_info][:owrt_router_available] = router_stat.last
-              ex5 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-w'], @config[:scripts][:enabled_scripts])
+              ex4 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-m'], @config[:scripts][:enabled_scripts])
+              mode = ex4.exec_command.first.split
+              locals[:local_data][:net_info][:mode] = mode[1].gsub('"', '')
+              ex5 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
               cur_out = ex5.exec_command.first.split
-              locals[:local_data][:net_info][:current_wifi_interface] = cur_out[1]
-              ex6 = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
-              cur_out = ex6.exec_command.first.split
               locals[:local_data][:net_info][:domain] = cur_out[1]
+              ex6 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-w'], @config[:scripts][:enabled_scripts])
+              cur_out = ex6.exec_command.first.split
+              locals[:local_data][:net_info][:current_wifi_interface] = cur_out[1]
               erb :admin_main, locals: locals
             when 'admin_configuration'
               unless authorized?

@@ -36,6 +36,7 @@ en:
       change:          "Change"
       qrcode:          "QRcode"
       show:            "Show"
+      configure:       "Configure"
     messages:
       warning:      "Warning"
       welcome:      "Welcome"
@@ -282,21 +283,23 @@ en:
         web-app-info-message:       "This is a WEB application so Starting/Stopping this application will not affect the performance of your MAZI Zone."
     network-page:
       subheader: "Network Settings"
-      network-settings-panel:
-        header:                    "Wi-Fi Network Settings"
+      wifi-ap-interface-panel:
+        header:                    "Wi-Fi Access Point Network Settings for %{interface}"
         ssid-name-label:           "Name of the Wi-Fi Network (SSID)"
         ssid-name-description:     "The Service Set IDentifier (SSID) is the name assigned to a Wi-Fi (wireless) network. All devices in the network must use this case-sensitive name to communicate over Wi-Fi, which is a text string up to 32 bytes long. Please press the edit button below to change it."
         wifi-channel-label:        "Channel of the Wi-Fi Network"
         wifi-channel-description:  "Choosing the best Wi-Fi channel on your MAZI zone helps to reduce interference and improve your WI-Fi signal. Please press the edit button below to change it."
         wifi-password-label:       "Password of the Wi-Fi Network"
         wifi-password-description: "The authentication password for the Wi-Fi (wireless) network. It must be at least 8 characters long. If it is left emtpy the Wi-Fi network security will be disabled. Please press the edit button below to change it."
+      unconfigured-dongle-panel:
+        message: "This Network interface has not been configured yet. Please use the button bellow, in order to configure it appropriately."
       internet-panel:
         header:    "Internet Network Mode"
         mode-hint: "Mode of the Wi-Fi Network"
       connect-wifi-panel:
         header:              "Connect to Wi-Fi for internet access"
         wifi-network-hint-1: "from Wi-Fi Networks"
-        wifi-network-hint-2: "Wi-Fi Network"
+        wifi-network-hint-2: "Wi-Fi Internet Network"
         usb-dongle-message:  "Please plugin an extra USB Wi-Fi dongle to your Raspberry pi to enable this feature. Suggested USB dongles"
       access-point-panel:
         header:          "Add router as Access Point"

@@ -24,6 +24,7 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have changed the WiFi network parameters."
                 redirect '/admin_network'
               end
+              args << "-i '#{params['interface']}'" if params['interface']
               args << "-s '#{params['ssid']}'" if params['ssid']
               args << "-c #{params['channel']}" if params['channel']
               if params['password'].nil? || params['password'].empty? || params['password'] == '' || params['password'] == ' ' || params['password'] == '-'
@@ -60,6 +61,8 @@ module Sinatra
                   args << "-s #{params['hidden-ssid']} -h"
                 end
               end
+              args << "-i '#{params['interface']}'" if params['interface']
+              args << "-d " if params['disconnect']
               args << "-p #{params['password']}" unless params['password'].nil? || params['password'].empty?
             when 'mazi-router.sh'
               args = []

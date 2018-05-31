@@ -1,7 +1,7 @@
 require 'open3'
 
 class MaziExecCmd
-  class ScriptNotEnabled < StandardError 
+  class ScriptNotEnabled < StandardError
   end
 
   def initialize(env, path, cmd, args=[], enabled_scripts=[], demo=false)
@@ -40,6 +40,15 @@ class MaziExecCmd
       return line.split(splitter) if line.include? token
     end
     false
+  end
+
+  def parseForAll(token, splitter=' ')
+    return demoParse(token, splitter) if @demo == 'demo'
+    out = []
+    @output.each do |line|
+      out << line.split(splitter) if line.include? token
+    end
+    out.empty? ? false : out
   end
 
   def demoExec
