@@ -58,8 +58,7 @@ module MaziMonitor
 
   def details_changed?
     details = get_monitoring_details
-    return false if details[:admin] == 'John Doe'
-    return false if details[:location] == '0.000000, 0.000000'
+    return false if details[:admin] == 'John Doe' || details[:loc] == '0.000000, 0.000000'
     true
   end
 

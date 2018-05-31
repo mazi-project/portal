@@ -235,11 +235,6 @@ module Sinatra
               session['error'] = "This portal runs on Demo mode! This action would have initiated the setup mechanism."
               redirect '/admin'
             end
-            unless authorized?
-              MaziLogger.debug "Not authorized"
-              session['error'] = nil
-              redirect '/admin_login?goto=setup'
-            end
             if params['current-password'].nil? || params['current-password'].empty?
               session['error'] = "Field Current Password is mandatory! Please try again."
               redirect '/setup'
@@ -272,7 +267,7 @@ module Sinatra
               session['error'] = "Field Device's Title is mandatory! Please try again."
               redirect '/setup'
             end
-            if params['descritpion'].nil? || params['descritpion'].empty?
+            if params['description'].nil? || params['description'].empty?
               session['error'] = "Field Device's Description is mandatory! Please try again."
               redirect '/setup'
             end
@@ -297,7 +292,7 @@ module Sinatra
             details[:admin]       = params['admin']
             details[:title]       = params['title']
             details[:description] = params['description']
-            details[:location]    = params['location']
+            details[:loc]         = params['location']
             write_monitoring_details(details)
 
             unless params['date'].nil? || params['date'].empty?
