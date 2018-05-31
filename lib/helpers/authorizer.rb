@@ -1,9 +1,10 @@
-
+AUTH_ENABLED = true
 module Authorizer
   def authorized?
     if @config[:general][:mode] == 'demo'
       return true
     end
+    return true unless AUTH_ENABLED
     !session[:username].nil?
   end
 
