@@ -63,7 +63,7 @@ module Sinatra
               locals[:local_data][:notifications]      = Mazi::Model::Notification.all
               locals[:local_data][:notifications_read] = session['notifications_read']
               locals[:local_data][:config_data]        = @config[:portal_configuration]
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
               lines = ex.exec_command
               users = ex.parseFor('wifi users')
               locals[:local_data][:users]          = {}
@@ -72,7 +72,7 @@ module Sinatra
               Mazi::Model::ApplicationInstance.all.each do |app|
                 locals[:local_data][:clicks] += app.click_counter
               end
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['-t', '-c', '-r', '-s'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
               ex.exec_command
               locals[:local_data][:temp]     = ex.parseFor("temp:").last
               locals[:local_data][:cpu]      = ex.parseFor("cpu:").last
@@ -167,14 +167,14 @@ module Sinatra
               end
               locals[:js] << "js/admin_dashboard.js"
               locals[:main_body] = :admin_dashboard
-              ex = MaziExecCmd.new('sh', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
               lines = ex.exec_command
               locals[:local_data][:net_info] = {}
               ssid = ex.parseFor('ssid')
               ssid.shift
               locals[:local_data][:net_info][:ssid] = ssid.join(' ') if ssid.kind_of? Array
               mode = ex.parseFor('mode')
-              ex2 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s', '--sd'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              ex2 = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['-u', '-t', '-c', '-r', '-s', '--sd'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
               ex2.exec_command
               users_online = ex2.parseFor('wifi users') ? ex2.parseFor('wifi users').last : nil
               temp         = ex2.parseFor("temp:") ? ex2.parseFor("temp:").last : nil
@@ -283,7 +283,7 @@ module Sinatra
                   ssid = ex2.parseFor('ESSID')
                   if_data[:ssid] = ssid.last.split(':').last.gsub('"', '')
                   if_data[:available_ssids] = []
-                  ex7 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+                  ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
                   if_data[:available_ssids] = ex7.exec_command
                   if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
                   if_data[:available_ssids].reject! {|ssid| ssid.empty?}
@@ -291,7 +291,7 @@ module Sinatra
 
                 else
                   if_data[:available_ssids] = []
-                  ex8 = MaziExecCmd.new('sh', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+                  ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
                   if_data[:available_ssids] = ex8.exec_command
                   if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
                   if_data[:available_ssids].reject! {|ssid| ssid.empty?}
@@ -299,7 +299,7 @@ module Sinatra
               end
               locals[:local_data][:interfaces] = interfaces
               locals[:local_data][:net_info]   = {}
-              ex3 = MaziExecCmd.new('sh', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
+              ex3 = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
               router_stat = ex3.exec_command.first.split
               locals[:local_data][:net_info][:owrt_router_available] = router_stat.last
               ex4 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-m'], @config[:scripts][:enabled_scripts])
