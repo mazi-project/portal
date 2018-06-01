@@ -373,9 +373,17 @@ module MaziVersion
     # version 2.4.5
     MaziLogger.debug "  Checking rc.local file"
     unless rc_local_updated?
-    MaziLogger.debug "rc.local older version found. Updating."
-     `cp /root/portal/init/rc.local /etc/rc.local`
-     MaziLogger.debug "Done Updating rc.local."
+      MaziLogger.debug "rc.local older version found. Updating."
+      `cp /root/portal/init/rc.local /etc/rc.local`
+      MaziLogger.debug "Done Updating rc.local."
+    end
+
+    # version 2.5.0
+    MaziLogger.debug "  Checking nodogsplash"
+    unless File.directory?('/root/nodogsplash')
+      MaziLogger.debug "nodogsplash does not exist. Updating!"
+      `bash /root/back-end/update.sh`
+      MaziLogger.debug "done."
     end
 
     delete_lock_update_file

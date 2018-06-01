@@ -241,7 +241,7 @@
             <option></option>
             <option value="wifi">WiFi Access Point</option>
             <option value="internet">Internet Connection</option>
-            <option value="mesh">Mesh</option>
+            <option value="mesh" disabled>Mesh</option>
           </select>
           <form class="form-signin" action="/exec" method="post" id="configure-wifi-form-<%= if_name %>" hidden>
             <div class="form-group">
@@ -259,7 +259,7 @@
                   <option value='5'>5</option>
                   <option value='6'>6</option>
                   <option value='7'>7</option>
-                  <option value='8'>8</option>adasdad
+                  <option value='8'>8</option>
                   <option value='9'>9</option>
                   <option value='10'>10</option>
                   <option value='11'>11</option>
@@ -304,7 +304,7 @@
   <% end %>
 <% end %>
 </div>
-<hr class="style4">
+<hr class="style14">
 <div class="row">
   <% if net_info[:owrt_router_available] == 'available' %>
     <% current_wifi_if = net_info[:current_wifi_interface] == 'Raspberry' ? 'Raspberry' : "External Router" %>
