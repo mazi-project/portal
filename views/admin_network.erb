@@ -210,17 +210,26 @@
       </div>
       <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
-          <small>Mesh</small>
+          <h2 class="no-margins">MAZI-Mesh</h2>
+          <small>Mesh Network Gateway</small></br>
         </div>
         <div class="pull-right"><i class="fas fa-5x fa-broadcast-tower"></i></div>
       </div>
       <div class="row change-conf-div" style>
-        <span class='col-lg-3'></span>
+      <span class='col-lg-3'>
+        <form action="/exec" method="post">
+          <input type="hidden" name="env" value='bash'>
+          <input type="hidden" name="cmd" value='mazi-mesh.sh'>
+          <input type="hidden" name="mode" value='portal'>
+          <input type="hidden" name="interface" value='<%= if_name %>'>
+          <button type='submit' class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fas fa-ban"></i> <%= I18n.translate("general.buttons.disconnect") %></button>
+        </form>
+      </span>
       <span class='col-lg-6'>
         <p class='interface-type-p'><b>Mesh Network</b></p>
       </span>
       <span class='col-lg-3'>
-        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#configure-interface-modal-<%= if_name %>"><i class="fas fa-cog"></i> <%= I18n.translate("general.buttons.configure") %></button>
+
       </span>
       </div>
     </div>
@@ -262,7 +271,7 @@
             <option></option>
             <option value="wifi">WiFi Access Point</option>
             <option value="internet">Internet Connection</option>
-            <option value="mesh">Mesh</option>
+            <option value="mesh" disabled>Mesh</option>
           </select>
           <form class="form-signin" action="/exec" method="post" id="configure-wifi-form-<%= if_name %>" hidden>
             <div class="form-group">
@@ -321,7 +330,7 @@
               <input type="hidden" name="cmd" value='mazi-mesh.sh'>
               <input type="hidden" name="interface" value='<%= if_name %>'>
               <input type="hidden" name="bridge" value='<%= net_info[:ap].to_s %>'>
-              <label for="mode"><%= I18n.translate("admin.network-page.popups.type-wifi-label") %>:</label>
+              <label for="mode"><%= I18n.translate("admin.network-page.popups.select-mesh-mode-label") %>:</label>
               <select class="form-control" name='mode'>
                 <option value='gateway'>Gateway</option>
                 <option value='node'>Node</option>
@@ -340,6 +349,34 @@
 </div>
 <hr class="style14">
 <div class="row">
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.network-page.internet-panel.header") %></div>
+      </div>
+      <div class="panel-body">
+        <div class="col-xs-6 text-left network-panel-min-height">
+          <h2 class="no-margins"><%= net_info[:mode] %></h2>
+          <small><%= I18n.translate("admin.network-page.internet-panel.mode-hint") %></small></br>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-globe"></i></br><button class="btn btn-primary pull-right mode-btn" data-toggle="modal" data-target="#change-mode-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
+      </div>
+    </div>
+  </div>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.network-page.portal-domain-panel.header") %></div>
+      </div>
+      <div class="panel-body">
+        <div class="col-xs-6 text-left network-panel-min-height">
+          <h2 class="no-margins"><%= net_info[:domain] %></h2>
+          <small><%= I18n.translate("admin.network-page.portal-domain-panel.domain-hint") %></small></br>
+        </div>
+        <div class="pull-right"><i class="fa fa-fw fa-5x fa-external-link-square-alt"></i></br><button class="btn btn-primary pull-right domain-btn" data-toggle="modal" data-target="#change-domain-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
+      </div>
+    </div>
+  </div>
   <% if net_info[:owrt_router_available] == 'available' %>
     <% current_wifi_if = net_info[:current_wifi_interface] == 'Raspberry' ? 'Raspberry' : "External Router" %>
     <% action = 'activate' if net_info[:current_wifi_interface] == 'Raspberry' %>
@@ -376,34 +413,6 @@
     </div>
   </div>
   <% end %>
-  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="panel-title"><%= I18n.translate("admin.network-page.portal-domain-panel.header") %></div>
-      </div>
-      <div class="panel-body">
-        <div class="col-xs-6 text-left network-panel-min-height">
-          <h2 class="no-margins"><%= net_info[:domain] %></h2>
-          <small><%= I18n.translate("admin.network-page.portal-domain-panel.domain-hint") %></small></br>
-        </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-external-link-square-alt"></i></br><button class="btn btn-primary pull-right domain-btn" data-toggle="modal" data-target="#change-domain-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
-      </div>
-    </div>
-  </div>
-  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div class="panel-title"><%= I18n.translate("admin.network-page.internet-panel.header") %></div>
-      </div>
-      <div class="panel-body">
-        <div class="col-xs-6 text-left network-panel-min-height">
-          <h2 class="no-margins"><%= net_info[:mode] %></h2>
-          <small><%= I18n.translate("admin.network-page.internet-panel.mode-hint") %></small></br>
-        </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-globe"></i></br><button class="btn btn-primary pull-right mode-btn" data-toggle="modal" data-target="#change-mode-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
-      </div>
-    </div>
-  </div>
 </div>
 
 <!-- show qrcode modal-->

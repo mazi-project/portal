@@ -319,6 +319,7 @@ en:
         change-mode-message:         "Use the form below to choose the Network Mode for this MAZI Zone. If you wish to choose the dual mode, please make sure to have access to the Internet (either through an ethernet cable or a Wi-Fi dongle)."
         connect-wifi-header:         "Connect to Wi-Fi Network"
         select-wifi-label:           "Select Wi-Fi name"
+        select-mesh-mode-label:      "Select Mesh mode"
         type-wifi-label:             "Or type it here if it is hidden"
         type-password-label:         "Type the password for the Wi-Fi network"
         change-domain-header:        "Edit Portal Domain"
