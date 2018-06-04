@@ -51,6 +51,7 @@
   - antenna.sh
   - date
   - ls
+  - mazi-mesh.sh
 :portal_configuration:
   :title: MAZI Zone Portal
   :applications_title: MAZI Zone

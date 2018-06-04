@@ -203,7 +203,28 @@
     </div>
   </div>
   <% elsif if_data[:mode] == 'mesh' %>
-
+  <div class='col-lg-4 col-md-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= if_data[:name] %></h3>
+      </div>
+      <div class="panel-body" style="border-bottom: 1px solid #ddd;">
+        <div class="col-xs-6 text-left network-panel-min-height">
+          <small>Mesh</small>
+        </div>
+        <div class="pull-right"><i class="fas fa-5x fa-broadcast-tower"></i></div>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'></span>
+      <span class='col-lg-6'>
+        <p class='interface-type-p'><b>Mesh Network</b></p>
+      </span>
+      <span class='col-lg-3'>
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#configure-interface-modal-<%= if_name %>"><i class="fas fa-cog"></i> <%= I18n.translate("general.buttons.configure") %></button>
+      </span>
+      </div>
+    </div>
+  </div>
   <% else %>
   <div class='col-lg-4 col-md-12'>
     <div class="panel panel-default">
@@ -241,11 +262,11 @@
             <option></option>
             <option value="wifi">WiFi Access Point</option>
             <option value="internet">Internet Connection</option>
-            <option value="mesh" disabled>Mesh</option>
+            <option value="mesh">Mesh</option>
           </select>
           <form class="form-signin" action="/exec" method="post" id="configure-wifi-form-<%= if_name %>" hidden>
             <div class="form-group">
-              <input type="hidden" name="env" value='sh'>
+              <input type="hidden" name="env" value='bash'>
               <input type="hidden" name="cmd" value='wifiap.sh'>
               <input type="hidden" name="interface" value='<%= if_name %>'>
               <label for='ssid'><%= I18n.translate("general.messages.ssid") %>: </label>
@@ -272,7 +293,7 @@
           </form>
           <form class="form-signin" action="/exec" method="post" id="configure-internet-form-<%= if_name %>" hidden>
             <div class="form-group">
-              <input type="hidden" name="env" value='sh'>
+              <input type="hidden" name="env" value='bash'>
               <input type="hidden" name="cmd" value='antenna.sh'>
               <input type="hidden" name="interface" value='<%= if_name %>'>
               <% if if_data[:available_ssids].nil? || if_data[:available_ssids].empty? %>
@@ -295,7 +316,20 @@
             </div>
           </form>
           <form class="form-signin" action="/exec" method="post" id="configure-mesh-form-<%= if_name %>" hidden>
-            <label for="ssid">TODO</label>
+            <div class="form-group">
+              <input type="hidden" name="env" value='bash'>
+              <input type="hidden" name="cmd" value='mazi-mesh.sh'>
+              <input type="hidden" name="interface" value='<%= if_name %>'>
+              <input type="hidden" name="bridge" value='<%= net_info[:ap].to_s %>'>
+              <label for="mode"><%= I18n.translate("admin.network-page.popups.type-wifi-label") %>:</label>
+              <select class="form-control" name='mode'>
+                <option value='gateway'>Gateway</option>
+                <option value='node'>Node</option>
+              </select>
+              <label for="ssid"><%= I18n.translate("admin.network-page.popups.select-wifi-label") %>:</label>
+              <input type="text" name="ssid" class="form-control" value='MAZI-Mesh' required>
+              <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.connect") %></button>
+            </div>
           </form>
         </div>
       </div>

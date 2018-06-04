@@ -81,6 +81,17 @@ module Sinatra
                 redirect '/admin_network'
               end
               args << "-d #{params['domain']}" unless params['domain'].nil? || params['domain'].empty?
+            when 'mazi-mesh.sh'
+              args = []
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode exec script"
+                session['error'] = "This portal runs on Demo mode! This action would have changed the Portal's Domain."
+                redirect '/admin_network'
+              end
+              args << params['mode'] unless params['mode'].nil? || params['mode'].empty?
+              args << "-i #{params['interface']}" unless params['interface'].nil? || params['interface'].empty?
+              args << "-s #{params['ssid']}" unless params['ssid'].nil? || params['ssid'].empty?
+              args << "-b #{params['bridge']}" if !(params['bridge'].nil? || params['bridge'].empty?) && params['bridge'] == 'node'
             else
               args = []
             end

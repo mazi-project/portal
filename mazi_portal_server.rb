@@ -11,6 +11,7 @@ require 'mysql'
 require 'helpers/mazi_sensors'
 require 'helpers/mazi_camera'
 require 'helpers/mazi_monitor'
+require 'helpers/mazi_network'
 require 'i18n'
 require 'i18n/backend/fallbacks'
 require 'helpers/mazi_locales'
@@ -37,6 +38,7 @@ class MaziApp < Sinatra::Base
   include MaziCamera
   include MaziMonitor
   include MaziLocales
+  include MaziNetwork
 
   use Rack::Session::Pool #, :expire_after => 60 * 60 * 24
   configure {set :show_exceptions, false}
