@@ -1,0 +1,361 @@
+# Messages for Swedish (svenska)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Bengtsson96
+# Author: WikiPhoenix
+---
+sv:
+  general:
+    buttons:
+      edit: Redigera
+      cancel: Avbryt
+      ok: OK
+      close: Stäng
+      create: Skapa
+      delete: Radera
+      start: Starta
+      stop: Stoppa
+      save: Spara ändringar
+      choose: Välj
+      export-to-csv: Exportera till CSV-fil
+      expand: Expandera
+      expand-storage: Expandera lagring
+      reboot: Starta om
+      reset: Återställ
+      shutdown: Stäng av
+      logout: Logga ut
+      update: Uppdatera
+      connect: Anslut
+      disconnect: Koppla från
+      toggle-device: Byt enhet
+      initialize: Initialisera
+      remove: Ta bort
+      load: Läs in
+      import: Importera
+      export: Exportera
+      refresh: Uppdatera
+      continue: Fortsätt
+      next: Nästa
+      previous: Föregående
+      submit: Skicka
+      change: Ändra
+      qrcode: QR-kod
+      show: Visa
+    messages:
+      warning: Varning
+      welcome: Välkommen
+      version: Version
+      enable: aktivera
+      disable: inaktivera
+      on_msg: PÅ
+      off_msg: AV
+      disconnected: Frånkopplad
+      here: här
+      ssid: SSID
+      channel: Kanal
+      password: Lösenord
+      offline: offline
+      dual: dubbel
+      restricted: begränsad
+      managed: hanterad
+      active: aktiv
+      inactive: inaktiv
+      error: fel
+  portal:
+    top-menu:
+      documentation: Dokumentation
+    side-menu:
+      applications: Applikationer
+      system: System
+      sensors: Sensorer
+      camera: Kamera
+      monitoring: Bevakning
+      devices: Enheter
+    system-page:
+      subheader: Systeminfo
+      users: Inloggade användare
+      temperature: Temperatur
+      cpu: CPU
+      ram: RAM
+      storage: Lagring
+    sensors-page:
+      header-message: På den här sidan ser du mätvärden från sensorer anslutna till
+        den här MAZI-zonen. Du kan använda knappen nedan för att hämta data för en
+        specifik tidsperiod.
+      temperature-for: Temperatur från %{sensor}
+      metrics-for: Riktning, acceleration and gyroskop-data från %{sensor}
+      humidity-for: Fuktighet från %{sensor}
+      pressure-for: Tryck från %{sensor}
+      no-sensors-warn: 'Varning: Antingen finns inga mätresultat i databasen eller
+        är ingen sensor ansluten till den här MAZI-zonen.'
+      choose-timeslot-message: Använd formuläret nedan för att välja en tidsperiod.
+      direction: Riktning (grader)
+      acceleration: Acceleration (x, y, z)
+    camera-page:
+      header: Kamera
+      subheader: På den här sidan kan du se foton och videor tagna av kameran som
+        är ansluten till den här MAZI-zonen.
+      live-stream-header: Direktsänd videoströmning
+      no-camera-warn: För tillfället är ingen kamera korrekt installerad i den här
+        MAZI-zonen!
+      media-library-header: Mediabibliotek
+      no-media-warn: Det finns inga bilder eller videor i biblioteket för tillfället!
+    monitoring-page:
+      popups:
+        device: Enhet
+        devices: Enheter
+        administrator: Administratör
+        description: Beskrivning
+        latitude: Latitud
+        longitude: Longitud
+        system_info: Systeminformation
+        cpu_temp: CPU-temperatur
+        cpu_load: CPU-läsning
+        ram_load: RAM-läsning
+        wifi-users: WiFi-användare
+        storage_use: Lagringsläsning
+        etherpad-pads: Etherpad-block
+        etherpad-users: Etherpad-användare
+        etherpad-datasize: Etherpad-datastorlek
+        etherpad-clicks: Etherpad-klickningar
+        guestbook-submissions: Meddelanden i gästboken
+        guestbook-comments: Kommentarer i gästboken
+        guestbook-images: Bilder i gästboken
+        guestbook-datasize: Gästbokens datastorlek
+        guestbook-clicks: Klickningar i gästboken
+        nextcloud-users: Nextcloud-användare
+        nextcloud-files: Nextcloud-filer
+        nextcloud-downloads: Nextcloud-nerladdningar
+        nextcloud-datasize: Nextclouds datastorlek
+        nextcloud-clicks: Nextcloud-klickningar
+  admin:
+    general:
+      admin-panel: MAZI-zonens administrationspanel
+      shutdown-modal-title: Stäng av?
+      shutdown-modal-message: MAZI-zonen kommer stängas av nu. Den här sidan kommer
+        därmed inte kunna nås och du måste starta om MAZI-zonen manuellt. Vill du
+        fortsätta?
+      reboot-modal-title: Starta om?
+      reboot-modal-message: MAZI-zonen kommer startas om nu. Den här sidan kommer
+        därmed inte kunna nås under några minuter, vänta en stund och uppdatera sedan
+        sidan. Vill du fortsätta?
+    top-menu:
+      admin: Admin
+      portal: Portal
+      set-date: Ange datum
+      username: Användarnamn
+      password: Lösenord
+      mysql-password: MySQL-lösenord
+      check-updates: Sök efter uppdateringar
+      settings: Inställningar
+    side-menu:
+      dashboard: Kontrollpanel
+      applications: Applikationer
+      networking: Nätverk
+      appearance: Utseende
+      devices: Enheter
+      notifications: Aviseringar
+      export-import: Exportera/importera
+      logs: Loggar
+      documentation: Dokumentation
+    updates:
+      checking-updates: Söker efter uppdateringar. Var god vänta...
+      update-message-4: Systemet uppdateras. Var god vänta...
+    setup-page:
+      last-step-header: Slutfört
+    dashboard-page:
+      subheader: Kontrollpanel
+      welcome:
+        message-list-2: Konfigurera MAZI-zonenätverket
+      hardware-info:
+        system-temperature: Systemtemperatur
+        cpu-load: Processoranvändning
+        ram-load: Användning av arbetsminne
+        storage-load: Minnesbelastning
+      applications:
+        header: Applikationer
+        applications-installed: Installerade applikationer
+      traffic:
+        header: Trafik
+        reset-visits: Återställ besöksräknaren
+        application-visits: Applikationsbesök
+      notifications:
+        header: Aviseringar
+      time-date:
+        current: Nuvarande tid och datum
+      version:
+        up-to-date: Uppdaterad
+    applications-page:
+      subheader: Applikationer
+      instances-menu:
+        active-column: Aktiv
+        splash-page-column: Startsida
+        name-column: Namn
+        name-hint: Applikationens namn
+        url-column: Webbadress
+        url-hint: Applikationens webbadress
+        description-column: Beskrivning
+        actions-column: Åtgärder
+      applications-menu:
+        status-column: Status
+        icon-column: Ikon
+        icon-hint: Applikationens standardikon
+        color-column: Färg
+        color-hint: Applikationens standardfärg
+        name-column: Applikationsnamn
+        name-hint: Applikationens namn
+        url-column: Webbadress
+        url-hint: Applikationens webbadress
+        description-column: Beskrivning
+        actions-column: Åtgärder
+        web-app-start-hint: Detta är en webbapplikation, den kommer köras hela tiden.
+        app-start-hint: Starta applikation
+        app-stop-hint: Stoppa applikationen
+      popups:
+        web-app-info-title: Webbapplikation
+    network-page:
+      subheader: Nätverksinställningar
+      network-settings-panel:
+        header: Inställningar för trådlöst nätverk
+        ssid-name-label: Det trådlösa nätverkets namn (SSID)
+        wifi-password-label: Lösenord för WiFi-nätverket
+      connect-wifi-panel:
+        wifi-network-hint-2: Trådlöst nätverk
+      popups:
+        edit-wifi-header: Redigera inställningar för trådlöst nätverk
+        change-channel-header: Byt kanal
+        change-password-header: Byt lösenord
+        change-mode-header: Ändra läge
+        connect-wifi-header: Anslut till trådlöst nätverk
+    appearance-page:
+      subheader: Utseende
+      theme-panel:
+        portal-title-label: Portal-titel
+        home-page-label: Hemsidans titel
+        home-subtitle-label: Hemsidans underrubrik
+        welcome-message-label: Applikationens välkomstmeddelande
+        background-image-label: Applikationens bakgrundsbild
+        colors-label: Färger
+        side-main-color: Sidopanelens huvudfärg
+      popups:
+        edit-theme-header: Redigera tema
+        edit-title-header: Redigera titel
+        edit-home-title-header: Redigera hemsidans titel
+        edit-home-subtitle-header: Redigera hemsidans undertitel
+        edit-welcome-message-header: Redigera välkomstmeddelande
+        edit-background-image-header: Redigera bakgrundsbild
+        reset-theme-header: Återställ tema
+        reset-theme-message: Detta kommer återställa samtliga visuella inställningar
+          till sina standardvärden.
+        load-theme-header: Ladda tema
+        load-theme-message: Ladda en av följande konfigurationsfiler
+        save-theme-header: Spara tema
+        save-theme-message: Ange ett namn för det nya temat.
+    devices-page:
+      subheader: Enheter
+      sensors-panel:
+        header: Sensorer
+        header-hint: Du kan använda detta för att styra diverse sensorer.
+        sensors-table:
+          type: Typ
+          status: Status
+          entries: Poster
+          actions: Handlingar
+          start-button-hint: Börja spara mätvärden
+          delete-button-hint: Radera alla sparade mätvärden
+      camera-panel:
+        header: Kamera
+        header-hint: Du kan använda detta för att styra kameran.
+      popups:
+        start-sensing-label1: Målserver
+        start-sensing-label2: Varaktighet (sekunder)
+        start-sensing-label4: Intervall (sekunder)
+        delete-sensing-message: Vill du radera samtliga sparade mätvärden?
+        start-images-label1: Varaktighet (sekunder)
+        start-images-label2: Intervall (sekunder)
+        delete-images-title: Radera alla foton
+        start-videos-label1: Varaktighet (sekunder)
+    monitoring-page:
+      details-panel:
+        header: Detaljer
+        table-label2: Administratör
+        table-label3: Titel
+        table-label4: Beskrivning
+        table-label5: Plats (latitud, longitud)
+      statistics-panel:
+        statistics-table:
+          status: Status
+          description: Beskrivning
+          action: Åtgärd
+          hardware-description-message: Bevakar systemaktivitet.
+          application-description-message: Bevakar applikationsdata.
+      popups:
+        change-details-label2: Administratör
+        change-details-label3: Titel
+        change-details-label4: Beskrivning
+        change-details-label5: Plats (latitud, longitud)
+        hardware-label1: Målserver
+        hardware-label2: Temperatur
+        hardware-label3: Användare av trådlöst nätverk
+        hardware-label4: Processorbelastning
+        hardware-label5: Arbetsminnesbelastning
+        hardware-label6: Minnesbelastning
+        application-label1: Målserver
+        application-label3: Gästboksapplikation
+        application-label4: Framadate-applikation
+        application-label5: Nextcloud-applikation
+    notifications-page:
+      subheader: Aviseringar
+      notifications-table:
+        header1: Status
+        header2: Titel
+        header3: Brödtext
+        header4: Åtgärder
+      popups:
+        create-notification-title: Skapa ny avisering
+        edit-notification-title: Redigera avisering
+        delete-notification-message: Notifikationen kommer raderas permanent från
+          databasen. Vill du fortsätta?
+    logs-page:
+      portal-log-panel:
+        filter-label1: Felmeddelanden
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: Beskrivning
+        subheader2: Ansluter över SSH
+        subheader3: Raspbian-konfiguration
+        paragraph6: och gå till menyn
+      etherpad-tab:
+        subheader1: Beskrivning
+        subheader2: Administrationsguide
+        subheader3: Användbara tips
+        paragraph5: Till exempel,
+      nextcloud-tab:
+        subheader1: Beskrivning
+        subheader3: Användbara tips
+        paragraph10: E-postadress
+        paragraph12: Hantera ditt lösenord
+      guestbook-tab:
+        subheader1: Beskrivning
+        subheader2: Administrationsguide
+        subheader3: Administratörslösenord
+      wordpress-tab:
+        subheader1: Beskrivning
+      framadate-tab:
+        subheader1: Beskrivning
+        paragraph2: Så här fungerar det
+        paragraph3: Skapa en enkät
+    settings-page:
+      subheader: Inställningar
+      panel-header: Systeminställningar
+      time-date:
+        header: Tid/datum
+      mysql-password:
+        header: MySQL-lösenord
+      apache-filesize:
+        header: Apache maximal filstorlek
+      popups:
+        change-time-date-title: Ändra tid eller datum
+        change-mysql-password-title: Ändra MySQL-lösenord
+        change-apache-filesize-title: Ändra Apaches maximala filstorlek för uppladdningar
+...

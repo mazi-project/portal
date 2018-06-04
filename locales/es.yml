@@ -1,0 +1,212 @@
+# Messages for Spanish (español)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Fitoschido
+---
+es:
+  general:
+    buttons:
+      edit: Editar
+      cancel: Cancelar
+      ok: Aceptar
+      close: Cerrar
+      create: Crear
+      delete: Eliminar
+      start: Iniciar
+      stop: Detener
+      save: Guardar cambios
+      choose: Elegir
+      export-to-csv: Exportar a un archivo CSV
+      reboot: Reiniciar
+      reset: Restablecer
+      shutdown: Apagar
+      logout: Salir
+      update: Actualizar
+      connect: Conectar
+      disconnect: Desconectar
+      toggle-device: Cambiar de dispositivo
+      initialize: Inicializar
+      remove: Quitar
+      load: Cargar
+      import: Importar
+      export: Exportar
+      refresh: Actualizar
+      continue: Continuar
+      next: Siguiente
+      previous: Anterior
+      submit: Enviar
+      change: Cambiar
+      qrcode: Código QR
+      show: Mostrar
+    messages:
+      warning: Alerta
+      version: Versión
+      off_msg: ⭘
+      channel: Canal
+      password: Contraseña
+  portal:
+    top-menu:
+      documentation: Documentación
+    side-menu:
+      applications: Aplicaciones
+      system: Sistema
+      sensors: Sensores
+      camera: Cámara
+      monitoring: Monitorización
+      devices: Dispositivos
+    system-page:
+      subheader: Información de sistema
+      users: Usuarios en línea
+      temperature: Temperatura
+      cpu: CPU
+      ram: RAM
+      storage: Almacenamiento
+    sensors-page:
+      direction: Dirección (grados)
+      acceleration: Aceleración (x, y, z)
+    camera-page:
+      header: Cámara
+    monitoring-page:
+      popups:
+        device: Dispositivo
+        devices: Dispositivos
+        description: Descripción
+        latitude: Latitud
+        longitude: Longitud
+        system_info: Información de sistema
+        cpu_temp: Temperatura de CPU
+        cpu_load: Carga de CPU
+        ram_load: Carga de RAM
+        wifi-users: Usuarios de wifi
+        storage_use: Carga de almacenamiento
+        etherpad-users: Usuarios de Etherpad
+        nextcloud-files: Archivos de Nextcloud
+  admin:
+    top-menu:
+      portal: Portal
+      set-date: Establecer fecha
+      username: Nombre de usuario
+      password: Contraseña
+      mysql-password: Contraseña de MySQL
+      check-updates: Buscar actualizaciones
+      settings: Configuración
+    side-menu:
+      applications: Aplicaciones
+      appearance: Apariencia
+      devices: Dispositivos
+      monitoring: Monitorización
+      notifications: Notificaciones
+      export-import: Exportar/importar
+      logs: Registros
+      documentation: Documentación
+    dashboard-page:
+      hardware-info:
+        system-temperature: Temperatura de sistema
+        cpu-load: Carga de CPU
+        ram-load: Carga de RAM
+        storage-load: Carga de almacenamiento
+      applications:
+        header: Aplicaciones
+        applications-installed: Aplicaciones instaladas
+      traffic:
+        header: Tránsito
+    applications-page:
+      instances-menu:
+        name-column: Nombre
+        name-hint: el nombre de la aplicación
+        url-column: URL
+        url-hint: el URL de la aplicación
+        description-column: Descripción
+        actions-column: Acciones
+        actions-hint: acciones que se pueden llevar a cabo en la aplicación
+      applications-menu:
+        header: Aplicaciones instaladas
+        status-column: Estado
+        icon-column: Icono
+        icon-hint: el icono predeterminado de la aplicación
+        color-column: Color
+        color-hint: el color predeterminado de la aplicación
+        name-column: Nombre de aplicación
+        name-hint: el nombre de la aplicación
+        url-column: URL
+        url-hint: el URL de la aplicación
+        description-column: Descripción
+        actions-column: Acciones
+        actions-hint: acciones que se pueden llevar a cabo en la aplicación
+    network-page:
+      portal-domain-panel:
+        header: Dominio de portal
+    appearance-page:
+      popups:
+        save-theme-header: Guardar tema
+    devices-page:
+      camera-panel:
+        header: Cámara
+    monitoring-page:
+      details-panel:
+        table-label3: Título
+        table-label4: Descripción
+        table-label5: Ubicación (lat., long.)
+      statistics-panel:
+        header: Datos de monitorización
+        statistics-table:
+          status: Estado
+          description: Descripción
+          action: Acción
+          hardware-description-message: Monitorización de la actividad del sistema.
+          application-description-message: Monitorización de los datos de aplicaciones.
+          no-hardware-tasks-message: No se está ejecutando ninguna tarea de monitorización
+            de actividad de sistema.
+          no-application-tasks-message: No se está ejecutando ninguna tarea de monitorización
+            de aplicaciones.
+      popups:
+        change-details-label3: Título
+        change-details-label4: Descripción
+        change-details-label5: Ubicación (lat., long.)
+        hardware-label2: Temperatura
+        hardware-label3: Usuarios de wifi
+        hardware-label4: Carga de CPU
+        hardware-label5: Carga de RAM
+        hardware-label6: Carga de almacenamiento
+    notifications-page:
+      subheader: Notificaciones
+      notifications-table:
+        header1: Estado
+        header2: Título
+        header3: Contenido
+        header4: Acciones
+      popups:
+        edit-notification-title: Editar notificación
+    logs-page:
+      portal-log-panel:
+        filter-label1: Mensajes de error
+    documentation-page:
+      etherpad-tab:
+        subheader1: Descripción
+        subheader2: Guía de administración
+        subheader3: Consejos útiles
+      nextcloud-tab:
+        subheader1: Descripción
+        subheader2: Guía de administración
+        subheader3: Consejos útiles
+      guestbook-tab:
+        subheader1: Descripción
+        subheader2: Guía de administración
+      wordpress-tab:
+        subheader1: Descripción
+        subheader2: Guía de administración
+      framadate-tab:
+        subheader1: Descripción
+    settings-page:
+      subheader: Configuración
+      panel-header: Configuración del sistema
+      time-date:
+        header: Fecha y hora
+      mysql-password:
+        header: Contraseña de MySQL
+      apache-filesize:
+        header: Tamaño máximo de archivos de Apache
+      popups:
+        change-time-date-title: Cambiar fecha y hora
+        change-mysql-password-title: Cambiar contraseña de MySQL
+...
