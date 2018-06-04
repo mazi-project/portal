@@ -1,0 +1,543 @@
+# Messages for Korean (한국어)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Ykhwong
+---
+ko:
+  general:
+    buttons:
+      edit: 편집
+      cancel: 취소
+      ok: 확인
+      close: 닫기
+      create: 만들기
+      delete: 삭제
+      start: 시작
+      stop: 정지
+      save: 변경사항 저장
+      choose: 선택하기
+      choose-timeslot: 타임슬롯 선택
+      export-to-csv: CSV 파일로 내보내기
+      expand: 확장
+      expand-storage: 기억 공간 확장
+      reboot: 다시 시작
+      reset: 초기화
+      shutdown: 끄기
+      logout: 로그아웃
+      update: 업데이트
+      connect: 연결
+      disconnect: 연결 끊기
+      toggle-device: 장치 바꾸기
+      initialize: 초기화
+      remove: 제거
+      load: 로드
+      import: 가져오기
+      export: 내보내기
+      refresh: 새로 고침
+      continue: 계속
+      next: 다음
+      previous: 이전
+      submit: 제출
+      change: 변경
+      qrcode: QR 코드
+      show: 보이기
+    messages:
+      warning: 경고
+      welcome: 환영합니다
+      version: 버전
+      enable: 활성화
+      disable: 비활성화
+      checked: 체크됨
+      on_msg: 켬
+      off_msg: 끔
+      disconnected: 연결되지 않음
+      here: 여기
+      ssid: SSID
+      channel: 채널
+      password: 비밀번호
+      offline: 오프라인
+      dual: 듀얼
+      restricted: 제한됨
+      active: 활성
+      inactive: 비활성
+      error: 오류
+  portal:
+    top-menu:
+      documentation: 설명서
+    side-menu:
+      applications: 애플리케이션
+      system: 시스템
+      sensors: 센서
+      camera: 카메라
+      monitoring: 모니터링
+      devices: 장치
+    system-page:
+      subheader: 시스템 정보
+      users: 온라인 사용자
+      app-clicks: 애플리케이션 클릭
+      temperature: 온도
+      cpu: CPU
+      ram: RAM
+      storage: 기억 공간
+    sensors-page:
+      header: 센서 측정
+      temperature-for: '%{sensor}의 온도'
+      humidity-for: '%{sensor}의 습도'
+      pressure-for: '%{sensor}의 압력'
+      no-sensors-warn: '경고: 데이터베이스에 측정이 없거나 센서 장치가 이 MAZI Zone에 연결되어 있지 않습니다.'
+      choose-timeslot-message: 타임슬롯을 선택하려면 아래의 양식을 사용해 주십시오.
+      direction: 방향 (도)
+      acceleration: 가속 (x, y, z)
+    camera-page:
+      header: 카메라
+      live-stream-header: 실시간 동영상 스트리밍
+      no-camera-warn: 현재 이 MAZI Zone에 올바르게 설치된 카메라가 없습니다!
+      media-library-header: 미디어 라이브러리
+      no-media-warn: 현재 라이브러리에 그림이나 동영상이 없습니다!
+    monitoring-page:
+      subheader: 모니터링
+      popups:
+        device: 장치
+        devices: 장치
+        deployment: 배치
+        administrator: 관리자
+        description: 설명
+        latitude: 위도
+        longitude: 경도
+        system_info: 시스템 정보
+        cpu_temp: CPU 온도
+        cpu_load: CPU 로드
+        ram_load: RAM 로드
+        wifi-users: 와이파이 사용자
+        storage_use: 기억 공간 로드
+        etherpad-pads: 이더패드 패드
+        etherpad-users: 이더패드 사용자
+        etherpad-datasize: 이더패드 데이터 크기
+        etherpad-clicks: 이더패드 클릭
+        guestbook-submissions: 방명록 제출
+        guestbook-comments: 방명록 댓글
+        guestbook-images: 방명록 그림
+        guestbook-datasize: 방명록 데이터 크기
+        guestbook-clicks: 방명록 클릭
+        nextcloud-users: Nextcloud 사용자
+        nextcloud-files: Nextcloud 파일
+        nextcloud-downloads: Nextcloud 다운로드
+        nextcloud-datasize: Nextcloud 데이터 크기
+        nextcloud-clicks: Nextcloud 클릭
+  admin:
+    general:
+      admin-panel: MAZI Zone 관리 패널
+      shutdown-modal-title: 끄시겠습니까?
+      shutdown-modal-message: MAZI Zone은 종료될 것입니다. 이로 인해 사이트의 도달이 불가능해지며 수동으로 MAZI
+        Zone을 다시 시작해야 할 수 있습니다. 계속하시겠습니까?
+      reboot-modal-title: 다시 시작하시겠습니까?
+    top-menu:
+      header: MAZI Zone 관리 패널
+      admin: 관리
+      portal: 포털
+      set-date: 날짜 설정
+      username: 사용자 이름
+      password: 비밀번호
+      mysql-password: MySQL 비밀번호
+      check-updates: 업데이트 확인
+      settings: 설정
+    side-menu:
+      dashboard: 대시보드
+      applications: 애플리케이션
+      networking: 네트워크
+      appearance: 보이기
+      devices: 장치
+      monitoring: 모니터링
+      notifications: 알림
+      export-import: 내보내기/가져오기
+      logs: 로그
+      documentation: 설명서
+    updates:
+      checking-updates: 업데이트를 검사하고 있습니다. 기다려 주십시오...
+      alert-message-1: 로컬 저장소가 수정되었습니다. 이로 인해 업데이트 기능이 오동작하게 됩니다. 수정한 파일에 대해 %{command}를
+        사용하여 로컬 저장소의 변경사항을 되돌려 주십시오.
+      update-message-1: 인터넷으로 활성화된 연결이 없습니다. 이 MAZI Zone을 인터넷에 연결한 다음 다시 시도해 주십시오.
+      update-message-3: 포털은 최신이므로 업데이트할 필요가 없습니다.
+      update-message-4: 이 시스템은 업데이트 중입니다. 기다려 주십시오...
+      update-message-6: 사용 가능한 업데이트가 있습니다. 업데이트 프로세스를 시작하려면 아래의 버튼을 사용해 주십시오.
+      update-hint: '참고: 잘못된 동작을 마주치신다면 장치를 다시 시작하십시오.'
+    setup-page:
+      setup-panel: MAZI Zone 설정 패널
+      first-step-header: 관리 비밀번호 설정
+      first-step-message: MAZI Zone 관리 패널의 관리 비밀번호를 설정하려면 아래의 양식을 사용하십시오.
+      first-step-hint: '참고: 이것이 새로운 MAZI Zone인 경우 현재 비밀번호는 1234입니다'
+      second-step-header: 날짜/시간 설정
+      second-step-message: 날짜/시간 및 MAZI Zone의 시간대를 변경하려면 아래의 양식을 사용해 주십시오.
+      third-step-header: 무선 인터페이스 설정
+      third-step-message: 와이파이 네트워크의 이름을 변경하려면 아래의 양식을 사용해 주십시오. (선택사항)
+      fourth-step-header: MAZI Zone 상세 정보
+      fourth-step-message: MAZI Zone의 상세한 사항을 변경하려면 아래의 양식을 사용해 주십시오
+      last-step-header: 완료
+      last-step-message: 모든 설정 단계를 성공적으로 완료하였습니다. 변경사항을 저장하려면 제출 버튼을 클릭해 주십시오.
+    dashboard-page:
+      subheader: 대시보드
+      welcome:
+        message-2: '다양한 도구를 탐색하려면 메뉴를 사용해 주십시오. 다음을 할 수 있습니다:'
+        message-list-1: 지원되는 애플리케이션 관리
+        message-list-2: MAZI Zone 네트워크 구성
+        message-list-3: 포털의 시각 표현 구성
+        message-list-4: 포털의 알림 추가/제거
+        message-list-5: 스냅샷 내보내기/가져오기
+      hardware-info:
+        header: MAZI Zone 하드웨어 정보
+        system-temperature: 시스템 온도
+        cpu-load: CPU 로드
+        ram-load: RAM 로드
+        storage-load: 기억 공간 로드
+      networking:
+        header: 네트워크
+        users-online: 현재 온라인 사용자
+        wifi-info: 와이파이 네트워크 정보
+      applications:
+        header: 애플리케이션
+        applications-installed: 설치된 애플리케이션
+      traffic:
+        header: 트래픽
+        reset-application-clicks: 애플리케이션 클릭 초기화
+        reset-visits: 방문 초기화
+        portal-visits: 전반적인 포털 방문
+        application-visits: 애플리케이션 방문
+      notifications:
+        header: 알림
+      time-date:
+        header: MAZI Zone 시간/날짜
+        current: 현재 날짜/시간
+      version:
+        header: MAZI Zone 버전
+        version-message-1: 이 포털은
+        up-to-date: 최신
+    applications-page:
+      subheader: 애플리케이션
+      instances-menu:
+        header: 애플리케이션 인스턴스
+        active-column: 활성
+        splash-page-column: 스플래시 페이지
+        splash-page-hint: 이 애플리케이션을 포털의 스플래시 페이지로 사용
+        name-column: 이름
+        name-hint: 애플리케이션 이름
+        url-column: URL
+        url-hint: 애플리케이션의 URL
+        description-column: 설명
+        parent-column: 부모 애플리케이션
+        parent-hint: 부모 애플리케이션
+        click-column: 클릭 카운터
+        actions-column: 동작
+        actions-hint: 애플리케이션에 수행할 수 있는 동작
+        guestbook-admin-hint: 방명록 관리 패널
+        delete-instance-hint: 애플리케이션 인스턴스 삭제
+        create-instance-hint: 새로운 애플리케이션 인스턴스 만들기
+        edit-instance-hint: 애플리케이션 인스턴스 편집
+      applications-menu:
+        header: 설치된 애플리케이션
+        status-column: 상태
+        status-hint: 포털의 동작 상태 (실행 중/정지됨)
+        icon-column: 아이콘
+        icon-hint: 애플리케이션 기본 아이콘
+        color-column: 색
+        color-hint: 애플리케이션 기본색
+        name-column: 애플리케이션 이름
+        name-hint: 애플리케이션 이름
+        url-column: URL
+        url-hint: 애플리케이션의 URL
+        description-column: 설명
+        actions-column: 동작
+        actions-hint: 애플리케이션에 수행할 수 있는 동작
+        web-app-info-hint: 이 애플리케이션을 시작하고 중지하는 일은 MAZI Zone의 성능에 영향을 미치지 않습니다.
+        web-app-start-hint: 이것이 웹 애플리케이션이면 계속 실행됩니다.
+        app-start-hint: 애플리케이션 시작
+        app-stop-hint: 애플리케이션 정지
+      popups:
+        delete-application-title: 애플리케이션 인스터스를 삭제하시겠습니까?
+        delete-application-message: 이 애플리케이션 인스턴스는 데이터베이스에서 영구적으로 삭제됩니다. 계속하시겠습니까?
+        delete-application-hint: 이 애플리케이션을 삭제하려면 그 전에 이 애플리케이션에 연결되어 있는 모든 애플리케이션
+          인스턴스를 삭제해야 합니다.
+        edit-application-title: 애플리케이션 인스턴스를 편집하시겠습니까?
+        create-application-title: 새로운 애플리케이션 인스턴스 만들기
+        create-application-help: '도움말: 일부 애플리케이션은 일시적으로 여러 인스턴스를 가질 수 없으므로 이것이 발견을
+          못하는 이유가 될 수 있습니다.'
+        web-app-info-title: 웹 애플리케이션
+        web-app-info-message: 이것은 웹 애플리케이션이므로 이 애플리케이션을 시작하거나 중단하는 일은 MAZI Zone의 성능에
+          영향을 주지 않습니다.
+    network-page:
+      subheader: 네트워크 설정
+      network-settings-panel:
+        header: 와이파이 네트워크 설정
+        ssid-name-label: 와이파이 네트워크 이름 (SSID)
+        wifi-channel-label: 와이파이 네트워크의 채널
+        wifi-password-label: 와이파이 네트워크의 비밀번호
+      internet-panel:
+        header: 인터넷 네트워크 모드
+        mode-hint: 와이파이 네트워크 방식
+      connect-wifi-panel:
+        header: 인터넷 접속을 위해 와이파이에 연결
+        wifi-network-hint-1: 와이파이 네트워크에서
+        wifi-network-hint-2: 와이파이 네트워크
+      access-point-panel:
+        header: 액세스 포인트로 라우터 추가
+        current-hint: 사용 중인 와이파이 액세스 포인트
+      portal-domain-panel:
+        header: 포털 도메인
+        domain-hint: 현재 포털 도메인
+      popups:
+        edit-wifi-header: 와이파이 구성 편집
+        edit-wifi-network-header: 와이파이 네트워크 설정 편집
+        show-qrcode-header: 와이파이 네트워크 QR 코드
+        change-channel-header: 채널 변경
+        change-password-header: 비밀번호 변경
+        change-mode-header: 모드 변경
+        connect-wifi-header: 와이파이 네트워크에 연결
+        select-wifi-label: 와이파이 이름 선택
+        type-wifi-label: 숨은 이름인 경우 아래에 입력하십시오
+        type-password-label: 와이파이 네트워크의 비밀번호를 입력하십시오
+        change-domain-header: 포털 도메인 편집
+    appearance-page:
+      subheader: 보이기
+      theme-panel:
+        header: 테마 구성
+        portal-title-label: 포털 제목
+        home-page-label: 홈페이지 제목
+        welcome-message-label: 애플리케이션 환영 메시지
+        welcome-message-hint: 이 값은 애플리케이션 페이지의 본문 환경 메시지를 구성합니다.
+        background-image-label: 애플리케이션 배경 이미지
+        background-image-hint: 이 값은 애플리케이션 페이지를 위한 배경 그림을 구성합니다.
+        colors-label: 색
+        side-active-color: 사이드 패널 활동 색
+        top-main-color: 최상위 패널 주 색상
+        colors-hint: 위의 값들은 포털의 다양한 색을 구성합니다.
+      popups:
+        edit-theme-header: 테마 편집
+        edit-title-header: 제목 편집
+        edit-welcome-message-header: 환영 메시지 편집
+        edit-background-image-header: 배경 이미지 편집
+        reset-theme-header: 테마 초기화
+        reset-theme-message: 이 동작은 모든 시각 구성을 기본값으로 초기화합니다.
+        load-theme-header: 테마 로드
+        load-theme-message: 다음의 구성 파일 중 하나를 로드
+        save-theme-header: 테마 저장
+        save-theme-message: 새로운 테마의 이름을 입력해 주십시오.
+    devices-page:
+      subheader: 장치
+      sensors-panel:
+        header: 센서
+        header-hint: 이것을 사용하여 다양한 센서를 제어할 수 있습니다.
+        toggle-sensors-message: 사용자 포털에서 센서 탭 활성화/비활성화
+        toggle-sensors-hint: 포털 센서 탭 활성화/비활성화
+        sensors-table:
+          type: 종류
+          status: 상태
+          entries: 항목
+          actions: 동작
+          start-button-hint: 측정 저장 시작
+          delete-button-hint: 저장된 모든 측정 삭제
+        no-sensors-message: MAZI zone에 연결된 센서를 찾을 수 없습니다.
+        init-sensors-message: 센서 모듈을 위한 초기화 절차가 아직 실행되지 않았습니다. 이 MAZI 존에 연결된 센서 장치를
+          사용하려면 아래의 버튼을 사용하여 이 모듈을 초기화해 주십시오.
+        init-button-hint: 센서 초기화 시작
+      camera-panel:
+        header: 카메라
+        header-hint: 이것을 사용하여 카메라를 제어할 수 있습니다.
+        toggle-camera-message: 사용자 포털의 카메라 탭 활성화/비활성화
+        toggle-camera-hint: 포털 카메라 탭 활성화/비활성화
+        camera-version-message: 이 이미지에 카메라 모듈이 올바르게 설치되지 않았습니다! 이 목적을 위해 올바르게 구성된
+          1.7.2 이상의 이미지를 사용해 주십시오.
+        no-camera-message: 이 MAZI Zone에 연결된 카메라가 없습니다!
+      popups:
+        start-sensing-title: 센서 측정 시작
+        start-sensing-label1: 대상 서버
+        start-sensing-label2: 지속 시간 (초)
+        start-sensing-label3: 달력 (끝 시간/날짜)
+        start-sensing-label4: 간격 (초)
+        delete-sensing-title: 센서 측정 삭제
+        delete-sensing-message: 저장된 모든 측정을 삭제하시겠습니까?
+        start-images-title: 이미지 캡처 시작
+        start-images-label1: 지속 시간 (초)
+        start-images-label2: 간격 (초)
+        delete-images-title: 모든 사진 삭제
+        delete-images-message: 캡처한 모든 사진을 삭제하시겠습니까?
+        start-videos-title: 동영상 캡처 시작
+        start-videos-label1: 지속 시간 (초)
+        delete-videos-title: 모든 동영상 삭제
+        delete-videos-message: 캡처된 모든 동영상을 삭제하시겠습니까?
+    monitoring-page:
+      subheader: 모니터링
+      details-panel:
+        header: 자세한 사항
+        header-hint: 이것을 사용하여 모니터링 기능을 활성화/비활성화할 수 있습니다.
+        toggle-monitoring-message: 모니터링 기능을 활성화/비활성화합니다.
+        toggle-monitoring-hint: 모니터링 기능 활성화/비활성화
+        table-label1: 배치
+        table-label2: 관리자
+        table-label3: 제목
+        table-label4: 설명
+        table-label5: 위치 (경도, 고도)
+        details-hint: 모니터링을 활성화하기 전에 모니터링 상세사항을 먼저 변경하는 것이 필수입니다!
+      statistics-panel:
+        header: 모니터링 데이터
+        header-hint: 이것을 사용하여 모니터링 활동을 제어할 수 있습니다.
+        toggle-monitoring-map-msg: 사용자 포털의 모니터링 탭 활성화/비활성화
+        toggle-monitoring-map-hint: 모니터링 탭 활성화/비활성화
+        statistics-table:
+          status: 상태
+          description: 설명
+          action: 동작
+          hardware-description-message: 시스템 활동 모니터링입니다.
+          application-description-message: 애플리케이션 데이터 모니터링입니다.
+          no-hardware-tasks-message: 현재 실행 중인 시스템 활동 모니터링 작업이 없습니다.
+          no-application-tasks-message: 현재 실행 중인 애플리케이션 모니터링 작업이 없습니다.
+          start-hardware-task-hint: 시스템 활동 모니터링 시작
+          stop-hardware-task-hint: 시스템 활동 모니터링 정지
+          delete-hardware-data-hint: 로컬 데이터베이스의 시스템 활동 모니터링 데이터를 모두 삭제
+          start-application-task-hint: 애플리케이션 모니터링 시작
+          stop-application-task-hint: 애플리케이션 모니터링 정지
+          delete-application-data-hint: 로컬 데이터베이스에서 애플리케이션 모니터링 데이터 삭제
+      popups:
+        change-details-header: 모니터링 상세사항 변경
+        change-details-label1: 배치
+        change-details-label2: 관리자
+        change-details-label3: 제목
+        change-details-label4: 설명
+        change-details-label5: 위치 (고도, 경도)
+        hardware-label1: 대상 서버
+        hardware-label2: 온도
+        hardware-label3: 와이파이 사용자
+        hardware-label4: CPU 로드
+        hardware-label5: RAM 로드
+        hardware-label6: 기억 공간 로드
+        application-label1: 대상 서버
+        application-label2: 이더패드 애플리케이션
+        application-label3: 방명록 애플리케이션
+        application-label5: Nextcloud 애플리케이션
+        start-hardware-header: 시스템 활동 모니터링 데이터 시작
+        start-hardware-message: 시스템 활동 모니터링 데이터를 내보내기 시작하려면 아래의 양식을 사용하십시오
+        start-application-header: 애플리케이션 모니터링 데이터 시작
+        start-application-message: 시스템 활동 모니터링 데이터를 보내기 시작하려면 아래의 양식을 사용하십시오
+        show-hardware-header: 시스템 활동 모니터링 정보
+        show-hardware-message: 시스템 활동 모니터링 프로세스의 현재 상태
+        show-application-header: 애플리케이션 모니터링 정보
+        show-application-message: 애플리케이션 모니터링 프로세스의 현재 상태
+        delete-hardware-header: 시스템 활동 모니터링 데이터 삭제
+        delete-hardware-hint: 이 동작은 완전히 실행되기까지 수초 소요될 수 있으므로 문서가 갱신될 때까지 기다려 주십시오.
+        delete-application-header: 애플리케이션 모니터링 데이터 삭제
+        delete-application-hint: 이 동작은 완전히 실행되기까지 수초 소요될 수 있으므로 문서가 갱신될 때까지 기다려 주십시오.
+    notifications-page:
+      subheader: 알림
+      notifications-table:
+        header1: 상태
+        header2: 제목
+        header4: 동작
+      popups:
+        create-notification-title: 새로운 알림 만들기
+        edit-notification-title: 알림 편집
+        delete-notification-message: 이 알림은 데이터베이스에서 영구적으로 삭제됩니다. 계속하시겠습니까?
+    import-export-page:
+      subheader: 스냅샷
+      save-snapshot-panel:
+        header: 스냅샷 저장
+        header-hint: 이것을 사용하여 스냅샷을 저장할 수 있습니다.
+        form-placeholder: 스냅샷 이름
+        form-hint: 새로운 스냅샷의 이름을 입력해 주십시오.
+      load-snapshot-panel:
+        header: 스냅샷 로드
+        header-hint: 이것을 사용하여 스냅샷을 로드할 수 있습니다.
+        message: 스냅샷을 선택하고 로드를 눌러 주십시오. MAZI 포털은 다시 시작됩니다.
+        no-snapshots-message: 현재 저장된 스냅샷이 없습니다.
+      import-export-panel:
+        header: 스냅샷 가져오기/내보내기
+        header-hint: 이것을 사용하여 스냅샷을 ZIP 파일로 내보낼 수 있습니다. 아니면 ZIP 파일을 스냅샷으로 가져올 수 있습니다.
+        message: 스냅샷을 선택하고 로드를 눌러 주십시오.
+        no-snapshots-message: 현재 저장된 스냅샷이 없습니다.
+      application-snapshots-header: 애플리케이션 스냅샷
+      interview-panel:
+        header-hint: 이것을 사용하여 스냅샷을 가져오거나 내보낼 수 있습니다.
+        form-placeholder: 스냅샷 이름
+      guestbook-panel:
+        header-hint: 이것을 사용하여 스냅샷을 가져오고 내보낼 수 있습니다.
+        form-placeholder: 스냅샷 이름
+      popups:
+        import-header: 스냅샷 가져오기
+        import-interview-header: 인터뷰를 위한 스냅샷 가져오기
+        import-guestbook-header: 방명록 스냅샷 가져오기
+        import-etherpad-header: 이더패드의 스냅샷 가져오기
+    logs-page:
+      subheader: 로그 뷰어
+      message: 아래의 MAZI Zone 로그 파일을 볼 수 있습니다
+      portal-log-panel:
+        header: 포털 로그 파일
+        header-hint: 포털 로그 파일입니다.
+        filter-label1: 오류 메시지
+        filter-label2: 경고 메시지
+        filter-label3: 디버그 메시지
+    documentation-page:
+      header: 관리 설명서
+      initial-configuration-tab:
+        header: 초기 구성
+        subheader1: 설명
+        subheader2: ssh를 통해 연결하는 중
+        subheader3: Raspbian 구성
+        paragraph3: pi 사용자의 비밀번호를 변경하려면 $passwd 과정을 수행하고 지시를 따르십시오.
+        paragraph5: Raspberry에 성공적으로 로그인하면 rasbian 구성 도구를 시작하십시오
+        paragraph7: 파일 시스템의 크기를 변경하여 전체 SD 카드와 용량 사용
+        paragraph9: 현재 위치의 로케일
+        paragraph10: 현 위치의 시간대
+      etherpad-tab:
+        subheader1: 설명
+        subheader2: 관리 가이드
+        subheader3: 유용한 팁
+        paragraph2: '관리 페이지의 위치:'
+        paragraph5: 이를테면
+      nextcloud-tab:
+        subheader1: 설명
+        subheader2: 관리 가이드
+        subheader3: 유용한 팁
+        paragraph2: '다음 위치에서 관리 페이지를 볼 수 있습니다:'
+        paragraph3: 내 개인 설정에 접근하려면
+        paragraph6: 지금 보고 계신 기능 중 일부는 다음을 포함합니다
+        paragraph7: 사용률 및 사용 가능한 할당량
+        paragraph8: 내 프로필 사진 관리
+        paragraph10: 이메일 주소
+        paragraph12: 내 비밀번호 관리
+        paragraph13: Nextcloud 인터페이스의 언어를 선택하십시오
+        paragraph14: 데스크톱 및 모바일 앱 링크
+      guestbook-tab:
+        subheader1: 설명
+        subheader2: 관리 가이드
+        subheader3: 관리자 비밀번호
+        subheader4: 콘텐츠의 다른 뷰
+        paragraph3: 관리 비밀번호를 변경하려면 이 경로의 config.js 파일을 여십시오
+        paragraph6: 슬라이드쇼 뷰
+        paragraph7: 태블릿 뷰
+      wordpress-tab:
+        subheader1: 설명
+        subheader2: 관리 가이드
+      framadate-tab:
+        subheader1: 설명
+        paragraph2: 아래는 동작 방식입니다
+        paragraph3: 설문 조사 만들기
+        paragraph4: 선택할 날짜나 주제 결정
+        paragraph5: 친구나 동료에게 설문조사 링크 보내기
+        paragraph6: 토론 후 결정
+    settings-page:
+      subheader: 설정
+      message: 이 도구를 사용하여 MAZI Zone의 다양한 구성 설정을 변경할 수 있습니다.
+      panel-header: 시스템 설정
+      time-date:
+        header: 시간/날짜
+      mysql-password:
+        header: MySQL 비밀번호
+      apache-filesize:
+        header: 아파치 최대 파일 크기
+      popups:
+        change-time-date-title: 시간/날짜 변경
+        change-time-date-message: MAZI Zone 시간/날짜를 변경하려면 아래의 양식을 사용해 주십시오.
+        change-mysql-password-title: MySQL 비밀번호 변경
+        change-mysql-password-message: 이 MAZI Zone의 MySQL 비밀번호를 변경하려면 아래의 양식을 사용해
+          주십시오.
+        change-apache-filesize-title: 아파치 최대 업로드 파일 크기 변경
+        change-apache-filesize-message: 이 MAZI Zone의 아파치 최대 업로드 파일 크기를 변경하려면 아래의 양식을
+          사용해 주십시오.
+...

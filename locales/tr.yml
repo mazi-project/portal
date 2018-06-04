@@ -1,0 +1,562 @@
+# Messages for Turkish (Türkçe)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Hedda
+---
+tr:
+  general:
+    buttons:
+      edit: Düzenle
+      cancel: İptal
+      ok: Tamam
+      close: Kapat
+      create: Oluştur
+      delete: Sil
+      start: Başla
+      stop: Dur
+      save: Değişiklikleri Kaydet
+      choose: Seç
+      choose-timeslot: Bir zaman dilimi seçin
+      export-to-csv: CSV dosyasına aktar
+      expand: Genişlet
+      expand-storage: Depolama alanını genişlet
+      reboot: Yeniden Başlat
+      reset: Sıfırla
+      shutdown: Kapat
+      logout: Çıkış
+      update: Güncelle
+      connect: Bağlan
+      disconnect: Bağlantıyı Kes
+      toggle-device: Cihazı Değiştir
+      initialize: Başlat
+      remove: Kaldır
+      load: Yükle
+      import: İçe aktar
+      export: Dışa aktar
+      refresh: Yenile
+      continue: Devam et
+      next: Sonraki
+      previous: Önceki
+      submit: Gönder
+      change: Değiştir
+      qrcode: QR kod
+      show: Göster
+    messages:
+      warning: Uyarı
+      welcome: Hoş geldiniz
+      version: Sürüm
+      enable: etkinleştir
+      disable: devre dışı bırak
+      checked: kontrol edildi
+      on_msg: Açık
+      off_msg: Kapalı
+      disconnected: Bağlantı kesildi
+      here: burada
+      ssid: SSID
+      channel: Kanal
+      password: Parola
+      offline: çevrimdışı
+      dual: çift
+      restricted: kısıtlı
+      managed: yönetilen
+      active: aktif
+      inactive: pasif
+      error: hata
+  portal:
+    top-menu:
+      documentation: Belgelendirme
+    side-menu:
+      applications: Uygulamalar
+      system: Sistem
+      sensors: Sensörler
+      camera: Kamera
+      monitoring: İzleme
+      devices: Cihazlar
+    system-page:
+      subheader: Sistem Bilgisi
+      users: Kullanıcı Çevrimiçi
+      app-clicks: Uygulama Tıklamaları
+      temperature: Sıcaklık
+      cpu: İşlemci
+      ram: RAM
+      storage: Depolama
+    sensors-page:
+      header: Sensör Ölçümleri
+      header-message: Bu sayfada MAZI Bölgesine bağlı çeşitli sensörlerin ölçümlerini
+        görebilirsiniz. Belirli bir dönemden ölçüm talep etmek için aşağıdaki düğmeyi
+        de kullanabilirsiniz.
+      no-sensors-warn: 'Uyarı: Veritabanında hiçbir ölçüm yok veya bu MAZI bölgesine
+        bir sensör cihazı bağlı değil.'
+      no-sensor-data-warn: 'Uyarı: Bu MAZI Bölgesi''nde kayıtlı sensör verileri bulunmamaktadır.
+        Bir sistem yöneticisi, sensör verilerinin toplanmasını sağlayabilir.'
+      choose-timeslot-message: Bir zaman dilimi seçmek için lütfen aşağıdaki formu
+        kullanın.
+      direction: Yön (Derece)
+      acceleration: Hızlanma (x, y, z)
+      gyroscope: Jiroskop (eğim, sapma, yalpa)
+      sensors-hint: Geçerli değerleri görmek için Sensehat kalibre edilmelidir. Daha
+        fazla bilgi için lütfen yönetici paneline bakın.
+    camera-page:
+      header: Kamera
+      subheader: Bu sayfada, bu MAZI Bölgesine bağlı kamera tarafından çekilen fotoğraf
+        ve videoları görebilirsiniz.
+      live-stream-header: Canlı Video Akışı
+      no-camera-warn: Şu anda bu MAZI Bölgesi'nde düzgün bir şekilde kurulmuş kamera
+        yok!
+      media-library-header: Medya Kütüphanesi
+      no-media-warn: Şu anda kütüphanede herhangi bir görüntü veya video bulunamadı!
+    monitoring-page:
+      subheader: İzleme
+      header-message: Bu sayfada, bu ve/veya diğer MAZI Bölgeleri'nin çeşitli izleme
+        ölçümlerine ait ölçümleri görebilirsiniz.
+      popups:
+        device: Cihaz
+        devices: Cihazlar
+        deployment: Yayılma
+        administrator: Yönetici
+        description: Açıklama
+        latitude: Enlem
+        longitude: Boylam
+        system_info: Sistem Bilgisi
+        cpu_temp: CPU Sıcaklığı
+        cpu_load: CPU Yükü
+        ram_load: RAM Yükü
+        wifi-users: WiFi Kullanıcıları
+        storage_use: Depolama Yükü
+        etherpad-pads: Etherpad Pedleri
+        etherpad-users: Etherpad Kullanıcıları
+        etherpad-datasize: Etherpad Veri Boyutu
+        etherpad-clicks: Etherpad Tıklamaları
+        guestbook-submissions: Ziyaretçi Defteri Gönderimleri
+        guestbook-comments: Ziyaretçi Defteri Yorumları
+        guestbook-images: Ziyaretçi Defteri Resimleri
+        guestbook-datasize: Ziyaretçi Defteri Veri Boyutu
+        guestbook-clicks: Ziyaretçi Defteri Tıklamaları
+        framadate-polls: Framadate Anketleri
+        framadate-votes: Framadate Oylamaları
+        framadate-comments: Framadate Yorumları
+        framadate-clicks: Framadate Tıklamaları
+        nextcloud-users: Nextcloud Kullanıcıları
+        nextcloud-files: Nextcloud Dosyaları
+        nextcloud-downloads: Nextcloud İndirmeleri
+        nextcloud-datasize: Nextcloud Veri Boyutu
+        nextcloud-clicks: Nextcloud Tıklamaları
+  admin:
+    general:
+      admin-panel: MAZI Bölgesi Yönetim paneli
+      shutdown-modal-title: Kapatılsın mı?
+      shutdown-modal-message: MAZI Bölgesi şimdi kapanacak, bu siteye ulaşılamayacak
+        ve bu MAZI Bölgesi'ni manuel olarak yeniden başlatmanız gerekecek. Devam edilsin
+        mi?
+      reboot-modal-title: Yeniden başlatılsın mı?
+      reboot-modal-message: MAZI Bölgesi şimdi yeniden başlatılacak, bu sitenin birkaç
+        dakikaya erişememesine neden olacak, lütfen birkaç dakika sonra bu sayfayı
+        bekleyin ve yenileyin. Devam edilsin mi?
+    top-menu:
+      header: MAZI Bölgesi Yönetim Paneli
+      admin: Yönetici
+      portal: Portal
+      set-date: Tarih Ayarla
+      username: Kullanıcı Adı
+      password: Parola
+      mysql-password: MySQL Parolası
+      check-updates: Güncelleştirmeleri Denetle
+      settings: Ayarlar
+    side-menu:
+      dashboard: Gösterge Paneli
+      applications: Uygulamalar
+      networking: Ağ
+      appearance: Görünüm
+      devices: Cihazlar
+      monitoring: İzleme
+      notifications: Bildirimler
+      export-import: Dışa/İçe Aktarım
+      logs: Günlükler
+      documentation: Belgeleme
+    updates:
+      checking-updates: Güncellemeler kontrol ediliyor. Lütfen bekleyin...
+      alert-message-1: Yerel deponuz düzenlendi. Bu, güncelleme işlevinin arızalanmasına
+        neden olur. Lütfen düzenlenmiş dosyalar için %{command} kullanarak bu değişiklikleri
+        yerel deponuzda geri alın.
+      update-message-1: İnternet için aktif herhangi bir bağlantı mevcut değil. Lütfen,
+        bu Mazi Bölgesi'ni internete bağlayın ve tekrar deneyin.
+      update-message-2: Bu portal Demo modunda çalışır! Bu işlem bir güncelleme işlemini
+        başlatırdı.
+      update-message-3: Portal zaten güncel olduğu için güncelleme gerekmiyor.
+      update-message-4: Sistem güncelleniyor. Lütfen bekleyin...
+      update-message-5: Güncelleme süreci neredeyse tamamlandı. Eksik bağımlılıkları
+        kurmak için MAZI Bölgeniz yeniden başlatılacaktır. WiFi ağınızı tekrar gördüğünüz
+        anda, güncellenmiş MAZI Bölgenize bağlanmaya hazırsınız.
+      update-message-6: Mevcut bir güncelleme var. Güncelleme işlemini başlatmak için
+        lütfen aşağıdaki düğmeyi kullanın.
+      update-hint: 'İpucu: hatalı bir davranışla karşılaşırsanız cihazınızı yeniden
+        başlatın.'
+    setup-page:
+      tog-nav: Gezinmeyi değiştir
+      setup-panel: MAZI Bölgesi Kurulum Paneli
+      first-step-header: Yönetici Şifre Kurulumu
+      first-step-message: MAZI Bölgesi yönetim paneli için yönetici şifresi ayarlamak
+        için aşağıdaki formu kullanın.
+      first-step-hint: 'ipucu: Bu yeni bir MAZI Bölgesi ise geçerli şifre 1234''tür.'
+      second-step-header: Tarih/Zaman kurulumu
+      second-step-message: Bu MAZI Bölgesi'nin saat diliminin yanı sıra Tarih/Zaman'ı
+        değiştirmek için lütfen aşağıdaki formu kullanın.
+      third-step-header: Kablosuz Arayüz Kurulumu
+      third-step-message: Wi-Fi ağının adını değiştirmek için lütfen aşağıdaki formu
+        kullanın (İsteğe bağlı).
+      third-step-warning: 'Uyarı: Wi-Fi ağınızın adını değiştirirseniz bu MAZI Bölgesi''ne
+        olan kablosuz bağlantınız kaybolur ve yeni Wi-Fi ağına yeniden bağlanmanız
+        gerekecektir.'
+      fourth-step-header: MAZI Bölgesi ayrıntıları
+      fourth-step-message: MAZI Bölgenizin ayrıntılarını değiştirmek için lütfen aşağıdaki
+        formu kullanın.
+      fourth-step-warning: 'İpucu: Konumunuzu bulmak (enlem, boylam) için Google haritalarını
+        kullanabilirsiniz. Sağ tıkla -> Burası neresi. Ardından, ekranın altında görünen
+        kutudaki koordinatları kullanın. (örneğin, 39.379012, 22.902813)'
+      last-step-header: Tamamlayınız
+      last-step-message: Tüm kurulum adımlarını başarıyla tamamladınız. Değişiklikleri
+        kaydetmek için lütfen gönder düğmesine tıklayın.
+    dashboard-page:
+      subheader: Gösterge Paneli
+      welcome:
+        message-1: '%{panel}, Bu MAZI Bölgesi portalını yönetmek için kullanılan ana
+          araçtır. Ayrıca bu MAZI Bölgesi''nin ağ oluşturma yönüdür.'
+        message-2: 'Lütfen, çeşitli araçlara ulaşmak için menüyü kullanın:'
+        message-list-1: Desteklenen uygulamaları yönetin
+        message-list-2: MAZI Bölgesi ağını yapılandırın
+        message-list-3: Portalın görsel sunumunu yapılandırın
+        message-list-4: Portalda bildirimleri ekle/kaldır
+        message-list-5: Anlık görüntü alma/verme
+      hardware-info:
+        header: MAZI Bölgesi Donanım Bilgisi
+        system-temperature: Sistem Sıcaklığı
+        cpu-load: CPU Yükü
+        ram-load: RAM Yükü
+        storage-load: Depolama Yükü
+      networking:
+        header: Ağ
+        users-online: Şu An Çevrimiçi Olan Kullanıcılar
+        wifi-info: Kablosuz Ağ Bilgisi
+      applications:
+        header: Uygulamalar
+        applications-installed: Yüklü Uygulamalar
+      traffic:
+        header: Trafik
+        reset-application-clicks: Uygulama Tıklamalarını Sıfırla
+        reset-visits: Ziyaretleri Sıfırla
+        portal-visits: Toplam Portal Ziyareti
+        application-visits: Uygulama Ziyareti
+      notifications:
+        header: Bildirimler
+        notifications: Aktif Portal Bildirimleri
+      time-date:
+        header: MAZI Bölgesi Saat/Tarih
+        current: Mevcut Tarih/Saat
+      version:
+        header: MAZI Bölgesi Sürümü
+        version-message-1: Bu Portal,
+        up-to-date: Güncel
+      popups:
+        expand-storage-message: MAZI Bölgesi depolamasını, aşağıdaki düğmeyi kullanarak
+          SD kartınızın maksimum kapasitesine genişletebilirsiniz. Bunun çalışması
+          için cihazı yeniden başlatmanız gerekmektedir.
+    applications-page:
+      subheader: Uygulamalar
+      instances-menu:
+        header: Uygulama Örnekleri
+        active-column: Aktif
+        active-hint: Portalda uygulama görünürlüğünü değiştir
+        splash-page-column: Giriş Sayfası
+        splash-page-hint: bu uygulamayı portalın giriş sayfası olarak kullan
+        name-column: İsim
+        name-hint: uygulamanın adı
+        url-column: URL
+        url-hint: uygulamanın URL'si
+        description-column: Açıklama
+        description-hint: portaldaki uygulama kısmında gösterilecek açıklama
+        parent-column: Ana Uygulama
+        parent-hint: ana uygulama
+        click-column: Tıklanma Sayacı
+        click-hint: uygulama için toplam tıklanma
+        actions-column: İşlemler
+        actions-hint: uygulamada gerçekleştirilebilecek işlemler
+        guestbook-admin-hint: Ziyaretçi Defteri Yönetici Paneli
+        delete-instance-hint: Uygulama Örneğini Sil
+        create-instance-hint: Yeni Uygulama Örneği Oluştur
+        edit-instance-hint: Uygulama Örneğini Düzenle
+      applications-menu:
+        header: Yüklü Uygulamalar
+        status-column: Durum
+        status-hint: portların çalışma durumu (çalışıyor/durdu)
+        icon-column: Simge
+        icon-hint: uygulamanın varsayılan simgesi
+        color-column: Renk
+        color-hint: uygulamanın varsayılan rengi
+        name-column: Uygulama Adı
+        name-hint: uygulamanın adı
+        url-column: URL
+        url-hint: Uygulamanın URL'si
+        description-column: Açıklama
+        description-hint: Portaldaki uygulama kısmında gösterilecek açıklama
+        actions-column: İşlemler
+        actions-hint: uygulamada gerçekleştirilebilecek işlemler
+        web-app-info-hint: Bu uygulamanın başlatılması/durdurulması, MAZI Bölgenizin
+          performansını etkilemeyecektir.
+        web-app-start-hint: Bu bir web uygulamasıdır, her zaman çalışır.
+        app-start-hint: Uygulamayı Başlat
+        app-stop-hint: Uygulamayı Durdur
+      popups:
+        delete-application-title: Uygulama Örneğini Silinsin mi?
+        delete-application-message: Bu uygulama örneği, veritabanından kalıcı olarak
+          silinecektir. Devam etmek istiyor musunuz?
+        delete-application-hint: Bu uygulamayı silebilmeniz için önce bu uygulamaya
+          bağlı tüm uygulama örneklerini silmeniz gerekir.
+        edit-application-title: Uygulama Örneğini Düzenle?
+        create-application-title: Yeni Uygulama Örneği oluştur
+        create-application-help: 'Yardım: Bazı uygulamalar şu an için birden fazla
+          örneğe sahip olamaz, bazılarının eksik olmasının nedeni budur.'
+        web-app-info-title: Web Uygulaması
+        web-app-info-message: Bu bir WEB uygulamasıdır, bu yüzden bu uygulamayı başlatma/durdurma,
+          MAZI Bölgenizin performansını etkilemeyecektir.
+    network-page:
+      subheader: Ağ Ayarları
+      network-settings-panel:
+        header: Kablosuz Ağ Ayarları
+        ssid-name-label: Kablosuz Ağın Adı (SSID)
+        ssid-name-description: Hizmet Kümesi Tanımlayıcısı (SSID) bir Wi-Fi (kablosuz)
+          ağa atanan addır. Ağdaki tüm aygıtlar, 32 bayta kadar bir metin dizesi olan
+          Wi-Fi üzerinden iletişim kurmak için bu büyük/küçük harfe duyarlı adı kullanmalıdır.
+          Lütfen değiştirmek için aşağıdaki düzenle düğmesine basın.
+        wifi-channel-label: Kablosuz Ağın Kanalı
+        wifi-channel-description: MAZI Bölgenizdeki en iyi Wi-Fi kanalını seçmek müdahaleyi
+          azaltmanıza ve Wi-Fi sinyalinizi geliştirmenize yardımcı olur. Lütfen değiştirmek
+          için aşağıdaki düzenle düğmesine basın.
+        wifi-password-label: Wi-Fi Ağının Şifresi
+        wifi-password-description: Wi-Fi (kablosuz) ağı için kimlik doğrulama şifresi.
+          En az 8 karakter uzunluğunda olmalı. Boş bırakılırsa Wi-Fi ağ güvenliği
+          devre dışı bırakılır. Lütfen değiştirmek için aşağıdaki düzenle düğmesine
+          basın.
+      internet-panel:
+        header: İnternet Ağı Modu
+        mode-hint: Kablosuz Ağın Modu
+      connect-wifi-panel:
+        header: İnternet erişimi için Wi-Fi'ye bağlanın
+        wifi-network-hint-1: Wi-Fi Ağlarından
+        wifi-network-hint-2: Wi-Fi Ağı
+        usb-dongle-message: Bu özelliği etkinleştirmek için lütfen Raspberry pi'nize
+          ekstra bir USB Wi-Fi dongle'ı ekleyin. Önerilen USB dongle'ları
+      access-point-panel:
+        header: Yönlendiriciyi Erişim Noktası olarak ekle
+        current-hint: Wi-Fi Erişim Noktası kullanımda
+        router-message: Raspberry Wi-Fi arayüzü şu anda kullanılıyor. Bir OpenWRT
+          yönlendiricisini Raspberry pi'nize takabilir ve Erişim Noktasını oraya taşıyabilirsiniz.
+          Önerilen cihazlar
+      portal-domain-panel:
+        header: Portal Alanı
+        domain-hint: Mevcut Portal Alanı
+      popups:
+        edit-wifi-header: Wi-Fi yapılandırmasını düzenle
+        edit-wifi-warning: 'Uyarı: Bu Wi-Fi ağı için herhangi bir yapılandırma değerini
+          değiştirirseniz bu MAZI Bölgesi''ne olan kablosuz bağlantınız kaybolur ve
+          yeni Wi-Fi ağına yeniden bağlanmanız gerekecektir.'
+        edit-wifi-network-header: Kablosuz Ağ Ayarlarını Düzenle
+        show-qrcode-header: Wi-Fi ağı QRkodu
+        change-channel-header: Kanalı Değiştir
+        change-password-header: Parolayı Değiştir
+        change-mode-header: Modu Değiştir
+        change-mode-message: Bu MAZI Bölgesi için Ağ Modunu seçmek için aşağıdaki
+          formu kullanın. İkili modu seçmek isterseniz lütfen internete erişiminiz
+          olduğundan emin olun (ethernet kablosu veya Wi-Fi dongle üzerinden).
+        connect-wifi-header: Wi-Fi Ağına Bağlan
+        select-wifi-label: Wi-Fi adı seç
+        type-wifi-label: Veya gizliyse buraya yazın
+        type-password-label: Wi-Fi ağı için şifre girin
+        change-domain-header: Portal Alanını Düzenle
+        change-domain-message: Bu işlem portalın alanını değiştirecektir. Lütfen geçerli
+          bir alan olduğundan (örneğin, en az bir '.' karakter) emin olun.
+        change-domain-warning: 'Uyarı: Geçersiz bir Alan Adı belirlerseniz Portal''a
+          erişilemez. Ancak, Yönetici Paneline bu URL''den erişebilirsiniz.'
+        toggle-access-point-header: Wi-Fi Erişim Noktası Aygıtını Değiştir
+        toggle-access-point-message: Bu işlem, Wi-Fi Erişim Noktası Aygıtını değiştirecektir.
+          Bu işlem, bu portala erişiminizi kaybetmenize neden olacak ve yeni Wi-Fi
+          ağına yeniden bağlanmanız gerekecektir. Devam etmek istediğine emin misin?
+    appearance-page:
+      subheader: Görünüm
+      theme-panel:
+        header: Tema Yapılandırmaları
+        portal-title-label: Portal başlığı
+        portal-title-hint: Bu değer, hem sol üst köşedeki başlığı hem de html üst
+          başlığını yapılandırır.
+        home-page-label: Anasayfa başlığı
+        home-page-hint: Bu değer, portallar için anasayfanın gövde başlığını yapılandırır.
+        home-subtitle-label: Anasayfa alt başlığı
+        home-subtitle-hint: Bu değer portallar için anasayfanın gövde altyazısını
+          yapılandırır.
+        welcome-message-label: Uygulamanın Hoş Geldiniz Mesajı
+        welcome-message-hint: Bu değer uygulamalar sayfası için karşılama mesajını
+          yapılandırır.
+        background-image-label: Uygulamanın Arkaplan Görüntüsü
+        background-image-hint: Bu değer, uygulama sayfalası için arkaplan resmini
+          yapılandırır.
+        colors-label: Renkler
+        side-main-color: Yan panel ana renk
+        side-active-color: Yan panel aktif renk
+        top-main-color: Üst panel ana renk
+        top-active-color: Üst panel aktif renk
+        colors-hint: Yukarıdaki değerler portalın çeşitli renklerini yapılandırır.
+      popups:
+        edit-theme-header: Temayı Düzenle
+        edit-title-header: Başlığı Düzenle
+        edit-home-title-header: Anasayfa Başlığını Düzenle
+        edit-home-subtitle-header: Anasayfa Altbaşlığını Düzenle
+        edit-welcome-message-header: Hoş Geldiniz Mesajını Düzenle
+        edit-background-image-header: Arkaplan Görüntüsünü Düzenle
+        reset-theme-header: Temayı Sıfırla
+        reset-theme-message: Bu eylem tüm görsel yapılandırmaları varsayılan değerlere
+          sıfırlayacaktır.
+        load-theme-header: Tema Yükle
+        load-theme-message: Aşağıdaki yapılandırma dosyalarından birini yükle
+        save-theme-header: Temayı Kaydet
+        save-theme-message: Lütfen yeni temanın adını girin.
+    devices-page:
+      subheader: Cihazlar
+      message: Bu MAZI Bölgesine (sensör, kamera, vb.) bağlı çeşitli desteklenen cihazları
+        kontrol etmek için aşağıdaki araçları kullanabilirsiniz. Desteklenen tüm cihazları
+        bulabilirsiniz
+      sensors-panel:
+        header: Sensörler
+        header-hint: Bunu, çeşitli sensörleri kontrol etmek için kullanabilirsiniz.
+        toggle-sensors-message: Kullanıcı portalı üzerindeki sensörler sekmesini etkinleştirin/devre
+          dışı bırakın
+        toggle-sensors-hint: portal sensörleri sekmesini etkinleştirin/devre dışı
+          bırakın
+        sensors-table:
+          type: Tür
+          status: Durum
+          entries: Girdiler
+          actions: İşlemler
+          start-button-hint: Ölçümleri kaydetmeye başla
+          delete-button-hint: Kayıtlı tüm ölçümleri sil
+          sensehat-calibration-hint: Sensehat'ınızı kalibre etmek isterseniz lütfen
+            bu eğiticinin kalibrasyon bölümünü takip ediniz.
+        no-sensors-message: Bu MAZI bölgesine bağlı bir sensör bulunamıyor.
+        init-sensors-message: Sensör modülü için başlatma prosedürü henüz uygulanmadı.
+          Bu MAZI Bölgesine bağlı bir sensör cihazı kullanmak isterseniz lütfen bu
+          modülü başlatmak için aşağıdaki düğmeyi kullanın.
+        init-button-hint: Sensör başlatmayı başlat
+      camera-panel:
+        header: Kamera
+        header-hint: Kamerayı kontrol etmek için bunu kullanabilirsiniz.
+        toggle-camera-message: Kullanıcı portalı üzerindeki kamera sekmesini etkinleştir/devre
+          dışı bırak
+        toggle-camera-hint: portallar kamera sekmesini etkinleştir/devre dışı bırak
+        camera-version-message: Kamera modülü bu görüntüye düzgün şekilde yüklenmemiş!
+          Lütfen bu amaç için uygun şekilde yapılandırılmış 1.7.2'den daha büyük bir
+          görüntü kullanın.
+        no-camera-message: Bu MAZI Bölgesine bağlı kamera yok!
+      popups:
+        start-sensing-title: Sensör Ölçümlerini Başlat
+        start-sensing-message: Ölçümleri toplamak için bir zaman dilimi tanımlamak
+          için lütfen Takvim'de bir Süre veya bir Tarih girin. Ayrıca, ölçümlerin
+          sıklığını tanımlamak için lütfen Zaman Aralığı'nı kullanın.
+        start-sensing-label1: Hedef Sunucu
+        start-sensing-label2: Süre (saniye)
+        start-sensing-label3: Takvim (bitiş saati/tarihi)
+        start-sensing-label4: Zaman Aralığı (saniye)
+        start-sensing-hint: 'İpucu: Hem Süre hem de Takvim giriş kutularını kullanırsanız
+          Takvim göz ardı edilir!'
+        delete-sensing-title: Sensör Ölçümlerini Sil
+        delete-sensing-message: Kayıtlı tüm ölçümleri silmek istiyor musunuz?
+        start-images-title: Görüntüleri Yakalamaya Başla
+        start-images-label1: Süre (saniye)
+        start-images-label2: Zaman Aralığı (saniye)
+        delete-images-title: Tüm Fotoğrafları Sil
+        delete-images-message: Çekilen tüm fotoğrafları silmek istiyor musunuz?
+        start-videos-title: Video Çekmeye Başla
+        start-videos-label1: Süre (saniye)
+        delete-videos-title: Tüm Videoları Sil
+        delete-videos-message: Çekilen tüm videoları silmek istiyor musunuz?
+    monitoring-page:
+      subheader: İzleme
+      message: MAZI bölgenizin topladığı yolu kontrol etmek için aşağıdaki araçları
+        kullanabilir ve veri toplama sunucusuna veriyi gönderebilirsiniz.
+      details-panel:
+        header: Ayrıntılar
+        header-hint: İzleme özelliğini etkinleştirmek/devre dışı bırakmak için bunu
+          kullanabilirsiniz.
+        toggle-monitoring-message: İzleme özelliğini etkinleştirin/devre dışı bırakın.
+        toggle-monitoring-hint: izleme özelliğini etkinleştirme/devre dışı bırakma
+        details-message: Aşağıda bu MAZI bölgesinin detaylarını görebilirsiniz, alt
+          kısımdaki düzenle butonuna basarak her şeyi değiştirebilirsiniz.
+        table-label1: Yayılma
+        table-label2: Yönetici
+        table-label3: Başlık
+        table-label4: Açıklama
+        table-label5: Konum (enlem, boylam)
+        details-hint: İzlemeyi etkinleştirmeden önce izleme ayrıntılarını değiştirmek
+          zorunludur!
+      statistics-panel:
+        header: İzleme Verisi
+        header-hint: İzleme faaliyetlerini kontrol etmek için bunu kullanabilirsiniz.
+        toggle-monitoring-map-msg: Kullanıcı portalı üzerindeki izleme sekmesini etkinleştirin/devre
+          dışı bırakın
+        toggle-monitoring-map-hint: izleme sekmesini etkinleştirme/devre dışı bırakma
+        message: Aşağıdaki başlatma/durdurma düğmelerine basarak sistem etkinliğini
+          ve uygulama izleme verilerini uzaktan (veya yerel) bir noktaya göndermeyi
+          başlatabilir/durdurabilirsiniz.
+        statistics-table:
+          status: Durum
+          description: Açıklama
+          action: İşlem
+          hardware-description-message: Sistem aktivitesinin izlenmesi.
+          application-description-message: Uygulama verilerinin izlenmesi.
+          no-hardware-tasks-message: Şu anda çalışan bir sistem etkinliği izleme görevi
+            yok.
+          no-application-tasks-message: Şu anda çalışan uygulama izleme görevleri
+            yok.
+      popups:
+        change-details-label2: Yönetici
+        change-details-label3: Başlık
+        change-details-label4: Açıklama
+        change-details-label5: Konum (enlem, boylam)
+        hardware-label1: Hedef Sunucu
+        hardware-label2: Sıcaklık
+        hardware-label3: WiFi kullanıcıları
+        hardware-label4: CPU yükü
+        hardware-label5: Ram yükü
+        hardware-label6: Depolama yükü
+        application-label1: Hedef Sunucu
+    notifications-page:
+      subheader: Bildirimler
+      notifications-table:
+        header1: Durum
+        header2: Başlık
+        header3: Gövde
+        header4: İşlemler
+      popups:
+        create-notification-title: Yeni bildirim oluştur
+        edit-notification-title: Bildirimi düzenle
+    import-export-page:
+      subheader: Anlık resimler
+    logs-page:
+      portal-log-panel:
+        filter-label1: Hata mesajları
+        filter-label2: Uyarı mesajları
+        filter-label3: Hata ayıklama mesajları
+    documentation-page:
+      header: Yönetici Belgeleri
+      initial-configuration-tab:
+        header: Başlangıç konfigürasyonu
+        subheader1: Açıklama
+      etherpad-tab:
+        paragraph5: Örneğin,
+      nextcloud-tab:
+        subheader1: Açıklama
+        paragraph12: Parolanızı yönetin
+    settings-page:
+      subheader: Ayarlar
+      popups:
+        change-apache-filesize-title: Apache max yükleme dosyalarını değiştir
+        change-apache-filesize-message: Bu MAZI Bölgesi için Apache max yükleme dosyalarını
+          değiştirmek için lütfen aşağıdaki formu kullanın.
+...

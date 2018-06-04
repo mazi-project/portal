@@ -1,0 +1,431 @@
+# Messages for Simplified Chinese (中文（简体）‎)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Liuxinyu970226
+---
+zh-hans:
+  general:
+    buttons:
+      edit: 编辑
+      cancel: 取消
+      ok: 确定
+      close: 关闭
+      create: 创建
+      delete: 删除
+      start: 开始
+      stop: 停止
+      save: 保存更改
+      choose: 选择
+      choose-timeslot: 选择时间间隙
+      export-to-csv: 导出为CSV文件
+      expand: 展开
+      expand-storage: 扩展存储
+      reboot: 重启
+      reset: 重置
+      shutdown: 关机
+      logout: 注销
+      update: 更新
+      connect: 连接
+      disconnect: 断开连接
+      toggle-device: 切换设备
+      initialize: 初始化
+      remove: 移除
+      load: 加载
+      import: 导入
+      export: 导出
+      refresh: 刷新
+      continue: 继续
+      next: 下一步
+      previous: 上一步
+      submit: 提交
+      change: 更改
+      qrcode: 二维码
+      show: 显示
+    messages:
+      warning: 警告
+      welcome: 欢迎
+      version: 版本
+      enable: 启用
+      disable: 禁用
+      checked: 已检查
+      on_msg: 开启
+      off_msg: 关闭
+      disconnected: 已断开连接
+      here: 这里
+      ssid: SSID
+      channel: 频道
+      password: 密码
+      offline: 离线
+      dual: 双重
+      restricted: 受限
+      managed: 已管理
+      active: 活跃
+      inactive: 不活跃
+      error: 错误
+  portal:
+    top-menu:
+      documentation: 文档
+    side-menu:
+      applications: 应用程序
+      system: 系统
+      sensors: 传感器
+      camera: 照相机
+      monitoring: 监视中
+      devices: 设备
+    system-page:
+      subheader: 系统信息
+      users: 用户在线
+      app-clicks: 应用程序点击
+      temperature: 温度
+      cpu: CPU
+      ram: RAM
+      storage: 存储
+    sensors-page:
+      header: 传感器测量
+      header-message: 在此页面您可以查看多个连接到此MAZI区域的传感器的测量。您也可以使用下方按钮请求对特定周期的测量。
+      temperature-for: 来自%{sensor}的温度
+      metrics-for: 来自%{sensor}的方向、加速和陀螺仪度量
+      humidity-for: 来自%{sensor}的湿度
+      pressure-for: 来自%{sensor}的压力
+      no-sensors-warn: 警告：此数据库中没有测量，或传感器设备未连接到此MAZI区域。
+      no-sensor-data-warn: 警告：没有传感器数据存放在此MAZI区域。系统管理员可以启用传感器数据收集。
+      choose-timeslot-message: 请使用下方表单选择时间间隙。
+      direction: 方向（角度）
+      acceleration: 加速（x, y, z）
+      gyroscope: 陀螺仪（音高, 偏航, 卷）
+      sensors-hint: 为查看有效值，应校准Sensehat。请检查管理员面板以了解更多详情。
+    camera-page:
+      header: 照相机
+      subheader: 在此页面您可以查看由连接到此MAZI区域的照相机拍摄的照片和视频。
+      live-stream-header: 在线视频流
+      no-camera-warn: 当前没有适当安装在此MAZI区域的照相机！
+      media-library-header: 媒体库
+      no-media-warn: 当前在库中没有找到图片或视频！
+    monitoring-page:
+      subheader: 监视中
+      header-message: 在此页面您可以查看此MAZI区域及/或其他区域多个监视测量器的测量。
+      popups:
+        device: 设备
+        devices: 设备
+        deployment: 部署
+        administrator: 管理员
+        description: 描述
+        latitude: 纬度
+        longitude: 经度
+        system_info: 系统信息
+        cpu_temp: CPU温度
+        cpu_load: CPU负载
+        ram_load: RAM负载
+        wifi-users: WiFi用户
+        storage_use: 存储加载
+        etherpad-pads: Etherpad平板
+        etherpad-users: Etherpad用户
+        etherpad-datasize: Etherpad数据大小
+        etherpad-clicks: Etherpad点击
+        guestbook-submissions: Guestbook提交
+        guestbook-comments: Guestbook评论
+        guestbook-images: Guestbook图片
+        guestbook-datasize: Guestbook数据大小
+        guestbook-clicks: Guestbook点击
+        framadate-polls: Framadate调查
+        framadate-votes: Framadate投票
+        framadate-comments: Framadate评论
+        framadate-clicks: Framadate点击
+        nextcloud-users: Nextcloud用户
+        nextcloud-files: Nextcloud文件
+        nextcloud-downloads: Nextcloud下载
+        nextcloud-datasize: Nextcloud数据大小
+        nextcloud-clicks: Nextcloud点击
+  admin:
+    general:
+      admin-panel: MAZI区域管理面板
+      shutdown-modal-title: 关机么？
+      shutdown-modal-message: MAZI区域现在将关机，这将导致此网站不能访问，您将需要手动重启此MAZI区域。开始么？
+      reboot-modal-title: 重启么？
+      reboot-modal-message: MAZI区域现在将重启，这将导致此网站有数分钟不能访问，请等待几分钟后刷新此页面。开始么？
+    top-menu:
+      header: MAZI区域管理面板
+      admin: 管理员
+      portal: 门户
+      set-date: 设置日期
+      username: 用户名
+      password: 密码
+      mysql-password: MySQL密码
+      check-updates: 检查更新
+      settings: 设置
+    side-menu:
+      dashboard: 控制面板
+      applications: 应用程序
+      networking: 网络
+      appearance: 外观
+      devices: 设备
+      monitoring: 监视中
+      notifications: 通知
+      export-import: 导出/导入
+      logs: 日志
+      documentation: 文档
+    updates:
+      checking-updates: 正在检查更新。请等待...
+      alert-message-1: 您的本地存储库已编辑。这导致更新功能故障。请通过使用%{command}在本地存储库回退对这些文件的更改。
+      update-message-1: 没有活跃的互联网连接。请连接此MAZI区域至互联网并重试。
+      update-message-2: 此门户以演示模式运行！此操作会开始更新过程。
+      update-message-3: 门户是最新版本，不需要更新。
+      update-message-4: 系统正在更新。请等待...
+      update-message-5: 更新进程几乎已完成。您的MAZI区域将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI区域了。
+      update-message-6: 存在可用更新。请使用下方的按钮启动更新过程。
+      update-hint: 提示：如果您遇到错误行为，请重启您的设备。
+    setup-page:
+      tog-nav: 开关导航
+      setup-panel: MAZI区域配置面板
+      first-step-header: 管理员密码配置
+      first-step-message: 使用下方的表单设置MAZI区域管理面板的管理员密码。
+      first-step-hint: 提示：如果这是新的MAZI区域，当前密码是1234
+      second-step-header: 日期/时间配置
+      second-step-message: 请使用下方的表单更改日期/时间，以及此MAZI区域的时区。
+      third-step-header: 无线界面配置
+      third-step-message: 请使用下方的表单更改Wi-Fi网络名称（可选）。
+      third-step-warning: 警告：如果您更改您的Wi-Fi网络名称，您的至此MAZI区域的无线连接将会丢失，并且您将需要重新连接到新的Wi-Fi网络。
+      fourth-step-header: MAZI区域详情
+      fourth-step-message: 请使用下方的表单更改您的MAZI区域详情
+      fourth-step-warning: 提示：您可以使用google地图查找您的位置（经纬度）：单击右键->这里是哪。然后使用屏幕下方方框中的坐标（例如39.379012,
+        22.902813）
+      last-step-header: 完成
+      last-step-message: 您已经成功完成所有的配置步骤。请点击提交按钮保存更改。
+    dashboard-page:
+      subheader: 控制面板
+      welcome:
+        message-1: '%{panel}是主工具，用于管理此MAZI区域门户，以及此MAZI区域的网络形式。'
+        message-2: 请使用菜单导航到多个工具，它们可以：
+        message-list-1: 管理支持的应用程序
+        message-list-2: 配置MAZI区域网络
+        message-list-3: 配置可视化门户外观
+        message-list-4: 添加/移除门户上的通知
+        message-list-5: 导出/导入快照
+      hardware-info:
+        header: MAZI区域硬件信息
+        system-temperature: 系统温度
+        cpu-load: CPU负载
+        ram-load: RAM负载
+        storage-load: 存储加载
+      networking:
+        header: 网络
+        users-online: 用户现在在线
+        wifi-info: Wi-Fi网络信息
+      applications:
+        header: 应用程序
+        applications-installed: 安装的应用程序
+      traffic:
+        header: 流量
+        reset-application-clicks: 重置应用程序点击
+        reset-visits: 重置访问
+        portal-visits: 覆盖门户访问
+        application-visits: 应用程序访问
+      notifications:
+        header: 通知
+        notifications: 激活门户通知
+      time-date:
+        header: MAZI区域时间/日期
+        current: 当前日期/时间
+      version:
+        header: MAZI区域版本
+        version-message-1: 此门户是
+        version-message-2: 提交后。
+        up-to-date: 最新
+      popups:
+        expand-storage-message: 您可以使用下方的按钮，扩充MAZI区域存储至您的SD卡最大容量。您将需要重启设备使其发生。
+    applications-page:
+      subheader: 应用程序
+      instances-menu:
+        header: 应用程序实例
+        active-column: 激活
+        active-hint: 开关应用程序在门户上的可见性
+        splash-page-column: 飞溅页面
+        splash-page-hint: 将此应用程序用作门户的飞溅页面
+        name-column: 名称
+        name-hint: 应用程序的名称
+        url-column: URL
+        url-hint: 应用程序的URL
+        description-column: 描述
+        description-hint: 将在门户上的应用程序瓦片显示的描述
+        parent-column: 父应用程序
+        parent-hint: 父应用程序
+        click-column: 点击计数器
+        click-hint: 覆盖应用程序的点击
+        actions-column: 操作
+        actions-hint: 可以在应用程序上执行的操作
+        guestbook-admin-hint: Guestbook管理员面板
+        delete-instance-hint: 删除应用程序实例
+        create-instance-hint: 创建新的应用程序实例
+        edit-instance-hint: 编辑应用程序实例
+      applications-menu:
+        header: 安装的应用程序
+        status-column: 状态
+        status-hint: 门户的操作（正在运行/已停止）
+        icon-column: 图标
+        icon-hint: 应用程序的默认图标
+        color-column: 颜色
+        color-hint: 应用程序的默认颜色
+        name-column: 应用程序名称
+        name-hint: 应用程序的名称
+        url-column: URL
+        url-hint: 应用程序的URL
+        description-column: 描述
+        description-hint: 将在门户上的应用程序瓦片显示的描述
+        actions-column: 操作
+        actions-hint: 可以在应用程序上执行的操作
+        web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI区域的性能。
+        web-app-start-hint: 这是web应用程序，它总是在运行。
+        app-start-hint: 开始应用程序
+        app-stop-hint: 停止应用程序
+      popups:
+        web-app-info-title: Web应用程序
+    network-page:
+      subheader: 网络设置
+      network-settings-panel:
+        header: Wi-Fi网络设置
+        ssid-name-label: Wi-Fi网络的名称（SSID）
+        wifi-channel-label: Wi-Fi网络的频道
+        wifi-password-label: Wi-Fi网络的密码
+      internet-panel:
+        header: 互联网网络模式
+        mode-hint: Wi-Fi网络的模式
+      connect-wifi-panel:
+        header: 连接到Wi-Fi以获取互联网访问
+        wifi-network-hint-1: 来自Wi-Fi网络
+        wifi-network-hint-2: Wi-Fi网络
+        usb-dongle-message: 请插入外部USB Wi-Fi电子狗至您的树莓派（Raspberry pi）设备以启用此功能。建议的USB电子狗
+      access-point-panel:
+        header: 将路由器添加为接入点
+        current-hint: 使用中的Wi-Fi接入点
+      portal-domain-panel:
+        header: 门户域
+        domain-hint: 当前门户域
+      popups:
+        edit-wifi-header: 编辑Wi-Fi配置
+        edit-wifi-network-header: 编辑Wi-Fi网络设置
+        show-qrcode-header: Wi-Fi网络二维码
+        change-channel-header: 更改频道
+        change-password-header: 更改密码
+        change-mode-header: 更改模式
+        connect-wifi-header: 连接到Wi-Fi网络
+        select-wifi-label: 选择Wi-Fi名称
+        type-wifi-label: 或如果它是隐藏的，在此输入
+        change-domain-header: 编辑门户域
+    appearance-page:
+      subheader: 外观
+      theme-panel:
+        portal-title-label: 门户标题
+        home-page-label: 首页标题
+        home-subtitle-label: 首页子标题
+        colors-label: 颜色
+      popups:
+        edit-title-header: 编辑标题
+        save-theme-header: 保存主题
+    devices-page:
+      subheader: 设备
+      sensors-panel:
+        sensors-table:
+          type: 类型
+          status: 状态
+          actions: 操作
+      camera-panel:
+        no-camera-message: 没有照相机连接到此MAZI区域！
+      popups:
+        start-sensing-label1: 目标服务器
+        start-sensing-label3: 日历（结束时间/日期）
+        delete-images-message: 您希望删除所有捕捉的照片么？
+        delete-videos-title: 删除所有视频
+    monitoring-page:
+      subheader: 正在监视
+      details-panel:
+        header: 详情
+        table-label1: 部署
+        table-label2: 管理员
+        table-label3: 标题
+        table-label4: 描述
+      statistics-panel:
+        statistics-table:
+          status: 状态
+          description: 描述
+          action: 操作
+          stop-hardware-task-hint: 停止系统活跃监视
+          start-application-task-hint: 开始应用程序监视
+      popups:
+        change-details-header: 更改监视详情
+        change-details-label1: 部署
+        change-details-label2: 管理员
+        change-details-label3: 标题
+        change-details-label4: 描述
+        change-details-label5: 位置（经纬度）
+        hardware-label1: 目标服务器
+        hardware-label2: 温度
+        hardware-label3: WiFi用户
+        hardware-label4: CPU负载
+        hardware-label5: Ram承载
+        hardware-label6: 存储加载
+        application-label1: 目标服务器
+        show-hardware-header: 系统活跃监视信息
+        delete-application-header: 删除应用程序监视数据
+    notifications-page:
+      subheader: 通知
+      notifications-table:
+        header1: 状态
+        header2: 标题
+        header3: 主体
+        header4: 操作
+      popups:
+        edit-notification-title: 编辑通告
+    import-export-page:
+      subheader: 快照
+      message: 您可以使用下方工具制作此MAZI区域当前配置的快照。这包括任何东西（网络配置、应用程序、应用程序实例、通知、可视化配置等）。
+      save-snapshot-panel:
+        header: 保存快照
+        form-placeholder: 快照名称
+      load-snapshot-panel:
+        header: 加载快照
+      import-export-panel:
+        message: 请选择一个快照并点击加载。
+      application-snapshots-header: 应用程序快照
+      interview-panel:
+        form-placeholder: 快照名称
+      guestbook-panel:
+        form-placeholder: 快照名称
+      popups:
+        import-header: 导入快照
+        import-guestbook-header: 导入Guestbook的快照
+        import-etherpad-header: 导入Etherpad的快照
+    logs-page:
+      message: 您可以查阅下方的MAZI区域日志文件
+      portal-log-panel:
+        header: 门户日志文件
+        header-hint: 门户日志文件。
+        filter-label1: 错误消息
+        filter-label3: 调试消息
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: 描述
+        paragraph10: 匹配您位置的时区
+      etherpad-tab:
+        paragraph5: 例如，
+      nextcloud-tab:
+        subheader1: 描述
+        paragraph12: 管理您的密码
+        paragraph14: 链接到桌面和移动应用
+      guestbook-tab:
+        subheader3: 管理员密码
+        paragraph4: 然后填写授权密码为您喜欢的密码。
+      framadate-tab:
+        paragraph2: 这是它如何工作的
+    settings-page:
+      subheader: 设置
+      panel-header: 系统设置
+      time-date:
+        header: 时间/日期
+      mysql-password:
+        header: MySQL密码
+      apache-filesize:
+        header: Apache最大文件大小
+      popups:
+        change-time-date-title: 更改时间/日期
+        change-mysql-password-title: 更改MySQL密码
+...

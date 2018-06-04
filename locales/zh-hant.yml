@@ -1,0 +1,464 @@
+# Messages for Traditional Chinese (中文（繁體）‎)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Kly
+---
+zh-hant:
+  general:
+    buttons:
+      edit: 編輯
+      cancel: 取消
+      ok: 確定
+      close: 關閉
+      create: 建立
+      delete: 刪除
+      start: 開始
+      stop: 停止
+      save: 儲存變更
+      choose: 選擇
+      choose-timeslot: 選擇時段
+      export-to-csv: 匯出成 CSV 檔案
+      expand: 擴充
+      expand-storage: 擴充儲存裝置
+      reboot: 重新開機
+      reset: 重新設定
+      shutdown: 關閉系統
+      logout: 登出
+      update: 更新
+      connect: 連接
+      disconnect: 中斷連接
+      toggle-device: 交換器設備
+      initialize: 初始化
+      remove: 移除
+      load: 載入
+      import: 匯入
+      export: 匯出
+      refresh: 重新整理
+      continue: 繼續
+      next: 下一個
+      previous: 上一個
+      submit: 提交
+      change: 變更
+      qrcode: QR 碼
+      show: 顯示
+    messages:
+      warning: 警告
+      welcome: 歡迎
+      version: 版本
+      enable: 啟用
+      disable: 停用
+      disconnected: 已中斷連接
+      ssid: SSID
+      channel: 頻段
+      password: 密碼
+      offline: 離線
+      restricted: 受限
+      active: 有效
+      inactive: 無效
+      error: 錯誤
+  portal:
+    top-menu:
+      documentation: 文件
+    side-menu:
+      applications: 應用程式
+      system: 系統
+      camera: 相機
+      monitoring: 監控
+      devices: 設備
+    system-page:
+      subheader: 系統資訊
+      users: 線上使用者
+      app-clicks: 應用程式點擊
+      temperature: 溫度
+      cpu: 中央處理器
+      ram: 記憶體
+      storage: 儲存裝置
+    sensors-page:
+      temperature-for: 來自 %{sensor} 的溫度
+      humidity-for: 來自 %{sensor} 的溼度
+      pressure-for: 來自 %{sensor} 的壓力
+      choose-timeslot-message: 請使用以下表單來選擇時段。
+      direction: 方向（角度）
+      acceleration: 加速（x、y、z）
+    camera-page:
+      header: 相機
+      subheader: 在此頁面您可以查看由連接到該 MAZI Zone 的相機所拍攝之照片與影片。
+      live-stream-header: 實況影片串流
+      no-camera-warn: 目前沒有正確安裝至此 MAZI Zone 的相機！
+      media-library-header: 多媒體庫
+      no-media-warn: 目前在多媒體庫中沒有找到圖片或影片！
+    monitoring-page:
+      subheader: 監控
+      popups:
+        device: 設備
+        devices: 設備
+        deployment: 部署
+        administrator: 管理員
+        description: 描述
+        latitude: 緯度
+        longitude: 經度
+        system_info: 系統資訊
+        cpu_temp: 中央處理器溫度
+        cpu_load: 中央處理器負荷
+        ram_load: 記憶體負荷
+        wifi-users: WiFi 使用者
+        storage_use: 儲存裝置負荷
+        etherpad-pads: Etherpad 記事本
+        etherpad-users: Etherpad 使用者
+        etherpad-datasize: Etherpad 資料大小
+        etherpad-clicks: Etherpad 點擊
+        guestbook-submissions: 訪客簿提交
+        guestbook-comments: 訪客簿評論
+        guestbook-images: 訪客簿圖片
+        guestbook-datasize: 訪客簿資料大小
+        guestbook-clicks: 訪客簿點擊
+        framadate-polls: Framadate 調查
+        framadate-votes: Framadate 投票
+        framadate-comments: Framadate 評論
+        framadate-clicks: Framadate 點擊
+        nextcloud-users: Nextcloud 使用者
+        nextcloud-files: Nextcloud 檔案
+        nextcloud-downloads: Nextcloud 下載
+        nextcloud-datasize: Nextcloud 資料大小
+        nextcloud-clicks: Nextcloud 點擊
+  admin:
+    general:
+      admin-panel: MAZI Zone 管理面板
+      shutdown-modal-title: 關閉系統？
+      reboot-modal-title: 重新開機？
+    top-menu:
+      header: MAZI Zone 管理面板
+      portal: 入口
+      set-date: 設定日期
+      username: 使用者名稱
+      password: 密碼
+      mysql-password: MySQL 密碼
+      check-updates: 檢查更新
+      settings: 設定
+    side-menu:
+      applications: 應用程式
+      networking: 網路
+      appearance: 外觀
+      devices: 設備
+      monitoring: 監控
+      notifications: 通知
+      export-import: 匯出/匯入
+      logs: 日誌
+      documentation: 文件
+    updates:
+      checking-updates: 檢查更新中。請稍等...
+      update-message-2: 此入口以展示模式運作！該操作會開始更新程序。
+      update-message-4: 系統更新中。請稍等...
+    setup-page:
+      setup-panel: MAZI Zone 配置面板
+      first-step-header: 管理密碼配置
+      first-step-hint: 提示：如果這是新的 MAZI Zone，那目前的密碼是 1234
+      second-step-header: 日期/時間配置
+      third-step-header: 無線介面配置
+      fourth-step-header: MAZI Zone 詳情
+      fourth-step-message: 請使用以下表單來變更您的 MAZI Zone 詳情
+      last-step-message: 您已成功完成所有配置步驟。請點擊提交按鈕來保存變更。
+    dashboard-page:
+      welcome:
+        message-2: 請使用選單來導航到各項工具，這些可以做出：
+        message-list-1: 管理支援的應用程式
+        message-list-2: 設置 MAZI Zone 網路
+        message-list-5: 匯出/匯入快照
+      hardware-info:
+        header: MAZI Zone 硬體訊息
+        system-temperature: 系統溫度
+        cpu-load: 中央處理器負荷
+        ram-load: 記憶體負荷
+        storage-load: 儲存裝置負荷
+      networking:
+        header: 網路
+        users-online: 使用者目前上線中
+        wifi-info: Wi-Fi 網路訊息
+      applications:
+        header: 應用程式
+        applications-installed: 已安裝應用程式
+      traffic:
+        header: 流量
+        reset-application-clicks: 重新設定應用程式點擊
+      notifications:
+        header: 通知
+        notifications: 啟用入口通知
+      time-date:
+        header: MAZI Zone 時間/日期
+        current: 目前日期/時間
+      version:
+        header: MAZI Zone 版本
+        version-message-1: 此入口是
+        up-to-date: 最新
+    applications-page:
+      subheader: 應用程式
+      instances-menu:
+        header: 應用程式實體
+        name-column: 名稱
+        name-hint: 應用程式名稱
+        url-column: URL
+        url-hint: 應用程式的 URL
+        description-column: 描述
+        click-column: 點擊計數
+        delete-instance-hint: 刪除應用程式實體
+        create-instance-hint: 建立新的應用程式實體
+        edit-instance-hint: 編輯應用程式實體
+      applications-menu:
+        header: 已安裝應用程式
+        status-column: 狀態
+        icon-column: 圖標
+        icon-hint: 應用程式預設圖標
+        color-column: 色彩
+        color-hint: 應用程式預設色彩
+        name-column: 應用程式名稱
+        name-hint: 應用程式名稱
+        url-column: URL
+        url-hint: 應用程式的 URL
+        description-column: 描述
+        app-start-hint: 開始應用程式
+        app-stop-hint: 停止應用程式
+      popups:
+        delete-application-title: 刪除應用程式實體？
+        edit-application-title: 編輯應用程式實體？
+        create-application-title: 建立新的應用程式實體
+    network-page:
+      subheader: 網路設定
+      network-settings-panel:
+        header: Wi-Fi 網路設定
+        ssid-name-label: Wi-Fi 網路名稱（SSID）
+        wifi-channel-label: Wi-Fi 網路頻段
+        wifi-password-label: Wi-Fi 網路密碼
+      internet-panel:
+        header: 網際網路模式
+        mode-hint: Wi-Fi 網路模式
+      connect-wifi-panel:
+        header: 連接至 Wi-Fi 來存取網際網路
+        wifi-network-hint-1: 來自 Wi-Fi 網路
+        wifi-network-hint-2: Wi-Fi 網路
+      access-point-panel:
+        header: 添加路由器為接入點
+        current-hint: 使用的 Wi-Fi 接入點
+      popups:
+        edit-wifi-header: 編輯 Wi-Fi 設置
+        edit-wifi-network-header: 編輯 Wi-Fi 網路設定
+        show-qrcode-header: Wi-Fi 網路二維碼
+        change-channel-header: 變更頻段
+        change-password-header: 變更密碼
+        change-mode-header: 變更模式
+        connect-wifi-header: 連接 Wi-Fi 網路
+        select-wifi-label: 選擇 Wi-Fi 名稱
+        type-password-label: 輸入 Wi-Fi 網路的密碼
+    appearance-page:
+      subheader: 外觀
+      theme-panel:
+        header: 主題設置
+        portal-title-label: 入口標題
+        home-page-label: 首頁標題
+        home-page-hint: 此值用來設置入口首頁的主體標題。
+        home-subtitle-label: 首頁子標題
+        home-subtitle-hint: 此值用來設置入口首頁的主體子標題。
+        welcome-message-label: 應用程式歡迎訊息
+        welcome-message-hint: 此值用來設置應用程式頁面的主題歡迎訊息。
+        background-image-label: 應用程式背景圖片
+        background-image-hint: 此值用來設置應用程式頁面的背景圖片。
+        colors-label: 色彩
+        side-main-color: 側邊面板主色彩
+        side-active-color: 側邊面板有效色彩
+        top-main-color: 頂端面板主色彩
+        top-active-color: 頂端面板有效色彩
+        colors-hint: 上方的值用來設置入口的各種顏色。
+      popups:
+        edit-theme-header: 編輯主題
+        edit-title-header: 編輯標題
+        edit-home-title-header: 編輯首頁標題
+        edit-home-subtitle-header: 編輯首頁子標題
+        edit-welcome-message-header: 編輯歡迎訊息
+        edit-background-image-header: 編輯背景圖片
+        reset-theme-header: 重新設定主題
+        load-theme-header: 載入主題
+        load-theme-message: 載入以下設置檔案之一
+        save-theme-header: 儲存主題
+        save-theme-message: 請輸入新主題的名稱。
+    devices-page:
+      subheader: 設備
+      sensors-panel:
+        sensors-table:
+          type: 類型
+          status: 狀態
+          start-button-hint: 開始保存測量
+          delete-button-hint: 刪除所有保存的測量
+      camera-panel:
+        header: 相機
+        header-hint: 您可以使用此來控制相機。
+        no-camera-message: 沒有相機連接到此 MAZI Zone！
+      popups:
+        start-sensing-label1: 目標伺服器
+        start-sensing-label2: 期間（秒）
+        start-sensing-label3: 行事曆（結束時間/日期）
+        start-sensing-label4: 間隔（秒）
+        start-images-title: 開始拍攝圖片
+        start-images-label1: 期間（秒）
+        start-images-label2: 間隔（秒）
+        delete-images-title: 刪除所有照片
+        start-videos-title: 開始拍攝影片
+        start-videos-label1: 期間（秒）
+        delete-videos-title: 刪除所有影片
+        delete-videos-message: 您想要刪除所有拍攝下來的影片嗎？
+    monitoring-page:
+      subheader: 監控
+      details-panel:
+        header: 詳情
+        header-hint: 您可以使用此來啓用/停用監控功能。
+        toggle-monitoring-message: 啟用/停用監控功能。
+        toggle-monitoring-hint: 啓用/停用監控功能
+        table-label1: 部署
+        table-label2: 管理員
+        table-label3: 標題
+        table-label4: 描述
+        table-label5: 位置（緯度、經度）
+      statistics-panel:
+        header: 監控資料
+        header-hint: 您可以使用此來控制監控行為。
+        toggle-monitoring-map-hint: 啓用/停用監控分頁
+        statistics-table:
+          status: 狀態
+          description: 描述
+          hardware-description-message: 監控系統行為。
+          application-description-message: 應用程式資料監控。
+          no-hardware-tasks-message: 目前沒有運作系統行為監控任務。
+          no-application-tasks-message: 目前沒有運作應用程式監控任務。
+          start-hardware-task-hint: 開始系統行為監控
+          stop-hardware-task-hint: 停止系統行為監控
+          delete-hardware-data-hint: 刪除所有來自本地端資料庫的系統行為監控資料
+          start-application-task-hint: 開始應用程式監控
+          stop-application-task-hint: 停止系統行為監控
+          delete-application-data-hint: 刪除所有來自本地端資料庫的應用程式監控資料
+      popups:
+        change-details-header: 變更監控詳情
+        change-details-message: 使用以下表單來變更模組的監控詳情
+        change-details-label1: 部署
+        change-details-label2: 管理員
+        change-details-label3: 標題
+        change-details-label4: 描述
+        change-details-label5: 位置（緯度、經度）
+        hardware-label1: 目標伺服器
+        hardware-label2: 溫度
+        hardware-label3: WiFi 使用者
+        hardware-label4: 中央處理器負荷
+        hardware-label5: 記憶體負荷
+        hardware-label6: 儲存裝置負荷
+        application-label1: 目標伺服器
+        application-label2: Etherpad 應用程式
+        application-label3: 訪客簿應用程式
+        application-label4: Framadate 應用程式
+        application-label5: Nextcloud 應用程式
+        start-hardware-header: 起始系統行為監控資料
+        start-hardware-message: 使用以下表單來開始發送系統行為監控資料
+        start-application-header: 開始應用程式監控資料
+        start-application-message: 使用以下表單來開始發送系統行為監控資料
+        show-hardware-header: 系統行為監控訊息
+        show-hardware-message: 系統行為監控程序的目前狀態
+        show-application-header: 應用程式監控訊息
+        show-application-message: 系統行為監控程序的目前狀態
+        delete-hardware-header: 刪除系統行為監控資料
+        delete-application-header: 刪除應用程式監控資料
+    notifications-page:
+      subheader: 通知
+      notifications-table:
+        header1: 狀態
+        header2: 標題
+        header3: 正文
+      popups:
+        create-notification-title: 建立新的通知
+        edit-notification-title: 編輯通知
+    import-export-page:
+      subheader: 快照
+      save-snapshot-panel:
+        header: 儲存快照
+        header-hint: 您可以使用此來取用快照。
+        form-placeholder: 快照名稱
+        form-hint: 請輸入新快照的名稱。
+      load-snapshot-panel:
+        header: 載入快照
+        header-hint: 您可以使用此來載入快照。
+        message: 請選擇快照並按下載入。MAZI 入口將會重新啟用。
+        no-snapshots-message: 目前沒有儲存快照。
+      import-export-panel:
+        header: 匯入/匯出快照
+        message: 請選擇快照並按下載入。
+        no-snapshots-message: 目前沒有儲存快照。
+      application-snapshots-header: 應用程式快照
+      interview-panel:
+        header-hint: 您可以使用此來匯入/匯出快照。
+        form-placeholder: 快照名稱
+      guestbook-panel:
+        header-hint: 您可以使用此來匯入/匯出快照。
+        form-placeholder: 快照名稱
+      popups:
+        import-header: 匯入快照
+    logs-page:
+      subheader: 日誌檢視
+      message: 您可以檢視以下的 MAZI Zone 日誌檔案
+      portal-log-panel:
+        header: 入口日誌檔案
+        filter-label1: 錯誤訊息
+        filter-label2: 警告訊息
+        filter-label3: 除錯訊息
+    documentation-page:
+      header: 管理文件
+      initial-configuration-tab:
+        header: 初始化設置
+        subheader1: 描述
+        subheader2: 透過 ssh 連接
+        subheader3: Raspbian 設置
+        paragraph7: 使用整個 SD 卡容量來重新調整檔案系統大小
+        paragraph9: 符合您位置的地區
+        paragraph10: 符合您位置的時區
+      etherpad-tab:
+        subheader1: 描述
+        subheader2: 管理入門
+        paragraph2: 要找出管理頁面您可以在
+        paragraph5: 例如：
+      nextcloud-tab:
+        subheader1: 描述
+        subheader2: 管理入門
+        paragraph2: 要找出管理頁面您可以在
+        paragraph3: 存取您的個人設定
+        paragraph5: 從下拉選單來挑選個人。
+        paragraph7: 使用量和可用額度
+        paragraph8: 管理您的個人檔案圖片
+        paragraph10: 電子郵件地址
+        paragraph11: 列出您的群組成員
+        paragraph12: 管理您的密碼
+        paragraph13: 挑選您的 Nextcloud 介面採用語言
+        paragraph14: 連結到桌面和行動應用程式
+      guestbook-tab:
+        subheader1: 描述
+        subheader2: 管理入門
+        subheader3: 管理密碼
+        paragraph8: 當您連接至您的 MAZI Zone 時，所有連結將會運作。
+      wordpress-tab:
+        subheader1: 描述
+        subheader2: 管理入門
+      framadate-tab:
+        subheader1: 描述
+        paragraph3: 建立調查
+        paragraph4: 判斷要挑選的日期和話題
+        paragraph6: 討論並作出您的決定
+    settings-page:
+      subheader: 設定
+      panel-header: 系統設定
+      time-date:
+        header: 時間/日期
+      mysql-password:
+        header: MySQL 密碼
+      apache-filesize:
+        header: Apache 最大檔案大小
+      popups:
+        change-time-date-title: 變更時間/日期
+        change-time-date-message: 請使用以下表單來變更 MAZI Zone 時間/日期。
+        change-mysql-password-title: 變更 MySQL 密碼
+        change-mysql-password-message: 請使用以下表單來變更此 MAZI Zone 的 MySQL 密碼。
+        change-apache-filesize-title: 變更 Apache 最大上傳檔案大小
+        change-apache-filesize-message: 請使用以下表單來變更此 MAZI Zone 的 Apache 最大上傳檔案大小。
+...

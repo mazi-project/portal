@@ -1,0 +1,98 @@
+# Messages for Message documentation (Message documentation)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Liuxinyu970226
+# Author: Robby
+---
+qqq:
+  general:
+    buttons:
+      edit: '{{Identical|Edit}}'
+      cancel: '{{Identical|Cancel}}'
+      ok: '{{Identical|OK}}'
+      close: '{{Identical|Close}}'
+      create: '{{Identical|Create}}'
+      delete: '{{Identical|Delete}}'
+      start: '{{Identical|Start}}'
+      reset: '{{Identical|Reset}}'
+      remove: '{{Identical|Remove}}'
+      load: '{{Identical|Load}}'
+      previous: '{{Identical|Previous}}'
+      show: '{{Identical|Show}}'
+    messages:
+      warning: '{{Identical|Warning}}'
+      welcome: '{{Idenrical|Welcome}}'
+      version: '{{Identical|Version}}'
+      here: '{{Identical|Here}}'
+      password: '{{Identical|Password}}'
+      active: '{{Identical|Active}}'
+  portal:
+    top-menu:
+      documentation: '{{Identical|Documentation}}'
+    side-menu:
+      system: '{{Identical|System}}'
+      camera: '{{Identical|Camera}}'
+      devices: '{{Identical|Device}}'
+    system-page:
+      temperature: '{{Identical|Temperature}}'
+    camera-page:
+      header: '{{Identical|Camera}}'
+    monitoring-page:
+      popups:
+        device: '{{Identical|Device}}'
+        devices: '{{Identical|Device}}'
+        administrator: '{{Identical|Administrator}}'
+        description: '{{Identical|Description}}'
+  admin:
+    top-menu:
+      username: '{{Identical|Username}}'
+      password: '{{Identical|Password}}'
+      settings: '{{Identical|Settings}}'
+    side-menu:
+      appearance: '{{Identical|Appearance}}'
+      devices: '{{Identical|Device}}'
+      notifications: '{{Identical|Notification}}'
+      documentation: '{{Identical|Documentation}}'
+    dashboard-page:
+      notifications:
+        header: '{{Identical|Notification}}'
+    applications-page:
+      instances-menu:
+        description-column: '{{Identical|Description}}'
+        actions-column: '{{Identical|Action}}'
+      applications-menu:
+        color-column: '{{Identical|Color}}'
+        description-column: '{{Identical|Description}}'
+    devices-page:
+      subheader: '{{Identical|Device}}'
+    monitoring-page:
+      details-panel:
+        table-label3: '{{Identical|Title}}'
+        table-label4: '{{Identical|Description}}'
+      statistics-panel:
+        statistics-table:
+          action: '{{Identical|Action}}'
+      popups:
+        change-details-label3: '{{Identical|Title}}'
+        change-details-label4: '{{Identical|Description}}'
+        hardware-label2: '{{Identical|Temperature}}'
+    notifications-page:
+      subheader: '{{Identical|Notification}}'
+      notifications-table:
+        header2: '{{Identical|Title}}'
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: '{{Identical|Description}}'
+      etherpad-tab:
+        subheader1: '{{Identical|Description}}'
+      nextcloud-tab:
+        subheader1: '{{Identical|Description}}'
+      guestbook-tab:
+        subheader1: '{{Identical|Description}}'
+      wordpress-tab:
+        subheader1: '{{Identical|Description}}'
+      framadate-tab:
+        subheader1: '{{Identical|Description}}'
+    settings-page:
+      subheader: '{{Identical|Settings}}'
+...

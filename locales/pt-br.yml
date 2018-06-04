@@ -1,0 +1,273 @@
+# Messages for Brazilian Portuguese (português do Brasil)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Eduardo Addad de Oliveira
+---
+pt-br:
+  general:
+    buttons:
+      edit: Editar
+      cancel: Cancelar
+      ok: OK
+      close: Fechar
+      create: Criar
+      delete: Excluir
+      start: Iniciar
+      stop: Parar
+      save: Salvar Mudanças
+      choose: Escolher
+      expand: Expandir
+      reboot: Reiniciar
+      reset: Redefinir
+      shutdown: Desligar
+      logout: Sair
+      update: Atualizar
+      connect: Conectar
+      disconnect: Desconectar
+      toggle-device: Trocar dispositivo
+      initialize: Inicializar
+      remove: Remover
+      load: Carregar
+      import: Importar
+      export: Exportar
+      refresh: Atualizar
+      continue: Continuar
+      next: Próximo
+      previous: Anterior
+      submit: Enviar
+      change: Mudar
+      qrcode: Código QR
+      show: Exibir
+    messages:
+      warning: Aviso
+      welcome: Bem-vindo
+      version: Versão
+      enable: ativar
+      disable: desabilitar
+      checked: verificado
+      on_msg: LIGAR
+      off_msg: DESLIGADO
+      disconnected: Desconectado
+      here: aqui
+      ssid: SSID
+      channel: Canal
+      password: Senha
+      offline: desconectado
+      restricted: restrito
+      managed: gerenciado
+      active: ativo
+      inactive: inativo
+      error: erro
+  portal:
+    top-menu:
+      documentation: Documentação
+    side-menu:
+      applications: Aplicativos
+      system: Sistema
+      sensors: Sensores
+      camera: Câmera
+      devices: Dispositivos
+    system-page:
+      subheader: Informações do Sistema
+      temperature: Temperatura
+      cpu: CPU
+      ram: RAM
+      storage: Armazenamento
+    sensors-page:
+      pressure-for: Pressão de %{sensor}
+      direction: Direção (Graus)
+      acceleration: Aceleração (x, y, z)
+    camera-page:
+      header: Câmera
+      no-camera-warn: Atualmente, não há câmera instalada corretamente nesta zona
+        MAZI!
+      no-media-warn: Atualmente, não há imagens ou vídeos encontrados na biblioteca!
+    monitoring-page:
+      header-message: Nesta página você pode ver as medidas de várias medições de
+        monitoramento desta ou de outras Zonas MAZI.
+      popups:
+        device: Dispositivo
+        devices: Dispositivos
+        deployment: Desenvolvimento
+        administrator: Administrador
+        description: Descrição
+        latitude: Latitude
+        longitude: Longitude
+        system_info: Informação do sistema
+        wifi-users: Usuários de WiFi
+        guestbook-datasize: Livro de Convidados
+  admin:
+    general:
+      shutdown-modal-title: Desligar?
+      reboot-modal-title: Reiniciar?
+    top-menu:
+      header: Painel de Administração da Zona MAZI
+      admin: Administrador
+      portal: Portal
+      username: Nome de usuário
+      password: Senha
+      check-updates: Verificar se há atualizações
+    side-menu:
+      dashboard: Painel de controle
+      applications: Aplicativos
+      appearance: Aparência
+      devices: Dispositivos
+      notifications: Notificações
+      logs: Registros
+    updates:
+      update-message-3: O portal está atualizado, não há necessidade de atualização.
+      update-message-4: O sistema está atualizando. Por favor, espere...
+      update-message-5: O processo de atualização está quase completo. Sua Zona MAZI
+        será reiniciada para instalar dependências ausentes. Assim que você vir sua
+        rede WiFi novamente, estará pronto para se conectar à sua Zona MAZI atualizada.
+      update-message-6: Existe uma atualização disponível. Por favor, use o botão
+        abaixo para iniciar o processo de atualização.
+      update-hint: 'Dica: se você tiver um comportamento defeituoso, reinicie o seu
+        dispositivo.'
+    setup-page:
+      last-step-header: Completo
+    dashboard-page:
+      subheader: Painel de controle
+      welcome:
+        message-list-2: Configurar a rede da Zona MAZI
+      hardware-info:
+        system-temperature: Temperatura do sistema
+        ram-load: Carga de RAM
+      applications:
+        header: Aplicativos
+    applications-page:
+      subheader: Aplicativos
+      instances-menu:
+        active-column: Ativo
+        name-column: Nome
+        url-column: URL
+        description-column: Descrição
+        click-hint: cliques gerais para o aplicativo
+        actions-column: Ações
+        guestbook-admin-hint: Painel de Administração do livro de visitas
+      applications-menu:
+        status-column: Status
+        icon-column: Ícone
+        color-column: Cor
+        name-column: Nome do aplicativo
+        url-column: URL
+        description-column: Descrição
+        actions-column: Ações
+      popups:
+        delete-application-hint: Você precisa excluir todas as instâncias do aplicativo
+          que estão conectadas a este aplicativo antes de poder excluir este aplicativo.
+    network-page:
+      internet-panel:
+        mode-hint: Modo da rede Wi-Fi
+      connect-wifi-panel:
+        wifi-network-hint-2: Rede Wi-Fi
+      portal-domain-panel:
+        header: Domínio do Portal
+      popups:
+        change-channel-header: Mudar o canal
+        change-password-header: Alterar senha
+        change-domain-header: Editar domínio do portal
+    appearance-page:
+      subheader: Aparência
+      theme-panel:
+        home-page-label: Título da página inicial
+        colors-label: Cores
+      popups:
+        edit-title-header: Editar título
+        edit-home-title-header: Editar título da pagina inicial
+        edit-welcome-message-header: Editar mensagem de boas-vindas
+        save-theme-header: Salvar tema
+    devices-page:
+      subheader: Dispositivos
+      sensors-panel:
+        header: Sensores
+        sensors-table:
+          type: Tipo
+          status: Status
+          entries: Entradas
+          actions: Ações
+        init-sensors-message: O procedimento de inicialização para o módulo de sensores
+          ainda não foi executado. Se você deseja usar um dispositivo sensor conectado
+          a esta zona MAZI, por favor, use o botão abaixo para inicializar este módulo.
+        init-button-hint: Iniciar inicialização dos sensores
+      camera-panel:
+        header: Câmera
+      popups:
+        start-sensing-label2: Duração (segundos)
+        start-videos-label1: Duração (segundos)
+    monitoring-page:
+      details-panel:
+        header: Detalhes
+        table-label1: Desenvolvimento
+        table-label2: Administrador
+        table-label3: Título
+        table-label4: Descrição
+      statistics-panel:
+        statistics-table:
+          status: Status
+          description: Descrição
+          action: Ação
+      popups:
+        change-details-label1: Desenvolvimento
+        change-details-label2: Administrador
+        change-details-label3: Título
+        change-details-label4: Descrição
+        hardware-label2: Temperatura
+    notifications-page:
+      subheader: Notificações
+      notifications-table:
+        header1: Status
+        header2: Título
+        header4: Ações
+    import-export-page:
+      subheader: Instantâneas
+      message: Você pode usar as ferramentas abaixo para tirar um instantâneo da configuração
+        atual desta Zona MAZI. Isso inclui tudo (configurações de rede, aplicativos,
+        instâncias de aplicativos, notificações, configurações visuais, etc.).
+      save-snapshot-panel:
+        form-placeholder: Nome do instantâneo
+      interview-panel:
+        form-placeholder: Nome do instantâneo
+    logs-page:
+      portal-log-panel:
+        filter-label1: Mensagens de erro
+    documentation-page:
+      initial-configuration-tab:
+        header: Configuração inicial
+        subheader1: Descrição
+        paragraph1: Este é o guia de documentação do administrador para o portal da
+          Zona MAZI. Use as guias acima para navegar pelas diferentes seções da documentação.
+          A aba atual descreve as diferentes ações que um administrador pode precisar,
+          a fim de configurar o pi de framboesa. Enquanto todas as outras guias fornecem
+          informações sobre a administração dos aplicativos suportados.
+      etherpad-tab:
+        subheader1: Descrição
+      nextcloud-tab:
+        subheader1: Descrição
+        paragraph1: Nextcloud é um arquivo privado de sincronização e compartilhamento
+          de servidor de comunicação. É totalmente open source e você pode hospedá-lo
+          sozinho ou pagar uma empresa para fazer isso por você. Dessa forma, você
+          está no controle de suas fotos, seu calendário e dados de contato, seus
+          documentos e tudo mais.
+        paragraph2: Você encontrará uma página de administração em
+        paragraph10: Endereço de e-mail
+        paragraph11: Lista suas associações de grupo
+        paragraph17: O link que aparece entre essas duas caixas de seleção agora pode
+          ser colado no URL de um novo aplicativo no
+      guestbook-tab:
+        subheader1: Descrição
+        subheader3: Senha de administrador
+      wordpress-tab:
+        subheader1: Descrição
+      framadate-tab:
+        subheader1: Descrição
+        paragraph1: O Framadate é um aplicativo gratuito e de código aberto como o
+          Doodle. É fácil criar um compromisso ou uma pesquisa sem registro para convidar
+          suas colaborações.
+        paragraph5: Envie o link da pesquisa para seus amigos ou colegas
+    settings-page:
+      subheader: Configurações
+      panel-header: Configurações de sistema
+      time-date:
+        header: Hora/Data
+...
