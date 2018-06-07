@@ -6,42 +6,42 @@
 el:
   general:
     buttons:
-      edit:            "Επεξεργασία"
-      cancel:          "Άκυρο"
-      ok:              "OK"
-      close:           "Κλείσιμο"
-      create:          "Δημιουργία"
-      delete:          "Διαγραφή"
-      start:           "Έναρξη"
-      stop:            "Διακοπή"
-      save:            "Αποθήκευση Αλλαγών"
-      choose:          "Επέλεξε"
-      choose-timeslot: "Επιλογή χρονοθήκης"
-      export-to-csv:   "Εξαγωγή σε αρχείο CSV"
-      expand:          "Επέκταση"
-      expand-storage:  "Επέκταση Αποθηκευτικού Χώρου"
-      reboot:          "Επανεκκίνηση"
-      reset:           "Επαναφορά"
-      shutdown:        "Τερματισμός"
-      logout:          "Αποσύνδεση"
-      update:          "Ενημέρωσε"
-      connect:         "Σύνδεση"
-      disconnect:      "Αποσύνδεση"
-      toggle-device:   "Eναλλαγή Συσκευής"
-      initialize:      "Αρχικοποιήστε"
-      remove:          "Αφαιρέστε"
-      load:            "Φορτώστε"
-      import:          "Εισαγωγή"
-      export:          "Εξαγωγή"
-      refresh:         "Ανανέωση"
-      continue:        "Συνέχεια"
-      next:            "Επόμενο"
-      previous:        "Προηγούμενο"
-      submit:          "Υποβολή"
-      change:          "Αλλαγή"
-      qrcode:          "QRcode"
-      show:            "Εμφάνισε"
-      configure:       "Ρυθμίστε"
+      edit: Επεξεργασία
+      cancel: Άκυρο
+      ok: OK
+      close: Κλείσιμο
+      create: Δημιουργία
+      delete: Διαγραφή
+      start: Έναρξη
+      stop: Διακοπή
+      save: Αποθήκευση Αλλαγών
+      choose: Επέλεξε
+      choose-timeslot: Επιλογή χρονοθήκης
+      export-to-csv: Εξαγωγή σε αρχείο CSV
+      expand: Επέκταση
+      expand-storage: Επέκταση Αποθηκευτικού Χώρου
+      reboot: Επανεκκίνηση
+      reset: Επαναφορά
+      shutdown: Τερματισμός
+      logout: Αποσύνδεση
+      update: Ενημέρωσε
+      connect: Σύνδεση
+      disconnect: Αποσύνδεση
+      toggle-device: Eναλλαγή Συσκευής
+      initialize: Αρχικοποιήστε
+      remove: Αφαιρέστε
+      load: Φορτώστε
+      import: Εισαγωγή
+      export: Εξαγωγή
+      refresh: Ανανέωση
+      continue: Συνέχεια
+      next: Επόμενο
+      previous: Προηγούμενο
+      submit: Υποβολή
+      change: Αλλαγή
+      qrcode: QRcode
+      show: Εμφάνισε
+      configure: Ρυθμίστε
     messages:
       warning: Προσοχή
       welcome: Καλώς Ήρθατε
@@ -319,33 +319,48 @@ el:
         app-start-hint: Έναρξη εφαρμογής
         app-stop-hint: Διακοπή εφαρμογής
       popups:
-        delete-application-title:   "Διαγραφή στιγμιότυπου εφαρμογής;"
-        delete-application-message: "Αυτή η εφαρμογή θα διαγραφεί οριστικά από τη βάση δεδομένων. Θέλετε να προχωρήσετε;"
-        delete-application-hint:    "Πρέπει να διαγράψετε όλες τις παρουσίες εφαρμογών που είναι συνδεδεμένες με αυτήν την εφαρμογή πριν να διαγράψετε αυτήν την εφαρμογή."
-        edit-application-title:     "Επεξεργασία της εφαρμογής;"
-        create-application-title:   "Δημιουργία νέου στιγμιότυπου εφαρμογής"
-        create-application-help:    "Βοήθεια: Κάποιες εφαρμογές δεν μπορούν να έχουν πολλές στιγμές προς το παρόν, γι 'αυτό μπορεί να λείπουν κάποιοι από αυτούς."
-        web-app-info-title:         "Εφαρμογή Web"
-        web-app-info-message:       "Αυτή είναι μια εφαρμογή WEB, η εκκίνηση/διακοπή αυτής της εφαρμογής δεν θα επηρεάσει την απόδοση της ζώνης MAZI σας."
+        delete-application-title: Διαγραφή στιγμιότυπου εφαρμογής;
+        delete-application-message: Αυτή η εφαρμογή θα διαγραφεί οριστικά από τη βάση
+          δεδομένων. Θέλετε να προχωρήσετε;
+        delete-application-hint: Πρέπει να διαγράψετε όλες τις παρουσίες εφαρμογών
+          που είναι συνδεδεμένες με αυτήν την εφαρμογή πριν να διαγράψετε αυτήν την
+          εφαρμογή.
+        edit-application-title: Επεξεργασία της εφαρμογής;
+        create-application-title: Δημιουργία νέου στιγμιότυπου εφαρμογής
+        create-application-help: 'Βοήθεια: Κάποιες εφαρμογές δεν μπορούν να έχουν
+          πολλές στιγμές προς το παρόν, γι ''αυτό μπορεί να λείπουν κάποιοι από αυτούς.'
+        web-app-info-title: Εφαρμογή Web
+        web-app-info-message: Αυτή είναι μια εφαρμογή WEB, η εκκίνηση/διακοπή αυτής
+          της εφαρμογής δεν θα επηρεάσει την απόδοση της ζώνης MAZI σας.
     network-page:
-      subheader: "Ρυθμίσεις δικτύου"
+      subheader: Ρυθμίσεις δικτύου
       wifi-ap-interface-panel:
-        header:                    "Ρυθμίσεις δικτύου Wi-Fi για %{interface}"
-        ssid-name-label:           "Όνομα δικτύου Wi-Fi (SSID)"
-        ssid-name-description:     "Το αναγνωριστικό συνόλου υπηρεσιών (SSID) είναι το όνομα που έχει αντιστοιχιστεί σε ένα δίκτυο Wi-Fi (ασύρματο). Όλες οι συσκευές στο δίκτυο πρέπει να χρησιμοποιούν αυτό το ευαίσθητο σε πεζά λόγια όνομα για να επικοινωνούν μέσω Wi-Fi, που είναι μια συμβολοσειρά κειμένου έως και 32 byte. Πατήστε το κουμπί επεξεργασίας παρακάτω για να το αλλάξετε."
-        wifi-channel-label:        "Κανάλι δικτύου Wi-Fi"
-        wifi-channel-description:  "Η επιλογή του καλύτερου καναλιού Wi-Fi στη ζώνη σας MAZI βοηθά στη μείωση των παρεμβολών και στη βελτίωση του σήματος WI-Fi. Πατήστε το κουμπί επεξεργασίας παρακάτω για να το αλλάξετε."
-        wifi-password-label:       "Κωδικός δικτύου Wi-Fi"
-        wifi-password-description: "Ο κωδικός ελέγχου ταυτότητας για το ασύρματο δίκτυο Wi-Fi. Πρέπει να έχει μήκος τουλάχιστον 8 χαρακτήρων. Αν παραμείνει κενή, η ασφάλεια δικτύου Wi-Fi θα απενεργοποιηθεί. Πατήστε το κουμπί επεξεργασίας παρακάτω για να το αλλάξετε."
+        header: Ρυθμίσεις δικτύου Wi-Fi για %{interface}
+        ssid-name-label: Όνομα δικτύου Wi-Fi (SSID)
+        ssid-name-description: Το αναγνωριστικό συνόλου υπηρεσιών (SSID) είναι το
+          όνομα που έχει αντιστοιχιστεί σε ένα δίκτυο Wi-Fi (ασύρματο). Όλες οι συσκευές
+          στο δίκτυο πρέπει να χρησιμοποιούν αυτό το ευαίσθητο σε πεζά λόγια όνομα
+          για να επικοινωνούν μέσω Wi-Fi, που είναι μια συμβολοσειρά κειμένου έως
+          και 32 byte. Πατήστε το κουμπί επεξεργασίας παρακάτω για να το αλλάξετε.
+        wifi-channel-label: Κανάλι δικτύου Wi-Fi
+        wifi-channel-description: Η επιλογή του καλύτερου καναλιού Wi-Fi στη ζώνη
+          σας MAZI βοηθά στη μείωση των παρεμβολών και στη βελτίωση του σήματος WI-Fi.
+          Πατήστε το κουμπί επεξεργασίας παρακάτω για να το αλλάξετε.
+        wifi-password-label: Κωδικός δικτύου Wi-Fi
+        wifi-password-description: Ο κωδικός ελέγχου ταυτότητας για το ασύρματο δίκτυο
+          Wi-Fi. Πρέπει να έχει μήκος τουλάχιστον 8 χαρακτήρων. Αν παραμείνει κενή,
+          η ασφάλεια δικτύου Wi-Fi θα απενεργοποιηθεί. Πατήστε το κουμπί επεξεργασίας
+          παρακάτω για να το αλλάξετε.
       unconfigured-dongle-panel:
-        message: "This Network interface has not been configured yet. Please use the button bellow, in order to configure it appropriately."
+        message: Αυτή η διεπαφή δικτύου δεν έχει ρυθμιστεί ακόμα. Παρακαλώ χρησιμοποιήστε
+          το παρακάτω κουμπί, προκειμένου να το ρυθμίσετε κατάλληλα.
       internet-panel:
         header: Λειτουργία δικτύου Internet
         mode-hint: Λειτουργία του δικτύου Wi-Fi
       connect-wifi-panel:
         header: Συνδεθείτε σε ένα Wi-Fi δίκτυο για σύνδεση στο Internet
         wifi-network-hint-1: από δίκτυα Wi-Fi
-        wifi-network-hint-2: Δίκτυο Wi-Fi
+        wifi-network-hint-2: Δίκτυο διαδικτύου Wi-Fi
         usb-dongle-message: Παρακαλώ προσθέστε ένα πρόσθετο USB Wi-Fi dongle στο rasberry
           pi για να ενεργοποιήσετε αυτό το χαρακτηριστικό. Προτεινόμενα dongles USB
       access-point-panel:
@@ -373,6 +388,7 @@ el:
           καλωδίου ethernet είτε μέσω dongle Wi-Fi).
         connect-wifi-header: Συνδεθείτε στο δίκτυο Wi-Fi
         select-wifi-label: Επιλέξτε όνομα Wi-Fi
+        select-mesh-mode-label: Επιλογή λειτουργίας πιασίματος
         type-wifi-label: Ή πληκτρολογήστε το εδώ εάν είναι κρυφό δίκτυο.
         type-password-label: Πληκτρολογήστε τον κωδικό πρόσβασης για το δίκτυο Wi-Fi
         change-domain-header: Επεξεργασία Portal Domain

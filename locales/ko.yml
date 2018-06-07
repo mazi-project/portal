@@ -41,6 +41,7 @@ ko:
       change: 변경
       qrcode: QR 코드
       show: 보이기
+      configure: 구성
     messages:
       warning: 경고
       welcome: 환영합니다
@@ -265,18 +266,20 @@ ko:
           영향을 주지 않습니다.
     network-page:
       subheader: 네트워크 설정
-      network-settings-panel:
-        header: 와이파이 네트워크 설정
+      wifi-ap-interface-panel:
+        header: '%{interface}의 와이파이 액세스 포인트 네트워크 설정'
         ssid-name-label: 와이파이 네트워크 이름 (SSID)
         wifi-channel-label: 와이파이 네트워크의 채널
         wifi-password-label: 와이파이 네트워크의 비밀번호
+      unconfigured-dongle-panel:
+        message: 네트워크 인터페이스가 아직 구성되지 않았습니다. 아래의 버튼을 사용하여 올바르게 구성해 주십시오.
       internet-panel:
         header: 인터넷 네트워크 모드
         mode-hint: 와이파이 네트워크 방식
       connect-wifi-panel:
         header: 인터넷 접속을 위해 와이파이에 연결
         wifi-network-hint-1: 와이파이 네트워크에서
-        wifi-network-hint-2: 와이파이 네트워크
+        wifi-network-hint-2: 와이파이 인터넷 네트워크
       access-point-panel:
         header: 액세스 포인트로 라우터 추가
         current-hint: 사용 중인 와이파이 액세스 포인트
@@ -292,6 +295,7 @@ ko:
         change-mode-header: 모드 변경
         connect-wifi-header: 와이파이 네트워크에 연결
         select-wifi-label: 와이파이 이름 선택
+        select-mesh-mode-label: 메시 모드 선택
         type-wifi-label: 숨은 이름인 경우 아래에 입력하십시오
         type-password-label: 와이파이 네트워크의 비밀번호를 입력하십시오
         change-domain-header: 포털 도메인 편집
