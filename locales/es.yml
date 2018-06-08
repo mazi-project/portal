@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Fitoschido
+# Author: Mgaved
 ---
 es:
   general:
@@ -38,10 +39,15 @@ es:
       change: Cambiar
       qrcode: Código QR
       show: Mostrar
+      configure: Configurar
     messages:
       warning: Alerta
+      welcome: Bienvenido/a
       version: Versión
+      enable: activar
+      disable: desactivar
       off_msg: ⭘
+      here: aquí
       channel: Canal
       password: Contraseña
   portal:
@@ -66,6 +72,7 @@ es:
       acceleration: Aceleración (x, y, z)
     camera-page:
       header: Cámara
+      no-media-warn: No se encontraron imágenes ni vídeos en la biblioteca.
     monitoring-page:
       popups:
         device: Dispositivo
@@ -80,7 +87,9 @@ es:
         wifi-users: Usuarios de wifi
         storage_use: Carga de almacenamiento
         etherpad-users: Usuarios de Etherpad
+        nextcloud-users: Usuarios de Nextcloud
         nextcloud-files: Archivos de Nextcloud
+        nextcloud-downloads: Descargas de Nextcloud
   admin:
     top-menu:
       portal: Portal
@@ -105,6 +114,8 @@ es:
         cpu-load: Carga de CPU
         ram-load: Carga de RAM
         storage-load: Carga de almacenamiento
+      networking:
+        wifi-info: Red de Wi-Fi Info
       applications:
         header: Aplicaciones
         applications-installed: Aplicaciones instaladas

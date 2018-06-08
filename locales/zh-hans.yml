@@ -41,6 +41,7 @@ zh-hans:
       change: 更改
       qrcode: 二维码
       show: 显示
+      configure: 配置
     messages:
       warning: 警告
       welcome: 欢迎
@@ -281,18 +282,20 @@ zh-hans:
         web-app-info-title: Web应用程序
     network-page:
       subheader: 网络设置
-      network-settings-panel:
-        header: Wi-Fi网络设置
+      wifi-ap-interface-panel:
+        header: '%{interface}的Wi-Fi访问点网络设置'
         ssid-name-label: Wi-Fi网络的名称（SSID）
         wifi-channel-label: Wi-Fi网络的频道
         wifi-password-label: Wi-Fi网络的密码
+      unconfigured-dongle-panel:
+        message: 此网络界面尚未配置。请使用下面的按钮，以适当配置它。
       internet-panel:
         header: 互联网网络模式
         mode-hint: Wi-Fi网络的模式
       connect-wifi-panel:
         header: 连接到Wi-Fi以获取互联网访问
         wifi-network-hint-1: 来自Wi-Fi网络
-        wifi-network-hint-2: Wi-Fi网络
+        wifi-network-hint-2: Wi-Fi互联网网络
         usb-dongle-message: 请插入外部USB Wi-Fi电子狗至您的树莓派（Raspberry pi）设备以启用此功能。建议的USB电子狗
       access-point-panel:
         header: 将路由器添加为接入点
@@ -309,30 +312,44 @@ zh-hans:
         change-mode-header: 更改模式
         connect-wifi-header: 连接到Wi-Fi网络
         select-wifi-label: 选择Wi-Fi名称
+        select-mesh-mode-label: 选择网眼模式
         type-wifi-label: 或如果它是隐藏的，在此输入
+        type-password-label: 输入Wi-Fi网络的密码
         change-domain-header: 编辑门户域
     appearance-page:
       subheader: 外观
       theme-panel:
+        header: 主题配置
         portal-title-label: 门户标题
         home-page-label: 首页标题
         home-subtitle-label: 首页子标题
+        welcome-message-label: 应用程序欢迎消息
         colors-label: 颜色
       popups:
         edit-title-header: 编辑标题
+        edit-welcome-message-header: 编辑欢迎消息
+        load-theme-header: 加载主题
+        load-theme-message: 加载以下配置文件之一
         save-theme-header: 保存主题
     devices-page:
       subheader: 设备
       sensors-panel:
+        header: 传感器
+        header-hint: 您可以使用此工具控制多个传感器。
         sensors-table:
           type: 类型
           status: 状态
+          entries: 记录
           actions: 操作
+        no-sensors-message: 找不到连接至此MAZI区域的传感器。
+        init-button-hint: 开始传感器初始化
       camera-panel:
+        header: 照相机
         no-camera-message: 没有照相机连接到此MAZI区域！
       popups:
         start-sensing-label1: 目标服务器
         start-sensing-label3: 日历（结束时间/日期）
+        delete-images-title: 删除所有照片
         delete-images-message: 您希望删除所有捕捉的照片么？
         delete-videos-title: 删除所有视频
     monitoring-page:
@@ -343,6 +360,7 @@ zh-hans:
         table-label2: 管理员
         table-label3: 标题
         table-label4: 描述
+        table-label5: 位置（经纬度）
       statistics-panel:
         statistics-table:
           status: 状态
@@ -374,6 +392,7 @@ zh-hans:
         header3: 主体
         header4: 操作
       popups:
+        create-notification-title: 创建新通知
         edit-notification-title: 编辑通告
     import-export-page:
       subheader: 快照
@@ -383,6 +402,7 @@ zh-hans:
         form-placeholder: 快照名称
       load-snapshot-panel:
         header: 加载快照
+        no-snapshots-message: 当前没有保存的快照。
       import-export-panel:
         message: 请选择一个快照并点击加载。
       application-snapshots-header: 应用程序快照
@@ -400,22 +420,33 @@ zh-hans:
         header: 门户日志文件
         header-hint: 门户日志文件。
         filter-label1: 错误消息
+        filter-label2: 警告消息
         filter-label3: 调试消息
     documentation-page:
       initial-configuration-tab:
         subheader1: 描述
         paragraph10: 匹配您位置的时区
       etherpad-tab:
+        subheader1: 描述
+        subheader3: 实用技巧
         paragraph5: 例如，
       nextcloud-tab:
         subheader1: 描述
+        subheader3: 实用技巧
+        paragraph2: 您将在此找到管理页面：
+        paragraph10: 电子邮件地址
         paragraph12: 管理您的密码
         paragraph14: 链接到桌面和移动应用
       guestbook-tab:
+        subheader1: 描述
         subheader3: 管理员密码
         paragraph4: 然后填写授权密码为您喜欢的密码。
+      wordpress-tab:
+        subheader1: 描述
       framadate-tab:
+        subheader1: 描述
         paragraph2: 这是它如何工作的
+        paragraph3: 创建调查
     settings-page:
       subheader: 设置
       panel-header: 系统设置
@@ -427,5 +458,6 @@ zh-hans:
         header: Apache最大文件大小
       popups:
         change-time-date-title: 更改时间/日期
+        change-time-date-message: 请使用以下表单以更改MAZI区域时间/日期。
         change-mysql-password-title: 更改MySQL密码
 ...

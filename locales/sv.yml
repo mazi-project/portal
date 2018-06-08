@@ -41,6 +41,7 @@ sv:
       change: Ändra
       qrcode: QR-kod
       show: Visa
+      configure: Konfigurera
     messages:
       warning: Varning
       welcome: Välkommen
@@ -79,6 +80,7 @@ sv:
       ram: RAM
       storage: Lagring
     sensors-page:
+      header: Sensorvärden
       header-message: På den här sidan ser du mätvärden från sensorer anslutna till
         den här MAZI-zonen. Du kan använda knappen nedan för att hämta data för en
         specifik tidsperiod.
@@ -88,6 +90,8 @@ sv:
       pressure-for: Tryck från %{sensor}
       no-sensors-warn: 'Varning: Antingen finns inga mätresultat i databasen eller
         är ingen sensor ansluten till den här MAZI-zonen.'
+      no-sensor-data-warn: 'Varning: Det finns ingen sensordata sparad i den här MAZI-zonen.
+        Systemadministratörer kan kan aktivera insamling av data.'
       choose-timeslot-message: Använd formuläret nedan för att välja en tidsperiod.
       direction: Riktning (grader)
       acceleration: Acceleration (x, y, z)
@@ -215,12 +219,11 @@ sv:
         web-app-info-title: Webbapplikation
     network-page:
       subheader: Nätverksinställningar
-      network-settings-panel:
-        header: Inställningar för trådlöst nätverk
+      wifi-ap-interface-panel:
         ssid-name-label: Det trådlösa nätverkets namn (SSID)
-        wifi-password-label: Lösenord för WiFi-nätverket
+        wifi-password-label: Lösenord för det trådlösa nätverket
       connect-wifi-panel:
-        wifi-network-hint-2: Trådlöst nätverk
+        wifi-network-hint-2: Trådlöst nätverk med Internetåtkomst
       popups:
         edit-wifi-header: Redigera inställningar för trådlöst nätverk
         change-channel-header: Byt kanal

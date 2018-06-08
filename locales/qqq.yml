@@ -1,6 +1,7 @@
 # Messages for Message documentation (Message documentation)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Guycn2
 # Author: Liuxinyu970226
 # Author: Robby
 ---
@@ -21,11 +22,12 @@ qqq:
       show: '{{Identical|Show}}'
     messages:
       warning: '{{Identical|Warning}}'
-      welcome: '{{Idenrical|Welcome}}'
+      welcome: '{{Identical|Welcome}}'
       version: '{{Identical|Version}}'
       here: '{{Identical|Here}}'
       password: '{{Identical|Password}}'
       active: '{{Identical|Active}}'
+      error: '{{Identical|Error}}'
   portal:
     top-menu:
       documentation: '{{Identical|Documentation}}'
@@ -45,6 +47,7 @@ qqq:
         description: '{{Identical|Description}}'
   admin:
     top-menu:
+      portal: '{{Identical|Portal}}'
       username: '{{Identical|Username}}'
       password: '{{Identical|Password}}'
       settings: '{{Identical|Settings}}'
@@ -58,13 +61,18 @@ qqq:
         header: '{{Identical|Notification}}'
     applications-page:
       instances-menu:
+        active-column: '{Identical|Active}}'
         description-column: '{{Identical|Description}}'
         actions-column: '{{Identical|Action}}'
       applications-menu:
         color-column: '{{Identical|Color}}'
         description-column: '{{Identical|Description}}'
+        actions-column: '{{Identical|Action}}'
     devices-page:
       subheader: '{{Identical|Device}}'
+      sensors-panel:
+        sensors-table:
+          type: '{{Identical|Type}}'
     monitoring-page:
       details-panel:
         table-label3: '{{Identical|Title}}'
@@ -73,12 +81,14 @@ qqq:
         statistics-table:
           action: '{{Identical|Action}}'
       popups:
+        change-details-label2: '{{Identical|Administrator}}'
         change-details-label3: '{{Identical|Title}}'
         change-details-label4: '{{Identical|Description}}'
         hardware-label2: '{{Identical|Temperature}}'
     notifications-page:
       subheader: '{{Identical|Notification}}'
       notifications-table:
+        header1: '{{Identical|Status}}'
         header2: '{{Identical|Title}}'
     documentation-page:
       initial-configuration-tab:

@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Hedda
+# Author: TmY e12
 ---
 tr:
   general:
@@ -41,6 +42,7 @@ tr:
       change: Değiştir
       qrcode: QR kod
       show: Göster
+      configure: Yapılandır
     messages:
       warning: Uyarı
       welcome: Hoş geldiniz
@@ -85,6 +87,10 @@ tr:
       header-message: Bu sayfada MAZI Bölgesine bağlı çeşitli sensörlerin ölçümlerini
         görebilirsiniz. Belirli bir dönemden ölçüm talep etmek için aşağıdaki düğmeyi
         de kullanabilirsiniz.
+      temperature-for: '%{sensor} sensöründen gelen sıcaklık'
+      metrics-for: '%{sensor} sensöründen yön, hızlanma ve jiroskop ölçümleri'
+      humidity-for: '%{sensor} sensöründen gelen nem'
+      pressure-for: '%{sensor} sensöründen gelen basınç'
       no-sensors-warn: 'Uyarı: Veritabanında hiçbir ölçüm yok veya bu MAZI bölgesine
         bir sensör cihazı bağlı değil.'
       no-sensor-data-warn: 'Uyarı: Bu MAZI Bölgesi''nde kayıtlı sensör verileri bulunmamaktadır.
@@ -255,6 +261,7 @@ tr:
       version:
         header: MAZI Bölgesi Sürümü
         version-message-1: Bu Portal,
+        version-message-2: arkada işlem yapar.
         up-to-date: Güncel
       popups:
         expand-storage-message: MAZI Bölgesi depolamasını, aşağıdaki düğmeyi kullanarak
@@ -320,8 +327,8 @@ tr:
           MAZI Bölgenizin performansını etkilemeyecektir.
     network-page:
       subheader: Ağ Ayarları
-      network-settings-panel:
-        header: Kablosuz Ağ Ayarları
+      wifi-ap-interface-panel:
+        header: '%{interface} için Wi-Fi Erişim Noktası Ağ Ayarları'
         ssid-name-label: Kablosuz Ağın Adı (SSID)
         ssid-name-description: Hizmet Kümesi Tanımlayıcısı (SSID) bir Wi-Fi (kablosuz)
           ağa atanan addır. Ağdaki tüm aygıtlar, 32 bayta kadar bir metin dizesi olan
@@ -336,13 +343,16 @@ tr:
           En az 8 karakter uzunluğunda olmalı. Boş bırakılırsa Wi-Fi ağ güvenliği
           devre dışı bırakılır. Lütfen değiştirmek için aşağıdaki düzenle düğmesine
           basın.
+      unconfigured-dongle-panel:
+        message: Bu ağ arayüzü henüz yapılandırılmamış. Uygun şekilde yapılandırmak
+          için lütfen alttaki butonu kullanın.
       internet-panel:
         header: İnternet Ağı Modu
         mode-hint: Kablosuz Ağın Modu
       connect-wifi-panel:
         header: İnternet erişimi için Wi-Fi'ye bağlanın
         wifi-network-hint-1: Wi-Fi Ağlarından
-        wifi-network-hint-2: Wi-Fi Ağı
+        wifi-network-hint-2: Wi-Fi İnternet Ağı
         usb-dongle-message: Bu özelliği etkinleştirmek için lütfen Raspberry pi'nize
           ekstra bir USB Wi-Fi dongle'ı ekleyin. Önerilen USB dongle'ları
       access-point-panel:
@@ -369,6 +379,7 @@ tr:
           olduğundan emin olun (ethernet kablosu veya Wi-Fi dongle üzerinden).
         connect-wifi-header: Wi-Fi Ağına Bağlan
         select-wifi-label: Wi-Fi adı seç
+        select-mesh-mode-label: Mesh modunu seç
         type-wifi-label: Veya gizliyse buraya yazın
         type-password-label: Wi-Fi ağı için şifre girin
         change-domain-header: Portal Alanını Düzenle
@@ -514,7 +525,19 @@ tr:
             yok.
           no-application-tasks-message: Şu anda çalışan uygulama izleme görevleri
             yok.
+          start-hardware-task-hint: Sistem etkinliğini izlemeyi başlat
+          stop-hardware-task-hint: Sistem etkinliğini izlemeyi durdur
+          delete-hardware-data-hint: Tüm sistem etkinliği izleme verilerini yerel
+            veritabanından sil
+          start-application-task-hint: Uygulama izlemeyi başlat
+          stop-application-task-hint: Uygulama izlemeyi durdur
+          delete-application-data-hint: Tüm uygulama izleme verilerini yerel veritabanından
+            sil
       popups:
+        change-details-header: İzleme ayrıntılarını değiştir
+        change-details-message: Modalın izleme ayrıntılarını değiştirmek için aşağıdaki
+          formu kullanın
+        change-details-label1: Yayılma
         change-details-label2: Yönetici
         change-details-label3: Başlık
         change-details-label4: Açıklama
@@ -526,6 +549,32 @@ tr:
         hardware-label5: Ram yükü
         hardware-label6: Depolama yükü
         application-label1: Hedef Sunucu
+        application-label2: Etherpad uygulaması
+        application-label3: Ziyaretçi defteri uygulaması
+        application-label4: Framadate uygulaması
+        application-label5: Nextcloud uygulaması
+        start-hardware-header: Sistem etkinliği izleme verilerini başlat
+        start-hardware-message: Sistem etkinliği izleme verilerini göndermeye başlamak
+          için aşağıdaki formu kullanın
+        start-application-header: Uygulama izleme verilerini başlat
+        start-application-message: Sistem etkinliği izleme verilerini göndermeye başlamak
+          için aşağıdaki formu kullanın
+        show-hardware-header: Sistem etkinliği izleme bilgisi
+        show-hardware-message: Sistem etkinliği izleme süreçleri için mevcut durum
+        show-application-header: Uygulama izleme bilgisi
+        show-application-message: Uygulama izleme süreçleri için mevcut durum
+        delete-hardware-header: Sistem etkinliği izleme verisini sil
+        delete-hardware-message: Tüm sistem etkinliği izleme verilerini yerel veritabanından
+          silmek için aşağıdaki düğmeyi kullanın. Şu anda veritabanındaki girişlerin
+          sayısı %{entries}
+        delete-hardware-hint: bu eylemi tamamen yürütmek birkaç saniye sürecektir,
+          bu yüzden sayfayı yenilemeden önce lütfen bekleyin.
+        delete-application-header: Uygulama izleme verilerini sil
+        delete-application-message: Tüm uygulama izleme verilerini yerel veritabanından
+          silmek için aşağıdaki düğmeyi kullanın. Şu anda veritabanındaki girişlerin
+          sayısı %{entries}
+        delete-application-hint: bu eylemi tamamen yürütmek birkaç saniye sürecektir,
+          bu yüzden sayfayı yenilemeden önce lütfen bekleyin.
     notifications-page:
       subheader: Bildirimler
       notifications-table:
@@ -536,10 +585,53 @@ tr:
       popups:
         create-notification-title: Yeni bildirim oluştur
         edit-notification-title: Bildirimi düzenle
+        delete-notification-message: Bu bildirim, veritabanından kalıcı olarak silinecek.
+          Devam etmek istiyor musunuz?
     import-export-page:
       subheader: Anlık resimler
+      message: Bu MAZI Bölgesinin mevcut yapılandırmasının anlık görüntüsünü almak
+        için aşağıdaki araçları kullanabilirsiniz. Bu, her şeyi içerir (ağ yapılandırmaları,
+        uygulamalar, uygulama örnekleri, bildirimler, görsel yapılandırmalar, vb.).
+      warning: 'Uyarı: Farklı bir Wi-Fi ağ ayarlarına sahip yeni bir anlık görüntü
+        yüklerseniz bu MAZI Bölgesine olan kablosuz bağlantınız kaybolur ve yeni Wi-Fi
+        ağına yeniden bağlanmanız gerekir.'
+      save-snapshot-panel:
+        header: Anlık Görüntüyü Kaydet
+        header-hint: Anlık görüntü çekmek için bunu kullanabilirsiniz.
+        form-placeholder: Anlık Görüntü Adı
+        form-hint: Lütfen yeni Anlık Görüntü'nün adını girin.
+      load-snapshot-panel:
+        header: Anlık Görüntü Yükle
+        header-hint: Anlık görüntü yüklemek için bunu kullanabilirsiniz.
+        message: Lütfen bir anlık görüntü seçin ve yükleye basın. MAZI portalı yeniden
+          başlatılacak.
+        no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
+      import-export-panel:
+        header: Anlık Görüntü Alma/Verme
+        header-hint: Bir anlık görüntüyü bir zip dosyasına dışa aktarmak için bunu
+          kullanabilirsiniz. Veya bir zip dosyasını anlık görüntü olarak içe aktarın.
+        message: Lütfen bir anlık görüntü seçin ve yükleye basın.
+        no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
+      application-snapshots-header: Uygulama anlık görüntüleri
+      application-snapshots-message: Bu MAZI Bölgesi tarafından desteklenen uygulamalar
+        için Anlık Görüntüleri Alma/Verme için aşağıdaki panelleri kullanın.
+      interview-panel:
+        header-hint: Anlık görüntü almak/vermek için bunu kullanabilirsiniz.
+        form-placeholder: Anlık Görüntü Adı
+      guestbook-panel:
+        header-hint: Anlık görüntü almak/vermek için bunu kullanabilirsiniz.
+        form-placeholder: Anlık Görüntü Adı
+      popups:
+        import-header: Anlık Görüntüyü İçe Aktar
+        import-interview-header: Röportaj için Anlık Görüntüyü İçeri Aktar
+        import-guestbook-header: Ziyaretçi Defterini için Anlık Görüntüyü İçeri Aktar
+        import-etherpad-header: Etherpad için Anlık Görüntüyü İçeri Aktar
     logs-page:
+      subheader: Günlük Görüntüleyici
+      message: MAZI Bölgesi günlük dosyalarını aşağıda görebilirsiniz
       portal-log-panel:
+        header: Portal Günlük Dosyası
+        header-hint: Portal Günlük Dosyası.
         filter-label1: Hata mesajları
         filter-label2: Uyarı mesajları
         filter-label3: Hata ayıklama mesajları
@@ -548,14 +640,151 @@ tr:
       initial-configuration-tab:
         header: Başlangıç konfigürasyonu
         subheader1: Açıklama
+        subheader2: ssh üzerinden bağlantı
+        subheader3: Raspbian Yapılandırması
+        paragraph1: Bu MAZI Bölgesi portalı için yönetici dokümantasyon rehberidir.
+          Belgelerin farklı bölümlerine gitmek için yukarıdaki sekmeleri kullanın.
+          Mevcut sekme, raspberry pi'yi yapılandırmak için yöneticinin ihtiyaç duyabileceği
+          farklı eylemleri açıklar. Diğer tüm sekmeler, desteklenen uygulamaların
+          yönetimi ile ilgili bilgi vermektedir.
+        paragraph2: Raspberry ile ssh arasındaki uzak bağlantı için bir terminal açmanız
+          ve aşağıdaki komutu yürütmeniz gerekmektedir.
+        paragraph3: Eğer pi kullanıcı şifresini değiştirmek isterseniz $passwd yapın
+          ve talimatları takip edin.
+        paragraph4: Bu, ssh bağlantısının parolasıdır ve yönetici arayüzüne giriş
+          yapmak için kullandığınız yönetici hesabından farklıdır.
+        paragraph5: Raspberry'ye başarılı bir şekilde giriş yaptıktan sonra, rasbian
+          yapılandırma aracını başlatın.
+        paragraph6: ve menüye gidin
+        paragraph7: Tüm SD kart kapasitesini kullanacak şekilde dosya sistemini yeniden
+          boyutlandırın
+        paragraph8: Uluslararasılaştırma seçeneğinde değişiklik
+        paragraph9: konumunuza uyan yerel ayar
+        paragraph10: konumunuza uyan saat dilimi
       etherpad-tab:
+        subheader1: Açıklama
+        subheader2: Yönetim Rehberi
+        subheader3: Faydalı ipuçları
+        paragraph1: Etherpad, tarayıcınızda çalışan çok oyunculu bir editör gibi,
+          belgeleri gerçek zamanlı olarak düzenlemenizi sağlar. Aynı belgede aynı
+          anda çalışan arkadaşlarınızla veya meslektaşlarınızla birlikte makaleler,
+          basın bültenleri, yapılacaklar listeleri vb. yazılar yazın. Tüm örnekler
+          iyi belgelenmiş bir API aracılığıyla tüm verilere erişim sağlar ve birçok
+          büyük veri değişim formatına içe/dışa aktarmayı destekler. Ve yerleşik özellik
+          seti sizin için yeterli değilse örneğinizi ihtiyacınıza göre özelleştirebilmenizi
+          sağlayan bir sürü eklenti var.
+        paragraph2: 'Şurada bir yönetici sayfası bulacaksınız:'
+        paragraph3: Yönetici şifresini değiştirmek için Yönetici sayfasında ayarları
+          seçin ve 'mazizone' ile şifrenizi değiştirin.
+        paragraph4: Eğer oturum açmayı başardığınızda yönetici panelinin uygulamalar
+          alanında URL'yi değiştirerek kendiniz bir indeks defteri oluşturursanız
+          ve bunu 'varsayılan' etherpad sayfası yaparsanız MAZI Bölgesi kullanıcılarınız
+          için daha kolay hale gelecektir. Kişiler kendi pedlerini oluşturmaya ve
+          bağlantılarını bu dizin sayfasına ekleyebilir ve bu da 'övgüye değer' olacak
+          ve sunucudaki kullanılabilir pedlerde gezinmeyi kolaylaştıracaktır.
         paragraph5: Örneğin,
+        paragraph6: Etherpad, metni zaman zaman 'temizleyen' ve mevcut farklı pedleri
+          düzenleyen uygun 'index' sayfaları varsa iyi çalışır.
       nextcloud-tab:
         subheader1: Açıklama
+        subheader2: Yönetim Rehberi
+        subheader3: Faydalı ipuçları
+        paragraph1: Nextcloud özel bir dosya senkronizasyonudur ve iletişim sunucusunu
+          paylaşır. Tamamen açık kaynaklıdır ve kendiniz ev sahipliği yapabilir ya
+          da sizin için bir şirkete ödeme yapabilirsiniz. Böylece fotoğraflarınızın,
+          takviminizin ve iletişim verilerinizin, belgelerinizin ve diğer her şeyin
+          kontrolü sizde olur.
+        paragraph2: 'Şurada bir yönetici sayfası bulacaksınız:'
+        paragraph3: Kişisel ayarlarınıza erişmek için
+        paragraph4: Nextcloud örneğinizin sağ üst köşesinde yöneticiye tıkladığınızda
+          Kişisel Ayarlar Menüsü açılır.
+        paragraph5: Açılır menüden Kişisel'i seçin.
+        paragraph6: 'Göreceğiniz özelliklerden bazıları şunlardır:'
+        paragraph7: Kullanım ve kullanılabilir kota
+        paragraph8: Profil resminizi yönetin
+        paragraph9: Tam isimle istediğiniz her şeyi yapabilirsiniz çünkü bu, benzersiz
+          ve değiştirilemeyen giriş adınızdan ayrıdır.
+        paragraph10: E-posta adresi
+        paragraph11: Grup üyeliklerinizi listeler
         paragraph12: Parolanızı yönetin
+        paragraph13: Nextcloud arayüzünüzün dilini seçin
+        paragraph14: Masaüstü ve mobil uygulamalara bağlantılar
+        paragraph15: Kullanıcılarınızı Nextcloud uygulamasına tanıtmanın kolay bir
+          yolu, paylaşımlı bir düzenlenebilir klasör oluşturmak ve ona bir kullanıcı
+          adı ve parola girmek zorunda kalmadan kolayca dosya paylaşmasına izin veren
+          ayrı bir uygulama olarak doğrudan bir bağlantı oluşturmaktır.
+        paragraph16: Daha spesifik olarak, Nextcloud'da yönetici olarak giriş yaptıktan
+          sonra, klasörün 'paylaşım' paneline tıklayıp 'Bağlantıyı paylaş' kutusunu
+          ve ardından 'Yükleme ve düzenlemeye izin ver' kutusunu işaretleyin (bkz.
+          aşağıdaki şekil).
+        paragraph17: 'Bu iki onay kutusu arasında görünen bağlantı, artık şuradaki
+          yeni bir uygulamanın URL''sine yapıştırılabilir:'
+        paragraph18: Ayrıca, farklı türde dosyalar (fotoğraflar, slaytlar, videolar)
+          için, kullanıcıların içeriği ne tür bir içerikte yönlendirmeyi ve göz atmayı
+          daha kolay hale getirmeyi kolaylaştırmak için ayrı bir klasör oluşturulmasına
+          yardımcı olabilir.
+        paragraph19: Paylaşılan Nextcloud klasörüne yüklenen içeriği başka uygulamalarda
+          kullanmanız gerekiyorsa dosyalara aşağıdaki yoldan erişilebilir.
+        paragraph20: 'Yani, örneğin, kullanıcı ''mazi'' ve klasör ses/yol için şöyle
+          olurdu:'
+        paragraph21: Nextcloud'da yeni kullanıcılar oluşturmak için internete bağlı
+          olmanız veya Raspberry ve Nextcloud uygulaması arasındaki zaman ve tarihi
+          manuel olarak senkronize etmeniz gerekir.
+      guestbook-tab:
+        subheader1: Açıklama
+        subheader2: Yönetim Rehberi
+        subheader3: Yönetici Parolası
+        subheader4: İçeriğin alternatif görünümleri
+        paragraph1: MAZI Ziyaretçi Defteri; izleyicilerin düşüncelerini, fotoğraflarını
+          vb. paylaşmalarını sağlayan etkinliklerde kullanılan açık kaynaklı bir uygulamadır.
+        paragraph2: 'MAZI Ziyaretçi Defteri uygulamasını yapılandırmak/yönetmek için
+          şuraya gidebilirsiniz:'
+        paragraph3: Yönetici şifresini değiştirmek için config.js dosyasını açın
+        paragraph4: ve sonra authPassword'u istediğiniz şifre ile doldurun.
+        paragraph5: İçeriğin standart web tarayıcısı sunumunun yanı sıra Ziyaretçi
+          Defteri diğer iki içerik görünümünü desteklemektedir.
+        paragraph6: Slayt gösterisi görünümü
+        paragraph7: Tablet görünümü
+        paragraph8: MAZI Bölgenize bağlı olduğunuzda tüm bağlantılar çalışır.
+      wordpress-tab:
+        subheader1: Açıklama
+        subheader2: Yönetim Rehberi
+        paragraph1: WordPress, geliştiriciler ve katkıda bulunanlar tarafından oluşturulan
+          açık kaynaklı ve ücretsiz bir Web yayınlama uygulaması, içerik yönetim sistemi
+          (CMS) ve blog oluşturma aracıdır. WordPress, kullanıcıların arka uç CMS'inden
+          ve tümleşik uygulama ve bileşenlerinden güncelleştirilebilen, özelleştirilebilen
+          ve yönetilebilen dinamik web siteleri ve bloglar oluşturmasına olanak tanır.
+        paragraph2: 'Bilgileri doldurun: sitenize bir başlık verin, kullanıcı adı
+          ve şifre oluşturun ve e-posta adresinizi girin. WordPress''i Yükle düğmesine
+          basın, daha sonra oluşturduğunuz hesabı kullanarak giriş yapın.'
+      framadate-tab:
+        subheader1: Açıklama
+        paragraph1: Framadate, Doodle gibi açık kaynaklı ve ücretsiz bir uygulamadır.
+          İşbirlikçilerinizi davet etmek için kayıt olmaksızın randevu veya anket
+          oluşturmak kolaydır.
+        paragraph2: Nasıl çalıştığına bakalım
+        paragraph3: Anket oluştur
+        paragraph4: Seçmek için tarihleri veya konuları belirleyin
+        paragraph5: Anket bağlantısını arkadaşlarınıza veya iş arkadaşlarınıza gönderin
+        paragraph6: Tartışın ve kararınızı verin
     settings-page:
       subheader: Ayarlar
+      message: MAZI Bölgenizdeki çeşitli yapılandırma ayarlarını değiştirmek için
+        bu sayfayı kullanabilirsiniz.
+      panel-header: Sistem ayarları
+      time-date:
+        header: Zaman/Tarih
+      mysql-password:
+        header: MySQL Parolası
+      apache-filesize:
+        header: Apache maksimum dosya boyutu
       popups:
+        change-time-date-title: Saat/Tarih Değiştir
+        change-time-date-message: MAZI Bölgesi Saatini/Tarihini değiştirmek için lütfen
+          aşağıdaki formu kullanın.
+        change-mysql-password-title: MySQL parolasını değiştir
+        change-mysql-password-message: Bu MAZI Bölgesi için MySQL şifresini değiştirmek
+          için lütfen aşağıdaki formu kullanın.
         change-apache-filesize-title: Apache max yükleme dosyalarını değiştir
         change-apache-filesize-message: Bu MAZI Bölgesi için Apache max yükleme dosyalarını
           değiştirmek için lütfen aşağıdaki formu kullanın.
