@@ -105,6 +105,14 @@ module MaziVersion
     response
   end
 
+  def self.rc_local_updated_2?
+    response = false
+    File.readlines("/etc/rc.local").each do |line|
+      response = true if line.include? 'bash /root/back-end/mazi-internet.sh'
+    end
+    response
+  end
+
   def self.guestbook_version
     JSON.parse(File.read('/var/www/html/mazi-board/src/node/package.json'))['version']
   end
@@ -382,6 +390,14 @@ module MaziVersion
     MaziLogger.debug "  Checking nodogsplash"
     unless File.directory?('/root/nodogsplash')
       MaziLogger.debug "nodogsplash does not exist. Updating!"
+      `bash /root/back-end/update.sh`
+      MaziLogger.debug "done."
+    end
+
+    # version 2.5.1
+    MaziLogger.debug "  Checking rc.local file"
+    unless rc_local_updated_2?
+      MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh`
       MaziLogger.debug "done."
     end
