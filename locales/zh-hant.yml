@@ -20,7 +20,7 @@ zh-hant:
       export-to-csv: 匯出成 CSV 檔案
       expand: 擴充
       expand-storage: 擴充儲存裝置
-      reboot: 重新開機
+      reboot: 重新啟動
       reset: 重新設定
       shutdown: 關閉系統
       logout: 登出
@@ -48,14 +48,18 @@ zh-hant:
       version: 版本
       enable: 啟用
       disable: 停用
+      checked: 已勾選
       on_msg: 開啟
       off_msg: 關閉
       disconnected: 已中斷連接
+      here: 此
       ssid: SSID
       channel: 頻段
       password: 密碼
       offline: 離線
+      dual: 雙重
       restricted: 受限
+      managed: 已管理
       active: 有效
       inactive: 無效
       error: 錯誤
@@ -79,12 +83,18 @@ zh-hant:
       storage: 儲存裝置
     sensors-page:
       header: 感測器測量
+      header-message: 在此頁面您可以查看多個連接至此 MAZI Zone 的感測器之測量。您也可以使用以下按鈕來請求在某一特定時段的測量。
       temperature-for: 來自 %{sensor} 的溫度
+      metrics-for: 來自 %{sensor} 的方向、加速、陀螺儀測量
       humidity-for: 來自 %{sensor} 的溼度
       pressure-for: 來自 %{sensor} 的壓力
+      no-sensors-warn: 警告：在資料庫或感測器設備中沒有連接至此 MAZI Zone 的測量。
+      no-sensor-data-warn: 警告：沒有儲存至此 MAZI Zone 的感測資料。可讓系統管理員開啟感測資料收藏。
       choose-timeslot-message: 請使用以下表單來選擇時段。
       direction: 方向（角度）
       acceleration: 加速（x、y、z）
+      gyroscope: 陀螺儀（俯仰、偏航、滾翻）
+      sensors-hint: 要查看有效值的話，應校正 Sensehat。請檢查管理面板來獲得更多詳情。
     camera-page:
       header: 相機
       subheader: 在此頁面您可以查看由連接到該 MAZI Zone 的相機所拍攝之照片與影片。
@@ -94,6 +104,7 @@ zh-hant:
       no-media-warn: 目前在多媒體庫中沒有找到圖片或影片！
     monitoring-page:
       subheader: 監控
+      header-message: 在此頁面您可以查看此或/與其它 MAZI Zones 各項監控測量內容。
       popups:
         device: 設備
         devices: 設備
@@ -131,11 +142,12 @@ zh-hant:
       admin-panel: MAZI Zone 管理面板
       shutdown-modal-title: 關閉系統？
       shutdown-modal-message: MAZI Zone 現在將要關機，這會導致此站台無法訪問，且您需要手動重新啟動此 MAZI Zone。要繼續嗎？
-      reboot-modal-title: 重新開機？
+      reboot-modal-title: 重新啟動？
       reboot-modal-message: MAZI Zone 現在將要重新啟動，這會導致此站台在數分鐘內無法訪問，請等待幾分鐘後重整此頁面。要繼續嗎？
     top-menu:
       header: MAZI Zone 管理面板
-      portal: 入口
+      admin: 管理
+      portal: 入口頁面
       set-date: 設定日期
       username: 使用者名稱
       password: 密碼
@@ -155,12 +167,17 @@ zh-hant:
       documentation: 文件
     updates:
       checking-updates: 檢查更新中。請稍等...
+      alert-message-1: 您本地端的儲存庫已被編輯，這會導致更新功能失效。請透過使用 %{command}，來替已編輯檔案撤銷這些在本地端儲存庫的變更。
       update-message-1: 沒有至網際網路的有效連接。請連接此 MAZI Zone 至網際網路並再試一次。
-      update-message-2: 此入口以展示模式運作！該操作會開始更新程序。
-      update-message-3: 入口是最新版本，不需要再更新。
+      update-message-2: 此入口頁面以展示模式運作！該操作會開始更新程序。
+      update-message-3: 入口頁面是最新版本，不需要再更新。
       update-message-4: 系統更新中。請稍等...
+      update-message-5: 更新程序將要完成，您的 MAZI Zone 會重新啟動以安裝缺少的相依套件。一旦您有看見您的 WiFi 網路後，您就可以準備來連接您的已更新
+        MAZI Zone。
       update-message-6: 有可用的更新。請使用下方按鈕來開始更新程序。
+      update-hint: 提示：若您遇到錯誤情況，請重新啟動您的設備。
     setup-page:
+      tog-nav: 切換導航
       setup-panel: MAZI Zone 配置面板
       first-step-header: 管理密碼配置
       first-step-message: 使用以下表單來設定 MAZI Zone 管理面板的管理密碼。
@@ -173,17 +190,19 @@ zh-hant:
         Wi-Fi 網路。
       fourth-step-header: MAZI Zone 詳情
       fourth-step-message: 請使用以下表單來變更您的 MAZI Zone 詳情
+      fourth-step-warning: 提示：您可以使用 Google 地圖來找尋您的位置（緯度、經度）以點擊右鍵 -> 這是哪裡。然後使用螢幕底端方框的座標（例如：39.379012,
+        22.902813）
       last-step-header: 完成
       last-step-message: 您已成功完成所有配置步驟。請點擊提交按鈕來保存變更。
     dashboard-page:
       subheader: 功能面板
       welcome:
-        message-1: '%{panel} 是管理此 MAZI Zone 入口，以及 MAZI Zone 網路方面的主要工具。'
-        message-2: 請使用選單來導航到各項工具，這些可以做出：
+        message-1: '%{panel} 是管理此 MAZI Zone 入口頁面，以及 MAZI Zone 網路方面的主要工具。'
+        message-2: 請使用選單來導向到各項工具，這些可以做出：
         message-list-1: 管理支援的應用程式
         message-list-2: 設置 MAZI Zone 網路
-        message-list-3: 設置入口的視覺呈現
-        message-list-4: 添加/移除在入口的通知
+        message-list-3: 設置入口頁面的視覺化呈現
+        message-list-4: 添加/移除在入口頁面的通知
         message-list-5: 匯出/匯入快照
       hardware-info:
         header: MAZI Zone 硬體訊息
@@ -201,26 +220,36 @@ zh-hant:
       traffic:
         header: 流量
         reset-application-clicks: 重新設定應用程式點擊
+        reset-visits: 重新設定訪問
+        portal-visits: 覆蓋入口頁面訪問
+        application-visits: 應用程式訪問
       notifications:
         header: 通知
-        notifications: 啟用入口通知
+        notifications: 啟用入口頁面通知
       time-date:
         header: MAZI Zone 時間/日期
         current: 目前日期/時間
       version:
         header: MAZI Zone 版本
-        version-message-1: 此入口是
+        version-message-1: 此入口頁面是
+        version-message-2: 提交後。
         up-to-date: 最新
+      popups:
+        expand-storage-message: 您可以透過下方按鈕來擴展 MAZI Zone 儲存至您的 SD 卡最大容量。要讓此生效的話，您需要重新啟動。
     applications-page:
       subheader: 應用程式
       instances-menu:
         header: 應用程式實體
+        active-column: 啟用
+        active-hint: 在入口頁面裡切換應用程式可見性
+        splash-page-column: 啟動畫面
+        splash-page-hint: 使用此應用程式為入口頁面的啟動畫面
         name-column: 名稱
         name-hint: 應用程式名稱
         url-column: URL
         url-hint: 應用程式的 URL
         description-column: 描述
-        description-hint: 描述將會顯示在入口的應用程式部份上
+        description-hint: 描述將會顯示在入口頁面的應用程式部份上
         parent-column: 父級應用程式
         parent-hint: 父級應用程式
         click-column: 點擊計數
@@ -234,7 +263,7 @@ zh-hant:
       applications-menu:
         header: 已安裝應用程式
         status-column: 狀態
-        status-hint: 入口的執行狀態（運作中/已停止）
+        status-hint: 入口頁面的執行狀態（運作中/已停止）
         icon-column: 圖標
         icon-hint: 應用程式預設圖標
         color-column: 色彩
@@ -244,7 +273,7 @@ zh-hant:
         url-column: URL
         url-hint: 應用程式的 URL
         description-column: 描述
-        description-hint: 描述將會顯示在入口的應用程式部份上
+        description-hint: 描述將會顯示在入口頁面的應用程式部份上
         actions-column: 操作
         actions-hint: 可在應用程式上執行操作
         web-app-info-hint: 開始/停止此應用程式並不會影響到您的 MAZI Zone 效能。
@@ -254,8 +283,10 @@ zh-hant:
       popups:
         delete-application-title: 刪除應用程式實體？
         delete-application-message: 此應用程式實體將會從資料庫裡永久刪除。您確定要繼續嗎？
+        delete-application-hint: 在您需要刪除所有連接至此應用程式的應用程式實體之前，您可以刪除此應用程式。
         edit-application-title: 編輯應用程式實體？
         create-application-title: 建立新的應用程式實體
+        create-application-help: 說明：一些應用程式無法在同一期間裡使用多個實體，這是它們會缺少的原因。
         web-app-info-title: 網路應用程式
         web-app-info-message: 此為網路應用程式，所以開始/停止此應用程式並不會影響到您的 MAZI Zone 效能。
     network-page:
@@ -263,10 +294,14 @@ zh-hant:
       wifi-ap-interface-panel:
         header: '%{interface}　的 Wi-Fi 接入點網路設定'
         ssid-name-label: Wi-Fi 網路名稱（SSID）
+        ssid-name-description: 服務設定識別碼（Service Set IDentifier、SSID）是分配給 Wi-Fi（無線）網路的名稱。所有在網路上的設備，應使用大小寫區分且長達
+          32 位元組文字字串的名稱，來透過 Wi-Fi 進行通訊。請按下以下編輯按鈕來變更。
         wifi-channel-label: Wi-Fi 網路頻段
         wifi-channel-description: 在您的 MAZI Zone 上挑選最適當的 Wi-Fi 頻段能減少干擾，並增強您的 WI-Fi
           信號。請點擊下方編輯按鈕來變更。
         wifi-password-label: Wi-Fi 網路密碼
+        wifi-password-description: 用於 Wi-Fi（無線）網路的驗證密碼。這至少要有 8 個字元長度。若此留空的話 Wi-Fi
+          網路安全將會失效。請按下以下編輯按鈕來變更。
       unconfigured-dongle-panel:
         message: 尚未設置此網路介面。請使用以下按鈕來進行適當設置。
       internet-panel:
@@ -276,25 +311,42 @@ zh-hant:
         header: 連接至 Wi-Fi 來存取網際網路
         wifi-network-hint-1: 來自 Wi-Fi 網路
         wifi-network-hint-2: Wi-Fi 網際網路
+        usb-dongle-message: 請在您的樹苺派插入額外的 USB Wi-Fi 傳輸器來啓用此功能。支援 USB 傳輸器
       access-point-panel:
         header: 添加路由器為接入點
         current-hint: 使用的 Wi-Fi 接入點
+        router-message: 樹苺派 Wi-Fi 介面目前正被使用中。您可以外掛 OpenWRT 路由器至您的樹苺派，並移動在此的接入點。建議設備
+      portal-domain-panel:
+        header: 入口網域
+        domain-hint: 目前入口網域
       popups:
         edit-wifi-header: 編輯 Wi-Fi 設置
+        edit-wifi-warning: 警告：如果您變動了此 Wi-Fi 網路的任何設置內容，您連至此 MAZI Zone 的無線連接將會遺失，並且需要重新連接到新的
+          Wi-Fi 網路。
         edit-wifi-network-header: 編輯 Wi-Fi 網路設定
         show-qrcode-header: Wi-Fi 網路二維碼
         change-channel-header: 變更頻段
         change-password-header: 變更密碼
         change-mode-header: 變更模式
+        change-mode-message: 使用以下表格來挑選用於此 MAZI Zone 的網路模式。如果您想要挑選雙重模式，請確認能夠存取網際網路（透過網路線或是
+          Wi-Fi 傳輸器）。
         connect-wifi-header: 連接 Wi-Fi 網路
         select-wifi-label: 選擇 Wi-Fi 名稱
         select-mesh-mode-label: 選擇 Mesh 模式
+        type-wifi-label: 若如果是隱藏的，在此輸入
         type-password-label: 輸入 Wi-Fi 網路的密碼
+        change-domain-header: 編輯入口網域
+        change-domain-message: 此操作將會變更入口網域。請確定為有效的網域（例：至少要有一個「.」字元）。
+        change-domain-warning: 警告：如果您設定無效網域，入口頁面將會無法訪問。然而，您可透過此 URL 來存取管理面板
+        toggle-access-point-header: 切換 Wi-Fi 接入點設備
+        toggle-access-point-message: 此操作將會變更 Wi-Fi 接入點設備。這會導致中斷掉您存取至此入口頁面，並需要重新連接新的
+          Wi-Fi 網路。您確定要繼續嗎？
     appearance-page:
       subheader: 外觀
       theme-panel:
         header: 主題設置
-        portal-title-label: 入口標題
+        portal-title-label: 入口頁面標題
+        portal-title-hint: 此值會設置左上方標題與 html 標頭標題。
         home-page-label: 首頁標題
         home-page-hint: 此值用來設置入口首頁的主體標題。
         home-subtitle-label: 首頁子標題
@@ -308,7 +360,7 @@ zh-hant:
         side-active-color: 側邊面板有效色彩
         top-main-color: 頂端面板主色彩
         top-active-color: 頂端面板有效色彩
-        colors-hint: 上方的值用來設置入口的各種顏色。
+        colors-hint: 上方的值用來設置入口頁面的各種顏色。
       popups:
         edit-theme-header: 編輯主題
         edit-title-header: 編輯標題
@@ -317,18 +369,19 @@ zh-hant:
         edit-welcome-message-header: 編輯歡迎訊息
         edit-background-image-header: 編輯背景圖片
         reset-theme-header: 重新設定主題
-        reset-theme-message: 此操作將會重新設定所有視覺設置成預設值。
+        reset-theme-message: 此操作將會重新設定所有視覺化設置成預設值。
         load-theme-header: 載入主題
         load-theme-message: 載入以下設置檔案之一
         save-theme-header: 儲存主題
         save-theme-message: 請輸入新主題的名稱。
     devices-page:
       subheader: 設備
+      message: 您可以使用以下工具來連接至此 MAZI Zone 的各項支援設備（感測器、相機、其它）。您可以查找所有支援設備
       sensors-panel:
         header: 感測器
         header-hint: 您可以使用此來控制多項感測器。
-        toggle-sensors-message: 啟用/停用在使用者入口的感測器分頁
-        toggle-sensors-hint: 啟用/停用入口的感測器分頁
+        toggle-sensors-message: 啟用/停用在使用者入口頁面的感測器分頁
+        toggle-sensors-hint: 啟用/停用入口頁面的感測器分頁
         sensors-table:
           type: 類型
           status: 狀態
@@ -336,21 +389,25 @@ zh-hant:
           actions: 操作
           start-button-hint: 開始保存測量
           delete-button-hint: 刪除所有保存的測量
+          sensehat-calibration-hint: 若您想校正您的 Sensehat，請依照此教程的校正段落
         no-sensors-message: 找不到連接至此 MAZI Zone 的感測器。
+        init-sensors-message: 用於感測器的初始化程序尚未執行。若您想要使用連接至此 MAZI Zone 的感測器設備，請使用以下按鈕來初始化此模組。
         init-button-hint: 開始感測器初始化
       camera-panel:
         header: 相機
         header-hint: 您可以使用此來控制相機。
-        toggle-camera-message: 啟用/停用在使用者入口的相機分頁
-        toggle-camera-hint: 啟用/停用入口的相機分頁
+        toggle-camera-message: 啟用/停用在使用者入口頁面的相機分頁
+        toggle-camera-hint: 啟用/停用入口頁面的相機分頁
         camera-version-message: 相機模組未正確安裝在此映像檔上！請使用版本大於 1.7.2 有對此正確設置的映像檔。
         no-camera-message: 沒有相機連接到此 MAZI Zone！
       popups:
         start-sensing-title: 開始感測器偵測
+        start-sensing-message: 請在行事曆上輸入期間或日期來定義時段以收集測量。另外，請使用間隔來定義測量的頻率。
         start-sensing-label1: 目標伺服器
         start-sensing-label2: 期間（秒）
         start-sensing-label3: 行事曆（結束時間/日期）
         start-sensing-label4: 間隔（秒）
+        start-sensing-hint: 提示：如果您同時使用期間與行事曆輸入框，行事曆內容將會忽略。
         delete-sensing-title: 刪除感測器測量
         delete-sensing-message: 您想要刪除所有儲存的測量嗎？
         start-images-title: 開始拍攝圖片
@@ -364,11 +421,13 @@ zh-hant:
         delete-videos-message: 您想要刪除所有拍攝下來的影片嗎？
     monitoring-page:
       subheader: 監控
+      message: 您可以使用下方工具來控制有關您的 MAZI Zone 收集，以及發送資料至資料收集伺服器的方式。
       details-panel:
         header: 詳情
         header-hint: 您可以使用此來啓用/停用監控功能。
         toggle-monitoring-message: 啟用/停用監控功能。
         toggle-monitoring-hint: 啓用/停用監控功能
+        details-message: 以下您可查看此 MAZI Zone 的詳情，您可以透過按下底端的編輯按鈕來變更任何項目。
         table-label1: 部署
         table-label2: 管理員
         table-label3: 標題
@@ -378,8 +437,9 @@ zh-hant:
       statistics-panel:
         header: 監控資料
         header-hint: 您可以使用此來控制監控行為。
-        toggle-monitoring-map-msg: 啟用/停用在使用者入口的監控分頁
+        toggle-monitoring-map-msg: 啟用/停用在使用者入口頁面的監控分頁
         toggle-monitoring-map-hint: 啓用/停用監控分頁
+        message: 您可以下方透過開始/停止按鈕來開始/停止發送系統行為與應用程式間式資料給遠端（或本地）端點。
         statistics-table:
           status: 狀態
           description: 描述
@@ -422,7 +482,10 @@ zh-hant:
         show-application-header: 應用程式監控訊息
         show-application-message: 系統行為監控程序的目前狀態
         delete-hardware-header: 刪除系統行為監控資料
+        delete-hardware-message: 使用以下按紐來刪除所有來自本地端資料庫的系統有效監控資料。目前在資料庫的項目數量為 %{entries}
+        delete-hardware-hint: 此操作需花費幾秒時間來完整執行，因此在重整頁面前請稍待。
         delete-application-header: 刪除應用程式監控資料
+        delete-application-message: 使用以下按紐來刪除所有來自本地端資料庫的應用程式有效監控資料。目前在資料庫的項目數量為 %{entries}
         delete-application-hint: 此操作將需花費幾秒來完整執行，因此在重新整理頁面前請稍待。
     notifications-page:
       subheader: 通知
@@ -437,6 +500,9 @@ zh-hant:
         delete-notification-message: 此通知將會從資料庫裡永久刪除。您確定要繼續嗎？
     import-export-page:
       subheader: 快照
+      message: 您可以使用以下工具來採用此 MAZI Zone 目前設置的快照。這裡頭有包含著任何項目（網路設置、應用程式、應用程式實體、通知、視覺化設置、其它）。
+      warning: 警告：如果您以不同的 Wi-Fi 網路設定來載入新的快照，您連至此 MAZI Zone 的無線連接將會遺失，並且需要重新連接到新的 Wi-Fi
+        網路。
       save-snapshot-panel:
         header: 儲存快照
         header-hint: 您可以使用此來取用快照。
@@ -445,7 +511,7 @@ zh-hant:
       load-snapshot-panel:
         header: 載入快照
         header-hint: 您可以使用此來載入快照。
-        message: 請選擇快照並按下載入。MAZI 入口將會重新啟用。
+        message: 請選擇快照並按下載入。MAZI 入口頁面將會重新啟用。
         no-snapshots-message: 目前沒有儲存快照。
       import-export-panel:
         header: 匯入/匯出快照
@@ -481,24 +547,36 @@ zh-hant:
         subheader1: 描述
         subheader2: 透過 ssh 連接
         subheader3: Raspbian 設置
+        paragraph1: 此為 MAZI Zone 入口頁面的管理文件入門。請使用上方的分頁來導向到各不同文件章節。目前此分頁描述內容為管理員在設置樹莓派時，可能會需要到的各項操作。其中所有其它分頁的資訊裡，都提供了支援應用程式方面的管理內容。
+        paragraph2: 要透過 ssh 來遠端連線到樹莓派，您必須開啟終端機並執行以下指令
         paragraph3: 若您想為樹梅派使用者變更密碼，請使用 $passwd 以及下列指示。
+        paragraph4: 此為用於 ssh 連線的密碼，它不同於您用來登入管理介面的管理密碼。
         paragraph5: 一旦您在樹莓派上成功登入時，便會開始 rasbian 設置工具
-        paragraph6: 且導航至選單
+        paragraph6: 並導向至選單
         paragraph7: 使用整個 SD 卡容量來重新調整檔案系統大小
+        paragraph8: 在國際化選項，變更
         paragraph9: 符合您位置的地區
         paragraph10: 符合您位置的時區
       etherpad-tab:
         subheader1: 描述
         subheader2: 管理入門
         subheader3: 有用提示
+        paragraph1: Etherpad 能讓您以即時的協作方式來編輯文件，如同運作在您瀏覽器上的線上多人編輯器。能夠編寫文章、新聞稿、待辦清單、其它等等。它可讓您與朋友、同學、或合伙們於同一時刻在同一份文件上編輯。所有運作在
+          Etherpad 上的實體，都可透過實用的 API 來存取所有資料，並支援多種主要資料交換格式的匯入/匯出。若內建預設功能無法滿足您的需求，另外有著可讓您對實體自訂化，以滿足您需求的多項外掛套件。
         paragraph2: 要找出管理頁面您可以在
+        paragraph3: 要變更管理密碼的話，請在管理頁面選擇設定後，以您的密碼來變更「mazizone」。
+        paragraph4: 若您建立了索引協作文件，並透過更改在管理面板中應用程式區域裡的 URL 來將此設為「預設」Etherpad 頁面，便能您的
+          MAZI Zone 使用者用起來更容易。人們可被邀請來建立他們自己所屬的協作文件，並在索引頁面添加他們的連結，這些除了是「可做出評註」之外，也能讓導向至伺服器上可用的協作文件更方便。
         paragraph5: 例如：
+        paragraph6: 在有人可以來抽空「清理」文字，並有合適的「索引」頁面來組織不同協作文件，以上情況之下便能夠讓 Etherpad 運作良好。
       nextcloud-tab:
         subheader1: 描述
         subheader2: 管理入門
         subheader3: 有用提示
+        paragraph1: Nextcloud 是用於私有檔案同步與分享交流的伺服器。它是完全開放原始碼的，因此您可以自行或是給付費用給廠商來託管。您可以藉此來操控您的相片、行事曆與聯絡內容、文件、以及其它內容。
         paragraph2: 要找出管理頁面您可以在
         paragraph3: 存取您的個人設定
+        paragraph4: 點擊在您 Nextcloud 實體右上角的管理，會開啟個人設定選單。
         paragraph5: 從下拉選單來挑選個人。
         paragraph6: 您將會看到一些包含在以下的功能
         paragraph7: 使用量和可用額度
@@ -509,6 +587,12 @@ zh-hant:
         paragraph12: 管理您的密碼
         paragraph13: 挑選您的 Nextcloud 介面採用語言
         paragraph14: 連結到桌面和行動應用程式
+        paragraph15: 一個向您的使用者介紹 Nextcloud 應用程式的簡單方法，是建立一個可分享、編輯的資料夾，並建立直接對應的連結。作為獨立的應用程式，它能允許任何人不需輸入使用者名稱或密碼，便可輕鬆分享檔案。
+        paragraph16: 進一步來說，當您以管理員身份登入 Nextcloud 後，您可以點擊資料夾的「分享」面板並勾選「分享連結」方框，然後選擇「允許上傳和編輯」（請參見下方圖例）。
+        paragraph17: 呈現在兩個勾選框之間的連結，現可發佈於新的應用程式 URL 在
+        paragraph18: 這能協助替各類型檔案建立獨立的資料夾（照片、投影片、影片），來使人可以更容易直接了解裡頭的內容，並瀏覽起來更方便。
+        paragraph19: 若您需要使用內容上傳至您在其它應用程式的 nextcloud 分享資料夾，檔案可透過以下路徑來存取
+        paragraph20: 因此例如來說，對於使用者「mazi」與檔案夾「audio/」而言路徑會是
         paragraph21: 要在 Nextcloud　上建立新的使用者您必須連接到網際網路，或是手動同步樹莓派與 Nextcloud 應用程式之間的時間與日期。
       guestbook-tab:
         subheader1: 描述
@@ -517,16 +601,25 @@ zh-hant:
         subheader4: 替代內容檢視
         paragraph1: MAZI Guestbook 是個可用來讓群眾分享他們的看法、照片、等等其它的開放原始碼應用程式。
         paragraph2: 要設置/調節 MAZI Guestbook 應用程式，您可以前往
+        paragraph3: 要變更管理密碼，請開啟在此路徑下的 config.js 檔案
         paragraph4: 然後在 authPassword 填寫您想要的密碼。
         paragraph5: 除了標準網路瀏覽器內容演示外，GuestBook 支援兩個其它內容檢視
+        paragraph6: 幻燈片檢視
+        paragraph7: 平板檢視
         paragraph8: 當您連接至您的 MAZI Zone 時，所有連結將會運作。
       wordpress-tab:
         subheader1: 描述
         subheader2: 管理入門
+        paragraph1: WordPress 是個由社群開發者與貢獻者所打造，開放原始碼且自由的網路發佈應用程式、內容管理系統、部落格工具。WordPress
+          能讓使用者建置可更新、自定化、動態的網站與部落格，並且可從後端內容管理系統、整合的應用程式與元件來管理。
+        paragraph2: 填寫訊息：給予您的站台一個標題，建立使用者名稱與密碼並輸入您的電子郵件地址。按下安裝 WordPress 按鈕，然後使用您剛建立的帳號來登入。
       framadate-tab:
         subheader1: 描述
+        paragraph1: Framadate 類似 Doodle 的開放原始碼自由應用程式。它能不需註冊便可輕鬆建立約定事項、調查來邀請給您的夥伴。
+        paragraph2: 此為如何運作的
         paragraph3: 建立調查
         paragraph4: 判斷要挑選的日期和話題
+        paragraph5: 發送調查連結給您的朋友或夥伴
         paragraph6: 討論並作出您的決定
     settings-page:
       subheader: 設定

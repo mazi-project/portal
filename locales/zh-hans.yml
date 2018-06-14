@@ -322,7 +322,9 @@ zh-hans:
         header: 主题配置
         portal-title-label: 门户标题
         home-page-label: 首页标题
+        home-page-hint: 此值配置门户首页的正文标题。
         home-subtitle-label: 首页子标题
+        home-subtitle-hint: 此值配置门户首页的正文子标题。
         welcome-message-label: 应用程序欢迎消息
         colors-label: 颜色
       popups:
@@ -362,6 +364,7 @@ zh-hans:
         table-label4: 描述
         table-label5: 位置（经纬度）
       statistics-panel:
+        toggle-monitoring-map-hint: 启用/禁用监视标签
         statistics-table:
           status: 状态
           description: 描述
@@ -382,8 +385,12 @@ zh-hans:
         hardware-label5: Ram承载
         hardware-label6: 存储加载
         application-label1: 目标服务器
+        start-hardware-message: 使用下面的表单开始发送系统活跃监视数据
+        start-application-header: 开始应用程序监视数据
         show-hardware-header: 系统活跃监视信息
+        show-application-message: 当前的应用程序监视进程状态
         delete-application-header: 删除应用程序监视数据
+        delete-application-message: 使用下面的按钮从本地数据库中删除应用程序监视数据。当前数据库中的记录数量为%{entries}
     notifications-page:
       subheader: 通知
       notifications-table:
@@ -394,6 +401,7 @@ zh-hans:
       popups:
         create-notification-title: 创建新通知
         edit-notification-title: 编辑通告
+        delete-notification-message: 此通知将从数据库中永久删除。您希望继续么？
     import-export-page:
       subheader: 快照
       message: 您可以使用下方工具制作此MAZI区域当前配置的快照。这包括任何东西（网络配置、应用程序、应用程序实例、通知、可视化配置等）。
@@ -434,7 +442,9 @@ zh-hans:
         subheader1: 描述
         subheader3: 实用技巧
         paragraph2: 您将在此找到管理页面：
+        paragraph6: 您将看到的一些功能包含在下方
         paragraph10: 电子邮件地址
+        paragraph11: 列举您的群组成员
         paragraph12: 管理您的密码
         paragraph14: 链接到桌面和移动应用
       guestbook-tab:

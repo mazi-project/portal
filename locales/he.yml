@@ -1,0 +1,217 @@
+# Messages for Hebrew (עברית)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Guycn2
+---
+he:
+  general:
+    buttons:
+      edit: עריכה
+      cancel: ביטול
+      ok: אישור
+      close: סגירה
+      create: יצירה
+      delete: מחיקה
+      start: התחלה
+      stop: עצירה
+      save: שמירת השינויים
+      choose: בחירה
+      choose-timeslot: בחירת תקופת זמן
+      export-to-csv: ייצוא לקובץ CSV
+      expand: הרחבה
+      expand-storage: הרחבת אחסון
+      reboot: אתחול מחדש
+      reset: איפוס
+      shutdown: כיבוי
+      logout: יציאה
+      update: עדכון
+      connect: התחברות
+      disconnect: התנתקות
+      toggle-device: החלפת מכשיר
+      initialize: אתחול
+      remove: הסרה
+      load: טעינה
+      import: ייבוא
+      export: ייצוא
+      refresh: רענון
+      continue: המשך
+      next: הבא
+      previous: הקודם
+      submit: שליחה
+      change: שינוי
+      qrcode: קוד QR
+      show: הצגה
+      configure: הגדרת תצורה
+    messages:
+      warning: אזהרה
+      welcome: ברוך בואך
+      version: גרסה
+      enable: הפעלה
+      disable: כיבוי
+      checked: נבדק
+      on_msg: מופעל
+      off_msg: כבוי
+      disconnected: לא מחובר
+      here: כאן
+      ssid: שם הרשת (SSID)
+      channel: ערוץ
+      password: סיסמה
+      offline: לא מקוון
+      dual: כפול
+      restricted: מוגבל
+      managed: מנוהל
+      active: פעיל
+      inactive: לא פעיל
+      error: שגיאה
+  portal:
+    top-menu:
+      documentation: תיעוד
+    side-menu:
+      applications: יישומים
+      system: מערכת
+      sensors: חיישנים
+      camera: מצלמה
+      monitoring: האזנה
+      devices: התקנים
+    system-page:
+      subheader: מידע על המערכת
+      users: משתמשים מחוברים
+      app-clicks: שימוש ביישומים
+      temperature: טמפרטורה
+      cpu: מעבד
+      ram: זיכרון (RAM)
+      storage: אחסון
+    sensors-page:
+      header: מדידת חיישנים
+      header-message: בדף זה ניתן לראות את המדידות של חיישנים שונים המחוברים לתחום
+        ה־MAZI הזה. אפשר גם להשתמש בכפתור שלמטה עבור מדידות מתקופת זמן מסוימת.
+      temperature-for: טמפרטורה של החיישן %{sensor}
+      metrics-for: מדדי כיוון, תאוצה וגירוסקופ של החיישן %{sensor}
+      humidity-for: לחות של החיישן %{sensor}
+      pressure-for: לחץ של החיישן %{sensor}
+      no-sensors-warn: 'אזהרה: ייתכן שלא קיימות מדידות בבסיס הנתונים, או שלא מחובר
+        חיישן לתחום ה־MAZI הזה.'
+      no-sensor-data-warn: 'אזהרה: לא מאוחסנים נתוני חיישנים בתחום ה־MAZI הזה. מנהלי
+        המערכת יכולים להפעיל את איסוף נתוני החיישנים.'
+      choose-timeslot-message: נא להשתמש בטופס שלהלן כדי לבחור תקופת זמן.
+      direction: כיוון (מעלות)
+      acceleration: תאוצה (x, y, z)
+      gyroscope: גירוסקופ (פנייה, נטייה, שיפוע)
+      sensors-hint: ה־Sensehat צריך להיות מכויל כדי שיוצגו ערכים תקינים. נא לבדוק
+        את לוח הניהול לפרטים נוספים.
+    camera-page:
+      header: מצלמה
+      subheader: בדף זה ניתן לראות את התמונות ואת הסרטונים שנתפסו על־ידי המצלמה המחוברת
+        לתחום ה־MAZI הזה.
+      live-stream-header: שידור וידאו חי
+      no-camera-warn: כרגע אין מצלמה שמותקנת בתחום ה־MAZI הזה כראוי!
+      media-library-header: ספריית מדיה
+      no-media-warn: כרגע לא נמצאו תמונות או סרטונים בספרייה!
+    monitoring-page:
+      subheader: האזנה
+      header-message: בדף זה ניתן לראות את מדידת ההאזנות בתחום ה־MAZI הזה ו/או בתחומים
+        אחרים.
+      popups:
+        device: התקן
+        devices: התקנים
+        deployment: פריסה
+        administrator: מנהל
+        description: תיאור
+        latitude: קו רוחב
+        longitude: קו אורך
+        system_info: מידע על המערכת
+        cpu_temp: טמפרטורת המעבד
+        cpu_load: עומס המעבד
+        ram_load: עומס הזיכרון (RAM)
+        wifi-users: משתמשי הרשת האלחוטית
+        storage_use: העומס באחסון
+        etherpad-pads: פנקסים של Etherpad
+        etherpad-users: משתמשי Etherpad
+        etherpad-datasize: גודל הנתונים ב־Etherpad
+        etherpad-clicks: שימוש ב־Etherpad
+        guestbook-submissions: הודעות בספר האורחים
+        guestbook-comments: תגובות בספר האורחים
+        guestbook-images: תמונות בספר האורחים
+        guestbook-datasize: גודל הנתונים בספר האורחים
+        guestbook-clicks: שימוש בספר האורחים
+        framadate-polls: סקרים ב־Framadate
+        framadate-votes: הצבעות ב־Framadate
+        framadate-comments: תגובות ב־Framadate
+        framadate-clicks: שימוש ב־Framadate
+        nextcloud-users: משתמשי Nextcloud
+        nextcloud-files: קבצים ב־Nextcloud
+        nextcloud-downloads: הורדות ב־Nextcloud
+        nextcloud-datasize: גודל הנתונים ב־Nextcloud
+        nextcloud-clicks: שימוש ב־Nextcloud
+  admin:
+    general:
+      admin-panel: לוח הניהול של תחום ה־MAZI
+      shutdown-modal-title: לכבות?
+      shutdown-modal-message: תחום ה־MAZI ייכבה עכשיו. זה יגרום לכך שהאתר יהיה בלתי־נגיש,
+        ויהיה צורך לאתחל מחדש את תחום ה־MAZI הזה באופן ידני. האם ברצונך להמשיך?
+      reboot-modal-title: לאתחל מחדש?
+      reboot-modal-message: תחום ה־MAZI יאותחל מחדש עכשיו. זה יגרום לכך שהאתר יהיה
+        בלתי־נגיש למשך כמה דקות. לפיכך, יהיה צורך להמתין ולטעון מחדש את הדף הזה לאחר
+        מספר דקות. האם ברצונך להמשיך?
+    top-menu:
+      header: לוח הניהול של תחום ה־MAZI
+      admin: מנהל
+      portal: פורטל
+      set-date: הגדרת תאריך
+      username: שם משתמש
+      password: סיסמה
+      mysql-password: סיסמת MySQL
+      check-updates: בדיקת עדכונים
+      settings: הגדרות
+    side-menu:
+      dashboard: לוח בקרה
+      applications: יישומים
+      networking: רשת
+      appearance: מראה
+      devices: התקנים
+      monitoring: האזנה
+      notifications: הודעות
+      export-import: ייצוא/ייבוא
+      logs: יומנים
+      documentation: תיעוד
+    updates:
+      checking-updates: מתבצעת בדיקה של עדכונים. נא להמתין...
+      alert-message-1: המאגר המקומי שלך נערך, והדבר גרם לתקלה בפעולת העדכון. נא לבטל
+        את השינויים הללו במאגר המקומי, על־ידי שימוש ב־%{command} עבור הקבצים שנערכו.
+      update-message-1: אין חיבור פעיל לאינטרנט. נא לחבר את תחום ה־MAZI הזה לאינטרנט
+        ולאחר מכן לנסות שוב.
+      update-message-2: פורטל זה פועל במצב הדגמה! הפעולה הזו הייתה אמורה להתחיל תהליך
+        עדכון.
+      update-message-3: פורטל זה כבר מעודכן, ולכן אין צורך בעדכון.
+      update-message-4: המערכת מבצעת עדכון. נא להמתין...
+      update-message-5: תהליך העדכון כמעט הושלם. תחום ה־MAZI שלך יופעל מחדש כדי להתקין
+        את המשאבים החסרים. ברגע שהרשת האלחוטית שלך תחזור לפעולה, ניתן יהיה להתחבר
+        לתחום ה־MAZI המעודכן.
+      update-message-6: קיים עדכון זמין. יש להשתמש בכפתור שלהלן כדי להתחיל את העדכון.
+      update-hint: 'עצה: אם זה לא פועל כמו שצריך, אפשר לאתחל מחדש את המכשיר.'
+    setup-page:
+      tog-nav: מצב הניווט
+      setup-panel: לוח ההפעלה של תחום ה־MAZI
+      first-step-header: הגדרת סיסמת הניהול
+      first-step-message: ניתן להשתמש בטופס שלהלן כדי להגדיר את סיסמת המנהל עבור לוח
+        הניהול של תחום ה־MAZI.
+      first-step-hint: 'עצה: אם זהו תחום MAZI חדש, הסיסמה הנוכחית היא 1234'
+      second-step-header: הגדרת תאריך ושעה
+      second-step-message: ניתן להשתמש בטופס שלהלן כדי לשנות את התאריך, את השעה ואת
+        אזור הזמן של תחום ה־MAZI הזה.
+      third-step-header: הגדרת הממשק האלחוטי
+      third-step-message: ניתן להשתמש בטופס שלהלן כדי לשנות את שם הרשת האלחוטית (לא
+        חובה).
+      third-step-warning: 'אזהרה: שינוי שם הרשת האלחוטית יגרום לניתוק החיבור האלחוטי
+        לתחום ה־MAZI הזה, ויהיה צורך להתחבר לרשת האלחוטית מחדש.'
+      fourth-step-header: פרטי תחום ה־MAZI
+      fourth-step-message: באפשרותך להשתמש בטופס שלהלן כדי לשנות את הפרטים של תחום
+        ה־MAZI שלך
+      fourth-step-warning: 'עצה: באפשרותך להשתמש בגוגל מפות כדי למצוא את המיקום שלך
+        (כלומר, קו רוחב וקו אורך), באמצעות לחיצת עכבר ימנית ובחירה באפשרות "מה יש
+        כאן?". לאחר מכן, יש להשתמש בקואורדינטות בתיבה שמופיעה בתחתית המסך (למשל 39.379012,
+        22.902813).'
+      last-step-header: שמירת השינויים
+      last-step-message: השלמת בהצלחה את כל שלבי ההגדרות הראשוניות. נא ללחוץ על הכפתור
+        כדי לשמור את השינויים.
+...
