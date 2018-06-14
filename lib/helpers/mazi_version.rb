@@ -16,6 +16,7 @@ module MaziVersion
   end
 
   def fetch
+    `cd /root/back-end && git fetch`
     `git fetch`
   end
 
@@ -89,15 +90,16 @@ module MaziVersion
     staged = staged?
     if diff.to_i > 0 && !staged
       create_lock_update_file
-      MaziLogger.debug "pull origin master"
-      `git pull origin master`
+      branch = get_current_branch
+      MaziLogger.debug "pull origin #{branch}"
+      `git pull origin #{branch}`
       MaziLogger.debug "done."
       MaziLogger.debug "db migrate"
       `rake db:migrate`
       MaziLogger.debug "done."
       `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
       MaziLogger.debug "Updating back-end scripts"
-      `cd /root/back-end && git pull origin master`
+      `cd /root/back-end && git pull origin #{branch}`
       MaziLogger.debug "done."
     end
     nil
