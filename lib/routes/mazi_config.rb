@@ -316,6 +316,14 @@ module Sinatra
             {status: "restarting"}.to_json
           end
 
+          app.put '/branch/:branch/?' do |branch|
+            MaziLogger.debug "request: put/branch from ip: #{request.ip} params: #{params.inspect}"
+
+            change_update_branch(branch)
+
+            {status: "OK"}.to_json
+          end
+
           app.post '/expand/storage/?' do
             MaziLogger.debug "request: post/expand/storage from ip: #{request.ip} params: #{params.inspect}"
             unless authorized?

@@ -58,6 +58,8 @@ en:
       active:       "active"
       inactive:     "inactive"
       error:        "error"
+      stable:       "Stable"
+      development:  "Development"
   portal:
     top-menu:
       documentation: "Documentation"
@@ -161,8 +163,10 @@ en:
       logs:          "Logs"
       documentation: "Documentation"
     updates:
+      subheader:         "Update"
       checking-updates:  "Checking for updates. Please wait..."
       alert-message-1:   "Your local repository has been edited. This causes the update function to malfunction. Please revert those changes in the local repository, by using %{command} for the edited files."
+      update-message-0:  "Please choose your update channel"
       update-message-1:  "There is no active connection to the internet. Please connect this MAZI Zone to the internet and try again."
       update-message-2:  "This portal runs on Demo mode! This action would have started an update process."
       update-message-3:  "The portal is up-to-date, there is no need for an update."
@@ -170,6 +174,7 @@ en:
       update-message-5:  "Update process is almost complete. Your MAZI Zone will be restarted in order to install missing dependencies. As soon as you see your WiFi network again, you are ready to connect to your updated MAZI Zone."
       update-message-6:  "There is an update available. Please use the button below to start the update process."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
+      update-chan-hint:  "Hint: the latest version of the Development channel could be unstable. Please advice the version details %{link} in order to decide your update channel"
     setup-page:
       tog-nav:             "Toggle navigation"
       setup-panel:         "MAZI Zone Setup Panel"

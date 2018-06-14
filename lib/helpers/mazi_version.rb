@@ -40,6 +40,7 @@ module MaziVersion
         return line.split[-2]
       end
     end
+    0
   end
 
   def staged?
@@ -61,6 +62,23 @@ module MaziVersion
       end
     end
     false
+  end
+
+  def get_current_branch
+    o = `git status`
+    o.split("\n").each do |line|
+      if line.include? 'On branch'
+        return line.split.last
+        break
+      end
+    end
+    'master'
+  end
+
+  def change_update_branch(branch="master")
+    fetch
+    `cd /root/back-end && git checkout #{branch}`
+    `git checkout #{branch}`
   end
 
   def version_update

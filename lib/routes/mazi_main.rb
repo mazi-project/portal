@@ -416,6 +416,16 @@ module Sinatra
               end
               session[:username] = nil
               redirect '/admin_login'
+            when 'admin_update'
+              unless authorized?
+                MaziLogger.debug "Not authorized"
+                session['error'] = nil
+                redirect "/admin_login?goto=#{index}"
+              end
+              locals[:js] << "js/admin_update.js"
+              locals[:main_body] = :admin_update
+              locals[:local_data][:current_branch] = get_current_branch
+              erb :admin_main, locals: locals
             when 'update'
               return {error: 'No active internet connection.', code: -2}.to_json        if no_internet?
               return {error: 'Staged code exist in the repository.', code: -1}.to_json  if staged?
