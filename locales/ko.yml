@@ -59,6 +59,7 @@ ko:
       offline: 오프라인
       dual: 듀얼
       restricted: 제한됨
+      managed: 관리됨
       active: 활성
       inactive: 비활성
       error: 오류
@@ -132,6 +133,8 @@ ko:
       shutdown-modal-message: MAZI Zone은 종료될 것입니다. 이로 인해 사이트의 도달이 불가능해지며 수동으로 MAZI
         Zone을 다시 시작해야 할 수 있습니다. 계속하시겠습니까?
       reboot-modal-title: 다시 시작하시겠습니까?
+      reboot-modal-message: MAZI Zone은 지금 다시 시작됩니다. 이로 인해 이 사이트는 수분 간 접근이 불가능하므로 기다렸다가
+        수분 뒤 이 페이지를 새로 고쳐 주십시오. 계속하시겠습니까?
     top-menu:
       header: MAZI Zone 관리 패널
       admin: 관리
@@ -171,6 +174,8 @@ ko:
       second-step-message: 날짜/시간 및 MAZI Zone의 시간대를 변경하려면 아래의 양식을 사용해 주십시오.
       third-step-header: 무선 인터페이스 설정
       third-step-message: 와이파이 네트워크의 이름을 변경하려면 아래의 양식을 사용해 주십시오. (선택사항)
+      third-step-warning: '경고: 와이파이 네트워크의 이름을 변경하면 이 MAZI Zone에 대한 무선 연결은 잃게 되므로 새로운
+        와이파이 네트워크로 다시 연결해야 할 수 있습니다.'
       fourth-step-header: MAZI Zone 상세 정보
       fourth-step-message: MAZI Zone의 상세한 사항을 변경하려면 아래의 양식을 사용해 주십시오
       last-step-header: 완료
@@ -246,6 +251,7 @@ ko:
         url-column: URL
         url-hint: 애플리케이션의 URL
         description-column: 설명
+        description-hint: 포털의 애플리케이션 타일에 표시할 설명
         actions-column: 동작
         actions-hint: 애플리케이션에 수행할 수 있는 동작
         web-app-info-hint: 이 애플리케이션을 시작하고 중지하는 일은 MAZI Zone의 성능에 영향을 미치지 않습니다.
@@ -288,6 +294,8 @@ ko:
         domain-hint: 현재 포털 도메인
       popups:
         edit-wifi-header: 와이파이 구성 편집
+        edit-wifi-warning: '경고: 이 와이파이 네트워크의 구성값을 변경하면 MAZI Zone에 대한 무선 연결을 잃게 되며
+          새로운 와이파이 네트워크로 다시 연결해야 할 수 있습니다.'
         edit-wifi-network-header: 와이파이 네트워크 설정 편집
         show-qrcode-header: 와이파이 네트워크 QR 코드
         change-channel-header: 채널 변경
@@ -299,23 +307,37 @@ ko:
         type-wifi-label: 숨은 이름인 경우 아래에 입력하십시오
         type-password-label: 와이파이 네트워크의 비밀번호를 입력하십시오
         change-domain-header: 포털 도메인 편집
+        change-domain-message: '이 동작은 포털의 도메인을 변경합니다. 유효한 도메인인지 확인해 주십시오. (예: 적어도
+          하나의 ''.'' 문자)'
+        change-domain-warning: '경고: 유효하지 않은 도메인을 설정하면 포털에 접근이 불가능합니다. 그러나 이 URL을 통해
+          관리자 패널에 접근할 수 있습니다'
+        toggle-access-point-header: 와이파이 액세스 포인트 장치 토글
+        toggle-access-point-message: 이 동작은 와이파이 액세스 포인트 장치를 변경합니다. 이 동작은 이 포털의 접근을
+          잃게 되며 새로운 와이파이 네트워크에 다시 연결해야 할 수 있습니다. 계속하시겠습니까?
     appearance-page:
       subheader: 보이기
       theme-panel:
         header: 테마 구성
         portal-title-label: 포털 제목
         home-page-label: 홈페이지 제목
+        home-page-hint: 이 값은 포털 홈페이지의 본문 제목을 구성합니다.
+        home-subtitle-label: 홈페이지 부제목
+        home-subtitle-hint: 이 값은 포털 홈페이지의 본문 부제를 구성합니다.
         welcome-message-label: 애플리케이션 환영 메시지
         welcome-message-hint: 이 값은 애플리케이션 페이지의 본문 환경 메시지를 구성합니다.
         background-image-label: 애플리케이션 배경 이미지
         background-image-hint: 이 값은 애플리케이션 페이지를 위한 배경 그림을 구성합니다.
         colors-label: 색
+        side-main-color: 사이드 패널 주요 색상
         side-active-color: 사이드 패널 활동 색
         top-main-color: 최상위 패널 주 색상
+        top-active-color: 상단 패널 활성 색상
         colors-hint: 위의 값들은 포털의 다양한 색을 구성합니다.
       popups:
         edit-theme-header: 테마 편집
         edit-title-header: 제목 편집
+        edit-home-title-header: 홈페이지 제목 편집
+        edit-home-subtitle-header: 홈페이지 부제목 편집
         edit-welcome-message-header: 환영 메시지 편집
         edit-background-image-header: 배경 이미지 편집
         reset-theme-header: 테마 초기화
@@ -326,6 +348,8 @@ ko:
         save-theme-message: 새로운 테마의 이름을 입력해 주십시오.
     devices-page:
       subheader: 장치
+      message: 아래의 도구를 사용하여 이 MAZI Zone에 연결된 다양한 지원 장치(센서, 카메라 등)를 제어할 수 있습니다. 지원되는
+        모든 장치를 볼 수 있습니다
       sensors-panel:
         header: 센서
         header-hint: 이것을 사용하여 다양한 센서를 제어할 수 있습니다.
@@ -369,6 +393,7 @@ ko:
         delete-videos-message: 캡처된 모든 동영상을 삭제하시겠습니까?
     monitoring-page:
       subheader: 모니터링
+      message: 아래의 도구를 사용하여 MAZI zone이 데이터를 수집하고 데이터 수집 서버에 보내는 방식을 제어할 수 있습니다.
       details-panel:
         header: 자세한 사항
         header-hint: 이것을 사용하여 모니터링 기능을 활성화/비활성화할 수 있습니다.
@@ -425,6 +450,8 @@ ko:
         show-application-header: 애플리케이션 모니터링 정보
         show-application-message: 애플리케이션 모니터링 프로세스의 현재 상태
         delete-hardware-header: 시스템 활동 모니터링 데이터 삭제
+        delete-hardware-message: 로컬 데이터베이스에서 모든 시스템 활동 모니터링 데이터를 삭제하려면 아래의 버튼을 사용하십시오.
+          현재 데이터베이스의 엔티티 수는 %{entries}개입니다
         delete-hardware-hint: 이 동작은 완전히 실행되기까지 수초 소요될 수 있으므로 문서가 갱신될 때까지 기다려 주십시오.
         delete-application-header: 애플리케이션 모니터링 데이터 삭제
         delete-application-hint: 이 동작은 완전히 실행되기까지 수초 소요될 수 있으므로 문서가 갱신될 때까지 기다려 주십시오.
@@ -433,6 +460,7 @@ ko:
       notifications-table:
         header1: 상태
         header2: 제목
+        header3: 본문
         header4: 동작
       popups:
         create-notification-title: 새로운 알림 만들기
@@ -440,6 +468,8 @@ ko:
         delete-notification-message: 이 알림은 데이터베이스에서 영구적으로 삭제됩니다. 계속하시겠습니까?
     import-export-page:
       subheader: 스냅샷
+      message: 아래의 도구를 사용하여 이 MAZI Zone의 현재 구성의 스냅샷을 만들 수 있습니다. 여기에는 모든 사항(네트워크 구성,
+        애플리케이션, 애플리케이션 인스턴스, 알림, 시각 구성 등)이 포함됩니다.
       save-snapshot-panel:
         header: 스냅샷 저장
         header-hint: 이것을 사용하여 스냅샷을 저장할 수 있습니다.
@@ -485,6 +515,7 @@ ko:
         subheader3: Raspbian 구성
         paragraph3: pi 사용자의 비밀번호를 변경하려면 $passwd 과정을 수행하고 지시를 따르십시오.
         paragraph5: Raspberry에 성공적으로 로그인하면 rasbian 구성 도구를 시작하십시오
+        paragraph6: 이후 메뉴로 이동
         paragraph7: 파일 시스템의 크기를 변경하여 전체 SD 카드와 용량 사용
         paragraph9: 현재 위치의 로케일
         paragraph10: 현 위치의 시간대
@@ -507,14 +538,20 @@ ko:
         paragraph12: 내 비밀번호 관리
         paragraph13: Nextcloud 인터페이스의 언어를 선택하십시오
         paragraph14: 데스크톱 및 모바일 앱 링크
+        paragraph16: 더 구체적으로 말씀드리면, 넥스트클라우드에서 관리자로 로그인한 후 폴더의 '공유' 패널을 클릭하고 '링크 공유'
+          상자에 체크한 다음 '업로드 및 편집 허용'을 누르십시오. (아래 그림 참고)
+        paragraph19: 다른 애플리케이션에 공유한 넥스트클라우드 폴더에 업로드된 내용을 사용해야 한다면 다음 경로를 통해 파일 접근이
+          가능합니다
       guestbook-tab:
         subheader1: 설명
         subheader2: 관리 가이드
         subheader3: 관리자 비밀번호
         subheader4: 콘텐츠의 다른 뷰
         paragraph3: 관리 비밀번호를 변경하려면 이 경로의 config.js 파일을 여십시오
+        paragraph4: 그 다음에 authPassword에 사용할 비밀번호를 채우십시오.
         paragraph6: 슬라이드쇼 뷰
         paragraph7: 태블릿 뷰
+        paragraph8: MAZI Zone에 연결 시 모든 링크가 동작합니다.
       wordpress-tab:
         subheader1: 설명
         subheader2: 관리 가이드

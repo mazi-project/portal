@@ -1,0 +1,604 @@
+# Messages for French (français)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Friday83260
+# Author: Gomoko
+# Author: Mgaved
+# Author: Wladek92
+---
+fr:
+  general:
+    buttons:
+      edit: Editer
+      cancel: Annuler
+      ok: OK
+      close: Fermer
+      create: Créer
+      delete: Supprimer
+      start: Démarrer
+      stop: Arrêt
+      save: Enregistrer les modifications
+      choose: Choisir
+      choose-timeslot: Choisir un intervalle de temps
+      export-to-csv: Exporter vers un fichier CSV
+      expand: Développer
+      expand-storage: Étendre le stockage
+      reboot: Redémarrer
+      reset: Réinitialiser
+      shutdown: Arrêt
+      logout: Déconnexion
+      update: Mettre à jour
+      connect: Connecter
+      disconnect: Déconnecter
+      toggle-device: Basculer d’appareil
+      initialize: Initialiser
+      remove: Supprimer
+      load: Charger
+      import: Importer
+      export: Exporter
+      refresh: Rafraîchir
+      continue: Continuer
+      next: Suivant
+      previous: Précédent
+      submit: Soumettre
+      change: Modifier
+      qrcode: QRCode
+      show: Afficher
+      configure: Configurer
+    messages:
+      warning: Avertissement
+      welcome: Bienvenue
+      version: Version
+      enable: activer
+      disable: désactiver
+      checked: vérifié
+      on_msg: ACTIF
+      off_msg: INACTIF
+      disconnected: Déconnecté
+      here: ici
+      ssid: SSID
+      channel: Canal
+      password: Mot de passe
+      offline: hors connexion
+      dual: duel
+      restricted: restreint
+      managed: géré
+      active: actif
+      inactive: désactivé
+      error: erreur
+  portal:
+    top-menu:
+      documentation: Documentation
+    side-menu:
+      applications: Applications
+      system: Système
+      sensors: Capteurs
+      camera: Appareil photo
+      monitoring: Supervision
+      devices: Appareils
+    system-page:
+      subheader: Informations système
+      users: Utilisateurs en ligne
+      app-clicks: Clics d’application
+      temperature: Température
+      cpu: Unité centrale
+      ram: Mémoire vive
+      storage: Stockage
+    sensors-page:
+      header: Mesures des capteurs
+      header-message: Sur cette page, vous pouvez voir les mesures des différents
+        capteurs connectés à cette zone MAZI. Vous pouvez aussi utiliser le bouton
+        ci-dessous pour demander des mesures sur une période précise.
+      temperature-for: Température de %{sensor}
+      metrics-for: Mesures de direction, accélération et gyroscope de %{sensor}
+      humidity-for: Humidité de %{sensor}
+      pressure-for: Pression de %{sensor}
+      no-sensors-warn: 'Avertissement : Soit il n’y a aucune mesure dans la base de
+        données, soit aucun appareil de mesure n’est connecté à cette zone MAZI.'
+      no-sensor-data-warn: 'Avertissement : Il n’y a aucune donnée de capteur stockée
+        sur cette zone MAZI. Un administrateur système peut activer la collecte des
+        données des capteurs.'
+      choose-timeslot-message: Veuillez utiliser le formulaire ci-dessous pour sélectionner
+        un créneau horaire.
+      direction: Direction (degrés)
+      acceleration: Accélération (x, y, z)
+      gyroscope: Gyroscope (tangage, lacet, roulis)
+      sensors-hint: Sensehat doit être calibré afin de voir des valeurs valides. Veuillez
+        vérifier le panneau d’administration pour plus de détails.
+    camera-page:
+      header: Appareil photo
+      subheader: Sur cette page, vous pouvez voir les photos et les vidéos prises
+        par l’appareil photo qui est connecté à cette zone MAZI.
+      live-stream-header: Flux vidéo en direct
+      no-camera-warn: Actuellement, il n’y a aucun appareil photo correctement installé
+        dans cette zone MAZI !
+      media-library-header: Bibliothèque de médias
+      no-media-warn: Il n'y a actuellement aucune image ni vidéo dans la bibliothèque
+        !
+    monitoring-page:
+      subheader: Surveillance
+      header-message: Sur cette page, vous pouvez voir les chiffres de diverses mesures
+        de surveillance de cette zone MAZI ou d’autres.
+      popups:
+        device: Appareil
+        devices: Appareils
+        deployment: Déploiement
+        administrator: Administrateur
+        description: Description
+        latitude: Latitude
+        longitude: Longitude
+        system_info: Information système
+        cpu_temp: Température du CPU
+        cpu_load: Charge CPU
+        ram_load: Charge mémoire
+        wifi-users: Utilisateurs WiFi
+        storage_use: Charge de stockage
+        etherpad-pads: Blocs Etherpad
+        etherpad-users: Utilisateurs Etherpad
+        etherpad-datasize: Taille de données Etherpad
+        etherpad-clicks: Clics Etherpad
+        guestbook-submissions: Soumissions au livre d’or
+        guestbook-comments: Commentaires du livre d'or
+        guestbook-images: Images du livre d'or
+        guestbook-datasize: Taille des données du livre d'or
+        guestbook-clicks: Clics sur le livre d’or
+        framadate-polls: Sondages de Framadate
+        framadate-votes: Votes de Framadate
+        framadate-comments: Commentaires de Framadate
+        framadate-clicks: Clics sur Framadate
+        nextcloud-users: Utilisateurs de Nextcloud
+        nextcloud-files: Fichiers de Nextcloud
+        nextcloud-downloads: Téléchargements sur Nextcloud
+        nextcloud-datasize: Taille de données de NextCloud
+        nextcloud-clicks: Clics sur Nextcloud
+  admin:
+    general:
+      admin-panel: Le panneau d’administration de la zone MAZI
+      shutdown-modal-title: Arrêter ?
+      shutdown-modal-message: La zone MAZI va s’arrêter maintenant, cela rendra ce
+        site inaccessible, et vous devrez redémarrer manuellement cette zone MAZI.
+        Continuer ?
+      reboot-modal-title: Redémarrer ?
+      reboot-modal-message: La zone MAZI va maintenant redémarrer, cela rendra ce
+        site inaccessible pendant quelques minutes, veuillez attendre et rafraîchir
+        cette page dans quelques minutes. Continuer ?
+    top-menu:
+      header: Panneau d’administration de la zone MAZI
+      admin: Administrateur
+      portal: Portail
+      set-date: Mettre à jour la date
+      username: Nom d’utilisateur
+      password: Mot de passe
+      mysql-password: Mot de passe de MySQL
+      check-updates: Vérifier les mises à jour
+      settings: Paramètres
+    side-menu:
+      dashboard: Tableau de bord
+      applications: Applications
+      networking: Réseau
+      appearance: Apparence
+      devices: Appareils
+      monitoring: Surveillance
+      notifications: Notifications
+      export-import: Exporter/Importer
+      logs: Journaux
+      documentation: Documentation
+    updates:
+      checking-updates: Recherche des mises à jour. Veuillez attendre...
+      alert-message-1: Votre dépôt local a été modifié. Cela provoque un mauvais fonctionnement
+        de la fonction de mise à jour. Veuillez annuler ces modifications dans le
+        dépôt local, en utilisant %{command} sur les fichiers modifiés.
+      update-message-1: Il n’y a pas de connexion active à Internet. Veuillez connecter
+        cette zone MAZI à Internet et réessayer.
+      update-message-2: Ce portail s’exécute en mode Démo ! Cette action aurait démarré
+        un processus de mise à jour.
+      update-message-3: Le portail est à jour, il n’y a pas besoin de mise à jour.
+      update-message-4: Le système est en cours de mise à jour. Veuillez patienter…
+      update-message-5: Le processus de mise à jour est quasiment terminé. Votre zone
+        MAZI sera redémarrée pour installer les dépendances manquantes. Dès que vous
+        verrez de nouveau votre réseau WiFi, vous serez prêt à vous connecter à votre
+        zone MAZI mise à jour.
+      update-message-6: Il y a une mise à jour disponible. Veuillez utiliser le bouton
+        ci-dessous pour démarrer le processus de mise à jour.
+      update-hint: 'Conseil : si vous rencontrez un comportement défectueux, redémarrez
+        votre appareil.'
+    setup-page:
+      tog-nav: Basculer la navigation
+      setup-panel: Panneau de paramétrage de la zone MAZI
+      first-step-header: Paramétrage du mot de passe d’administration
+      first-step-message: Utiliser le formulaire ci-dessous pour définir le mot de
+        passe d’administration du panneau d’administration de la zone MAZI.
+      first-step-hint: 'conseil : si c’est une nouvelle zone MAZI, le mot de passe
+        actuel est 1234'
+      second-step-header: Initialiser Date/Heure
+      second-step-message: Veuillez utiliser le formulaire ci-dessous pour modifier
+        la Date/Heure, ainsi que le fuseau horaire de cette zone MAZI.
+      third-step-header: Paramétrage de l’interface sans fil
+      third-step-message: Veuillez utiliser le formulaire ci-dessous pour modifier
+        le nom du réseau Wi-Fi (facultatif).
+      third-step-warning: 'Avertissement : Si vous modifiez le nom de votre réseau
+        Wi-Fi, votre connexion sans fil à cette zone MAZI sera perdue et vous devrez
+        le reconnecter au nouveau réseau Wi-Fi.'
+      fourth-step-header: Détails de la zone MAZI
+      fourth-step-message: Veuillez utiliser le formulaire ci-dessous pour modifier
+        les détails de votre zone MAZI
+      fourth-step-warning: 'Conseil : Vous pouvez utiliser les cartes Google pour
+        trouver votre emplacement (lat, long) avec clic-droit -> Qu’y a-t-il ici.
+        Puis utilisez les coordonnées dans la boîte qui apparaît en vas de l’écran
+        (ex. 39.379012, 22.902813)'
+      last-step-header: Terminer
+      last-step-message: Vous avez bien terminé toutes les étapes de configuration.
+        Veuillez cliquer sur le bouton Soumettre pour enregistrer les modifications.
+    dashboard-page:
+      subheader: Tableau de bord
+      welcome:
+        message-1: '%{panel} est l’outil principal, utilisé pour gérer ce portail
+          de la zone MAZI aussi bien que l’aspect réseau de cette zone MAZI.'
+        message-2: 'Veuillez utiliser le menu pour naviguer entre les différents outils,
+          qui peuvent :'
+        message-list-1: Gérer les applications supportées
+        message-list-2: Configurer le réseau de la zone MAZI
+        message-list-3: Configurer la représentation visuelle du portail
+        message-list-4: Ajouter/supprimer des notifications sur le portail
+        message-list-5: Exporter/importer des instantanés
+      hardware-info:
+        header: Information sur le matériel de la zone MAZI
+        system-temperature: Température du système
+        cpu-load: Charge du CPU
+        ram-load: Occupation mémoire vive
+        storage-load: Charge du stockage
+      networking:
+        header: Réseau
+        users-online: Utilisateurs actuellement connectés
+        wifi-info: Informations sur le réseau Wi-Fi
+      applications:
+        header: Applications
+        applications-installed: Applications installées
+      traffic:
+        header: Trafic
+        reset-application-clicks: Réinitialiser les clics d’application
+        reset-visits: Réinitialiser les visites
+        portal-visits: Visites d’ensemble du portail
+        application-visits: Visites d’application
+      notifications:
+        header: Notifications
+        notifications: Notifications actives du portail
+      time-date:
+        header: Date/Heure de la zone MAZI
+        current: Date/Heure actuelles
+      version:
+        header: Version de la zone MAZI
+        version-message-1: Ce portail est
+        version-message-2: validations derrière.
+        up-to-date: À jour
+      popups:
+        expand-storage-message: Vous pouvez étendre le stockage de la zone MAZI jusqu’à
+          la capacité maximale de votre carte SD en utilisant le bouton ci-dessous.
+          Vous devrez redémarrer l’appareil pour que cela prenne effet.
+    applications-page:
+      subheader: Applications
+      instances-menu:
+        header: Instances d’application
+        active-column: Actif
+        active-hint: basculer la visibilité de l’application sur le portail
+        splash-page-column: Page d’accueil
+        splash-page-hint: utiliser cette application comme page d’accueil du portail
+        name-column: Nom
+        name-hint: le nom de l'application
+        url-column: URL
+        url-hint: l’URL de l’application
+        description-column: Description
+        description-hint: la description qui sera affichée sur la brique de l’application
+          dans le portail
+        parent-column: Application parent
+        parent-hint: l'application parent
+        click-column: Compteur de clics
+        click-hint: clics totaux pour l’application
+        actions-column: Actions
+        actions-hint: actions pouvant être réalisées par l'application
+        guestbook-admin-hint: Panneau d’administration du livre d’or
+        delete-instance-hint: Supprimer l'instance de l'application
+        create-instance-hint: Créer une nouvelle instance de l'application
+        edit-instance-hint: Modifier l’instance de l’application
+      applications-menu:
+        header: Applications installées
+        status-column: État
+        status-hint: l’état opérationnel du portail (démarré/arrêté)
+        icon-column: Icône
+        icon-hint: l'icône par défaut de l'application
+        color-column: Couleur
+        color-hint: la couleur par défaut de l’application
+        name-column: Nom de l’application
+        name-hint: le nom de l'application
+        url-column: URL
+        url-hint: l'URL de l'application
+        description-column: Description
+        description-hint: la description qui sera affichée sur la brique de l’application
+          sur le portail
+        actions-column: Actions
+        actions-hint: actions pouvant être realisées par l'application
+        web-app-info-hint: Démarrer/Arrêter cette application n’affectera pas la performance
+          de votre zone MAZI.
+        web-app-start-hint: C’est une application web, elle fonctionne toujours.
+        app-start-hint: Démarrer l’application
+        app-stop-hint: Arrêter l'application
+      popups:
+        delete-application-title: Supprimer l’instance de l’application ?
+        delete-application-message: Cette instance d’application sera supprimée de
+          façon permanente de la base de données. Voulez-vous continuer ?
+        delete-application-hint: Vous devez supprimer toutes les instances d’application
+          qui sont connectées à cette application avant de pouvoir supprimer cette
+          dernière.
+        edit-application-title: Modifier l’instance d’application ?
+        create-application-title: Créer une nouvelle instance d’application
+        create-application-help: 'Aide : Certaines applications ne peuvent pas avoir
+          plusieurs instances pour le moment, c’est la raison pour laquelle certaines
+          peuvent être absentes.'
+        web-app-info-title: Application Web
+        web-app-info-message: C’est une application web, donc démarrer/arrêter cette
+          application n’affectera pas la performance de votre zone MAZI.
+    network-page:
+      subheader: Paramètres réseau
+      wifi-ap-interface-panel:
+        header: Paramètres réseau du point d’accès Wi-Fi pour %{interface}
+        ssid-name-label: Nom du réseau Wi-Fi (SSID)
+        ssid-name-description: L’Identifiant de l’Ensemble de Service (SSID) est le
+          nom affecté à un réseau Wi-Fi (sans fil). Tous les appareils dans le réseau
+          doivent utiliser ce nom sensible à la casse pour communiquer sur le Wi-Fi,
+          ce nom étant une chaîne de texte faisant jusqu’à 32 octets. Veuillez appuyer
+          sur le bouton de modification ci-dessous pour le modifier.
+        wifi-channel-label: Canal du réseau Wi-Fi
+        wifi-channel-description: Choisir le meilleur canal Wi-Fi dans votre zone
+          MAZI aide à réduire les interférences et améliore votre signal Wi-Fi. Veuillez
+          appuyer sur le bouton de modification ci-dessous pour le modifier.
+        wifi-password-label: Mot de passe du réseau Wi-Fi
+        wifi-password-description: Le mot de passe d’authentification pour le réseau
+          Wi-Fi (sans fil). Il doit faire au moins 8 caractères de long. S’il est
+          laissé vide, la sécurité du réseau Wi-Fi sera désactivée. Veuillez appuyer
+          sur le bouton de modification ci-dessous pour le modifier.
+      unconfigured-dongle-panel:
+        message: Cette interface réseau n’a pas encore été configurée. Veuillez utiliser
+          le bouton ci-dessous, pour la configurer convenablement.
+      internet-panel:
+        header: Mode réseau internet
+        mode-hint: Mode du réseau Wi-Fi
+      connect-wifi-panel:
+        header: Se connecter au Wi-Fi pour l’accès Internet
+        wifi-network-hint-1: des réseaux Wi-Fi
+        wifi-network-hint-2: Réseau internet Wi-Fi
+        usb-dongle-message: Veuillez insérer un dongle supplémentaire USB Wi-Fi à
+          votre Raspberry pi pour activer cette fonctionnalité. Dongles USB suggérés
+      access-point-panel:
+        header: Ajouter un routeur comme point d'accès
+        current-hint: Point d'accès Wi-Fi en cours d'utilisation
+        router-message: L'interface Wi-Fi de Raspberry est en cours d'utilisation.
+          Vous pouvez insérer un routeur OpenWRT dans votre Raspberry pi et déplacer
+          le point d'accès là-bas. Appareils suggérés
+      portal-domain-panel:
+        header: Domaine du portail
+        domain-hint: Domaine du portail courant
+      popups:
+        edit-wifi-header: Modifier la configuration Wi-Fi
+        edit-wifi-warning: 'Avertissement : Si vous modifiez une valeur de la configuration
+          pour ce réseau Wi-Fi, votre connexion sans fil à cette zone MAZI sera perdue
+          et vous devrez essayer de vous reconnecter au nouveau réseau Wi-Fi.'
+        edit-wifi-network-header: Modifier les paramètres de réseau Wi-Fi
+        show-qrcode-header: QRCode du réseau Wi-Fi
+        change-channel-header: Modifier le canal
+        change-password-header: Changer le mot de passe
+        change-mode-header: Changer le mode
+        change-mode-message: Utiliser le formulaire ci-dessous pour choisir le mode
+          réseau pour cette zone MAZI. Si vous voulez choisir le mode dual, assurez-vous
+          d’avoir accès à Internet (soit via un câble ethernet, soit via un dongle
+          Wi-Fi).
+        connect-wifi-header: Se connecter au réseau Wi-Fi
+        select-wifi-label: Sélectionner le nom du Wi-Fi
+        select-mesh-mode-label: Sélectionner le mode Mesh
+        type-wifi-label: Ou entrez le ici s'il est caché
+        type-password-label: Saisir le mot de passe du réseau Wi-Fi
+        change-domain-header: Modifier le domaine du portail
+        change-domain-message: Cette action modifiera le domaine du portail. Assurez-vous
+          que c’est un domaine valide (par ex. au moins un caractère '.').
+        change-domain-warning: 'Avertissement : Si vous mettez un domaine non valide,
+          le portail sera inatteignable. Toutefois, vous pouvez accéder au panneau
+          d’administration via cette URL'
+        toggle-access-point-header: Basculer l’appareil de point d’accès du Wi-Fi
+        toggle-access-point-message: Cette action changera l’appareil de point d’accès
+          du Wi-Fi. Cette action vous fera perdre l’accès à ce portail, et vous devrez
+          vous reconnecter au nouveau réseau Wi-Fi. Êtes-vous sûr de vouloir continuer ?
+    appearance-page:
+      subheader: Aspect
+      theme-panel:
+        header: Configurations de thème
+        portal-title-label: Titre du portail
+        portal-title-hint: Cette valeur configure à la fois le titre dans le coin
+          en haut à gauche, et le titre de l’entête HTML.
+        home-page-label: Titre de la page d’accueil
+        home-page-hint: Cette valeur configure le titre du corps de la page d'accueil
+          des portails.
+        home-subtitle-label: Sous-titre de la page d’accueil
+        home-subtitle-hint: Cette valeur configure le sous-titre du corps de page
+          pour la page d’accueil des portails.
+        welcome-message-label: Message d'accueil de l'application
+        welcome-message-hint: Cette valeur configure le message de bienvenue du corps
+          de la page pour la page des applications.
+        background-image-label: Image de fond de l'application
+        background-image-hint: Cette valeur configure l’image de fond de la page des
+          applications.
+        colors-label: Couleurs
+        side-main-color: Couleur principale du panneau latéral
+        side-active-color: Couleur active du panneau latéral
+        top-main-color: Couleur principale du panneau supérieur
+        top-active-color: Couleur active du bandeau supérieur
+        colors-hint: Les valeurs ci-dessus configurent les différentes couleurs du
+          portail.
+      popups:
+        edit-theme-header: Modifier le thème
+        edit-title-header: Modifier le titre
+        edit-home-title-header: Modifier le titre de la page d’accueil
+        edit-home-subtitle-header: Modifier le sous-titre de la page d’accueil
+        edit-welcome-message-header: Modifier le message de bienvenue
+        edit-background-image-header: Modifier l’image de fond
+        reset-theme-header: Réinitialiser le thème
+        reset-theme-message: Cette action réinitialisera toutes les configurations
+          visuelles aux valeurs par défaut.
+        load-theme-header: Charger le thème
+        load-theme-message: Charger un des fichiers de configuration suivante
+        save-theme-header: Sauvegarder le thème
+        save-theme-message: Veuillez saisir le nom du nouveau thème.
+    devices-page:
+      subheader: Appareils
+      message: Vous pouvez utiliser les outils ci-dessous pour contrôler les différents
+        appareils supportés et connectés dans cette zone MAZI (capteurs, appareils
+        photo, etc). Vous pourrez trouver tous les appareils supportés
+      sensors-panel:
+        header: Capteurs
+        header-hint: Vous pouvez utiliser cela pour contrôler différents capteurs.
+        toggle-sensors-message: Activer/désactiver l'onglet des capteurs sur le portail
+          utilisateur
+        toggle-sensors-hint: activer/désactiver l’onglet des capteurs des portails
+        sensors-table:
+          type: Type
+          status: État
+          entries: Entrées
+          actions: Actions
+          start-button-hint: Démarrer l’enregistrement des mesures
+          delete-button-hint: Supprimer toutes les mesures enregistrées
+          sensehat-calibration-hint: Si vous voulez calibrer votre sensehat, veuillez
+            suivre la section calibration de ce tutoriel
+        no-sensors-message: Impossible de trouver un capteur connecté à cette zone
+          MAZI.
+        init-button-hint: Démarrer l'initialisation des capteurs
+      popups:
+        start-sensing-title: Démarrer les mesures des capteurs
+        start-sensing-label1: Serveur cible
+        start-sensing-label3: Calendrier (heure/date de fin)
+        delete-images-message: Voulez-vous supprimer toutes les photos prises ?
+    monitoring-page:
+      details-panel:
+        header: Détails
+        header-hint: Vous pouvez utiliser cela pour activer/désactiver la fonctionalité
+          d'observation.
+        table-label1: Déploiement
+        table-label2: Administrateur
+        table-label3: Titre
+        table-label4: Description
+      statistics-panel:
+        statistics-table:
+          description: Description
+          action: Action
+          hardware-description-message: Observer l'activité du système.
+          application-description-message: Observer les données de l'application.
+          no-hardware-tasks-message: Aucune tâche de surveillance de l'activité système
+            en cours.
+          start-hardware-task-hint: Commencer l'activité de monitoring du système
+          start-application-task-hint: Démarrer l'observation de l'application
+          stop-application-task-hint: Arrêter l'observation de l'application
+      popups:
+        change-details-header: Modifier les détails de l'observation
+        change-details-label2: Administrateur
+        change-details-label3: Titre
+        change-details-label4: Description
+        hardware-label1: Serveur cible
+        hardware-label2: Température
+        hardware-label3: Utilisateurs wifi
+        hardware-label4: Charge CPU
+        application-label1: Serveur cible
+        application-label2: Application Etherpad
+        application-label3: Application du livre d'or
+        application-label5: Application Nextcloud
+        start-hardware-message: Utilisez le formulaire ci-dessous pour commencer à
+          envoyer des données de surveillance d'activité système
+        start-application-header: Démarrer données de gestion d'application
+        show-hardware-header: Information de surveillance d'activité système
+        delete-application-header: Supprimer les données d'observation de l'application
+    notifications-page:
+      notifications-table:
+        header1: État
+        header2: Titre
+        header3: Corps
+      popups:
+        edit-notification-title: Notification de modification
+        delete-notification-message: Cette notification sera effacée de façon permanente
+          de la base de données. Voulez-vous continuer ?
+    import-export-page:
+      subheader: Captures
+      message: Vous pouvez utiliser les outils ci-dessous pour faire une saisie d'écran
+        de la configuration actuelle de cette zone MAZI. Cela inclut tout (configurations
+        réseau, instances d'applications, notifications, configuration visuelles,
+        etc.).
+      save-snapshot-panel:
+        header: Sauvegarder la capture
+        form-placeholder: Nom de la capture d'écran
+      load-snapshot-panel:
+        no-snapshots-message: Aucune capture sauvegardée actuellement.
+      import-export-panel:
+        message: Sélectionnez une capture et cliquez sur charger.
+      application-snapshots-header: Captures de l'application
+      interview-panel:
+        form-placeholder: Nom de la capture d'écran
+      guestbook-panel:
+        form-placeholder: Nom de la capture
+      popups:
+        import-header: Importer une capture
+    logs-page:
+      portal-log-panel:
+        filter-label1: Messages d’erreur
+        filter-label3: Messages de debogue
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: Description
+        subheader2: Se connecter via ssh
+        paragraph1: Voici le guide de documentation administrateur pour le portail
+          MAZI Zone. Utilisez les onglets ci-dessus pour naviguer entre les différentes
+          sections de la documentation. L'onglet actuel décrit les différentes actions
+          dont un administrateur pourrait avoir besoin, afin de configurer le Raspberry
+          Pi. Alors que tous les autres onglets apportent des informations concernant
+          l'administration des applications supportées.
+        paragraph3: Si vous voulez changer le mot de passe pour l'utilisateur Pi,
+          faîtes $passwd et suivez les instructions.
+        paragraph9: la locale correspondant à votre situation géographique
+      etherpad-tab:
+        subheader2: Guide de l'administration
+        paragraph6: Etherpad fonctionne bien lorsqu'il y a un quelqu'un qui « nettoie
+          » le texte de temps en temps et s'il existe des pages d'« index » convenables
+          qui organisent les différents tampons disponibles.
+      nextcloud-tab:
+        subheader1: Description
+        paragraph1: Nextcloud est un serveur privé de synchronisation et partage de
+          fichiers. Il est totalement open-source et vous pouvez l'héberger vous-même
+          ou payer une compagnie pour le faire à votre place. De cette manière, vous
+          avez le contrôle sur vos photos, votre calendrier et données de contacts,
+          vos documents et tout le reste.
+        paragraph2: Vous trouverez une page administrateur sur
+        paragraph6: Certaines des fonctionnalités que vous allez voir incluent ce
+          qui suit
+        paragraph12: Gérez votre mot de passe
+        paragraph14: Liens vers le poste de travail et les applications mobiles
+        paragraph17: Le lien qui apparaît entre ces deux cases à cocher peut désormais
+          être collé à l'URL d'une nouvelle application au
+      guestbook-tab:
+        subheader3: Mot de passe administrateur
+        paragraph4: puis remplissez le champ « authPassword » avec le mot de passe
+          de votre choix.
+      wordpress-tab:
+        paragraph2: 'Remplissez les informations : donnez à votre site un titre, créez
+          un nom d''utilisateur et un mot de passe, et entrez votre adresse e-mail.
+          Cliquez sur le bouton « Install WordPress », puis connectez vous en utilisant
+          le compte que vous venez de créer.'
+      framadate-tab:
+        paragraph1: Framadate est une application gratuite et open-source comme Doodle.
+          Il est facile de créer un rendez-vous ou un sondage sans enregistrement
+          pour inviter vos collaborateurs
+        paragraph2: Voici comment cela fonctionne
+    settings-page:
+      subheader: Paramètres
+      panel-header: Paramètres système
+      time-date:
+        header: Heure/Jour
+      apache-filesize:
+        header: Taille maxiamle des fichiers Apache
+      popups:
+        change-time-date-title: Changer heure et date
+        change-mysql-password-title: Changer le mot de passe de MySQL
+...

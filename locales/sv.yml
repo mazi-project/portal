@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Bengtsson96
+# Author: Mgaved
 # Author: WikiPhoenix
 ---
 sv:
@@ -17,6 +18,7 @@ sv:
       stop: Stoppa
       save: Spara ändringar
       choose: Välj
+      choose-timeslot: Välj en tidslucka
       export-to-csv: Exportera till CSV-fil
       expand: Expandera
       expand-storage: Expandera lagring
@@ -48,6 +50,7 @@ sv:
       version: Version
       enable: aktivera
       disable: inaktivera
+      checked: kontrolleras
       on_msg: PÅ
       off_msg: AV
       disconnected: Frånkopplad
@@ -75,6 +78,7 @@ sv:
     system-page:
       subheader: Systeminfo
       users: Inloggade användare
+      app-clicks: Applikationsklick
       temperature: Temperatur
       cpu: CPU
       ram: RAM
@@ -95,6 +99,7 @@ sv:
       choose-timeslot-message: Använd formuläret nedan för att välja en tidsperiod.
       direction: Riktning (grader)
       acceleration: Acceleration (x, y, z)
+      gyroscope: Gyroskop (lutning, gir, rullning)
     camera-page:
       header: Kamera
       subheader: På den här sidan kan du se foton och videor tagna av kameran som
@@ -105,6 +110,7 @@ sv:
       media-library-header: Mediabibliotek
       no-media-warn: Det finns inga bilder eller videor i biblioteket för tillfället!
     monitoring-page:
+      subheader: Övervakar
       popups:
         device: Enhet
         devices: Enheter
@@ -158,24 +164,33 @@ sv:
       networking: Nätverk
       appearance: Utseende
       devices: Enheter
+      monitoring: Övervakar
       notifications: Aviseringar
       export-import: Exportera/importera
       logs: Loggar
       documentation: Dokumentation
     updates:
       checking-updates: Söker efter uppdateringar. Var god vänta...
+      update-message-3: Portalen är uppdaterad, den behöver inte uppdateras.
       update-message-4: Systemet uppdateras. Var god vänta...
     setup-page:
+      tog-nav: Slå på/av navigering
+      fourth-step-header: MAZI Zone-detaljer
       last-step-header: Slutfört
     dashboard-page:
       subheader: Kontrollpanel
       welcome:
         message-list-2: Konfigurera MAZI-zonenätverket
+        message-list-4: Lägg till/ta bort aviseringar på portalen
+        message-list-5: Exportera/importera ögonblicksbilder
       hardware-info:
         system-temperature: Systemtemperatur
         cpu-load: Processoranvändning
         ram-load: Användning av arbetsminne
         storage-load: Minnesbelastning
+      networking:
+        users-online: Användare som är anslutna nu
+        wifi-info: WiFi-nätverksinfo
       applications:
         header: Applikationer
         applications-installed: Installerade applikationer
@@ -185,23 +200,38 @@ sv:
         application-visits: Applikationsbesök
       notifications:
         header: Aviseringar
+        notifications: Aktiva portalaviseringar
       time-date:
         current: Nuvarande tid och datum
       version:
+        version-message-1: Denna portal är
         up-to-date: Uppdaterad
     applications-page:
       subheader: Applikationer
       instances-menu:
+        header: Applikationsinstanser
         active-column: Aktiv
+        active-hint: slå på/av applikationens synlighet på portalen
         splash-page-column: Startsida
         name-column: Namn
         name-hint: Applikationens namn
         url-column: Webbadress
         url-hint: Applikationens webbadress
         description-column: Beskrivning
+        description-hint: beskrivningen som kommer visas i applikationens ruta på
+          portalen
+        parent-column: Överordnad applikation
+        parent-hint: den överordnade applikationen
+        click-column: Klickräknare
         actions-column: Åtgärder
+        guestbook-admin-hint: Gästbokens administrationspanel
+        delete-instance-hint: Radera instans av en applikation
+        create-instance-hint: Skapa ny instans av en applikation
+        edit-instance-hint: Redigera instans av en applikation
       applications-menu:
+        header: Installerade applikationer
         status-column: Status
+        status-hint: portalens driftstatus (igång / stoppad)
         icon-column: Ikon
         icon-hint: Applikationens standardikon
         color-column: Färg
@@ -211,28 +241,63 @@ sv:
         url-column: Webbadress
         url-hint: Applikationens webbadress
         description-column: Beskrivning
+        description-hint: beskrivningen som kommer visas i applikationens ruta på
+          portalen
         actions-column: Åtgärder
+        web-app-info-hint: Att starta eller stoppa den här applikationen kommer inte
+          påverka MAZI-zonens prestanda.
         web-app-start-hint: Detta är en webbapplikation, den kommer köras hela tiden.
         app-start-hint: Starta applikation
         app-stop-hint: Stoppa applikationen
       popups:
+        delete-application-title: Vill du radera en instans av applikationen?
+        delete-application-message: Applikationen kommer raderas oåterkalleligen från
+          databasen. Vill du fortsätta?
+        edit-application-title: Redigera applikationsinstans?
+        create-application-title: Skapa ny applikationsinstans
+        create-application-help: 'Hjälp: Vissa applikationer kan inte ha flera instanser
+          för tillfället, detta är anledningen varför vissa av dem kanske saknas.'
         web-app-info-title: Webbapplikation
     network-page:
       subheader: Nätverksinställningar
       wifi-ap-interface-panel:
         ssid-name-label: Det trådlösa nätverkets namn (SSID)
+        wifi-channel-label: Kanal för WiFi-nätverket
         wifi-password-label: Lösenord för det trådlösa nätverket
+      unconfigured-dongle-panel:
+        message: Detta nätverksgränssnitt har ännu inte konfigurerats. Använd knappen
+          nedan för att konfigurera det ordentligt.
+      internet-panel:
+        header: Internetnätverksläge
+        mode-hint: Läge för WiFi-nätverket
       connect-wifi-panel:
+        header: Anslut till ett trådlöst nätverk för att få Internetåtkomst
+        wifi-network-hint-1: från trådlösa nätverk
         wifi-network-hint-2: Trådlöst nätverk med Internetåtkomst
+        usb-dongle-message: Anslut ytterligare en trådlös nätverks-dångel via USB
+          för att möjliggöra den här funktionen. Föreslagna dånglar
+      access-point-panel:
+        header: Lägg till router som accesspunkt
+        current-hint: Trådlös accesspunkt används
+      portal-domain-panel:
+        header: Portaldomän
+        domain-hint: Nuvarande portaldomän
       popups:
         edit-wifi-header: Redigera inställningar för trådlöst nätverk
+        edit-wifi-network-header: Redigera inställningar för trådlöst nätverk
+        show-qrcode-header: QR-kod för trådlöst nätverk
         change-channel-header: Byt kanal
         change-password-header: Byt lösenord
         change-mode-header: Ändra läge
         connect-wifi-header: Anslut till trådlöst nätverk
+        select-wifi-label: Välj WiFi-namn
+        type-wifi-label: Eller skriv det här om det är dolt
+        type-password-label: Ange lösenordet till det trådlösa nätverket
+        change-domain-header: Redigera portaldomän
     appearance-page:
       subheader: Utseende
       theme-panel:
+        header: Temakonfigurationer
         portal-title-label: Portal-titel
         home-page-label: Hemsidans titel
         home-subtitle-label: Hemsidans underrubrik
@@ -259,6 +324,7 @@ sv:
       sensors-panel:
         header: Sensorer
         header-hint: Du kan använda detta för att styra diverse sensorer.
+        toggle-sensors-message: Aktivera/inaktivera sensorfliken på användarportalen
         sensors-table:
           type: Typ
           status: Status
@@ -269,15 +335,18 @@ sv:
       camera-panel:
         header: Kamera
         header-hint: Du kan använda detta för att styra kameran.
+        toggle-camera-hint: aktivera/inaktivera portalens kameraflik
       popups:
         start-sensing-label1: Målserver
         start-sensing-label2: Varaktighet (sekunder)
+        start-sensing-label3: Kalender (sluttid/-datum)
         start-sensing-label4: Intervall (sekunder)
         delete-sensing-message: Vill du radera samtliga sparade mätvärden?
         start-images-label1: Varaktighet (sekunder)
         start-images-label2: Intervall (sekunder)
         delete-images-title: Radera alla foton
         start-videos-label1: Varaktighet (sekunder)
+        delete-videos-title: Radera alla videor
     monitoring-page:
       details-panel:
         header: Detaljer
@@ -304,6 +373,7 @@ sv:
         hardware-label5: Arbetsminnesbelastning
         hardware-label6: Minnesbelastning
         application-label1: Målserver
+        application-label2: Etherpad-applikation
         application-label3: Gästboksapplikation
         application-label4: Framadate-applikation
         application-label5: Nextcloud-applikation
@@ -319,10 +389,55 @@ sv:
         edit-notification-title: Redigera avisering
         delete-notification-message: Notifikationen kommer raderas permanent från
           databasen. Vill du fortsätta?
+    import-export-page:
+      subheader: Ögonblicksbilder
+      message: Du kan använda verktygen nedan för att ta ögonblicksbilder av nuvarande
+        konfiguration av denna MAZI Zone. Detta inkluderar allting (nätverkskonfigurationer,
+        applikationer, applikationsinstanser, aviseringar, visuella konfigurationer,
+        etc).
+      warning: 'Varning: Om du läser in en ny ögonblicksbild med andra WiFi-nätverksinställningar
+        kommer din trådlösa anslutning till denna MAZI Zone förloras och du måste
+        återansluta till det nya WiFi-nätverket.'
+      save-snapshot-panel:
+        header: Spara ögonblicksbild
+        header-hint: Du kan använda detta för att ta en ögonblicksbild
+        form-placeholder: Namn på ögonblicksbild
+        form-hint: Ange namnet på den nya ögonblicksbilden.
+      load-snapshot-panel:
+        header: Läs in ögonblicksbild
+        header-hint: Du kan använda detta för att läsa in en ögonblicksbild.
+        message: Välj en ögonblicksbild och klicka på läs in. MAZI-portalen kommer
+          att starta om.
+        no-snapshots-message: Det finns inga sparade ögonblicksbilder.
+      import-export-panel:
+        header: Importera/exportera ögonblicksbild
+        header-hint: Du kan använda detta för att exportera en ögonblicksbild för
+          att exportera en ögonblicksbild till en ZIP-fil. Eller importera en ZIP-fil
+          som en ögonblicksbild.
+        message: Välj en ögonblicksbild och klicka på läs in.
+        no-snapshots-message: Det finns för tillfället inga sparade ögonblicksbilder.
+      application-snapshots-header: Ögonblicksbilder för applikation
+      application-snapshots-message: Använd panelerna nedan för att importera/exportera
+        ögonblicksbilder för applikationer som stöds av denna MAZI Zone.
+      interview-panel:
+        header-hint: Du kan använda detta för att importera/exportera en ögonblicksbild
+        form-placeholder: Namn på ögonblicksbild
+      guestbook-panel:
+        header-hint: Du kan använda detta för att importera/exportera en ögonblicksbild.
+        form-placeholder: Namn på ögonblicksbild
+      popups:
+        import-header: Importera ögonblicksbild
+        import-interview-header: Importera ögonblicksbild för intervju
+        import-guestbook-header: Importera ögonblicksbild för gästbok.
+        import-etherpad-header: Importera ögonblicksbild för Etherpad
     logs-page:
+      subheader: Loggvy
       portal-log-panel:
         filter-label1: Felmeddelanden
+        filter-label2: Varningsmeddelanden
+        filter-label3: Felsökningsmeddelanden
     documentation-page:
+      header: Administratörsdokumentation
       initial-configuration-tab:
         subheader1: Beskrivning
         subheader2: Ansluter över SSH
@@ -336,8 +451,13 @@ sv:
       nextcloud-tab:
         subheader1: Beskrivning
         subheader3: Användbara tips
+        paragraph3: För att komma åt dina personliga inställningar
+        paragraph8: Hantera din profilbild
         paragraph10: E-postadress
+        paragraph11: Lista dina gruppmedlemskap
         paragraph12: Hantera ditt lösenord
+        paragraph13: Välj språket för ditt Nextcloud-gränsnitt
+        paragraph14: Länkar till dator- och mobilappar
       guestbook-tab:
         subheader1: Beskrivning
         subheader2: Administrationsguide
@@ -348,6 +468,9 @@ sv:
         subheader1: Beskrivning
         paragraph2: Så här fungerar det
         paragraph3: Skapa en enkät
+        paragraph4: Bestäm datum eller ämnen att välja
+        paragraph5: Skicka enkätlänken till dina vänner eller kollegor
+        paragraph6: Diskutera och gör dina val
     settings-page:
       subheader: Inställningar
       panel-header: Systeminställningar

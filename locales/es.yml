@@ -115,7 +115,7 @@ es:
         ram-load: Carga de RAM
         storage-load: Carga de almacenamiento
       networking:
-        wifi-info: Red de Wi-Fi Info
+        wifi-info: Información de la red wifi
       applications:
         header: Aplicaciones
         applications-installed: Aplicaciones instaladas

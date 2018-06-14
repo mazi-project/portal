@@ -1,0 +1,208 @@
+# Messages for Luxembourgish (Lëtzebuergesch)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Robby
+---
+lb:
+  general:
+    buttons:
+      edit: Änneren
+      cancel: Ofbriechen
+      ok: OK
+      close: Zoumaachen
+      create: Uleeën
+      delete: Läschen
+      start: Ufank
+      stop: Stopp
+      save: Ännerunge späicheren
+      choose: Eraussichen
+      export-to-csv: Als CSV Fichier exportéieren
+      expand: Opklappen
+      reboot: Nei starten
+      reset: Zrécksetzen
+      shutdown: Eroffueren
+      logout: Ausloggen
+      update: Aktualiséieren
+      connect: Verbannen
+      toggle-device: Apparat wiesselen
+      initialize: Initialiséieren
+      remove: Ewechhuelen
+      load: Lueden
+      export: Export
+      refresh: Aktualiséieren
+      continue: Virufueren
+      next: Weider
+      previous: Vireg
+      change: Änneren
+      qrcode: QR-Code
+      show: Weisen
+      configure: Astellen
+    messages:
+      warning: Warnung
+      welcome: Wëllkomm
+      version: Versioun
+      enable: aktivéieren
+      disable: ausschalten
+      checked: nogekuckt
+      on_msg: UN
+      off_msg: AUS
+      here: hei
+      channel: Kanal
+      password: Passwuert
+      dual: dual
+      restricted: limitéiert
+      active: aktiv
+      inactive: inaktiv
+      error: Feeler
+  portal:
+    top-menu:
+      documentation: Dokumentatioun
+    side-menu:
+      system: System
+      sensors: Sensoren
+      camera: Kamera
+      devices: Apparater
+    system-page:
+      users: Online Benotzer
+      temperature: Temperatur
+      cpu: CPU
+      ram: RAM
+    sensors-page:
+      acceleration: Beschleunegung (x, y, z)
+    camera-page:
+      header: Kamera
+      no-media-warn: Aktuell goufe keng Biller oder Videoen an der Bibliothéik fonnt!
+    monitoring-page:
+      popups:
+        device: Apparat
+        devices: Apparater
+        administrator: Administrateur
+        description: Beschreiwung
+        cpu_temp: CPU-Temperatur
+        wifi-users: WiFi Benotzer
+        etherpad-users: Etherpad Benotzer
+        nextcloud-users: Nextcloud Benotzer
+  admin:
+    general:
+      reboot-modal-title: Nei starten?
+    top-menu:
+      admin: Admin
+      portal: Portal
+      set-date: Datum astellen
+      username: Benotzernumm
+      password: Passwuert
+      mysql-password: MySQL-Passwuert
+      check-updates: No Aktualisatioune sichen
+      settings: Astellungen
+    side-menu:
+      appearance: Ausgesinn
+      devices: Apparater
+      monitoring: Iwwerwaachen
+      notifications: Notifikatiounen
+      documentation: Dokumentatioun
+    setup-page:
+      last-step-header: Komplett
+    dashboard-page:
+      networking:
+        users-online: Aktuell Benotzer online
+      traffic:
+        header: Trafic
+      notifications:
+        header: Notifikatiounen
+      version:
+        up-to-date: Aktuell
+    applications-page:
+      instances-menu:
+        active-column: Aktiv
+        name-column: Numm
+        url-column: URL
+        description-column: Beschreiwung
+        actions-column: Aktiounen
+      applications-menu:
+        url-column: URL
+        description-column: Beschreiwung
+        actions-column: Aktiounen
+    network-page:
+      popups:
+        change-password-header: Passwuert änneren
+        select-wifi-label: Wi-Fi Numm eraussichen
+    appearance-page:
+      subheader: Ausgesinn
+      theme-panel:
+        colors-label: Faarwen
+      popups:
+        edit-title-header: Titel änneren
+    devices-page:
+      subheader: Apparater
+      sensors-panel:
+        header: Sensoren
+        sensors-table:
+          type: Typ
+          actions: Aktiounen
+      camera-panel:
+        header: Kamera
+      popups:
+        start-sensing-label2: Dauer (Sekonnen)
+        start-sensing-label4: Intervall (Sekonnen)
+        delete-images-title: All Fotoe läschen
+        delete-images-message: Wëllt Dir all déi gemaacht Fotoe läschen?
+        delete-videos-title: All Videoe läschen
+    monitoring-page:
+      details-panel:
+        header: Detailer
+        table-label2: Administrateur
+        table-label3: Titel
+        table-label4: Beschreiwung
+      statistics-panel:
+        statistics-table:
+          description: Beschreiwung
+          action: Aktioun
+      popups:
+        change-details-label1: Installatioun
+        change-details-label2: Administrateur
+        change-details-label3: Titel
+        change-details-label4: Beschreiwung
+        hardware-label2: Temperatur
+        hardware-label3: WiFi Benotzer
+        hardware-label4: CPU Belaaschtung
+    notifications-page:
+      subheader: Notifikatiounen
+      notifications-table:
+        header1: Status
+        header2: Titel
+        header4: Aktiounen
+      popups:
+        edit-notification-title: Notifikatioun änneren
+    import-export-page:
+      interview-panel:
+        form-placeholder: Numm vum Snapshot
+      guestbook-panel:
+        form-placeholder: Numm vum Snapshot
+    logs-page:
+      portal-log-panel:
+        filter-label1: Feelermessagen
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: Beschreiwung
+      etherpad-tab:
+        subheader1: Beschreiwung
+        paragraph5: Zum Beispill,
+      nextcloud-tab:
+        subheader1: Beschreiwung
+        paragraph12: Geréiert Äert Passwuert
+      guestbook-tab:
+        subheader1: Beschreiwung
+      wordpress-tab:
+        subheader1: Beschreiwung
+      framadate-tab:
+        subheader1: Beschreiwung
+        paragraph2: Hei ass et wéi et funktionéiert
+    settings-page:
+      subheader: Astellungen
+      time-date:
+        header: Zäit/Datum
+      mysql-password:
+        header: MySQL-Passwuert
+      popups:
+        change-mysql-password-title: Mäi MySQL-Passwuert änneren
+...

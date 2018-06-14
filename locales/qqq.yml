@@ -18,6 +18,7 @@ qqq:
       reset: '{{Identical|Reset}}'
       remove: '{{Identical|Remove}}'
       load: '{{Identical|Load}}'
+      next: '{{Identical|Next}}'
       previous: '{{Identical|Previous}}'
       show: '{{Identical|Show}}'
     messages:
@@ -62,12 +63,15 @@ qqq:
     applications-page:
       instances-menu:
         active-column: '{Identical|Active}}'
+        name-column: '{{Identical|Name}}'
         description-column: '{{Identical|Description}}'
         actions-column: '{{Identical|Action}}'
       applications-menu:
         color-column: '{{Identical|Color}}'
         description-column: '{{Identical|Description}}'
         actions-column: '{{Identical|Action}}'
+    appearance-page:
+      subheader: '{{Identical|Appearance}}'
     devices-page:
       subheader: '{{Identical|Device}}'
       sensors-panel:
