@@ -1,4 +1,4 @@
-VERSION = '2.5.2'
+VERSION = '2.5.3'
 
 class ConfigCaller
   include MaziConfig
@@ -131,6 +131,13 @@ module MaziVersion
       response = true if line.include? 'bash /root/back-end/mazi-internet.sh'
     end
     response
+  end
+
+  def self.nodogsplash_port_rules_updated?
+    File.readlines("/etc/nodogsplash/offline.txt").each do |line|
+      return true if line.include? 'FirewallRule allow all'
+    end
+    false
   end
 
   def self.guestbook_version
@@ -418,6 +425,14 @@ module MaziVersion
     MaziLogger.debug "  Checking rc.local file"
     unless rc_local_updated_2?
       MaziLogger.debug "rc.local older version found. Updating."
+      `bash /root/back-end/update.sh`
+      MaziLogger.debug "done."
+    end
+
+    # version 2.5.3
+    MaziLogger.debug "  Checking nodogsplash port rules"
+    unless nodogsplash_port_rules_updated?
+      MaziLogger.debug "nodogsplash port rules older version found. Updating."
       `bash /root/back-end/update.sh`
       MaziLogger.debug "done."
     end
