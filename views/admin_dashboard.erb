@@ -202,7 +202,7 @@
             <div class="row">
               <div class="col-xs-6 text-left panel-min-height">
                 <h3 class="no-margins"><%= I18n.translate("general.messages.version") %> <%= version %></h2>
-                <small><%= version_difference.to_i > 0 ? "#{I18n.translate("admin.dashboard-page.version.version-message-1")} `#{version_difference} #{I18n.translate("admin.dashboard-page.version.version-message-2")}" : "#{I18n.translate("admin.dashboard-page.version.up-to-date")}"%></small>
+                <small><%= version_difference.to_i > 0 ? "#{I18n.translate("admin.dashboard-page.version.version-message", nof_commits: version_difference)}" : "#{I18n.translate("admin.dashboard-page.version.up-to-date")}"%></small>
               </div>
               <div class="pull-right"><i class="fa fa-fw fa-5x fa-tag"></i></div>
             </div>
