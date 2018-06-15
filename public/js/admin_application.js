@@ -83,7 +83,7 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
       }
     });
@@ -98,21 +98,23 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
       }
     });
   });
 
   $('.splash-instance-switch').click(function(){
+    console.log('1111');
     var appId = $(this).attr('id').split('_').pop();
+    console.log('2222');
     $.ajax({
       url: '/application/' + appId + '/instance/splash',
       type: 'PUT',
       success: function(result) {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -129,7 +131,7 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
         else{
           window.setTimeout(function(){location.reload()}, 3000);
@@ -150,7 +152,7 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
         else{
           window.setTimeout(function(){location.reload()}, 3000);

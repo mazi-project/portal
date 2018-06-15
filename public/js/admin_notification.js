@@ -46,7 +46,7 @@ $( document ).ready(function() {
         id = JSON.parse(result).id;
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
       }
     });

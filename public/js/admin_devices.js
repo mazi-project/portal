@@ -6,7 +6,7 @@ $( document ).ready(function() {
       success: function(result) {
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
       }
     });

@@ -4,7 +4,7 @@ $( document ).ready(function() {
       url: '/monitor/toggle/overall',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -14,7 +14,7 @@ $( document ).ready(function() {
       url: '/monitor/toggle/map',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -24,7 +24,7 @@ $( document ).ready(function() {
       url: '/monitor/toggle/hardware',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -34,7 +34,7 @@ $( document ).ready(function() {
       url: '/monitor/toggle/applications',
       type: 'POST',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -251,7 +251,7 @@ $( document ).ready(function() {
       success: function(result) {
         error = JSON.parse(result).error;
         if (error != null){
-          location.reload();
+          location.reload(true);
         }
       }
     });

@@ -18,7 +18,7 @@ $( document ).ready(function() {
       type: 'DELETE',
       data: {snapshotname: snapshot_name},
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });

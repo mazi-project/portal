@@ -19,7 +19,7 @@ $( document ).ready(function() {
       url: '/branch/' + branch,
       type: 'PUT',
       success: function(result){
-        location.reload();
+        location.reload(true);
       }
     });
   });

@@ -8,7 +8,7 @@ $( document ).ready(function() {
       url: '/application/all/click_counter',
       type: 'DELETE',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
@@ -18,7 +18,7 @@ $( document ).ready(function() {
       url: '/session/all',
       type: 'DELETE',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });

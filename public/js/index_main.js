@@ -31,7 +31,7 @@ $( document ).ready(function() {
       url: '/locales/' + appId,
       type: 'POST',
       success: function(result) {
-        location.reload();
+        location.reload(true);
       }
     });
   });
