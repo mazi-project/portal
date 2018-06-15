@@ -260,7 +260,7 @@ en:
       applications-menu:
         header:             "Installed Applications"
         status-column:      "Status"
-        status-hint:        "the opperation status of portal (running/stoppped)"
+        status-hint:        "the operation status of portal (running/stoppped)"
         icon-column:        "Icon"
         icon-hint:          "the application default icon"
         color-column:       "Color"
