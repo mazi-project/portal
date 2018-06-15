@@ -195,6 +195,7 @@
               <option value='lime'>lime</option>
             </select>
             <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
+            <small><%= I18n.translate("admin.applications-page.popups.application-icon-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Administrator-icons' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
           </div>
         </form>
@@ -231,6 +232,7 @@
               <option value='lime' <%= 'selected' if app.color == 'lime' %>lime</option>
             </select>
             <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>
+            <small><%= I18n.translate("admin.applications-page.popups.application-icon-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Administrator-icons' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
           </div>
         </form>
@@ -270,7 +272,7 @@
             </select>
             <input type="text" name="name" class="form-control" placeholder="name" required autofocus>
             <input type="text" name="url" class="form-control" id="create_inst_app_url_in" placeholder="URL" value='<%= first_app_url %>' required>
-            <input type="text" name="icon" class="form-control" id="create_inst_app_icon_in" placeholder="icon" value='<%= first_app_icon %>' required>
+            <input type="text" name="icon" class="form-control" id="create_inst_app_icon_in" placeholder="icon" value='<%= first_app_icon %>'>
             <select name="color" class="form-control" id="create_inst_app_color_sl" required>
               <option value="" disabled selected>Color</option>
               <option value='green'>green</option>
@@ -283,6 +285,7 @@
               <option value='lime'>lime</option>
             </select>
             <textarea name="description" class="form-control" rows="5" id="comment" placeholder='Description (150 characters max)' maxlength="150"></textarea>
+            <small><%= I18n.translate("admin.applications-page.popups.application-icon-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Administrator-icons' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Create</button>
           </div>
         </form>
@@ -309,7 +312,7 @@
             <input type="hidden" name="id" value="<%= app.id %>">
             <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
             <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
-            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" placeholder="Icon" required>
+            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" placeholder="Icon">
             <select name="color" class="form-control" required>
               <option value='green' <%= 'selected' if app.color == 'green' %>>green</option>
               <option value='yellow' <%= 'selected' if app.color == 'yellow' %>>yellow</option>
@@ -321,6 +324,7 @@
               <option value='lime' <%= 'selected' if app.color == 'lime' %>>lime</option>
             </select>
             <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>
+            <small><%= I18n.translate("admin.applications-page.popups.application-icon-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Administrator-icons' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Save changes</button>
           </div>
         </form>

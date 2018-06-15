@@ -282,6 +282,7 @@ en:
         delete-application-message: "This application instance will be permanently deleted from the database. Do you wish to proceed?"
         delete-application-hint:    "You need to delete all application instances that are connected to this application before you can delete this application."
         edit-application-title:     "Edit Application Instance?"
+        application-icon-hint:      "Hint: for the icon please check the documentation %{link}"
         create-application-title:   "Create new Application Instance"
         create-application-help:    "Help: Some applications cannot have multiple instances for the moment, this is the reason some of them might be missing."
         web-app-info-title:         "Web Application"
