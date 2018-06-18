@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Guycn2
+# Author: Haniavis
 # Author: Liuxinyu970226
 # Author: Robby
 ---
@@ -27,6 +28,10 @@ qqq:
       version: '{{Identical|Version}}'
       here: '{{Identical|Here}}'
       password: '{{Identical|Password}}'
+      managed: This is a hybrid mode of the toolkit, something between offline (all
+        users offline) and dual (all users online), where the administrator is able
+        to configure some of the users to be offline and some of them to be online
+        according to specific criteria
       active: '{{Identical|Active}}'
       error: '{{Identical|Error}}'
   portal:
@@ -97,6 +102,8 @@ qqq:
     documentation-page:
       initial-configuration-tab:
         subheader1: '{{Identical|Description}}'
+        paragraph3: '{{doc-important|Do not translate "$passwd", that''s a Raspberry
+          Pi maintain command.}}'
       etherpad-tab:
         subheader1: '{{Identical|Description}}'
       nextcloud-tab:

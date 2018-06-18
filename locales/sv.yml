@@ -204,7 +204,6 @@ sv:
       time-date:
         current: Nuvarande tid och datum
       version:
-        version-message-1: Denna portal är
         up-to-date: Uppdaterad
     applications-page:
       subheader: Applikationer

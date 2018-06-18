@@ -66,6 +66,8 @@ fr:
       active: actif
       inactive: désactivé
       error: erreur
+      stable: Stable
+      development: Développement
   portal:
     top-menu:
       documentation: Documentation
@@ -184,10 +186,12 @@ fr:
       logs: Journaux
       documentation: Documentation
     updates:
+      subheader: Mise à jour
       checking-updates: Recherche des mises à jour. Veuillez attendre...
       alert-message-1: Votre dépôt local a été modifié. Cela provoque un mauvais fonctionnement
         de la fonction de mise à jour. Veuillez annuler ces modifications dans le
         dépôt local, en utilisant %{command} sur les fichiers modifiés.
+      update-message-0: Veuillez choisir votre canal de mise à jour
       update-message-1: Il n’y a pas de connexion active à Internet. Veuillez connecter
         cette zone MAZI à Internet et réessayer.
       update-message-2: Ce portail s’exécute en mode Démo ! Cette action aurait démarré
@@ -202,6 +206,11 @@ fr:
         ci-dessous pour démarrer le processus de mise à jour.
       update-hint: 'Conseil : si vous rencontrez un comportement défectueux, redémarrez
         votre appareil.'
+      update-chan-hint: 'Conseil : la dernière version du canal Développement peut
+        être instable. Il n’est pas conseillé de faire des va et viens avec le canal
+        de mise à jour, car cela peut provoquer un comportement inattendu. Veuillez
+        consulter les détails de la version %{link} afin de décider de votre canal
+        de mise à jour.'
     setup-page:
       tog-nav: Basculer la navigation
       setup-panel: Panneau de paramétrage de la zone MAZI
@@ -268,8 +277,6 @@ fr:
         current: Date/Heure actuelles
       version:
         header: Version de la zone MAZI
-        version-message-1: Ce portail est
-        version-message-2: validations derrière.
         up-to-date: À jour
       popups:
         expand-storage-message: Vous pouvez étendre le stockage de la zone MAZI jusqu’à
@@ -468,11 +475,18 @@ fr:
             suivre la section calibration de ce tutoriel
         no-sensors-message: Impossible de trouver un capteur connecté à cette zone
           MAZI.
+        init-sensors-message: La procédure d’initialisation pour le module des capteurs
+          n’a pas encore été exécuté. Si vous voulez utiliser un appareil de capteur
+          connecté à cette zone MAZI, veuillez utiliser le bouton ci-dessous pour
+          initialiser ce module.
         init-button-hint: Démarrer l'initialisation des capteurs
+      camera-panel:
+        header: Appareil photo
       popups:
         start-sensing-title: Démarrer les mesures des capteurs
         start-sensing-label1: Serveur cible
         start-sensing-label3: Calendrier (heure/date de fin)
+        delete-sensing-title: Supprimer les mesures de capteurs
         delete-images-message: Voulez-vous supprimer toutes les photos prises ?
     monitoring-page:
       details-panel:
@@ -492,6 +506,7 @@ fr:
           no-hardware-tasks-message: Aucune tâche de surveillance de l'activité système
             en cours.
           start-hardware-task-hint: Commencer l'activité de monitoring du système
+          stop-hardware-task-hint: Arrêter l'observation de l'activité du système
           start-application-task-hint: Démarrer l'observation de l'application
           stop-application-task-hint: Arrêter l'observation de l'application
       popups:
@@ -503,6 +518,7 @@ fr:
         hardware-label2: Température
         hardware-label3: Utilisateurs wifi
         hardware-label4: Charge CPU
+        hardware-label5: Charge de la RAM
         application-label1: Serveur cible
         application-label2: Application Etherpad
         application-label3: Application du livre d'or
@@ -513,6 +529,7 @@ fr:
         show-hardware-header: Information de surveillance d'activité système
         delete-application-header: Supprimer les données d'observation de l'application
     notifications-page:
+      subheader: Notifications
       notifications-table:
         header1: État
         header2: Titre
@@ -531,6 +548,7 @@ fr:
         header: Sauvegarder la capture
         form-placeholder: Nom de la capture d'écran
       load-snapshot-panel:
+        header: Charger une capture
         no-snapshots-message: Aucune capture sauvegardée actuellement.
       import-export-panel:
         message: Sélectionnez une capture et cliquez sur charger.
@@ -565,6 +583,7 @@ fr:
           qui organisent les différents tampons disponibles.
       nextcloud-tab:
         subheader1: Description
+        subheader3: Conseils utiles
         paragraph1: Nextcloud est un serveur privé de synchronisation et partage de
           fichiers. Il est totalement open-source et vous pouvez l'héberger vous-même
           ou payer une compagnie pour le faire à votre place. De cette manière, vous
@@ -581,16 +600,18 @@ fr:
         subheader3: Mot de passe administrateur
         paragraph4: puis remplissez le champ « authPassword » avec le mot de passe
           de votre choix.
+        paragraph7: Vue tablette
       wordpress-tab:
-        paragraph2: 'Remplissez les informations : donnez à votre site un titre, créez
-          un nom d''utilisateur et un mot de passe, et entrez votre adresse e-mail.
-          Cliquez sur le bouton « Install WordPress », puis connectez vous en utilisant
+        paragraph2: 'Remplissez les informations : donnez un titre à votre site, créez
+          un nom d''utilisateur et un mot de passe, et entrez votre adresse courriel.
+          Cliquez sur le bouton « Install WordPress », puis connectez-vous en utilisant
           le compte que vous venez de créer.'
       framadate-tab:
         paragraph1: Framadate est une application gratuite et open-source comme Doodle.
           Il est facile de créer un rendez-vous ou un sondage sans enregistrement
           pour inviter vos collaborateurs
         paragraph2: Voici comment cela fonctionne
+        paragraph6: Discutez et prenez votre décision
     settings-page:
       subheader: Paramètres
       panel-header: Paramètres système

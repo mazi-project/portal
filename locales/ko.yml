@@ -63,6 +63,8 @@ ko:
       active: 활성
       inactive: 비활성
       error: 오류
+      stable: 안정
+      development: 개발
   portal:
     top-menu:
       documentation: 설명서
@@ -87,6 +89,8 @@ ko:
       humidity-for: '%{sensor}의 습도'
       pressure-for: '%{sensor}의 압력'
       no-sensors-warn: '경고: 데이터베이스에 측정이 없거나 센서 장치가 이 MAZI Zone에 연결되어 있지 않습니다.'
+      no-sensor-data-warn: '경고: 이 MAZI Zone에 저장된 센서 데이터가 없습니다. 시스템 관리자는 센서 데이터의 모음집을
+        활성화할 수 있습니다.'
       choose-timeslot-message: 타임슬롯을 선택하려면 아래의 양식을 사용해 주십시오.
       direction: 방향 (도)
       acceleration: 가속 (x, y, z)
@@ -157,9 +161,11 @@ ko:
       logs: 로그
       documentation: 설명서
     updates:
+      subheader: 업데이트
       checking-updates: 업데이트를 검사하고 있습니다. 기다려 주십시오...
       alert-message-1: 로컬 저장소가 수정되었습니다. 이로 인해 업데이트 기능이 오동작하게 됩니다. 수정한 파일에 대해 %{command}를
         사용하여 로컬 저장소의 변경사항을 되돌려 주십시오.
+      update-message-0: 업데이트 채널을 선택해 주십시오
       update-message-1: 인터넷으로 활성화된 연결이 없습니다. 이 MAZI Zone을 인터넷에 연결한 다음 다시 시도해 주십시오.
       update-message-3: 포털은 최신이므로 업데이트할 필요가 없습니다.
       update-message-4: 이 시스템은 업데이트 중입니다. 기다려 주십시오...
@@ -215,7 +221,7 @@ ko:
         current: 현재 날짜/시간
       version:
         header: MAZI Zone 버전
-        version-message-1: 이 포털은
+        version-message: 이 포털은 '커밋 %{nof_commits}개'가 남아있습니다.
         up-to-date: 최신
     applications-page:
       subheader: 애플리케이션
@@ -241,7 +247,7 @@ ko:
       applications-menu:
         header: 설치된 애플리케이션
         status-column: 상태
-        status-hint: 포털의 동작 상태 (실행 중/정지됨)
+        status-hint: 동작 상태 (실행 중/정지됨)
         icon-column: 아이콘
         icon-hint: 애플리케이션 기본 아이콘
         color-column: 색
@@ -251,7 +257,7 @@ ko:
         url-column: URL
         url-hint: 애플리케이션의 URL
         description-column: 설명
-        description-hint: 포털의 애플리케이션 타일에 표시할 설명
+        description-hint: 애플리케이션 기본 설명
         actions-column: 동작
         actions-hint: 애플리케이션에 수행할 수 있는 동작
         web-app-info-hint: 이 애플리케이션을 시작하고 중지하는 일은 MAZI Zone의 성능에 영향을 미치지 않습니다.
@@ -264,6 +270,7 @@ ko:
         delete-application-hint: 이 애플리케이션을 삭제하려면 그 전에 이 애플리케이션에 연결되어 있는 모든 애플리케이션
           인스턴스를 삭제해야 합니다.
         edit-application-title: 애플리케이션 인스턴스를 편집하시겠습니까?
+        application-icon-hint: '참고: 아이콘의 설명문서를 참고하십시오 %{link}'
         create-application-title: 새로운 애플리케이션 인스턴스 만들기
         create-application-help: '도움말: 일부 애플리케이션은 일시적으로 여러 인스턴스를 가질 수 없으므로 이것이 발견을
           못하는 이유가 될 수 있습니다.'
@@ -470,6 +477,8 @@ ko:
       subheader: 스냅샷
       message: 아래의 도구를 사용하여 이 MAZI Zone의 현재 구성의 스냅샷을 만들 수 있습니다. 여기에는 모든 사항(네트워크 구성,
         애플리케이션, 애플리케이션 인스턴스, 알림, 시각 구성 등)이 포함됩니다.
+      warning: '경고: 각기 다른 와이파이 네트워크 설정을 가진 새로운 스냅샷을 로드하면 이 MAZI Zone에 대한 무선 연결이 소실되며
+        새로운 와이파이 네트워크에 다시 연결해야 할 수 있습니다.'
       save-snapshot-panel:
         header: 스냅샷 저장
         header-hint: 이것을 사용하여 스냅샷을 저장할 수 있습니다.
@@ -513,6 +522,7 @@ ko:
         subheader1: 설명
         subheader2: ssh를 통해 연결하는 중
         subheader3: Raspbian 구성
+        paragraph2: ssh를 통해 Raspberry에 원격으로 연결하려면 터미널을 열고 다음의 명령어를 실행해야 합니다
         paragraph3: pi 사용자의 비밀번호를 변경하려면 $passwd 과정을 수행하고 지시를 따르십시오.
         paragraph5: Raspberry에 성공적으로 로그인하면 rasbian 구성 도구를 시작하십시오
         paragraph6: 이후 메뉴로 이동
@@ -542,6 +552,8 @@ ko:
           상자에 체크한 다음 '업로드 및 편집 허용'을 누르십시오. (아래 그림 참고)
         paragraph19: 다른 애플리케이션에 공유한 넥스트클라우드 폴더에 업로드된 내용을 사용해야 한다면 다음 경로를 통해 파일 접근이
           가능합니다
+        paragraph21: Nextcloud에 새로운 사용자를 만들려면 인터넷에 연결되어 있거나 Raspberry와 Nextcloud 애플리케이션
+          간에 수동으로 시간과 날짜를 동기화해야 합니다.
       guestbook-tab:
         subheader1: 설명
         subheader2: 관리 가이드

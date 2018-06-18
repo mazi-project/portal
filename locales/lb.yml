@@ -54,6 +54,8 @@ lb:
       active: aktiv
       inactive: inaktiv
       error: Feeler
+      stable: Stabil
+      development: Entwécklung
   portal:
     top-menu:
       documentation: Dokumentatioun
@@ -100,6 +102,9 @@ lb:
       monitoring: Iwwerwaachen
       notifications: Notifikatiounen
       documentation: Dokumentatioun
+    updates:
+      subheader: Aktualiséieren
+      update-message-0: Sicht w.e.g. Äre Kanal fir d'Aktualisatiounen
     setup-page:
       last-step-header: Komplett
     dashboard-page:

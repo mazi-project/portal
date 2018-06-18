@@ -46,6 +46,7 @@ es:
       version: Versión
       enable: activar
       disable: desactivar
+      on_msg: ⏽
       off_msg: ⭘
       here: aquí
       channel: Canal
@@ -72,7 +73,8 @@ es:
       acceleration: Aceleración (x, y, z)
     camera-page:
       header: Cámara
-      no-media-warn: No se encontraron imágenes ni vídeos en la biblioteca.
+      media-library-header: Mediateca
+      no-media-warn: No se encontraron imágenes ni vídeos en la mediateca.
     monitoring-page:
       popups:
         device: Dispositivo
@@ -148,9 +150,15 @@ es:
       portal-domain-panel:
         header: Dominio de portal
     appearance-page:
+      theme-panel:
+        portal-title-label: Título del portal
       popups:
         save-theme-header: Guardar tema
     devices-page:
+      sensors-panel:
+        sensors-table:
+          status: Estado
+          actions: Acciones
       camera-panel:
         header: Cámara
     monitoring-page:
@@ -187,11 +195,14 @@ es:
         header3: Contenido
         header4: Acciones
       popups:
+        create-notification-title: Crear notificación nueva
         edit-notification-title: Editar notificación
     logs-page:
       portal-log-panel:
         filter-label1: Mensajes de error
     documentation-page:
+      initial-configuration-tab:
+        subheader1: Descripción
       etherpad-tab:
         subheader1: Descripción
         subheader2: Guía de administración

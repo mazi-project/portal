@@ -63,6 +63,8 @@ zh-hans:
       active: 活跃
       inactive: 不活跃
       error: 错误
+      stable: 稳定
+      development: 开发
   portal:
     top-menu:
       documentation: 文档
@@ -166,8 +168,10 @@ zh-hans:
       logs: 日志
       documentation: 文档
     updates:
+      subheader: 更新
       checking-updates: 正在检查更新。请等待...
       alert-message-1: 您的本地存储库已编辑。这导致更新功能故障。请通过使用%{command}在本地存储库回退对这些文件的更改。
+      update-message-0: 请选择您的更新频道
       update-message-1: 没有活跃的互联网连接。请连接此MAZI区域至互联网并重试。
       update-message-2: 此门户以演示模式运行！此操作会开始更新过程。
       update-message-3: 门户是最新版本，不需要更新。
@@ -175,6 +179,7 @@ zh-hans:
       update-message-5: 更新进程几乎已完成。您的MAZI区域将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI区域了。
       update-message-6: 存在可用更新。请使用下方的按钮启动更新过程。
       update-hint: 提示：如果您遇到错误行为，请重启您的设备。
+      update-chan-hint: 提示：最新开发频道的版本可能不稳定。不建议更改回并继续使用更新的频道，因为这可能导致意想不到的行为。请建议版本详情%{link}以决定您的更新频道
     setup-page:
       tog-nav: 开关导航
       setup-panel: MAZI区域配置面板
@@ -229,8 +234,7 @@ zh-hans:
         current: 当前日期/时间
       version:
         header: MAZI区域版本
-        version-message-1: 此门户是
-        version-message-2: 提交后。
+        version-message: 此门户晚于“%{nof_commits}提交”。
         up-to-date: 最新
       popups:
         expand-storage-message: 您可以使用下方的按钮，扩充MAZI区域存储至您的SD卡最大容量。您将需要重启设备使其发生。
@@ -261,7 +265,7 @@ zh-hans:
       applications-menu:
         header: 安装的应用程序
         status-column: 状态
-        status-hint: 门户的操作（正在运行/已停止）
+        status-hint: 操作状态（正在运行/已停止）
         icon-column: 图标
         icon-hint: 应用程序的默认图标
         color-column: 颜色
@@ -271,7 +275,7 @@ zh-hans:
         url-column: URL
         url-hint: 应用程序的URL
         description-column: 描述
-        description-hint: 将在门户上的应用程序瓦片显示的描述
+        description-hint: 应用程序默认描述
         actions-column: 操作
         actions-hint: 可以在应用程序上执行的操作
         web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI区域的性能。
@@ -279,6 +283,7 @@ zh-hans:
         app-start-hint: 开始应用程序
         app-stop-hint: 停止应用程序
       popups:
+        application-icon-hint: 提示：对于图标，请检查文档%{link}
         web-app-info-title: Web应用程序
     network-page:
       subheader: 网络设置
@@ -300,6 +305,7 @@ zh-hans:
       access-point-panel:
         header: 将路由器添加为接入点
         current-hint: 使用中的Wi-Fi接入点
+        router-message: 当前使用的是树莓派Wi-Fi界面。您可以插入OpenWRT路由器至您的树莓派，并移动访问点至此。建议的设备
       portal-domain-panel:
         header: 门户域
         domain-hint: 当前门户域
@@ -310,12 +316,14 @@ zh-hans:
         change-channel-header: 更改频道
         change-password-header: 更改密码
         change-mode-header: 更改模式
+        change-mode-message: 使用下面的表单选择此MAZI区域的网络模式。如果您希望选择双模式，请确保有互联网访问（通过以太网电缆或Wi-Fi电子狗）。
         connect-wifi-header: 连接到Wi-Fi网络
         select-wifi-label: 选择Wi-Fi名称
         select-mesh-mode-label: 选择网眼模式
         type-wifi-label: 或如果它是隐藏的，在此输入
         type-password-label: 输入Wi-Fi网络的密码
         change-domain-header: 编辑门户域
+        change-domain-warning: 警告：如果您设置无效的域，门户将无法打开。然而您可以通过此URL访问管理员面板
     appearance-page:
       subheader: 外观
       theme-panel:
@@ -433,6 +441,7 @@ zh-hans:
     documentation-page:
       initial-configuration-tab:
         subheader1: 描述
+        paragraph3: 如果您希望更改派用户的密码，请进行$passwd并跟随指引。
         paragraph10: 匹配您位置的时区
       etherpad-tab:
         subheader1: 描述
@@ -442,6 +451,7 @@ zh-hans:
         subheader1: 描述
         subheader3: 实用技巧
         paragraph2: 您将在此找到管理页面：
+        paragraph5: 从下拉菜单中选择个人。
         paragraph6: 您将看到的一些功能包含在下方
         paragraph10: 电子邮件地址
         paragraph11: 列举您的群组成员
@@ -457,6 +467,7 @@ zh-hans:
         subheader1: 描述
         paragraph2: 这是它如何工作的
         paragraph3: 创建调查
+        paragraph5: 发送调查链接至您的朋友或同事
     settings-page:
       subheader: 设置
       panel-header: 系统设置

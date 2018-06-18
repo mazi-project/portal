@@ -64,6 +64,8 @@ tr:
       active: aktif
       inactive: pasif
       error: hata
+      stable: Kararlı
+      development: Geliştirme
   portal:
     top-menu:
       documentation: Belgelendirme
@@ -180,10 +182,12 @@ tr:
       logs: Günlükler
       documentation: Belgeleme
     updates:
+      subheader: Güncelle
       checking-updates: Güncellemeler kontrol ediliyor. Lütfen bekleyin...
       alert-message-1: Yerel deponuz düzenlendi. Bu, güncelleme işlevinin arızalanmasına
         neden olur. Lütfen düzenlenmiş dosyalar için %{command} kullanarak bu değişiklikleri
         yerel deponuzda geri alın.
+      update-message-0: Lütfen güncelleme kanalınızı seçin
       update-message-1: İnternet için aktif herhangi bir bağlantı mevcut değil. Lütfen,
         bu Mazi Bölgesi'ni internete bağlayın ve tekrar deneyin.
       update-message-2: Bu portal Demo modunda çalışır! Bu işlem bir güncelleme işlemini
@@ -197,6 +201,10 @@ tr:
         lütfen aşağıdaki düğmeyi kullanın.
       update-hint: 'İpucu: hatalı bir davranışla karşılaşırsanız cihazınızı yeniden
         başlatın.'
+      update-chan-hint: 'İpucu: Geliştirme kanalının en son sürümü kararsız olabilir.
+        Beklenmeyen durumlara neden olabileceğinden güncelleme kanalını ileri ve geri
+        almanız önerilmez. Güncelleme kanalınıza karar vermek için lütfen %{link}
+        sürüm ayrıntılarını belirtin.'
     setup-page:
       tog-nav: Gezinmeyi değiştir
       setup-panel: MAZI Bölgesi Kurulum Paneli
@@ -260,8 +268,7 @@ tr:
         current: Mevcut Tarih/Saat
       version:
         header: MAZI Bölgesi Sürümü
-        version-message-1: Bu Portal,
-        version-message-2: arkada işlem yapar.
+        version-message: Bu Portal '%{nof_commits} işleminin arkasında.
         up-to-date: Güncel
       popups:
         expand-storage-message: MAZI Bölgesi depolamasını, aşağıdaki düğmeyi kullanarak
@@ -294,7 +301,7 @@ tr:
       applications-menu:
         header: Yüklü Uygulamalar
         status-column: Durum
-        status-hint: portların çalışma durumu (çalışıyor/durdu)
+        status-hint: operasyonel durum (çalışıyor/durdu)
         icon-column: Simge
         icon-hint: uygulamanın varsayılan simgesi
         color-column: Renk
@@ -304,7 +311,7 @@ tr:
         url-column: URL
         url-hint: Uygulamanın URL'si
         description-column: Açıklama
-        description-hint: Portaldaki uygulama kısmında gösterilecek açıklama
+        description-hint: uygulamanın varsayılan açıklaması
         actions-column: İşlemler
         actions-hint: uygulamada gerçekleştirilebilecek işlemler
         web-app-info-hint: Bu uygulamanın başlatılması/durdurulması, MAZI Bölgenizin
@@ -319,6 +326,8 @@ tr:
         delete-application-hint: Bu uygulamayı silebilmeniz için önce bu uygulamaya
           bağlı tüm uygulama örneklerini silmeniz gerekir.
         edit-application-title: Uygulama Örneğini Düzenle?
+        application-icon-hint: 'İpucu: simge için lütfen %{link} dokümanlarını kontrol
+          edin'
         create-application-title: Yeni Uygulama Örneği oluştur
         create-application-help: 'Yardım: Bazı uygulamalar şu an için birden fazla
           örneğe sahip olamaz, bazılarının eksik olmasının nedeni budur.'

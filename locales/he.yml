@@ -191,11 +191,11 @@ he:
       update-hint: 'עצה: אם זה לא פועל כמו שצריך, אפשר לאתחל מחדש את המכשיר.'
     setup-page:
       tog-nav: מצב הניווט
-      setup-panel: לוח ההפעלה של תחום ה־MAZI
+      setup-panel: לוח ההגדרות של תחום ה־MAZI
       first-step-header: הגדרת סיסמת הניהול
       first-step-message: ניתן להשתמש בטופס שלהלן כדי להגדיר את סיסמת המנהל עבור לוח
         הניהול של תחום ה־MAZI.
-      first-step-hint: 'עצה: אם זהו תחום MAZI חדש, הסיסמה הנוכחית היא 1234'
+      first-step-hint: 'לתשומת ליבך: אם זהו תחום MAZI חדש, הסיסמה הנוכחית היא 1234'
       second-step-header: הגדרת תאריך ושעה
       second-step-message: ניתן להשתמש בטופס שלהלן כדי לשנות את התאריך, את השעה ואת
         אזור הזמן של תחום ה־MAZI הזה.
@@ -214,4 +214,42 @@ he:
       last-step-header: שמירת השינויים
       last-step-message: השלמת בהצלחה את כל שלבי ההגדרות הראשוניות. נא ללחוץ על הכפתור
         כדי לשמור את השינויים.
+    dashboard-page:
+      subheader: לוח בקרה
+      welcome:
+        message-1: '%{panel} הוא הכלי הראשי המשמש לניהול הפורטל של תחום ה‏־MAZI הזה,
+          כמו גם לניהול כלי הרשת של תחום ה־MAZI הזה.'
+        message-2: 'ניתן להשתמש בתפריט כדי לנווט בכלים השונים, לצורך:'
+        message-list-1: ניהול היישומים הנתמכים
+        message-list-2: הגדרת הרשת של תחום ה־MAZI הזה
+        message-list-3: הגדרת המראה החזותי של הפורטל
+        message-list-4: הוספת/הסרת הודעות בפורטל
+        message-list-5: ייצוא/ייבוא תמונות
+      hardware-info:
+        header: מידע על החומרה של תחום ה־MAZI הזה
+        system-temperature: טמפרטורת המערכת
+        cpu-load: עומס המעבד
+        ram-load: עומס הזיכרון (RAM)
+        storage-load: העומס באחסון
+      networking:
+        header: רשת
+        users-online: משתמשים המחוברים כעת
+        wifi-info: מידע על הרשת האלחוטית
+      applications:
+        header: יישומים
+        applications-installed: יישומים שהותקנו
+      traffic:
+        header: תעבורה
+        reset-application-clicks: איפוס השימוש ביישומים
+        reset-visits: איפוס הביקורים
+        portal-visits: כל הביקורים בפורטל
+        application-visits: ביקורים ביישומים
+      notifications:
+        header: הודעות
+        notifications: הודעות פעילות בפורטל
+      time-date:
+        header: תאריך ושעה של תחום ה־MAZI
+        current: התאריך והשעה הנוכחיים
+      version:
+        header: גרסת תחום ה־MAZI
 ...

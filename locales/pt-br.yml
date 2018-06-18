@@ -16,7 +16,10 @@ pt-br:
       stop: Parar
       save: Salvar Mudanças
       choose: Escolher
+      choose-timeslot: Escolha um intervalo de tempo
+      export-to-csv: Exportar para um arquivo CSV
       expand: Expandir
+      expand-storage: Expandir Armazenamento
       reboot: Reiniciar
       reset: Redefinir
       shutdown: Desligar
@@ -38,6 +41,7 @@ pt-br:
       change: Mudar
       qrcode: Código QR
       show: Exibir
+      configure: Configurar
     messages:
       warning: Aviso
       welcome: Bem-vindo
@@ -53,11 +57,14 @@ pt-br:
       channel: Canal
       password: Senha
       offline: desconectado
+      dual: dual
       restricted: restrito
       managed: gerenciado
       active: ativo
       inactive: inativo
       error: erro
+      stable: Estável
+      development: Desenvolvimento
   portal:
     top-menu:
       documentation: Documentação
@@ -66,14 +73,18 @@ pt-br:
       system: Sistema
       sensors: Sensores
       camera: Câmera
+      monitoring: Monitoramento
       devices: Dispositivos
     system-page:
       subheader: Informações do Sistema
+      users: Usuários online
+      app-clicks: Cliques de aplicativos
       temperature: Temperatura
       cpu: CPU
       ram: RAM
       storage: Armazenamento
     sensors-page:
+      header: Medidas de sensor
       pressure-for: Pressão de %{sensor}
       direction: Direção (Graus)
       acceleration: Aceleração (x, y, z)
@@ -115,6 +126,8 @@ pt-br:
       notifications: Notificações
       logs: Registros
     updates:
+      subheader: Atualizar
+      update-message-0: Por favor escolha o seu canal de atualização
       update-message-3: O portal está atualizado, não há necessidade de atualização.
       update-message-4: O sistema está atualizando. Por favor, espere...
       update-message-5: O processo de atualização está quase completo. Sua Zona MAZI
@@ -152,10 +165,13 @@ pt-br:
         name-column: Nome do aplicativo
         url-column: URL
         description-column: Descrição
+        description-hint: a descrição padrão do aplicativo
         actions-column: Ações
       popups:
         delete-application-hint: Você precisa excluir todas as instâncias do aplicativo
           que estão conectadas a este aplicativo antes de poder excluir este aplicativo.
+        application-icon-hint: 'Dica: para o ícone, por favor, verifique a documentação
+          %{link}'
     network-page:
       internet-panel:
         mode-hint: Modo da rede Wi-Fi
