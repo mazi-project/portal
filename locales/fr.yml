@@ -277,6 +277,7 @@ fr:
         current: Date/Heure actuelles
       version:
         header: Version de la zone MAZI
+        version-message: Ce portail est '%{nof_commits} validations' en retard.
         up-to-date: À jour
       popups:
         expand-storage-message: Vous pouvez étendre le stockage de la zone MAZI jusqu’à
@@ -310,7 +311,7 @@ fr:
       applications-menu:
         header: Applications installées
         status-column: État
-        status-hint: l’état opérationnel du portail (démarré/arrêté)
+        status-hint: l’état opérationnel (démarré/arrêté)
         icon-column: Icône
         icon-hint: l'icône par défaut de l'application
         color-column: Couleur
@@ -320,8 +321,7 @@ fr:
         url-column: URL
         url-hint: l'URL de l'application
         description-column: Description
-        description-hint: la description qui sera affichée sur la brique de l’application
-          sur le portail
+        description-hint: la description par défaut de l’application
         actions-column: Actions
         actions-hint: actions pouvant être realisées par l'application
         web-app-info-hint: Démarrer/Arrêter cette application n’affectera pas la performance
@@ -337,6 +337,8 @@ fr:
           qui sont connectées à cette application avant de pouvoir supprimer cette
           dernière.
         edit-application-title: Modifier l’instance d’application ?
+        application-icon-hint: 'Conseil : pour l’icône, veuillez vérifier la documentation
+          %{link}'
         create-application-title: Créer une nouvelle instance d’application
         create-application-help: 'Aide : Certaines applications ne peuvent pas avoir
           plusieurs instances pour le moment, c’est la raison pour laquelle certaines
@@ -482,59 +484,140 @@ fr:
         init-button-hint: Démarrer l'initialisation des capteurs
       camera-panel:
         header: Appareil photo
+        header-hint: Vous pouvez utiliser ceci pour contrôler l'appareil photo.
+        toggle-camera-message: Activer/désactiver l’onglet appareil photo sur le portail
+          utilisateur
+        toggle-camera-hint: activer/désactiver l’onglet appareil photo des portails
+        camera-version-message: Le module Appareil photo n’est ps bien installé sur
+          cette image ! Veuillez utiliser une image plus grande que 1.7.2 qui est
+          bien configurée pour cela.
+        no-camera-message: Il n’y a aucun appareil photo connecté à cette zone MAZI !
       popups:
         start-sensing-title: Démarrer les mesures des capteurs
+        start-sensing-message: Veuillez entrer une durée ou une date sur le calendrier
+          pour définir un créneau horaire pour regrouper les mesures. Veuillez aussi
+          utiliser l’intervalle pour définir la fréquence des mesures.
         start-sensing-label1: Serveur cible
+        start-sensing-label2: Durée (en secondes)
         start-sensing-label3: Calendrier (heure/date de fin)
+        start-sensing-label4: Intervalle (en secondes)
+        start-sensing-hint: 'Conseil : Si vous utilisez à la fois la durée et les
+          zones de saisie de calendrier, le calendrier sera ignoré !!!'
         delete-sensing-title: Supprimer les mesures de capteurs
+        delete-sensing-message: Voulez-vous supprimer toutes les mesures enregistrées ?
+        start-images-title: Démarrer la capture des images
+        start-images-label1: Durée (en secondes)
+        start-images-label2: Intervalle (en secondes)
+        delete-images-title: Supprimer toutes les photos
         delete-images-message: Voulez-vous supprimer toutes les photos prises ?
+        start-videos-title: Démarrer la capture vidéo
+        start-videos-label1: Durée (en secondes)
+        delete-videos-title: Supprimer toutes les vidéos
+        delete-videos-message: Voulez-vous supprimer toutes les vidéos capturées ?
     monitoring-page:
+      subheader: Surveillance
+      message: Vous pouvez utiliser les outils ci-dessous pour contrôler la manière
+        dont votre zone MAZI collecte et envoie les données à un serveur de collecte
+        de données.
       details-panel:
         header: Détails
         header-hint: Vous pouvez utiliser cela pour activer/désactiver la fonctionalité
           d'observation.
+        toggle-monitoring-message: Activer/désactiver la fonctionnalité de surveillance.
+        toggle-monitoring-hint: activer/désactiver la fonctionnalité de surveillance
+        details-message: Ci-dessous, vous pouvez voir les détails pour cette zone
+          MAZI, vous pouvez tout modifier en appuyant sur le bouton de modification
+          en bas.
         table-label1: Déploiement
         table-label2: Administrateur
         table-label3: Titre
         table-label4: Description
+        table-label5: Emplacement (lat, long)
+        details-hint: Il est obligatoire de modifier d’abord les détails de surveillance,
+          avant de l’activer !
       statistics-panel:
+        header: Données de surveillance
+        header-hint: Vous pouvez utiliser cela pour contrôler les activités de surveillance.
+        toggle-monitoring-map-msg: Activer/désactiver l’onglet de surveillance sur
+          le portail utilisateur
+        toggle-monitoring-map-hint: activer/désactiver l’onglet de surveillance
+        message: Vous pouvez démarrer/arrêter d’envoyer les données d’activité système
+          et de surveillance de l’application à un endroit distant (ou local) en appuyant
+          sur le bouton démarrer/arrêter ci-dessous.
         statistics-table:
+          status: État
           description: Description
           action: Action
           hardware-description-message: Observer l'activité du système.
           application-description-message: Observer les données de l'application.
           no-hardware-tasks-message: Aucune tâche de surveillance de l'activité système
             en cours.
+          no-application-tasks-message: Aucune tâche de surveillance d’application
+            ne tourne actuellement.
           start-hardware-task-hint: Commencer l'activité de monitoring du système
           stop-hardware-task-hint: Arrêter l'observation de l'activité du système
+          delete-hardware-data-hint: Supprimer toutes les données de surveillance
+            de l’activité système de la base de données locale
           start-application-task-hint: Démarrer l'observation de l'application
           stop-application-task-hint: Arrêter l'observation de l'application
+          delete-application-data-hint: Supprimer toutes les données de surveillance
+            d’application de la base de données locale
       popups:
         change-details-header: Modifier les détails de l'observation
+        change-details-message: Utiliser le formulaire ci-dessous pour modifier les
+          détails de surveillance du modal
+        change-details-label1: Déploiement
         change-details-label2: Administrateur
         change-details-label3: Titre
         change-details-label4: Description
+        change-details-label5: Coordonnées(lattitude, longitude)
         hardware-label1: Serveur cible
         hardware-label2: Température
         hardware-label3: Utilisateurs wifi
         hardware-label4: Charge CPU
         hardware-label5: Charge de la RAM
+        hardware-label6: Charge mémoire
         application-label1: Serveur cible
         application-label2: Application Etherpad
         application-label3: Application du livre d'or
+        application-label4: Application Framadate
         application-label5: Application Nextcloud
+        start-hardware-header: Démarrer les données de surveillance de l’activité
+          système
         start-hardware-message: Utilisez le formulaire ci-dessous pour commencer à
           envoyer des données de surveillance d'activité système
         start-application-header: Démarrer données de gestion d'application
+        start-application-message: Utiliser le formulaire ci-dessous pour démarrer
+          les données de surveillance de l’activité système
         show-hardware-header: Information de surveillance d'activité système
+        show-hardware-message: État actuel des traitements de surveillance de l’activité
+          système
+        show-application-header: Information de surveillance de l’application
+        show-application-message: État actuel pour les traitements de surveillance
+          de l’application
+        delete-hardware-header: Supprimer les données de surveillance de l’activité
+          système
+        delete-hardware-message: Utiliser le bouton ci-dessous pour supprimer touts
+          les données de surveillance de l’activité système de la base de données
+          locale. Actuellement, le nombre d’entrées dans la base de données est de
+          %{entries}
+        delete-hardware-hint: cette action prendra plusieurs secondes pour s’exécuter ;
+          veuillez donc attendre avant de rafraîchir la page.
         delete-application-header: Supprimer les données d'observation de l'application
+        delete-application-message: Utiliser le bouton ci-dessous pour supprimer toutes
+          les données de surveillance d’application de la base de données locale.
+          Actuellement, le nombre d’entrées dans la base de données est de %{entries}
+        delete-application-hint: cette action prendra plusieurs secondes à s’exécuter ;
+          veuillez donc attendre avant de rafraîchir la page.
     notifications-page:
       subheader: Notifications
       notifications-table:
         header1: État
         header2: Titre
         header3: Corps
+        header4: Actions
       popups:
+        create-notification-title: Créer une nouvelle notification
         edit-notification-title: Notification de modification
         delete-notification-message: Cette notification sera effacée de façon permanente
           de la base de données. Voulez-vous continuer ?
@@ -544,45 +627,91 @@ fr:
         de la configuration actuelle de cette zone MAZI. Cela inclut tout (configurations
         réseau, instances d'applications, notifications, configuration visuelles,
         etc.).
+      warning: 'Avertissement : Si vous chargez un nouvel instantané avec des paramètres
+        de réseau Wi-Fi différents, votre connexion sans fil à cette zone MAZI sera
+        perdue et vous devrez vous reconnecter au nouveau réseau Wi-Fi.'
       save-snapshot-panel:
         header: Sauvegarder la capture
+        header-hint: Vous pouvez utiliser ceci pour prendre un instantané.
         form-placeholder: Nom de la capture d'écran
+        form-hint: Veuillez saisir le nom du nouvel instantané.
       load-snapshot-panel:
         header: Charger une capture
+        header-hint: Vous pouvez utiliser cela pour charger un instantané.
+        message: Veuillez sélectionner un instantané et appuyer sur charger. Le portail
+          MAZI redémarrera.
         no-snapshots-message: Aucune capture sauvegardée actuellement.
       import-export-panel:
+        header: Importer/Exporter un instantané
+        header-hint: Vous pouvez utiliser ceci pour exporter un instantané vers un
+          fichier zip. Ou importer un fichier zip en tant qu’instantané.
         message: Sélectionnez une capture et cliquez sur charger.
+        no-snapshots-message: Actuellement, il n’y a pas d’instantané enregistré.
       application-snapshots-header: Captures de l'application
+      application-snapshots-message: Utiliser les onglets ci-dessous pour importer/exporter
+        des instantanés pour les applications supportées par cette zone MAZI.
       interview-panel:
+        header-hint: Vous pouvez utiliser cela pour importer/exporter un instantané.
         form-placeholder: Nom de la capture d'écran
       guestbook-panel:
+        header-hint: Vous pouvez utiliser cela pour importer/exporter un instantané.
         form-placeholder: Nom de la capture
       popups:
         import-header: Importer une capture
+        import-interview-header: Importer un instantané pour Interview
+        import-guestbook-header: Importer un instantané pour le livre d’or
+        import-etherpad-header: Importer un instantané pour Etherpad
     logs-page:
+      subheader: Visualiseur de journal
+      message: Vous pouvez afficher les fichiers de journal de la zone MAZI ci-dessous
       portal-log-panel:
+        header: Fichier de journal du portail
+        header-hint: Fichier de journal du portail.
         filter-label1: Messages d’erreur
+        filter-label2: Messages d’avertissement
         filter-label3: Messages de debogue
     documentation-page:
+      header: Documentation d’administration
       initial-configuration-tab:
+        header: Configuration initiale
         subheader1: Description
         subheader2: Se connecter via ssh
+        subheader3: Configuration Raspbian
         paragraph1: Voici le guide de documentation administrateur pour le portail
           MAZI Zone. Utilisez les onglets ci-dessus pour naviguer entre les différentes
           sections de la documentation. L'onglet actuel décrit les différentes actions
           dont un administrateur pourrait avoir besoin, afin de configurer le Raspberry
           Pi. Alors que tous les autres onglets apportent des informations concernant
           l'administration des applications supportées.
+        paragraph2: Pour la connexion distante au Raspberry via SSH, vous devez ouvrir
+          un terminal et exécuter la commande suivante
         paragraph3: Si vous voulez changer le mot de passe pour l'utilisateur Pi,
           faîtes $passwd et suivez les instructions.
+        paragraph4: Ceci est le mot de passe pour la connexion SSH, qui est différent
+          du compte d’administration que vous utilisez pour vous connecter à l’interface
+          d’administration.
+        paragraph5: Une fois que vous êtes bien connecté au Raspberry, démarrez l’outil
+          de configuration rasbian
+        paragraph6: et naviguez jusqu’au menu
+        paragraph7: Retaillez le système de fichiers pour utiliser toute la capacité
+          de la carte SD
+        paragraph8: Dans l’option d’internationalisation, modifiez
         paragraph9: la locale correspondant à votre situation géographique
+        paragraph10: le fuseau horaire pour correspondre à votre emplacement
       etherpad-tab:
+        subheader1: Description
         subheader2: Guide de l'administration
+        subheader3: Conseils utiles
+        paragraph2: Vous trouverez une page d’administration au
+        paragraph3: Pour modifier le mot de passe d’administration, dans la page d’Administration,
+          choisissez paramètres et remplacez 'mazizone' par votre mot de passe.
+        paragraph5: Par exemple,
         paragraph6: Etherpad fonctionne bien lorsqu'il y a un quelqu'un qui « nettoie
           » le texte de temps en temps et s'il existe des pages d'« index » convenables
           qui organisent les différents tampons disponibles.
       nextcloud-tab:
         subheader1: Description
+        subheader2: Guide d’administration
         subheader3: Conseils utiles
         paragraph1: Nextcloud est un serveur privé de synchronisation et partage de
           fichiers. Il est totalement open-source et vous pouvez l'héberger vous-même
@@ -590,9 +719,21 @@ fr:
           avez le contrôle sur vos photos, votre calendrier et données de contacts,
           vos documents et tout le reste.
         paragraph2: Vous trouverez une page administrateur sur
+        paragraph3: Pour accéder à vos paramètres personnels
+        paragraph4: Cliquez sur l’administration dans le coin en haut à droite de
+          votre instance de Nextcloud. Le menu des paramètres personnels s’ouvre.
+        paragraph5: Choisir Personal dans le menu déroulant.
         paragraph6: Certaines des fonctionnalités que vous allez voir incluent ce
           qui suit
+        paragraph7: Quota utilisé et disponible
+        paragraph8: Gérer l’image de votre profil
+        paragraph9: 'Nom complet : Vous pouvez y mettre ce que vous voulez, car il
+          est différent de votre nom de connexion, qui est unique et ne peut pas être
+          modifié'
+        paragraph10: Adresse de messagerie
+        paragraph11: Affiche vos groupes d'appartenance
         paragraph12: Gérez votre mot de passe
+        paragraph13: Choisir la langue pour votre interface Nextcloud
         paragraph14: Liens vers le poste de travail et les applications mobiles
         paragraph17: Le lien qui apparaît entre ces deux cases à cocher peut désormais
           être collé à l'URL d'une nouvelle application au
@@ -617,6 +758,8 @@ fr:
       panel-header: Paramètres système
       time-date:
         header: Heure/Jour
+      mysql-password:
+        header: Mot de passe de MySQL
       apache-filesize:
         header: Taille maxiamle des fichiers Apache
       popups:

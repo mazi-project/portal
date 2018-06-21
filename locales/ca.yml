@@ -212,6 +212,7 @@ ca:
           actions: Accions
       camera-panel:
         header: Càmera
+        no-camera-message: No hi ha cap càmera connectada a aquesta zona MAZI.
       popups:
         start-sensing-label2: Durada (segons)
         start-sensing-label3: Calendari (hora/data de finalització)
@@ -227,6 +228,8 @@ ca:
       subheader: Monitoratge
       details-panel:
         header: Detalls
+        table-label3: Títol
+        table-label4: Descripció
       statistics-panel:
         header: Dades de monitoratge
         statistics-table:
@@ -235,6 +238,13 @@ ca:
           action: Acció
           hardware-description-message: Monitoratge de l’activitat del sistema.
           application-description-message: Monitoratge de les dades de les aplicacions.
+      popups:
+        change-details-label3: Títol
+        change-details-label4: Descripció
+        hardware-label2: Temperatura
+        hardware-label4: Càrrega de la CPU
+        hardware-label5: Càrrega de la RAM
+        hardware-label6: Càrrega de l’emmagatzematge
     notifications-page:
       subheader: Notificacions
       notifications-table:
@@ -245,10 +255,31 @@ ca:
       popups:
         create-notification-title: Crea una notificació nova
         edit-notification-title: Modifica la notificació
+        delete-notification-message: Se suprimirà aquesta notificació permanentment
+          de la base de dades. Voleu continuar?
     logs-page:
       portal-log-panel:
         filter-label1: Missatges d’error
+        filter-label3: Missatges de depuració
     documentation-page:
+      header: Documentació administrativa
+      initial-configuration-tab:
+        header: Paràmetres inicials
+        subheader1: Descripció
+        subheader3: Paràmetres del Raspbian
+      etherpad-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+        paragraph5: Per exemple,
+      nextcloud-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+        paragraph3: Per a accedir als paràmetres personals
+        paragraph10: Adreça electrònica
+        paragraph14: Enllaços a les aplicacions d’escriptori i per a mòbils
+      guestbook-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
       wordpress-tab:
         subheader1: Descripció
         subheader2: Guia d’administració

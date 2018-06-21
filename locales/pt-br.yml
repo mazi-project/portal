@@ -138,6 +138,7 @@ pt-br:
       update-hint: 'Dica: se você tiver um comportamento defeituoso, reinicie o seu
         dispositivo.'
     setup-page:
+      third-step-header: Configuração de interface sem fio
       last-step-header: Completo
     dashboard-page:
       subheader: Painel de controle

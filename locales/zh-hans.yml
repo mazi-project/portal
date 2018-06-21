@@ -346,6 +346,7 @@ zh-hans:
       sensors-panel:
         header: 传感器
         header-hint: 您可以使用此工具控制多个传感器。
+        toggle-sensors-hint: 启用/禁用门户传感器标签
         sensors-table:
           type: 类型
           status: 状态
@@ -377,6 +378,7 @@ zh-hans:
           status: 状态
           description: 描述
           action: 操作
+          no-hardware-tasks-message: 当前没有运行系统活动监视任务。
           stop-hardware-task-hint: 停止系统活跃监视
           start-application-task-hint: 开始应用程序监视
       popups:
@@ -393,6 +395,7 @@ zh-hans:
         hardware-label5: Ram承载
         hardware-label6: 存储加载
         application-label1: 目标服务器
+        application-label4: Framadate应用程序
         start-hardware-message: 使用下面的表单开始发送系统活跃监视数据
         start-application-header: 开始应用程序监视数据
         show-hardware-header: 系统活跃监视信息
@@ -468,6 +471,7 @@ zh-hans:
         paragraph2: 这是它如何工作的
         paragraph3: 创建调查
         paragraph5: 发送调查链接至您的朋友或同事
+        paragraph6: 讨论并作出您的决定
     settings-page:
       subheader: 设置
       panel-header: 系统设置
@@ -481,4 +485,5 @@ zh-hans:
         change-time-date-title: 更改时间/日期
         change-time-date-message: 请使用以下表单以更改MAZI区域时间/日期。
         change-mysql-password-title: 更改MySQL密码
+        change-mysql-password-message: 请使用下面的表单更改此MAZI区域的MySQL密码。
 ...

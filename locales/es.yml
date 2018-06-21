@@ -51,6 +51,9 @@ es:
       here: aquí
       channel: Canal
       password: Contraseña
+      managed: gestionado
+      stable: Estable
+      development: Desarrollo
   portal:
     top-menu:
       documentation: Documentación
@@ -110,6 +113,8 @@ es:
       export-import: Exportar/importar
       logs: Registros
       documentation: Documentación
+    updates:
+      subheader: Actualizar
     dashboard-page:
       hardware-info:
         system-temperature: Temperatura de sistema
@@ -149,7 +154,10 @@ es:
     network-page:
       portal-domain-panel:
         header: Dominio de portal
+      popups:
+        connect-wifi-header: Conectar con una red wifi
     appearance-page:
+      subheader: Apariencia
       theme-panel:
         portal-title-label: Título del portal
       popups:
