@@ -688,23 +688,40 @@ fr:
         paragraph3: Si vous voulez changer le mot de passe pour l'utilisateur Pi,
           faîtes $passwd et suivez les instructions.
         paragraph4: Ceci est le mot de passe pour la connexion SSH, qui est différent
-          du compte d’administration que vous utilisez pour vous connecter à l’interface
+          du compte administrateur que vous utilisez pour vous connecter à l’interface
           d’administration.
         paragraph5: Une fois que vous êtes bien connecté au Raspberry, démarrez l’outil
           de configuration rasbian
         paragraph6: et naviguez jusqu’au menu
-        paragraph7: Retaillez le système de fichiers pour utiliser toute la capacité
-          de la carte SD
+        paragraph7: Redimensionnez le système de fichiers afin d'utiliser toute la
+          capacité de la carte SD
         paragraph8: Dans l’option d’internationalisation, modifiez
         paragraph9: la locale correspondant à votre situation géographique
-        paragraph10: le fuseau horaire pour correspondre à votre emplacement
+        paragraph10: le fuseau horaire correspondant à votre emplacement
       etherpad-tab:
         subheader1: Description
         subheader2: Guide de l'administration
         subheader3: Conseils utiles
+        paragraph1: Etherpad vous permet de modifier des documents de façon collaborative
+          en temps réel, tout comme un éditeur multi-joueurs en direct qui s’exécute
+          dans votre navigateur. Écrire des articles, des articles de presse, des
+          listes de choses à faire, etc. ensemble avec vos amis, vos co-étudiants
+          ou collègues, tous travaillant sur le même document simultanément. Toutes
+          les instances fournissent un accès à toutes les données via une API bien
+          documentée et supportent des importations/exportations vers beaucoup des
+          principaux formats d’échange de données. Et si l’ensemble de fonctionnalités
+          intégré ne vous suffit pas, il y a des tonnes de modules qui vous permettent
+          de personnaliser votre instance pour correspondre à vos besoins.
         paragraph2: Vous trouverez une page d’administration au
         paragraph3: Pour modifier le mot de passe d’administration, dans la page d’Administration,
           choisissez paramètres et remplacez 'mazizone' par votre mot de passe.
+        paragraph4: Ce sera plus facile pour les utilisateurs de votre zone MAZI si
+          vous créez vous-même un bloc d’index et en faites la page etherpad 'par
+          défaut' en modifiant l’URL dans la zone d’application de l’onglet d’administration,
+          quand vous gérez la connexion. Les gens peuvent être invités à créer leurs
+          propres blocs, et ajouter leur lien dans cette page d’index, qui sera aussi
+          'commentable' et la rendre plus facile à naviguer dans les blocs disponibles
+          sur le serveur.
         paragraph5: Par exemple,
         paragraph6: Etherpad fonctionne bien lorsqu'il y a un quelqu'un qui « nettoie
           » le texte de temps en temps et s'il existe des pages d'« index » convenables
@@ -735,26 +752,75 @@ fr:
         paragraph12: Gérez votre mot de passe
         paragraph13: Choisir la langue pour votre interface Nextcloud
         paragraph14: Liens vers le poste de travail et les applications mobiles
+        paragraph15: Un moyen facile de familiariser vos utilisateurs à l’application
+          Nextcloud est de créer un répertoire partagé modifiable et créer un lien
+          direct vers celui-ci, comme une application séparée, ce qui permettra à
+          n’importe qui de partager facilement des fichiers sans avoir à saisir un
+          nom d’utilisateur et un mot de passe.
+        paragraph16: Plus spécifiquement, après vous être connecté en tant qu’administrateur
+          dans Nextcloud, vous cliquez sur l’onglet 'partage' du répertoire et cochez
+          la case 'Partager le lien', et puis 'Permettre le téléchargement et la modification'
+          (voir figure ci-dessous).
         paragraph17: Le lien qui apparaît entre ces deux cases à cocher peut désormais
           être collé à l'URL d'une nouvelle application au
+        paragraph18: Il peut aussi être utile de créer un répertoire séparé pour différents
+          types de fichier (photos, diapos, vidéos) pour faciliter l’indication aux
+          gens quel type de contenu est attendu et faciliter la navigation.
+        paragraph19: Si vous devez utiliser le contenu téléchargé sur votre répertoire
+          partagé Nextcloud dans d’autres applications, les fichiers sont accessibles
+          à travers le chemin suivant
+        paragraph20: Ainsi, par exemple, pour l’utilisateur 'mazi' et le répertoire
+          audio/, le chemin serait
+        paragraph21: Afin de créer de nouveaux utilisateurs dans Nextcloud, vous devez
+          être connecté à Internet ou synchroniser manuellement la date et l’heure
+          entre le Raspberry et l’application Nextcloud.
       guestbook-tab:
+        subheader1: Description
+        subheader2: Guide d’administration
         subheader3: Mot de passe administrateur
+        subheader4: Affichages alternatifs du contenu
+        paragraph1: Le livre d’or MAZI est une application à source ouverte qui peut
+          être utilisée dans les événements, permettant aux participants de partager
+          leurs pensées, leurs photos, etc.
+        paragraph2: Pour configurer/modérer l’application livre d’or MAZI, vous pouvez
+          aller sur
+        paragraph3: Afin de modifier le mot de passe d’administration, ouvrir le fichier
+          config.js, qui se trouve à cet endroit
         paragraph4: puis remplissez le champ « authPassword » avec le mot de passe
           de votre choix.
+        paragraph5: En même temps qu’une présentation de contenu d’un navigateur web
+          standard, le livre d’or supporte deux autres affichages du contenu
+        paragraph6: Affichage diaporama
         paragraph7: Vue tablette
+        paragraph8: tous les liens fonctionnent quand vous êtes connecté à votre zone
+          MAZI.
       wordpress-tab:
+        subheader1: Description
+        subheader2: Guide d’administration
+        paragraph1: WordPress est une application de publication web ouverte et libre,
+          un système de gestion de contenu (CMS) et un outil de blog, construit par
+          une communauté de développeurs et de contributeurs. WordPress permet aux
+          utilisateurs de construire des sites web dynamiques et des blogs qui peuvent
+          être mis à jour, personnalisés et gérés depuis son serveur CMS, son application
+          intégrée et ses composants.
         paragraph2: 'Remplissez les informations : donnez un titre à votre site, créez
           un nom d''utilisateur et un mot de passe, et entrez votre adresse courriel.
           Cliquez sur le bouton « Install WordPress », puis connectez-vous en utilisant
           le compte que vous venez de créer.'
       framadate-tab:
+        subheader1: Description
         paragraph1: Framadate est une application gratuite et open-source comme Doodle.
           Il est facile de créer un rendez-vous ou un sondage sans enregistrement
           pour inviter vos collaborateurs
         paragraph2: Voici comment cela fonctionne
+        paragraph3: Créer un sondage
+        paragraph4: Déterminer les dates ou les sujets à choisir
+        paragraph5: Envoyer le lien du sondage à vos amis ou collègues
         paragraph6: Discutez et prenez votre décision
     settings-page:
       subheader: Paramètres
+      message: Vous pouvez utiliser cette page pour modifier différents paramètres
+        de configuration sur votre zone MAZI.
       panel-header: Paramètres système
       time-date:
         header: Heure/Jour
@@ -764,5 +830,14 @@ fr:
         header: Taille maxiamle des fichiers Apache
       popups:
         change-time-date-title: Changer heure et date
+        change-time-date-message: Veuillez utiliser le formulaire ci-dessous pour
+          modifier la date et l’heure de la zone MAZI.
         change-mysql-password-title: Changer le mot de passe de MySQL
+        change-mysql-password-message: Veuillez utiliser le formulaire ci-dessous
+          pour modifier le mot de passe MySQL pour cette zone MAZI.
+        change-apache-filesize-title: Modifier la taille maximale des fichiers téléchargeables
+          de Apache
+        change-apache-filesize-message: Veuillez utiliser le formulaire ci-dessous
+          pour modifier la taille maximale des fichiers téléchargeables d’Apache pour
+          cette zone MAZI.
 ...

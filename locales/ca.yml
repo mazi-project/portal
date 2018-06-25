@@ -295,4 +295,6 @@ ca:
         header: Contrasenya del MySQL
       apache-filesize:
         header: Mida màxima de fitxer de l’Apache
+      popups:
+        change-time-date-title: Canvia la data o l’hora
 ...

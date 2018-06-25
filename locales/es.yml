@@ -152,6 +152,8 @@ es:
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
     network-page:
+      internet-panel:
+        mode-hint: Modo de la red wifi
       portal-domain-panel:
         header: Dominio de portal
       popups:

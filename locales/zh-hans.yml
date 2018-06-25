@@ -1,6 +1,7 @@
 # Messages for Simplified Chinese (中文（简体）‎)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Deathkon
 # Author: Liuxinyu970226
 ---
 zh-hans:
@@ -23,7 +24,7 @@ zh-hans:
       reboot: 重启
       reset: 重置
       shutdown: 关机
-      logout: 注销
+      logout: 登出
       update: 更新
       connect: 连接
       disconnect: 断开连接
@@ -85,23 +86,23 @@ zh-hans:
       storage: 存储
     sensors-page:
       header: 传感器测量
-      header-message: 在此页面您可以查看多个连接到此MAZI区域的传感器的测量。您也可以使用下方按钮请求对特定周期的测量。
+      header-message: 在此页面，您可以查看多个连接到此MAZI Zone的传感器的测量结果。您也可以使用下方按钮请求从特定时间段进行测量。
       temperature-for: 来自%{sensor}的温度
       metrics-for: 来自%{sensor}的方向、加速和陀螺仪度量
       humidity-for: 来自%{sensor}的湿度
       pressure-for: 来自%{sensor}的压力
-      no-sensors-warn: 警告：此数据库中没有测量，或传感器设备未连接到此MAZI区域。
-      no-sensor-data-warn: 警告：没有传感器数据存放在此MAZI区域。系统管理员可以启用传感器数据收集。
+      no-sensors-warn: 警告：数据库中没有测量值，或者传感器设备未连接到此MAZI Zone。
+      no-sensor-data-warn: 警告：此MAZI Zone没有存储传感器数据。 系统管理员可以启用收集传感器数据。
       choose-timeslot-message: 请使用下方表单选择时间间隙。
       direction: 方向（角度）
-      acceleration: 加速（x, y, z）
-      gyroscope: 陀螺仪（音高, 偏航, 卷）
+      acceleration: 加速度（x, y, z）
+      gyroscope: 陀螺仪（俯仰，偏航，滚转）
       sensors-hint: 为查看有效值，应校准Sensehat。请检查管理员面板以了解更多详情。
     camera-page:
       header: 照相机
-      subheader: 在此页面您可以查看由连接到此MAZI区域的照相机拍摄的照片和视频。
+      subheader: 在此页面您可以查看由连接到此MAZI Zone的照相机拍摄的照片和视频。
       live-stream-header: 在线视频流
-      no-camera-warn: 当前没有适当安装在此MAZI区域的照相机！
+      no-camera-warn: 目前，这个MAZI Zone没有正确安装摄像头！
       media-library-header: 媒体库
       no-media-warn: 当前在库中没有找到图片或视频！
     monitoring-page:
@@ -142,12 +143,12 @@ zh-hans:
   admin:
     general:
       admin-panel: MAZI区域管理面板
-      shutdown-modal-title: 关机么？
-      shutdown-modal-message: MAZI区域现在将关机，这将导致此网站不能访问，您将需要手动重启此MAZI区域。开始么？
-      reboot-modal-title: 重启么？
+      shutdown-modal-title: 要关机吗？
+      shutdown-modal-message: MAZI Zone现在会关闭，这将导致这个网站无法访问，您需要手动重新启动这个MAZI Zone。 是否继续？
+      reboot-modal-title: 要重启吗？
       reboot-modal-message: MAZI区域现在将重启，这将导致此网站有数分钟不能访问，请等待几分钟后刷新此页面。开始么？
     top-menu:
-      header: MAZI区域管理面板
+      header: MAZI Zone管理面板
       admin: 管理员
       portal: 门户
       set-date: 设置日期
@@ -170,28 +171,29 @@ zh-hans:
     updates:
       subheader: 更新
       checking-updates: 正在检查更新。请等待...
-      alert-message-1: 您的本地存储库已编辑。这导致更新功能故障。请通过使用%{command}在本地存储库回退对这些文件的更改。
-      update-message-0: 请选择您的更新频道
-      update-message-1: 没有活跃的互联网连接。请连接此MAZI区域至互联网并重试。
+      alert-message-1: 您的本地存储库已被编辑。 这会导致更新功能故障。 请通过对编辑文件使用%{command}来恢复本地存储库中的更改。
+      update-message-0: 请选择您的更新线路
+      update-message-1: 没有与互联网的有效连接。 请将此MAZI Zone连接到互联网，然后重试。
       update-message-2: 此门户以演示模式运行！此操作会开始更新过程。
       update-message-3: 门户是最新版本，不需要更新。
       update-message-4: 系统正在更新。请等待...
-      update-message-5: 更新进程几乎已完成。您的MAZI区域将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI区域了。
-      update-message-6: 存在可用更新。请使用下方的按钮启动更新过程。
+      update-message-5: 更新进程几乎已完成。您的MAZI Zone将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI
+        Zone了。
+      update-message-6: 存在可用更新。请使用下方的按钮启动更新程序。
       update-hint: 提示：如果您遇到错误行为，请重启您的设备。
-      update-chan-hint: 提示：最新开发频道的版本可能不稳定。不建议更改回并继续使用更新的频道，因为这可能导致意想不到的行为。请建议版本详情%{link}以决定您的更新频道
+      update-chan-hint: 提示：开发线路的最新版本可能不稳定。不建议来回更换更新线路，因为它可能会导致意外的行为。请告知版本详情%{link}以决定您的更新线路
     setup-page:
       tog-nav: 开关导航
-      setup-panel: MAZI区域配置面板
+      setup-panel: MAZI Zone配置面板
       first-step-header: 管理员密码配置
-      first-step-message: 使用下方的表单设置MAZI区域管理面板的管理员密码。
-      first-step-hint: 提示：如果这是新的MAZI区域，当前密码是1234
+      first-step-message: 使用下方的表单设置MAZI Zone管理面板的管理员密码。
+      first-step-hint: 提示：如果这是新的MAZI Zone，当前密码是1234
       second-step-header: 日期/时间配置
-      second-step-message: 请使用下方的表单更改日期/时间，以及此MAZI区域的时区。
+      second-step-message: 请使用下方的表单更改日期/时间，以及此MAZI Zone的时区。
       third-step-header: 无线界面配置
       third-step-message: 请使用下方的表单更改Wi-Fi网络名称（可选）。
-      third-step-warning: 警告：如果您更改您的Wi-Fi网络名称，您的至此MAZI区域的无线连接将会丢失，并且您将需要重新连接到新的Wi-Fi网络。
-      fourth-step-header: MAZI区域详情
+      third-step-warning: 警告：如果您更改了Wi-Fi网络的名称，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接至新的Wi-Fi网络。
+      fourth-step-header: MAZI Zone详细信息
       fourth-step-message: 请使用下方的表单更改您的MAZI区域详情
       fourth-step-warning: 提示：您可以使用google地图查找您的位置（经纬度）：单击右键->这里是哪。然后使用屏幕下方方框中的坐标（例如39.379012,
         22.902813）
@@ -200,22 +202,22 @@ zh-hans:
     dashboard-page:
       subheader: 控制面板
       welcome:
-        message-1: '%{panel}是主工具，用于管理此MAZI区域门户，以及此MAZI区域的网络形式。'
+        message-1: '%{panel}是主工具，用于管理此MAZI Zone门户，以及此MAZI Zone的网络形式。'
         message-2: 请使用菜单导航到多个工具，它们可以：
         message-list-1: 管理支持的应用程序
-        message-list-2: 配置MAZI区域网络
+        message-list-2: 配置MAZI Zone网络
         message-list-3: 配置可视化门户外观
         message-list-4: 添加/移除门户上的通知
         message-list-5: 导出/导入快照
       hardware-info:
-        header: MAZI区域硬件信息
+        header: MAZI Zone硬件信息
         system-temperature: 系统温度
         cpu-load: CPU负载
         ram-load: RAM负载
         storage-load: 存储加载
       networking:
         header: 网络
-        users-online: 用户现在在线
+        users-online: 用户目前在线
         wifi-info: Wi-Fi网络信息
       applications:
         header: 应用程序
@@ -230,22 +232,22 @@ zh-hans:
         header: 通知
         notifications: 激活门户通知
       time-date:
-        header: MAZI区域时间/日期
+        header: MAZI Zone时间/日期
         current: 当前日期/时间
       version:
-        header: MAZI区域版本
+        header: MAZI Zone版本
         version-message: 此门户晚于“%{nof_commits}提交”。
         up-to-date: 最新
       popups:
-        expand-storage-message: 您可以使用下方的按钮，扩充MAZI区域存储至您的SD卡最大容量。您将需要重启设备使其发生。
+        expand-storage-message: 您可以使用下面的按钮将MAZI Zone存储扩展到SD卡的最大容量。 您需要重新启动设备才能生效。
     applications-page:
       subheader: 应用程序
       instances-menu:
         header: 应用程序实例
         active-column: 激活
         active-hint: 开关应用程序在门户上的可见性
-        splash-page-column: 飞溅页面
-        splash-page-hint: 将此应用程序用作门户的飞溅页面
+        splash-page-column: 醒目页面
+        splash-page-hint: 使用此应用程序作为门户的启动页面
         name-column: 名称
         name-hint: 应用程序的名称
         url-column: URL
@@ -263,7 +265,7 @@ zh-hans:
         create-instance-hint: 创建新的应用程序实例
         edit-instance-hint: 编辑应用程序实例
       applications-menu:
-        header: 安装的应用程序
+        header: 已安装的应用程序
         status-column: 状态
         status-hint: 操作状态（正在运行/已停止）
         icon-column: 图标
@@ -278,13 +280,20 @@ zh-hans:
         description-hint: 应用程序默认描述
         actions-column: 操作
         actions-hint: 可以在应用程序上执行的操作
-        web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI区域的性能。
-        web-app-start-hint: 这是web应用程序，它总是在运行。
+        web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI Zone的性能。
+        web-app-start-hint: 这是web应用程序，它始终运行。
         app-start-hint: 开始应用程序
         app-stop-hint: 停止应用程序
       popups:
+        delete-application-title: 删除应用程序实例？
+        delete-application-message: 该应用程序实例将从数据库中永久删除。你确认要继续吗？
+        delete-application-hint: 您需要删除所有连接到此应用程序的应用程序实例，然后才能删除此应用程序。
+        edit-application-title: 编辑应用程序实例？
         application-icon-hint: 提示：对于图标，请检查文档%{link}
+        create-application-title: 创建新的应用程序实例
+        create-application-help: 帮助：一些应用程序暂时不能有多个实例，因此其中一些应用程序可能会丢失。
         web-app-info-title: Web应用程序
+        web-app-info-message: 这是一个WEB应用程序，因此启动/停止此应用程序不会影响您的MAZI Zone的性能。
     network-page:
       subheader: 网络设置
       wifi-ap-interface-panel:
@@ -298,143 +307,229 @@ zh-hans:
         header: 互联网网络模式
         mode-hint: Wi-Fi网络的模式
       connect-wifi-panel:
-        header: 连接到Wi-Fi以获取互联网访问
+        header: 连接到Wi-Fi以访问互联网
         wifi-network-hint-1: 来自Wi-Fi网络
         wifi-network-hint-2: Wi-Fi互联网网络
-        usb-dongle-message: 请插入外部USB Wi-Fi电子狗至您的树莓派（Raspberry pi）设备以启用此功能。建议的USB电子狗
+        usb-dongle-message: 请将额外的USB Wi-Fi加密狗插入Raspberry pi以启用此功能。 建议的USB加密狗
       access-point-panel:
         header: 将路由器添加为接入点
         current-hint: 使用中的Wi-Fi接入点
-        router-message: 当前使用的是树莓派Wi-Fi界面。您可以插入OpenWRT路由器至您的树莓派，并移动访问点至此。建议的设备
+        router-message: 目前正在使用Raspberry Wi-Fi接口。 您可以将OpenWRT路由器插入Raspberry pi，然后将移动接入点移至此处。
+          建议的设备
       portal-domain-panel:
-        header: 门户域
-        domain-hint: 当前门户域
+        header: 门户域名
+        domain-hint: 当前门户域名
       popups:
         edit-wifi-header: 编辑Wi-Fi配置
+        edit-wifi-warning: 警告：如果您更改此Wi-Fi网络的任何配置值，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接到新的Wi-Fi网络。
         edit-wifi-network-header: 编辑Wi-Fi网络设置
         show-qrcode-header: Wi-Fi网络二维码
-        change-channel-header: 更改频道
+        change-channel-header: 更改线路
         change-password-header: 更改密码
         change-mode-header: 更改模式
-        change-mode-message: 使用下面的表单选择此MAZI区域的网络模式。如果您希望选择双模式，请确保有互联网访问（通过以太网电缆或Wi-Fi电子狗）。
+        change-mode-message: 使用下面的表格为这个MAZI区域选择网络模式。 如果您想选择双模式，请确保能够访问Internet（通过以太网电缆或Wi-Fi加密狗）。
         connect-wifi-header: 连接到Wi-Fi网络
         select-wifi-label: 选择Wi-Fi名称
-        select-mesh-mode-label: 选择网眼模式
+        select-mesh-mode-label: 选择网格模式
         type-wifi-label: 或如果它是隐藏的，在此输入
         type-password-label: 输入Wi-Fi网络的密码
-        change-domain-header: 编辑门户域
-        change-domain-warning: 警告：如果您设置无效的域，门户将无法打开。然而您可以通过此URL访问管理员面板
+        change-domain-header: 编辑门户域名
+        change-domain-message: 此操作将更改Portal的域名。请确保它是一个有效的域名（例如至少有一个'.'字符）。
+        change-domain-warning: 警告：如果您设置了无效的域名，则该门户将无法访问。但是，您可以通过此URL访问管理面板
+        toggle-access-point-header: 切换Wi-Fi接入点设备
+        toggle-access-point-message: 此操作将更改Wi-Fi接入点设备。此操作会导致您无法访问此门户网站，您需要重新连接到新的Wi-Fi网络。你确定要继续吗？
     appearance-page:
       subheader: 外观
       theme-panel:
         header: 主题配置
         portal-title-label: 门户标题
+        portal-title-hint: 该值配置左上角的标题和html标题。
         home-page-label: 首页标题
         home-page-hint: 此值配置门户首页的正文标题。
         home-subtitle-label: 首页子标题
         home-subtitle-hint: 此值配置门户首页的正文子标题。
         welcome-message-label: 应用程序欢迎消息
+        welcome-message-hint: 该值为应用程序页面配置欢迎消息的正文内容。
+        background-image-label: 应用程序背景图片
+        background-image-hint: 这个值用于配置应用程序页面的背景图片。
         colors-label: 颜色
+        side-main-color: 侧边面板主颜色
+        side-active-color: 侧边面板激活颜色
+        top-main-color: 顶部面板的主颜色
+        top-active-color: 顶部面板激活颜色
+        colors-hint: 以上数值用于配置门户的各种颜色。
       popups:
+        edit-theme-header: 编辑主题
         edit-title-header: 编辑标题
+        edit-home-title-header: 编辑主页标题
+        edit-home-subtitle-header: 编辑主页子标题
         edit-welcome-message-header: 编辑欢迎消息
+        edit-background-image-header: 编辑背景图片
+        reset-theme-header: 重置主题
+        reset-theme-message: 此行为会将全部可视化设置重设为默认值。
         load-theme-header: 加载主题
         load-theme-message: 加载以下配置文件之一
         save-theme-header: 保存主题
+        save-theme-message: 请输入新的主题名称。
     devices-page:
       subheader: 设备
+      message: 您可以使用下面的工具来控制连接到此MAZI Zone的各种受支持设备（传感器，摄像机等）。你可以找到所有支持的设备
       sensors-panel:
         header: 传感器
         header-hint: 您可以使用此工具控制多个传感器。
-        toggle-sensors-hint: 启用/禁用门户传感器标签
+        toggle-sensors-message: 启用/禁用用户门户中的感应标签栏
+        toggle-sensors-hint: 启用/禁用门户传感器选项卡
         sensors-table:
           type: 类型
           status: 状态
           entries: 记录
           actions: 操作
-        no-sensors-message: 找不到连接至此MAZI区域的传感器。
+          start-button-hint: 开始保存测量
+          delete-button-hint: 删除全部已保存的大小信息
+          sensehat-calibration-hint: 如果你想校准你的sensehat，请查阅本教程的校准部分
+        no-sensors-message: 找不到连接至此MAZI Zone的传感器。
+        init-sensors-message: 传感器模块尚未初始化。如果您希望使用连接到此MAZI Zone的传感器设备，请使用下面的按钮来初始化此模块。
         init-button-hint: 开始传感器初始化
       camera-panel:
         header: 照相机
-        no-camera-message: 没有照相机连接到此MAZI区域！
+        header-hint: 您可以用这个来控制相机。
+        toggle-camera-message: 在用户门户上启用/禁用摄像头选项卡
+        toggle-camera-hint: 启用/禁用门户的拍照选项卡
+        camera-version-message: 相机模块未正确安装在此图像上！请使用此功能专用的大于1.7.2的图像。
+        no-camera-message: 没有照相机连接到此MAZI Zone！
       popups:
+        start-sensing-title: 启动响应式大小
+        start-sensing-message: 请在日历上输入持续时间或日期以定义收集测量的时间段。另外，请使用区间来定义测量的频率。
         start-sensing-label1: 目标服务器
+        start-sensing-label2: 持续时间（秒）
         start-sensing-label3: 日历（结束时间/日期）
+        start-sensing-label4: 间隔（秒）
+        start-sensing-hint: 提示：如果您同时使用了持续时间和日历输入框，则日历将被忽略！！！
+        delete-sensing-title: 删除响应式大小
+        delete-sensing-message: 你想删除所有保存的测量结果吗？
+        start-images-title: 开始拍摄图像
+        start-images-label1: 持续时间（秒）
+        start-images-label2: 间隔（秒）
         delete-images-title: 删除所有照片
-        delete-images-message: 您希望删除所有捕捉的照片么？
+        delete-images-message: 您希望删除所有拍摄的照片么？
+        start-videos-title: 开始拍摄视频
+        start-videos-label1: 持续时间（秒）
         delete-videos-title: 删除所有视频
+        delete-videos-message: 你希望将拍摄的视频全部删除吗？
     monitoring-page:
       subheader: 正在监视
+      message: 你可以使用下方的工具来控制你的MAZI Zone采集并发送数据至数据采集服务器的方式。
       details-panel:
         header: 详情
+        header-hint: 你可以使用这个来启用/禁用监视功能。
+        toggle-monitoring-message: 启用/禁用监控功能。
+        toggle-monitoring-hint: 启用/禁用监控功能
+        details-message: 您可以在下面看到MAZI Zone的详细信息，您可以通过按下底部的编辑按钮来更改各项内容。
         table-label1: 部署
         table-label2: 管理员
         table-label3: 标题
         table-label4: 描述
-        table-label5: 位置（经纬度）
+        table-label5: 位置（经度，纬度）
+        details-hint: 在启用监控之前，必须首先更改监控详情！
       statistics-panel:
+        header: 监控数据
+        header-hint: 你可以使用这个来控制监视行为。
+        toggle-monitoring-map-msg: 启用/禁用用户门户的监控标签
         toggle-monitoring-map-hint: 启用/禁用监视标签
+        message: 通过按下方的开始/停止按钮，您可以开始/停止将系统活动和应用程序监视数据发送到远程（或本地）端。
         statistics-table:
           status: 状态
           description: 描述
           action: 操作
-          no-hardware-tasks-message: 当前没有运行系统活动监视任务。
-          stop-hardware-task-hint: 停止系统活跃监视
+          hardware-description-message: 系统行为监控。
+          application-description-message: 应用程序数据监控。
+          no-hardware-tasks-message: 当前没有正在运行的系统行为监控任务。
+          no-application-tasks-message: 目前没有任何应用程序监控任务在运行。
+          start-hardware-task-hint: 开始系统活跃监视
+          stop-hardware-task-hint: 停止系统行为监控
+          delete-hardware-data-hint: 从本地数据库中删除全部系统行为监控信息
           start-application-task-hint: 开始应用程序监视
+          stop-application-task-hint: 停止应用程序监控
+          delete-application-data-hint: 从本地数据库中删除全部应用程序监控数据
       popups:
         change-details-header: 更改监视详情
+        change-details-message: 请用以下表格来修改模型的监测详情。
         change-details-label1: 部署
         change-details-label2: 管理员
         change-details-label3: 标题
         change-details-label4: 描述
-        change-details-label5: 位置（经纬度）
+        change-details-label5: 位置（经度，纬度）
         hardware-label1: 目标服务器
         hardware-label2: 温度
         hardware-label3: WiFi用户
         hardware-label4: CPU负载
-        hardware-label5: Ram承载
-        hardware-label6: 存储加载
+        hardware-label5: 加载Ram
+        hardware-label6: 加载存储
         application-label1: 目标服务器
+        application-label2: Etherpad应用程序
+        application-label3: 留言板应用程序
         application-label4: Framadate应用程序
-        start-hardware-message: 使用下面的表单开始发送系统活跃监视数据
+        application-label5: Nextcloud应用程序
+        start-hardware-header: 启动系统行为监控数据
+        start-hardware-message: 使用下面的表单开始发送系统行为监控数据
         start-application-header: 开始应用程序监视数据
-        show-hardware-header: 系统活跃监视信息
+        start-application-message: 使用以下表格来开始发送系统监控数据
+        show-hardware-header: 系统行为监控信息
+        show-hardware-message: 当前系统行为监控程序的状态
+        show-application-header: 应用程序监视信息
         show-application-message: 当前的应用程序监视进程状态
-        delete-application-header: 删除应用程序监视数据
+        delete-hardware-header: 删除系统行为监控数据
+        delete-hardware-message: 使用下面的按钮从本地数据库中删除所有系统活动监控数据。目前数据库中的条目数量是%{entries}
+        delete-hardware-hint: 此行为需要几秒钟来完成，请在刷新页面之前稍等片刻。
+        delete-application-header: 删除应用程序监控数据
         delete-application-message: 使用下面的按钮从本地数据库中删除应用程序监视数据。当前数据库中的记录数量为%{entries}
+        delete-application-hint: 此操作需要几秒钟才能执行完毕，因此请在刷新页面之前等待。
     notifications-page:
       subheader: 通知
       notifications-table:
         header1: 状态
         header2: 标题
-        header3: 主体
+        header3: 正文
         header4: 操作
       popups:
         create-notification-title: 创建新通知
-        edit-notification-title: 编辑通告
+        edit-notification-title: 编辑通知
         delete-notification-message: 此通知将从数据库中永久删除。您希望继续么？
     import-export-page:
       subheader: 快照
-      message: 您可以使用下方工具制作此MAZI区域当前配置的快照。这包括任何东西（网络配置、应用程序、应用程序实例、通知、可视化配置等）。
+      message: 您可以使用下面的工具为这个MAZI Zone的当前配置拍摄快照。这包括一切内容（网络配置，应用程序，应用程序实例，通知，可视化配置等）。
+      warning: 警告：如果您使用不同的Wi-Fi网络设置加载新快照，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接到新的Wi-Fi网络。
       save-snapshot-panel:
         header: 保存快照
+        header-hint: 你可以使用这个来拍摄快照。
         form-placeholder: 快照名称
+        form-hint: 请输入新快照的名字。
       load-snapshot-panel:
         header: 加载快照
-        no-snapshots-message: 当前没有保存的快照。
+        header-hint: 你可以使用这个来加载快照。
+        message: 请选择一个快照文件并点击上传。MAZI门户将会重启。
+        no-snapshots-message: 当前没有已保存的快照。
       import-export-panel:
+        header: 导入/导出快照
+        header-hint: 你可使用它来导出zip文件的快照。或者将一个zip文件作为快照导入。
         message: 请选择一个快照并点击加载。
+        no-snapshots-message: 尚无已保存的快照。
       application-snapshots-header: 应用程序快照
+      application-snapshots-message: 使用下面的面板为此MAZI Zone支持的应用程序导入/导出快照。
       interview-panel:
+        header-hint: 你可以使用这个来导入/导出快照。
         form-placeholder: 快照名称
       guestbook-panel:
+        header-hint: 你可以使用这个来导入/导出快照。
         form-placeholder: 快照名称
       popups:
         import-header: 导入快照
+        import-interview-header: 导入访问快照
         import-guestbook-header: 导入Guestbook的快照
         import-etherpad-header: 导入Etherpad的快照
     logs-page:
-      message: 您可以查阅下方的MAZI区域日志文件
+      subheader: 日志查看器
+      message: 您可以查阅下方的MAZI Zone日志文件
       portal-log-panel:
         header: 门户日志文件
         header-hint: 门户日志文件。
@@ -442,38 +537,86 @@ zh-hans:
         filter-label2: 警告消息
         filter-label3: 调试消息
     documentation-page:
+      header: 管理员文档
       initial-configuration-tab:
+        header: 初始配置
         subheader1: 描述
+        subheader2: 通过SSH连接
+        subheader3: Raspbian配置
+        paragraph1: 这是MAZI Zone门户的管理文档指南。使用上面的标签导航到文档的不同部分。当前一栏描述了管理员可能需要的不同操作，用来配置树莓派。而其他各个选项卡提供了受支持的应用程序的管理信息。
+        paragraph2: 若要通过ssh远程连接到Raspberry，你需要打开一个终端并执行以下命令
         paragraph3: 如果您希望更改派用户的密码，请进行$passwd并跟随指引。
-        paragraph10: 匹配您位置的时区
+        paragraph4: 这是ssh连接的密码，它与您用来登录管理界面的管理员帐户不同。
+        paragraph5: 当你成功登录Raspberry后，请启动Rasbian配置工具
+        paragraph6: 并导航到菜单
+        paragraph7: 重新调整文件系统的大小以使用整个SD卡容量
+        paragraph8: 在国际化选项中，更改
+        paragraph9: 匹配您的地理位置的语言环境设置
+        paragraph10: 匹配您地理位置的时区
       etherpad-tab:
         subheader1: 描述
+        subheader2: 管理指南
         subheader3: 实用技巧
+        paragraph1: Etherpad允许您实时协作编辑文档，就像在您的浏览器中运行的实时多人编辑器一样。与您的朋友，同学或同事一起撰写文章，新闻稿，待办事项列表等，所有人都同时在同一个文档上工作。所有实例都可以通过一个文档完整的API提供对所有数据的访问，并支持导入/导出成多种主流文件格式。如果内置的功能对您来说不够用，有大量插件允许您自定义您的实例以满足您的需求。
+        paragraph2: 你将找到管理页面位于
+        paragraph3: 要更改管理员密码，请在管理员页面中选择设置并将“mazizone”改为你的密码。
+        paragraph4: 为了便于您的MAZI Zone用户，您可以在登陆管理页面后，创建自己的索引板块，并通过更改管理面板的应用程序区域中的URL，使其成为“默认”etherpad页面。人们可以被邀请创建他们自己的板块，并将其链接添加到该索引页面中，这也将是“可评论的”，并且使得更容易浏览服务器上的可用板块。
         paragraph5: 例如，
+        paragraph6: 如果有人来时不时地“清理”文本，并且有合适的“索引”页面来组织各种可能的平板设备，Etherpad就能运行良好。
       nextcloud-tab:
         subheader1: 描述
+        subheader2: 管理指南
         subheader3: 实用技巧
+        paragraph1: Nextcloud是一个私人文件同步和共享通信服务器。 它完全开源，你可以自己托管它或委托一个公司为你这样做。通过这种方式，您可以管理您的照片，日历和联系人数据，文档以及其他任何内容。
         paragraph2: 您将在此找到管理页面：
+        paragraph3: 访问您的个人设置
+        paragraph4: 点击Nextcloud实例右上角的管理员。可打开个人设置菜单
         paragraph5: 从下拉菜单中选择个人。
-        paragraph6: 您将看到的一些功能包含在下方
+        paragraph6: 您将看到的一些功能包括以下内容
+        paragraph7: 使用情况和可用配额
+        paragraph8: 编辑你的资料图片
+        paragraph9: 姓名 你可以随意填写，因为它与你的登录名并不相同，登录名是唯一且不可被更改的
         paragraph10: 电子邮件地址
-        paragraph11: 列举您的群组成员
+        paragraph11: 您的群组成员列表
         paragraph12: 管理您的密码
+        paragraph13: 为您的Nextcloud界面选择语言
         paragraph14: 链接到桌面和移动应用
+        paragraph15: 将用户引入Nextcloud应用程序的一种简单方法是创建一个共享可编辑文件夹并创建一个直接链接，作为一个单独的应用程序，这将允许任何人无需输入用户名和密码即可轻松共享文件。
+        paragraph16: 更具体地说，在你以管理员身份登录Nextcloud后，您可以点击文件夹的“共享”面板并选中“共享链接”框，然后选择“允许上传和编辑”（请参见下图）。
+        paragraph17: 在这两个复选框之间的连接已被识别为URL，指向一个应用程序位于
+        paragraph18: 它还可以帮助为不同类型的文件（照片，幻灯片，视频）创建单独的文件夹，以便更容易地让用户得知这是那种类型的内容，并使浏览更简便。
+        paragraph19: 如果您需要使用上传到其他应用程序中共享的Nextcloud文件夹的内容，则可通过以下路径访问这些文件
+        paragraph20: 所以，例如，对于用户“mazi”的文件夹音频/路径将会是
+        paragraph21: 为了在Nextcloud中创建新用户，您必须连接到Internet或手动同步Raspberry和Nextcloud应用程序之间的时间与日期。
       guestbook-tab:
         subheader1: 描述
+        subheader2: 管理指南
         subheader3: 管理员密码
-        paragraph4: 然后填写授权密码为您喜欢的密码。
+        subheader4: 内容的替代视图
+        paragraph1: MAZI Guestbook是一款开源应用程序，可用于让用户分享他们的想法，照片等。
+        paragraph2: 要配置/调整MAZI留言板应用程序，您可以转到
+        paragraph3: 若要修改管理员密码，请打开位于当前路径下的 config.js 文件
+        paragraph4: 然后将授权密码填写为您喜欢的密码。
+        paragraph5: 除了标准的Web浏览器内容视图外，GuestBook还支持其他两种内容视图
+        paragraph6: 幻灯片视图
+        paragraph7: 平板视图
+        paragraph8: 当您连接到MAZI Zone时，所有链接都能正常工作。
       wordpress-tab:
         subheader1: 描述
+        subheader2: 管理指南
+        paragraph1: WordPress是一个开源和免费的Web发布应用程序，内容管理系统（CMS）和由开发人员和贡献者社区构建的博客工具。WordPress允许用户构建动态网站和博客，这些网站和博客可能会通过其后端CMS和集成应用程序和组件进行更新，定制和管理。
+        paragraph2: 填写信息：给您的网站设置一个标题，创建一个用户名和密码，并输入您的电子邮件地址。 点击安装WordPress的按钮，然后用刚刚创建的帐户来登录。
       framadate-tab:
         subheader1: 描述
-        paragraph2: 这是它如何工作的
+        paragraph1: Framadate 正如 Doodle 一样，是一个开源、免费的应用程序。无需注册即可邀请您的朋友前来，轻松地创建约会或调查。
+        paragraph2: 这是它的工作原理
         paragraph3: 创建调查
+        paragraph4: 决定要选择的日期或主题
         paragraph5: 发送调查链接至您的朋友或同事
         paragraph6: 讨论并作出您的决定
     settings-page:
       subheader: 设置
+      message: 您可以使用此页面来更改在MAZI Zone上的各种配置设置。
       panel-header: 系统设置
       time-date:
         header: 时间/日期
@@ -483,7 +626,9 @@ zh-hans:
         header: Apache最大文件大小
       popups:
         change-time-date-title: 更改时间/日期
-        change-time-date-message: 请使用以下表单以更改MAZI区域时间/日期。
+        change-time-date-message: 请使用以下表单更改MAZI Zone的时间/日期。
         change-mysql-password-title: 更改MySQL密码
-        change-mysql-password-message: 请使用下面的表单更改此MAZI区域的MySQL密码。
+        change-mysql-password-message: 请使用下面的表单修改此MAZI Zone的MySQL密码。
+        change-apache-filesize-title: 修改Apache最大上传文件大小
+        change-apache-filesize-message: 请用以下表格来修改在MAZI Zone中的Apache服务器最大上传文件大小限制。
 ...
