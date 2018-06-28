@@ -63,6 +63,8 @@ he:
       active: פעיל
       inactive: לא פעיל
       error: שגיאה
+      stable: יציב
+      development: פיתוח
   portal:
     top-menu:
       documentation: תיעוד
@@ -175,9 +177,11 @@ he:
       logs: יומנים
       documentation: תיעוד
     updates:
+      subheader: עדכון
       checking-updates: מתבצעת בדיקה של עדכונים. נא להמתין...
       alert-message-1: המאגר המקומי שלך נערך, והדבר גרם לתקלה בפעולת העדכון. נא לבטל
         את השינויים הללו במאגר המקומי, על־ידי שימוש ב־%{command} עבור הקבצים שנערכו.
+      update-message-0: נא לבחור את ערוץ העדכונים שלך
       update-message-1: אין חיבור פעיל לאינטרנט. נא לחבר את תחום ה־MAZI הזה לאינטרנט
         ולאחר מכן לנסות שוב.
       update-message-2: פורטל זה פועל במצב הדגמה! הפעולה הזו הייתה אמורה להתחיל תהליך
@@ -189,6 +193,9 @@ he:
         לתחום ה־MAZI המעודכן.
       update-message-6: קיים עדכון זמין. יש להשתמש בכפתור שלהלן כדי להתחיל את העדכון.
       update-hint: 'עצה: אם זה לא פועל כמו שצריך, אפשר לאתחל מחדש את המכשיר.'
+      update-chan-hint: 'עצה: ייתכן שהגרסה האחרונה של ערוץ הפיתוח אינה יציבה. לא מומלץ
+        לשנות את ערוץ העדכונים באופן תדיר, משום שהדבר עלול לגרום לתקלות בלתי־צפויות.
+        ניתן לעיין בפרטי הגרסה (%{link}) כדי להחליט באיזה ערוץ עדכונים לבחור.'
     setup-page:
       tog-nav: מצב הניווט
       setup-panel: לוח ההגדרות של תחום ה־MAZI
@@ -252,4 +259,30 @@ he:
         current: התאריך והשעה הנוכחיים
       version:
         header: גרסת תחום ה־MAZI
+        version-message: בפורטל זה יש %{nof_commits} שינויים שטרם עודכנו.
+        up-to-date: מעודכן
+      popups:
+        expand-storage-message: באפשרותך להרחיב את האחסון של תחום ה־MAZI הזה לקיבולת
+          המרבית של כרטיס ה־SD שלך באמצעות הכפתור שלמטה. יהיה צורך לאתחל מחדש את המכשיר
+          כדי שהרחבת האחסון תיכנס לתוקף.
+    applications-page:
+      subheader: יישומים
+      instances-menu:
+        header: תצוגת היישום
+        active-column: פעיל
+        active-hint: שינוי מצב התצוגה של היישום בפורטל
+        splash-page-column: דף הפתיחה
+        splash-page-hint: שימוש ביישום זה בתור דף הפתיחה של הפורטל
+        name-column: שם
+        name-hint: שם היישום
+        url-column: כתובת URL
+        url-hint: כתובת ה־URL של היישום
+        description-column: תיאור
+        description-hint: התיאור שיוצג עבור היישום בפורטל
+        parent-column: יישום אב
+        parent-hint: יישום האב
+        click-column: מונה לחיצות
+        click-hint: סך כל הפעמים שהיישום הופעל
+        actions-column: פעולות
+        actions-hint: פעולות שניתן לבצע ביישום
 ...

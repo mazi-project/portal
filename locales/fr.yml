@@ -277,7 +277,7 @@ fr:
         current: Date/Heure actuelles
       version:
         header: Version de la zone MAZI
-        version-message: Ce portail est '%{nof_commits} validations' en retard.
+        version-message: Ce portail est en retard de '%{nof_commits} validations'.
         up-to-date: À jour
       popups:
         expand-storage-message: Vous pouvez étendre le stockage de la zone MAZI jusqu’à
@@ -495,8 +495,8 @@ fr:
       popups:
         start-sensing-title: Démarrer les mesures des capteurs
         start-sensing-message: Veuillez entrer une durée ou une date sur le calendrier
-          pour définir un créneau horaire pour regrouper les mesures. Veuillez aussi
-          utiliser l’intervalle pour définir la fréquence des mesures.
+          pour définir un créneau horaire et regrouper les mesures. Veuillez aussi
+          utiliser l’intervalle afin de définir la fréquence des mesures.
         start-sensing-label1: Serveur cible
         start-sensing-label2: Durée (en secondes)
         start-sensing-label3: Calendrier (heure/date de fin)
@@ -745,7 +745,7 @@ fr:
         paragraph7: Quota utilisé et disponible
         paragraph8: Gérer l’image de votre profil
         paragraph9: 'Nom complet : Vous pouvez y mettre ce que vous voulez, car il
-          est différent de votre nom de connexion, qui est unique et ne peut pas être
+          est dissocié du votre nom de connexion, qui est unique et ne peut pas être
           modifié'
         paragraph10: Adresse de messagerie
         paragraph11: Affiche vos groupes d'appartenance
@@ -764,8 +764,8 @@ fr:
         paragraph17: Le lien qui apparaît entre ces deux cases à cocher peut désormais
           être collé à l'URL d'une nouvelle application au
         paragraph18: Il peut aussi être utile de créer un répertoire séparé pour différents
-          types de fichier (photos, diapos, vidéos) pour faciliter l’indication aux
-          gens quel type de contenu est attendu et faciliter la navigation.
+          types de fichiers (photos, diapos, vidéos) afin d'orienter les personnes
+          plus facilement sur le type de contenu attendu et faciliter la navigation.
         paragraph19: Si vous devez utiliser le contenu téléchargé sur votre répertoire
           partagé Nextcloud dans d’autres applications, les fichiers sont accessibles
           à travers le chemin suivant

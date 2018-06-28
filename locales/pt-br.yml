@@ -137,6 +137,10 @@ pt-br:
         abaixo para iniciar o processo de atualização.
       update-hint: 'Dica: se você tiver um comportamento defeituoso, reinicie o seu
         dispositivo.'
+      update-chan-hint: 'Dica: a versão mais recente do canal de desenvolvimento pode
+        ser instável. Não é recomendado alterar o canal de atualização, pois isso
+        pode causar um comportamento inesperado. Por favor, informe os detalhes da
+        versão %{link} para decidir o seu canal de atualização'
     setup-page:
       third-step-header: Configuração de interface sem fio
       last-step-header: Completo
