@@ -299,8 +299,11 @@ zh-hans:
       wifi-ap-interface-panel:
         header: '%{interface}的Wi-Fi访问点网络设置'
         ssid-name-label: Wi-Fi网络的名称（SSID）
-        wifi-channel-label: Wi-Fi网络的频道
+        ssid-name-description: 服务集标识符（SSID）是分配给Wi-Fi（无线）网络的名称。网络中的所有设备都必须使用这种区分大小写的名称来通过Wi-Fi进行通信，它是一个长32字节的字符串。请点击下面的编辑按钮进行更改。
+        wifi-channel-label: Wi-Fi网络路线
+        wifi-channel-description: 在MAZI Zone上选择最佳的Wi-Fi线路有助于减少干扰并改善您的WI-Fi信号。请按下面的编辑按钮进行更改。
         wifi-password-label: Wi-Fi网络的密码
+        wifi-password-description: Wi-Fi（无线）网络的验证密码。必须至少为8个字符。如果密码为空，Wi-Fi网络安全将被禁用。请点击下面的编辑按钮进行更改。
       unconfigured-dongle-panel:
         message: 此网络界面尚未配置。请使用下面的按钮，以适当配置它。
       internet-panel:

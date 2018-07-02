@@ -253,7 +253,7 @@ fr:
       hardware-info:
         header: Information sur le matériel de la zone MAZI
         system-temperature: Température du système
-        cpu-load: Charge du CPU
+        cpu-load: Charge CPU
         ram-load: Occupation mémoire vive
         storage-load: Charge du stockage
       networking:
@@ -273,7 +273,7 @@ fr:
         header: Notifications
         notifications: Notifications actives du portail
       time-date:
-        header: Date/Heure de la zone MAZI
+        header: Heure/Date de la zone MAZI
         current: Date/Heure actuelles
       version:
         header: Version de la zone MAZI
@@ -391,7 +391,7 @@ fr:
         edit-wifi-warning: 'Avertissement : Si vous modifiez une valeur de la configuration
           pour ce réseau Wi-Fi, votre connexion sans fil à cette zone MAZI sera perdue
           et vous devrez essayer de vous reconnecter au nouveau réseau Wi-Fi.'
-        edit-wifi-network-header: Modifier les paramètres de réseau Wi-Fi
+        edit-wifi-network-header: Modifier les paramètres du réseau Wi-Fi
         show-qrcode-header: QRCode du réseau Wi-Fi
         change-channel-header: Modifier le canal
         change-password-header: Changer le mot de passe
@@ -488,7 +488,7 @@ fr:
         toggle-camera-message: Activer/désactiver l’onglet appareil photo sur le portail
           utilisateur
         toggle-camera-hint: activer/désactiver l’onglet appareil photo des portails
-        camera-version-message: Le module Appareil photo n’est ps bien installé sur
+        camera-version-message: Le module Appareil photo n’est pas bien installé sur
           cette image ! Veuillez utiliser une image plus grande que 1.7.2 qui est
           bien configurée pour cela.
         no-camera-message: Il n’y a aucun appareil photo connecté à cette zone MAZI !
@@ -502,7 +502,7 @@ fr:
         start-sensing-label3: Calendrier (heure/date de fin)
         start-sensing-label4: Intervalle (en secondes)
         start-sensing-hint: 'Conseil : Si vous utilisez à la fois la durée et les
-          zones de saisie de calendrier, le calendrier sera ignoré !!!'
+          zones de saisie du calendrier, le calendrier sera ignoré !!!'
         delete-sensing-title: Supprimer les mesures de capteurs
         delete-sensing-message: Voulez-vous supprimer toutes les mesures enregistrées ?
         start-images-title: Démarrer la capture des images
@@ -532,7 +532,7 @@ fr:
         table-label2: Administrateur
         table-label3: Titre
         table-label4: Description
-        table-label5: Emplacement (lat, long)
+        table-label5: Emplacement (lattitude, longitude)
         details-hint: Il est obligatoire de modifier d’abord les détails de surveillance,
           avant de l’activer !
       statistics-panel:
@@ -586,7 +586,7 @@ fr:
           système
         start-hardware-message: Utilisez le formulaire ci-dessous pour commencer à
           envoyer des données de surveillance d'activité système
-        start-application-header: Démarrer données de gestion d'application
+        start-application-header: Démarrer données de surveillance d'application
         start-application-message: Utiliser le formulaire ci-dessous pour démarrer
           les données de surveillance de l’activité système
         show-hardware-header: Information de surveillance d'activité système
@@ -597,7 +597,7 @@ fr:
           de l’application
         delete-hardware-header: Supprimer les données de surveillance de l’activité
           système
-        delete-hardware-message: Utiliser le bouton ci-dessous pour supprimer touts
+        delete-hardware-message: Utiliser le bouton ci-dessous pour supprimer toutes
           les données de surveillance de l’activité système de la base de données
           locale. Actuellement, le nombre d’entrées dans la base de données est de
           %{entries}
@@ -620,7 +620,7 @@ fr:
         create-notification-title: Créer une nouvelle notification
         edit-notification-title: Notification de modification
         delete-notification-message: Cette notification sera effacée de façon permanente
-          de la base de données. Voulez-vous continuer ?
+          dans la base de données. Voulez-vous continuer ?
     import-export-page:
       subheader: Captures
       message: Vous pouvez utiliser les outils ci-dessous pour faire une saisie d'écran
