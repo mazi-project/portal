@@ -85,6 +85,7 @@ pt-br:
       storage: Armazenamento
     sensors-page:
       header: Medidas de sensor
+      temperature-for: Temperatura de %{sensor}
       pressure-for: Pressão de %{sensor}
       direction: Direção (Graus)
       acceleration: Aceleração (x, y, z)
@@ -153,6 +154,8 @@ pt-br:
         ram-load: Carga de RAM
       applications:
         header: Aplicativos
+      version:
+        version-message: Este Portal é %{nof_commits} commits' por trás.
     applications-page:
       subheader: Aplicativos
       instances-menu:
@@ -165,6 +168,7 @@ pt-br:
         guestbook-admin-hint: Painel de Administração do livro de visitas
       applications-menu:
         status-column: Status
+        status-hint: o status operacional (em execução/parado)
         icon-column: Ícone
         color-column: Cor
         name-column: Nome do aplicativo
