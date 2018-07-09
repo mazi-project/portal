@@ -142,6 +142,14 @@ class MaziApp < Sinatra::Base
         app.save
       end
     end
+    i = 1
+    Mazi::Model::ApplicationInstance.all.each do |app|
+      if app.order.nil?
+        app.order = i
+        app.save
+      end
+      i = app.order + 1
+    end
   end
 
   error do |err|
