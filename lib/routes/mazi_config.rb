@@ -268,13 +268,7 @@ module Sinatra
             details[:admin]       = params['admin'] unless params['admin'].nil? || params['admin'].empty?
             details[:title]       = params['title'] unless params['title'].nil? || params['title'].empty?
             details[:description] = params['description'] unless params['description'].nil? || params['description'].empty?
-            unless params['deployment'].nil? || params['deployment'].empty?
-              unless valid_location?(params['location'])
-                session['error'] = "Invalid location! Please try again by using this format 'latitude, longitude'."
-                redirect '/setup'
-              end
-              details[:loc] = params['location']
-            end
+            details[:loc]         = params['location'] unless params['location'].nil? || params['location'].empty?
             write_monitoring_details(details)
 
             unless params['date'].nil? || params['date'].empty?
