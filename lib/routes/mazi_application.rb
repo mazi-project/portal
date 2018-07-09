@@ -74,7 +74,6 @@ module Sinatra
               app.enabled     = params['enabled'] if params['enabled']
               app.color       = params['color'] if params['color']
               unless params['icon'].nil? || params['icon'].empty?
-                puts "aaaaaaa"
                 app.icon = params['icon'] if params['icon']
                 app.icon = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
                 app.icon = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
