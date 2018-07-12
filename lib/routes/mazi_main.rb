@@ -157,6 +157,28 @@ module Sinatra
               locals[:js] << "js/jquery.datetimepicker.min.js"
               locals[:timezones] = all_supported_timezones
               erb :setup, locals: locals
+            when 'splash'
+              locals[:main_body] = :splash
+ 	      redir = "#{params['redir']}"
+              redir = redir.gsub( /http?:\/\//, 'http%3A%2F%2F')
+              locals[:authtarget] = "#{params['authaction']}?redir=#{redir}&tok=#{params['tok']}"
+              locals[:clientmac] = "#{params['mac']}"
+              locals[:imagesdir] = "/path/to/image"
+              locals[:apps] = Mazi::Model::Application.all
+              locals[:name] = @config[:portal_configuration][:applications_title]
+              ex4 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-m'], @config[:scripts][:enabled_scripts])
+              mode = ex4.exec_command.first.split
+              mode = mode[1].gsub('"', '')
+              if mode == "offline"
+                 locals[:message_mode] = "so it does NOT provide internet access."
+              else
+                 locals[:message_mode] = "so it does provide internet access."
+              end
+              locals[:mode] = "#{mode}"
+              ex5 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
+              domain = ex5.exec_command.first.split
+              locals[:domain] = "http://#{domain[1]}"
+              erb :splash, locals: locals
             when 'admin'
               redirect 'admin_dashboard'
             when 'admin_dashboard'
