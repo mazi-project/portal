@@ -26,6 +26,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>#</th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.active-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.splash-page-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.splash-page-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.color-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.color-column") %></th>
@@ -41,6 +42,12 @@
     <tbody>
       <% application_instances.each do |app| %>
       <tr class="app_inst_tr" id="app_inst_tr_<%= app.id.to_s %>">
+        <td scope="row">
+          <div class="btn-group-vertical">
+            <button class="btn btn-xs btn-default app_inst_order_btn" id="app_inst_order_up_btn_<%= app.id.to_s %>" <%= 'disabled' if app.id == application_instances.first.id %>><i class="fas fa-angle-up"  ></i></button>
+            <button class="btn btn-xs btn-default app_inst_order_btn" id="app_inst_order_down_btn_<%= app.id.to_s %>" <%= 'disabled' if app.id == application_instances.last.id %>><i class="fas fa-angle-down"></i></button>
+          </div>
+        </td>
         <td scope="row">
           <label class="switch" title="<%= app.enabled ? I18n.translate("general.messages.enable") : I18n.translate("general.messages.disable") %> the application">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
@@ -84,6 +91,7 @@
     </tbody>
     <tfoot>
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>

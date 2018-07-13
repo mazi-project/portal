@@ -170,4 +170,23 @@ $( document ).ready(function() {
     $("#create_inst_app_icon_in").val(new_icon);
     $("#create_inst_app_color_sl").val(new_color);
   });
+
+  $('.app_inst_order_btn').click(function(){
+    if ($(this).attr('disabled')){
+      return;
+    }
+    var attrs = $(this).attr('id').split('_')
+    var appId = attrs.pop();
+    attrs.pop();
+    var action = attrs.pop();
+    $.ajax({
+      url: '/application_instance/' + appId + '/' + action ,
+      type: 'PUT',
+      success: function(result) {
+        id = JSON.parse(result).id;
+        error = JSON.parse(result).error;
+        location.reload(true);
+      }
+    });
+  });
 });

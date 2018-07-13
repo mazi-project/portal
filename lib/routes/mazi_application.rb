@@ -24,8 +24,12 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have created a new application."
                 redirect '/admin_application'
               end
-              params['icon'] = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
-              params['icon'] = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
+              unless params['icon'].nil? || params['icon'].empty?
+                params['icon'] = "fa fa-fw fa-5x #{params['icon']}" unless params['icon'].include?(' ')
+                params['icon'] = "#{params['icon']} fa-5x" unless params['icon'].include?('fa-5x')
+              else
+                params['icon'] = nil
+              end
               a =  Mazi::Model::ApplicationInstance.create(params)
             else
               e = Mazi::Model::Application.validate(params)
@@ -315,6 +319,15 @@ module Sinatra
               session['error'] = "Application '#{application}' not supported by this action."
               redirect back
             end
+          end
+
+           # application order up or down
+          app.put '/application_instance/:id/:action/?' do |id, action|
+            MaziLogger.debug "request: put/application_insance from ip: #{request.ip} id: #{id} action: #{action}"
+            app = Mazi::Model::ApplicationInstance.find(id: id)
+
+            action == 'up' ? app.up : app.down
+            {result: 'OK', id: id}.to_json
           end
         end
 
