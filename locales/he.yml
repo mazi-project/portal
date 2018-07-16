@@ -268,7 +268,7 @@ he:
     applications-page:
       subheader: יישומים
       instances-menu:
-        header: תצוגת היישום
+        header: יישומים מדומים
         active-column: פעיל
         active-hint: שינוי מצב התצוגה של היישום בפורטל
         splash-page-column: דף הפתיחה
@@ -285,4 +285,5 @@ he:
         click-hint: סך כל הפעמים שהיישום הופעל
         actions-column: פעולות
         actions-hint: פעולות שניתן לבצע ביישום
+        guestbook-admin-hint: לוח הניהול של ספר האורחים
 ...

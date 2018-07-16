@@ -24,7 +24,7 @@ zh-hans:
       reboot: 重启
       reset: 重置
       shutdown: 关机
-      logout: 登出
+      logout: 退出
       update: 更新
       connect: 连接
       disconnect: 断开连接
@@ -86,23 +86,23 @@ zh-hans:
       storage: 存储
     sensors-page:
       header: 传感器测量
-      header-message: 在此页面，您可以查看多个连接到此MAZI Zone的传感器的测量结果。您也可以使用下方按钮请求从特定时间段进行测量。
+      header-message: 在此页面，您可以查看多个连接到此MAZI区域的传感器的测量结果。您也可以使用下方按钮请求从特定时间段进行测量。
       temperature-for: 来自%{sensor}的温度
       metrics-for: 来自%{sensor}的方向、加速和陀螺仪度量
       humidity-for: 来自%{sensor}的湿度
       pressure-for: 来自%{sensor}的压力
-      no-sensors-warn: 警告：数据库中没有测量值，或者传感器设备未连接到此MAZI Zone。
-      no-sensor-data-warn: 警告：此MAZI Zone没有存储传感器数据。 系统管理员可以启用收集传感器数据。
+      no-sensors-warn: 警告：数据库中没有测量值，或者传感器设备未连接到此MAZI区域。
+      no-sensor-data-warn: 警告：此MAZI区域没有存储传感器数据。系统管理员可以启用收集传感器数据。
       choose-timeslot-message: 请使用下方表单选择时间间隙。
       direction: 方向（角度）
       acceleration: 加速度（x, y, z）
-      gyroscope: 陀螺仪（俯仰，偏航，滚转）
+      gyroscope: 陀螺仪（最高点、偏航、滚动）
       sensors-hint: 为查看有效值，应校准Sensehat。请检查管理员面板以了解更多详情。
     camera-page:
       header: 照相机
-      subheader: 在此页面您可以查看由连接到此MAZI Zone的照相机拍摄的照片和视频。
+      subheader: 在此页面您可以查看由连接到此MAZI区域的照相机拍摄的照片和视频。
       live-stream-header: 在线视频流
-      no-camera-warn: 目前，这个MAZI Zone没有正确安装摄像头！
+      no-camera-warn: 目前，这个MAZI区域没有正确安装摄像头！
       media-library-header: 媒体库
       no-media-warn: 当前在库中没有找到图片或视频！
     monitoring-page:
@@ -143,9 +143,9 @@ zh-hans:
   admin:
     general:
       admin-panel: MAZI区域管理面板
-      shutdown-modal-title: 要关机吗？
-      shutdown-modal-message: MAZI Zone现在会关闭，这将导致这个网站无法访问，您需要手动重新启动这个MAZI Zone。 是否继续？
-      reboot-modal-title: 要重启吗？
+      shutdown-modal-title: 关机？
+      shutdown-modal-message: MAZI区域现在会关闭，这将导致这个网站无法访问，您需要手动重新启动这个MAZI区域。是否继续？
+      reboot-modal-title: 重启？
       reboot-modal-message: MAZI区域现在将重启，这将导致此网站有数分钟不能访问，请等待几分钟后刷新此页面。开始么？
     top-menu:
       header: MAZI Zone管理面板
@@ -171,29 +171,28 @@ zh-hans:
     updates:
       subheader: 更新
       checking-updates: 正在检查更新。请等待...
-      alert-message-1: 您的本地存储库已被编辑。 这会导致更新功能故障。 请通过对编辑文件使用%{command}来恢复本地存储库中的更改。
-      update-message-0: 请选择您的更新线路
-      update-message-1: 没有与互联网的有效连接。 请将此MAZI Zone连接到互联网，然后重试。
+      alert-message-1: 您的本地存储库已被编辑。这会导致更新功能故障。 请通过对编辑文件使用%{command}来恢复本地存储库中的更改。
+      update-message-0: 请选择您的更新频道
+      update-message-1: 没有与互联网的有效连接。请将此MAZI区域连接到互联网，然后重试。
       update-message-2: 此门户以演示模式运行！此操作会开始更新过程。
       update-message-3: 门户是最新版本，不需要更新。
       update-message-4: 系统正在更新。请等待...
-      update-message-5: 更新进程几乎已完成。您的MAZI Zone将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI
-        Zone了。
+      update-message-5: 更新进程几乎已完成。您的MAZI区域将会重启以安装剩余依赖组件。一旦您再次看到您的WiFi网络，您就可以连接到您更新的MAZI区域了。
       update-message-6: 存在可用更新。请使用下方的按钮启动更新程序。
       update-hint: 提示：如果您遇到错误行为，请重启您的设备。
       update-chan-hint: 提示：开发线路的最新版本可能不稳定。不建议来回更换更新线路，因为它可能会导致意外的行为。请告知版本详情%{link}以决定您的更新线路
     setup-page:
       tog-nav: 开关导航
-      setup-panel: MAZI Zone配置面板
+      setup-panel: MAZI区域配置面板
       first-step-header: 管理员密码配置
-      first-step-message: 使用下方的表单设置MAZI Zone管理面板的管理员密码。
-      first-step-hint: 提示：如果这是新的MAZI Zone，当前密码是1234
+      first-step-message: 使用下方的表单设置MAZI区域管理面板的管理员密码。
+      first-step-hint: 提示：如果这是新的MAZI区域，当前密码是1234
       second-step-header: 日期/时间配置
-      second-step-message: 请使用下方的表单更改日期/时间，以及此MAZI Zone的时区。
+      second-step-message: 请使用下方的表单更改日期/时间，以及此MAZI区域的时区。
       third-step-header: 无线界面配置
       third-step-message: 请使用下方的表单更改Wi-Fi网络名称（可选）。
-      third-step-warning: 警告：如果您更改了Wi-Fi网络的名称，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接至新的Wi-Fi网络。
-      fourth-step-header: MAZI Zone详细信息
+      third-step-warning: 警告：如果您更改了Wi-Fi网络的名称，则与此MAZI区域的无线连接将会丢失，您将需要重新连接至新的Wi-Fi网络。
+      fourth-step-header: MAZI区域详情
       fourth-step-message: 请使用下方的表单更改您的MAZI区域详情
       fourth-step-warning: 提示：您可以使用google地图查找您的位置（经纬度）：单击右键->这里是哪。然后使用屏幕下方方框中的坐标（例如39.379012,
         22.902813）
@@ -202,15 +201,15 @@ zh-hans:
     dashboard-page:
       subheader: 控制面板
       welcome:
-        message-1: '%{panel}是主工具，用于管理此MAZI Zone门户，以及此MAZI Zone的网络形式。'
+        message-1: '%{panel}是主工具，用于管理此MAZI区域门户，以及此MAZI区域的网络形式。'
         message-2: 请使用菜单导航到多个工具，它们可以：
         message-list-1: 管理支持的应用程序
-        message-list-2: 配置MAZI Zone网络
+        message-list-2: 配置MAZI区域网络
         message-list-3: 配置可视化门户外观
         message-list-4: 添加/移除门户上的通知
         message-list-5: 导出/导入快照
       hardware-info:
-        header: MAZI Zone硬件信息
+        header: MAZI区域硬件信息
         system-temperature: 系统温度
         cpu-load: CPU负载
         ram-load: RAM负载
@@ -232,22 +231,22 @@ zh-hans:
         header: 通知
         notifications: 激活门户通知
       time-date:
-        header: MAZI Zone时间/日期
+        header: MAZI区域时间/日期
         current: 当前日期/时间
       version:
-        header: MAZI Zone版本
+        header: MAZI区域版本
         version-message: 此门户晚于“%{nof_commits}提交”。
         up-to-date: 最新
       popups:
-        expand-storage-message: 您可以使用下面的按钮将MAZI Zone存储扩展到SD卡的最大容量。 您需要重新启动设备才能生效。
+        expand-storage-message: 您可以使用下面的按钮将MAZI区域存储扩展到SD卡的最大容量。您需要重新启动设备才能生效。
     applications-page:
       subheader: 应用程序
       instances-menu:
         header: 应用程序实例
         active-column: 激活
         active-hint: 开关应用程序在门户上的可见性
-        splash-page-column: 醒目页面
-        splash-page-hint: 使用此应用程序作为门户的启动页面
+        splash-page-column: 飞溅页面
+        splash-page-hint: 使用此应用程序作为门户的飞溅页面
         name-column: 名称
         name-hint: 应用程序的名称
         url-column: URL
@@ -265,7 +264,7 @@ zh-hans:
         create-instance-hint: 创建新的应用程序实例
         edit-instance-hint: 编辑应用程序实例
       applications-menu:
-        header: 已安装的应用程序
+        header: 安装的应用程序
         status-column: 状态
         status-hint: 操作状态（正在运行/已停止）
         icon-column: 图标
@@ -280,14 +279,14 @@ zh-hans:
         description-hint: 应用程序默认描述
         actions-column: 操作
         actions-hint: 可以在应用程序上执行的操作
-        web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI Zone的性能。
+        web-app-info-hint: 开始/停止此应用程序将不会影响您的MAZI区域性能。
         web-app-start-hint: 这是web应用程序，它始终运行。
         app-start-hint: 开始应用程序
         app-stop-hint: 停止应用程序
       popups:
         delete-application-title: 删除应用程序实例？
-        delete-application-message: 该应用程序实例将从数据库中永久删除。你确认要继续吗？
-        delete-application-hint: 您需要删除所有连接到此应用程序的应用程序实例，然后才能删除此应用程序。
+        delete-application-message: 该应用程序实例将从数据库中永久删除。您希望继续吗？
+        delete-application-hint: 在您可以删除此应用程序之前，您需要删除所有连接至此应用程序的应用程序示例。
         edit-application-title: 编辑应用程序实例？
         application-icon-hint: 提示：对于图标，请检查文档%{link}
         create-application-title: 创建新的应用程序实例

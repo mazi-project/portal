@@ -605,7 +605,7 @@ fr:
           veuillez donc attendre avant de rafraîchir la page.
         delete-application-header: Supprimer les données d'observation de l'application
         delete-application-message: Utiliser le bouton ci-dessous pour supprimer toutes
-          les données de surveillance d’application de la base de données locale.
+          les données de surveillance d’application dans la base de données locale.
           Actuellement, le nombre d’entrées dans la base de données est de %{entries}
         delete-application-hint: cette action prendra plusieurs secondes à s’exécuter ;
           veuillez donc attendre avant de rafraîchir la page.
@@ -713,7 +713,7 @@ fr:
           intégré ne vous suffit pas, il y a des tonnes de modules qui vous permettent
           de personnaliser votre instance pour correspondre à vos besoins.
         paragraph2: Vous trouverez une page d’administration au
-        paragraph3: Pour modifier le mot de passe d’administration, dans la page d’Administration,
+        paragraph3: Pour modifier le mot de passe administrateur, dans la page d’Administration,
           choisissez paramètres et remplacez 'mazizone' par votre mot de passe.
         paragraph4: Ce sera plus facile pour les utilisateurs de votre zone MAZI si
           vous créez vous-même un bloc d’index et en faites la page etherpad 'par
