@@ -1,0 +1,440 @@
+# Messages for Basque (euskara)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Amaia
+---
+eu:
+  general:
+    buttons:
+      edit: Aldatu
+      cancel: Utzi
+      ok: Ados
+      close: Itxi
+      create: Sortu
+      delete: Ezabatu
+      start: Hasi
+      stop: Gelditu
+      save: Aldaketak gorde
+      choose: Aukeratu
+      choose-timeslot: Aukeratu denbora tartea
+      export-to-csv: Esportatu CSV fitxategira
+      expand: Zabaldu
+      expand-storage: Zabaldu Biltegia
+      reboot: Berrabiarazi
+      reset: Hasieratu
+      shutdown: Itzali
+      logout: Saioa itxi
+      update: Eguneratu
+      connect: Konektatu
+      disconnect: Deskonektatu
+      toggle-device: Gailuz aldatu
+      initialize: Hasieratu
+      remove: Kendu
+      load: Kargatu
+      import: Inportatu
+      export: Esportatu
+      refresh: Freskatu
+      continue: Jarraitu
+      next: Hurrengoa
+      previous: Aurrekoa
+      submit: Bidali
+      change: Aldatu
+      qrcode: QR kodea
+      show: Erakutsi
+      configure: Konfiguratu
+    messages:
+      welcome: Ongi etorri
+      version: Bertsioa
+      enable: gaitu
+      disable: desgaitu
+      checked: Egiaztatua
+      disconnected: Deskonektatua
+      here: hemen
+      ssid: SSID
+      channel: Kanala
+      password: Pasahitza
+      offline: Konexiorik gabe
+      restricted: mugatua
+      managed: kudeatuta
+      active: aktiboa
+      inactive: inaktiboa
+      error: errorea
+      development: Garapena
+  portal:
+    top-menu:
+      documentation: Dokumentazioa
+    side-menu:
+      applications: Aplikazioak
+      system: Sistema
+      sensors: Sentsoreak
+      camera: Kamera
+      monitoring: Monitorizazioa
+      devices: Gailuak
+    system-page:
+      subheader: Sistemaren informazioa
+      users: Konektatutako erabiltzaileak
+      temperature: Tenperatura
+      cpu: CPU
+      storage: Biltegia
+    sensors-page:
+      header: Sentsore neurketak
+      header-message: Orri honetan MAZI Zone honetara konektatutako zenbait sentsoreren
+        neurketak ikus ditzakezu. Azpian dagoen botoia erabili dezakezu denbora tarte
+        zehatz bateko neurketak ikusteko.
+      temperature-for: '%{sensor} sentsorearen tenperatura'
+      metrics-for: '%{sensor} sentsorearen norabide, azelerazio eta giroskopio neurketak'
+      humidity-for: '%{sensor} sentsorearen hezetasuna'
+      pressure-for: '%{sensor} sentsorearen presioa'
+      choose-timeslot-message: Mesedez, erabili beheko formatua denbora tarte bat
+        aukeratzeko.
+      direction: Norabidea (graduak)
+      acceleration: Azelerazioa (x, y, z)
+    camera-page:
+      header: Kamera
+      live-stream-header: Streaming bidezko zuzeneko bideoa
+      no-camera-warn: Oraingoz ez dago kamerarik MAZI Zone honetan instalatuta!
+      media-library-header: Mediateka
+      no-media-warn: Ez da irudi edo bideorik aurkitu mediatekan!
+    monitoring-page:
+      subheader: Monitorizatzen
+      header-message: Orri honetan MAZI Zone honetako edo beste bateko zenbait monitorizazio
+        neurketen datuak ikus ditzakezu.
+      popups:
+        device: Gailua
+        devices: Gailuak
+        administrator: Administratzailea
+        description: Deskribapena
+        latitude: Latitudea
+        longitude: Longitudea
+        system_info: Sistemaren informazioa
+        cpu_temp: CPUaren tenperatura
+        wifi-users: Wifi erabiltzaileak
+        etherpad-users: Etherpad erabiltzaileak
+        nextcloud-users: Nextcloud erabiltzaileak
+        nextcloud-files: Nextcloud fitxategiak
+        nextcloud-downloads: Nextcloud deskargak
+  admin:
+    general:
+      admin-panel: MAZI Zone-aren administrazio panela
+      shutdown-modal-title: Itzali?
+      reboot-modal-title: Berrabiarazi?
+    top-menu:
+      header: MAZI Zone Administrazio Panela
+      admin: Administratzalea
+      portal: Ataria
+      set-date: Data ezarri
+      username: Erabiltzaile izena
+      password: Pasahitza
+      mysql-password: MySQL pasahitza
+      check-updates: Eguneraketak bilatu
+      settings: Ezarpenak
+    side-menu:
+      applications: Aplikazioak
+      appearance: Itxura
+      devices: Gailuak
+      monitoring: Monitorizazioa
+      notifications: Jakinarazpenak
+      export-import: Esportatu/Inportatu
+      logs: Erregistroak
+      documentation: Dokumentazioa
+    updates:
+      subheader: Eguneratu
+      checking-updates: Eguneraketak bilatzen. Mesedez, itxaron...
+      update-message-0: Mesedez, aukeratu zure eguneraketa kanala
+      update-message-1: Ez dago Interneterako konexiorik. Mesedez, konektatu MAZI
+        Zone-a Internetera eta saiatu berriro.
+      update-message-2: Atari hau Demo moduan dabil! Ekintza honek eguneratze prozesu
+        bat abiaraziko zuen.
+      update-message-3: Atari hau egunean dago, ez dago eguneraketaren beharrik.
+      update-message-4: Sistema eguneratzen ari da. Mesedez, itxaron...
+      update-message-6: Eguneraketa bat dago eskuragarri. Mesedez, erabili azpiko
+        botoia eguneraketa abiarazteko.
+      update-hint: 'Aholkua: portaera akastunen bat egon ezkero, berrabiarazi zure
+        gailua.'
+    setup-page:
+      setup-panel: MAZI Zone konfigurazio panela
+      first-step-message: Erabili beheko formatua MAZI Zone administratzaile paneleko
+        administratzaile pasahitza ezartzeko.
+      first-step-hint: 'aholkua: MAZI Zone berri bat bada, oraingoz dagoen pasahitza
+        1234 da'
+      second-step-header: Data eta ordu ezarpena
+      third-step-header: Haririk gabeko interfaze konfigurazioa
+      fourth-step-header: MAZI Zone xehetasunak
+      last-step-header: Bukatuta
+      last-step-message: Egoki bete dituzu konfigurazio pausu guztiak. Mesedez, klikatu
+        bidaltzeko botoian aldaketak gordetzeko.
+    dashboard-page:
+      welcome:
+        message-list-2: MAZI Zone sarea konfiguratu
+        message-list-3: Atariaren ikuspegia konfiguratu
+        message-list-4: Gehitu/lendu jakinarazpenak atarian
+        message-list-5: Argazkiak esportatu/inportatu
+      hardware-info:
+        system-temperature: Sistemaren Tenperatura
+        cpu-load: CPUaren karga
+        ram-load: RAMaren karga
+        storage-load: Biltegiaren karga
+      networking:
+        users-online: Orain online dauden erabiltzaileak
+        wifi-info: Wifi sarearen informazioa
+      applications:
+        header: Aplikazioak
+        applications-installed: Instalatuta dauden aplikazioak
+      traffic:
+        reset-visits: Bisitak hasieratu
+        portal-visits: Atariaren bisita orokorrak
+        application-visits: Aplikazioaren bisitak
+      notifications:
+        header: Jakinarazpenak
+        notifications: Gaitu atariaren jakinarazpenak
+      time-date:
+        header: MAZI Zone denbora/data
+        current: Oraingo data eta ordua
+      version:
+        header: MAZI Zone bertsioa
+        up-to-date: Egunean
+      popups:
+        expand-storage-message: MAZI Zone biltegiaren edukiera zure SD txartelaren
+          gehienezko edukierara handitu dezakezu beheko botoia erabiliz. Eragina izateko,
+          gailua berrabiarazi beharko duzu.
+    applications-page:
+      subheader: Aplikazioak
+      instances-menu:
+        header: Aplikazioaren instantziak
+        active-column: Aktiboa
+        name-column: Izena
+        name-hint: aplikazioaren izena
+        url-column: URL
+        url-hint: aplikazioaren URLa
+        description-column: Deskribapena
+        click-column: Klik zenbatzailea
+        actions-column: Ekintzak
+        actions-hint: aplikazioan egin daitezkeen ekintzak
+      applications-menu:
+        header: Instalatutako aplikazioak
+        status-column: Egoera
+        status-hint: eragiketaren egoera (abian/geldituta)
+        icon-column: Ikonoa
+        icon-hint: aplikazioaren ikono lehenetsia
+        color-column: Kolorea
+        color-hint: aplikazioaren kolore lehenetsia
+        name-column: Aplikazioaren izena
+        name-hint: aplikazioaren izena
+        url-column: URL
+        url-hint: aplikazioaren URLa
+        description-column: Deskribapena
+        description-hint: aplikazioaren deskribapen lehenetsia
+        actions-column: Ekintzak
+        actions-hint: aplikazioan egin daitezkeen ekintzak
+        web-app-start-hint: Web-aplikazio bat da, beti dago abian.
+        app-start-hint: Aplikazioa abiarazi
+        app-stop-hint: Aplikazioa gelditu
+      popups:
+        application-icon-hint: 'Aholkua: mesedez, ikonorako egiaztatu dokumentazioa
+          %{link}'
+        web-app-info-title: Web-aplikazioa
+    network-page:
+      subheader: Sarearen ezarpenak
+      wifi-ap-interface-panel:
+        ssid-name-label: Wifi sarearen izena (SSID)
+        wifi-channel-label: Wifi sarearen kanala
+        wifi-password-label: Wifi sarearen pasahitza
+      unconfigured-dongle-panel:
+        message: Sare honetako interfazea ez da oraindik konfiguratu. Mesedez, erabili
+          azpiko botoia modu egokian konfiguratzeko.
+      internet-panel:
+        mode-hint: Wifi sarearen modua
+      connect-wifi-panel:
+        header: Konektatu wifira internetera sartzeko
+      portal-domain-panel:
+        header: Atariaren domeinua
+        domain-hint: Atariaren oraingo domeinua
+      popups:
+        edit-wifi-header: Aldatu wifi konfigurazioa
+        edit-wifi-network-header: aldatu wifi sarearen ezarpenak
+        show-qrcode-header: Wifi sarearen QR kodea
+        change-channel-header: Kanala aldatu
+        change-password-header: Pasahitza aldatu
+        change-mode-header: Modua aldatu
+        connect-wifi-header: Wifi sarera konektatu
+        select-wifi-label: Wifiaren izena aukeratu
+        change-domain-header: Atariaren domeinua aldatu
+        change-domain-warning: 'Kontuz: balio ez duen domeinu bat ezarri baduzu, ezingo
+          zara atarira sartu. Hala ere, Administratzaile paneletra sar zaitezke URL
+          honen bidez.'
+    appearance-page:
+      subheader: Itxura
+      theme-panel:
+        header: Gaiaren konfigurazioak
+        portal-title-label: Atariaren izenburua
+        portal-title-hint: Balore honek bai goiko ezkerreko izenburua, baita html
+          izenburua konfiguratzen ditu.
+        welcome-message-label: Aplikazioaren ongi etorri mezua
+        background-image-label: Aplikazioaren atzeko irudia
+        colors-label: Koloreak
+        side-main-color: Alboko paneleko kolore nagusia
+        top-main-color: Goiko paneleko kolore nagusia
+        colors-hint: Gaineko baloreek atariko zenbait kolore konfiguratzen dituzte.
+      popups:
+        edit-theme-header: Gaia aldatu
+        edit-title-header: Izenburua aldatu
+        edit-welcome-message-header: Ongi etorri mezua aldatu
+        edit-background-image-header: Atzealdeko irudia aldatu
+        reset-theme-header: Gaia berrasiertu
+        reset-theme-message: Ekintza honek ikuspegi konfigurazioak balore lehenetsietara
+          berrasieratuko ditu.
+        load-theme-header: Gaia kargatu
+        load-theme-message: Ondoko konfigurazio fitxategietako bat kargatu
+        save-theme-header: Gaia gorde
+        save-theme-message: Mesedez, sartu gai berriaren izena
+    devices-page:
+      subheader: Gailuak
+      sensors-panel:
+        header: Sentsoreak
+        header-hint: Hau erabili dezakezu zenbait sentsore kontrolatzeko.
+        sensors-table:
+          type: Mota
+          status: Egoera
+          entries: Sarrerak
+          actions: Ekintzak
+          start-button-hint: Neurketak gordetzen hasi
+          delete-button-hint: Gordetako neurketa guztiak ezabatu
+        no-sensors-message: Ezin izan da MAZI Zone honetara konetkatutako sentsorerik
+          aurkitu.
+        init-sensors-message: Sentsoreen modulurako hasieratze prozedura ez da oraindik
+          exekutatu. MAZI Zonde honetara konektatutako sentsore gailu bat erabili
+          nahi baduzu, mesedez, erabili azpiko botoia modulu hau hasieratzeko.
+        init-button-hint: Sentsoreen hasieratzea abiarazi
+      camera-panel:
+        header: Kamera
+        header-hint: Hau erabili dezakezu kamera kontrolatzeko.
+        no-camera-message: Ez dago kamerarik MAZI Zone honetara konektatuta!
+      popups:
+        start-sensing-title: Sentsore neurketa hasi
+        start-sensing-message: Mesedez, sartu egutegian iraupena edo data, neurketak
+          bildu nahi dituzun denbora tartea zehazteko. Gainera, mesedez, erabili tartea
+          neurketen maiztasuna zehazteko.
+        start-sensing-label2: Iraupena (segundoak)
+        start-sensing-label3: Egutegia (amaitzeko ordua eta data)
+        start-sensing-label4: Tartea (segundoak)
+        delete-sensing-title: Sentsore neurketak ezabatu
+        delete-sensing-message: Gordetako neurketa guztiak ezabatu nahi dituzu?
+        start-images-title: Irudiak hartzen hasi
+        start-images-label1: Iraupena (segundoak)
+        start-images-label2: Tartea (segundoak)
+        delete-images-title: Argazki guztiak ezabatu
+        delete-images-message: Hartutako argazki guztiak ezabatu nahi dituzu?
+        start-videos-title: Bideoa grabatzen hasi
+        start-videos-label1: Iraupena (segundoak)
+        delete-videos-title: Bideo guztiak ezabatu
+        delete-videos-message: Grabatutako bideo guztiak ezabatu nahi dituzu?
+    monitoring-page:
+      subheader: Monitorizazioa
+      details-panel:
+        header: Xehetasunak
+        table-label2: Administratzailea
+        table-label3: Izenburua
+        table-label4: Deskribapena
+        table-label5: Kokapena (latitudea, longitudea)
+      statistics-panel:
+        header: Monitorizazio datuak
+        header-hint: Hau erabili dezakezu monitorizazio ekintzak kontrolatzeko.
+        statistics-table:
+          status: Egoera
+          description: Deskribapena
+          action: Ekintza
+          hardware-description-message: Sistemaren jarduera monitorizazioa.
+          no-hardware-tasks-message: Orain ez dago sistemaren jardueraren monitorizaziorik
+            abian.
+          start-hardware-task-hint: Sistemaren jardueraren monitorizazioa hasi
+          stop-hardware-task-hint: Sistemaren jardueraren monitorizazioa gelditu
+      popups:
+        change-details-header: Aldatu monitorizazio xehetasunak
+        change-details-label2: Administratzailea
+        change-details-label3: Izenburua
+        change-details-label4: Deskribapena
+        change-details-label5: Kokapena (latitudea, longitudea)
+        hardware-label2: Tenperatura
+        hardware-label3: Wifi erabiltzaileak
+        hardware-label4: CPUaren karga
+        hardware-label5: RAMaren karga
+        hardware-label6: Biltegiaren karga
+        application-label5: Nextcloud aplikazioa
+    notifications-page:
+      subheader: Jakinarazpenak
+      notifications-table:
+        header1: Egoera
+        header2: Izenburua
+        header4: Ekintzak
+      popups:
+        create-notification-title: Sortu jakinarazpen berriak
+        edit-notification-title: Jakinarazpenak aldatu
+        delete-notification-message: Jakinarazpen hau betirako ezabatuko da datu-base
+          honetatik. Jarraitu nahi duzu?
+    import-export-page:
+      subheader: Irudiak
+      save-snapshot-panel:
+        header: Irudia gorde
+      load-snapshot-panel:
+        no-snapshots-message: Oraingoz ez dago irudirik gordeta.
+      import-export-panel:
+        header: Inportatu eta esportatu irudia
+        header-hint: Hau erabili dezakezu irudi bat zip fitxategi bezala esportatzeko,
+          edo zip fitxategi bat irudi bezala inportatzeko.
+        message: Mesedez, aukeratu irudi bat eta sakatu kargatu.
+        no-snapshots-message: Oraingoz ez dago irudirik gordeta.
+      application-snapshots-header: Aplikazioaren irudiak
+      interview-panel:
+        header-hint: Hau erabili dezakezu irudiak inportatu eta esportatzeko.
+      guestbook-panel:
+        header-hint: Hau erabili dezakezu irudiak inportatu eta esportatzeko.
+      popups:
+        import-header: Inportatu irudia
+    logs-page:
+      portal-log-panel:
+        filter-label1: Errore-mezuak
+    documentation-page:
+      initial-configuration-tab:
+        header: Hasierako konfigurazioa
+        subheader1: Deskribapena
+        subheader2: ssh bidez konektatzen
+      etherpad-tab:
+        subheader1: Deskribapena
+        subheader2: Administrazio gida
+        subheader3: Aholku erabilgarriak
+        paragraph5: Adibidez,
+      nextcloud-tab:
+        subheader1: Deskribapena
+        subheader2: Administrazio gida
+        subheader3: Aholku erabilgarriak
+        paragraph3: Zure ezarpen pertsonaletara sartzeko
+        paragraph8: Aldatu zure profileko irudia
+        paragraph10: Helbide elektronikoa
+        paragraph12: Aldatu zure pasahitza
+      guestbook-tab:
+        subheader1: Deskribapena
+        subheader2: Administrazio gida
+        subheader3: Administratzaile pasahitza
+        subheader4: Edukiaren bestelako ikuspegiak
+        paragraph8: esteka guztiek funtzionatzen dute zure MAZI Zonera konektatu zaudenean
+      wordpress-tab:
+        subheader1: Deskribapena
+        subheader2: Administrazio gida
+      framadate-tab:
+        subheader1: Deskribapena
+        paragraph2: Hemen dago nola funtzionatzen duen
+        paragraph4: Zehaztu aukeratzeko data edo gaiak
+        paragraph5: Bidali inkestaren esteka zure lagun edo kideei
+    settings-page:
+      subheader: Ezarpenak
+      message: Orri hau erabili dezakezu zure MAZI Zonearen ezarpenen zenbait konfigurazio
+        aldatzeko.
+      panel-header: Sistemaren ezarpenak
+      time-date:
+        header: Data eta ordua
+      mysql-password:
+        header: MySQL pasahitza
+      popups:
+        change-time-date-title: Aldatu data eta ordua
+        change-mysql-password-title: Aldatu MySQL pasahitza
+...
