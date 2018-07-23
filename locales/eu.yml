@@ -108,7 +108,10 @@ eu:
         longitude: Longitudea
         system_info: Sistemaren informazioa
         cpu_temp: CPUaren tenperatura
+        cpu_load: CPUaren karga
+        ram_load: RAMaren karga
         wifi-users: Wifi erabiltzaileak
+        storage_use: Biltegiaren karga
         etherpad-users: Etherpad erabiltzaileak
         nextcloud-users: Nextcloud erabiltzaileak
         nextcloud-files: Nextcloud fitxategiak
@@ -117,7 +120,12 @@ eu:
     general:
       admin-panel: MAZI Zone-aren administrazio panela
       shutdown-modal-title: Itzali?
+      shutdown-modal-message: MAZI Zone orain itzaliko da, honek gune honetara ezin
+        sartzea eragingo du, eta MAZI Zone hau eskuz berrabiarazi beharko duzu. Jarraitu?
       reboot-modal-title: Berrabiarazi?
+      reboot-modal-message: MAZI Zone orain berrabiaraziko da, honek minutu batzuez
+        gune honetara ezin sartzea eragingo du, mesedez, itxaron eta freskatu orri
+        hau minutu batzuk igarotzean. Jarraitu?
     top-menu:
       header: MAZI Zone Administrazio Panela
       admin: Administratzalea
@@ -170,6 +178,7 @@ eu:
         message-list-4: Gehitu/lendu jakinarazpenak atarian
         message-list-5: Argazkiak esportatu/inportatu
       hardware-info:
+        header: MAZI Zone hardware informazioa
         system-temperature: Sistemaren Tenperatura
         cpu-load: CPUaren karga
         ram-load: RAMaren karga
@@ -246,6 +255,9 @@ eu:
         mode-hint: Wifi sarearen modua
       connect-wifi-panel:
         header: Konektatu wifira internetera sartzeko
+        wifi-network-hint-2: wifi Internet sarea
+      access-point-panel:
+        current-hint: Erabiltzen ari den wifi sarbide puntua
       portal-domain-panel:
         header: Atariaren domeinua
         domain-hint: Atariaren oraingo domeinua
@@ -258,10 +270,17 @@ eu:
         change-mode-header: Modua aldatu
         connect-wifi-header: Wifi sarera konektatu
         select-wifi-label: Wifiaren izena aukeratu
+        type-wifi-label: Edo idatzi hemen ezkutatuta badago
+        type-password-label: Idatzi wifi sarerako pasahitza
         change-domain-header: Atariaren domeinua aldatu
+        change-domain-message: Ekintza honek atariaren domeinua aldatuko du. Mesedez,
+          ziurtatu baliozko domeinua dela (adib. gutxienez '.' karaktere bat duela)
         change-domain-warning: 'Kontuz: balio ez duen domeinu bat ezarri baduzu, ezingo
           zara atarira sartu. Hala ere, Administratzaile paneletra sar zaitezke URL
           honen bidez.'
+        toggle-access-point-message: Ekintza honek wifiaren sarbide puntuaren gailua
+          aldatuko du. Honek atari honetarako sarrera galtzea eragingo du eta wifi
+          sare berrira konektatu beharko zara. Ziur zaude jarraitu nahi duzula?
     appearance-page:
       subheader: Itxura
       theme-panel:
@@ -376,6 +395,8 @@ eu:
       save-snapshot-panel:
         header: Irudia gorde
       load-snapshot-panel:
+        header: Kargatu irudia
+        header-hint: Hau erabili dezakezu irudi bat kargatzeko.
         no-snapshots-message: Oraingoz ez dago irudirik gordeta.
       import-export-panel:
         header: Inportatu eta esportatu irudia
@@ -398,6 +419,7 @@ eu:
         header: Hasierako konfigurazioa
         subheader1: Deskribapena
         subheader2: ssh bidez konektatzen
+        subheader3: Raspbian konfigurazioa
       etherpad-tab:
         subheader1: Deskribapena
         subheader2: Administrazio gida
@@ -411,6 +433,7 @@ eu:
         paragraph8: Aldatu zure profileko irudia
         paragraph10: Helbide elektronikoa
         paragraph12: Aldatu zure pasahitza
+        paragraph13: Aukeratu zure Nextcloud interfazerako hizkuntza
       guestbook-tab:
         subheader1: Deskribapena
         subheader2: Administrazio gida
