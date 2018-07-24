@@ -36,7 +36,7 @@
     $(function(){
       $('#enter').on('click',function(){
        $('#enter').toggle(300);
-       window.location = "<%= authtarget %>";
+       window.location = "<%=domain%>:4567/splashEnter?authaction=<%=authaction%>&tok=<%=tok%>&redir=<%=redir%>&mac=<%=mac%>";
       });
     });            
   </script>    
