@@ -187,7 +187,7 @@ module Sinatra
                unless File.exist?('/etc/mazi/users.dat') then
                   File.new "/etc/mazi/users.dat", "w"
                end
-               File.write('/etc/mazi/users.dat',"#{mac}\n", mode: 'a')
+               File.write('/etc/mazi/users.dat',"#{mac} #{Time.now}\n", mode: 'a')
                redirect "#{authtarget}"
             when 'admin'
               redirect 'admin_dashboard'
