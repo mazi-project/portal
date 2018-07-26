@@ -43,6 +43,7 @@ eu:
       show: Erakutsi
       configure: Konfiguratu
     messages:
+      warning: Abisua
       welcome: Ongi etorri
       version: Bertsioa
       enable: gaitu
@@ -59,6 +60,7 @@ eu:
       active: aktiboa
       inactive: inaktiboa
       error: errorea
+      stable: Egonkorra
       development: Garapena
   portal:
     top-menu:
