@@ -1,4 +1,6 @@
 $( document ).ready(function() {
+  $('#loading_message').hide();
+
   $('.admin-logout-button').click(function(){
 
   });
@@ -12,5 +14,9 @@ $( document ).ready(function() {
         location.reload(true);
       }
     });
+  });
+
+  $(".load_btn").click(function(){
+    $('#loading_message').show();
   });
 });

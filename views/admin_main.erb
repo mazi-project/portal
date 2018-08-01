@@ -28,7 +28,6 @@
 </head>
 
 <body>
-
   <div id="wrapper">
 
     <% local_data[:main_body] = main_body %>
@@ -36,6 +35,11 @@
     <% local_data[:locales]   = locales %>
     <% local_data[:version]   = version %>
     <%= erb :admin_main_menu, locals: local_data %>
+    <div id="loading_message">
+      <div>
+        <p><i class="fas fa-spinner fa-spin"></i> Loading, please wait...</p>
+      </div>
+    </div>
 
     <div id="page-wrapper">
       <div class="container-fluid">

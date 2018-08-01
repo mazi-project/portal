@@ -6,6 +6,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {download: true, snapshotname: snapshot_name},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '.zip';
       }
     });
@@ -30,6 +31,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'interview'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_interview.zip';
       }
     });
@@ -42,6 +44,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'etherpad'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_etherpad.zip';
       }
     });
@@ -54,6 +57,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'guestbook'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_guestbook.zip';
       }
     });
@@ -66,6 +70,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'wordpress'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_wordpress.zip';
       }
     });
@@ -78,6 +83,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'nextcloud'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_nextcloud.zip';
       }
     });
@@ -90,6 +96,7 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'full'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '.zip';
       }
     });
@@ -102,8 +109,16 @@ $( document ).ready(function() {
       type: 'POST',
       data: {export_app: true, snapshotname: snapshot_name, application: 'config'},
       success: function(result) {
+        $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_config.zip';
       }
     });
+  });
+
+   $('.form-upload').submit(function(e) {
+    var id = $(this).attr('id');
+    var modal = id.replace('form', 'modal');
+    $('#' + modal).modal('hide');
+    return true;
   });
 });
