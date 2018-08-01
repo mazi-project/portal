@@ -14,100 +14,149 @@
 
 <div class="row">
   <div class='col-md-12 col-lg-12'>
-    <p>
-      <%= I18n.translate("admin.import-export-page.message") %>
-    </p>
+    <h3><%= I18n.translate("admin.import-export-page.full-snapshots-header") %></h3>
+    <p><%= I18n.translate("admin.import-export-page.full-snapshots-message") %></p>
   </div>
-  <div class='col-md-8 col-lg-6'>
-    <div class="row">
-      <div class='col-md-6'>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.header") %>
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.header-hint") %>"></i>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <form id="save-snapshot-form" action="/snapshot" method="post">
-                <div class="form-group">
-                  <input type="hidden" name="save" class="form-control" value='true' autofocus="">
-                  <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
-                  <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
-                </div>
-                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> <%= I18n.translate("general.buttons.save") %></button>
-              </form>
-            </div>
-          </div>
+  <div class='col-lg-3 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">MAZI Zone Snapshot
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.full-panel.header-hint") %>"></i>
         </div>
       </div>
-
-      <div class='col-md-6'>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.header") %>
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.load-snapshot-panel.header-hint") %>"></i>
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="full_export" class="form-control" value='true'>
+              <input type="text" name="snapshotname" class="form-control" id="full-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
             </div>
-          </div>
-          <div class="panel-body">
-            <div class="row">
-              <% unless dbs.nil? || dbs.empty? %>
-              <form id="load-snapshot-form" action="/snapshot" method="post">
-                <div class="form-group">
-                  <input type="hidden" name="load" class="form-control" value='true' autofocus="">
-                  <select id="snapshot-select" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
-                    <% dbs.each do |db| %>
-                    <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
-                    <% end %>
-                  </select>
-                  <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.message") %></small>
-                </div>
-                <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-trash-alt"></i> <%= I18n.translate("general.buttons.delete") %></button>
-                <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.load") %></button>
-              </form>
-              <% else %>
-              <p class="text-center" style="margin-bottom: 82px"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.no-snapshots-message") %></p>
-              <% end %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class='col-md-8 col-lg-6'>
-    <div class="row">
-      <div class='col-md-6'>
-        <div class="panel panel-default">
-          <div class="panel-heading">
-            <div class="panel-title"><%= I18n.translate("admin.import-export-page.import-export-panel.header") %>
-              <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.import-export-panel.header-hint") %>"></i>
-            </div>
-          </div>
-          <div class="panel-body">
-            <div class="row" style="margin-right: -11px; margin-left: -11px;">
-              <% unless dbs.nil? || dbs.empty? %>
-              <form id="export-snapshot-form" action="/snapshot" method="post">
-                <div class="form-group">
-                  <select id="snapshot-select-download" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
-                    <% dbs.each do |db| %>
-                    <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
-                    <% end %>
-                  </select>
-                  <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.import-export-panel.message") %></small>
-                </div>
-                <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
-              </form>
-              <% else %>
-              <p class="text-center" style="margin-bottom: 48px"><%= I18n.translate("admin.import-export-page.import-export-panel.no-snapshots-message") %></p>
-              <% end %>
-              <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
-            </div>
-          </div>
+            <a data-toggle="modal" data-target="#upload-full-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-full-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
+          </form>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <h3><%= I18n.translate("admin.import-export-page.configuration-snapshots-header") %></h3>
+    <p><%= I18n.translate("admin.import-export-page.configuration-snapshots-message") %></p>
+  </div>
+  <div class='col-lg-3 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Configuration Snapshot
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.config-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="config_export" class="form-control" value='true'>
+              <input type="text" name="snapshotname" class="form-control" id="config-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-config-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-config-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <div class="row">
+  <div class='col-md-12 col-lg-12'>
+    <h3><%= I18n.translate("admin.import-export-page.configuration-snapshots-header") %></h3>
+    <p><%= I18n.translate("admin.import-export-page.configuration-snapshots-message") %></p>
+  </div>
+
+  <div class='col-lg-3 col-md-4 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <form id="save-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="save" class="form-control" value='true' autofocus="">
+              <input type="text" name="snapshotname" class="form-control" id="snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-placeholder") %>" autofocus="" required>
+              <small id="snapshotLoadHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.save-snapshot-panel.form-hint") %></small>
+            </div>
+            <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-save"></i> <%= I18n.translate("general.buttons.save") %></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-lg-3 col-md-4 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.load-snapshot-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <% unless dbs.nil? || dbs.empty? %>
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="load" class="form-control" value='true' autofocus="">
+              <select id="snapshot-select" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
+                <% dbs.each do |db| %>
+                <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
+                <% end %>
+              </select>
+              <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.message") %></small>
+            </div>
+            <button type="button" class="btn btn-danger pull-left" id="delete-snapshot"><i class="fa fa-trash-alt"></i> <%= I18n.translate("general.buttons.delete") %></button>
+            <button type="submit" class="btn btn-success pull-right" id="load-snapshot-submit"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.load") %></button>
+          </form>
+          <% else %>
+          <p class="text-center" style="margin-bottom: 82px"><%= I18n.translate("admin.import-export-page.load-snapshot-panel.no-snapshots-message") %></p>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='col-lg-3 col-md-4 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title"><%= I18n.translate("admin.import-export-page.import-export-panel.header") %>
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.import-export-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row" style="margin-right: -11px; margin-left: -11px;">
+          <% unless dbs.nil? || dbs.empty? %>
+          <form id="export-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <select id="snapshot-select-download" name="snapshotname" class="form-control" aria-describedby="snapshotSaveHelp">
+                <% dbs.each do |db| %>
+                <option value='<%= db.gsub('.db', '') %>'><%= db.gsub('.db', '') %></option>
+                <% end %>
+              </select>
+              <small id="snapshotSaveHelp" class="form-text text-muted"><%= I18n.translate("admin.import-export-page.import-export-panel.message") %></small>
+            </div>
+            <button type="button" class="btn btn-success pull-left" id="download-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
+          </form>
+          <% else %>
+          <p class="text-center" style="margin-bottom: 48px"><%= I18n.translate("admin.import-export-page.import-export-panel.no-snapshots-message") %></p>
+          <% end %>
+          <a data-toggle="modal" data-target="#upload-snapshots-modal" class="btn btn-success pull-right"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
 
 <small>* <%= I18n.translate("admin.import-export-page.warning") %></small></br>
 
@@ -277,7 +326,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-etherpad-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -299,7 +348,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-guestbook-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -321,7 +370,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-nextcloud-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
@@ -343,13 +392,55 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-wordpress-header") %></h4>
       </div>
       <div class="modal-body">
         <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='WordPress'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload full snapshots modal-->
+<div class="modal fade" id="upload-full-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-full-header") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="full_import" class="form-control" value='true'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload config snapshots modal-->
+<div class="modal fade" id="upload-config-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-config-header") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="config_import" class="form-control" value='true'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>

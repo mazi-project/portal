@@ -192,6 +192,22 @@ module MaziConfig
     end
   end
 
+  def zip_full_snapshot(snapshot_name)
+
+  end
+
+  def unzip_full_snapshot(filename, tempfile)
+
+  end
+
+  def zip_config_snapshot(snapshot_name)
+
+  end
+
+  def unzip_config_snapshot(filename, tempfile)
+
+  end
+
   def zip_app_snapshot(app_name, snapshot_name)
     File.delete("public/snapshots/#{snapshot_name}_#{app_name}.zip") if File.exist?("public/snapshots/#{snapshot_name}_#{app_name}.zip")
     if app_name == 'etherpad'

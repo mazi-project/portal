@@ -82,4 +82,28 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('#download-full-snapshot').click(function(){
+    var snapshot_name = $( "#full-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'full'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '.zip';
+      }
+    });
+  });
+
+  $('#download-config-snapshot').click(function(){
+    var snapshot_name = $( "#config-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'config'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '_config.zip';
+      }
+    });
+  });
 });

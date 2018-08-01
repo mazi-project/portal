@@ -217,6 +217,42 @@ module Sinatra
               filename = params['snapshot'][:filename]
               unzip_app_snapshot(params[:application], filename, tempfile)
               redirect '/admin_snapshot'
+            elsif params['full_export']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have exported a full snapshot."
+                redirect '/admin_snapshot'
+              end
+              zip_full_snapshot(params['snapshotname'])
+              return {result: 'OK', file: "#{params[:snapshotname]}.zip"}
+            elsif params['full_import']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have imported a full snapshot."
+                redirect '/admin_snapshot'
+              end
+              tempfile = params['snapshot'][:tempfile]
+              filename = params['snapshot'][:filename]
+              unzip_full_snapshot(filename, tempfile)
+              redirect '/admin_snapshot'
+            elsif params['config_export']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have exported a configuration snapshot."
+                redirect '/admin_snapshot'
+              end
+              zip_config_snapshot(params['snapshotname'])
+              return {result: 'OK', file: "#{params[:snapshotname]}_configuration.zip"}
+            elsif params['config_import']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have imported a configration snapshot."
+                redirect '/admin_snapshot'
+              end
+              tempfile = params['snapshot'][:tempfile]
+              filename = params['snapshot'][:filename]
+              unzip_config_snapshot(filename, tempfile)
+              redirect '/admin_snapshot'
             end
 
             redirect '/admin_snapshot'
