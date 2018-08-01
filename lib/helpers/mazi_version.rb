@@ -117,6 +117,12 @@ module MaziVersion
     MaziLogger.debug "done."
   end
 
+  def self.remove_old_snapshots
+    MaziLogger.debug "deleting old snapshots"
+    `rm -rf public/snapshots/* 2> /dev/null`
+    MaziLogger.debug "done."
+  end
+
   def self.rc_local_updated?
     response = false
     File.readlines("/etc/rc.local").each do |line|
@@ -437,6 +443,7 @@ module MaziVersion
       MaziLogger.debug "done."
     end
 
+    remove_old_snapshots
     delete_lock_update_file
   end
 end
