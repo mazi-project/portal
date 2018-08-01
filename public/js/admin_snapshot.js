@@ -58,4 +58,28 @@ $( document ).ready(function() {
       }
     });
   });
+
+  $('#download-wordpress-snapshot').click(function(){
+    var snapshot_name = $( "#wordpress-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'wordpress'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '_wordpress.zip';
+      }
+    });
+  });
+
+  $('#download-nextcloud-snapshot').click(function(){
+    var snapshot_name = $( "#nextcloud-snapshotname").val();
+    $.ajax({
+      url: '/snapshot/',
+      type: 'POST',
+      data: {export_app: true, snapshotname: snapshot_name, application: 'nextcloud'},
+      success: function(result) {
+        window.location.href = 'snapshots/' + snapshot_name + '_nextcloud.zip';
+      }
+    });
+  });
 });

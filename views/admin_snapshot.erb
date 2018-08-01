@@ -116,14 +116,13 @@
     <h3><%= I18n.translate("admin.import-export-page.application-snapshots-header") %></h3>
     <p><%= I18n.translate("admin.import-export-page.application-snapshots-message") %></p>
   </div>
-  <div class='col-lg-3 col-md-6 col-sm-12'>
+  <div class='col-lg-2 col-md-6 col-sm-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Interview
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.interview-panel.header-hint") %>"></i>
         </div>
       </div>
-      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <form id="load-snapshot-form" action="/snapshot" method="post">
@@ -139,7 +138,7 @@
       </div>
     </div>
   </div>
-<!--   <div class='col-lg-3 col-md-6 col-sm-12'>
+  <div class='col-lg-2 col-md-6 col-sm-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">Etherpad
@@ -160,15 +159,14 @@
         </div>
       </div>
     </div>
-  </div> -->
-  <div class='col-lg-3 col-md-6 col-sm-12'>
+  </div>
+  <div class='col-lg-2 col-md-6 col-sm-12'>
     <div class="panel panel-default">
       <div class="panel-heading">
         <div class="panel-title">GuestBook
           <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.guestbook-panel.header-hint") %>"></i>
         </div>
       </div>
-      <!-- panel body -->
       <div class="panel-body">
         <div class="row">
           <form id="load-snapshot-form" action="/snapshot" method="post">
@@ -184,12 +182,55 @@
       </div>
     </div>
   </div>
+  <div class='col-lg-2 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">WordPress
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.interview-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="export_app" class="form-control" value='true'>
+              <input type="hidden" name="application" class="form-control" value='WordPress'>
+              <input type="text" name="snapshotname" class="form-control" id="wordpress-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-wordpress-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-wordpress-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='col-lg-2 col-md-6 col-sm-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Nextcloud
+          <i class="fa fa-info-circle pull-right" aria-hidden="true" title="<%= I18n.translate("admin.import-export-page.interview-panel.header-hint") %>"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <div class="row">
+          <form id="load-snapshot-form" action="/snapshot" method="post">
+            <div class="form-group">
+              <input type="hidden" name="export_app" class="form-control" value='true'>
+              <input type="hidden" name="application" class="form-control" value='Nextcloud'>
+              <input type="text" name="snapshotname" class="form-control" id="nextcloud-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
+            </div>
+            <a data-toggle="modal" data-target="#upload-nextcloud-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
+            <button type="button" class="btn btn-success pull-right" id="download-nextcloud-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- upload snapshots modal-->
 <div class="modal fade" id="upload-snapshots-modal" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -211,7 +252,6 @@
 <!-- upload interview snapshots modal-->
 <div class="modal fade" id="upload-interview-snapshots-modal" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -234,7 +274,6 @@
 <!-- upload etherpad snapshots modal-->
 <div class="modal fade" id="upload-etherpad-snapshots-modal" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -257,7 +296,6 @@
 <!-- upload guestbook snapshots modal-->
 <div class="modal fade" id="upload-guestbook-snapshots-modal" role="dialog">
   <div class="modal-dialog">
-    <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -268,6 +306,50 @@
           <div class="form-group">
             <input type="hidden" name="import_app" class="form-control" value='true'>
             <input type="hidden" name="application" class="form-control" value='GuestBook'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload nextcloud snapshots modal-->
+<div class="modal fade" id="upload-nextcloud-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="import_app" class="form-control" value='true'>
+            <input type="hidden" name="application" class="form-control" value='Nextcloud'>
+            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- upload wordpress snapshots modal-->
+<div class="modal fade" id="upload-wordpress-snapshots-modal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><%= I18n.translate("admin.import-export-page.popups.import-interview-header") %></h4>
+      </div>
+      <div class="modal-body">
+        <form class="form-signin" action="/snapshot" method="post" enctype="multipart/form-data">
+          <div class="form-group">
+            <input type="hidden" name="import_app" class="form-control" value='true'>
+            <input type="hidden" name="application" class="form-control" value='WordPress'>
             <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
