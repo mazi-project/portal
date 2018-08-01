@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Mazi Portal">
+    <meta name="author" content="nitlab">
+    <script src="js/jquery.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script> 
+    <title></title>
+  </head>
+
+  <body>
+    <center>
+    <h1>Welcome to the <%= name %>.</h1>
+
+    <p>This zone provides access to the <%= name %> applications:</p>
+    <ul>
+      <% apps.each do |app|%>
+        <li> <%= app.name %></li>
+      <% end %>
+    </ul>
+    <p>The zone is in <%= mode %> mode, <%= message_mode %></p>
+    <div class="container">  
+      <div class="alert alert-info alert-dismissible">
+      <strong>Info!</strong> If this window stays open after you have connected, enter the following into the browser bar <b> <%= domain %></b>, then close this window.
+      </div>
+      <a href="#" id="enter" class="btn btn-success">ENTER</a>
+    </div>
+    </center>
+  </body>
+  <script>
+    $(function(){
+      $('#enter').on('click',function(){
+       $('#enter').toggle(300);
+       window.location = "<%=domain%>:4567/splashEnter?authaction=<%=authaction%>&tok=<%=tok%>&redir=<%=redir%>&mac=<%=mac%>";
+      });
+    });            
+  </script>    
+  <style>
+    body{
+      background: #DFDCDC;
+    }
+    ul{
+     list-style-position: inside; 
+     min-width:170px;
+     width: 0%;
+     margin: auto;
+     text-align: left; 
+    }
+  </style>
+</html>
