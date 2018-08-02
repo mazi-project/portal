@@ -160,10 +160,10 @@ module Sinatra
             when 'splash'
               MaziLogger.debug "Splash Page "
               locals[:main_body] = :splash
-              locals[:tok] = "#{params['tok']}" 
- 	      locals[:redir] = "#{params['redir']}"
+              locals[:tok] = "#{params['tok']}"
+ 	            locals[:redir] = "#{params['redir']}"
               locals[:authaction] = "#{params['authaction']}"
-              locals[:mac] = "#{params['mac']}" 
+              locals[:mac] = "#{params['mac']}"
               locals[:apps] = Mazi::Model::Application.all
               locals[:name] = @config[:portal_configuration][:applications_title]
               ex4 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-m'], @config[:scripts][:enabled_scripts])
@@ -315,6 +315,20 @@ module Sinatra
               locals[:js] << "js/admin_snapshot.js"
               locals[:main_body] = :admin_snapshot
               locals[:local_data][:dbs] = getAllDBSnapshots
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['--usb'], @config[:scripts][:enabled_scripts])
+              ex.exec_command.each do |line|
+                locals[:local_data][:usb] = false if line == 'usb -'
+                if line.start_with?('usb_target')
+                  locals[:local_data][:usb] = true
+                  locals[:local_data][:usb_target] = line.split.last
+                end
+                if line.start_with?('free_space')
+                  free = line.split.last
+                  free = free.length > 6 ? "#{free[0..-7]}.#{free[-6]} GB" : "#{free[0..2]} MB"
+                  locals[:local_data][:free] = free
+                end
+              end
+               puts locals[:local_data]
               erb :admin_main, locals: locals
             when 'admin_devices'
               unless authorized?

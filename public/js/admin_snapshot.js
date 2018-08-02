@@ -90,14 +90,16 @@ $( document ).ready(function() {
   });
 
   $('#download-full-snapshot').click(function(){
-    var snapshot_name = $( "#full-snapshotname").val();
+    var snapshot_name = $("#full-snapshotname").val();
+    var usb_target =    $("#full-usb-target").val();
+    console.log(usb_target);
     $.ajax({
       url: '/snapshot/',
       type: 'POST',
-      data: {full_export: true, snapshotname: snapshot_name, application: 'full'},
+      data: {full_export: true, snapshotname: snapshot_name, usb_target: usb_target},
       success: function(result) {
         $('#loading_message').hide();
-        window.location.href = 'snapshots/' + snapshot_name + '.zip';
+        alert('done');
       }
     });
   });

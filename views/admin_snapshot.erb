@@ -26,14 +26,25 @@
       </div>
       <div class="panel-body">
         <div class="row">
+          <% if usb %>
+          <div class='col-md-12'>
+            <p><%= I18n.translate("admin.import-export-page.full-snapshot-panel.usb-message", free_space: free) %></p>
+          </div>
           <form id="load-snapshot-form" action="/snapshot" method="post">
             <div class="form-group">
               <input type="hidden" name="full_export" class="form-control" value='true'>
+              <input type="hidden" name="usb_target" class="form-control" id="full-usb-target" value='<%= usb_target %>'>
               <input type="text" name="snapshotname" class="form-control" id="full-snapshotname" aria-describedby="snapshotLoadHelp" placeholder="<%= I18n.translate("admin.import-export-page.interview-panel.form-placeholder") %>" autofocus="" required>
             </div>
             <a data-toggle="modal" data-target="#upload-full-snapshots-modal" class="btn btn-success pull-left"><i class="fa fa-upload"></i> <%= I18n.translate("general.buttons.import") %></a>
             <button type="button" class="btn btn-success pull-right load_btn" id="download-full-snapshot"><i class="fa fa-download"></i> <%= I18n.translate("general.buttons.export") %></button>
           </form>
+          <% else %>
+          <div class="col-xs-7 text-left">
+            <p><%= I18n.translate("admin.import-export-page.full-snapshot-panel.no-usb-message") %></p>
+          </div>
+          <div class="pull-right"><i class="fas fa-5x fa-ban"></i></div>
+          <% end %>
         </div>
       </div>
     </div>

@@ -496,6 +496,8 @@ en:
       full-snapshot-panel:
         header-hint:      "You can use this to import/export a snapshot."
         form-placeholder: "Snapshot Name"
+        no-usb-message:   "Currently there is no USB storage device detected. Please plug in a USB storage device and refresh the page."
+        usb-message:      "A USB storage device has been detected. There is %{free_space} of free space on the device."
       configuration-snapshots-header:  "Configuration Snapshots"
       configuration-snapshots-message: "You can use the panel below to take a snapshot of the current configuration of this MAZI Zone."
       warning:   "Warning: If you load a new snapshot with different Wi-Fi network settings, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
