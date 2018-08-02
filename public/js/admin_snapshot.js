@@ -94,7 +94,7 @@ $( document ).ready(function() {
     $.ajax({
       url: '/snapshot/',
       type: 'POST',
-      data: {export_app: true, snapshotname: snapshot_name, application: 'full'},
+      data: {full_export: true, snapshotname: snapshot_name, application: 'full'},
       success: function(result) {
         $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '.zip';
@@ -107,7 +107,7 @@ $( document ).ready(function() {
     $.ajax({
       url: '/snapshot/',
       type: 'POST',
-      data: {export_app: true, snapshotname: snapshot_name, application: 'config'},
+      data: {config_export: true, snapshotname: snapshot_name, application: 'config'},
       success: function(result) {
         $('#loading_message').hide();
         window.location.href = 'snapshots/' + snapshot_name + '_config.zip';
@@ -115,7 +115,7 @@ $( document ).ready(function() {
     });
   });
 
-   $('.form-upload').submit(function(e) {
+  $('.form-upload').submit(function(e) {
     var id = $(this).attr('id');
     var modal = id.replace('form', 'modal');
     $('#' + modal).modal('hide');

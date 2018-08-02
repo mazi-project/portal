@@ -242,7 +242,7 @@ module Sinatra
                 redirect '/admin_snapshot'
               end
               zip_config_snapshot(params['snapshotname'])
-              return {result: 'OK', file: "#{params[:snapshotname]}_configuration.zip"}
+              return {result: 'OK', file: "#{params[:snapshotname]}_config.zip"}
             elsif params['config_import']
               if @config[:general][:mode] == 'demo'
                 MaziLogger.debug "Demo mode upload snapshot"
