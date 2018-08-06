@@ -319,6 +319,8 @@ module Sinatra
               ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['--usb'], @config[:scripts][:enabled_scripts])
               ex.exec_command.each do |line|
                 locals[:local_data][:usb] = false if line == 'usb -'
+                locals[:local_data][:usb_target] = nil
+                locals[:local_data][:free] = 0
                 if line.start_with?('usb_target')
                   locals[:local_data][:usb] = true
                   locals[:local_data][:usb_target] = line.split.last
@@ -329,7 +331,7 @@ module Sinatra
                   locals[:local_data][:free] = free
                 end
               end
-              locals[:local_data][:zip_files] = locals[:local_data][:usb_target] ? get_all_zip_files_in_device(locals[:local_data][:usb_target]) : nil
+              locals[:local_data][:zip_files] = locals[:local_data][:usb_target] ? get_all_zip_files_in_device(locals[:local_data][:usb_target]) : []
               erb :admin_main, locals: locals
             when 'admin_devices'
               unless authorized?
