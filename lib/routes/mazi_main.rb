@@ -328,7 +328,7 @@ module Sinatra
                   locals[:local_data][:free] = free
                 end
               end
-               puts locals[:local_data]
+              locals[:local_data][:zip_files] = locals[:local_data][:usb_target] ? get_all_zip_files_in_device(locals[:local_data][:usb_target]) : nil
               erb :admin_main, locals: locals
             when 'admin_devices'
               unless authorized?

@@ -231,9 +231,7 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have imported a full snapshot."
                 redirect '/admin_snapshot'
               end
-              tempfile = params['snapshot'][:tempfile]
-              filename = params['snapshot'][:filename]
-              unzip_full_snapshot(filename, tempfile)
+              unzip_full_snapshot(params['usb_target'], params['zip_file'])
               redirect '/admin_snapshot'
             elsif params['config_export']
               if @config[:general][:mode] == 'demo'

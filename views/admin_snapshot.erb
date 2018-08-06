@@ -431,7 +431,14 @@
         <form class="form-upload" id="upload-full-snapshots-form" action="/snapshot" method="post" enctype="multipart/form-data">
           <div class="form-group">
             <input type="hidden" name="full_import" class="form-control" value='true'>
-            <input type="file" name="snapshot" class="form-control filestyle" data-buttonText="Browse">
+            <input type="hidden" name="usb_target" class="form-control" id="full-usb-target" value='<%= usb_target %>'>
+            <select class="form-control" id="zip_file" name='zip_file'>
+            <% unless zip_files.nil? || zip_files.empty? %>
+              <% zip_files.each do |file| %>
+                <option value="<%= file %>"><%= file.split('/').last %></option>
+              <% end%>
+            <% end %>
+            </select>
             <button class="btn btn-lg btn-primary btn-block load_btn" type="submit"><%= I18n.translate("general.buttons.import") %></button>
           </div>
         </form>
