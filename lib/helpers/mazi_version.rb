@@ -80,6 +80,7 @@ module MaziVersion
     fetch
     `cd /root/back-end && git checkout #{branch}`
     `git checkout #{branch}`
+    `service mazi-portal restart`
   end
 
   def version_update
