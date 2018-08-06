@@ -215,6 +215,7 @@ module Sinatra
               storage      = ex2.parseFor("storage:") ? "#{ex2.parseFor("storage:")[-2]} #{ex2.parseFor("storage:")[-1]}" : nil
               sd_size      = ex2.parseFor("ram:") ? ex2.parseFor("SD size:").last : nil
               expanded     = ex2.parseFor("expand:") ? ex2.parseFor("expand:").last : nil
+              users_online = 0 if users_online == 'users:'
               locals[:local_data][:users]                 = {}
               locals[:local_data][:users][:online]        = users_online
               locals[:local_data][:temp]                  = temp
