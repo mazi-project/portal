@@ -223,8 +223,8 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have exported a full snapshot."
                 redirect '/admin_snapshot'
               end
-              zip_full_snapshot(params['snapshotname'], params['usb_target'])
-              return {result: 'OK', file: "#{params[:snapshotname]}.zip"}
+              out = zip_full_snapshot(params['snapshotname'], params['usb_target'])
+              return {result: 'OK', file: out}.to_json
             elsif params['full_import']
               if @config[:general][:mode] == 'demo'
                 MaziLogger.debug "Demo mode upload snapshot"

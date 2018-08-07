@@ -97,7 +97,10 @@ $( document ).ready(function() {
       type: 'POST',
       data: {full_export: true, snapshotname: snapshot_name, usb_target: usb_target},
       success: function(result) {
+        res = JSON.parse(result);
         $('#loading_message').hide();
+        $('#snapshot-done-p').text("Your snapshot has been successfully saved on your storage device (" + usb_target + "). The file name is " + res.file);
+        $('#snapshot-done-div').show();
       }
     });
   });

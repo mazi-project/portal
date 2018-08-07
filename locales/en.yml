@@ -498,7 +498,7 @@ en:
         form-placeholder: "Snapshot Name"
         no-usb-message:   "Currently there is no USB storage device detected. Please plug in a USB storage device and refresh the page."
         usb-message:      "A USB storage device has been detected. There is %{free_space} of free space on the device."
-      full-warning:       "Warning: loading a new snapshot is a time consuming procedure. Also, at the end of the procedure the device will be rebooted."
+      full-warning:       "Warning: Importing and exporting a snapshot is a time consuming procedure and also depends on your MAZI Zone data and USB device speed. You will not be able to interact with the MAZI Portal during the import/export procedure. The device will be rebooted at the end of the import procedure."
       configuration-snapshots-header:  "Configuration Snapshots"
       configuration-snapshots-message: "You can use the panel below to take a snapshot of the current configuration of this MAZI Zone."
       warning:   "Warning: If you load a new snapshot with different Wi-Fi network settings, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
