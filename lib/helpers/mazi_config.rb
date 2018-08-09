@@ -238,7 +238,7 @@ module MaziConfig
       end
       zipfile.add("guestbook/#{snapshot_name}_guestbook.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json")
       zipfile.add("guestbook/config.js", "/var/www/html/mazi-board/src/www/js/config.js")
-      zipfile.add("guestbook/be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+      zipfile.add("guestbook/main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
       zipfile.add('guestbook/submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
       zipfile.add('guestbook/header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
       bgimgname = get_guestbook_background_image_name
@@ -322,18 +322,18 @@ module MaziConfig
             img_name = filename.gsub('mzbgimg_', '')
             File.delete("/var/www/html/mazi-board/src/www/images/#{img_name}") if File.exist?("/var/www/html/mazi-board/src/www/images/#{img_name}")
             entry.extract("/var/www/html/mazi-board/src/www/images/#{img_name}")
-          elsif filename == 'config.js'
-            File.delete("/var/www/html/mazi-board/src/www/js/config.js") if File.exist?("/var/www/html/mazi-board/src/www/js/config.js")
+          elsif filename == 'main.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/main.config.js") if File.exist?("/var/www/html/mazi-board/src/node/main.config.js")
             if get_guestbook_version == '0.1'
               File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
               entry.extract("/root/tmp_config.js")
-              if get_guestbook_config_file_version("/root/tmp_config.js", "front-end") == "0.0.1"
-                update_guestbook_config_file_version("/root/tmp_config.js", "front-end")
-                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/main.config.js")
               end
               File.delete("/root/tmp_config.js")
             else
-              entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
+              entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
           elsif filename == 'be_config.js'
             File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
@@ -538,7 +538,7 @@ module MaziConfig
         end
         zipfile.add("#{snapshot_name}_#{app_name}.json", "/tmp/#{snapshot_name}_#{app_name}.json")
         zipfile.add("config.js", "/var/www/html/mazi-board/src/www/js/config.js")
-        zipfile.add("be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+        zipfile.add("main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
         zipfile.add('submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
         zipfile.add('header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
         bgimgname = get_guestbook_background_image_name
@@ -644,18 +644,18 @@ module MaziConfig
             else
               entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
             end
-          elsif entry.name == 'be_config.js'
-            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+          elsif entry.name == 'main.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/main.config.js") if File.exist?("/var/www/html/mazi-board/src/node/main.config.js")
             if get_guestbook_version == '0.1'
               File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
               entry.extract("/root/tmp_config.js")
               if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
                 update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
-                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/config.js")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/main.config.js")
               end
               File.delete("/root/tmp_config.js")
             else
-              entry.extract("/var/www/html/mazi-board/src/node/config.js")
+              entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
           elsif entry.name == 'submission_input_tmpl.html'
             File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
