@@ -319,8 +319,8 @@ module Sinatra
               ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['--usb'], @config[:scripts][:enabled_scripts])
               ex.exec_command.each do |line|
                 locals[:local_data][:usb] = false if line == 'usb -'
-                locals[:local_data][:usb_target] = nil
-                locals[:local_data][:free] = 0
+                locals[:local_data][:usb_target] = '' if locals[:local_data][:usb_target].nil?
+                locals[:local_data][:free] = 0 if locals[:local_data][:free].nil?
                 if line.start_with?('usb_target')
                   locals[:local_data][:usb] = true
                   locals[:local_data][:usb_target] = line.split.last
