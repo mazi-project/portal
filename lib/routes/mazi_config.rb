@@ -348,6 +348,9 @@ module Sinatra
             MaziLogger.debug "request: put/branch from ip: #{request.ip} params: #{params.inspect}"
 
             change_update_branch(branch)
+            update_config_file
+            MaziLogger.debug 'Restarting'
+            `reboot`
 
             {status: "OK"}.to_json
           end

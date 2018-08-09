@@ -175,6 +175,7 @@ en:
       update-message-6:  "There is an update available. Please use the button below to start the update process."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
       update-chan-hint:  "Hint: the latest version of the Development channel could be unstable. It is not recomended to change back and forth the update channel, since it may cause unexpected behavior. Please advise the version details %{link} in order to decide your update channel"
+      update-chan-warn:  "Warning: changing to another channel will cause a device reboot."
     setup-page:
       tog-nav:             "Toggle navigation"
       setup-panel:         "MAZI Zone Setup Panel"

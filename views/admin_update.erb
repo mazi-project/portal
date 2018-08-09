@@ -20,7 +20,8 @@
         <option value='master' <%= 'selected="selected"' if current_branch == 'master' %>><%= I18n.translate("general.messages.stable") %></option>
         <option value='Dev'  <%= 'selected="selected"' if current_branch == 'Dev' %>><%= I18n.translate("general.messages.development") %></option>
       </select></br>
-      <small><%= I18n.translate("admin.updates.update-chan-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Version-History' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small>
+      <small><%= I18n.translate("admin.updates.update-chan-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Version-History' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small></br>
+      <small><%= I18n.translate("admin.updates.update-chan-warn") %></small>
     </p>
     <button type="button" class="btn btn-default choose-branch-btn pull-left" data-toggle="modal" data-target="#update-version-modal"><%= I18n.translate("general.buttons.update") %></button>
   </div>

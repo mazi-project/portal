@@ -80,7 +80,6 @@ module MaziVersion
     fetch
     `cd /root/back-end && git checkout #{branch}`
     `git checkout #{branch}`
-    `service mazi-portal restart`
   end
 
   def version_update
@@ -121,7 +120,6 @@ module MaziVersion
   def self.remove_old_snapshots
     MaziLogger.debug "deleting old snapshots"
     `rm -rf public/snapshots/* 2> /dev/null`
-    MaziLogger.debug "done."
   end
 
   def self.rc_local_updated?
@@ -136,6 +134,14 @@ module MaziVersion
     response = false
     File.readlines("/etc/rc.local").each do |line|
       response = true if line.include? 'bash /root/back-end/mazi-internet.sh'
+    end
+    response
+  end
+
+  def self.rc_local_updated_3?
+    response = true
+    File.readlines("/etc/rc.local").each do |line|
+      response = false if line.include? '/sbin/ifconfig wlan0 10.0.0.1'
     end
     response
   end
@@ -226,8 +232,36 @@ module MaziVersion
     response
   end
 
+  def self.get_current_branch
+    o = `git status`
+    o.split("\n").each do |line|
+      if line.include? 'On branch'
+        return line.split.last
+        break
+      end
+    end
+    'master'
+  end
+
+  def self.branch_exists?(branch)
+    `git branch`.split("\n").each do |line|
+      return true if line.include?(branch)
+    end
+    false
+  end
+
+  def self.get_branch_or_create(branch)
+    unless branch_exists?(branch)
+      cur_branch = get_current_branch
+      `git checkout #{branch}`
+      `git checkout #{cur_branch}`
+    end
+    branch
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
+    get_branch_or_create("Dev")
     begin
       MaziLogger.debug "  Checking MySQL gem"
       Gem::Specification.find_by_name("mysql")# version 1.6.6 requires mysql gem
@@ -429,7 +463,7 @@ module MaziVersion
     end
 
     # version 2.5.1
-    MaziLogger.debug "  Checking rc.local file"
+    MaziLogger.debug "  Checking rc.local file 2"
     unless rc_local_updated_2?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh`
@@ -441,6 +475,24 @@ module MaziVersion
     unless nodogsplash_port_rules_updated?
       MaziLogger.debug "nodogsplash port rules older version found. Updating."
       `bash /root/back-end/update.sh`
+      MaziLogger.debug "done."
+    end
+
+    # version 2.5.4
+    MaziLogger.debug "  Checking rc.local file 3"
+    unless rc_local_updated_3?
+      MaziLogger.debug "rc.local older version found. Updating."
+      `bash /root/back-end/update.sh 2.5.4 > /dev/null 2>&1`
+      if self.etherpad_version == '1.6.3'
+        Dir.chdir('/var/www/html/etherpad-lite/'){
+          `git pull origin`
+          `rm /etc/init.d/etherpad-lite`
+          `cp /root/portal/init/etherpad-lite.service /etc/systemd/system/etherpad-lite.service`
+          `systemctl enable etherpad-lite`
+          `systemctl start etherpad-lite`
+        }
+      end
+    unle
       MaziLogger.debug "done."
     end
 
