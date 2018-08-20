@@ -483,7 +483,6 @@ module MaziVersion
     unless rc_local_updated_3?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh 2.5.4`
-    unle
       MaziLogger.debug "done."
     end
 
