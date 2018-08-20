@@ -490,6 +490,7 @@ module MaziVersion
           `cp /root/portal/init/etherpad-lite.service /etc/systemd/system/etherpad-lite.service`
           `systemctl enable etherpad-lite`
           `systemctl start etherpad-lite`
+          `systemctl daemon-reload`
         }
       end
     unle
