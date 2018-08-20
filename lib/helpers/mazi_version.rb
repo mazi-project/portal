@@ -253,7 +253,7 @@ module MaziVersion
   def self.get_branch_or_create(branch)
     unless branch_exists?(branch)
       cur_branch = get_current_branch
-      `git checkout #{branch}`
+      `git checkout --track origin/Dev`
       `git checkout #{cur_branch}`
     end
     branch
@@ -483,16 +483,6 @@ module MaziVersion
     unless rc_local_updated_3?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh 2.5.4`
-      if self.etherpad_version == '1.6.3'
-        Dir.chdir('/var/www/html/etherpad-lite/'){
-          `git pull origin`
-          `rm /etc/init.d/etherpad-lite`
-          `cp /root/portal/init/etherpad-lite.service /etc/systemd/system/etherpad-lite.service`
-          `systemctl enable etherpad-lite`
-          `systemctl start etherpad-lite`
-          `systemctl daemon-reload`
-        }
-      end
     unle
       MaziLogger.debug "done."
     end
