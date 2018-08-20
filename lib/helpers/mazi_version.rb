@@ -482,7 +482,7 @@ module MaziVersion
     MaziLogger.debug "  Checking rc.local file 3"
     unless rc_local_updated_3?
       MaziLogger.debug "rc.local older version found. Updating."
-      `bash /root/back-end/update.sh 2.5.4 > /dev/null 2>&1`
+      `bash /root/back-end/update.sh 2.5.4`
       if self.etherpad_version == '1.6.3'
         Dir.chdir('/var/www/html/etherpad-lite/'){
           `git pull origin`
