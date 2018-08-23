@@ -291,7 +291,7 @@ module Sinatra
                 session['error'] = nil
                 redirect "/admin_login?goto=#{index}"
               end
-              locals[:js] << "js/admin_network.js"
+              locals[:js] << "js/admin_configuration.js"
               locals[:js] << "js/jscolor.min.js"
               locals[:main_body] = :admin_configuration
               locals[:local_data][:portal_configuration] = @config[:portal_configuration]
