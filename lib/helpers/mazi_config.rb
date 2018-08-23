@@ -344,19 +344,19 @@ module MaziConfig
               entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
           elsif filename == 'config.js'
-            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            File.delete("/var/www/html/mazi-board/src/www/js/config.js") if File.exist?("/var/www/html/mazi-board/src/www/js/config.js")
             if get_guestbook_version == '0.1'
               File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
               entry.extract("/root/tmp_config.js")
-              if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
-                update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
-                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "front-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "front-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
               else
                 FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
               end
               File.delete("/root/tmp_config.js")
             else
-              entry.extract("/var/www/html/mazi-board/src/node/config.js")
+              entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
             end
           elsif filename == 'submission_input_tmpl.html'
             File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
