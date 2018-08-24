@@ -153,6 +153,13 @@ module MaziVersion
     false
   end
 
+  def self.dnsmasq_updated?
+    File.readlines("/etc/dnsmasq.conf").each do |line|
+      return false if line.include? 'dhcp-range=10.0.0.10,10.0.0.200,255.255.255.0,12h'
+    end
+    true
+  end
+
   def self.nodogsplash_port_rules_updated?
     File.readlines("/etc/nodogsplash/offline.txt").each do |line|
       return true if line.include? 'FirewallRule allow all'
@@ -486,7 +493,7 @@ module MaziVersion
     end
 
     # version 2.5.4
-    MaziLogger.debug "  Checking rc.local file 3"
+    MaziLogger.debug "  Checking updates for version 2.5.4"
     unless rc_local_updated_3?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh 2.5.4`
@@ -497,6 +504,20 @@ module MaziVersion
       FileUtils.cp("/root/portal/init/portal.conf", "/etc/apache2/sites-available/portal.conf")
       `systemctl daemon-reload`
       `service apache2 restart`
+      MaziLogger.debug "done."
+    end
+    unless dnsmasq_updated?
+      MaziLogger.debug "dnsmasq.conf older version found. Updating."
+      lines = ''
+      File.readlines('/etc/dnsmasq.conf').each do |line|
+        if line.include? 'dhcp-range=10.0.0.10,10.0.0.200,255.255.255.0,12h'
+          lines += "dhcp-range=10.0.0.10,10.0.0.240,255.255.255.0,6h\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/dnsmasq.conf', "w") {|file| file.puts lines }
+      `service dnsmasq restart`
       MaziLogger.debug "done."
     end
 
