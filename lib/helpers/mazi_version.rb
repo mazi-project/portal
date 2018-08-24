@@ -146,6 +146,13 @@ module MaziVersion
     response
   end
 
+  def self.portal_conf_updated?
+    File.readlines("/etc/apache2/sites-available/portal.conf").each do |line|
+      return true if line.include? 'timeout'
+    end
+    false
+  end
+
   def self.nodogsplash_port_rules_updated?
     File.readlines("/etc/nodogsplash/offline.txt").each do |line|
       return true if line.include? 'FirewallRule allow all'
@@ -483,6 +490,13 @@ module MaziVersion
     unless rc_local_updated_3?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh 2.5.4`
+      MaziLogger.debug "done."
+    end
+    unless portal_conf_updated?
+      MaziLogger.debug "portal.conf in sites available older version found. Updating."
+      FileUtils.cp("/root/portal/init/portal.conf", "/etc/apache2/sites-available/portal.conf")
+      `systemctl daemon-reload`
+      `service apache2 restart`
       MaziLogger.debug "done."
     end
 
