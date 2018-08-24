@@ -244,6 +244,7 @@ module MaziConfig
       zipfile.add("guestbook/#{snapshot_name}_guestbook.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json")
       zipfile.add("guestbook/config.js", "/var/www/html/mazi-board/src/www/js/config.js")
       zipfile.add("guestbook/main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
+      zipfile.add("guestbook/be.config.js", "/var/www/html/mazi-board/src/node/config.js")
       zipfile.add('guestbook/submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
       zipfile.add('guestbook/header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
       bgimgname = get_guestbook_background_image_name
@@ -343,6 +344,9 @@ module MaziConfig
             else
               entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
+          elsif filename == 'be.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            entry.extract("/var/www/html/mazi-board/src/node/config.js")
           elsif filename == 'config.js'
             File.delete("/var/www/html/mazi-board/src/www/js/config.js") if File.exist?("/var/www/html/mazi-board/src/www/js/config.js")
             if get_guestbook_version == '0.1'
@@ -549,6 +553,7 @@ module MaziConfig
         zipfile.add("#{snapshot_name}_#{app_name}.json", "/tmp/#{snapshot_name}_#{app_name}.json")
         zipfile.add("config.js", "/var/www/html/mazi-board/src/www/js/config.js")
         zipfile.add("main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
+        zipfile.add("be.config.js", "/var/www/html/mazi-board/src/node/config.js")
         zipfile.add('submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
         zipfile.add('header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
         bgimgname = get_guestbook_background_image_name
@@ -669,6 +674,9 @@ module MaziConfig
             else
               entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
+          elsif entry.name == 'be.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            entry.extract("/var/www/html/mazi-board/src/node/config.js")
           elsif entry.name == 'submission_input_tmpl.html'
             File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
             entry.extract("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
@@ -864,7 +872,7 @@ module MaziConfig
     File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
       line = line.strip
       if line.start_with? 'auto_expand_comment:'
-        return line.split(':').last.strip!
+        return line.split(':').last.split('/').first.strip!
       end
     end
   end
@@ -885,7 +893,7 @@ module MaziConfig
     File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
       line = line.strip
       if line.start_with? 'submission_name_required:'
-        return line.split(':').last.gsub(',', '').strip!
+        return line.split(':').last.split(',').first.strip!
       end
     end
   end
