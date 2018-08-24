@@ -164,20 +164,21 @@ module Sinatra
  	            locals[:redir] = "#{params['redir']}"
               locals[:authaction] = "#{params['authaction']}"
               locals[:mac] = "#{params['mac']}"
-              locals[:apps] = Mazi::Model::Application.all
+              locals[:apps] = Mazi::Model::ApplicationInstance.all
               locals[:name] = @config[:portal_configuration][:applications_title]
-              ex4 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-m'], @config[:scripts][:enabled_scripts])
-              mode = ex4.exec_command.first.split
-              mode = mode[1].gsub('"', '')
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-m', '-d'], @config[:scripts][:enabled_scripts])
+              lines = ex.exec_command
+              mode = ex.parseFor('mode').last
+              ssid = ex.parseFor('ssid').last
+              domain = ex.parseFor('domain').last
               if mode == "offline"
                  locals[:message_mode] = "so it does NOT provide internet access."
               else
                  locals[:message_mode] = "so it does provide internet access."
               end
-              locals[:mode] = "#{mode}"
-              ex5 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-d'], @config[:scripts][:enabled_scripts])
-              domain = ex5.exec_command.first.split
-              locals[:domain] = "http://#{domain[1]}"
+              locals[:mode] = mode
+              locals[:ssid] = ssid
+              locals[:domain] = "http://#{domain}"
               erb :splash, locals: locals
             when 'splashEnter'
                mac = "#{params['mac']}"
