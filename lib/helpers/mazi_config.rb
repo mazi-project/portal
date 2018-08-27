@@ -192,12 +192,314 @@ module MaziConfig
     end
   end
 
+  def zip_full_snapshot(snapshot_name, usb_target)
+    mysql_user, mysql_password = get_mysql_details
+    File.delete("#{usb_target}/#{snapshot_name}.zip") if File.file?("#{usb_target}/#{snapshot_name}.zip")
+    Dir.mkdir("#{usb_target}/#{snapshot_name}_tmp") unless Dir.exist?("#{usb_target}/#{snapshot_name}_tmp")
+    input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
+                       "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
+                       "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net"]
+
+    ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command.join("\n")
+    File.open("/tmp/network.net", 'w') { |file| file.write(lines) }
+    MaziLogger.debug('Zipping Etherpad')
+    db = "etherpad"
+    `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_etherpad.sql`
+    MaziLogger.debug('Zipping Nextcloud')
+    db = "nextcloud"
+    `sudo -u www-data php occ maintenance:mode --on`
+    `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud.sql`
+    `cd /var/www/html/nextcloud/ && zip -r -1 #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_config.zip config/`
+    `cd /var/www/html/nextcloud/ && zip -r -1 #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_data.zip data/`
+    `cd /var/www/html/nextcloud/ && zip -r -1 #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_themes.zip themes/`
+    MaziLogger.debug('Zipping WordPress')
+    db = "wordpress"
+    `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_wordpress.sql`
+    `cd /var/www/html/ && zip -r -1 #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_wordpress_files.zip wordpress/`
+    MaziLogger.debug('Zipping Guestbook')
+    db = "letterbox"
+    `mongoexport --db #{db} -c submissions --out #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json`
+    guestbook_path = "/var/www/html/mazi-board/src/files"
+    interview_path = '/var/www/html/mazi-princess/src/server/node/files'
+
+    Zip.on_exists_proc = false
+    MaziLogger.debug('Creating final zip file')
+    Zip::File.open("#{usb_target}/#{snapshot_name}.zip", Zip::File::CREATE) do |zipfile|
+      input_filenames.each do |filename|
+        zipfile.add('config/' + filename.split('/').last, filename) if File.file?(filename)
+      end
+      zipfile.add('config/' + @config[:portal_configuration][:applications_background_image], "public/images/#{@config[:portal_configuration][:applications_background_image]}")
+      zipfile.add("etherpad/#{snapshot_name}_etherpad.sql", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_etherpad.sql")
+      zipfile.add("nextcloud/#{snapshot_name}_nextcloud.sql", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud.sql")
+      zipfile.add("nextcloud/config.zip", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_config.zip")
+      zipfile.add("nextcloud/data.zip", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_data.zip")
+      zipfile.add("nextcloud/themes.zip", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_nextcloud_themes.zip")
+      zipfile.add("wordpress/#{snapshot_name}_wordpress.sql", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_wordpress.sql")
+      zipfile.add("wordpress/files.zip", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_wordpress_files.zip")
+      Dir["#{guestbook_path}/**/**"].each do |file|
+        zipfile.add("guestbook/" + file.sub(guestbook_path+'/',''), file)
+      end
+      zipfile.add("guestbook/#{snapshot_name}_guestbook.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json")
+      zipfile.add("guestbook/config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+      zipfile.add("guestbook/main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
+      zipfile.add("guestbook/be.config.js", "/var/www/html/mazi-board/src/node/config.js")
+      zipfile.add('guestbook/submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
+      zipfile.add('guestbook/header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
+      bgimgname = get_guestbook_background_image_name
+      zipfile.add("guestbook/mzbgimg_#{bgimgname}", "/var/www/html/mazi-board/src/www/images/#{bgimgname}")
+      Dir["#{interview_path}/**/**"].each do |file|
+        zipfile.add("interview/" + file.sub(interview_path+'/', ''), file)
+      end
+      zipfile.add('interview/attachments.db', '/var/www/html/mazi-princess/src/server/node/data/attachments.db')
+      zipfile.add('interview/interviews.db', '/var/www/html/mazi-princess/src/server/node/data/interviews.db')
+      zipfile.get_output_stream("README.txt") { |os| os.write "Snapshot #{snapshot_name} has been downloaded at #{Time.now}. \nThis is an autogenerated file. \nYou can upload this file back to the MAZI Zone portal through the admin panel in order to achieve a previous state of the portal.\n" }
+    end
+
+    MaziLogger.debug('Removing tmp files')
+    `rm -f /tmp/network.net`
+    `rm -rf #{usb_target}/#{snapshot_name}_tmp`
+    `sudo -u www-data php occ maintenance:mode --off`
+    MaziLogger.debug("done with snapshot #{usb_target}/#{snapshot_name}.zip")
+    "#{usb_target}/#{snapshot_name}.zip"
+  end
+
+  def unzip_full_snapshot(usb_target, filename)
+    mysql_user, mysql_password = get_mysql_details
+    Dir.mkdir("#{usb_target}/.mazi_tmp") unless Dir.exist?("#{usb_target}/.mazi_tmp")
+    input_filenames = { "inventory.db" => "database/inventory.db", "config.yml" => "/etc/mazi/config.yml", "mazi.conf" => "/etc/mazi/mazi.conf", "sql.conf" => "/etc/mazi/sql.conf",
+                        "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
+                        "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
+                        "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
+                        "network.net" => "/tmp/network.net"}
+    File.delete("#{usb_target}/.mazi_tmp/network.net") if File.file?("#{usb_target}/.mazi_tmp/network.net")
+    Zip::File.open(filename) do |zip_file|
+      zip_file.each do |entry|
+        next if entry.name == 'README.txt'
+        if entry.name.start_with?('config/')
+          filename = entry.name.gsub('config/', '')
+          if filename.include?('.jpg') || filename.include?('.png')
+            File.delete("public/images/#{filename}") if File.exist?("public/images/#{filename}")
+            entry.extract("public/images/#{filename}")
+          else
+            target = input_filenames[filename]
+            File.delete(target) if File.file?(target)
+            entry.extract(target)
+            `chmod +w #{target}` if filename.include?('.db')
+          end
+        elsif entry.name.start_with?('etherpad/')
+          db = 'etherpad'
+          filename = entry.name.gsub('etherpad/', '')
+          File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
+          entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
+          `mysql -u #{mysql_user} -p#{mysql_password} #{db} < #{usb_target}/.mazi_tmp/#{filename}`
+        elsif entry.name.start_with?('nextcloud/')
+          db = 'nextcloud'
+          filename = entry.name.gsub('nextcloud/', '')
+          `sudo -u www-data php occ maintenance:mode --on`
+          File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
+          entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
+          if filename.include?('.zip')
+            `rm -rf /var/www/html/nextcloud/#{filename.gsub('.zip', '')}`
+            `unzip #{usb_target}/.mazi_tmp/#{filename} -d /var/www/html/nextcloud/`
+            `chown -R www-data:www-data /var/www/html/nextcloud/#{filename.gsub('.zip', '')}/`
+          else
+            `mysql -u #{mysql_user} -p#{mysql_password} #{db} < #{usb_target}/.mazi_tmp/#{filename}`
+          end
+          `sudo -u www-data php occ maintenance:mode --off`
+        elsif entry.name.start_with?('wordpress/')
+          db = "wordpress"
+          filename = entry.name.gsub('wordpress/', '')
+          File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
+          entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
+          if filename.include?('.zip')
+            `rm -rf /var/www/html/wordpress`
+            `unzip #{usb_target}/.mazi_tmp/#{filename} -d /var/www/html/`
+            `chown -R www-data:www-data /var/www/html/wordpress/`
+          else
+            `mysql -u #{mysql_user} -p#{mysql_password} #{db} < #{usb_target}/.mazi_tmp/#{filename}`
+          end
+        elsif entry.name.start_with?('guestbook/')
+          path = "/var/www/html/mazi-board/src/files"
+          filename = entry.name.gsub('guestbook/', '')
+          if filename.include?('.json')
+            File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
+            entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
+            `mongoimport --db letterbox --collection submissions --drop --file #{usb_target}/.mazi_tmp/#{filename}`
+          elsif filename.include?('mzbgimg_')
+            img_name = filename.gsub('mzbgimg_', '')
+            File.delete("/var/www/html/mazi-board/src/www/images/#{img_name}") if File.exist?("/var/www/html/mazi-board/src/www/images/#{img_name}")
+            entry.extract("/var/www/html/mazi-board/src/www/images/#{img_name}")
+          elsif filename == 'main.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/main.config.js") if File.exist?("/var/www/html/mazi-board/src/node/main.config.js")
+            if get_guestbook_version == '0.1'
+              File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
+              entry.extract("/root/tmp_config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/main.config.js")
+              end
+              File.delete("/root/tmp_config.js")
+            else
+              entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
+            end
+          elsif filename == 'be.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            entry.extract("/var/www/html/mazi-board/src/node/config.js")
+          elsif filename == 'config.js'
+            File.delete("/var/www/html/mazi-board/src/www/js/config.js") if File.exist?("/var/www/html/mazi-board/src/www/js/config.js")
+            if get_guestbook_version == '0.1'
+              File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
+              entry.extract("/root/tmp_config.js")
+              if get_guestbook_config_file_version("/root/tmp_config.js", "front-end") == "0.0.1"
+                update_guestbook_config_file_version("/root/tmp_config.js", "front-end")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+              else
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+              end
+              File.delete("/root/tmp_config.js")
+            else
+              entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
+            end
+          elsif filename == 'submission_input_tmpl.html'
+            File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
+            entry.extract("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
+          elsif filename == 'header_tmpl.html'
+            File.delete("/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html")
+            entry.extract("/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html")
+          else
+            if File.directory?("#{path}/#{filename}")
+              FileUtils.rm_rf("#{path}/#{filename}")
+            elsif File.exist?("#{path}/#{filename}")
+              File.delete("#{path}/#{filename}")
+            end
+            entry.extract("#{path}/#{filename}")
+          end
+        elsif entry.name.start_with?('interview/')
+          path = '/var/www/html/mazi-princess/src/server/node/files'
+          filename = entry.name.gsub('interview/', '')
+          if filename.include?('.db')
+            if filename == 'interviews.db'
+              STDOUT.flush
+              File.delete("/var/www/html/mazi-princess/src/server/node/data/interviews.db") if File.exist?("/var/www/html/mazi-princess/src/server/node/data/interviews.db")
+              entry.extract("/var/www/html/mazi-princess/src/server/node/data/interviews.db")
+            elsif filename == 'attachments.db'
+              File.delete("/var/www/html/mazi-princess/src/server/node/data/attachments.db") if File.exist?("/var/www/html/mazi-princess/src/server/node/data/attachments.db")
+              entry.extract("/var/www/html/mazi-princess/src/server/node/data/attachments.db")
+            end
+          else
+            if File.directory?("#{path}/#{filename}")
+              FileUtils.rm_rf("#{path}/#{filename}")
+            elsif File.exist?("#{path}/#{filename}")
+              File.delete("#{path}/#{filename}")
+            end
+            entry.extract("#{path}/#{filename}")
+          end
+        end
+      end
+    end
+    if File.file?("#{usb_target}/.mazi_tmp/network.net")
+      args = []
+      File.readlines("#{usb_target}/.mazi_tmp/network.net").each do |line|
+        line = line.split
+        case line.shift
+        when 'ssid'
+          arg = line.join(' ')
+          args << "-s '#{arg}'"
+        when 'channel'
+          arg = line.join(' ')
+          args << "-c '#{arg}'"
+        when 'password'
+          arg = line.join(' ')
+          args << (arg == '-' ? "-w off" : "-p #{arg}")
+        when 'mode'
+          arg = line.join(' ')
+          MaziExecCmd.new('bash', '/root/back-end/', 'internet.sh', ["-m #{arg}"], @config[:scripts][:enabled_scripts]).exec_command
+        end
+      end
+      MaziExecCmd.new('bash', '/root/back-end/', 'wifiap.sh', args, @config[:scripts][:enabled_scripts]).exec_command
+    end
+    `rm -rf #{usb_target}/.mazi_tmp/`
+    `rake db:migrate`
+    `reboot`
+  end
+
+  def zip_config_snapshot(snapshot_name)
+    File.delete("public/snapshots/#{snapshot_name}_config.zip") if File.file?("public/snapshots/#{snapshot_name}_config.zip")
+    input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
+                       "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
+                       "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net"]
+
+    ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
+    lines = ex.exec_command.join("\n")
+    File.open("/tmp/network.net", 'w') { |file| file.write(lines) }
+
+    Zip.on_exists_proc = false
+    Zip::File.open("public/snapshots/#{snapshot_name}_config.zip", Zip::File::CREATE) do |zipfile|
+      input_filenames.each do |filename|
+        zipfile.add(filename.split('/').last, filename) if File.file?(filename)
+      end
+      zipfile.add(@config[:portal_configuration][:applications_background_image], "public/images/#{@config[:portal_configuration][:applications_background_image]}")
+      zipfile.get_output_stream("README.txt") { |os| os.write "Snapshot #{snapshot_name} has been downloaded at #{Time.now}. \nThis is an autogenerated file. \nYou can upload this file back to the MAZI Zone portal through the admin panel in order to achieve a previous state of the portal.\n" }
+    end
+    `rm -f /tmp/network.net`
+  end
+
+  def unzip_config_snapshot(filename, tempfile)
+    input_filenames = { "inventory.db" => "database/inventory.db", "config.yml" => "/etc/mazi/config.yml", "mazi.conf" => "/etc/mazi/mazi.conf", "sql.conf" => "/etc/mazi/sql.conf",
+                        "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
+                        "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
+                        "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
+                        "network.net" => "/tmp/network.net"}
+
+    File.delete("/tmp/network.net") if File.file?("/tmp/network.net")
+    Zip::File.open(tempfile.path) do |zip_file|
+      zip_file.each do |entry|
+        next if entry.name == 'README.txt'
+        if entry.name.include?('.jpg') || entry.name.include?('.png')
+          File.delete("public/images/#{entry.name}") if File.exist?("public/images/#{entry.name}")
+          entry.extract("public/images/#{entry.name}")
+        else
+          target = input_filenames[entry.name]
+          File.delete(target) if File.file?(target)
+          entry.extract(target)
+          `chmod +w #{target}` if entry.name.include?('.db')
+        end
+      end
+    end
+    if File.file?("/tmp/network.net")
+      args = []
+      File.readlines("/tmp/network.net").each do |line|
+        line = line.split
+        case line.shift
+        when 'ssid'
+          arg = line.join(' ')
+          args << "-s '#{arg}'"
+        when 'channel'
+          arg = line.join(' ')
+          args << "-c '#{arg}'"
+        when 'password'
+          arg = line.join(' ')
+          args << (arg == '-' ? "-w off" : "-p #{arg}")
+        when 'mode'
+          arg = line.join(' ')
+          MaziExecCmd.new('bash', '/root/back-end/', 'internet.sh', ["-m #{arg}"], @config[:scripts][:enabled_scripts]).exec_command
+        end
+      end
+      MaziExecCmd.new('bash', '/root/back-end/', 'wifiap.sh', args, @config[:scripts][:enabled_scripts]).exec_command
+      `rm -f /tmp/network.net`
+    end
+    `rake db:migrate`
+    `service mazi-portal restart`
+  end
+
   def zip_app_snapshot(app_name, snapshot_name)
+    mysql_user, mysql_password = get_mysql_details
     File.delete("public/snapshots/#{snapshot_name}_#{app_name}.zip") if File.exist?("public/snapshots/#{snapshot_name}_#{app_name}.zip")
     if app_name == 'etherpad'
-      db             = "etherpad"
-      mysql_user     = "etherpad"
-      mysql_password = "mazizone"
+      db = "etherpad"
       `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > /tmp/#{snapshot_name}_#{app_name}.sql`
 
       Zip.on_exists_proc = false
@@ -206,6 +508,39 @@ module MaziConfig
         zipfile.get_output_stream("README.txt") { |os| os.write "Snapshot '#{snapshot_name}' for the application '#{app_name}' has been downloaded at #{Time.now}. \nThis is an autogenerated file. \nYou can upload this file back to the MAZI Zone portal through the admin panel in order to achieve a previous state of the application '#{app_name}'.\n" }
       end
       `rm /tmp/#{snapshot_name}_#{app_name}.sql`
+    elsif app_name == 'nextcloud'
+      db = "nextcloud"
+      `sudo -u www-data php occ maintenance:mode --on`
+      `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > /tmp/#{snapshot_name}_#{app_name}.sql`
+      `cd /var/www/html/nextcloud/ && zip -r -1 /tmp/#{snapshot_name}_#{app_name}_config.zip config/`
+      `cd /var/www/html/nextcloud/ && zip -r -1 /tmp/#{snapshot_name}_#{app_name}_data.zip data/`
+      `cd /var/www/html/nextcloud/ && zip -r -1 /tmp/#{snapshot_name}_#{app_name}_themes.zip themes/`
+      Zip.on_exists_proc = false
+      Zip::File.open("public/snapshots/#{snapshot_name}_#{app_name}.zip", Zip::File::CREATE) do |zipfile|
+        zipfile.add("#{snapshot_name}_#{app_name}.sql", "/tmp/#{snapshot_name}_#{app_name}.sql")
+        zipfile.add("config.zip", "/tmp/#{snapshot_name}_#{app_name}_config.zip")
+        zipfile.add("data.zip", "/tmp/#{snapshot_name}_#{app_name}_data.zip")
+        zipfile.add("themes.zip", "/tmp/#{snapshot_name}_#{app_name}_themes.zip")
+        zipfile.get_output_stream("README.txt") { |os| os.write "Snapshot '#{snapshot_name}' for the application '#{app_name}' has been downloaded at #{Time.now}. \nThis is an autogenerated file. \nYou can upload this file back to the MAZI Zone portal through the admin panel in order to achieve a previous state of the application '#{app_name}'.\n" }
+      end
+      `sudo -u www-data php occ maintenance:mode --off`
+      `rm /tmp/#{snapshot_name}_#{app_name}.sql`
+      `rm /tmp/#{snapshot_name}_#{app_name}_themes.zip`
+      `rm /tmp/#{snapshot_name}_#{app_name}_data.zip`
+      `rm /tmp/#{snapshot_name}_#{app_name}_config.zip`
+    elsif app_name == 'wordpress'
+      db = "wordpress"
+
+      `mysqldump -u #{mysql_user} -p#{mysql_password} #{db} > /tmp/#{snapshot_name}_#{app_name}.sql`
+      `cd /var/www/html/ && zip -r -1 /tmp/#{snapshot_name}_#{app_name}_files.zip wordpress/`
+      Zip.on_exists_proc = false
+      Zip::File.open("public/snapshots/#{snapshot_name}_#{app_name}.zip", Zip::File::CREATE) do |zipfile|
+        zipfile.add("#{snapshot_name}_#{app_name}.sql", "/tmp/#{snapshot_name}_#{app_name}.sql")
+        zipfile.add("files.zip", "/tmp/#{snapshot_name}_#{app_name}_files.zip")
+        zipfile.get_output_stream("README.txt") { |os| os.write "Snapshot '#{snapshot_name}' for the application '#{app_name}' has been downloaded at #{Time.now}. \nThis is an autogenerated file. \nYou can upload this file back to the MAZI Zone portal through the admin panel in order to achieve a previous state of the application '#{app_name}'.\n" }
+      end
+      `rm /tmp/#{snapshot_name}_#{app_name}.sql`
+      `rm /tmp/#{snapshot_name}_#{app_name}_files.zip`
     elsif app_name == 'guestbook'
       `mongoexport --db letterbox -c submissions --out /tmp/#{snapshot_name}_#{app_name}.json`
       path = "/var/www/html/mazi-board/src/files"
@@ -217,7 +552,8 @@ module MaziConfig
         end
         zipfile.add("#{snapshot_name}_#{app_name}.json", "/tmp/#{snapshot_name}_#{app_name}.json")
         zipfile.add("config.js", "/var/www/html/mazi-board/src/www/js/config.js")
-        zipfile.add("be_config.js", "/var/www/html/mazi-board/src/node/config.js")
+        zipfile.add("main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
+        zipfile.add("be.config.js", "/var/www/html/mazi-board/src/node/config.js")
         zipfile.add('submission_input_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html')
         zipfile.add('header_tmpl.html', '/var/www/html/mazi-board/src/www/js/templates/header_tmpl.html')
         bgimgname = get_guestbook_background_image_name
@@ -246,15 +582,52 @@ module MaziConfig
 
   def unzip_app_snapshot(app_name, filename, tempfile)
     if app_name.downcase == 'etherpad'
-      db             = "etherpad"
-      mysql_user     = "etherpad"
-      mysql_password = "mazizone"
+      db = "etherpad"
+
       Zip::File.open(tempfile.path) do |zip_file|
         zip_file.each do |entry|
           next if entry.name == 'README.txt'
           File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
           entry.extract("/tmp/#{entry.name}")
-          `mysql -u root -pm@z1 #{db} < /tmp/#{entry.name}`
+          `mysql -u #{mysql_user} -p#{mysql_password} #{db} < /tmp/#{entry.name}`
+          `rm /tmp/#{entry.name}`
+        end
+      end
+    elsif app_name.downcase == 'nextcloud'
+      db = "nextcloud"
+
+      `sudo -u www-data php occ maintenance:mode --on`
+      Zip::File.open(tempfile.path) do |zip_file|
+        zip_file.each do |entry|
+          next if entry.name == 'README.txt'
+          File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
+          entry.extract("/tmp/#{entry.name}")
+          if entry.name.include?('.zip')
+            `rm -rf /var/www/html/nextcloud/#{entry.name.gsub('.zip', '')}`
+            `unzip /tmp/#{entry.name} -d /var/www/html/nextcloud/`
+            `chown -R www-data:www-data /var/www/html/nextcloud/#{entry.name.gsub('.zip', '')}/`
+          else
+            `mysql -u #{mysql_user} -p#{mysql_password} #{db} < /tmp/#{entry.name}`
+          end
+          `rm /tmp/#{entry.name}`
+        end
+      end
+      `sudo -u www-data php occ maintenance:mode --off`
+    elsif app_name.downcase == 'wordpress'
+      db = "wordpress"
+
+      Zip::File.open(tempfile.path) do |zip_file|
+        zip_file.each do |entry|
+          next if entry.name == 'README.txt'
+          File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
+          entry.extract("/tmp/#{entry.name}")
+          if entry.name.include?('.zip')
+            `rm -rf /var/www/html/wordpress`
+            `unzip /tmp/#{entry.name} -d /var/www/html/`
+            `chown -R www-data:www-data /var/www/html/wordpress/`
+          else
+            `mysql -u #{mysql_user} -p#{mysql_password} #{db} < /tmp/#{entry.name}`
+          end
           `rm /tmp/#{entry.name}`
         end
       end
@@ -281,24 +654,29 @@ module MaziConfig
               if get_guestbook_config_file_version("/root/tmp_config.js", "front-end") == "0.0.1"
                 update_guestbook_config_file_version("/root/tmp_config.js", "front-end")
                 FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
+              else
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/www/js/config.js")
               end
               File.delete("/root/tmp_config.js")
             else
               entry.extract("/var/www/html/mazi-board/src/www/js/config.js")
             end
-          elsif entry.name == 'be_config.js'
-            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+          elsif entry.name == 'main.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/main.config.js") if File.exist?("/var/www/html/mazi-board/src/node/main.config.js")
             if get_guestbook_version == '0.1'
               File.delete("/root/tmp_config.js") if File.exist?("/root/tmp_config.js")
               entry.extract("/root/tmp_config.js")
               if get_guestbook_config_file_version("/root/tmp_config.js", "back-end") == "0.0.1"
                 update_guestbook_config_file_version("/root/tmp_config.js", "back-end")
-                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/config.js")
+                FileUtils.cp("/root/tmp_config.js", "/var/www/html/mazi-board/src/node/main.config.js")
               end
               File.delete("/root/tmp_config.js")
             else
-              entry.extract("/var/www/html/mazi-board/src/node/config.js")
+              entry.extract("/var/www/html/mazi-board/src/node/main.config.js")
             end
+          elsif entry.name == 'be.config.js'
+            File.delete("/var/www/html/mazi-board/src/node/config.js") if File.exist?("/var/www/html/mazi-board/src/node/config.js")
+            entry.extract("/var/www/html/mazi-board/src/node/config.js")
           elsif entry.name == 'submission_input_tmpl.html'
             File.delete("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html") if File.exist?("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
             entry.extract("/var/www/html/mazi-board/src/www/js/templates/submission_input_tmpl.html")
@@ -316,8 +694,6 @@ module MaziConfig
         end
       end
     elsif app_name.downcase == 'interview'
-      app_dir = {interview: '/var/www/html/mazi-princess/src/server/node/files'}
-
       path = '/var/www/html/mazi-princess/src/server/node/files'
       Zip::File.open(tempfile.path) do |zip_file|
         zip_file.each do |entry|
@@ -496,7 +872,7 @@ module MaziConfig
     File.readlines('/var/www/html/mazi-board/src/www/js/config.js').each do |line|
       line = line.strip
       if line.start_with? 'auto_expand_comment:'
-        return line.split(':').last.strip!
+        return line.split(':').last.split('/').first.strip!
       end
     end
   end
@@ -517,7 +893,7 @@ module MaziConfig
     File.readlines('/var/www/html/mazi-board/src/node/config.js').each do |line|
       line = line.strip
       if line.start_with? 'submission_name_required:'
-        return line.split(':').last.gsub(',', '').strip!
+        return line.split(':').last.split(',').first.strip!
       end
     end
   end
@@ -644,6 +1020,19 @@ module MaziConfig
       end
     end
     File.open('/var/www/html/nextcloud/.htaccess', "w") {|file| file.puts lines }
+  end
+
+  def get_mysql_details
+    data = JSON.parse(File.read("/etc/mazi/sql.conf"))
+    [data['username'], data['password']]
+  end
+
+  def get_all_zip_files_in_device(device='/media/usb0')
+    files = []
+    Dir["#{device}/*.zip"].each do |file|
+      files << file
+    end
+    files
   end
 
   def all_supported_timezones

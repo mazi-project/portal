@@ -1,4 +1,4 @@
-VERSION = '2.5.3'
+VERSION = '2.5.5'
 
 class ConfigCaller
   include MaziConfig
@@ -117,6 +117,11 @@ module MaziVersion
     MaziLogger.debug "done."
   end
 
+  def self.remove_old_snapshots
+    MaziLogger.debug "deleting old snapshots"
+    `rm -rf public/snapshots/* 2> /dev/null`
+  end
+
   def self.rc_local_updated?
     response = false
     File.readlines("/etc/rc.local").each do |line|
@@ -131,6 +136,28 @@ module MaziVersion
       response = true if line.include? 'bash /root/back-end/mazi-internet.sh'
     end
     response
+  end
+
+  def self.rc_local_updated_3?
+    response = true
+    File.readlines("/etc/rc.local").each do |line|
+      response = false if line.include? '/sbin/ifconfig wlan0 10.0.0.1'
+    end
+    response
+  end
+
+  def self.portal_conf_updated?
+    File.readlines("/etc/apache2/sites-available/portal.conf").each do |line|
+      return true if line.include? 'timeout'
+    end
+    false
+  end
+
+  def self.dnsmasq_updated?
+    File.readlines("/etc/dnsmasq.conf").each do |line|
+      return false if line.include? 'dhcp-range=10.0.0.10,10.0.0.200,255.255.255.0,12h'
+    end
+    true
   end
 
   def self.nodogsplash_port_rules_updated?
@@ -219,8 +246,36 @@ module MaziVersion
     response
   end
 
+  def self.get_current_branch
+    o = `git status`
+    o.split("\n").each do |line|
+      if line.include? 'On branch'
+        return line.split.last
+        break
+      end
+    end
+    'master'
+  end
+
+  def self.branch_exists?(branch)
+    `git branch`.split("\n").each do |line|
+      return true if line.include?(branch)
+    end
+    false
+  end
+
+  def self.get_branch_or_create(branch)
+    unless branch_exists?(branch)
+      cur_branch = get_current_branch
+      `git checkout --track origin/Dev`
+      `git checkout #{cur_branch}`
+    end
+    branch
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
+    get_branch_or_create("Dev")
     begin
       MaziLogger.debug "  Checking MySQL gem"
       Gem::Specification.find_by_name("mysql")# version 1.6.6 requires mysql gem
@@ -422,7 +477,7 @@ module MaziVersion
     end
 
     # version 2.5.1
-    MaziLogger.debug "  Checking rc.local file"
+    MaziLogger.debug "  Checking rc.local file 2"
     unless rc_local_updated_2?
       MaziLogger.debug "rc.local older version found. Updating."
       `bash /root/back-end/update.sh`
@@ -437,6 +492,36 @@ module MaziVersion
       MaziLogger.debug "done."
     end
 
+    # version 2.5.4
+    MaziLogger.debug "  Checking updates for version 2.5.4"
+    unless rc_local_updated_3?
+      MaziLogger.debug "rc.local older version found. Updating."
+      `bash /root/back-end/update.sh 2.5.4`
+      MaziLogger.debug "done."
+    end
+    unless portal_conf_updated?
+      MaziLogger.debug "portal.conf in sites available older version found. Updating."
+      FileUtils.cp("/root/portal/init/portal.conf", "/etc/apache2/sites-available/portal.conf")
+      `systemctl daemon-reload`
+      `service apache2 restart`
+      MaziLogger.debug "done."
+    end
+    unless dnsmasq_updated?
+      MaziLogger.debug "dnsmasq.conf older version found. Updating."
+      lines = ''
+      File.readlines('/etc/dnsmasq.conf').each do |line|
+        if line.include? 'dhcp-range=10.0.0.10,10.0.0.200,255.255.255.0,12h'
+          lines += "dhcp-range=10.0.0.10,10.0.0.240,255.255.255.0,6h\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/dnsmasq.conf', "w") {|file| file.puts lines }
+      `service dnsmasq restart`
+      MaziLogger.debug "done."
+    end
+
+    remove_old_snapshots
     delete_lock_update_file
   end
 end

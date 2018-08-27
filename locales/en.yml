@@ -52,7 +52,7 @@ en:
       channel:      "Channel"
       password:     "Password"
       offline:      "offline"
-      dual:         "dual"
+      online:         "online"
       restricted:   "restricted"
       managed:      "managed"
       active:       "active"
@@ -175,6 +175,7 @@ en:
       update-message-6:  "There is an update available. Please use the button below to start the update process."
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
       update-chan-hint:  "Hint: the latest version of the Development channel could be unstable. It is not recomended to change back and forth the update channel, since it may cause unexpected behavior. Please advise the version details %{link} in order to decide your update channel"
+      update-chan-warn:  "Warning: changing to another channel will cause a device reboot."
     setup-page:
       tog-nav:             "Toggle navigation"
       setup-panel:         "MAZI Zone Setup Panel"
@@ -321,7 +322,7 @@ en:
         change-channel-header:       "Change Channel"
         change-password-header:      "Change Password"
         change-mode-header:          "Change Mode"
-        change-mode-message:         "Use the form below to choose the Network Mode for this MAZI Zone. If you wish to choose the dual mode, please make sure to have access to the Internet (either through an ethernet cable or a Wi-Fi dongle)."
+        change-mode-message:         "Use the form below to choose the Network Mode for this MAZI Zone. If you wish to choose the online mode, please make sure to have access to the Internet (either through an ethernet cable or a Wi-Fi dongle)."
         connect-wifi-header:         "Connect to Wi-Fi Network"
         select-wifi-label:           "Select Wi-Fi name"
         select-mesh-mode-label:      "Select Mesh mode"
@@ -491,7 +492,16 @@ en:
         delete-notification-message: "This notification will be permanently deleted from the database. Do you wish to proceed?"
     import-export-page:
       subheader: "Snapshots"
-      message:   "You can use the tools below to take a snapshot of the current configuration of this MAZI Zone. This includes everything (network configurations, applications, application instances, notifications, visual configurations, etc)."
+      full-snapshots-header:  "MAZI Zone Snapshots"
+      full-snapshots-message: "You can use the panel below to take a snapshot of the current configuration of this MAZI Zone. This includes everything (network configurations, applications, application instances, notifications, visual configurations, etc)."
+      full-snapshot-panel:
+        header-hint:      "You can use this to import/export a snapshot."
+        form-placeholder: "Snapshot Name"
+        no-usb-message:   "Currently there is no USB storage device detected. Please plug in a USB storage device and refresh the page."
+        usb-message:      "A USB storage device has been detected. There is %{free_space} of free space on the device."
+      full-warning:       "Warning: Importing and exporting a snapshot is a time consuming procedure and also depends on your MAZI Zone data and USB device speed. You will not be able to interact with the MAZI Portal during the import/export procedure. The device will be rebooted at the end of the import procedure."
+      configuration-snapshots-header:  "Configuration Snapshots"
+      configuration-snapshots-message: "You can use the panel below to take a snapshot of the current configuration of this MAZI Zone."
       warning:   "Warning: If you load a new snapshot with different Wi-Fi network settings, your wireless connection to this MAZI Zone will be lost and you will need to reconnect to the new Wi-Fi network."
       save-snapshot-panel:
         header:           "Save Snapshot"
@@ -508,7 +518,7 @@ en:
         header-hint:          "You can use this to export a snapshot to a zip file. Or import a zip file as a snapshot."
         message:              "Please select a snapshot and press load."
         no-snapshots-message: "Currently, there are no snapshots saved."
-      application-snapshots-header:   "Application snapshots"
+      application-snapshots-header:   "Application Snapshots"
       application-snapshots-message:  "Use the panels below to Import/Export snapshots for the applications supported by this MAZI Zone."
       interview-panel:
         header-hint:      "You can use this to import/export a snapshot."
@@ -521,6 +531,10 @@ en:
         import-interview-header: "Import Snapshot for Interview"
         import-guestbook-header: "Import Snapshot for Guestbook"
         import-etherpad-header:  "Import Snapshot for Etherpad"
+        import-nextcloud-header: "Import Snapshot for Nextcloud"
+        import-wordpress-header: "Import Snapshot for WordPress"
+        import-full-header:      "Import Snapshot for this MAZI Zone"
+        import-config-header:    "Import a configuration Snapshot"
     logs-page:
       subheader: "Log Viewer"
       message:   "You can view MAZI Zone log files below"

@@ -217,6 +217,40 @@ module Sinatra
               filename = params['snapshot'][:filename]
               unzip_app_snapshot(params[:application], filename, tempfile)
               redirect '/admin_snapshot'
+            elsif params['full_export']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have exported a full snapshot."
+                redirect '/admin_snapshot'
+              end
+              out = zip_full_snapshot(params['snapshotname'], params['usb_target'])
+              return {result: 'OK', file: out}.to_json
+            elsif params['full_import']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have imported a full snapshot."
+                redirect '/admin_snapshot'
+              end
+              unzip_full_snapshot(params['usb_target'], params['zip_file'])
+              redirect '/admin_snapshot'
+            elsif params['config_export']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have exported a configuration snapshot."
+                redirect '/admin_snapshot'
+              end
+              zip_config_snapshot(params['snapshotname'])
+              return {result: 'OK', file: "#{params[:snapshotname]}_config.zip"}
+            elsif params['config_import']
+              if @config[:general][:mode] == 'demo'
+                MaziLogger.debug "Demo mode upload snapshot"
+                session['error'] = "This portal runs on Demo mode! This action would have imported a configration snapshot."
+                redirect '/admin_snapshot'
+              end
+              tempfile = params['snapshot'][:tempfile]
+              filename = params['snapshot'][:filename]
+              unzip_config_snapshot(filename, tempfile)
+              redirect '/admin_snapshot'
             end
 
             redirect '/admin_snapshot'
@@ -268,13 +302,7 @@ module Sinatra
             details[:admin]       = params['admin'] unless params['admin'].nil? || params['admin'].empty?
             details[:title]       = params['title'] unless params['title'].nil? || params['title'].empty?
             details[:description] = params['description'] unless params['description'].nil? || params['description'].empty?
-            unless params['deployment'].nil? || params['deployment'].empty?
-              unless valid_location?(params['location'])
-                session['error'] = "Invalid location! Please try again by using this format 'latitude, longitude'."
-                redirect '/setup'
-              end
-              details[:loc] = params['location']
-            end
+            details[:loc]         = params['location'] unless params['location'].nil? || params['location'].empty?
             write_monitoring_details(details)
 
             unless params['date'].nil? || params['date'].empty?
@@ -320,6 +348,9 @@ module Sinatra
             MaziLogger.debug "request: put/branch from ip: #{request.ip} params: #{params.inspect}"
 
             change_update_branch(branch)
+            update_config_file
+            MaziLogger.debug 'Restarting'
+            `reboot`
 
             {status: "OK"}.to_json
           end

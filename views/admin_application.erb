@@ -26,6 +26,7 @@
   <table class="table">
     <thead>
       <tr>
+        <th>#</th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.active-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.active-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.instances-menu.splash-page-hint") %>"><%= I18n.translate("admin.applications-page.instances-menu.splash-page-column") %></th>
         <th title="<%= I18n.translate("admin.applications-page.applications-menu.color-hint") %>"><%= I18n.translate("admin.applications-page.applications-menu.color-column") %></th>
@@ -42,6 +43,12 @@
       <% application_instances.each do |app| %>
       <tr class="app_inst_tr" id="app_inst_tr_<%= app.id.to_s %>">
         <td scope="row">
+          <div class="btn-group-vertical">
+            <button class="btn btn-xs btn-default app_inst_order_btn" id="app_inst_order_up_btn_<%= app.id.to_s %>" <%= 'disabled' if app.id == application_instances.first.id %>><i class="fas fa-angle-up"  ></i></button>
+            <button class="btn btn-xs btn-default app_inst_order_btn" id="app_inst_order_down_btn_<%= app.id.to_s %>" <%= 'disabled' if app.id == application_instances.last.id %>><i class="fas fa-angle-down"></i></button>
+          </div>
+        </td>
+        <td scope="row">
           <label class="switch" title="<%= app.enabled ? I18n.translate("general.messages.enable") : I18n.translate("general.messages.disable") %> the application">
             <input type="checkbox" <%= app.enabled ? 'checked' : '' %>>
             <div class="slider round enabled-instance-switch" id='enabled-instance-switch_<%= app.id %>'></div>
@@ -56,7 +63,7 @@
         <% color = app.color.nil? ? app.application.color : app.color %>
         <td><div class="small-colored-square small-colored-square-<%= color %>"></div></td>
         <% icon = app.icon.nil? ? app.application.icon : app.icon %>
-        <td><i class="<%= icon.gsub('fa-5x', '') %>"></i></td>
+        <td><i class="<%= icon.gsub('fa-5x', '').gsub('  ', ' ') %>"></i></td>
         <td><%= app.name %></td>
         <td><a href='<%= app.url %>' target="_blank"><%= app.url %></a></td>
         <td><%= app.description %></td>
@@ -84,6 +91,7 @@
     </tbody>
     <tfoot>
       <tr>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
@@ -296,6 +304,7 @@
 </div>
 
 <% application_instances.each do |app| %>
+<% icon = app.icon.nil? ? app.application.icon : app.icon %>
 <!-- edit application modal-->
 <div class="modal fade" id="edit-application-instance-modal-<%= app.id %>" role="dialog">
   <div class="modal-dialog">
@@ -312,7 +321,7 @@
             <input type="hidden" name="id" value="<%= app.id %>">
             <input type="text" name="name" class="form-control" value="<%= app.name %>" required autofocus>
             <input type="text" name="url" class="form-control" value="<%= app.url %>" required>
-            <input type="text" name="icon" class="form-control" value="<%= app.icon %>" placeholder="Icon">
+            <input type="text" name="icon" class="form-control" value="<%= icon.gsub('fa-5x', '').gsub('  ', ' ') %>" placeholder="Icon">
             <select name="color" class="form-control" required>
               <option value='green' <%= 'selected' if app.color == 'green' %>>green</option>
               <option value='yellow' <%= 'selected' if app.color == 'yellow' %>>yellow</option>
@@ -320,7 +329,7 @@
               <option value='blue' <%= 'selected' if app.color == 'blue' %>>blue</option>
               <option value='purple' <%= 'selected' if app.color == 'purple' %>>purple</option>
               <option value='teal' <%= 'selected' if app.color == 'teal' %>>teal</option>
-              <option value='navi' <%= 'selected' if app.color == 'navi' %>>navi</option>
+              <option value='navi' <%= 'selected' if app.color == 'navi' %>>navy blue</option>
               <option value='lime' <%= 'selected' if app.color == 'lime' %>>lime</option>
             </select>
             <textarea name="description" class="form-control" rows="5" id="comment" maxlength="150"><%= app.description %></textarea>

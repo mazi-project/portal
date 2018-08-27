@@ -62,7 +62,7 @@ $( document ).ready(function() {
 
       }
     });
-    event.preventDefault();
+    return false;
   });
 
   $('.start-application-data-form').submit(function(){
@@ -87,7 +87,7 @@ $( document ).ready(function() {
 
       }
     });
-    event.preventDefault();
+    return false;
   });
 
   $('.stop-hardware-monitoring-data-button').click(function(){
@@ -301,6 +301,6 @@ $( document ).ready(function() {
         }, values.interval * 1000);
       }
     });
-    event.preventDefault();
+    return false;
   });
 });

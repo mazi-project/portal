@@ -52,7 +52,7 @@ module Sinatra
               locals[:main_body] = :index_application
               locals[:local_data][:applications]          = Mazi::Model::Application.all
               locals[:local_data][:notifications]         = Mazi::Model::Notification.all
-              locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.all
+              locals[:local_data][:application_instances] = Mazi::Model::ApplicationInstance.dataset.order(:order).all
               locals[:local_data][:notifications_read]    = session['notifications_read']
               locals[:local_data][:config_data]           = @config[:portal_configuration]
               erb :index_main, locals: locals
@@ -157,6 +157,39 @@ module Sinatra
               locals[:js] << "js/jquery.datetimepicker.min.js"
               locals[:timezones] = all_supported_timezones
               erb :setup, locals: locals
+            when 'splash'
+              MaziLogger.debug "Splash Page "
+              locals[:main_body] = :splash
+              locals[:tok] = "#{params['tok']}"
+ 	            locals[:redir] = "#{params['redir']}"
+              locals[:authaction] = "#{params['authaction']}"
+              locals[:mac] = "#{params['mac']}"
+              locals[:apps] = Mazi::Model::ApplicationInstance.all
+              locals[:name] = @config[:portal_configuration][:applications_title]
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-m', '-d'], @config[:scripts][:enabled_scripts])
+              lines = ex.exec_command
+              mode = ex.parseFor('mode').last
+              ssid = ex.parseFor('ssid').last
+              domain = ex.parseFor('domain').last
+              if mode == "offline"
+                 locals[:message_mode] = "so it does NOT provide internet access."
+              else
+                 locals[:message_mode] = "so it does provide internet access."
+              end
+              locals[:mode] = mode
+              locals[:ssid] = ssid
+              locals[:domain] = "http://#{domain}"
+              erb :splash, locals: locals
+            when 'splashEnter'
+               mac = "#{params['mac']}"
+               redir = "#{params['redir']}"
+               redir = redir.gsub( /http?:\/\//, 'http%3A%2F%2F')
+               authtarget = "#{params['authaction']}?redir=#{redir}&tok=#{params['tok']}"
+               unless File.exist?('/etc/mazi/users.dat') then
+                  File.new "/etc/mazi/users.dat", "w"
+               end
+               File.write('/etc/mazi/users.dat',"#{mac} #{Time.now}\n", mode: 'a')
+               redirect "#{authtarget}"
             when 'admin'
               redirect 'admin_dashboard'
             when 'admin_dashboard'
@@ -183,6 +216,7 @@ module Sinatra
               storage      = ex2.parseFor("storage:") ? "#{ex2.parseFor("storage:")[-2]} #{ex2.parseFor("storage:")[-1]}" : nil
               sd_size      = ex2.parseFor("ram:") ? ex2.parseFor("SD size:").last : nil
               expanded     = ex2.parseFor("expand:") ? ex2.parseFor("expand:").last : nil
+              users_online = 0 if users_online == 'users:'
               locals[:local_data][:users]                 = {}
               locals[:local_data][:users][:online]        = users_online
               locals[:local_data][:temp]                  = temp
@@ -210,7 +244,7 @@ module Sinatra
               locals[:js] << "js/admin_application.js"
               locals[:main_body] = :admin_application
               locals[:local_data][:applications]                = Mazi::Model::Application.all
-              locals[:local_data][:application_instances]       = Mazi::Model::ApplicationInstance.all
+              locals[:local_data][:application_instances]       = Mazi::Model::ApplicationInstance.dataset.order(:order).all
               locals[:local_data][:can_have_multiple_instances] = ['NextCloud', 'Etherpad', 'FramaDate']
               erb :admin_main, locals: locals
             when 'admin_documentation'
@@ -258,7 +292,7 @@ module Sinatra
                 session['error'] = nil
                 redirect "/admin_login?goto=#{index}"
               end
-              locals[:js] << "js/admin_network.js"
+              locals[:js] << "js/admin_configuration.js"
               locals[:js] << "js/jscolor.min.js"
               locals[:main_body] = :admin_configuration
               locals[:local_data][:portal_configuration] = @config[:portal_configuration]
@@ -283,6 +317,22 @@ module Sinatra
               locals[:js] << "js/admin_snapshot.js"
               locals[:main_body] = :admin_snapshot
               locals[:local_data][:dbs] = getAllDBSnapshots
+              ex = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-stat.sh', ['--usb'], @config[:scripts][:enabled_scripts])
+              ex.exec_command.each do |line|
+                locals[:local_data][:usb] = false if line == 'usb -'
+                locals[:local_data][:usb_target] = '' if locals[:local_data][:usb_target].nil?
+                locals[:local_data][:free] = 0 if locals[:local_data][:free].nil?
+                if line.start_with?('usb_target')
+                  locals[:local_data][:usb] = true
+                  locals[:local_data][:usb_target] = line.split.last
+                end
+                if line.start_with?('free_space')
+                  free = line.split.last
+                  free = free.length > 6 ? "#{free[0..-7]}.#{free[-6]} GB" : "#{free[0..2]} MB"
+                  locals[:local_data][:free] = free
+                end
+              end
+              locals[:local_data][:zip_files] = locals[:local_data][:usb_target] ? get_all_zip_files_in_device(locals[:local_data][:usb_target]) : []
               erb :admin_main, locals: locals
             when 'admin_devices'
               unless authorized?

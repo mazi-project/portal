@@ -1,0 +1,15 @@
+[Unit]
+Description=Etherpad-lite, the collaborative editor.
+After=syslog.target network.target
+
+[Service]
+Type=simple
+User=etherpad
+Group=etherpad
+WorkingDirectory=/var/www/html/etherpad-lite
+Environment=NODE_ENV=production
+ExecStart=/usr/bin/nodejs /var/www/html/etherpad-lite/node_modules/ep_etherpad-lite/node/server.js
+Restart=always # use mysql plus a complete settings.json to avoid Service hold-off time over, scheduling restart.
+
+[Install]
+WantedBy=multi-user.target

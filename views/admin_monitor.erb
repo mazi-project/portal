@@ -239,6 +239,7 @@
             <input type="text" id='monitor_description' name="description" class="form-control" value="<%= details[:description] %>" required>
             <label for='monitor_location'><%= I18n.translate("admin.monitoring-page.popups.change-details-label5") %>:</label>
             <input type="text" id='monitor_location' name="loc" class="form-control" value="<%= details[:loc] %>" required>
+            <small>* <%= I18n.translate("admin.setup-page.fourth-step-warning") %></small>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
           </div>
         </form>

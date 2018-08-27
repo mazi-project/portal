@@ -15,6 +15,7 @@ module Mazi::Model
       end
       description['click_counter'] = 0
       description['enabled'] ||= true
+      description['order'] = ApplicationInstance.dataset.order(:order).all.last.order + 1
       nil
     end
 
@@ -33,6 +34,18 @@ module Mazi::Model
       nil
     end
 
+    def before_destroy
+      flag = false
+      ApplicationInstance.dataset.order(:order).all.each do |app|
+        flag = true if self.id == app.id
+        if flag
+          app.order -= 1
+          app.save
+        end
+      end
+      super
+    end
+
     def enable
       self.enabled = true
       self.save
@@ -40,6 +53,22 @@ module Mazi::Model
 
     def disable
       self.enabled = false
+      self.save
+    end
+
+    def up
+      app = ApplicationInstance.find(order: self.order - 1)
+      app.order += 1
+      app.save
+      self.order -= 1
+      self.save
+    end
+
+    def down
+      app = ApplicationInstance.find(order: self.order + 1)
+      app.order -= 1
+      app.save
+      self.order += 1
       self.save
     end
   end
