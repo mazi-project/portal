@@ -168,7 +168,7 @@ module Sinatra
               locals[:name] = @config[:portal_configuration][:applications_title]
               ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-m', '-d'], @config[:scripts][:enabled_scripts])
               lines = ex.exec_command
-              mode = ex.parseFor('mode').last
+              mode = ex.parseFor('mode').last.gsub('"', '')
               ssid = ex.parseFor('ssid').last
               domain = ex.parseFor('domain').last
               if mode == "offline"
