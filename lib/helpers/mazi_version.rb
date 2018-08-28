@@ -501,7 +501,15 @@ module MaziVersion
     end
     unless portal_conf_updated?
       MaziLogger.debug "portal.conf in sites available older version found. Updating."
-      FileUtils.cp("/root/portal/init/portal.conf", "/etc/apache2/sites-available/portal.conf")
+      lines = ''
+      File.readlines('/etc/apache2/sites-available/portal.conf').each do |line|
+        if line.include? 'ProxyPass / http://localhost:4567/'
+          lines += "        ProxyPass / http://localhost:4567/ connectiontimeout=2000 timeout=2000\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/apache2/sites-available/portal.conf', "w") {|file| file.puts lines }
       `systemctl daemon-reload`
       `service apache2 restart`
       MaziLogger.debug "done."
