@@ -57,7 +57,7 @@ ko:
       channel: 채널
       password: 비밀번호
       offline: 오프라인
-      dual: 듀얼
+      online: 온라인
       restricted: 제한됨
       managed: 관리됨
       active: 활성
@@ -171,6 +171,7 @@ ko:
       update-message-4: 이 시스템은 업데이트 중입니다. 기다려 주십시오...
       update-message-6: 사용 가능한 업데이트가 있습니다. 업데이트 프로세스를 시작하려면 아래의 버튼을 사용해 주십시오.
       update-hint: '참고: 잘못된 동작을 마주치신다면 장치를 다시 시작하십시오.'
+      update-chan-warn: '경고: 다른 채널로 변경하면 장치가 다시 부팅됩니다.'
     setup-page:
       setup-panel: MAZI Zone 설정 패널
       first-step-header: 관리 비밀번호 설정
@@ -478,8 +479,15 @@ ko:
         delete-notification-message: 이 알림은 데이터베이스에서 영구적으로 삭제됩니다. 계속하시겠습니까?
     import-export-page:
       subheader: 스냅샷
-      message: 아래의 도구를 사용하여 이 MAZI Zone의 현재 구성의 스냅샷을 만들 수 있습니다. 여기에는 모든 사항(네트워크 구성,
-        애플리케이션, 애플리케이션 인스턴스, 알림, 시각 구성 등)이 포함됩니다.
+      full-snapshots-header: MAZI Zone 스냅샷
+      full-snapshot-panel:
+        header-hint: 이것을 사용하여 스냅샷을 가져오거나 내보낼 수 있습니다.
+        form-placeholder: 스냅샷 이름
+        no-usb-message: 현재 USB 기억 장치가 발견되지 않았습니다. USB 기억 장치를 연결한 다음 문서를 새로 고쳐 주십시오.
+        usb-message: USB 기억 장치가 발견되었습니다. 장치에 %{free_space} 여유 공간이 있습니다.
+      configuration-snapshots-header: 구성 스냅샷
+      configuration-snapshots-message: 아래의 패널을 사용하여 이 MAZI Zone의 현재 구성의 스냅샷을 찍을 수
+        있습니다.
       warning: '경고: 각기 다른 와이파이 네트워크 설정을 가진 새로운 스냅샷을 로드하면 이 MAZI Zone에 대한 무선 연결이 소실되며
         새로운 와이파이 네트워크에 다시 연결해야 할 수 있습니다.'
       save-snapshot-panel:
@@ -509,6 +517,10 @@ ko:
         import-interview-header: 인터뷰를 위한 스냅샷 가져오기
         import-guestbook-header: 방명록 스냅샷 가져오기
         import-etherpad-header: 이더패드의 스냅샷 가져오기
+        import-nextcloud-header: 넥스트클라우드용 스냅샷 가져오기
+        import-wordpress-header: 워드프레스용 스냅샷 가져오기
+        import-full-header: MAZI Zone용 스냅샷 가져오기
+        import-config-header: 구성 스냅샷 가져오기
     logs-page:
       subheader: 로그 뷰어
       message: 아래의 MAZI Zone 로그 파일을 볼 수 있습니다

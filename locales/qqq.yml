@@ -5,6 +5,7 @@
 # Author: Haniavis
 # Author: Liuxinyu970226
 # Author: Robby
+# Author: ديفيد
 ---
 qqq:
   general:
@@ -67,7 +68,7 @@ qqq:
         header: '{{Identical|Notification}}'
     applications-page:
       instances-menu:
-        active-column: '{Identical|Active}}'
+        active-column: '{{Identical|Active}}'
         name-column: '{{Identical|Name}}'
         description-column: '{{Identical|Description}}'
         actions-column: '{{Identical|Action}}'

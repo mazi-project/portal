@@ -57,7 +57,7 @@ zh-hant:
       channel: 頻段
       password: 密碼
       offline: 離線
-      dual: 雙重
+      online: 線上
       restricted: 受限
       managed: 已管理
       active: 有效
@@ -182,6 +182,7 @@ zh-hant:
       update-hint: 提示：若您遇到錯誤情況，請重新啟動您的設備。
       update-chan-hint: 提示：最新版的開發頻段可能會不穩定。不建議進行反覆替換更新頻段，這樣做可能會導致異常的情況發生。請告知版本詳情 %{link}
         以決定您的更新頻段
+      update-chan-warn: 警告：更改到其它頻段設備將會重新啟動。
     setup-page:
       tog-nav: 切換導航
       setup-panel: MAZI Zone 配置面板
@@ -334,7 +335,7 @@ zh-hant:
         change-channel-header: 變更頻段
         change-password-header: 變更密碼
         change-mode-header: 變更模式
-        change-mode-message: 使用以下表格來挑選用於此 MAZI Zone 的網路模式。如果您想要挑選雙重模式，請確認能夠存取網際網路（透過網路線或是
+        change-mode-message: 使用以下表格來挑選用於此 MAZI Zone 的網路模式。如果您想要挑選線上模式，請確認能夠存取網際網路（透過網路線或是
           Wi-Fi 傳輸器）。
         connect-wifi-header: 連接 Wi-Fi 網路
         select-wifi-label: 選擇 Wi-Fi 名稱
@@ -506,7 +507,17 @@ zh-hant:
         delete-notification-message: 此通知將會從資料庫裡永久刪除。您確定要繼續嗎？
     import-export-page:
       subheader: 快照
-      message: 您可以使用以下工具來採用此 MAZI Zone 目前設置的快照。這裡頭有包含著任何項目（網路設置、應用程式、應用程式實體、通知、視覺化設置、其它）。
+      full-snapshots-header: MAZI Zone 快照
+      full-snapshots-message: 您可以使用下方的控制面板來取用目前此 MAZI Zone 設置的快照。這有包含著任何項目（網路設置、應用程式、應用程式實體、通知、視覺化設置等等）。
+      full-snapshot-panel:
+        header-hint: 您可以利用此來匯出/匯入快照。
+        form-placeholder: 快照名稱
+        no-usb-message: 目前沒有偵測到 USB 儲存裝置。請插入一個 USB 儲存裝置並重整頁面。
+        usb-message: 偵測到一個 USB 儲存裝置。裝置上有 %{free_space} 剩餘空間。
+      full-warning: 警告：匯入與匯出快照為耗時的程序，並依據您的 MAZI Zone 資料與 USB 裝置速度來取決快慢。在匯入/匯出程序這段期間，您會無法以
+        MAZI 入口頁面進行互動。設備在結束匯入程序之後會重新啟動。
+      configuration-snapshots-header: 設置快照
+      configuration-snapshots-message: 您可以使用下方的控制面板來取用目前此 MAZI Zone 設置的快照。
       warning: 警告：如果您以不同的 Wi-Fi 網路設定來載入新的快照，您連至此 MAZI Zone 的無線連接將會遺失，並且需要重新連接到新的 Wi-Fi
         網路。
       save-snapshot-panel:
@@ -537,6 +548,10 @@ zh-hant:
         import-interview-header: 匯入會見的快照
         import-guestbook-header: 匯入 Guestbook 快照
         import-etherpad-header: 匯入 Etherpad 的快照
+        import-nextcloud-header: 為 Nextcloud 匯入快照
+        import-wordpress-header: 為 WordPress  匯入快照
+        import-full-header: 為此 MAZI Zone 匯入快照
+        import-config-header: 匯入一個設置快照
     logs-page:
       subheader: 日誌檢視
       message: 您可以檢視以下的 MAZI Zone 日誌檔案

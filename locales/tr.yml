@@ -58,7 +58,6 @@ tr:
       channel: Kanal
       password: Parola
       offline: çevrimdışı
-      dual: çift
       restricted: kısıtlı
       managed: yönetilen
       active: aktif
@@ -446,7 +445,7 @@ tr:
       sensors-panel:
         header: Sensörler
         header-hint: Bunu, çeşitli sensörleri kontrol etmek için kullanabilirsiniz.
-        toggle-sensors-message: Kullanıcı portalı üzerindeki sensörler sekmesini etkinleştirin/devre
+        toggle-sensors-message: Kullanıcı portali üzerindeki sensörler sekmesini etkinleştirin/devre
           dışı bırakın
         toggle-sensors-hint: portal sensörleri sekmesini etkinleştirin/devre dışı
           bırakın
@@ -467,7 +466,7 @@ tr:
       camera-panel:
         header: Kamera
         header-hint: Kamerayı kontrol etmek için bunu kullanabilirsiniz.
-        toggle-camera-message: Kullanıcı portalı üzerindeki kamera sekmesini etkinleştir/devre
+        toggle-camera-message: Kullanıcı portali üzerindeki kamera sekmesini etkinleştir/devre
           dışı bırak
         toggle-camera-hint: portallar kamera sekmesini etkinleştir/devre dışı bırak
         camera-version-message: Kamera modülü bu görüntüye düzgün şekilde yüklenmemiş!
@@ -518,7 +517,7 @@ tr:
       statistics-panel:
         header: İzleme Verisi
         header-hint: İzleme faaliyetlerini kontrol etmek için bunu kullanabilirsiniz.
-        toggle-monitoring-map-msg: Kullanıcı portalı üzerindeki izleme sekmesini etkinleştirin/devre
+        toggle-monitoring-map-msg: Kullanıcı portali üzerindeki izleme sekmesini etkinleştirin/devre
           dışı bırakın
         toggle-monitoring-map-hint: izleme sekmesini etkinleştirme/devre dışı bırakma
         message: Aşağıdaki başlatma/durdurma düğmelerine basarak sistem etkinliğini
@@ -598,9 +597,6 @@ tr:
           Devam etmek istiyor musunuz?
     import-export-page:
       subheader: Anlık resimler
-      message: Bu MAZI Bölgesinin mevcut yapılandırmasının anlık görüntüsünü almak
-        için aşağıdaki araçları kullanabilirsiniz. Bu, her şeyi içerir (ağ yapılandırmaları,
-        uygulamalar, uygulama örnekleri, bildirimler, görsel yapılandırmalar, vb.).
       warning: 'Uyarı: Farklı bir Wi-Fi ağ ayarlarına sahip yeni bir anlık görüntü
         yüklerseniz bu MAZI Bölgesine olan kablosuz bağlantınız kaybolur ve yeni Wi-Fi
         ağına yeniden bağlanmanız gerekir.'
@@ -612,7 +608,7 @@ tr:
       load-snapshot-panel:
         header: Anlık Görüntü Yükle
         header-hint: Anlık görüntü yüklemek için bunu kullanabilirsiniz.
-        message: Lütfen bir anlık görüntü seçin ve yükleye basın. MAZI portalı yeniden
+        message: Lütfen bir anlık görüntü seçin ve yükleye basın. MAZI portali yeniden
           başlatılacak.
         no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
       import-export-panel:
@@ -651,7 +647,7 @@ tr:
         subheader1: Açıklama
         subheader2: ssh üzerinden bağlantı
         subheader3: Raspbian Yapılandırması
-        paragraph1: Bu MAZI Bölgesi portalı için yönetici dokümantasyon rehberidir.
+        paragraph1: Bu MAZI Bölgesi portali için yönetici dokümantasyon rehberidir.
           Belgelerin farklı bölümlerine gitmek için yukarıdaki sekmeleri kullanın.
           Mevcut sekme, raspberry pi'yi yapılandırmak için yöneticinin ihtiyaç duyabileceği
           farklı eylemleri açıklar. Diğer tüm sekmeler, desteklenen uygulamaların

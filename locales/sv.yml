@@ -59,7 +59,6 @@ sv:
       channel: Kanal
       password: Lösenord
       offline: offline
-      dual: dubbel
       restricted: begränsad
       managed: hanterad
       active: aktiv
@@ -397,10 +396,6 @@ sv:
           databasen. Vill du fortsätta?
     import-export-page:
       subheader: Ögonblicksbilder
-      message: Du kan använda verktygen nedan för att ta ögonblicksbilder av nuvarande
-        konfiguration av denna MAZI Zone. Detta inkluderar allting (nätverkskonfigurationer,
-        applikationer, applikationsinstanser, aviseringar, visuella konfigurationer,
-        etc).
       warning: 'Varning: Om du läser in en ny ögonblicksbild med andra WiFi-nätverksinställningar
         kommer din trådlösa anslutning till denna MAZI Zone förloras och du måste
         återansluta till det nya WiFi-nätverket.'

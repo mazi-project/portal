@@ -44,7 +44,6 @@ ca:
       version: Versió
       enable: habilita
       disable: inhabilita
-      on_msg: ⏽
       off_msg: ⭘
       disconnected: Desconnectat
       ssid: SSID

@@ -58,7 +58,6 @@ zh-hans:
       channel: 频道
       password: 密码
       offline: 离线
-      dual: 双重
       restricted: 受限
       managed: 已管理
       active: 活跃
@@ -499,7 +498,6 @@ zh-hans:
         delete-notification-message: 此通知将从数据库中永久删除。您希望继续么？
     import-export-page:
       subheader: 快照
-      message: 您可以使用下面的工具为这个MAZI Zone的当前配置拍摄快照。这包括一切内容（网络配置，应用程序，应用程序实例，通知，可视化配置等）。
       warning: 警告：如果您使用不同的Wi-Fi网络设置加载新快照，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接到新的Wi-Fi网络。
       save-snapshot-panel:
         header: 保存快照

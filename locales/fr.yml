@@ -5,6 +5,7 @@
 # Author: Gomoko
 # Author: Mgaved
 # Author: Wladek92
+# Author: Zarisi
 ---
 fr:
   general:
@@ -60,7 +61,7 @@ fr:
       channel: Canal
       password: Mot de passe
       offline: hors connexion
-      dual: duel
+      online: en ligne
       restricted: restreint
       managed: géré
       active: actif
@@ -211,6 +212,8 @@ fr:
         de mise à jour, car cela peut provoquer un comportement inattendu. Veuillez
         consulter les détails de la version %{link} afin de décider de votre canal
         de mise à jour.'
+      update-chan-warn: 'Avertissement: basculer vers un autre canal fera redémarrer
+        l''équipement.'
     setup-page:
       tog-nav: Basculer la navigation
       setup-panel: Panneau de paramétrage de la zone MAZI
@@ -397,7 +400,7 @@ fr:
         change-password-header: Changer le mot de passe
         change-mode-header: Changer le mode
         change-mode-message: Utiliser le formulaire ci-dessous pour choisir le mode
-          réseau pour cette zone MAZI. Si vous voulez choisir le mode dual, assurez-vous
+          réseau pour cette zone MAZI. Si vous voulez choisir le mode en ligne, assurez-vous
           d’avoir accès à Internet (soit via un câble ethernet, soit via un dongle
           Wi-Fi).
         connect-wifi-header: Se connecter au réseau Wi-Fi
@@ -623,10 +626,26 @@ fr:
           dans la base de données. Voulez-vous continuer ?
     import-export-page:
       subheader: Captures
-      message: Vous pouvez utiliser les outils ci-dessous pour faire une saisie d'écran
-        de la configuration actuelle de cette zone MAZI. Cela inclut tout (configurations
-        réseau, instances d'applications, notifications, configuration visuelles,
-        etc.).
+      full-snapshots-header: Instantanés de zone MAZI
+      full-snapshots-message: Vous pouvez utiliser le panneau ci-dessous pour prendre
+        un instantané de la configuration actuelle de cette zone MAZI. Cela inclut
+        tout (configurations réseau, applications, instances d'application, notifications,
+        configurations visuelles, etc.).
+      full-snapshot-panel:
+        header-hint: Vous pouvez utiliser ceci pour importer/exporter un instantané.
+        form-placeholder: Nom de l'instantané
+        no-usb-message: Actuellement aucun périphérique de stockage USB n'a été détecté.
+          Veuillez insérer un périphérique de stockage USB et rafraîchir la page.
+        usb-message: Un périphérique de stockage USB a été détecté. Il y a %{free_space}
+          d'espace libre sur le périphérique.
+      full-warning: 'Avertissement: l''importation et l''exportation d''un instantané
+        prennent du temps et dépendent également des données de votre zone MAZI et
+        de la vitesse du périphérique USB. Vous ne pourrez pas interagir avec le portail
+        MAZI pendant la procédure d''importation/exportation. Le périphérique sera
+        redémarré à la fin de la procédure d''importation.'
+      configuration-snapshots-header: Instantanés de la configuration
+      configuration-snapshots-message: Vous pouvez utiliser le panneau ci-dessous
+        pour prendre un instantané de la configuration courante de cette zone MAZI.
       warning: 'Avertissement : Si vous chargez un nouvel instantané avec des paramètres
         de réseau Wi-Fi différents, votre connexion sans fil à cette zone MAZI sera
         perdue et vous devrez vous reconnecter au nouveau réseau Wi-Fi.'
@@ -647,7 +666,7 @@ fr:
           fichier zip. Ou importer un fichier zip en tant qu’instantané.
         message: Sélectionnez une capture et cliquez sur charger.
         no-snapshots-message: Actuellement, il n’y a pas d’instantané enregistré.
-      application-snapshots-header: Captures de l'application
+      application-snapshots-header: Instantané d'application
       application-snapshots-message: Utiliser les onglets ci-dessous pour importer/exporter
         des instantanés pour les applications supportées par cette zone MAZI.
       interview-panel:
@@ -661,6 +680,10 @@ fr:
         import-interview-header: Importer un instantané pour Interview
         import-guestbook-header: Importer un instantané pour le livre d’or
         import-etherpad-header: Importer un instantané pour Etherpad
+        import-nextcloud-header: Importer un instantané pour Nextcloud
+        import-wordpress-header: Importer un instantané pour WordPress
+        import-full-header: Importer un instantané pour cette zone MAZI
+        import-config-header: Importer un instantané de configuration
     logs-page:
       subheader: Visualiseur de journal
       message: Vous pouvez afficher les fichiers de journal de la zone MAZI ci-dessous
