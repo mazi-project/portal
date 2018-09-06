@@ -1,0 +1,13 @@
+apt-get install ruby
+apt-get install ruby-dev
+apt-get install git
+apt-get install sqlite3
+apt-get install libsqlite3-dev
+apt-get install default-libmysqlclient-dev
+git clone git@github.com:mazi-project/portal.git
+git clone git@github.com:mazi-project/back-end.git
+mkdir /etc/mazi
+cp /root/portal/etc/config.yml /etc/mazi
+gem install bundler
+bundle install
+rake db:migrate

@@ -50,3 +50,4 @@ build-iPhoneSimulator/
 .rvmrc
 /database/inventory.db
 users.log
+Gemfile.lock
