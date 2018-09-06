@@ -59,6 +59,7 @@ sv:
       channel: Kanal
       password: Lösenord
       offline: offline
+      online: ansluten
       restricted: begränsad
       managed: hanterad
       active: aktiv
