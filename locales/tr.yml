@@ -1,6 +1,7 @@
 # Messages for Turkish (Türkçe)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: By erdo can
 # Author: Hedda
 # Author: TmY e12
 ---
@@ -58,6 +59,7 @@ tr:
       channel: Kanal
       password: Parola
       offline: çevrimdışı
+      online: çevrimiçi
       restricted: kısıtlı
       managed: yönetilen
       active: aktif
