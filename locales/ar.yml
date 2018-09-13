@@ -1,6 +1,7 @@
 # Messages for Arabic (العربية)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Meno25
 # Author: ديفيد
 # Author: محمد أحمد عبد الفتاح
 ---
@@ -263,6 +264,7 @@ ar:
         current: التاريخ/الوقت الحالي
       version:
         header: نسخة منطقة MAZI
+        version-message: هذه البوابة هي '%{nof_commits} commits' خلفها.
         up-to-date: حتى الآن
       popups:
         expand-storage-message: يمكنك توسيع مساحة تخزين MAZI إلى السعة القصوى لبطاقة
@@ -281,6 +283,7 @@ ar:
         url-column: المسار
         url-hint: مسار التطبيق
         description-column: الوصف
+        description-hint: الوصف الذي سيعرض على أيقونة التطبيق في البوابة
         parent-column: والد التطبيق
         parent-hint: التطبيق الأم
         click-column: عداد النقر
