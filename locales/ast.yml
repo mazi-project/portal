@@ -1,0 +1,189 @@
+# Messages for Asturian (asturianu)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Xuacu
+---
+ast:
+  general:
+    buttons:
+      edit: Editar
+      cancel: Encaboxar
+      ok: Aceutar
+      close: Zarrar
+      create: Crear
+      delete: Desaniciar
+      start: Principiar
+      stop: Parar
+      save: Guardar los cambios
+      choose: Escoyer
+      choose-timeslot: Seleiciona un fusu horariu
+      export-to-csv: Esportar a un ficheru CSV
+      expand: Espander
+      expand-storage: Espander almacenamientu
+      reboot: Reaniciar
+      reset: Reestablecer
+      shutdown: Apagar
+      logout: Salir
+      update: Anovar
+      connect: Coneutar
+      disconnect: Desconectar
+      toggle-device: Cambiar de preséu
+      initialize: Inicializar
+      remove: Quitar
+      load: Cargar
+      import: Importar
+      export: Esportar
+      refresh: Refrescar
+      continue: Siguir
+      next: Siguiente
+      previous: Anterior
+      submit: Unviar
+      change: Camudar
+      qrcode: Códigu QR
+      show: Amosar
+      configure: Configurar
+    messages:
+      warning: Avisu
+      welcome: Bienveníos
+      version: Versión
+      enable: activar
+      disable: desactivar
+      checked: revisáu
+      on_msg: Prendíu
+      off_msg: Apagáu
+      disconnected: Desconectáu
+      here: equí
+      ssid: SSID
+      channel: Canal
+      password: Contraseña
+      offline: sin conexón
+      online: en llinia
+      restricted: torgáu
+      managed: alministráu
+      active: activu
+      inactive: Inactivu
+      error: error
+      stable: Estable
+      development: Desendolcu
+  portal:
+    top-menu:
+      documentation: Documentación
+    side-menu:
+      applications: Aplicaciones
+      system: Sistema
+      sensors: Sensores
+      camera: Cámara
+      monitoring: Monitorización
+      devices: Preseos
+    system-page:
+      subheader: Información del Sistema
+      users: Usuarios coneutaos
+      app-clicks: Clicks n'aplicación
+      temperature: Temperatura
+      cpu: CPU
+      ram: RAM
+      storage: Almacenamientu
+    sensors-page:
+      header: Midíes de sensores
+      header-message: Nesta páxina puedes ver les midies de distintos sensores coneutaos
+        con esta zona MAZI. Puedes usar el botón de más abaxo pa solicitar les midíes
+        d’un periodu determináu.
+      temperature-for: Temperatura de %{sensor}
+      metrics-for: Métriques de Direición, Aceleración y Xiroscopiu de %{sensor}
+      humidity-for: Humedá de %{sensor}
+      pressure-for: Presión de %{sensor}
+      no-sensors-warn: 'Atención: Nun hai midíes na base de datos o nun se coneutó
+        un preséu sensor a esta Zona MAZI.'
+      no-sensor-data-warn: 'Atención: Nun hai datos de sensor guardaos nesta Zona
+        MAZI. Un alministrador del sistema puede activar la collecha de datos del
+        sensor.'
+      choose-timeslot-message: Usa'l formulariu de más abaxo pa seleicionar un fusu
+        horariu.
+      direction: Direición (graos)
+      acceleration: Aceleración (x, y, z)
+      gyroscope: Xiroscopiu (balancéu, xiru, cabecéu)
+      sensors-hint: Sensehat tendría de calibrase pa poder ver valores válidos. Comprueba'l
+        tableru d'alministración pa más detalles.
+    camera-page:
+      header: Cámara
+      subheader: Nesta páxina alcontrarás les fotos y videos tomaos cola cimara coneutada
+        a esta zona MAZI.
+      live-stream-header: Streaming de videu en vivo
+      no-camera-warn: Nesti momentu, nun hai cámara dala instalada correutamente nesta
+        zona MAZI.
+      media-library-header: Mediateca
+      no-media-warn: Nesti momentu nun hai imaxes nin videos na mediateca.
+    monitoring-page:
+      subheader: Monitorización
+      header-message: Nesta páxina puedes ver les midiciones de dellos parámetros
+        de monitorización d'esta y/o otres Zones MAZI.
+      popups:
+        device: Preséu
+        devices: Preseos
+        deployment: Despliegue
+        administrator: Alministrador
+        description: Descripción
+        latitude: Llatitú
+        longitude: Llonxitú
+        system_info: Información de sistema
+        cpu_temp: Temperatura de CPU
+        cpu_load: Carga de CPU
+        ram_load: Carga de RAM
+        wifi-users: Usuarios de WiFi
+        storage_use: Carga d'almacenamientu
+        etherpad-pads: Pads Etherpad
+        etherpad-users: Usuarios d'Etherpad
+        etherpad-datasize: Tamañu de datos d'Etherpad
+        etherpad-clicks: Clicks d'Etherpad
+        guestbook-submissions: Unvios al llibru de visites
+        guestbook-comments: Comentarios del llibru de visites
+        guestbook-images: Imaxes del llibru de visites
+        guestbook-datasize: Tamañu de datos del llibru de visites
+        guestbook-clicks: Pulsaciones del llibru de visites
+        nextcloud-users: Usuarios de Nextcloud
+        nextcloud-files: Ficheros de Nextcloud
+        nextcloud-downloads: Descargues de Nextcloud
+        nextcloud-datasize: Tamañu de datos de Nextcloud
+        nextcloud-clicks: Pulsaciones en Nextcloud
+  admin:
+    top-menu:
+      admin: Almin
+      portal: Portal
+      set-date: Establecer data
+      username: Nome d'usuariu
+      password: Contraseña
+      mysql-password: Contraseña de MySQL
+      check-updates: Buscar anovamientos
+      settings: Configuración
+    side-menu:
+      dashboard: Tableru
+      applications: Aplicaciones
+      appearance: Aspeutu
+      devices: Preseos
+      monitoring: Monitorización
+      notifications: Avisos
+      export-import: Esportar/importar
+      logs: Rexistros
+      documentation: Documentación
+    updates:
+      subheader: Anovar
+      checking-updates: Comprobando si hai anovamientos. Espera…
+    applications-page:
+      instances-menu:
+        url-column: URL
+        url-hint: la URL de l'aplicación
+        description-column: Descripción
+        actions-column: Aiciones
+        actions-hint: aiciones que pueden facese na aplicación
+      applications-menu:
+        status-column: Estáu
+        icon-column: Iconu
+        icon-hint: l'iconu predetermináu de l'aplicación
+        color-column: Color
+        color-hint: el color predetermináu de l'aplicación
+        name-column: Nome de l'aplicación
+        name-hint: el nome de l'aplicación
+        url-column: URL
+        url-hint: la URL de l'aplicación
+        description-column: Descripción
+...
