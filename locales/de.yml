@@ -1,0 +1,233 @@
+# Messages for German (Deutsch)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: FF11
+# Author: Metalhead64
+# Author: Mgaved
+# Author: Pascalheynmoeller
+---
+de:
+  general:
+    buttons:
+      edit: Bearbeiten
+      cancel: Abbrechen
+      ok: OK
+      close: Schließen
+      create: Erstellen
+      delete: Löschen
+      start: Start
+      stop: Stopp
+      save: Änderungen speichern
+      choose: Auswählen
+      choose-timeslot: Wähle ein Zeitfenster
+      export-to-csv: Als CSV - Datei exportieren
+      expand: Ausklappen
+      expand-storage: Speicher ausklappen
+      reboot: Neu starten
+      reset: Zurücksetzen
+      shutdown: Abschalten
+      logout: Abmelden
+      update: Aktualisieren
+      connect: Verbinden
+      disconnect: Trennen
+      toggle-device: Gerät wechseln
+      initialize: Initasilieren
+      remove: Entfernen
+      load: Laden
+      import: Import
+      export: Export
+      refresh: Aktualisieren
+      continue: Fortfahren
+      next: Nächste
+      previous: Vorherige
+      submit: Absenden
+      change: Ändern
+      qrcode: QR-Code
+      show: Anzeigen
+      configure: Konfigurieren
+    messages:
+      warning: Warnung
+      welcome: Willkommen
+      version: Version
+      enable: aktivieren
+      disable: deaktivieren
+      checked: Geprüft
+      on_msg: AN
+      off_msg: AUS
+      disconnected: Getrennt
+      here: hier
+      ssid: SSID
+      channel: Kanal
+      password: Passwort
+      offline: Offline
+      online: Online
+      restricted: Beschränkt
+      managed: verwaltet
+      active: aktiv
+      inactive: inaktiv
+      error: Fehler
+      stable: Stabil
+      development: Entwicklung
+  portal:
+    top-menu:
+      documentation: Dokumentation
+    side-menu:
+      applications: Anwendungen
+      system: System
+      sensors: Sensoren
+      camera: Kamera
+      monitoring: Überwachung
+      devices: Geräte
+    system-page:
+      subheader: Systeminformationen
+      users: Onlinebenutzer
+      app-clicks: Anwendungsklicks
+      temperature: Temperatur
+      cpu: Zentrale Prozessor Einheit (CPU)
+      ram: Arbeitsspeicher (RAM)
+      storage: Massenspeicher
+    sensors-page:
+      header: Sensor Messungen
+      header-message: Auf dieser Seite kannst du die Messungen verschiedener Sensoren
+        sehen die mit MAZI Zone verbunden sind. Die Taste unten kannst du benutzen
+        um die Messungen eines bestimmten Zeitraums abzufragen.
+      temperature-for: Temperatur von %{sensor}
+      metrics-for: Richtung, Beschleunigung und Gyroskop Messungen von %{sensor}
+      humidity-for: Feuchtigkeit von %{sensor}
+      pressure-for: Atmosphärischer Druck von %{sensor}
+      no-sensors-warn: 'Warnung: Entweder sind keine Messungen in der Datenbank vorhanden
+        oder es sind keine Sensoren mit der MAZI Zone verbunden.'
+      no-sensor-data-warn: 'Warnung: Es sind keine Sensordaten in der MAZI Zone gespeichert.
+        Ein Systemadministrator kann das Sammeln von Sensordaten aktivieren.'
+      choose-timeslot-message: Hier drunter kannst du ein Zeitfenster auswählen.
+      direction: Richtung (Grad)
+      acceleration: Beschleunigung (x, y, z)
+      gyroscope: Kreiselinstrument (Neigungswinkel, Gierrate, Rollbewegung)
+      sensors-hint: Sensehat sollte kalbribriert sein um gültige Werte zu erhalten.
+        Prüfe bitte das Admin Panel für mehr Details.
+    camera-page:
+      header: Kamera
+      subheader: Auf dieser Seite kannst du die mit der MAZI Zone Kamera aufgenommenen
+        Fotos und Videos sehen.
+      live-stream-header: Live Video Streaming
+      no-camera-warn: Zur Zeit, ist noch keine Kamera richtig in der MAZI Zone installiert!
+      media-library-header: Medienbibliothek
+      no-media-warn: Zur Zeit, sind keine Bilder und Videos in der Bibliothek zu finden!
+    monitoring-page:
+      subheader: Überwachung
+      header-message: Auf dieser Seite kannst du verschieden Messungen aus dieser
+        und/oder anderen MAZI Zones sehen.
+      popups:
+        device: Gerät
+        devices: Geräte
+        deployment: Entwicklung
+        administrator: Administrator
+        description: Beschreibung
+        latitude: Breitengrad
+        longitude: Längengrad
+        system_info: Systeminformationen
+        cpu_temp: CPU - Temperatur
+        cpu_load: CPU Auslastung
+        ram_load: RAM Auslastung
+        wifi-users: WiFi - Benutzer
+        storage_use: Massenspeicher Auslastung
+        etherpad-pads: Etherpad-Pads
+        etherpad-users: Etherpad-Benutzer
+        etherpad-datasize: Etherpad-Datengröße
+        etherpad-clicks: Etherpad Klicks
+        guestbook-submissions: Gästebucheinträge
+        guestbook-comments: Gästebuch-Kommentare
+        guestbook-images: Gästebuch-Bilder
+        guestbook-datasize: Datengröße des Gästebuchs
+        guestbook-clicks: Gästebuch Klicks
+        framadate-polls: Framadate Umfragen
+        framadate-votes: Framadate Wahlen
+        framadate-comments: Framadate Kommentare
+        framadate-clicks: Framadate Klicks
+        nextcloud-users: Nextcloud Benutzer
+        nextcloud-files: Nextcloud Dateien
+        nextcloud-downloads: Nextcloud Downloads
+        nextcloud-datasize: Nextcloud Datengröße
+        nextcloud-clicks: Nextcloud Klicks
+  admin:
+    general:
+      admin-panel: Das MAZI Zone Administrations Panel
+      shutdown-modal-title: Herunterfahren?
+      shutdown-modal-message: Dies wird deine MAZI Zone herunterfahren, dadurch wird
+        diese Seite unerreichbar und du wirst deine MAZI Zone manuell neu starten
+        müssen. Ausführen?
+      reboot-modal-title: Neu starten?
+      reboot-modal-message: MAZI Zone wird jetzt neu starten, dadurch wird diese Seite
+        für einige Minuten nicht erreichbar sein; warte bitte ein paar Minuten und
+        lade diese Seite neu. Ausführen?
+    top-menu:
+      header: MAZI Zone Administrations Panel
+      admin: Administrator
+      portal: Portal
+      set-date: Setze das Datum
+      username: Benutzername
+      password: Passwort
+      mysql-password: MySQL Passwort
+      check-updates: Nach Aktualisierungen suchen
+      settings: Einstellungen
+    side-menu:
+      dashboard: Armaturenbrett
+      applications: Anwendungen
+      networking: Netzwerk
+      appearance: Aussehen
+      devices: Geräte
+      monitoring: Überwachung
+      notifications: Benachrichtigungen
+      export-import: Export/Import
+      logs: Protokoll
+      documentation: Dokumentation
+    updates:
+      subheader: Aktualisieren
+      checking-updates: Überprüfe auf Aktualisierungen. Bitte warten...
+      alert-message-1: Deine lokale Paketquelle wurde geändert. Das verursachte eine
+        Fehlfunktion bei der Aktualisierung. Bitte mache deine Änderungen Rückgängig
+        in dem du %{command} für die bearbeiteten lokalen Paketquellen anwendest.
+      update-message-0: Bitte wähle deinen Aktualisierungs Kanal
+      update-message-1: Es existiert keine aktive Verbindung zum Internet. Verbinde
+        diese MAZI Zone mit dem Internet und versuche es noch mal.
+      update-message-2: Dieses Portal läuft im Demonstrations Modus! Diese Aktion
+        hätte einen Aktualisierungs Prozess gestartet.
+      update-message-3: Das Portal ist auf dem neusten Stand, Aktualisierungen werden
+        nicht benötigt.
+      update-message-4: Das System Aktualisiert. Bitte warten...
+      update-message-5: Der Aktualisierungsprozess ist fast abgeschlossen. Deine MAZI
+        Zone wird neu gestartet um fehlende Abhängigkeiten zu installieren. Sobald
+        das WLAN Netzwerk wieder sichtbar ist, kannst du dich wieder mit deiner aktualisierten
+        MAZI Zone verbinden.
+      update-message-6: Eine Aktualisierung ist verfügbar. Benutze die Taste unten
+        drunter um den Aktualisierungsprozess zu starten.
+      update-hint: 'Hinweis: Wenn du ein fehlerhaftes Verhalten feststellst, starte
+        dein Gerät neu.'
+      update-chan-hint: 'Hinweis: Die letzte Version des Entwickler Kanals kann instabil
+        sein. Es wird nicht empholen hin und her zwischen den Aktualisierungskanälen
+        zu wechseln, da dies möglicherweise ein unerwartetes Verhalten herbeiführen
+        kann. Bitte beachte die Versions Details in %{link} um dich für eine Aktualisierungskanal
+        zu entscheiden.'
+      update-chan-warn: 'Warnung: Der Wechsel zu einem anderen Kanal wird das Gerät
+        dazu bringen direkt neu zu starten.'
+    setup-page:
+      tog-nav: Navigation umschalten
+      setup-panel: MAZI Zone Setup Panel
+      first-step-header: Admin Passwort Setup
+      first-step-message: Benutze die Eingabefelder unten drunter um das Administrator
+        Passwort für das "MAZI Zone Aadministrations Panel" zu setzen.
+      first-step-hint: 'Hinweis: Bei einer neuen MAZI Zone ist das aktuelle Passwort
+        "1234"'
+      second-step-header: Einstellen von Datum und Uhrzeit
+      second-step-message: Benutze die Eingabefelder unten um Datum und Uhrzeit sowie
+        Zeitzone für die MAZI Zone zu setzen.
+      third-step-header: WLAN Schnittstellen Setup
+      third-step-message: Benutze das Eingabfeld unten um den Namen des WLAN-Netzwerks
+        zu ändern (Optional).
+      last-step-header: Vervollständigen
+    dashboard-page:
+      applications:
+        header: Anwendungen
+      version:
+        up-to-date: Aktuell
+...
