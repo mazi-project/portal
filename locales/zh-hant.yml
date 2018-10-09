@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Kly
+# Author: LNDDYL
 ---
 zh-hant:
   general:
@@ -74,7 +75,7 @@ zh-hant:
       sensors: 感測器
       camera: 相機
       monitoring: 監控
-      devices: 設備
+      devices: 裝置
     system-page:
       subheader: 系統資訊
       users: 線上使用者
@@ -108,8 +109,8 @@ zh-hant:
       subheader: 監控
       header-message: 在此頁面您可以查看此或/與其它 MAZI Zones 各項監控測量內容。
       popups:
-        device: 設備
-        devices: 設備
+        device: 裝置
+        devices: 裝置
         deployment: 部署
         administrator: 管理員
         description: 描述
@@ -161,7 +162,7 @@ zh-hant:
       applications: 應用程式
       networking: 網路
       appearance: 外觀
-      devices: 設備
+      devices: 裝置
       monitoring: 監控
       notifications: 通知
       export-import: 匯出/匯入
@@ -382,7 +383,7 @@ zh-hant:
         save-theme-header: 儲存主題
         save-theme-message: 請輸入新主題的名稱。
     devices-page:
-      subheader: 設備
+      subheader: 裝置
       message: 您可以使用以下工具來連接至此 MAZI Zone 的各項支援設備（感測器、相機、其它）。您可以查找所有支援設備
       sensors-panel:
         header: 感測器
