@@ -211,6 +211,7 @@ it:
           portale MAZI Zone, nonché l''aspetto di rete di questa MAZI Zone.'
         message-2: 'Utilizza il menu per accedere ai vari strumenti, che possono:'
         message-list-1: Gestire le applicazioni supportate
+        message-list-2: Configura la rete MAZI Zone
         message-list-4: Aggiungi / rimuovi notifiche sul portale
         message-list-5: Esporta / importa istantanee
       hardware-info:
@@ -290,9 +291,50 @@ it:
           il pulsante Modifica qui sotto per cambiarlo.
         wifi-channel-label: Canale della rete Wi-Fi
         wifi-password-label: Password della rete Wi-Fi
+      popups:
+        change-channel-header: Cambia canale
+        change-password-header: Cambia password
+        change-mode-header: Cambia modalità
+        connect-wifi-header: Connettere con un Network Wi-Fi
+        select-wifi-label: Seleziona nome Wi-Fi
+        select-mesh-mode-label: Seleziona la modalità Mesh
+        type-wifi-label: Oppure digita qui se è nascosto
+        type-password-label: Digita la password per la rete Wi-Fi
+        change-domain-header: Modifica il dominio del portale
+        change-domain-message: Questa azione cambierà il dominio del portale. Assicurati
+          che sia un dominio valido (ad esempio almeno un carattere ".").
+        change-domain-warning: 'Avvertenza: se si imposta un dominio non valido, il
+          portale non sarà raggiungibile. Tuttavia, puoi accedere al pannello di amministrazione
+          tramite questo URL'
     appearance-page:
+      subheader: Aspetto
       theme-panel:
+        portal-title-label: Titolo del portale
+        home-page-label: Titolo della home page
+        home-subtitle-label: Sottotitolo della pagina iniziale
+        welcome-message-label: Messaggio di benvenuto dell'applicazione
+        welcome-message-hint: Questo valore configura il messaggio di benvenuto del
+          corpo per la pagina delle applicazioni.
+        background-image-label: Immagine di sfondo dell'applicazione
+        background-image-hint: Questo valore configura l'immagine di sfondo per la
+          pagina delle applicazioni.
         colors-label: Colori
+        side-main-color: Colore principale del pannello laterale
+        top-main-color: Colore principale del pannello superiore
+      popups:
+        edit-theme-header: Modifica tema
+        edit-title-header: Modifica titolo
+        edit-home-title-header: Modifica il titolo della pagina iniziale
+        edit-home-subtitle-header: Modifica sottotitoli della home page
+        edit-welcome-message-header: Modifica messaggio di benvenuto
+        edit-background-image-header: Modifica l'immagine di sfondo
+        reset-theme-header: Reimposta tema
+        reset-theme-message: Questa azione ripristinerà tutte le configurazioni visive
+          ai valori predefiniti.
+        load-theme-header: Carica tema
+        load-theme-message: Carica uno dei seguenti file di configurazione
+        save-theme-header: Salva tema
+        save-theme-message: Si prega di inserire il nome del nuovo tema.
     devices-page:
       subheader: Dispositivi
       sensors-panel:
@@ -308,10 +350,20 @@ it:
           actions: Azioni
           start-button-hint: Inizia a salvare le misure
           delete-button-hint: Elimina tutte le misurazioni salvate
+        no-sensors-message: Impossibile trovare un sensore collegato a questa zona
+          MAZI.
+        init-button-hint: Avvia l'inizializzazione dei sensori
       camera-panel:
         header: Camera
+        header-hint: È possibile utilizzare questo per controllare la fotocamera.
+        camera-version-message: Il modulo Camera non è installato correttamente su
+          questa immagine! Utilizzare un'immagine maggiore della  1.7.2 configurata
+          correttamente per questo scopo.
+        no-camera-message: Non ci sono telecamere collegate a questa zona MAZI!
       popups:
+        start-sensing-label1: Server di destinazione
         start-sensing-label2: Durata (secondi)
+        start-sensing-label3: Calendario (ora / data di fine)
         start-sensing-label4: Intervallo (secondi)
         start-images-title: Inizia a Catturare le Immagini
         start-images-label1: Durata (secondi)
@@ -341,16 +393,29 @@ it:
           prima di abilitare il monitoraggio!
       statistics-panel:
         header: Monitoraggio dei dati
+        header-hint: È possibile utilizzare questo per controllare le attività di
+          monitoraggio.
         statistics-table:
           status: Stato
           description: Descrizione
           action: Azione
+          hardware-description-message: Monitoraggio dell'attività del sistema.
+          application-description-message: Monitoraggio dei dati dell'applicazione.
+          start-hardware-task-hint: Avvia il monitoraggio dell'attività del sistema
+          stop-hardware-task-hint: Arresta il monitoraggio dell'attività del sistema
+          delete-hardware-data-hint: Elimina tutti i dati di monitoraggio dell'attività
+            del sistema dal database locale
       popups:
+        change-details-header: Modifica i dettagli di monitoraggio
         change-details-label2: Amministratore
         change-details-label3: Titolo
         change-details-label4: Descrizione
         change-details-label5: Ubicazione (lat., long.)
         hardware-label2: Temperatura
+        hardware-label3: Utenti WiFi
+        hardware-label4: Carico della CPU
+        hardware-label5: Carico della RAM
+        application-label2: Applicazione Etherpad
     notifications-page:
       subheader: Notifiche
       notifications-table:

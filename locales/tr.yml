@@ -206,6 +206,8 @@ tr:
         Beklenmeyen durumlara neden olabileceğinden güncelleme kanalını ileri ve geri
         almanız önerilmez. Güncelleme kanalınıza karar vermek için lütfen %{link}
         sürüm ayrıntılarını belirtin.'
+      update-chan-warn: 'Uyarı: Başka bir kanala geçmek, bir cihazın yeniden başlatılmasına
+        neden olur.'
     setup-page:
       tog-nav: Gezinmeyi değiştir
       setup-panel: MAZI Bölgesi Kurulum Paneli
@@ -385,7 +387,7 @@ tr:
         change-password-header: Parolayı Değiştir
         change-mode-header: Modu Değiştir
         change-mode-message: Bu MAZI Bölgesi için Ağ Modunu seçmek için aşağıdaki
-          formu kullanın. İkili modu seçmek isterseniz lütfen internete erişiminiz
+          formu kullanın. Çevrimiçi modu seçmek isterseniz lütfen internete erişiminiz
           olduğundan emin olun (ethernet kablosu veya Wi-Fi dongle üzerinden).
         connect-wifi-header: Wi-Fi Ağına Bağlan
         select-wifi-label: Wi-Fi adı seç
@@ -599,6 +601,25 @@ tr:
           Devam etmek istiyor musunuz?
     import-export-page:
       subheader: Anlık resimler
+      full-snapshots-header: MAZI Bölgesi Anlık Görüntü
+      full-snapshots-message: Bu MAZI Bölgesinin mevcut yapılandırmasının bir anlık
+        görüntüsünü almak için aşağıdaki paneli kullanabilirsiniz. Buna her şeyi dahildir
+        (ağ yapılandırmaları, uygulamalar, uygulama örnekleri, bildirimler, görsel
+        yapılandırmalar, vb.).
+      full-snapshot-panel:
+        header-hint: Anlık görüntü içeriye/dışarıya aktarmak için bunu kullanabilirsiniz.
+        form-placeholder: Anlık Görüntü Adı
+        no-usb-message: Şu an herhangi bir USB depolama cihazı algılanmadı. Lütfen
+          bir USB depolama cihazını takın ve sayfayı yenileyin.
+        usb-message: Bir USB depolama aygıtı tespit edildi. Cihazda %{free_space}
+          boş alan var.
+      full-warning: 'Uyarı: Bir anlık görüntüyü içe ve dışa aktarmak, zaman alıcı
+        bir prosedürdür ve ayrıca MAZI Bölgesi verilerinize ve USB cihazınızın hızına
+        bağlıdır. İçe/dışa aktarma prosedürü sırasında MAZI Portalı ile etkileşim
+        kuramayacaksınız. Cihaz, içe aktarma prosedürünün sonunda yeniden başlatılacaktır.'
+      configuration-snapshots-header: Yapılandırma Anlık Görüntüleri
+      configuration-snapshots-message: Bu MAZI Bölgesinin mevcut yapılandırmasının
+        bir anlık görüntüsünü almak için aşağıdaki paneli kullanabilirsiniz.
       warning: 'Uyarı: Farklı bir Wi-Fi ağ ayarlarına sahip yeni bir anlık görüntü
         yüklerseniz bu MAZI Bölgesine olan kablosuz bağlantınız kaybolur ve yeni Wi-Fi
         ağına yeniden bağlanmanız gerekir.'
@@ -619,7 +640,7 @@ tr:
           kullanabilirsiniz. Veya bir zip dosyasını anlık görüntü olarak içe aktarın.
         message: Lütfen bir anlık görüntü seçin ve yükleye basın.
         no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
-      application-snapshots-header: Uygulama anlık görüntüleri
+      application-snapshots-header: Uygulama Anlık Görüntüleri
       application-snapshots-message: Bu MAZI Bölgesi tarafından desteklenen uygulamalar
         için Anlık Görüntüleri Alma/Verme için aşağıdaki panelleri kullanın.
       interview-panel:
@@ -633,6 +654,10 @@ tr:
         import-interview-header: Röportaj için Anlık Görüntüyü İçeri Aktar
         import-guestbook-header: Ziyaretçi Defterini için Anlık Görüntüyü İçeri Aktar
         import-etherpad-header: Etherpad için Anlık Görüntüyü İçeri Aktar
+        import-nextcloud-header: Nextcloud için Anlık Görüntüyü İçe Aktar
+        import-wordpress-header: WordPress için Anlık Görüntüyü İçe Aktar
+        import-full-header: Bu MAZI Bölgesi için Anlık Görüntüyü İçe Aktar
+        import-config-header: Bir yapılandırma Anlık Görüntüsünü içe aktar
     logs-page:
       subheader: Günlük Görüntüleyici
       message: MAZI Bölgesi günlük dosyalarını aşağıda görebilirsiniz

@@ -224,10 +224,12 @@ de:
       third-step-header: WLAN Schnittstellen Setup
       third-step-message: Benutze das Eingabfeld unten um den Namen des WLAN-Netzwerks
         zu ändern (Optional).
+      fourth-step-header: Einzelheiten zur MAZI-Zone
       last-step-header: Vervollständigen
     dashboard-page:
       applications:
         header: Anwendungen
+        applications-installed: Installierte Anwendungen
       version:
         up-to-date: Aktuell
 ...
