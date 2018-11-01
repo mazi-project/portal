@@ -227,9 +227,23 @@ de:
       fourth-step-header: Einzelheiten zur MAZI-Zone
       last-step-header: Vervollständigen
     dashboard-page:
+      networking:
+        users-online: Derzeitige Online-Benutzer
       applications:
         header: Anwendungen
         applications-installed: Installierte Anwendungen
+      notifications:
+        header: Benachrichtigungen
+      time-date:
+        current: Aktuelles Datum/Uhrzeit
       version:
         up-to-date: Aktuell
+    applications-page:
+      subheader: Anwendungen
+      instances-menu:
+        active-column: Aktiv
+        description-column: Beschreibung
+        actions-column: Aktionen
+      applications-menu:
+        app-start-hint: Anwendung starten
 ...
