@@ -199,7 +199,7 @@ module MaziConfig
     input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
                        "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
                        "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
-                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdoc/splash.html"]
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdocs/splash.html"]
 
     ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command.join("\n")
@@ -274,7 +274,7 @@ module MaziConfig
                         "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
                         "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
                         "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
-                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdoc/splash.html"}
+                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdocs/splash.html"}
     File.delete("#{usb_target}/.mazi_tmp/network.net") if File.file?("#{usb_target}/.mazi_tmp/network.net")
     Zip::File.open(filename) do |zip_file|
       zip_file.each do |entry|
@@ -436,7 +436,7 @@ module MaziConfig
     input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
                        "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
                        "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
-                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdoc/splash.html"]
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdocs/splash.html"]
 
     ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command.join("\n")
@@ -458,7 +458,7 @@ module MaziConfig
                         "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
                         "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
                         "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
-                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdoc/splash.html"}
+                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdocs/splash.html"}
 
     File.delete("/tmp/network.net") if File.file?("/tmp/network.net")
     Zip::File.open(tempfile.path) do |zip_file|
