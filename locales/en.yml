@@ -176,6 +176,7 @@ en:
       update-hint:       "Hint: if you experience a faulty behavior reboot your device."
       update-chan-hint:  "Hint: the latest version of the Development channel could be unstable. It is not recomended to change back and forth the update channel, since it may cause unexpected behavior. Please advise the version details %{link} in order to decide your update channel"
       update-chan-warn:  "Warning: changing to another channel will cause a device reboot."
+      last-jessie-warn:  "Warning: This is the last version (v2.6) based in Raspbian Jessie. Since v3, the toolkit is based on Raspbian Stretch. If you want to keep following the MAZI toolkit development, you have to download the latest v3 image from <a href='https://github.com/mazi-project/guides/wiki/Version-History'>here</a>. In case you want to keep your current data and configuration, you can export your current MAZI Zone using an external <a href='/admin_snapshot'>USB disk</a> and import it to your a v3 MAZI Zone. Check also <a href='https://github.com/mazi-project/guides/wiki/From-v2.6-to-v.3'>here</a> for more info."
     setup-page:
       tog-nav:             "Toggle navigation"
       setup-panel:         "MAZI Zone Setup Panel"
