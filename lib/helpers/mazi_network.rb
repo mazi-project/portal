@@ -72,4 +72,13 @@ module MaziNetwork
     end
     interfaces
   end
+
+  def verify_domain(domain)
+    return "contain at least one dot (.) character" unless domain.include?('.')
+    return "not contain a hyphen (-) as the first or the last character" if domain.start_with?('-') || domain.end_with?('-')
+    special = "?<>',?[]}{=_)(*&^%$#`~{}"
+    regex = /[#{special.gsub(/./){|char| "\\#{char}"}}]/
+    return "not contain the following characters: #{special}" if domain =~ regex
+    nil
+  end
 end
