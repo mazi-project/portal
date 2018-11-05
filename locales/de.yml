@@ -246,4 +246,5 @@ de:
         actions-column: Aktionen
       applications-menu:
         app-start-hint: Anwendung starten
+        app-stop-hint: Anwendung stoppen
 ...

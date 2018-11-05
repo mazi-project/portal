@@ -214,6 +214,15 @@ fr:
         de mise à jour.'
       update-chan-warn: 'Avertissement: basculer vers un autre canal fera redémarrer
         l''équipement.'
+      last-jessie-warn: 'Attention: ceci est la dernière version (v2.6) basée sur
+        Raspbian Jessie. Depuis la v3, la boîte à outils est basée sur Raspbian Stretch.
+        Si vous souhaitez continuer à suivre le développement de la boîte à outils
+        MAZI, vous devez télécharger la dernière image v3 à partir de <a href=''https://github.com/mazi-project/guides/wiki/Version-History''>here</a>.
+        Si vous souhaitez conserver vos données et votre configuration actuelles,
+        vous pouvez exporter votre zone MAZI actuelle à l''aide d''un <a href=''/admin_snapshot''>disque
+        USB</a> externe et l''importer dans votre Zone MAZI v3. Consultez également
+        <a href=''https://github.com/mazi-project/guides/wiki/From-v2.6-to-v.3''>
+        ceci </a> pour plus d''informations.'
     setup-page:
       tog-nav: Basculer la navigation
       setup-panel: Panneau de paramétrage de la zone MAZI
