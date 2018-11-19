@@ -224,24 +224,51 @@ de:
       third-step-header: WLAN Schnittstellen Setup
       third-step-message: Benutze das Eingabfeld unten um den Namen des WLAN-Netzwerks
         zu ändern (Optional).
+      third-step-warning: 'Warung: Wenn du den Namen deines Wi-Fi Netzwerkes änderst,
+        geht Ihre Verbindung zu dieser MAZI Zone verloren und Sie werden sich mit
+        dem neuen Wi-Fi Netzwerk erneut verbeinden müssen.'
       fourth-step-header: Einzelheiten zur MAZI-Zone
+      fourth-step-message: Bitte benutzen Sie das Formular unten, um die Details für
+        Ihre MAZI Zone zu ändern
       last-step-header: Vervollständigen
+      last-step-message: Sie haben alle Schritte der Einrichtung erfolgreich abgeschlossen.
+        Bitte klicken Sie auf "Absenden", um die Änderungen zu speichern.
     dashboard-page:
+      subheader: Dashboard
+      welcome:
+        message-list-2: Konfigurieren Sie das Mazi Zone - Netzwerk
+        message-list-4: Benachrichtigungne auf dem Portal hinzufügen/entfenren
+        message-list-5: Snapshots exportieren/importieren
+      hardware-info:
+        header: MAZI Zone Hardwareinformationen
+        system-temperature: Systemtemperatur
+        cpu-load: CPU-Auslastung
+        ram-load: RAM-Auslastung
       networking:
-        users-online: Derzeitige Online-Benutzer
+        users-online: Benutzer, die zurzeit online sind
+        wifi-info: Wi-Fi - Netzwerkinfo
       applications:
         header: Anwendungen
         applications-installed: Installierte Anwendungen
+      traffic:
+        reset-visits: Besuche zurücksetzen
       notifications:
         header: Benachrichtigungen
       time-date:
+        header: MAZI Zone Zeit/Datum
         current: Aktuelles Datum/Uhrzeit
       version:
+        header: MAZI Zone Version
         up-to-date: Aktuell
     applications-page:
       subheader: Anwendungen
       instances-menu:
         active-column: Aktiv
+        active-hint: Sichtbarkeit der Anwendung auf dem Portal umschalten
+        name-column: Name
+        name-hint: Der Name der Anwendung
+        url-column: URL
+        url-hint: Die URL der Anwendung
         description-column: Beschreibung
         actions-column: Aktionen
       applications-menu:
