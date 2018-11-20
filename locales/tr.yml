@@ -1,6 +1,7 @@
 # Messages for Turkish (Türkçe)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: By erdo can
 # Author: Hedda
 # Author: TmY e12
 ---
@@ -58,12 +59,14 @@ tr:
       channel: Kanal
       password: Parola
       offline: çevrimdışı
-      dual: çift
+      online: çevrimiçi
       restricted: kısıtlı
       managed: yönetilen
       active: aktif
       inactive: pasif
       error: hata
+      stable: Kararlı
+      development: Geliştirme
   portal:
     top-menu:
       documentation: Belgelendirme
@@ -180,10 +183,12 @@ tr:
       logs: Günlükler
       documentation: Belgeleme
     updates:
+      subheader: Güncelle
       checking-updates: Güncellemeler kontrol ediliyor. Lütfen bekleyin...
       alert-message-1: Yerel deponuz düzenlendi. Bu, güncelleme işlevinin arızalanmasına
         neden olur. Lütfen düzenlenmiş dosyalar için %{command} kullanarak bu değişiklikleri
         yerel deponuzda geri alın.
+      update-message-0: Lütfen güncelleme kanalınızı seçin
       update-message-1: İnternet için aktif herhangi bir bağlantı mevcut değil. Lütfen,
         bu Mazi Bölgesi'ni internete bağlayın ve tekrar deneyin.
       update-message-2: Bu portal Demo modunda çalışır! Bu işlem bir güncelleme işlemini
@@ -197,6 +202,12 @@ tr:
         lütfen aşağıdaki düğmeyi kullanın.
       update-hint: 'İpucu: hatalı bir davranışla karşılaşırsanız cihazınızı yeniden
         başlatın.'
+      update-chan-hint: 'İpucu: Geliştirme kanalının en son sürümü kararsız olabilir.
+        Beklenmeyen durumlara neden olabileceğinden güncelleme kanalını ileri ve geri
+        almanız önerilmez. Güncelleme kanalınıza karar vermek için lütfen %{link}
+        sürüm ayrıntılarını belirtin.'
+      update-chan-warn: 'Uyarı: Başka bir kanala geçmek, bir cihazın yeniden başlatılmasına
+        neden olur.'
     setup-page:
       tog-nav: Gezinmeyi değiştir
       setup-panel: MAZI Bölgesi Kurulum Paneli
@@ -260,8 +271,7 @@ tr:
         current: Mevcut Tarih/Saat
       version:
         header: MAZI Bölgesi Sürümü
-        version-message-1: Bu Portal,
-        version-message-2: arkada işlem yapar.
+        version-message: Bu Portal '%{nof_commits} işleminin arkasında.
         up-to-date: Güncel
       popups:
         expand-storage-message: MAZI Bölgesi depolamasını, aşağıdaki düğmeyi kullanarak
@@ -294,7 +304,7 @@ tr:
       applications-menu:
         header: Yüklü Uygulamalar
         status-column: Durum
-        status-hint: portların çalışma durumu (çalışıyor/durdu)
+        status-hint: operasyonel durum (çalışıyor/durdu)
         icon-column: Simge
         icon-hint: uygulamanın varsayılan simgesi
         color-column: Renk
@@ -304,7 +314,7 @@ tr:
         url-column: URL
         url-hint: Uygulamanın URL'si
         description-column: Açıklama
-        description-hint: Portaldaki uygulama kısmında gösterilecek açıklama
+        description-hint: uygulamanın varsayılan açıklaması
         actions-column: İşlemler
         actions-hint: uygulamada gerçekleştirilebilecek işlemler
         web-app-info-hint: Bu uygulamanın başlatılması/durdurulması, MAZI Bölgenizin
@@ -319,6 +329,8 @@ tr:
         delete-application-hint: Bu uygulamayı silebilmeniz için önce bu uygulamaya
           bağlı tüm uygulama örneklerini silmeniz gerekir.
         edit-application-title: Uygulama Örneğini Düzenle?
+        application-icon-hint: 'İpucu: simge için lütfen %{link} dokümanlarını kontrol
+          edin'
         create-application-title: Yeni Uygulama Örneği oluştur
         create-application-help: 'Yardım: Bazı uygulamalar şu an için birden fazla
           örneğe sahip olamaz, bazılarının eksik olmasının nedeni budur.'
@@ -375,7 +387,7 @@ tr:
         change-password-header: Parolayı Değiştir
         change-mode-header: Modu Değiştir
         change-mode-message: Bu MAZI Bölgesi için Ağ Modunu seçmek için aşağıdaki
-          formu kullanın. İkili modu seçmek isterseniz lütfen internete erişiminiz
+          formu kullanın. Çevrimiçi modu seçmek isterseniz lütfen internete erişiminiz
           olduğundan emin olun (ethernet kablosu veya Wi-Fi dongle üzerinden).
         connect-wifi-header: Wi-Fi Ağına Bağlan
         select-wifi-label: Wi-Fi adı seç
@@ -437,7 +449,7 @@ tr:
       sensors-panel:
         header: Sensörler
         header-hint: Bunu, çeşitli sensörleri kontrol etmek için kullanabilirsiniz.
-        toggle-sensors-message: Kullanıcı portalı üzerindeki sensörler sekmesini etkinleştirin/devre
+        toggle-sensors-message: Kullanıcı portali üzerindeki sensörler sekmesini etkinleştirin/devre
           dışı bırakın
         toggle-sensors-hint: portal sensörleri sekmesini etkinleştirin/devre dışı
           bırakın
@@ -458,7 +470,7 @@ tr:
       camera-panel:
         header: Kamera
         header-hint: Kamerayı kontrol etmek için bunu kullanabilirsiniz.
-        toggle-camera-message: Kullanıcı portalı üzerindeki kamera sekmesini etkinleştir/devre
+        toggle-camera-message: Kullanıcı portali üzerindeki kamera sekmesini etkinleştir/devre
           dışı bırak
         toggle-camera-hint: portallar kamera sekmesini etkinleştir/devre dışı bırak
         camera-version-message: Kamera modülü bu görüntüye düzgün şekilde yüklenmemiş!
@@ -509,7 +521,7 @@ tr:
       statistics-panel:
         header: İzleme Verisi
         header-hint: İzleme faaliyetlerini kontrol etmek için bunu kullanabilirsiniz.
-        toggle-monitoring-map-msg: Kullanıcı portalı üzerindeki izleme sekmesini etkinleştirin/devre
+        toggle-monitoring-map-msg: Kullanıcı portali üzerindeki izleme sekmesini etkinleştirin/devre
           dışı bırakın
         toggle-monitoring-map-hint: izleme sekmesini etkinleştirme/devre dışı bırakma
         message: Aşağıdaki başlatma/durdurma düğmelerine basarak sistem etkinliğini
@@ -589,9 +601,25 @@ tr:
           Devam etmek istiyor musunuz?
     import-export-page:
       subheader: Anlık resimler
-      message: Bu MAZI Bölgesinin mevcut yapılandırmasının anlık görüntüsünü almak
-        için aşağıdaki araçları kullanabilirsiniz. Bu, her şeyi içerir (ağ yapılandırmaları,
-        uygulamalar, uygulama örnekleri, bildirimler, görsel yapılandırmalar, vb.).
+      full-snapshots-header: MAZI Bölgesi Anlık Görüntü
+      full-snapshots-message: Bu MAZI Bölgesinin mevcut yapılandırmasının bir anlık
+        görüntüsünü almak için aşağıdaki paneli kullanabilirsiniz. Buna her şeyi dahildir
+        (ağ yapılandırmaları, uygulamalar, uygulama örnekleri, bildirimler, görsel
+        yapılandırmalar, vb.).
+      full-snapshot-panel:
+        header-hint: Anlık görüntü içeriye/dışarıya aktarmak için bunu kullanabilirsiniz.
+        form-placeholder: Anlık Görüntü Adı
+        no-usb-message: Şu an herhangi bir USB depolama cihazı algılanmadı. Lütfen
+          bir USB depolama cihazını takın ve sayfayı yenileyin.
+        usb-message: Bir USB depolama aygıtı tespit edildi. Cihazda %{free_space}
+          boş alan var.
+      full-warning: 'Uyarı: Bir anlık görüntüyü içe ve dışa aktarmak, zaman alıcı
+        bir prosedürdür ve ayrıca MAZI Bölgesi verilerinize ve USB cihazınızın hızına
+        bağlıdır. İçe/dışa aktarma prosedürü sırasında MAZI Portalı ile etkileşim
+        kuramayacaksınız. Cihaz, içe aktarma prosedürünün sonunda yeniden başlatılacaktır.'
+      configuration-snapshots-header: Yapılandırma Anlık Görüntüleri
+      configuration-snapshots-message: Bu MAZI Bölgesinin mevcut yapılandırmasının
+        bir anlık görüntüsünü almak için aşağıdaki paneli kullanabilirsiniz.
       warning: 'Uyarı: Farklı bir Wi-Fi ağ ayarlarına sahip yeni bir anlık görüntü
         yüklerseniz bu MAZI Bölgesine olan kablosuz bağlantınız kaybolur ve yeni Wi-Fi
         ağına yeniden bağlanmanız gerekir.'
@@ -603,7 +631,7 @@ tr:
       load-snapshot-panel:
         header: Anlık Görüntü Yükle
         header-hint: Anlık görüntü yüklemek için bunu kullanabilirsiniz.
-        message: Lütfen bir anlık görüntü seçin ve yükleye basın. MAZI portalı yeniden
+        message: Lütfen bir anlık görüntü seçin ve yükleye basın. MAZI portali yeniden
           başlatılacak.
         no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
       import-export-panel:
@@ -612,7 +640,7 @@ tr:
           kullanabilirsiniz. Veya bir zip dosyasını anlık görüntü olarak içe aktarın.
         message: Lütfen bir anlık görüntü seçin ve yükleye basın.
         no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
-      application-snapshots-header: Uygulama anlık görüntüleri
+      application-snapshots-header: Uygulama Anlık Görüntüleri
       application-snapshots-message: Bu MAZI Bölgesi tarafından desteklenen uygulamalar
         için Anlık Görüntüleri Alma/Verme için aşağıdaki panelleri kullanın.
       interview-panel:
@@ -626,6 +654,10 @@ tr:
         import-interview-header: Röportaj için Anlık Görüntüyü İçeri Aktar
         import-guestbook-header: Ziyaretçi Defterini için Anlık Görüntüyü İçeri Aktar
         import-etherpad-header: Etherpad için Anlık Görüntüyü İçeri Aktar
+        import-nextcloud-header: Nextcloud için Anlık Görüntüyü İçe Aktar
+        import-wordpress-header: WordPress için Anlık Görüntüyü İçe Aktar
+        import-full-header: Bu MAZI Bölgesi için Anlık Görüntüyü İçe Aktar
+        import-config-header: Bir yapılandırma Anlık Görüntüsünü içe aktar
     logs-page:
       subheader: Günlük Görüntüleyici
       message: MAZI Bölgesi günlük dosyalarını aşağıda görebilirsiniz
@@ -642,7 +674,7 @@ tr:
         subheader1: Açıklama
         subheader2: ssh üzerinden bağlantı
         subheader3: Raspbian Yapılandırması
-        paragraph1: Bu MAZI Bölgesi portalı için yönetici dokümantasyon rehberidir.
+        paragraph1: Bu MAZI Bölgesi portali için yönetici dokümantasyon rehberidir.
           Belgelerin farklı bölümlerine gitmek için yukarıdaki sekmeleri kullanın.
           Mevcut sekme, raspberry pi'yi yapılandırmak için yöneticinin ihtiyaç duyabileceği
           farklı eylemleri açıklar. Diğer tüm sekmeler, desteklenen uygulamaların

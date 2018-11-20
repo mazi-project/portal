@@ -33,6 +33,7 @@ lb:
       continue: Virufueren
       next: Weider
       previous: Vireg
+      submit: Schécken
       change: Änneren
       qrcode: QR-Code
       show: Weisen
@@ -49,11 +50,13 @@ lb:
       here: hei
       channel: Kanal
       password: Passwuert
-      dual: dual
+      online: online
       restricted: limitéiert
       active: aktiv
       inactive: inaktiv
       error: Feeler
+      stable: Stabil
+      development: Entwécklung
   portal:
     top-menu:
       documentation: Dokumentatioun
@@ -68,6 +71,7 @@ lb:
       cpu: CPU
       ram: RAM
     sensors-page:
+      direction: Richtung (Graden)
       acceleration: Beschleunegung (x, y, z)
     camera-page:
       header: Kamera
@@ -99,7 +103,11 @@ lb:
       devices: Apparater
       monitoring: Iwwerwaachen
       notifications: Notifikatiounen
+      export-import: Export/Import
       documentation: Dokumentatioun
+    updates:
+      subheader: Aktualiséieren
+      update-message-0: Sicht w.e.g. Äre Kanal fir d'Aktualisatiounen
     setup-page:
       last-step-header: Komplett
     dashboard-page:
@@ -181,6 +189,7 @@ lb:
     logs-page:
       portal-log-panel:
         filter-label1: Feelermessagen
+        filter-label2: Warnmessagen
     documentation-page:
       initial-configuration-tab:
         subheader1: Beschreiwung
@@ -189,6 +198,7 @@ lb:
         paragraph5: Zum Beispill,
       nextcloud-tab:
         subheader1: Beschreiwung
+        paragraph10: E-Mail-Adress
         paragraph12: Geréiert Äert Passwuert
       guestbook-tab:
         subheader1: Beschreiwung
@@ -204,5 +214,6 @@ lb:
       mysql-password:
         header: MySQL-Passwuert
       popups:
+        change-time-date-title: Zäit/Datum änneren
         change-mysql-password-title: Mäi MySQL-Passwuert änneren
 ...

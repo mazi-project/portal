@@ -1,0 +1,212 @@
+# Messages for Burmese (မြန်မာဘာသာ)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Dr Lotus Black
+---
+my:
+  general:
+    buttons:
+      edit: ပြင်ဆင်ရန်
+      cancel: မလုပ်တော့
+      ok: အိုကေ
+      close: ပိတ်ရန်
+      create: ဖန်တီးရန်
+      delete: ဖျက်ရန်
+      start: စတင်ရန်
+      stop: ရပ်
+      save: ပြောင်းလဲမှုများကို သိမ်းရန်
+      choose: ရွေးချယ်ရန်
+      expand: ချဲ့ရန်
+      update: မွမ်းမံ
+      connect: ချိတ်ဆက်ရန်
+      disconnect: မချိတ်ဆက်တော့ရန်
+      initialize: အစပြုရန်
+      remove: ဖယ်ရှားရန်
+      import: တင်သွင်းရန်
+      export: တင်ပို့ရန်
+      refresh: ပြန်လည်ဆန်းသစ်ရန်
+      continue: ဆက်လက်
+      next: ရှေ့
+      previous: ယခင်က
+      submit: ထည့်သွင်းရန်
+      change: ပြောင်းလဲရန်
+      show: ပြသရန်
+    messages:
+      warning: သတိပေးချက်
+      welcome: ကြိုဆိုပါသည်
+      version: ဗားရှင်းများ
+      enable: လုပ်ခွင့်ပြုရန်
+      disable: ခွင့်မပြုပါနှင့်
+      checked: စစ်ဆေးပြီး
+      on_msg: ဖွင့်
+      off_msg: ပိတ်
+      disconnected: မချိတ်ဆက်တော့ပါ
+      password: စကားဝှက်
+      online: အွန်လိုင်း
+      error: အမှား
+      stable: တည်ငြိမ်သော
+  portal:
+    side-menu:
+      system: စနစ်
+      sensors: အာရုံခံများ
+      camera: ကင်မရာ
+      monitoring: စောင့်ကြည့်ခြင်း
+      devices: စက်ပစ္စည်း
+    system-page:
+      subheader: စနစ် အချက်အလက်
+      temperature: အပူချိန်
+      cpu: စီပီယူ
+      storage: သိုလှောင်ခန်း
+    sensors-page:
+      header: အာရုံခံ တိုင်းတာမှုများ
+      direction: ဦးတည်ရာ (ဒီဂရီ)
+      acceleration: အရှိန် (x, y, z)
+    camera-page:
+      header: ကင်မရာ
+      media-library-header: မီဒီယာ စာကြည့်တိုက်
+    monitoring-page:
+      subheader: စောင့်ကြည့်ခြင်း
+      popups:
+        device: စက်ပစ္စည်း
+        devices: စက်ပစ္စည်းများ
+        administrator: အက်ဒမင်
+        description: ဖော်ပြချက်
+        latitude: လတ္တီကျု
+        longitude: လောင်ဂျီကျု
+        system_info: စနစ် သတင်းအချက်အလက်
+        cpu_temp: စီပီယူ အပူချိန်
+        wifi-users: ဝိုင်ဖိုင် အသုံးပြုသူများ
+  admin:
+    top-menu:
+      admin: အက်ဒမင်
+      portal: ပေါ်တယ်
+      set-date: ရက်စွဲ သတ်မှတ်ရန်
+      username: အသုံးပြုသူအမည်
+      password: စကားဝှက်
+      settings: အပြင်အဆင်များ
+    side-menu:
+      dashboard: လုပ်ဆောင်ချက်များ ပြသသည့်နေရာ
+      appearance: ပုံပန်းသွင်ပြင်
+      devices: စက်ပစ္စည်းများ
+      monitoring: စောင့်ကြည့်ခြင်း
+      notifications: အသိပေးချက်များ
+      export-import: တင်ထုတ်/တင်သွင်း
+      logs: မှတ်​တမ်း​များ​
+      documentation: မှတ်တမ်းမှတ်ရာများ
+    updates:
+      subheader: မွမ်းမံ
+    setup-page:
+      last-step-header: ပြီးဆုံးသည်
+    dashboard-page:
+      subheader: လုပ်ဆောင်ချက်များ ပြသသည့်နေရာ
+      hardware-info:
+        system-temperature: စနစ် အပူချိန်
+      notifications:
+        header: အသိပေးချက်များ
+    applications-page:
+      instances-menu:
+        name-column: အမည်
+        description-column: ဖော်ပြချက်
+        actions-column: ဆောင်ရွက်ချက်များ
+      applications-menu:
+        status-column: အခြေအနေ
+        icon-column: အိုင်ကွန်
+        color-column: အရောင်
+        description-column: ဖော်ပြချက်
+        actions-column: လုပ်ဆောင်ချက်များ
+    network-page:
+      connect-wifi-panel:
+        wifi-network-hint-1: ဝိုင်ဖိုင် ကွန်ရက်များမှ
+        wifi-network-hint-2: ဝိုင်ဖိုင် အင်တာနက်ကွန်ရက်
+      popups:
+        edit-wifi-network-header: ဝိုင်ဖိုင်ကွန်ရက် အပြင်အဆင်များကို ပြင်ဆင်ရန်
+        change-password-header: စကားဝှက် ပြောင်းရန်
+        connect-wifi-header: ဝိုင်ဖိုင်ကွန်ရက်သို့ ချိတ်ဆက်ရန်
+        select-wifi-label: ဝိုင်ဖိုင်အမည် ရွေးချယ်ပါ
+    appearance-page:
+      subheader: ပုံပန်းသွင်ပြင်
+      theme-panel:
+        portal-title-label: ပေါ်တယ် ခေါင်းစဉ်
+        home-page-label: ဗဟိုစာမျက်နှာ ခေါင်းစဉ်
+        home-subtitle-label: ဗဟိုစာမျက်နှာ ခေါင်းစဉ်ခွဲ
+        colors-label: အရောင်များ
+      popups:
+        edit-title-header: ခေါင်းစဉ် ပြင်ဆင်ရန်
+    devices-page:
+      subheader: စက်ပစ္စည်းများ
+      sensors-panel:
+        header: အာရုံခံများ
+        sensors-table:
+          type: အမျိုးအစား
+          status: အခြေအနေ
+          actions: ဆောင်ရွက်ချက်များ
+      camera-panel:
+        header: ကင်မရာ
+      popups:
+        start-images-label1: ကြာမြင့်ချိန် (စက္ကန့်)
+        delete-images-title: ဓာတ်ပုံအားလုံး ဖျက်ပစ်ရန်
+        delete-images-message: ဖမ်းယူထားသော ဓာတ်ပုံအားလုံး ဖျက်ပစ်ရန်?
+        delete-videos-title: ဗီဒီယိုအားလုံးကို ဖျက်ပစ်ရန်
+    monitoring-page:
+      subheader: စောင့်ကြည့်ခြင်း
+      details-panel:
+        header: အသေးစိတ်များ
+        table-label2: အက်ဒမင်
+        table-label3: ခေါင်းစဉ်
+        table-label4: ဖော်ပြချက်
+        table-label5: တည်နေရာ (လတ္တီ၊ လောင်ဂျီ)
+      statistics-panel:
+        statistics-table:
+          status: အခြေအနေ
+          description: ဖော်ပြချက်
+          action: ဆောင်ရွက်ချက်
+      popups:
+        change-details-label2: အက်ဒမင်
+        change-details-label3: ခေါင်းစဉ်
+        change-details-label4: ဖော်ပြချက်
+        change-details-label5: တည်နေရာ (လတ္တီ၊ လောင်ဂျီ)
+        hardware-label2: အပူချိန်
+        hardware-label3: ဝိုင်ဖိုင် အသုံးပြုသူများ
+    notifications-page:
+      subheader: အသိပေးချက်များ
+      notifications-table:
+        header1: အခြေအနေ
+        header2: ခေါင်းစဉ်
+        header3: စာကိုယ်
+        header4: ဆောင်ရွက်ချက်များ
+      popups:
+        create-notification-title: အသိပေးချက်အသစ် ဖန်တီးရန်
+        edit-notification-title: အသိပေးချက် ပြင်ဆင်ရန်
+    logs-page:
+      portal-log-panel:
+        filter-label1: အမှား မက်ဆေ့များ
+        filter-label2: သတိပေး မက်ဆေ့များ
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: ဖော်ပြချက်
+      etherpad-tab:
+        subheader1: ဖော်ပြချက်
+        subheader2: အက်ဒမင် လမ်းညွန်
+        paragraph5: နမူနာအားဖြင့်
+      nextcloud-tab:
+        subheader1: ဖော်ပြချက်
+        subheader2: အက်ဒမင် လမ်းညွန်
+        paragraph10: အီးမေး လိပ်စာ
+        paragraph12: သင်၏ စကားဝှက်ကို စီမံပါ
+      guestbook-tab:
+        subheader1: ဖော်ပြချက်
+        subheader2: အက်ဒမင် လမ်းညွန်
+        subheader3: အက်ဒမင် စကားဝှက်
+      wordpress-tab:
+        subheader1: ဖော်ပြချက်
+        subheader2: အက်ဒမင် လမ်းညွန်
+      framadate-tab:
+        subheader1: ဖော်ပြချက်
+    settings-page:
+      subheader: အပြင်အဆင်များ
+      panel-header: စနစ် အပြင်အဆင်များ
+      time-date:
+        header: အချိန်/ရက်စွဲ
+      popups:
+        change-time-date-title: အချိန်/ရက်စွဲ ပြောင်းလဲရန်
+...

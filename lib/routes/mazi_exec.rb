@@ -80,6 +80,12 @@ module Sinatra
                 session['error'] = "This portal runs on Demo mode! This action would have changed the Portal's Domain."
                 redirect '/admin_network'
               end
+              vdom_msg = verify_domain(params['domain'])
+              unless vdom_msg.nil?
+                MaziLogger.debug "Domain #{params['domain']} is invalid! Message: #{vdom_msg}"
+                session['error'] = "Domain #{params['domain']} is invalid! The domain must '#{vdom_msg}'"
+                redirect '/admin_network'
+              end
               args << "-d #{params['domain']}" unless params['domain'].nil? || params['domain'].empty?
             when 'mazi-mesh.sh'
               args = []

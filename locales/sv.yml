@@ -59,12 +59,13 @@ sv:
       channel: Kanal
       password: Lösenord
       offline: offline
-      dual: dubbel
+      online: ansluten
       restricted: begränsad
       managed: hanterad
       active: aktiv
       inactive: inaktiv
       error: fel
+      development: Utveckling
   portal:
     top-menu:
       documentation: Dokumentation
@@ -170,7 +171,11 @@ sv:
       logs: Loggar
       documentation: Dokumentation
     updates:
+      subheader: Uppdatera
       checking-updates: Söker efter uppdateringar. Var god vänta...
+      update-message-0: Välj din uppdateringskanal
+      update-message-1: Det finns ingen fungerande Internetanslutning. Anslut denna
+        MAZI Zone till Internet och försök igen.
       update-message-3: Portalen är uppdaterad, den behöver inte uppdateras.
       update-message-4: Systemet uppdateras. Var god vänta...
     setup-page:
@@ -202,9 +207,10 @@ sv:
         header: Aviseringar
         notifications: Aktiva portalaviseringar
       time-date:
+        header: Tid/datum för MAZI Zone
         current: Nuvarande tid och datum
       version:
-        version-message-1: Denna portal är
+        header: Version av MAZI Zone
         up-to-date: Uppdaterad
     applications-page:
       subheader: Applikationer
@@ -241,9 +247,9 @@ sv:
         url-column: Webbadress
         url-hint: Applikationens webbadress
         description-column: Beskrivning
-        description-hint: beskrivningen som kommer visas i applikationens ruta på
-          portalen
+        description-hint: applikationens standardbeskrivning
         actions-column: Åtgärder
+        actions-hint: åtgärder som kan utföras på applikationen
         web-app-info-hint: Att starta eller stoppa den här applikationen kommer inte
           påverka MAZI-zonens prestanda.
         web-app-start-hint: Detta är en webbapplikation, den kommer köras hela tiden.
@@ -391,10 +397,6 @@ sv:
           databasen. Vill du fortsätta?
     import-export-page:
       subheader: Ögonblicksbilder
-      message: Du kan använda verktygen nedan för att ta ögonblicksbilder av nuvarande
-        konfiguration av denna MAZI Zone. Detta inkluderar allting (nätverkskonfigurationer,
-        applikationer, applikationsinstanser, aviseringar, visuella konfigurationer,
-        etc).
       warning: 'Varning: Om du läser in en ny ögonblicksbild med andra WiFi-nätverksinställningar
         kommer din trådlösa anslutning till denna MAZI Zone förloras och du måste
         återansluta till det nya WiFi-nätverket.'

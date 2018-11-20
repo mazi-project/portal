@@ -1,4 +1,4 @@
-VERSION = '2.5.6'
+VERSION = '2.6.0'
 
 class ConfigCaller
   include MaziConfig
@@ -142,6 +142,14 @@ module MaziVersion
     response = true
     File.readlines("/etc/rc.local").each do |line|
       response = false if line.include? '/sbin/ifconfig wlan0 10.0.0.1'
+    end
+    response
+  end
+
+  def self.rc_local_updated_4?
+    response = false
+    File.readlines("/etc/rc.local").each do |line|
+      response = true if line.include? 'if [ "$(bash /root/back-end/mazi-current.sh -n)" = "error" ];then'
     end
     response
   end
@@ -526,6 +534,37 @@ module MaziVersion
       end
       File.open('/etc/dnsmasq.conf', "w") {|file| file.puts lines }
       `service dnsmasq restart`
+      MaziLogger.debug "done."
+    end
+
+    MaziLogger.debug "  Checking updates for version 2.6.0"
+    unless rc_local_updated_4?
+      MaziLogger.debug "rc.local older version found. Updating."
+      lines = ''
+      File.readlines("/etc/rc.local").each do |line|
+        if line.include? 'bash /root/back-end/mazi-internet.sh -m $(jq -r .mode /etc/mazi/mazi.conf)'
+          lines += "if [ \"$(bash /root/back-end/mazi-current.sh -n)\" = \"error\" ];then\n"
+          lines += "  bash /root/back-end/mazi-internet.sh -m offline\n"
+          lines += "else\n"
+          lines += "  bash /root/back-end/mazi-internet.sh -m $(jq -r .mode /etc/mazi/mazi.conf)\n"
+          lines += "fi\n"
+        else
+          lines << line
+        end
+      end
+      File.open('/etc/rc.local', "w") {|file| file.puts lines }
+
+      lines = ''
+      File.readlines('/etc/apache2/sites-available/portal.conf').each do |line|
+        if line.include? 'ProxyPass / http://localhost:4567/'
+          lines += "        ProxyPass / http://localhost:4567/ connectiontimeout=10000 timeout=10000\n"
+        else
+          lines += line
+        end
+      end
+      File.open('/etc/apache2/sites-available/portal.conf', "w") {|file| file.puts lines }
+      `systemctl daemon-reload`
+      `service apache2 restart`
       MaziLogger.debug "done."
     end
 

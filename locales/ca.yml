@@ -1,0 +1,299 @@
+# Messages for Catalan (català)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Fitoschido
+---
+ca:
+  general:
+    buttons:
+      edit: Edita
+      cancel: Cancel·la
+      ok: D’acord
+      close: Tanca
+      create: Crea
+      delete: Suprimeix
+      start: Inicia
+      stop: Atura
+      save: Desa els canvis
+      choose: Tria
+      reboot: Reinicia
+      reset: Reinicialitza
+      shutdown: Apaga
+      logout: Finalitza la sessió
+      update: Actualitza
+      connect: Connecta
+      disconnect: Desconnecta
+      toggle-device: Canvia de dispositiu
+      initialize: Inicialitza
+      remove: Treu
+      load: Carrega
+      import: Importa
+      export: Exporta
+      refresh: Actualitza
+      continue: Continua
+      next: Següent
+      previous: Anterior
+      submit: Envia
+      change: Canvia
+      qrcode: Codi QR
+      show: Mostra
+      configure: Configura
+    messages:
+      warning: Advertiment
+      welcome: Us donem la benvinguda
+      version: Versió
+      enable: habilita
+      disable: inhabilita
+      off_msg: ⭘
+      disconnected: Desconnectat
+      ssid: SSID
+      channel: Canal
+      password: Contrasenya
+      stable: Estable
+      development: Desenvolupament
+  portal:
+    top-menu:
+      documentation: Documentació
+    side-menu:
+      applications: Aplicacions
+      system: Sistema
+      sensors: Sensors
+      camera: Càmera
+      monitoring: Monitoratge
+      devices: Dispositius
+    system-page:
+      subheader: Informació del sistema
+      users: Usuaris en línia
+      temperature: Temperatura
+      cpu: CPU
+      ram: RAM
+      storage: Emmagatzematge
+    sensors-page:
+      header: Mesures dels sensors
+      header-message: En aquesta pàgina trobareu les mesures dels diversos sensors
+        connectats a aquesta zona MAZI. També podeu fer servir el botó a sota per
+        a sol·licitar les mesures d’un període determinat.
+      direction: Direcció (graus)
+      acceleration: Acceleració (x, y, z)
+    camera-page:
+      header: Càmera
+      subheader: En aquesta pàgina trobareu les fotos i els vídeos que ha capturat
+        la càmera connectada a aquesta zona MAZI.
+      no-camera-warn: En aquest moment, no hi ha cap càmera instal·lada adequadament
+        en aquesta zona MAZI.
+      media-library-header: Mediateca
+      no-media-warn: La mediateca no conté actualment cap imatge o vídeo.
+    monitoring-page:
+      subheader: Monitoratge
+      popups:
+        device: Dispositiu
+        devices: Dispositius
+        deployment: Desplegament
+        administrator: Administrador
+        description: Descripció
+        latitude: Latitud
+        longitude: Longitud
+        system_info: Informació del sistema
+        cpu_temp: Temperatura de la CPU
+        cpu_load: Càrrega de la CPU
+        ram_load: Càrrega de la RAM
+        storage_use: Càrrega de l’emmagatzematge
+  admin:
+    general:
+      admin-panel: El tauler d’administració de la zona MAZI
+      shutdown-modal-title: Voleu apagar-la?
+      shutdown-modal-message: Aquesta zona MAZI s’apagarà ara. Açò farà que el lloc
+        sigui inaccessible i haureu de reiniciar la zona manualment. Voleu continuar?
+      reboot-modal-title: Voleu reiniciar-la?
+      reboot-modal-message: Aquesta zona MAZI es reiniciarà ara. Açò farà que el lloc
+        sigui inaccessible durant uns minuts. Espereu i, tot seguit, actualitzeu aquesta
+        pàgina. Voleu continuar?
+    top-menu:
+      header: Tauler d’administració de zones MAZI
+      username: Nom d’usuari
+      password: Contrasenya
+      mysql-password: Contrasenya del MySQL
+      check-updates: Comprova si hi ha actualitzacions
+      settings: Paràmetres
+    side-menu:
+      dashboard: Tauler de control
+      applications: Aplicacions
+      networking: Treball en xarxa
+      appearance: Aparença
+      devices: Dispositius
+      monitoring: Monitoratge
+      notifications: Notificacions
+      export-import: Importació/exportació
+      logs: Registres
+      documentation: Documentació
+    updates:
+      subheader: Actualitza
+      checking-updates: S’està comprovant si hi ha actualitzacions. Espereu…
+      update-message-0: Trieu el vostre canal d’actualitzacions
+      update-message-4: S’està actualitzant el sistema. Espereu…
+    setup-page:
+      fourth-step-header: Detalls de la zona MAZI
+      fourth-step-message: Utilitzeu aquest formulari per a modificar els detalls
+        de la vostra zona MAZI
+    dashboard-page:
+      subheader: Tauler de control
+      hardware-info:
+        header: Informació de maquinari de la zona MAZI
+        system-temperature: Temperatura del sistema
+        cpu-load: Càrrega de la CPU
+        ram-load: Càrrega de la RAM
+        storage-load: Càrrega de l’emmagatzematge
+      networking:
+        header: Treball en xarxa
+        users-online: Usuaris en línia ara
+      applications:
+        header: Aplicacions
+        applications-installed: Aplicacions instal·lades
+      traffic:
+        header: Trànsit
+      notifications:
+        header: Notificacions
+    applications-page:
+      instances-menu:
+        name-column: Nom
+        name-hint: el nom de l’aplicació
+        url-column: URL
+        url-hint: l’URL de l’aplicació
+        description-column: Descripció
+        actions-column: Accions
+        actions-hint: les accions que poden fer-se amb l’aplicació
+      applications-menu:
+        header: Aplicacions instal·lades
+        status-column: Estat
+        status-hint: l’estat d’operacions (en execució/aturada)
+        icon-column: Icona
+        icon-hint: la icona per defecte de l’aplicació
+        color-column: Color
+        color-hint: el color per defecte de l’aplicació
+        name-column: Nom de l’aplicació
+        name-hint: el nom de l’aplicació
+        url-column: URL
+        url-hint: l’URL de l’aplicació
+        description-column: Descripció
+        description-hint: la descripció per defecte de l’aplicació
+        actions-column: Accions
+        actions-hint: les accions que poden fer-se amb l’aplicació
+        web-app-start-hint: 'Aquesta és una aplicació web: s’executa sempre.'
+        app-start-hint: Inicia l’aplicació
+        app-stop-hint: Atura l’aplicació
+      popups:
+        web-app-info-title: Aplicació web
+    network-page:
+      subheader: Paràmetres de la xarxa
+    appearance-page:
+      subheader: Aparença
+      theme-panel:
+        colors-label: Colors
+      popups:
+        edit-theme-header: Modifica el tema
+        edit-title-header: Modifica el títol
+        edit-home-title-header: Modifica el títol de la pàgina inicial
+        edit-home-subtitle-header: Modifica el subtítol de la pàgina inicial
+        edit-welcome-message-header: Modifica el missatge de benvinguda
+        edit-background-image-header: Modifica la imatge de fons
+        reset-theme-header: Reinicialitza el tema
+        reset-theme-message: Aquesta acció reinicialitzarà tots els paràmetres visuals
+          als seus valors per defecte.
+        load-theme-header: Carrega un tema
+        save-theme-header: Desa el tema
+        save-theme-message: Introduïu el nom del tema nou.
+    devices-page:
+      subheader: Dispositius
+      sensors-panel:
+        sensors-table:
+          type: Tipus
+          status: Estat
+          actions: Accions
+      camera-panel:
+        header: Càmera
+        no-camera-message: No hi ha cap càmera connectada a aquesta zona MAZI.
+      popups:
+        start-sensing-label2: Durada (segons)
+        start-sensing-label3: Calendari (hora/data de finalització)
+        start-sensing-label4: Interval (segons)
+        start-images-label1: Durada (segons)
+        start-images-label2: Interval (segons)
+        delete-images-title: Suprimeix totes les fotos
+        delete-images-message: Voleu suprimir totes les fotos que s’han fet?
+        start-videos-label1: Durada (segons)
+        delete-videos-title: Suprimeix tots els vídeos
+        delete-videos-message: Voleu suprimir tots els vídeos que s’han enregistrat?
+    monitoring-page:
+      subheader: Monitoratge
+      details-panel:
+        header: Detalls
+        table-label3: Títol
+        table-label4: Descripció
+      statistics-panel:
+        header: Dades de monitoratge
+        statistics-table:
+          status: Estat
+          description: Descripció
+          action: Acció
+          hardware-description-message: Monitoratge de l’activitat del sistema.
+          application-description-message: Monitoratge de les dades de les aplicacions.
+      popups:
+        change-details-label3: Títol
+        change-details-label4: Descripció
+        hardware-label2: Temperatura
+        hardware-label4: Càrrega de la CPU
+        hardware-label5: Càrrega de la RAM
+        hardware-label6: Càrrega de l’emmagatzematge
+    notifications-page:
+      subheader: Notificacions
+      notifications-table:
+        header1: Estat
+        header2: Títol
+        header3: Cos
+        header4: Accions
+      popups:
+        create-notification-title: Crea una notificació nova
+        edit-notification-title: Modifica la notificació
+        delete-notification-message: Se suprimirà aquesta notificació permanentment
+          de la base de dades. Voleu continuar?
+    logs-page:
+      portal-log-panel:
+        filter-label1: Missatges d’error
+        filter-label3: Missatges de depuració
+    documentation-page:
+      header: Documentació administrativa
+      initial-configuration-tab:
+        header: Paràmetres inicials
+        subheader1: Descripció
+        subheader3: Paràmetres del Raspbian
+      etherpad-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+        paragraph5: Per exemple,
+      nextcloud-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+        paragraph3: Per a accedir als paràmetres personals
+        paragraph10: Adreça electrònica
+        paragraph14: Enllaços a les aplicacions d’escriptori i per a mòbils
+      guestbook-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+      wordpress-tab:
+        subheader1: Descripció
+        subheader2: Guia d’administració
+      framadate-tab:
+        subheader1: Descripció
+        paragraph2: Així és com funciona
+    settings-page:
+      subheader: Paràmetres
+      panel-header: Paràmetres del sistema
+      time-date:
+        header: Data i hora
+      mysql-password:
+        header: Contrasenya del MySQL
+      apache-filesize:
+        header: Mida màxima de fitxer de l’Apache
+      popups:
+        change-time-date-title: Canvia la data o l’hora
+...

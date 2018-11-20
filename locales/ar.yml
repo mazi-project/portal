@@ -1,0 +1,784 @@
+# Messages for Arabic (العربية)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Meno25
+# Author: ديفيد
+# Author: محمد أحمد عبد الفتاح
+---
+ar:
+  general:
+    buttons:
+      edit: تعديل
+      cancel: إلغاء
+      ok: حسنا
+      close: إغلاق
+      create: إنشاء
+      delete: حذف
+      start: بداية
+      stop: إيقاف
+      save: حفظ التغييرات
+      choose: اختر
+      choose-timeslot: اختر موعدا زمنيا
+      export-to-csv: تصدير إلى ملف CSV
+      expand: وسع
+      expand-storage: توسيع التخزين
+      reboot: إعادة التشغيل
+      reset: إعادة ضبط
+      shutdown: إغلاق
+      logout: تسجيل الخروج
+      update: تحديث
+      connect: اتصال
+      disconnect: قطع الاتصال
+      toggle-device: تبديل الجهاز
+      initialize: تهيئة
+      remove: إزالة
+      load: تحميل
+      import: استيراد
+      export: تصدير
+      refresh: تحديث
+      continue: استمرار
+      next: التالي
+      previous: السابق
+      submit: إرسال
+      change: تغيير
+      qrcode: رمز الاستجابة السريعة
+      show: عرض
+      configure: تهيئة
+    messages:
+      warning: تحذير
+      welcome: مرحبا
+      version: الإصدار
+      enable: تمكين
+      disable: تعطيل
+      checked: مفحوص
+      on_msg: تشغيل
+      off_msg: إيقاف
+      disconnected: انقطع الاتصال
+      here: هنا
+      ssid: معرف مجموعه الخدمات
+      channel: القناة
+      password: كلمة السر
+      offline: غير متصل
+      online: على الإنترنت
+      restricted: مقيد
+      managed: إدارة
+      active: نشط
+      inactive: غير نشط
+      error: خطأ
+      stable: مستقرة
+      development: التطوير
+  portal:
+    top-menu:
+      documentation: التوثيق
+    side-menu:
+      applications: تطبيقات
+      system: النظام
+      sensors: أجهزة الاستشعار
+      camera: كاميرا
+      monitoring: مراقبة
+      devices: الأجهزة
+    system-page:
+      subheader: معلومات النظام
+      users: المستخدمون على الإنترنت
+      app-clicks: نقرات التطبيق
+      temperature: درجة الحرارة
+      cpu: وحدة المعالجة المركزية
+      ram: ذاكرة الوصول العشوائي
+      storage: التخزين
+    sensors-page:
+      header: قياسات الاستشعار
+      header-message: في هذه الصفحة، يمكنك رؤية قياسات مختلف المستشعرات المتصلة بمنطقة
+        MAZI هذه، يمكنك أيضا استخدام الزر أدناه لطلب القياسات من فترة محددة.
+      temperature-for: درجة الحرارة من %{sensor}
+      metrics-for: مقاييس الاتجاه والتسريع والجيروسكوب من %{sensor}
+      humidity-for: الرطوبة من %{sensor}
+      pressure-for: الضغط من %{sensor}
+      no-sensors-warn: تحذير:إما أنه لا توجد قياسات في قاعدة البيانات أو أن جهاز الاستشعار
+        غير متصل بمنطقة MAZI.
+      no-sensor-data-warn: 'تحذير: لا توجد بيانات مستشعر مخزنة في منطقة MAZI هذه،
+        يمكن لإداري نظام تمكين جمع بيانات المستشعر.'
+      choose-timeslot-message: يُرجَى استخدام النموذج أدناه لتحديد توقيت.
+      direction: الاتجاه (درجات)
+      acceleration: التسارع (س، ص، ع)
+      gyroscope: الجيروسكوب (حدة، ياو، لفة)
+      sensors-hint: تجب معايرة Sensehat من أجل رؤية القيم الصحيحة، يُرجَى التحقق من
+        لوحة الادارة لمزيد من التفاصيل.
+    camera-page:
+      header: كاميرا
+      subheader: في هذه الصفحة ، يمكنك مشاهدة الصور ومقاطع الفيديو الملتقطة بواسطة
+        الكاميرا المتصلة بمنطقة MAZI هذه.
+      live-stream-header: لقطات فيديو حية
+      no-camera-warn: حاليا ، لا توجد كاميرا مثبتة بشكل صحيح على منطقة MAZI هذه!
+      media-library-header: مكتبة الوسائط
+      no-media-warn: في الوقت الحالي، لا توجد صور أو مقاطع فيديو في المكتبة!
+    monitoring-page:
+      subheader: مراقبة
+      header-message: في هذه الصفحة يمكنك رؤية قياسات مختلف قياسات المراقبة لهذه أو/وغيرها
+        من مناطق MAZI.
+      popups:
+        device: جهاز
+        devices: الأجهزة
+        deployment: نشر
+        administrator: إداري
+        description: الوصف
+        latitude: دائرة العرض
+        longitude: خط الطول
+        system_info: معلومات النظام
+        cpu_temp: درجة حرارة وحدة المعالجة المركزية
+        cpu_load: تحميل وحدة المعالجة المركزية
+        ram_load: تحميل ذاكرة الوصول العشوائي
+        wifi-users: مستخدمو الواي فاي
+        storage_use: تحميل التخزين
+        etherpad-pads: منصات إيثرباد
+        etherpad-users: مستخدمو إيثرباد
+        etherpad-datasize: حجم بيانات إيثرباد
+        etherpad-clicks: نقرات إيثرباد
+        guestbook-submissions: رسائل الزوار
+        guestbook-comments: تعليقات الزوار
+        guestbook-images: صور الزوار
+        guestbook-datasize: حجم بيانات الزوار
+        guestbook-clicks: نقرات الزوار
+        framadate-polls: استطلاعات Framadate
+        framadate-votes: أصوات Framadate
+        framadate-comments: تعليقات Framadate
+        framadate-clicks: نقرات Framadate
+        nextcloud-users: مستخدمو السحابة القادمة
+        nextcloud-files: ملفات السحابة القادمة
+        nextcloud-downloads: تنزيلات السحابة القادمة
+        nextcloud-datasize: حجم بيانات السحابة القادمة
+        nextcloud-clicks: نقرات السحابة القادمة
+  admin:
+    general:
+      admin-panel: لوحة إدارة منطقة MAZI
+      shutdown-modal-title: إغلاق؟
+      shutdown-modal-message: ستقوم الآن منطقة MAZI بإيقاف التشغيل، وهذا سيتسبب في
+        عدم إمكانية الوصول إلى هذا الموقع وستحتاج إلى إعادة تشغيل منطقة MAZI يدويا،
+        تقدم؟
+      reboot-modal-title: إعادة التشغيل؟
+      reboot-modal-message: ستقوم الآن منطقة MAZI بإعادة التشغيل، سيؤدي هذا إلى عدم
+        إمكانية الوصول إلى هذا الموقع لبضع دقائق، الرجاء الانتظار وتحديث هذه الصفحة
+        بعد بضع دقائق، تقدم؟
+    top-menu:
+      header: لوحة إدارة منطقة MAZI
+      admin: إداري
+      portal: بوابة
+      set-date: ضبط التاريخ
+      username: اسم المستخدم
+      password: كلمة السر
+      mysql-password: كلمة سر MySQL
+      check-updates: التحقق من التحديثات
+      settings: إعدادات
+    side-menu:
+      dashboard: لوحة البيانات
+      applications: تطبيقات
+      networking: الشبكات
+      appearance: المظهر
+      devices: الأجهزة
+      monitoring: مراقبة
+      notifications: إخطارات
+      export-import: استيراد/تصدير
+      logs: سجلات
+      documentation: التوثيق
+    updates:
+      subheader: تحديث
+      checking-updates: جارٍ البحث عن تحديثات، الرجاء الإنتظار...
+      alert-message-1: تم تحرير مستودع التخزين المحلي الخاص بك، هذا يؤدي إلى تعطل
+        وظيفة التحديث، تُرجَى إعادة هذه التغييرات في المخزن المحلي ، باستخدام %{command}
+        للملفات المحررة.
+      update-message-0: يُرجَى اختيار قناة التحديث الخاصة بك
+      update-message-1: لا يوجد اتصال نشط بالإنترنت; يرجى توصيل منطقة MAZI هذه بالإنترنت
+        وحاول مرة أخرى.
+      update-message-2: هذه البوابة تعمل في الوضع التجريبي! كان من المفترض أن يكون
+        هذا الإجراء قد بدأ عملية تحديث.
+      update-message-3: البوابة محدثة; ليست هناك حاجة للتحديث.
+      update-message-4: جارٍ تحديث النظام، الرجاء الإنتظار...
+      update-message-5: اكتملت عملية التحديث تقريبا، ستتم إعادة تشغيل منطقة MAZI الخاصة
+        بك لتثبيت تبعيات مفقودة، بمجرد رؤية شبكة واي فاي مرة أخرى، تكون جاهزًا للاتصال
+        بمنطقة MAZI المحدثة الخاصة بك.
+      update-message-6: هناك تحديث متاح، يُرجَى استخدام الزر أدناه لبدء عملية التحديث.
+      update-hint: 'تلميح: إذا واجهت سلوكا خاطئا، أعد تشغيل جهازك.'
+      update-chan-hint: 'تلميح: قد تكون أحدث نسخة من قناة التطوير غير مستقرة، لا يُنصَح
+        بتغيير قناة التحديث ذهابا وإيابا; نظرا لأنها قد تسبب سلوكا غير متوقع، يُرجَى
+        إبلاغ تفاصيل الإصدار %{link} لتحديد قناة التحديث الخاصة بك'
+      update-chan-warn: 'تحذير: سيؤدي التغيير في قناة أخرى إلى إعادة تشغيل الجهاز.'
+    setup-page:
+      tog-nav: تبديل التصفح
+      setup-panel: لوحة إعداد منطقة MAZI
+      first-step-header: إعداد كلمة مرور إداري
+      first-step-message: استخدم النموذج أدناه تعيين كلمة مرور الإداري للوحة إدارة
+        منطقة MAZI.
+      first-step-hint: 'تلميح: إذا كانت هذه منطقة MAZI جديدة، فإن كلمة المرور الحالية
+        هي 1234'
+      second-step-header: إعداد التاريخ/الوقت
+      second-step-message: يُرجَى استخدام النموذج أدناه لتغيير التاريخ/الوقت، وكذلك
+        المنطقة الزمنية لمنطقة MAZI.
+      third-step-header: إعداد واجهة لاسلكية
+      third-step-message: يُرجَى استخدام النموذج أدناه لتغيير اسم شبكة واي فاي (اختياري).
+      third-step-warning: 'تحذير: إذا قمت بتغيير اسم شبكة واي فاي الخاصة بك، فسيتم
+        فقد اتصالك اللاسلكي بمنطقة MAZI وستحتاج إلى إعادة الاتصال بشبكة الواي فاي
+        الجديدة.'
+      fourth-step-header: تفاصيل منطقة MAZI
+      fourth-step-message: يُرجَى استخدام النموذج أدناه لتغيير تفاصيل منطقة MAZI الخاصة
+        بك
+      fourth-step-warning: 'تلميح: يمكنك استخدام خرائط جوجل للعثور على موقعك (خط الطول،
+        دائرة العرض) بالنقر بزر الفأرة الأيمن فوق -> ماذا هنا، ثم استخدم الإحداثيات
+        من الصندوق الذي يظهر في أسفل الشاشة (مثل 39.379012, 22.902813)'
+      last-step-header: كامل
+      last-step-message: لقد أكملت بنجاح جميع خطوات الإعداد. الرجاء النقر فوق الزر
+        إرسال لحفظ التغييرات.
+    dashboard-page:
+      subheader: لوحة البيانات
+      welcome:
+        message-1: '%{panel} هي الأداة الرئيسية المستخدمة لإدارة مدخل منطقة MAZI،
+          بالإضافة إلى جانب الشبكات في منطقة MAZI.'
+        message-2: 'يُرجَى استخدام القائمة للتنقل إلى الأدوات المختلفة ، والتي يمكنها:'
+        message-list-1: إدارة التطبيقات المدعومة
+        message-list-2: تكوين شبكة منطقة MAZI
+        message-list-3: تكوين التمثيل المرئي للبوابة
+        message-list-4: إضافة/إزالة الإخطارات على البوابة
+        message-list-5: تصدير/استيراد اللقطات
+      hardware-info:
+        header: معلومات أجهزة منطقة MAZI
+        system-temperature: درجة حرارة النظام
+        cpu-load: تحميل وحدة المعالجة المركزية
+        ram-load: تحميل ذاكرة الوصول العشوائي
+        storage-load: تحميل التخزين
+      networking:
+        header: الشبكات
+        users-online: مستخدمو الإنترنت الآن
+        wifi-info: معلومات شبكة واي فاي
+      applications:
+        header: تطبيقات
+        applications-installed: التطبيقات المثبتة
+      traffic:
+        header: حركة المرور
+        reset-application-clicks: إعادة تعيين نقرات التطبيق
+        reset-visits: إعادة تعيين الزيارات
+        portal-visits: الزيارات الشاملة للبوابة
+        application-visits: زيارات التطبيق
+      notifications:
+        header: إشعارات
+        notifications: إخطارات البوابة نشيطة
+      time-date:
+        header: وقت/تاريخ منطقة MAZI
+        current: التاريخ/الوقت الحالي
+      version:
+        header: نسخة منطقة MAZI
+        version-message: هذه البوابة هي '%{nof_commits} commits' خلفها.
+        up-to-date: حتى الآن
+      popups:
+        expand-storage-message: يمكنك توسيع مساحة تخزين MAZI إلى السعة القصوى لبطاقة
+          SD الخاصة بك باستخدام الزر أدناه، ستحتاج إلى إعادة تشغيل الجهاز ليصبح ساري
+          المفعول.
+    applications-page:
+      subheader: تطبيقات
+      instances-menu:
+        header: مثيلات التطبيق
+        active-column: نشط
+        active-hint: تبديل رؤية التطبيق على البوابة
+        splash-page-column: صفحة البداية
+        splash-page-hint: استخدام هذا التطبيق كصفحة البداية للبوابة
+        name-column: الاسم
+        name-hint: اسم التطبيق
+        url-column: المسار
+        url-hint: مسار التطبيق
+        description-column: الوصف
+        description-hint: الوصف الذي سيعرض على أيقونة التطبيق في البوابة
+        parent-column: والد التطبيق
+        parent-hint: التطبيق الأم
+        click-column: عداد النقر
+        click-hint: النقرات العامة للتطبيق
+        actions-column: أفعال
+        actions-hint: الإجراءات التي يمكن تنفيذها على التطبيق
+        guestbook-admin-hint: لوحة الإدارة في دفتر الزوار
+        delete-instance-hint: حذف مثيل التطبيق
+        create-instance-hint: إنشاء مثيل تطبيق جديد
+        edit-instance-hint: تحرير مثيل التطبيق
+      applications-menu:
+        header: التطبيقات المثبتة
+        status-column: الحالة
+        status-hint: حالة التشغيل (تشغيل/توقف)
+        icon-column: الأيقونة
+        icon-hint: الأيقونة الافتراضية للتطبيق
+        color-column: اللون
+        color-hint: اللون الافتراضي للتطبيق
+        name-column: اسم التطبيق
+        name-hint: اسم التطبيق
+        url-column: المسار
+        url-hint: مسار التطبيق
+        description-column: الوصف
+        description-hint: وصف التطبيق الافتراضي
+        actions-column: أفعال
+        actions-hint: الإجراءات التي يمكن تنفيذها على التطبيق
+        web-app-info-hint: لن يؤثر تشغيل/إيقاف هذا التطبيق على أداء منطقة MAZI الخاصة
+          بك.
+        web-app-start-hint: هذا تطبيق ويب، يتم تشغيله دائما.
+        app-start-hint: بدء التطبيق
+        app-stop-hint: وقف التطبيق
+      popups:
+        delete-application-title: حذف مثيل التطبيق؟
+        delete-application-message: سيتم حذف نسخة التطبيق هذه نهائيًا من قاعدة البيانات،
+          هل ترغب في المتابعة؟
+        delete-application-hint: تحتاج إلى حذف كافة مثيلات التطبيق المتصلة بهذا التطبيق
+          قبل أن تتمكن من حذف هذا التطبيق.
+        edit-application-title: تحرير مثيل التطبيق؟
+        application-icon-hint: 'تلميح: للحصول على الرمز تُرجَى مراجعة التوثيق %{link}'
+        create-application-title: إنشاء مثيل التطبيق الجديد
+        create-application-help: 'مساعدة: بعض التطبيقات لا يمكن أن تكون لها حالات
+          متعددة في الوقت الحالي; وهذا هو السبب في أن بعضها قد يكون مفقودًا.'
+        web-app-info-title: تطبيق الويب
+        web-app-info-message: هذا تطبيق ويب لذا لن يؤثر بدء/إيقاف هذا التطبيق على
+          أداء منطقة MAZI الخاصة بك.
+    network-page:
+      subheader: إعدادات الشبكة
+      wifi-ap-interface-panel:
+        header: إعدادات شبكة نقطة اتصال واي فاي لـ%{interface}
+        ssid-name-label: اسم شبكة واي فاي (SSID)
+        ssid-name-description: معرف مجموعة الخدمات (SSID) هو الاسم المعين لشبكة واي
+          فاي (لاسلكية)، يجب أن تستخدم جميع الأجهزة الموجودة في الشبكة هذا الاسم الحساس
+          لحالة الأحرف للاتصال عبر شبكة واي فاي، وهي سلسلة نصية بطول يصل إلى 32 بايت،
+          يُرجَى الضغط على زر التعديل أدناه لتغييرها.
+        wifi-channel-label: قناة شبكة واي فاي
+        wifi-channel-description: يساعد اختيار أفضل قناة واي فاي في منطقة MAZI على
+          تقليل التشويش وتحسين إشارة واي فاي لديك، يُرجَى الضغط على زر التعديل أدناه
+          لتغييرها.
+        wifi-password-label: كلمة مرور شبكة واي فاي
+        wifi-password-description: كلمة مرور المصادقة لشبكة Wi-Fi (اللاسلكية)، يجب
+          أن يكون طولها 8 أحرف على الأقل، إذا تم تركها فارغة فسيتم تعطيل أمان شبكة
+          واي فاي، يُرجَى الضغط على زر التعديل أدناه لتغييرها.
+      unconfigured-dongle-panel:
+        message: لم يتم تكوين واجهة الشبكة هذه بعد، يُرجَى استخدام الزر التالي; لتهيئته
+          بشكل مناسب.
+      internet-panel:
+        header: وضع شبكة الإنترنت
+        mode-hint: وضع شبكة واي فاي
+      connect-wifi-panel:
+        header: اتصل بشبكة واي فاي للوصول إلى الإنترنت
+        wifi-network-hint-1: من شبكات واي فاي
+        wifi-network-hint-2: شبكة إنترنت واي فاي
+        usb-dongle-message: يُرجَى وضع ملحق إضافي لجهاز يو إس بي واي فاي على جهاز
+          رسبري باي لتمكين هذه الميزة، مقابس يو إس بي مقترحة
+      access-point-panel:
+        header: إضافة جهاز التوجيه كنقطة وصول
+        current-hint: نقطة وصول واي فاي قيد الاستخدام
+        router-message: يجري حاليا استخدام واجهة راسبري واي فاي، يمكنك إضافة جهاز
+          OpenWRT إلى جهاز توجيه رسبري باي وتحريك نقطة الوصول إلى هناك، الأجهزة المقترحة
+      portal-domain-panel:
+        header: مجال البوابة
+        domain-hint: المجال الحالي البوابة
+      popups:
+        edit-wifi-header: تعديل تكوين واي فاي
+        edit-wifi-warning: 'تحذير: إذا قمت بتغيير أية قيم تهيئة لشبكة واي فاي هذه،
+          فسيتم فقد اتصالك اللاسلكي بمنطقة MAZI وستحتاج إلى إعادة الاتصال بشبكة الواي
+          فاي الجديدة.'
+        edit-wifi-network-header: تحرير إعدادات شبكة واي فاي
+        show-qrcode-header: رمز الاستجابة السريعة لشبكة واي فاي
+        change-channel-header: تغيير القناة
+        change-password-header: تغيير كلمة السر
+        change-mode-header: تغيير الوضع
+        change-mode-message: استخدم النموذج أدناه لاختيار وضع الشبكة في منطقة MAZI،
+          إذا كنت ترغب في اختيار وضع الاتصال بالإنترنت، فيُرجَى التأكد من أن لديك
+          إمكانية الوصول إلى الإنترنت (إما عبر كابل إيثرنت أو دونجل واي فاي).
+        connect-wifi-header: اتصل بشبكة واي فاي
+        select-wifi-label: حدد اسم واي فاي
+        select-mesh-mode-label: حدد وضع الشبكة
+        type-wifi-label: أو اكتبها هنا إذا كانت مخفية
+        type-password-label: اكتب كلمة المرور لشبكة واي فاي
+        change-domain-header: تحرير نطاق البوابة
+        change-domain-message: سيغير هذا الإجراء نطاق البوابة، يُرجَى التأكد من أنه
+          نطاق صالح (على سبيل المثال، حرف '.' واحد على الأقل).
+        change-domain-warning: 'تحذير: إذا قمت بتعيين نطاق غير صالح، فستكون البوابة
+          غير قابلة للوصول، ومع ذلك ، يمكنك الوصول إلى لوحة الإداري من خلال هذا المسار'
+        toggle-access-point-header: تبديل جهاز نقطة الوصول عبر واي فاي
+        toggle-access-point-message: سيؤدي هذا الإجراء إلى تغيير جهاز نقطة الوصول
+          عبر واي فاي، سيؤدي هذا الإجراء إلى فقدان الوصول إلى هذا المدخل وستحتاج إلى
+          إعادة الاتصال بشبكة الواي فاي الجديدة، هل أنت متأكد أنك تريد المتابعة؟
+    appearance-page:
+      subheader: المظهر
+      theme-panel:
+        header: تكوينات الموضوع
+        portal-title-label: عنوان البوابة
+        portal-title-hint: تقوم هذه القيمة بتكوين كل من العنوان الموجود في أعلى الزاوية
+          اليسرى وعنوان الرأس html.
+        home-page-label: عنوان الصفحة الرئيسية
+        home-page-hint: تعمل هذه القيمة على تهيئة عنوان الهيئة للصفحة الرئيسية للبوابات.
+        home-subtitle-label: العنوان الفرعي الصفحة الرئيسية
+        home-subtitle-hint: تقوم هذه القيمة بتكوين عنوان فرعي للجسم للصفحة الرئيسية
+          للبوابات.
+        welcome-message-label: رسالة ترحيب التطبيق
+        welcome-message-hint: تقوم هذه القيمة بتكوين رسالة ترحيب الجسم لصفحة التطبيقات.
+        background-image-label: صورة خلفية التطبيق
+        background-image-hint: تقوم هذه القيمة بتكوين صورة الخلفية لصفحة التطبيقات.
+        colors-label: الألوان
+        side-main-color: اللون الرئيسي للوحة الجانبية
+        side-active-color: اللون النشط للوحة الجانبية
+        top-main-color: اللون الأساسي للوحة العلوية
+        top-active-color: اللون النشط للوحة العلوية
+        colors-hint: القيم أعلاه تكون ألوانا مختلفة للبوابة.
+      popups:
+        edit-theme-header: تحرير السمة
+        edit-title-header: تحرير العنوان
+        edit-home-title-header: تحرير عنوان الصفحة الرئيسية
+        edit-home-subtitle-header: تحرير العنوان الفرعي الصفحة الرئيسية
+        edit-welcome-message-header: تحرير رسالة الترحيب
+        edit-background-image-header: تحرير صورة الخلفية
+        reset-theme-header: إعادة تعيين الموضوع
+        reset-theme-message: سيقوم هذا الإجراء بإعادة تعيين كافة التكوينات المرئية
+          إلى القيم الافتراضية.
+        load-theme-header: تحميل الموضوع
+        load-theme-message: تحميل أحد ملفات التكوين التالية
+        save-theme-header: حفظ الموضوع
+        save-theme-message: يُرجَى إدخال اسم الموضوع الجديد.
+    devices-page:
+      subheader: الأجهزة
+      message: يمكنك استخدام الأدوات التالية للتحكم في مختلف الأجهزة المدعومة المتصلة
+        بمنطقة MAZI (أجهزة الاستشعار والكاميرات وغيرها)، يمكنك العثور على جميع الأجهزة
+        المدعومة
+      sensors-panel:
+        header: أجهزة الاستشعار
+        header-hint: يمكنك استخدام هذا للتحكم في العديد من أجهزة الاستشعار.
+        toggle-sensors-message: تمكين/تعطيل علامة التبويب أجهزة الاستشعار على بوابة
+          المستخدم
+        toggle-sensors-hint: تمكين/تعطيل علامة التبويب أجهزة استشعار البوابة
+        sensors-table:
+          type: النوع
+          status: الحالة
+          entries: المدخلات
+          actions: أفعال
+          start-button-hint: ابدأ حفظ القياسات
+          delete-button-hint: احذف جميع القياسات المحفوظة
+          sensehat-calibration-hint: إذا كنت ترغب في معايرة المعنى الخاص بك يُرجَى
+            اتباع قسم المعايرة في هذا البرنامج التعليمي
+        no-sensors-message: لا يمكن العثور على مستشعر متصل بمنطقة MAZI هذه.
+        init-sensors-message: لم يتم تنفيذ إجراءات التهيئة لوحدة المستشعرات بعد، إذا
+          كنت ترغب في استخدام جهاز استشعار متصل بمنطقة MAZI، فيُرجَى استخدام الزر
+          أدناه لتهيئة هذه الوحدة.
+        init-button-hint: بدء تهيئة أجهزة الاستشعار
+      camera-panel:
+        header: كاميرا
+        header-hint: يمكنك استخدام هذا للتحكم في الكاميرا.
+        toggle-camera-message: تمكين/تعطيل علامة تبويب الكاميرا على بوابة المستخدم
+        toggle-camera-hint: تمكين/تعطيل علامة التبويب كاميرا البوابات
+        camera-version-message: وحدة الكاميرا غير مثبتة بشكل صحيح على هذه الصورة!
+          الرجاء استخدام صورة أكبر من 1.7.2 تم تكوينها بشكل صحيح لهذا الغرض.
+        no-camera-message: لا توجد كاميرا متصلة بمنطقة MAZI هذه!
+      popups:
+        start-sensing-title: بدء قياسات الاستشعار
+        start-sensing-message: يُرجَى إدخال مدة أو تاريخ في التقويم لتحديد موعد زمني
+          لجمع القياسات، أيضا، يُرجَى استخدام الفاصل الزمني لتحديد وتيرة القياسات.
+        start-sensing-label1: الخادم الهدف
+        start-sensing-label2: المدة (ثوانٍ)
+        start-sensing-label3: التقويم (وقت/تاريخ الانتهاء)
+        start-sensing-label4: الفاصل الزمني (بالثواني)
+        start-sensing-hint: 'تلميح: إذا كنت تستخدم كلا من صندوقي إدخال المدة والتقويم،
+          فسيتم تجاهل التقويم!!!'
+        delete-sensing-title: حذف قياسات الاستشعار
+        delete-sensing-message: هل تريد حذف جميع القياسات المحفوظة؟
+        start-images-title: بدء التقاط الصور
+        start-images-label1: المدة (ثوانٍ)
+        start-images-label2: الفاصل الزمني (بالثواني)
+        delete-images-title: حذف كل الصور
+        delete-images-message: هل تريد حذف جميع الصور الملتقطة؟
+        start-videos-title: بدء التقاط الفيديو
+        start-videos-label1: المدة (ثوانٍ)
+        delete-videos-title: حذف جميع مقاطع الفيديو
+        delete-videos-message: هل تريد حذف جميع مقاطع الفيديو الملتقطة؟
+    monitoring-page:
+      subheader: مراقبة
+      message: يمكنك استخدام الأدوات التالية للتحكم في الطريقة التي تقوم بها منطقة
+        MAZI بجمع البيانات وإرسالها إلى خادم تجميع البيانات.
+      details-panel:
+        header: التفاصيل
+        header-hint: يمكنك استخدام هذا لتمكين/تعطيل ميزة المراقبة.
+        toggle-monitoring-message: تمكين/تعطيل ميزة المراقبة.
+        toggle-monitoring-hint: تمكين/تعطيل ميزة المراقبة
+        details-message: أدناه يمكنك رؤية التفاصيل الخاصة بمنطقة MAZI هذه، يمكنك تغيير
+          كل شيء عن طريق الضغط على زر التعديل في الأسفل.
+        table-label1: نشر
+        table-label2: إداري
+        table-label3: العنوان
+        table-label4: الوصف
+        table-label5: الموقع (دائرة العرض، خط الطول)
+        details-hint: يلزم تغيير تفاصيل المراقبة أولاً، قبل تمكين المراقبة!
+      statistics-panel:
+        header: مراقبة البيانات
+        header-hint: يمكنك استخدام هذا للتحكم في أنشطة المراقبة.
+        toggle-monitoring-map-msg: تمكين/تعطيل علامة التبويب مراقبة على بوابة المستخدم
+        toggle-monitoring-map-hint: تمكين/تعطيل علامة التبويب مراقبة
+        message: يمكنك بدء/إيقاف إرسال نشاط النظام وبيانات مراقبة التطبيق إلى نقطة
+          بعيدة (أو محلية) بالضغط على أزرار البدء/الإيقاف أدناه.
+        statistics-table:
+          status: الحالة
+          description: الوصف
+          action: فعل
+          hardware-description-message: مراقبة نشاط النظام.
+          application-description-message: مراقبة بيانات التطبيق.
+          no-hardware-tasks-message: لا توجد مهام مراقبة نشاط نظام قيد التشغيل حاليا.
+          no-application-tasks-message: لا توجد مهام مراقبة تطبيقات قيد التشغيل حاليا.
+          start-hardware-task-hint: بدء مراقبة نشاط النظام
+          stop-hardware-task-hint: وقف مراقبة نشاط النظام
+          delete-hardware-data-hint: احذف جميع بيانات مراقبة نشاط النظام من قاعدة
+            البيانات المحلية
+          start-application-task-hint: بدء مراقبة التطبيق
+          stop-application-task-hint: وقف مراقبة التطبيق
+          delete-application-data-hint: احذف جميع بيانات مراقبة التطبيق من قاعدة البيانات
+            المحلية
+      popups:
+        change-details-header: تغيير تفاصيل المراقبة
+        change-details-message: استخدم النموذج أدناه لتغيير تفاصيل مراقبة الوسائط
+        change-details-label1: نشر
+        change-details-label2: إداري
+        change-details-label3: العنوان
+        change-details-label4: الوصف
+        change-details-label5: الموقع (دائرة العرض، خط الطول)
+        hardware-label1: الخادم الهدف
+        hardware-label2: درجة الحرارة
+        hardware-label3: مستخدمو واي فاي
+        hardware-label4: تحميل وحدة المعالجة المركزية
+        hardware-label5: تحميل ذاكرة الوصول العشوائي
+        hardware-label6: تحميل التخزين
+        application-label1: الخادم الهدف
+        application-label2: تطبيق إيثرباد
+        application-label3: تطبيق سجل الزوار
+        application-label4: تطبيق Framadate
+        application-label5: تطبيق السحابة القادمة
+        start-hardware-header: بدء بيانات مراقبة نشاط النظام
+        start-hardware-message: استخدم النموذج أدناه لبدء إرسال بيانات مراقبة نشاط
+          النظام
+        start-application-header: بدء تشغيل بيانات مراقبة التطبيق
+        start-application-message: استخدم النموذج أدناه لبدء إرسال بيانات مراقبة نشاط
+          النظام
+        show-hardware-header: معلومات مراقبة نشاط النظام
+        show-hardware-message: الحالة الحالية لعمليات مراقبة نشاط النظام
+        show-application-header: معلومات مراقبة التطبيق
+        show-application-message: الحالة الحالية لعمليات مراقبة التطبيق
+        delete-hardware-header: حذف بيانات مراقبة نشاط النظام
+        delete-hardware-message: استخدم الزر أدناه لحذف جميع بيانات مراقبة نشاط النظام
+          من قاعدة البيانات المحلية، عدد الإدخالات في قاعدة البيانات حاليا هو %{entries}
+        delete-hardware-hint: سيستغرق هذا الإجراء عدة ثوانٍ حتى يتم تنفيذه بالكامل;
+          لذا يُرجَى الانتظار قبل تحديث الصفحة.
+        delete-application-header: حذف بيانات مراقبة التطبيق
+        delete-application-message: استخدم الزر أدناه لحذف جميع بيانات مراقبة التطبيق
+          من قاعدة البيانات المحلية، عدد الإدخالات في قاعدة البيانات حاليا هو %{entries}
+        delete-application-hint: سيستغرق هذا الإجراء عدة ثوانٍ حتى يتم تنفيذه بالكامل;
+          لذا يُرجَى الانتظار قبل تحديث الصفحة.
+    notifications-page:
+      subheader: إخطارات
+      notifications-table:
+        header1: الحالة
+        header2: العنوان
+        header3: الجسم
+        header4: أفعال
+      popups:
+        create-notification-title: إنشاء إشعار جديد
+        edit-notification-title: تحرير الإخطار
+        delete-notification-message: سيتم حذف هذا الإشعار نهائيا من قاعدة البيانات،
+          هل ترغب في المتابعة؟
+    import-export-page:
+      subheader: لقطات
+      full-snapshots-header: لقطات منطقة MAZI
+      full-snapshots-message: يمكنك استخدام اللوحة أدناه لالتقاط لقطة للتهيئة الحالية
+        لمنطقة MAZI، ويشمل هذا كل شيء (تكوينات الشبكة، والتطبيقات، ومثيلات التطبيق،
+        والإشعارات، والتكوينات البصرية، وما إلى ذلك).
+      full-snapshot-panel:
+        header-hint: يمكنك استخدام هذا لاستيراد/تصدير لقطة.
+        form-placeholder: اسم اللقطة
+        no-usb-message: لا يوجد حاليا جهاز تخزين USB مكتشف; يُرجَى توصيل جهاز تخزين
+          USB وتحديث الصفحة.
+        usb-message: تم اكتشاف جهاز تخزين USB، يوجد %{free_space} من المساحة الخالية
+          على الجهاز.
+      full-warning: 'تحذير: يُعتبَر استيراد اللقطة وتصديرها إجراءً يستغرق وقتا طويلا
+        ويعتمد أيضا على بيانات منطقة MAZI وسرعة جهاز USB، لن تتمكن من التفاعل مع بوابة
+        MAZI أثناء إجراء الاستيراد/التصدير، ستتم إعادة تمهيد الجهاز في نهاية إجراء
+        الاستيراد.'
+      configuration-snapshots-header: لقطات تكوين
+      configuration-snapshots-message: يمكنك استخدام اللوحة أدناه لالتقاط لقطة للتهيئة
+        الحالية لمنطقة MAZI.
+      warning: 'تحذير: إذا قمت بتحميل لقطة جديدة باستخدام إعدادات شبكة واي فاي مختلفة،
+        فسيتم فقد اتصالك اللاسلكي بمنطقة MAZI وستحتاج إلى إعادة الاتصال بشبكة الواي
+        فاي الجديدة.'
+      save-snapshot-panel:
+        header: احفظ اللقطة
+        header-hint: يمكنك استخدام هذا لأخذ لقطة.
+        form-placeholder: اسم اللقطة
+        form-hint: يُرجَى إدخال اسم اللقطة الجديدة.
+      load-snapshot-panel:
+        header: تحميل لقطة
+        header-hint: يمكنك استخدام هذا لتحميل لقطة.
+        message: يُرجَى تحديد لقطة وتحميل الضغط، ستتم إعادة تشغيل بوابة MAZI.
+        no-snapshots-message: حاليا ، لا توجد لقطات محفوظة.
+      import-export-panel:
+        header: استيراد/تصدير اللقطات
+        header-hint: يمكنك استخدام هذا لتصدير لقطة إلى ملف zip، أو استيراد ملف مضغوط
+          كصورة.
+        message: يُرجَى تحديد لقطة والنقر فوق تحميل.
+        no-snapshots-message: حاليا ، لا توجد لقطات محفوظة.
+      application-snapshots-header: لقطات التطبيق
+      application-snapshots-message: استخدم الألواح أدناه لاستيراد/تصدير لقطات للتطبيقات
+        التي تدعمها منطقة MAZI.
+      interview-panel:
+        header-hint: يمكنك استخدام هذا لاستيراد/تصدير لقطة.
+        form-placeholder: اسم اللقطة
+      guestbook-panel:
+        header-hint: يمكنك استخدام هذا لاستيراد/تصدير لقطة.
+        form-placeholder: اسم اللقطة
+      popups:
+        import-header: استيراد لقطة
+        import-interview-header: استيراد لقطة للمقابلة
+        import-guestbook-header: استيراد لقطة للضيف
+        import-etherpad-header: استيراد لقطة من أجل إيثرباد
+        import-nextcloud-header: استيراد لقطة من أجل السحابة القادمة
+        import-wordpress-header: استيراد لقطة ووردبريس
+        import-full-header: استيراد لقطة لمنطقة MAZI
+        import-config-header: استيراد لقطة تكوين
+    logs-page:
+      subheader: عارض السجل
+      message: يمكنك عرض ملفات سجل منطقة MAZI أدناه
+      portal-log-panel:
+        header: ملف سجل البوابة
+        header-hint: ملف سجل البوابة.
+        filter-label1: رسائل خطأ
+        filter-label2: رسائل تحذير
+        filter-label3: رسائل التصحيح
+    documentation-page:
+      header: توثيق الإداري
+      initial-configuration-tab:
+        header: الترتيب الأولي
+        subheader1: الوصف
+        subheader2: الاتصال من خلال ssh
+        subheader3: تكوين Raspbian
+        paragraph1: هذا هو دليل توثيق بوابة منطقة MAZI، استخدم علامات التبويب أعلاه
+          للانتقال إلى الأقسام المختلفة من التوثيق، تصف علامة التبويب الحالية الإجراءات
+          المختلفة التي قد يحتاجها إداري; من أجل تكوين رسبري باي، بينما توفر كل علامات
+          التبويب الأخرى معلومات تتعلق بإدارة التطبيقات المدعومة.
+        paragraph2: للاتصال عن بعد بـRaspberry من خلال ssh عليك أن تفتح محطة وتنفيذ
+          الأمر التالي
+        paragraph3: إذا كنت ترغب في تغيير كلمة المرور لمستخدم pi قم بـ$passwd واتبع
+          التعليمات.
+        paragraph4: هذه هي كلمة مرور اتصال ssh وتختلف عن حساب الإداري الذي تستخدمه
+          لتسجيل دخول واجهة الإداري.
+        paragraph5: بمجرد تسجيل الدخول بنجاح في Raspberry، ابدأ أداة تكوين rasbian
+        paragraph6: وانتقل إلى القائمة
+        paragraph7: تغيير حجم نظام الملفات لاستخدام سعة بطاقة SD بأكملها
+        paragraph8: في خيار الترجمة، غير
+        paragraph9: اللغة لتتناسب مع موقعك
+        paragraph10: المنطقة الزمنية لتتناسب مع موقعك
+      etherpad-tab:
+        subheader1: الوصف
+        subheader2: دليل الإدارة
+        subheader3: نصائح مفيدة
+        paragraph1: يسمح لك إيثرباد بتحرير المستندات بشكل تعاوني في الوقت الفعلي،
+          تماما مثل المحرر متعدد اللاعبين المباشر الذي يعمل في متصفحك، كتابة المقالات
+          والبيانات الصحفية وقوائم المهام وما إلى ذلك مع أصدقائك أو زملائك الطلاب
+          أو زملائك الذين يعملون جميعا على نفس المستند في نفس الوقت، توفر جميع الحالات
+          إمكانية الوصول إلى جميع البيانات من خلال واجهة برمجة تطبيقات جيدة التوثيق
+          وتدعم الاستيراد/التصدير إلى العديد من تنسيقات تبادل البيانات الرئيسية، وإذا
+          لم تكن مجموعة الميزات المضمنة كافية بالنسبة لك، فهناك الكثير من البرامج
+          المساعدة التي تسمح لك بتخصيص مثيلك لتناسب احتياجاتك.
+        paragraph2: ستجد صفحة الإداري في
+        paragraph3: لتغيير كلمة مرور الإداري; في صفحة الإداري، حدد الإعدادات وقم بتغيير
+          "mazizone" باستخدام كلمة المرور الخاصة بك.
+        paragraph4: سيجعل الأمر أكثر سهولة لمستخدمي منطقة MAZI إذا قمت بإنشاء لوحة
+          فهرس بنفسك وجعلها صفحة إيثرباد "افتراضية" عن طريق تغيير المسار في منطقة
+          التطبيقات في لوحة الإدارة، عندما تتمكن من تسجيل الدخول، يمكن دعوة الأشخاص
+          لإنشاء منصات خاصة بهم، وإضافة رابطهم في صفحة الفهرس هذه، والتي ستكون أيضا
+          "قابلة للتعليق" وتسهل التنقل عبر اللوحات المتوفرة على الخادم.
+        paragraph5: فمثلا،
+        paragraph6: يعمل إيثرباد بشكل جيد عندما يكون هناك شخص "ينظف" النص من وقت لآخر،
+          وإذا كانت هناك صفحات "فهرس" مناسبة تنظم اللوحات المتوفرة المختلفة.
+      nextcloud-tab:
+        subheader1: الوصف
+        subheader2: دليل الإدارة
+        subheader3: نصائح مفيدة
+        paragraph1: السحابة القادمة هي مزامنة الملفات الخاصة ومشاركة خادم الاتصالات،
+          وهي مفتوحة المصدر بالكامل ويمكنك استضافتها بنفسك أو دفع شركة للقيام بذلك
+          نيابة عنك، بهذه الطريقة، أنت تتحكم في صورك، وتقويمك وبيانات الاتصال الخاصة
+          بك، ومستنداتك وكل شيء آخر.
+        paragraph2: ستجد صفحة إداري في
+        paragraph3: للوصول إلى إعداداتك الشخصية
+        paragraph4: النقر على إداري في الجزء العلوي، الزاوية اليمنى من مثيل سحابتك
+          القادمة، تفتح قائمة الإعدادات الشخصية.
+        paragraph5: اختر شخصية من القائمة المنسدلة.
+        paragraph6: تتضمن بعض الميزات التي ستشاهدها ما يلي
+        paragraph7: الاستخدام والحصة المتاحة
+        paragraph8: إدارة صورة ملفك الشخصي
+        paragraph9: الاسم الكامل يمكنك جعل هذا أي شيء تريده; لأنه منفصل عن اسم تسجيل
+          دخولك، وهو فريد ولا يمكن تغييره
+        paragraph10: عنوان البريد الإلكتروني
+        paragraph11: يسرد عضويات المجموعات الخاصة بك
+        paragraph12: إدارة كلمة مرورك
+        paragraph13: اختر اللغة لواجهة سحابتك القادمة
+        paragraph14: روابط لتطبيقات سطح المكتب والجوال
+        paragraph15: تتمثل إحدى الطرق السهلة لتقديم المستخدمين إلى تطبيق السحابة القادمة
+          في إنشاء مجلد مشترك قابل للتحرير وإنشاء رابط مباشر إليه، كتطبيق منفصل، يسمح
+          لأي شخص بمشاركة الملفات بسهولة دون الحاجة إلى إدخال اسم المستخدم وكلمة المرور.
+        paragraph16: وبشكل أكثر تحديدا، بعد تسجيل الدخول كإداري في السحابة القادمة،
+          تنقر على لوحة "المشاركة" من المجلد وتحدد الصندوق "رابط المشاركة"، ثم "السماح
+          بالرفع والتحرير" (انظر الشكل أدناه).
+        paragraph17: يمكن الآن لصق الرابط الذي يظهر بين هاتين الخانتين على مسار تطبيق
+          جديد في
+        paragraph18: قد يساعد أيضا في إنشاء مجلد منفصل لأنواع مختلفة من الملفات (الصور
+          والشرائح ومقاطع الفيديو) لتسهيل توجيه الأشخاص على نوع المحتوى المتوقع وتسهيل
+          التصفح.
+        paragraph19: إذا كنت بحاجة إلى استخدام المحتوى المرفوع إلى مجلد السحابة القادمة
+          المشترك في تطبيقات أخرى، فيمكن الوصول إلى الملفات من خلال المسار التالي
+        paragraph20: لذلك، على سبيل المثال، للمستخدم "مازي" ومجلد الصوت/ سيكون المسار
+        paragraph21: من أجل إنشاء مستخدمين جدد في السحابة القادمة; يجب أن تكون متصلا
+          بالإنترنت أو مزامنا الوقت والتاريخ يدويا بين تطبيق Raspberry والسحابة القادمة.
+      guestbook-tab:
+        subheader1: الوصف
+        subheader2: دليل الإدارة
+        subheader3: كلمة سر الإداري
+        subheader4: وجهات النظر البديلة للمحتوى
+        paragraph1: سجل زوار MAZI تطبيق مفتوح المصدر يمكن استخدامه في الأحداث مما
+          يتيح للجمهور مشاركة أفكارهم وصورهم وما إلى ذلك.
+        paragraph2: لتكوين/تنسيق تطبيق سجل زوار MAZI; يمكنك الذهاب إلى
+        paragraph3: لتغيير كلمة مرور الإداري; افتح ملف config.js، الذي يحدث في هذا
+          المسار
+        paragraph4: ثم املأ authPassword بكلمة المرور التي تفضلها.
+        paragraph5: بالإضافة إلى عرض تقديمي قياسي لمتصفح الويب، يدعم تطبيق سجل الزوار
+          عرضين آخرين للمحتوى
+        paragraph6: عرض الشرائح
+        paragraph7: عرض الحاسوب اللوحي
+        paragraph8: جميع الروابط تعمل عندما تكون متصلا بمنطقة MAZI.
+      wordpress-tab:
+        subheader1: الوصف
+        subheader2: دليل الإدارة
+        paragraph1: ووردبريس تطبيق نشر ويب مفتوح المصدر ومجاني، ونظام إدارة محتوى
+          (CMS) وأداة تدوين تم بناؤها بواسطة مجتمع من المطورين والمساهمين، يتيح ووردبريس
+          للمستخدمين إنشاء مواقع ويب ومدونات ديناميكية يمكن تحديثها وتخصيصها وإدارتها
+          من نظام إدارة محتواه الخلفي والتطبيقات والمكونات المتكاملة.
+        paragraph2: 'املأ المعلومات: امنح موقعك عنوانا، وأنشئ اسم مستخدم وكلمة مرور
+          وأدخل عنوان بريدك الإلكتروني، اضغط على زر تثبيت ووردبريس، ثم سجل الدخول
+          باستخدام الحساب الذي أنشأته للتو.'
+      framadate-tab:
+        subheader1: الوصف
+        paragraph1: Framadate هو تطبيق مفتوح المصدر ومجاني مثل خربشة، من السهل إنشاء
+          موعد أو استطلاع بدون تسجيل لدعوة التعاون.
+        paragraph2: هنا كيف يعمل
+        paragraph3: إنشاء استطلاع
+        paragraph4: تحديد التواريخ أو المواضيع للاختيار
+        paragraph5: أرسل رابط الاستطلاع إلى أصدقائك أو زملائك
+        paragraph6: ناقش واتخذ قرارك
+    settings-page:
+      subheader: إعدادات
+      message: يمكنك استخدام هذه الصفحة لتغيير إعدادات التكوين المختلفة في منطقة MAZI
+        الخاصة بك.
+      panel-header: إعدادات النظام
+      time-date:
+        header: الوقت/التاريخ
+      mysql-password:
+        header: كلمة سر MySQL
+      apache-filesize:
+        header: الحد الأقصى لحجم ملف أباتشي
+      popups:
+        change-time-date-title: تغيير الوقت/التاريخ
+        change-time-date-message: يرجى استخدام النموذج أدناه لتغيير وقت/تاريخ منطقة
+          MAZI.
+        change-mysql-password-title: تغيير كلمة مرور MySQL
+        change-mysql-password-message: يُرجَى استخدام النموذج أدناه لتغيير كلمة مرور
+          MySQL في منطقة MAZI.
+        change-apache-filesize-title: تغيير تحميل الحد الأقصى لحجم ملف أباتشي
+        change-apache-filesize-message: يُرجَى استخدام النموذج أدناه لتغيير الحد الأقصى
+          لحجم رفع ملف أباتشي في منطقة MAZI.
+...

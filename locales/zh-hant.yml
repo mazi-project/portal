@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Kly
+# Author: LNDDYL
 ---
 zh-hant:
   general:
@@ -57,12 +58,14 @@ zh-hant:
       channel: 頻段
       password: 密碼
       offline: 離線
-      dual: 雙重
+      online: 線上
       restricted: 受限
       managed: 已管理
       active: 有效
       inactive: 無效
       error: 錯誤
+      stable: 穩定
+      development: 開發
   portal:
     top-menu:
       documentation: 文件
@@ -72,7 +75,7 @@ zh-hant:
       sensors: 感測器
       camera: 相機
       monitoring: 監控
-      devices: 設備
+      devices: 裝置
     system-page:
       subheader: 系統資訊
       users: 線上使用者
@@ -106,8 +109,8 @@ zh-hant:
       subheader: 監控
       header-message: 在此頁面您可以查看此或/與其它 MAZI Zones 各項監控測量內容。
       popups:
-        device: 設備
-        devices: 設備
+        device: 裝置
+        devices: 裝置
         deployment: 部署
         administrator: 管理員
         description: 描述
@@ -159,15 +162,17 @@ zh-hant:
       applications: 應用程式
       networking: 網路
       appearance: 外觀
-      devices: 設備
+      devices: 裝置
       monitoring: 監控
       notifications: 通知
       export-import: 匯出/匯入
       logs: 日誌
       documentation: 文件
     updates:
+      subheader: 更新
       checking-updates: 檢查更新中。請稍等...
       alert-message-1: 您本地端的儲存庫已被編輯，這會導致更新功能失效。請透過使用 %{command}，來替已編輯檔案撤銷這些在本地端儲存庫的變更。
+      update-message-0: 請挑選您的更新頻段
       update-message-1: 沒有至網際網路的有效連接。請連接此 MAZI Zone 至網際網路並再試一次。
       update-message-2: 此入口頁面以展示模式運作！該操作會開始更新程序。
       update-message-3: 入口頁面是最新版本，不需要再更新。
@@ -176,6 +181,9 @@ zh-hant:
         MAZI Zone。
       update-message-6: 有可用的更新。請使用下方按鈕來開始更新程序。
       update-hint: 提示：若您遇到錯誤情況，請重新啟動您的設備。
+      update-chan-hint: 提示：最新版的開發頻段可能會不穩定。不建議進行反覆替換更新頻段，這樣做可能會導致異常的情況發生。請告知版本詳情 %{link}
+        以決定您的更新頻段
+      update-chan-warn: 警告：更改到其它頻段設備將會重新啟動。
     setup-page:
       tog-nav: 切換導航
       setup-panel: MAZI Zone 配置面板
@@ -231,8 +239,7 @@ zh-hant:
         current: 目前日期/時間
       version:
         header: MAZI Zone 版本
-        version-message-1: 此入口頁面是
-        version-message-2: 提交後。
+        version-message: 此入口頁面落後「%{nof_commits} 個提交」。
         up-to-date: 最新
       popups:
         expand-storage-message: 您可以透過下方按鈕來擴展 MAZI Zone 儲存至您的 SD 卡最大容量。要讓此生效的話，您需要重新啟動。
@@ -263,7 +270,7 @@ zh-hant:
       applications-menu:
         header: 已安裝應用程式
         status-column: 狀態
-        status-hint: 入口頁面的執行狀態（運作中/已停止）
+        status-hint: 操作狀態（運作中/已停止）
         icon-column: 圖標
         icon-hint: 應用程式預設圖標
         color-column: 色彩
@@ -273,7 +280,7 @@ zh-hant:
         url-column: URL
         url-hint: 應用程式的 URL
         description-column: 描述
-        description-hint: 描述將會顯示在入口頁面的應用程式部份上
+        description-hint: 應用程式預設描述
         actions-column: 操作
         actions-hint: 可在應用程式上執行操作
         web-app-info-hint: 開始/停止此應用程式並不會影響到您的 MAZI Zone 效能。
@@ -285,6 +292,7 @@ zh-hant:
         delete-application-message: 此應用程式實體將會從資料庫裡永久刪除。您確定要繼續嗎？
         delete-application-hint: 在您需要刪除所有連接至此應用程式的應用程式實體之前，您可以刪除此應用程式。
         edit-application-title: 編輯應用程式實體？
+        application-icon-hint: 提示：對於圖標方面，請檢查文件 %{link}
         create-application-title: 建立新的應用程式實體
         create-application-help: 說明：一些應用程式無法在同一期間裡使用多個實體，這是它們會缺少的原因。
         web-app-info-title: 網路應用程式
@@ -328,7 +336,7 @@ zh-hant:
         change-channel-header: 變更頻段
         change-password-header: 變更密碼
         change-mode-header: 變更模式
-        change-mode-message: 使用以下表格來挑選用於此 MAZI Zone 的網路模式。如果您想要挑選雙重模式，請確認能夠存取網際網路（透過網路線或是
+        change-mode-message: 使用以下表格來挑選用於此 MAZI Zone 的網路模式。如果您想要挑選線上模式，請確認能夠存取網際網路（透過網路線或是
           Wi-Fi 傳輸器）。
         connect-wifi-header: 連接 Wi-Fi 網路
         select-wifi-label: 選擇 Wi-Fi 名稱
@@ -375,7 +383,7 @@ zh-hant:
         save-theme-header: 儲存主題
         save-theme-message: 請輸入新主題的名稱。
     devices-page:
-      subheader: 設備
+      subheader: 裝置
       message: 您可以使用以下工具來連接至此 MAZI Zone 的各項支援設備（感測器、相機、其它）。您可以查找所有支援設備
       sensors-panel:
         header: 感測器
@@ -500,7 +508,17 @@ zh-hant:
         delete-notification-message: 此通知將會從資料庫裡永久刪除。您確定要繼續嗎？
     import-export-page:
       subheader: 快照
-      message: 您可以使用以下工具來採用此 MAZI Zone 目前設置的快照。這裡頭有包含著任何項目（網路設置、應用程式、應用程式實體、通知、視覺化設置、其它）。
+      full-snapshots-header: MAZI Zone 快照
+      full-snapshots-message: 您可以使用下方的控制面板來取用目前此 MAZI Zone 設置的快照。這有包含著任何項目（網路設置、應用程式、應用程式實體、通知、視覺化設置等等）。
+      full-snapshot-panel:
+        header-hint: 您可以利用此來匯出/匯入快照。
+        form-placeholder: 快照名稱
+        no-usb-message: 目前沒有偵測到 USB 儲存裝置。請插入一個 USB 儲存裝置並重整頁面。
+        usb-message: 偵測到一個 USB 儲存裝置。裝置上有 %{free_space} 剩餘空間。
+      full-warning: 警告：匯入與匯出快照為耗時的程序，並依據您的 MAZI Zone 資料與 USB 裝置速度來取決快慢。在匯入/匯出程序這段期間，您會無法以
+        MAZI 入口頁面進行互動。設備在結束匯入程序之後會重新啟動。
+      configuration-snapshots-header: 設置快照
+      configuration-snapshots-message: 您可以使用下方的控制面板來取用目前此 MAZI Zone 設置的快照。
       warning: 警告：如果您以不同的 Wi-Fi 網路設定來載入新的快照，您連至此 MAZI Zone 的無線連接將會遺失，並且需要重新連接到新的 Wi-Fi
         網路。
       save-snapshot-panel:
@@ -531,6 +549,10 @@ zh-hant:
         import-interview-header: 匯入會見的快照
         import-guestbook-header: 匯入 Guestbook 快照
         import-etherpad-header: 匯入 Etherpad 的快照
+        import-nextcloud-header: 為 Nextcloud 匯入快照
+        import-wordpress-header: 為 WordPress  匯入快照
+        import-full-header: 為此 MAZI Zone 匯入快照
+        import-config-header: 匯入一個設置快照
     logs-page:
       subheader: 日誌檢視
       message: 您可以檢視以下的 MAZI Zone 日誌檔案

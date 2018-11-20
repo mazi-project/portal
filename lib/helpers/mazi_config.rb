@@ -199,7 +199,7 @@ module MaziConfig
     input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
                        "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
                        "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
-                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net"]
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdocs/splash.html"]
 
     ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command.join("\n")
@@ -220,7 +220,8 @@ module MaziConfig
     `cd /var/www/html/ && zip -r -1 #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_wordpress_files.zip wordpress/`
     MaziLogger.debug('Zipping Guestbook')
     db = "letterbox"
-    `mongoexport --db #{db} -c submissions --out #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json`
+    `mongoexport --db #{db} -c submissions --out #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook_submissions.json`
+    `mongoexport --db #{db} -c comments --out #{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook_comments.json`
     guestbook_path = "/var/www/html/mazi-board/src/files"
     interview_path = '/var/www/html/mazi-princess/src/server/node/files'
 
@@ -241,7 +242,8 @@ module MaziConfig
       Dir["#{guestbook_path}/**/**"].each do |file|
         zipfile.add("guestbook/" + file.sub(guestbook_path+'/',''), file)
       end
-      zipfile.add("guestbook/#{snapshot_name}_guestbook.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook.json")
+      zipfile.add("guestbook/#{snapshot_name}_guestbook_submissions.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook_submissions.json")
+      zipfile.add("guestbook/#{snapshot_name}_guestbook_comments.json", "#{usb_target}/#{snapshot_name}_tmp/#{snapshot_name}_guestbook_comments.json")
       zipfile.add("guestbook/config.js", "/var/www/html/mazi-board/src/www/js/config.js")
       zipfile.add("guestbook/main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
       zipfile.add("guestbook/be.config.js", "/var/www/html/mazi-board/src/node/config.js")
@@ -272,7 +274,7 @@ module MaziConfig
                         "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
                         "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
                         "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
-                        "network.net" => "/tmp/network.net"}
+                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdocs/splash.html"}
     File.delete("#{usb_target}/.mazi_tmp/network.net") if File.file?("#{usb_target}/.mazi_tmp/network.net")
     Zip::File.open(filename) do |zip_file|
       zip_file.each do |entry|
@@ -323,10 +325,14 @@ module MaziConfig
         elsif entry.name.start_with?('guestbook/')
           path = "/var/www/html/mazi-board/src/files"
           filename = entry.name.gsub('guestbook/', '')
-          if filename.include?('.json')
+          if filename.include?('_submissions.json')
             File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
             entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
             `mongoimport --db letterbox --collection submissions --drop --file #{usb_target}/.mazi_tmp/#{filename}`
+          elsif filename.include?('_comments.json')
+            File.delete("#{usb_target}/.mazi_tmp/#{filename}") if File.exist?("#{usb_target}/.mazi_tmp/#{filename}")
+            entry.extract("#{usb_target}/.mazi_tmp/#{filename}")
+            `mongoimport --db letterbox --collection comments --drop --file #{usb_target}/.mazi_tmp/#{filename}`
           elsif filename.include?('mzbgimg_')
             img_name = filename.gsub('mzbgimg_', '')
             File.delete("/var/www/html/mazi-board/src/www/images/#{img_name}") if File.exist?("/var/www/html/mazi-board/src/www/images/#{img_name}")
@@ -430,7 +436,7 @@ module MaziConfig
     input_filenames = ["database/inventory.db", "/etc/mazi/config.yml", "/etc/mazi/mazi.conf", "/etc/mazi/sql.conf", "/etc/mazi/users.dat",
                        "/etc/hostapd/replace.sed", "/etc/hostapd/hostapd.conf", "/etc/hostapd/template_80211n.txt ", "/etc/nodogsplash/nodogsplash.conf",
                        "/etc/nodogsplash/offline.txt", "/etc/nodogsplash/online.txt", "/etc/wpa_supplicant/wpa_supplicant.conf", "/etc/dnsmasq.conf",
-                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net"]
+                       "/etc/apache2/sites-available/portal.conf", "/tmp/network.net", "/etc/hosts", "/var/www/html/index.html", "/etc/nodogsplash/htdocs/splash.html"]
 
     ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c', '-m'], @config[:scripts][:enabled_scripts])
     lines = ex.exec_command.join("\n")
@@ -452,7 +458,7 @@ module MaziConfig
                         "users.dat" => "/etc/mazi/users.dat", "replace.sed" => "/etc/hostapd/replace.sed", "hostapd.conf" => "/etc/hostapd/hostapd.conf", "template_80211n.txt" => "/etc/hostapd/template_80211n.txt ",
                         "nodogsplash.conf" => "/etc/nodogsplash/nodogsplash.conf", "offline.txt" => "/etc/nodogsplash/offline.txt", "online.txt" => "/etc/nodogsplash/online.txt",
                         "wpa_supplicant.conf" => "/etc/wpa_supplicant/wpa_supplicant.conf", "dnsmasq.conf" => "/etc/dnsmasq.conf", "portal.conf" => "/etc/apache2/sites-available/portal.conf",
-                        "network.net" => "/tmp/network.net"}
+                        "network.net" => "/tmp/network.net", "hosts" => "/etc/hosts", "index.html" => "/var/www/html/index.html", "splash.html" => "/etc/nodogsplash/htdocs/splash.html"}
 
     File.delete("/tmp/network.net") if File.file?("/tmp/network.net")
     Zip::File.open(tempfile.path) do |zip_file|
@@ -542,7 +548,8 @@ module MaziConfig
       `rm /tmp/#{snapshot_name}_#{app_name}.sql`
       `rm /tmp/#{snapshot_name}_#{app_name}_files.zip`
     elsif app_name == 'guestbook'
-      `mongoexport --db letterbox -c submissions --out /tmp/#{snapshot_name}_#{app_name}.json`
+      `mongoexport --db letterbox -c submissions --out /tmp/#{snapshot_name}_#{app_name}_submissions.json`
+      `mongoexport --db letterbox -c comments --out /tmp/#{snapshot_name}_#{app_name}_comments.json`
       path = "/var/www/html/mazi-board/src/files"
 
       Zip.on_exists_proc = false
@@ -550,7 +557,8 @@ module MaziConfig
         Dir["#{path}/**/**"].each do |file|
           zipfile.add(file.sub(path+'/',''), file)
         end
-        zipfile.add("#{snapshot_name}_#{app_name}.json", "/tmp/#{snapshot_name}_#{app_name}.json")
+        zipfile.add("#{snapshot_name}_#{app_name}_submissions.json", "/tmp/#{snapshot_name}_#{app_name}_submissions.json")
+        zipfile.add("#{snapshot_name}_#{app_name}_comments.json", "/tmp/#{snapshot_name}_#{app_name}_comments.json")
         zipfile.add("config.js", "/var/www/html/mazi-board/src/www/js/config.js")
         zipfile.add("main.config.js", "/var/www/html/mazi-board/src/node/main.config.js")
         zipfile.add("be.config.js", "/var/www/html/mazi-board/src/node/config.js")
@@ -637,10 +645,15 @@ module MaziConfig
       Zip::File.open(tempfile.path) do |zip_file|
         zip_file.each do |entry|
           next if entry.name == 'README.txt'
-          if entry.name.include?('.json')
+          if entry.name.include?('_submissions.json')
             File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
             entry.extract("/tmp/#{entry.name}")
             `mongoimport --db letterbox --collection submissions --drop --file /tmp/#{entry.name}`
+            `rm /tmp/#{entry.name}`
+          elsif entry.name.include?('_comments.json')
+            File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
+            entry.extract("/tmp/#{entry.name}")
+            `mongoimport --db letterbox --collection comments --drop --file /tmp/#{entry.name}`
             `rm /tmp/#{entry.name}`
           elsif entry.name.include?('mzbgimg_')
             img_name = entry.name.gsub('mzbgimg_', '')

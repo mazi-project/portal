@@ -16,7 +16,10 @@ pt-br:
       stop: Parar
       save: Salvar Mudanças
       choose: Escolher
+      choose-timeslot: Escolha um intervalo de tempo
+      export-to-csv: Exportar para um arquivo CSV
       expand: Expandir
+      expand-storage: Expandir Armazenamento
       reboot: Reiniciar
       reset: Redefinir
       shutdown: Desligar
@@ -38,6 +41,7 @@ pt-br:
       change: Mudar
       qrcode: Código QR
       show: Exibir
+      configure: Configurar
     messages:
       warning: Aviso
       welcome: Bem-vindo
@@ -53,11 +57,14 @@ pt-br:
       channel: Canal
       password: Senha
       offline: desconectado
+      online: conectado
       restricted: restrito
       managed: gerenciado
       active: ativo
       inactive: inativo
       error: erro
+      stable: Estável
+      development: Desenvolvimento
   portal:
     top-menu:
       documentation: Documentação
@@ -66,14 +73,19 @@ pt-br:
       system: Sistema
       sensors: Sensores
       camera: Câmera
+      monitoring: Monitoramento
       devices: Dispositivos
     system-page:
       subheader: Informações do Sistema
+      users: Usuários online
+      app-clicks: Cliques de aplicativos
       temperature: Temperatura
       cpu: CPU
       ram: RAM
       storage: Armazenamento
     sensors-page:
+      header: Medidas de sensor
+      temperature-for: Temperatura de %{sensor}
       pressure-for: Pressão de %{sensor}
       direction: Direção (Graus)
       acceleration: Aceleração (x, y, z)
@@ -115,6 +127,8 @@ pt-br:
       notifications: Notificações
       logs: Registros
     updates:
+      subheader: Atualizar
+      update-message-0: Por favor escolha o seu canal de atualização
       update-message-3: O portal está atualizado, não há necessidade de atualização.
       update-message-4: O sistema está atualizando. Por favor, espere...
       update-message-5: O processo de atualização está quase completo. Sua Zona MAZI
@@ -124,7 +138,14 @@ pt-br:
         abaixo para iniciar o processo de atualização.
       update-hint: 'Dica: se você tiver um comportamento defeituoso, reinicie o seu
         dispositivo.'
+      update-chan-hint: 'Dica: a versão mais recente do canal de desenvolvimento pode
+        ser instável. Não é recomendado alterar o canal de atualização, pois isso
+        pode causar um comportamento inesperado. Por favor, informe os detalhes da
+        versão %{link} para decidir o seu canal de atualização'
+      update-chan-warn: 'Aviso: mudar para outro canal fará com que o dispositivo
+        seja reinicializado.'
     setup-page:
+      third-step-header: Configuração de interface sem fio
       last-step-header: Completo
     dashboard-page:
       subheader: Painel de controle
@@ -135,6 +156,8 @@ pt-br:
         ram-load: Carga de RAM
       applications:
         header: Aplicativos
+      version:
+        version-message: Este Portal é %{nof_commits} commits' por trás.
     applications-page:
       subheader: Aplicativos
       instances-menu:
@@ -147,15 +170,19 @@ pt-br:
         guestbook-admin-hint: Painel de Administração do livro de visitas
       applications-menu:
         status-column: Status
+        status-hint: o status operacional (em execução/parado)
         icon-column: Ícone
         color-column: Cor
         name-column: Nome do aplicativo
         url-column: URL
         description-column: Descrição
+        description-hint: a descrição padrão do aplicativo
         actions-column: Ações
       popups:
         delete-application-hint: Você precisa excluir todas as instâncias do aplicativo
           que estão conectadas a este aplicativo antes de poder excluir este aplicativo.
+        application-icon-hint: 'Dica: para o ícone, por favor, verifique a documentação
+          %{link}'
     network-page:
       internet-panel:
         mode-hint: Modo da rede Wi-Fi
@@ -166,6 +193,9 @@ pt-br:
       popups:
         change-channel-header: Mudar o canal
         change-password-header: Alterar senha
+        change-mode-message: Use o formulário abaixo para escolher o modo de rede
+          para esta zona MAZI. Se você quiser escolher o modo online, certifique-se
+          de ter acesso à Internet (através de um cabo ethernet ou de um dongle Wi-Fi).
         change-domain-header: Editar domínio do portal
     appearance-page:
       subheader: Aparência
@@ -221,13 +251,36 @@ pt-br:
         header4: Ações
     import-export-page:
       subheader: Instantâneas
-      message: Você pode usar as ferramentas abaixo para tirar um instantâneo da configuração
-        atual desta Zona MAZI. Isso inclui tudo (configurações de rede, aplicativos,
-        instâncias de aplicativos, notificações, configurações visuais, etc.).
+      full-snapshots-header: Instantâneos da Zona MAZI
+      full-snapshots-message: Você pode usar o painel abaixo para tirar um instantâneo
+        da configuração atual desta Zona MAZI. Isso inclui tudo (configurações de
+        rede, aplicativos, instâncias de aplicativos, notificações, configurações
+        visuais, etc.)
+      full-snapshot-panel:
+        header-hint: Você pode usar isso para importar/exportar um instantâneo.
+        form-placeholder: Nome do instantâneo
+        no-usb-message: Atualmente não há nenhum dispositivo de armazenamento USB
+          detectado. Por favor, conecte um dispositivo de armazenamento USB e atualize
+          a página.
+        usb-message: Um dispositivo de armazenamento USB foi detectado. Há %{free_space}
+          de espaço livre no dispositivo.
+      full-warning: 'Aviso: Importar e exportar um instantâneo é um procedimento demorado
+        e também depende dos dados da Zona MAZI e da velocidade do dispositivo USB.
+        Você não poderá interagir com o Portal MAZI durante o procedimento de importação/exportação.
+        O dispositivo será reinicializado no final do procedimento de importação.'
+      configuration-snapshots-header: Configuração de Instantâneos
+      configuration-snapshots-message: Você pode usar o painel abaixo para tirar um
+        instantâneo da configuração atual desta Zona MAZI.
       save-snapshot-panel:
         form-placeholder: Nome do instantâneo
+      application-snapshots-header: Instantâneos de aplicativos
       interview-panel:
         form-placeholder: Nome do instantâneo
+      popups:
+        import-nextcloud-header: Importar instantâneo para o Nextcloud
+        import-wordpress-header: Importar instantâneo para o WordPress
+        import-full-header: Importar instantâneo para esta zona MAZI
+        import-config-header: Importar um instantâneo de configuração
     logs-page:
       portal-log-panel:
         filter-label1: Mensagens de erro
