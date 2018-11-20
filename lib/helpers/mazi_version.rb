@@ -73,10 +73,10 @@ module MaziVersion
         break
       end
     end
-    'master'
+    'stretch'
   end
 
-  def change_update_branch(branch="master")
+  def change_update_branch(branch="stretch")
     fetch
     `cd /root/back-end && git checkout #{branch}`
     `git checkout #{branch}`

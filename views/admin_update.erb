@@ -14,11 +14,11 @@
 
 <div class='row'>
   <div class='col-lg-12'>
-    <p>The current update channel is: <b><%= current_branch == 'master' ? I18n.translate("general.messages.stable") : I18n.translate("general.messages.development") %></b></p>
+    <p>The current update channel is: <b><%= current_branch == 'stretch' ? I18n.translate("general.messages.stable") : I18n.translate("general.messages.development") %></b></p>
     <p class="alert alert-success"><%= I18n.translate("admin.updates.update-message-0") %>:
       <select id="update-channel-sel">
-        <option value='master' <%= 'selected="selected"' if current_branch == 'master' %>><%= I18n.translate("general.messages.stable") %></option>
-        <option value='Dev'  <%= 'selected="selected"' if current_branch == 'Dev' %>><%= I18n.translate("general.messages.development") %></option>
+        <option value='stretch' <%= 'selected="selected"' if current_branch == 'stretch' %>><%= I18n.translate("general.messages.stable") %></option>
+        <option value='stretchDev'  <%= 'selected="selected"' if current_branch == 'stretchDev' %>><%= I18n.translate("general.messages.development") %></option>
       </select></br>
       <small><%= I18n.translate("admin.updates.update-chan-hint", link: "<a href='https://github.com/mazi-project/guides/wiki/Version-History' target='_blank'>#{I18n.translate("general.messages.here")}</a>") %></small></br>
       <small><%= I18n.translate("admin.updates.update-chan-warn") %></small>
