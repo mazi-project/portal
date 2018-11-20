@@ -456,7 +456,7 @@
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="mode" id="optionsRadios2" value="online" <%= 'checked' if net_info[:mode] == 'online' || net_info[:mode] == 'dual' %>><%= I18n.translate("general.messages.online") %>
+                    <input type="radio" name="mode" id="optionsRadios2" value="online" <%= 'checked' if net_info[:mode] == 'online' || net_info[:mode] == 'dual' %> <%= 'disabled' unless net_info[:current_internet_connection_on] %>><%= I18n.translate("general.messages.online") %>
                   </label>
                 </div>
                 <div class="radio">

@@ -285,6 +285,9 @@ module Sinatra
               ex6 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-w'], @config[:scripts][:enabled_scripts])
               cur_out = ex6.exec_command.first.split
               locals[:local_data][:net_info][:current_wifi_interface] = cur_out[1]
+              ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-n'], @config[:scripts][:enabled_scripts])
+              cur_out = ex7.exec_command
+              locals[:local_data][:net_info][:current_internet_connection_on] = cur_out.include?('ok')
               erb :admin_main, locals: locals
             when 'admin_configuration'
               unless authorized?
