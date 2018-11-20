@@ -163,7 +163,7 @@ class MaziApp < Sinatra::Base
   at_exit do
     MaziLogger.debug "Exiting"
     pid = `ps aux | grep -v grep | grep 'bash /root/back-end/mazi-sense.sh -n sensehat -m -ac -g' | awk '{print $2}'`
-    `kill -9 #{pid}`
+    `kill -9 #{pid}` unless pid.nil? || pid.empty?
   end
 
   register Sinatra::MaziApp::Routing::MaziMain
