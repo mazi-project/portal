@@ -286,9 +286,26 @@ module MaziConfig
             entry.extract("public/images/#{filename}")
           else
             target = input_filenames[filename]
-            File.delete(target) if File.file?(target)
-            entry.extract(target)
-            `chmod +w #{target}` if filename.include?('.db')
+            if filename == 'online.txt' || filename == 'offline.txt' || filename == 'nodogsplash.conf'
+              entry.extract("/tmp/#{filename}")
+              if nodogsplash_conf_file_version("/tmp/#{filename}") == '1'
+                lines = ''
+                File.readlines("/tmp/#{filename}").each do |line|
+                  if line.strip.include? "ClientIdleTimeout"
+                    lines += line.gsub('ClientIdleTimeout', 'AuthIdleTimeout')
+                  else
+                    lines += line
+                  end
+                end
+                File.open("/tmp/#{filename}", "w") {|file| file.puts lines }
+              end
+              `cp /tmp/#{filename} #{target}`
+              `rm /tmp/#{filename}`
+            else
+              File.delete(target) if File.file?(target)
+              entry.extract(target)
+              `chmod +w #{target}` if filename.include?('.db')
+            end
           end
         elsif entry.name.start_with?('etherpad/')
           db = 'etherpad'
@@ -468,10 +485,27 @@ module MaziConfig
           File.delete("public/images/#{entry.name}") if File.exist?("public/images/#{entry.name}")
           entry.extract("public/images/#{entry.name}")
         else
-          target = input_filenames[entry.name]
-          File.delete(target) if File.file?(target)
-          entry.extract(target)
-          `chmod +w #{target}` if entry.name.include?('.db')
+          target = input_filenames[filename]
+          if filename == 'online.txt' || filename == 'offline.txt' || filename == 'nodogsplash.conf'
+            entry.extract("/tmp/#{filename}")
+            if nodogsplash_conf_file_version("/tmp/#{filename}") == '1'
+              lines = ''
+              File.readlines("/tmp/#{filename}").each do |line|
+                if line.strip.include? "ClientIdleTimeout"
+                  lines += line.gsub('ClientIdleTimeout', 'AuthIdleTimeout')
+                else
+                  lines += line
+                end
+              end
+              File.open("/tmp/#{filename}", "w") {|file| file.puts lines }
+            end
+            `cp /tmp/#{filename} #{target}`
+            `rm /tmp/#{filename}`
+          else
+            File.delete(target) if File.file?(target)
+            entry.extract(target)
+            `chmod +w #{target}` if filename.include?('.db')
+          end
         end
       end
     end
@@ -1046,6 +1080,15 @@ module MaziConfig
       files << file
     end
     files
+  end
+
+  def nodogsplash_conf_file_version(file)
+    File.readlines(file).each do |line|
+      if line.include?('ClientIdleTimeout')
+        return '1'
+      end
+    end
+    '3.2.1'
   end
 
   def all_supported_timezones
