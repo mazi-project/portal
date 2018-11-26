@@ -5,6 +5,7 @@
 # Author: Metalhead64
 # Author: Mgaved
 # Author: Pascalheynmoeller
+# Author: Sushi
 ---
 de:
   general:
@@ -226,7 +227,7 @@ de:
         zu ändern (Optional).
       third-step-warning: 'Warung: Wenn du den Namen deines Wi-Fi Netzwerkes änderst,
         geht Ihre Verbindung zu dieser MAZI Zone verloren und Sie werden sich mit
-        dem neuen Wi-Fi Netzwerk erneut verbeinden müssen.'
+        dem neuen Wi-Fi Netzwerk erneut verbinden müssen.'
       fourth-step-header: Einzelheiten zur MAZI-Zone
       fourth-step-message: Bitte benutzen Sie das Formular unten, um die Details für
         Ihre MAZI Zone zu ändern
