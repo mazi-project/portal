@@ -532,7 +532,7 @@ module MaziConfig
       `rm -f /tmp/network.net`
     end
     `rake db:migrate`
-    `service mazi-portal restart`
+    `reboot`
   end
 
   def zip_app_snapshot(app_name, snapshot_name)
