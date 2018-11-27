@@ -485,26 +485,26 @@ module MaziConfig
           File.delete("public/images/#{entry.name}") if File.exist?("public/images/#{entry.name}")
           entry.extract("public/images/#{entry.name}")
         else
-          target = input_filenames[filename]
-          if filename == 'online.txt' || filename == 'offline.txt' || filename == 'nodogsplash.conf'
-            entry.extract("/tmp/#{filename}")
-            if nodogsplash_conf_file_version("/tmp/#{filename}") == '1'
+          target = input_filenames[entry.name]
+          if entry.name == 'online.txt' || entry.name == 'offline.txt' || entry.name == 'nodogsplash.conf'
+            entry.extract("/tmp/#{entry.name}")
+            if nodogsplash_conf_file_version("/tmp/#{entry.name}") == '1'
               lines = ''
-              File.readlines("/tmp/#{filename}").each do |line|
+              File.readlines("/tmp/#{entry.name}").each do |line|
                 if line.strip.include? "ClientIdleTimeout"
                   lines += line.gsub('ClientIdleTimeout', 'AuthIdleTimeout')
                 else
                   lines += line
                 end
               end
-              File.open("/tmp/#{filename}", "w") {|file| file.puts lines }
+              File.open("/tmp/#{entry.name}", "w") {|file| file.puts lines }
             end
-            `cp /tmp/#{filename} #{target}`
-            `rm /tmp/#{filename}`
+            `cp /tmp/#{entry.name} #{target}`
+            `rm /tmp/#{entry.name}`
           else
             File.delete(target) if File.file?(target)
             entry.extract(target)
-            `chmod +w #{target}` if filename.include?('.db')
+            `chmod +w #{target}` if entry.name.include?('.db')
           end
         end
       end
@@ -623,6 +623,7 @@ module MaziConfig
   end
 
   def unzip_app_snapshot(app_name, filename, tempfile)
+    mysql_user, mysql_password = get_mysql_details
     if app_name.downcase == 'etherpad'
       db = "etherpad"
 
