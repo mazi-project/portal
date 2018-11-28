@@ -645,6 +645,7 @@ module MaziConfig
           next if entry.name == 'README.txt'
           File.delete("/tmp/#{entry.name}") if File.exist?("/tmp/#{entry.name}")
           entry.extract("/tmp/#{entry.name}")
+          next if entry.name == 'config.zip'
           if entry.name.include?('.zip')
             `rm -rf /var/www/html/nextcloud/#{entry.name.gsub('.zip', '')}`
             `unzip /tmp/#{entry.name} -d /var/www/html/nextcloud/`
