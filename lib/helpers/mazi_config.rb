@@ -279,6 +279,7 @@ module MaziConfig
     Zip::File.open(filename) do |zip_file|
       zip_file.each do |entry|
         next if entry.name == 'README.txt'
+        next if entry.name == 'nextcloud/config.zip'
         if entry.name.start_with?('config/')
           filename = entry.name.gsub('config/', '')
           if filename.include?('.jpg') || filename.include?('.png')
