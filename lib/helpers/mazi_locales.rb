@@ -3,7 +3,7 @@ module MaziLocales
     I18n::Backend::Simple.send(:include, I18n::Backend::Fallbacks)
     I18n.load_path = Dir[File.join(settings.root, 'locales', '*.yml')]
     I18n.backend.load_translations
-    I18n.available_locales = [:en, :el]
+    I18n.available_locales = [:en, :el, :fr, :ar, :tr, 'zh-hans'.to_sym]
     set_locale(:en)
   end
 
