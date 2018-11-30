@@ -369,6 +369,7 @@ module Sinatra
               locals[:local_data][:welcomeMessage]      = get_guestbook_welcome_message
               locals[:local_data][:auto_expand_comment] = get_guestbook_auto_expand_comment
               locals[:local_data][:submision_name_req]  = get_guestbook_submission_name_req
+              locals[:local_data][:cur_background_img]  = get_guestbook_background_image_name
               erb :admin_main, locals: locals
             when 'admin_monitor'
               unless authorized?

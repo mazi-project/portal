@@ -71,11 +71,11 @@
       <div class="panel-body">
         <div class="row">
           <div class="col-lg-12">
-            <p>You can use the form bellow to upload a new background image for the GuestBook application.</p>
+            <p>Current image: <%= cur_background_img %> </br>You can use the form bellow to upload a new background image for the GuestBook application.</p>
             <form action="/application_admin/guestbook/background_image" method="post" enctype="multipart/form-data">
               <div class="form-group">
                 <input type="file" name="guestbook_background_image" class="form-control filestyle" data-buttonText="Browse">
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Upload</button>
+                <input type="submit" class="btn btn-primary pull-right" value="Upload" title="Upload background image"/>
               </div>
             </form>
           </div>
