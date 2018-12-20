@@ -114,8 +114,8 @@ module Sinatra
             end
 
           end
-
-          app.get '/sensors/id/?' do
+         
+          app.get '/sensors/id/?' do 
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
@@ -502,9 +502,96 @@ module Sinatra
             end
           end
 
+          app.post '/create/mesh/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            MaziLogger.debug "Create mesh Database, information table and node table"
+            begin
+             client = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}")
+             client.query("CREATE DATABASE IF NOT EXISTS mesh")
+             client.close
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
+            
+             con.query("CREATE TABLE IF NOT EXISTS information(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), ssid VARCHAR(50), 
+                        administrator VARCHAR(50), title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
+             con.query("CREATE TABLE IF NOT EXISTS node(id INT PRIMARY KEY AUTO_INCREMENT, node_id INT(4), ip VARCHAR(15) )")
+             
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+	  
+  	  app.post '/register/node/information' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Register the node of the mesh network"
+            begin
+            con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
+           
+            id = con.query("SELECT id FROM information WHERE deployment LIKE '#{body["deployment"]}'AND ssid='#{body["ssid"]}' AND
+                            title='#{body["title"]}'AND administrator='#{body["admin"]}' AND description='#{body["description"]}' 
+                            AND location='#{body["loc"]}'")
+            id = id.fetch_row
+	    if( id == nil )
+	       con.query("INSERT INTO information(deployment, ssid, administrator, title, description, location)
+                          VALUES( '#{body["deployment"]}', '#{body["ssid"]}','#{body["admin"]}', '#{body["title"]}', '#{body["description"]}', 
+                          '#{body["loc"]}')")
+               id = con.query("SELECT max(id) FROM information")
+               id = id.fetch_row
+            end
+             
+            return id
 
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
 
-          app.post '/monitoring/register/?' do
+          app.post '/register/node' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Registers the IP of the node"
+            begin
+            con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
+           
+            id = con.query("SELECT id FROM node WHERE node_id LIKE '#{body["node_id"]}'")
+            id = id.fetch_row
+       
+            if ( id != nil )
+               con.query("UPDATE node SET ip = '#{body["ip"]} WHERE id = #{id}'")
+            else
+               con.query("INSERT INTO node(node_id, ip) VALUES( '#{body["node_id"]}', '#{body["ip"]}')") 
+            end        
+
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+
+          app.get '/sshKey/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            MaziLogger.debug "Send the ssh public key"
+            begin
+               key =  File.read('/root/.ssh/id_rsa.pub')
+               return key
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+            end
+          end   
+
+	  app.post '/monitoring/register/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
