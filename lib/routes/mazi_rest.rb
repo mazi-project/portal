@@ -55,43 +55,6 @@ module Sinatra
             end
           end
  
-
-=begin
-          app.post '/create/sht11/?' do
-            file = File.read('/etc/mazi/sql.conf')
-            data = JSON.parse(file)
-            request.body.rewind
-            MaziLogger.debug "Create sht11 table in monitoring Database if doesn't exists"
-            begin
-             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("CREATE TABLE IF NOT EXISTS sht11(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME, temperature VARCHAR(4), humidity VARCHAR(4))")
-            rescue Mysql::Error => e
-              MaziLogger.error e.message
-            ensure
-              con.close if con
-            end
-          end
-
-
-          app.post '/update/sht11/?' do
-            file = File.read('/etc/mazi/sql.conf')
-            data = JSON.parse(file)
-            request.body.rewind
-            body = JSON.parse(request.body.read)
-            date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
-            MaziLogger.debug "Update sht11 table "
-            begin
-             con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
-             con.query("INSERT INTO sht11(sensor_id, time, temperature, humidity)
-                        VALUES('#{body["sensor_id"]}','#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
-                               '#{body["value"]["temp"]}','#{body["value"]["hum"]}')")
-            rescue Mysql::Error => e
-              MaziLogger.error e.message
-            ensure
-              con.close if con
-            end
-          end
-=end
           app.post '/sensor/register/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)            
@@ -590,6 +553,26 @@ module Sinatra
             ensure
             end
           end   
+      
+          app.post '/flush/node/?' do
+            file = File.read('/etc/mazi/sql.conf')
+            data = JSON.parse(file)
+            request.body.rewind
+            body = JSON.parse(request.body.read)
+            MaziLogger.debug "Delete node with IP:#{body["ip"]} from the Database"
+            begin
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
+             node_id = con.query("SELECT node_id FROM node WHERE ip LIKE '#{body["ip"]}'")
+             node_id = node_id.fetch_row.first
+             con.query("DELETE FROM node WHERE node_id='#{node_id}'")
+             con.query("DELETE FROM information WHERE id='#{node_id}'")
+            rescue Mysql::Error => e
+              MaziLogger.error e.message
+            ensure
+              con.close if con
+            end
+          end
+            
 
 	  app.post '/monitoring/register/?' do
             file = File.read('/etc/mazi/sql.conf')
