@@ -26,7 +26,7 @@ $( document ).ready(function() {
   $(".panel-desc-txt-block").height(maxHeight);
 
   $('.language-button').click(function(){
-    var appId = $(this).attr('id').split('-')[0];
+    var appId = $(this).attr('id').replace('-language-button', '');
     $.ajax({
       url: '/locales/' + appId,
       type: 'POST',
