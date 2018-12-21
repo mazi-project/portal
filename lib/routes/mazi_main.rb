@@ -233,7 +233,9 @@ module Sinatra
               locals[:local_data][:rasp_date]             = Time.now.strftime("%d %b %Y")
               locals[:local_data][:rasp_time]             = Time.now.strftime("%H:%M")
               locals[:local_data][:version]               = getVersion
-              locals[:local_data][:version_difference]    = version_difference
+              ex3 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-n'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+              line = ex3.exec_command
+              locals[:local_data][:version_difference] = line == 'OK' ? version_difference : 0
               erb :admin_main, locals: locals
             when 'admin_application'
               unless authorized?
