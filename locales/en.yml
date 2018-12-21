@@ -140,7 +140,7 @@ en:
       shutdown-modal-title:   "Shutdown?"
       shutdown-modal-message: "MAZI Zone will now Shutdown, this will cause this site to be unreachable and you will need to manually reboot this MAZI Zone. Proceed?"
       reboot-modal-title:     "Reboot?"
-      reboot-modal-message:   "MAZI Zone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutres. Proceed?"
+      reboot-modal-message:   "MAZI Zone will now Reboot, this will cause this site to be unreachable for a few minutes, please wait and refresh this page after a few minutes. Proceed?"
     top-menu:
       header:         "MAZI Zone Administration Panel"
       admin:          "Admin"
