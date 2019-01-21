@@ -229,6 +229,7 @@ module MaziVersion
         `gem uninstall -I sinatra -v 1.4.8`
         `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
         `cp /root/portal/init/gollum.service /etc/systemd/system`
+        `systemctl enable gollum`
         MaziLogger.debug "  done"
         `service mazi-portal restart`
         `service gollum start`
@@ -243,6 +244,7 @@ module MaziVersion
         `gem uninstall -y sinatra -v 1.4.8`
         `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
         `cp /root/portal/init/gollum.service /etc/systemd/system`
+        `systemctl enable gollum`
         MaziLogger.debug "  done"
         `service mazi-portal restart`
         `service gollum start`
