@@ -217,7 +217,37 @@ module MaziVersion
       end
       File.open('/root/.ssh/authorized_keys', "w") {|file| file.puts lines }
     end
-
+    begin
+      Gem::Specification.find_by_name("gollum")
+    rescue Gem::LoadError
+       MaziLogger.debug "    gollum gem not found. Installing."
+        `apt-get -y update`
+        `apt-get -y install zlib1g-dev libicu-dev`
+        `gem install gollum --no-ri --no-rdoc`
+        `gem uninstall posix-spawn -v 0.3.13`
+        `gem install posix-spawn -v 0.3.12`
+        `gem uninstall -y sinatra -v 1.4.8`
+        `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
+        `cp /root/portal/init/gollum.service /etc/systemd/system`
+        MaziLogger.debug "  done"
+        `service mazi-portal restart`
+        `service gollum start`
+    rescue
+      unless Gem.available?("gollum")
+        MaziLogger.debug "    gollum gem not found. Installing."
+        `apt-get -y update`
+        `apt-get -y install zlib1g-dev libicu-dev`
+        `gem install gollum --no-ri --no-rdoc`
+        `gem uninstall posix-spawn -v 0.3.13`
+        `gem install posix-spawn -v 0.3.12`
+        `gem uninstall -y sinatra -v 1.4.8`
+        `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
+        `cp /root/portal/init/gollum.service /etc/systemd/system`
+        MaziLogger.debug "  done"
+        `service mazi-portal restart`
+        `service gollum start`
+      end
+    end
 
     remove_old_snapshots
     delete_lock_update_file
