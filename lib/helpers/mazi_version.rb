@@ -224,9 +224,9 @@ module MaziVersion
         `apt-get -y update`
         `apt-get -y install zlib1g-dev libicu-dev`
         `gem install gollum --no-ri --no-rdoc`
-        `gem uninstall posix-spawn -v 0.3.13`
+        `gem uninstall -I posix-spawn -v 0.3.13`
         `gem install posix-spawn -v 0.3.12`
-        `gem uninstall -y sinatra -v 1.4.8`
+        `gem uninstall -I sinatra -v 1.4.8`
         `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
         `cp /root/portal/init/gollum.service /etc/systemd/system`
         MaziLogger.debug "  done"
