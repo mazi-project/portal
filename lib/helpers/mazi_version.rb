@@ -231,8 +231,8 @@ module MaziVersion
         `cp /root/portal/init/gollum.service /etc/systemd/system`
         `systemctl enable gollum`
         MaziLogger.debug "  done"
-        `service mazi-portal restart`
         `service gollum start`
+        `service mazi-portal restart`
     rescue
       unless Gem.available?("gollum")
         MaziLogger.debug "    gollum gem not found. Installing."
@@ -246,8 +246,8 @@ module MaziVersion
         `cp /root/portal/init/gollum.service /etc/systemd/system`
         `systemctl enable gollum`
         MaziLogger.debug "  done"
-        `service mazi-portal restart`
         `service gollum start`
+        `service mazi-portal restart`
       end
     end
 
