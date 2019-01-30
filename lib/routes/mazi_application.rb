@@ -233,6 +233,10 @@ module Sinatra
                 res = app.start
               when 'stop'
                 res = app.stop
+                app.application_instances.each do |instance|
+                  instance.enabled = false
+                  instance.save
+                end
               when 'status'
                 res = app.status
               end

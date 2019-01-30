@@ -1,4 +1,4 @@
-VERSION = '3.0'
+VERSION = '3.0.2'
 
 class ConfigCaller
   include MaziConfig
@@ -193,8 +193,63 @@ module MaziVersion
     end
   end
 
+  def self.ssh_key_found?
+    filename = '/root/.ssh/authorized_keys'
+    if File.file?(filename)
+      File.readlines(filename).each do |line|
+        return true if line.include?('ardadouk@HP-PC')
+      end
+    end
+    false
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
+
+    MaziLogger.debug "  Checking updates for version 3.0.2"
+    if self.ssh_key_found?
+      lines = ''
+      MaziLogger.debug "    SSH key found. Removing."
+      File.readlines('/root/.ssh/authorized_keys').each do |line|
+        unless line.include? "ardadouk@HP-PC"
+          lines += line
+        end
+      end
+      File.open('/root/.ssh/authorized_keys', "w") {|file| file.puts lines }
+    end
+    begin
+      Gem::Specification.find_by_name("gollum")
+    rescue Gem::LoadError
+       MaziLogger.debug "    gollum gem not found. Installing."
+        `apt-get -y update`
+        `apt-get -y install zlib1g-dev libicu-dev`
+        `gem install gollum --no-ri --no-rdoc`
+        `gem uninstall -I posix-spawn -v 0.3.13`
+        `gem install posix-spawn -v 0.3.12`
+        `gem uninstall -I sinatra -v 1.4.8`
+        `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
+        `cp /root/portal/init/gollum.service /etc/systemd/system`
+        `systemctl enable gollum`
+        MaziLogger.debug "  done"
+        `service gollum start`
+        `service mazi-portal restart`
+    rescue
+      unless Gem.available?("gollum")
+        MaziLogger.debug "    gollum gem not found. Installing."
+        `apt-get -y update`
+        `apt-get -y install zlib1g-dev libicu-dev`
+        `gem install gollum --no-ri --no-rdoc`
+        `gem uninstall posix-spawn -v 0.3.13`
+        `gem install posix-spawn -v 0.3.12`
+        `gem uninstall -y sinatra -v 1.4.8`
+        `cd /root; git clone https://github.com/mazi-project/guides.wiki.git`
+        `cp /root/portal/init/gollum.service /etc/systemd/system`
+        `systemctl enable gollum`
+        MaziLogger.debug "  done"
+        `service gollum start`
+        `service mazi-portal restart`
+      end
+    end
 
     remove_old_snapshots
     delete_lock_update_file
