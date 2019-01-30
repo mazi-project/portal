@@ -527,9 +527,10 @@ module Sinatra
            
             id = con.query("SELECT id FROM node WHERE node_id LIKE '#{body["node_id"]}'")
             id = id.fetch_row
-       
+            id = id.first
+
             if ( id != nil )
-               con.query("UPDATE node SET ip = '#{body["ip"]} WHERE id = #{id}'")
+               con.query("UPDATE node SET ip = '#{body["ip"]}' WHERE id = '#{id}'")
             else
                con.query("INSERT INTO node(node_id, ip) VALUES( '#{body["node_id"]}', '#{body["ip"]}')") 
             end        
