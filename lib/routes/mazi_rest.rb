@@ -477,7 +477,7 @@ module Sinatra
             
              con.query("CREATE TABLE IF NOT EXISTS information(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), ssid VARCHAR(50), 
                         administrator VARCHAR(50), title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
-             con.query("CREATE TABLE IF NOT EXISTS node(id INT PRIMARY KEY AUTO_INCREMENT, node_id INT(4), ip VARCHAR(15) )")
+             con.query("CREATE TABLE IF NOT EXISTS node(id INT PRIMARY KEY AUTO_INCREMENT, node_id INT(4), ip VARCHAR(30) )")
              
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -527,9 +527,9 @@ module Sinatra
            
             id = con.query("SELECT id FROM node WHERE node_id LIKE '#{body["node_id"]}'")
             id = id.fetch_row
-       
+            id = id.first
             if ( id != nil )
-               con.query("UPDATE node SET ip = '#{body["ip"]} WHERE id = #{id}'")
+               con.query("UPDATE node SET ip = '#{body["ip"]}' WHERE id = '#{id}'")
             else
                con.query("INSERT INTO node(node_id, ip) VALUES( '#{body["node_id"]}', '#{body["ip"]}')") 
             end        
