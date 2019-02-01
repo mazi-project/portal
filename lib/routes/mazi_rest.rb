@@ -528,6 +528,10 @@ module Sinatra
             id = con.query("SELECT id FROM node WHERE node_id LIKE '#{body["node_id"]}'")
             id = id.fetch_row
             id = id.first
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1ce8b745322f7aa542fcb3cb2a4d77c90694e9f1
             if ( id != nil )
                con.query("UPDATE node SET ip = '#{body["ip"]}' WHERE id = '#{id}'")
             else

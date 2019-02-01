@@ -6,7 +6,7 @@ class MaziExecCmd
 
   def initialize(env, path, cmd, args=[], enabled_scripts=[], demo=false)
     @enabled_scripts = enabled_scripts
-    @demo = demo
+    @demo = demo == "demo"
     raise ScriptNotEnabled unless enabled?(cmd)
     @cmd = cmd
     @env = env
@@ -21,7 +21,7 @@ class MaziExecCmd
   end
 
   def exec_command
-    return demoExec if @demo == 'demo'
+    return demoExec if @demo
     command = "#{@env} #{@path}#{@cmd} #{@args.join(' ')}"
     MaziLogger.debug "$ #{command}"
     @output = []
@@ -35,7 +35,7 @@ class MaziExecCmd
   end
 
   def parseFor(token, splitter=' ')
-    return demoParse(token, splitter) if @demo == 'demo'
+    return demoParse(token, splitter) if @demo
     @output.each do |line|
       return line.split(splitter) if line.include? token
     end
@@ -43,7 +43,7 @@ class MaziExecCmd
   end
 
   def parseForAll(token, splitter=' ')
-    return demoParse(token, splitter) if @demo == 'demo'
+    return demoParse(token, splitter) if @demo
     out = []
     @output.each do |line|
       out << line.split(splitter) if line.include? token
@@ -92,6 +92,8 @@ class MaziExecCmd
         return ['password', '123456789']
       when 'mode'
         return ['mode', 'offline']
+      when 'interface'
+        return [{:wlan0=>{:interface=>"wlan0", :name=>"Raspberry WiFi111", :mode=>"wifi"}}]
       end
     when 'internet.sh'
       'OK'

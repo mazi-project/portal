@@ -1,7 +1,7 @@
 module MaziNetwork
   def get_interfaces
     interfaces = {}
-    ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-i', 'all', '-i', 'wifi', '-i', 'internet', '-i', 'mesh'], @config[:scripts][:enabled_scripts])
+    ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-i', 'all', '-i', 'wifi', '-i', 'internet', '-i', 'mesh'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
     lines = ex.exec_command
     wifi_if     = nil
     internet_if = nil
@@ -32,7 +32,7 @@ module MaziNetwork
     interfaces.each do |if_name, if_data|
       case if_data[:mode]
       when 'wifi'
-        ex1 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c'], @config[:scripts][:enabled_scripts])
+        ex1 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-s', '-p', '-c'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
         lines = ex1.exec_command
         ssid = ex1.parseFor('ssid')
         ssid.shift
@@ -43,7 +43,7 @@ module MaziNetwork
         if_data[:password] = password[1] if password.kind_of? Array
         ap = if_name
       when 'internet'
-        ex2 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-i', if_name.to_s, '-a'], @config[:scripts][:enabled_scripts])
+        ex2 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-i', if_name.to_s, '-a'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
         lines = ex2.exec_command
         if lines.nil? || lines.empty? || !lines.first.include?('ESSID')
           if_data[:mode] = nil
@@ -56,7 +56,7 @@ module MaziNetwork
         ssid = ex2.parseFor('ESSID')
         if_data[:ssid] = ssid.last.split(':').last.gsub('"', '')
         if_data[:available_ssids] = []
-        ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+        ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts], @config[:general][:mode])
         if_data[:available_ssids] = ex7.exec_command
         if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
         if_data[:available_ssids].reject! {|ssid| ssid.empty?}
@@ -64,7 +64,7 @@ module MaziNetwork
 
       else
         if_data[:available_ssids] = []
-        ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts])
+        ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts], @config[:general][:mode])
         if_data[:available_ssids] = ex8.exec_command
         if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
         if_data[:available_ssids].reject! {|ssid| ssid.empty?}
