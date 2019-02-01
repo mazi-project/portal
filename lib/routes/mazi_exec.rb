@@ -98,6 +98,7 @@ module Sinatra
               args << "-i #{params['interface']}" unless params['interface'].nil? || params['interface'].empty?
               args << "-s #{params['ssid']}" unless params['ssid'].nil? || params['ssid'].empty?
               args << "-b #{params['bridge']}" if !(params['bridge'].nil? || params['bridge'].empty?) && params['bridge'] == 'node'
+              args << "--ip #{params['ip']}" unless params['ip'].nil? || params['ip'].empty?
             else
               args = []
             end

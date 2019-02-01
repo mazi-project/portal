@@ -61,7 +61,23 @@ module MaziNetwork
         if_data[:available_ssids].map! {|ssid| ssid.gsub('ESSID:', '').gsub('"', '')}
         if_data[:available_ssids].reject! {|ssid| ssid.empty?}
       when 'mesh'
-
+        ex1 = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-mesh.sh', ['-d'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
+        lines = ex1.exec_command
+        ssid = ex1.parseFor('mesh_ssid').last.gsub('"', '')
+        mode = ex1.parseFor('mode').last.gsub('"', '')
+        if_data[:mesh_ssid] = ssid
+        if_data[:mesh_mode] = mode.capitalize
+        if mode == 'gateway'
+          if_data[:mesh_nodes] = []
+          mysql_username, mysql_password = mysql_creds
+          mysql_username, mysql_password = mysql_creds
+          con = Mysql.new('localhost', mysql_username, mysql_password, 'mesh')
+          q = "SELECT * FROM node INNER JOIN information ON node.node_id = information.id"
+          a = con.query(q)
+          a.each_hash do |row|
+            if_data[:mesh_nodes] << {id: row['id'], ip: row['ip'], title: row['title']}
+          end
+        end
       else
         if_data[:available_ssids] = []
         ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts], @config[:general][:mode])

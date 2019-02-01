@@ -210,8 +210,8 @@
       </div>
       <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
-          <h2 class="no-margins">MAZI-Mesh</h2>
-          <small>Mesh Network Gateway</small></br>
+          <h2 class="no-margins"><%= if_data[:mesh_ssid] %></h2>
+          <small>Mesh Network <%= if_data[:mesh_mode] %></small></br>
         </div>
         <div class="pull-right"><i class="fas fa-5x fa-broadcast-tower"></i></div>
       </div>
@@ -221,7 +221,6 @@
           <input type="hidden" name="env" value='bash'>
           <input type="hidden" name="cmd" value='mazi-mesh.sh'>
           <input type="hidden" name="mode" value='portal'>
-          <input type="hidden" name="interface" value='<%= if_name %>'>
           <button type='submit' class="btn btn-danger pull-left" style="margin-left: 10px;"><i class="fas fa-ban"></i> <%= I18n.translate("general.buttons.disconnect") %></button>
         </form>
       </span>
@@ -229,8 +228,53 @@
         <p class='interface-type-p'><b>Mesh Network</b></p>
       </span>
       <span class='col-lg-3'>
-
+        <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#configure-mesh-modal-<%= if_name %>"><i class="fas fa-cog"></i> <%= I18n.translate("general.buttons.configure") %></button>
       </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="configure-mesh-modal-<%= if_name %>" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title"><%= I18n.translate("general.buttons.configure") %></h4>
+        </div>
+        <div class="modal-body">
+          <% if if_data[:mesh_nodes].nil? || if_data[:mesh_nodes].empty? %>
+            <p>There are no nodes connected to this mesh network.</p>
+          <% else%>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th><%= I18n.translate("admin.monitoring-page.details-panel.table-label3") %></th>
+                <th>IP</th>
+                <th><%= I18n.translate("admin.applications-page.instances-menu.actions-column") %></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% if_data[:mesh_nodes].each do |node| %>
+              <tr>
+                <td><%= node[:id] %></td>
+                <td><%= node[:title] %></td>
+                <td><%= node[:ip] %></td>
+                <td>
+                  <form action="/exec" method="post">
+                    <input type="hidden" name="env" value='bash'>
+                    <input type="hidden" name="cmd" value='mazi-mesh.sh'>
+                    <input type="hidden" name="mode" value='portal'>
+                    <input type="hidden" name="ip" value='<%= node[:ip] %>'>
+                    <button type='submit' class="btn btn-danger" style="margin-left: 10px;"><i class="fas fa-ban"></i> <%= I18n.translate("general.buttons.disconnect") %></button>
+                  </form>
+                </td>
+              </tr>
+              <% end %>
+            </tbody>
+          </table>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
