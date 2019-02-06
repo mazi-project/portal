@@ -14,15 +14,15 @@ module Sinatra
             begin
              con = Mysql.new('localhost',"#{data["username"]}", "#{data["password"]}", "monitoring")
              con.query("CREATE TABLE IF NOT EXISTS measurements(id INT PRIMARY KEY AUTO_INCREMENT,sensor_id INT(4) , time DATETIME)")
-             
+
              body["senstypes"].each do |i|
                id = con.query("SELECT 1  FROM INFORMATION_SCHEMA.COLUMNS WHERE  table_name = 'measurements' AND column_name = '#{i}'")
                exists = id.fetch_row
-               if exists.nil? 
-                 con.query("ALTER TABLE measurements ADD #{i} varchar(4) NOT NULL default '0';")  
+               if exists.nil?
+                 con.query("ALTER TABLE measurements ADD #{i} varchar(4) NOT NULL default '0';")
                end
              end
- 
+
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -43,7 +43,7 @@ module Sinatra
             rescue Mysql::Error => e
               MaziLogger.error e.message
               case e.errno
-              when 1044, 1045, 1142, 1143,1227            
+              when 1044, 1045, 1142, 1143,1227
                return "Database Access Denied"
               when 1037, 1038, 1041, 1135, 1257
                return "Database Out of memory"
@@ -54,22 +54,22 @@ module Sinatra
               con.close if con
             end
           end
- 
+
           app.post '/sensor/register/?' do
             file = File.read('/etc/mazi/sql.conf')
-            data = JSON.parse(file)            
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Register sensor: #{body["sensor_name"]} from ip: #{body["ip"]}"
             begin
               con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
               con.query("CREATE TABLE IF NOT EXISTS sensors(id INT PRIMARY KEY AUTO_INCREMENT, sensor_name VARCHAR(50), ip VARCHAR(15), device_id INT(4))")
- 
+
               con.query("INSERT INTO sensors(sensor_name, ip, device_id)
                         VALUES('#{body["sensor_name"]}', '#{body["ip"]}', '#{body["device_id"]}')")
               id = con.query("SELECT max(id) FROM sensors")
               return id.fetch_row
-            
+
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
@@ -77,8 +77,8 @@ module Sinatra
             end
 
           end
-         
-          app.get '/sensors/id/?' do 
+
+          app.get '/sensors/id/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
@@ -162,7 +162,7 @@ module Sinatra
 
 
           app.post '/create/framadate/?' do
- 	    file = File.read('/etc/mazi/sql.conf')
+            file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             MaziLogger.debug "Create framadate table in monitoring Database if doesn't exists"
@@ -245,7 +245,7 @@ module Sinatra
 
           app.post '/update/guestbook/?' do
             file = File.read('/etc/mazi/sql.conf')
-            data = JSON.parse(file)    
+            data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
@@ -363,7 +363,7 @@ module Sinatra
                         online_users INT(4))")
              con.query("CREATE TABLE IF NOT EXISTS system(id INT PRIMARY KEY AUTO_INCREMENT, device_id INT(4), timestamp DATETIME, cpu_temperature FLOAT(3,1) COMMENT 'Celsius',
                         cpu_usage FLOAT(3,1) COMMENT 'percentage %',ram_usage FLOAT(3,1) COMMENT 'percentage %',
-                        storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1), upload_unit VARCHAR(10), 
+                        storage FLOAT(3,1) COMMENT 'percentage %', upload FLOAT(3,1), upload_unit VARCHAR(10),
                         download FLOAT(3,1), download_unit VARCHAR(10) )")
             con.query ("ALTER TABLE system ADD UNIQUE KEY (device_id)")
             rescue Mysql::Error => e
@@ -381,12 +381,12 @@ module Sinatra
             date = DateTime.strptime("#{body["date"]}", '%H%M%S%d%m%y')
             MaziLogger.debug "Update system table in monitoring Database"
             begin
-             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")          
-             con.query("INSERT INTO system(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit) 
+             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
+             con.query("INSERT INTO system(device_id, timestamp, cpu_temperature, cpu_usage, ram_usage, storage, upload, upload_unit,download, download_unit)
                         VALUES('#{body["device_id"]}', '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}',
                                              '#{body["temp"]}', '#{body["cpu"]}', '#{body["ram"]}', '#{body["storage"]}','#{body["network"]["upload"]}',
                                              '#{body["network"]["upload_unit"]}','#{body["network"]["download"]}',
-                                             '#{body["network"]["download_unit"]}') 
+                                             '#{body["network"]["download_unit"]}')
                         ON DUPLICATE KEY UPDATE timestamp = '#{date.year}-#{date.month}-#{date.day} #{date.hour}:#{date.minute}:#{date.second}', cpu_temperature = '#{body["temp"]}',
                                                 cpu_usage = '#{body["cpu"]}', ram_usage = '#{body["ram"]}', storage = '#{body["storage"]}', upload = '#{body["network"]["upload"]}',
                                                 upload_unit = '#{body["network"]["upload_unit"]}', download = '#{body["network"]["download"]}', download_unit = '#{body["network"]["download_unit"]}' ; ")
@@ -474,18 +474,18 @@ module Sinatra
              client.query("CREATE DATABASE IF NOT EXISTS mesh")
              client.close
              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
-            
-             con.query("CREATE TABLE IF NOT EXISTS information(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), ssid VARCHAR(50), 
+
+             con.query("CREATE TABLE IF NOT EXISTS information(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50), ssid VARCHAR(50),
                         administrator VARCHAR(50), title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
              con.query("CREATE TABLE IF NOT EXISTS node(id INT PRIMARY KEY AUTO_INCREMENT, node_id INT(4), ip VARCHAR(30) )")
-             
+
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
               con.close if con
             end
           end
-	  
+
   	  app.post '/register/node/information' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -494,19 +494,19 @@ module Sinatra
             MaziLogger.debug "Register the node of the mesh network"
             begin
             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
-           
+
             id = con.query("SELECT id FROM information WHERE deployment LIKE '#{body["deployment"]}'AND ssid='#{body["ssid"]}' AND
-                            title='#{body["title"]}'AND administrator='#{body["admin"]}' AND description='#{body["description"]}' 
+                            title='#{body["title"]}'AND administrator='#{body["admin"]}' AND description='#{body["description"]}'
                             AND location='#{body["loc"]}'")
             id = id.fetch_row
-	    if( id == nil )
-	       con.query("INSERT INTO information(deployment, ssid, administrator, title, description, location)
-                          VALUES( '#{body["deployment"]}', '#{body["ssid"]}','#{body["admin"]}', '#{body["title"]}', '#{body["description"]}', 
+            if( id == nil )
+              con.query("INSERT INTO information(deployment, ssid, administrator, title, description, location)
+                          VALUES( '#{body["deployment"]}', '#{body["ssid"]}','#{body["admin"]}', '#{body["title"]}', '#{body["description"]}',
                           '#{body["loc"]}')")
-               id = con.query("SELECT max(id) FROM information")
-               id = id.fetch_row
+              id = con.query("SELECT max(id) FROM information")
+              id = id.fetch_row
             end
-             
+
             return id
 
             rescue Mysql::Error => e
@@ -524,19 +524,16 @@ module Sinatra
             MaziLogger.debug "Registers the IP of the node"
             begin
             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
-           
+
             id = con.query("SELECT id FROM node WHERE node_id LIKE '#{body["node_id"]}'")
             id = id.fetch_row
-            id = id.first
-<<<<<<< HEAD
-=======
+            id = id.first unless id.nil?
 
->>>>>>> 1ce8b745322f7aa542fcb3cb2a4d77c90694e9f1
             if ( id != nil )
-               con.query("UPDATE node SET ip = '#{body["ip"]}' WHERE id = '#{id}'")
+              con.query("UPDATE node SET ip = '#{body["ip"]}' WHERE id = '#{id}'")
             else
-               con.query("INSERT INTO node(node_id, ip) VALUES( '#{body["node_id"]}', '#{body["ip"]}')") 
-            end        
+              con.query("INSERT INTO node(node_id, ip) VALUES( '#{body["node_id"]}', '#{body["ip"]}')")
+            end
 
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -550,14 +547,14 @@ module Sinatra
             data = JSON.parse(file)
             MaziLogger.debug "Send the ssh public key"
             begin
-               key =  File.read('/root/.ssh/id_rsa.pub')
-               return key
+              key =  File.read('/root/.ssh/id_rsa.pub')
+              return key
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
             end
-          end   
-      
+          end
+
           app.post '/flush/node/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
@@ -565,52 +562,52 @@ module Sinatra
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Delete node with IP:#{body["ip"]} from the Database"
             begin
-             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
-             node_id = con.query("SELECT node_id FROM node WHERE ip LIKE '#{body["ip"]}'")
-             node_id = node_id.fetch_row.first
-             con.query("DELETE FROM node WHERE node_id='#{node_id}'")
-             con.query("DELETE FROM information WHERE id='#{node_id}'")
+              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "mesh")
+              node_id = con.query("SELECT node_id FROM node WHERE ip LIKE '#{body["ip"]}'")
+              node_id = node_id.fetch_row.first
+              con.query("DELETE FROM node WHERE node_id='#{node_id}'")
+              con.query("DELETE FROM information WHERE id='#{node_id}'")
             rescue Mysql::Error => e
               MaziLogger.error e.message
             ensure
               con.close if con
             end
           end
-            
 
-	  app.post '/monitoring/register/?' do
+
+          app.post '/monitoring/register/?' do
             file = File.read('/etc/mazi/sql.conf')
             data = JSON.parse(file)
             request.body.rewind
             body = JSON.parse(request.body.read)
             MaziLogger.debug "Create monitoring Database, devices table and deployment table"
             begin
-             client = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}")
-             client.query("CREATE DATABASE IF NOT EXISTS monitoring")
-             client.close
-             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-            
-             con.query("CREATE TABLE IF NOT EXISTS deployments(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50))")
+              client = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}")
+              client.query("CREATE DATABASE IF NOT EXISTS monitoring")
+              client.close
+              con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
 
-             id = con.query("SELECT id FROM deployments WHERE deployment LIKE '#{body["deployment"]}'")
-             deployment_id = id.fetch_row
-             
-             unless deployment_id.nil?
+              con.query("CREATE TABLE IF NOT EXISTS deployments(id INT PRIMARY KEY AUTO_INCREMENT, deployment VARCHAR(50))")
+
+              id = con.query("SELECT id FROM deployments WHERE deployment LIKE '#{body["deployment"]}'")
+              deployment_id = id.fetch_row
+
+              unless deployment_id.nil?
                 deployment_id = deployment_id.first
-               
-             else
+
+              else
                 con.query("INSERT INTO deployments(deployment) VALUES('#{body["deployment"]}')")
                 id = con.query("SELECT max(id) FROM deployments")
                 deployment_id = id.fetch_row.first
-             end
-                                   
-             con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment_id INT(4), administrator VARCHAR(50),
+              end
+
+              con.query("CREATE TABLE IF NOT EXISTS devices(id INT PRIMARY KEY AUTO_INCREMENT, deployment_id INT(4), administrator VARCHAR(50),
                         title VARCHAR(50), description VARCHAR(200), location VARCHAR(50) )")
-             con.query("INSERT INTO devices(deployment_id, administrator, title, description, location)
+              con.query("INSERT INTO devices(deployment_id, administrator, title, description, location)
                         VALUES( #{deployment_id}, '#{body["admin"]}', '#{body["title"]}', '#{body["description"]}', '#{body["loc"]}')")
-             id = con.query("SELECT max(id) FROM devices")
-    
-            return id.fetch_row
+              id = con.query("SELECT max(id) FROM devices")
+
+              return id.fetch_row
 
             rescue Mysql::Error => e
               MaziLogger.error e.message
@@ -628,12 +625,12 @@ module Sinatra
             MaziLogger.debug "Search for device ID in monitoring database"
             begin
             con = Mysql.new('localhost', "#{data["username"]}", "#{data["password"]}", "monitoring")
-           
+
             id = con.query("SELECT id FROM deployments WHERE deployment LIKE '#{body["deployment"]}'")
             deployment_id = id.fetch_row
             unless deployment_id.nil?
-               deployment_id = deployment_id.first
-            end        
+              deployment_id = deployment_id.first
+            end
 
             id = con.query("SELECT id FROM devices WHERE title LIKE '#{body["title"]}'AND administrator='#{body["admin"]}'
                             AND description='#{body["description"]}' AND location='#{body["loc"]}' AND deployment_id=#{deployment_id}")
