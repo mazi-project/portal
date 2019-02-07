@@ -275,6 +275,7 @@ module Sinatra
               interfaces.each do |ifn, ifd|
                 locals[:local_data][:net_info][:ap] = ifn if ifd[:mode] == 'wifi'
               end
+              locals[:local_data][:users] = get_network_users
               ex3 = MaziExecCmd.new('bash', '/root/back-end/', 'mazi-router.sh', ['-s'], @config[:scripts][:enabled_scripts])
               router_stat = ex3.exec_command.first.split
               locals[:local_data][:net_info][:owrt_router_available] = router_stat.last

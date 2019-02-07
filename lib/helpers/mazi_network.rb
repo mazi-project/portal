@@ -97,4 +97,9 @@ module MaziNetwork
     return "not contain the following characters: #{special}" if domain =~ regex
     nil
   end
+
+  def get_network_users
+    [{id: 1, name: 'User 1', ip: '10.0.0.1', status: "activated"}, {id: 2, name: 'User 2', ip: '10.0.0.2', status: "deactivated"},
+     {id: 3, name: 'User 3', ip: '10.0.0.3', status: "deactivated"}, {id: 4, name: 'User 4', ip: '10.0.0.4', status: "activated"}]
+  end
 end

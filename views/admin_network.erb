@@ -148,7 +148,7 @@
       <div class="row change-conf-div" style>
         <span class='col-lg-3'>
           <form action="/exec" method="post">
-            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="env" value='bash'>
             <input type="hidden" name="cmd" value='antenna.sh'>
             <input type="hidden" name="interface" value='<%= if_name %>'>
             <input type="hidden" name="disconnect" value='true'>
@@ -176,7 +176,7 @@
         <div class="modal-body">
           <form class="form-signin" action="/exec" method="post">
             <div class="form-group">
-              <input type="hidden" name="env" value='sh'>
+              <input type="hidden" name="env" value='bash'>
               <input type="hidden" name="cmd" value='antenna.sh'>
               <input type="hidden" name="interface" value='<%= if_name %>'>
               <% if if_data[:available_ssids].nil? || if_data[:available_ssids].empty? %>
@@ -398,12 +398,26 @@
       <div class="panel-heading">
         <div class="panel-title"><%= I18n.translate("admin.network-page.internet-panel.header") %></div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
-          <h2 class="no-margins"><%= net_info[:mode] == 'dual' ? I18n.translate("general.messages.online") : I18n.translate("general.messages.#{net_info[:mode]}") %></h2>
+          <h2 class="no-margins"><%= net_info[:mode] == 'dual' ? I18n.translate("general.messages.online") : net_info[:mode] == 'restricted' ? I18n.translate("general.messages.managed") : I18n.translate("general.messages.#{net_info[:mode]}") %></h2>
           <small><%= I18n.translate("admin.network-page.internet-panel.mode-hint") %></small></br>
         </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-globe"></i></br><button class="btn btn-primary pull-right mode-btn" data-toggle="modal" data-target="#change-mode-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
+        <i class="fa fa-fw fa-5x fa-globe pull-right"></i>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'>
+          <% if net_info['mode'] == 'restricted' %>
+          <button class="btn btn-primary pull-right mode-btn" data-toggle="modal" data-target="#configure-mode-modal"><i class="fas fa-cog"></i> <%= I18n.translate("general.buttons.configure") %>
+          </button>
+          <% end %>
+        </span>
+        <span class='col-lg-6'></span>
+        <span class='col-lg-3'>
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#change-mode-modal">
+            <i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %>
+          </button>
+        </span>
       </div>
     </div>
   </div>
@@ -412,12 +426,21 @@
       <div class="panel-heading">
         <div class="panel-title"><%= I18n.translate("admin.network-page.portal-domain-panel.header") %></div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
           <h2 class="no-margins"><%= net_info[:domain] %></h2>
           <small><%= I18n.translate("admin.network-page.portal-domain-panel.domain-hint") %></small></br>
         </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-external-link-square-alt"></i></br><button class="btn btn-primary pull-right domain-btn" data-toggle="modal" data-target="#change-domain-modal"><i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %></button></div>
+        <i class="fa fa-fw fa-5x fa-external-link-square-alt pull-right"></i>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'></span>
+        <span class='col-lg-6'></span>
+        <span class='col-lg-3'>
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#change-domain-modal">
+            <i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %>
+          </button>
+        </span>
       </div>
     </div>
   </div>
@@ -431,14 +454,19 @@
       <div class="panel-heading">
         <div class="panel-title"><%= I18n.translate("admin.network-page.access-point-panel.header") %></div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
           <h2 class="no-margins"><%= current_wifi_if %></h2>
           <small><%= I18n.translate("admin.network-page.access-point-panel.current-hint") %></small></br>
         </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-link" style="margin-left: 15px;"></i></br>
-          <button class="btn btn-primary pull-right toggel-ap-btn" data-toggle="modal" data-target="#toggle-ap-modal"><%= I18n.translate("general.buttons.toggle-device") %></button>
-        </div>
+        <i class="fa fa-fw fa-5x fa-link pull-right"></i>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'></span>
+        <span class='col-lg-6'></span>
+        <span class='col-lg-3'>
+          <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#toggle-ap-modal"><%= I18n.translate("general.buttons.toggle-device") %></button>
+        </span>
       </div>
     </div>
   </div>
@@ -448,15 +476,80 @@
       <div class="panel-heading">
         <div class="panel-title"><%= I18n.translate("admin.network-page.access-point-panel.header") %></div>
       </div>
-      <div class="panel-body">
+      <div class="panel-body" style="border-bottom: 1px solid #ddd;">
         <div class="col-xs-6 text-left network-panel-min-height">
           <small><%= I18n.translate("admin.network-page.access-point-panel.router-message") %> <a href="https://github.com/mazi-project/guides/wiki/Products" target="_blank"><%= I18n.translate("general.messages.here") %></a></small>
         </div>
-        <div class="pull-right"><i class="fa fa-fw fa-5x fa-link" style="margin-left: 15px;"></i></br><button class="btn btn-primary pull-right toggle-ap-btn" disabled><%= I18n.translate("general.buttons.toggle-device") %></button></div>
+        <i class="fa fa-fw fa-5x fa-link pull-right"></i>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'></span>
+        <span class='col-lg-6'></span>
+        <span class='col-lg-3'>
+          <button class="btn btn-primary pull-right" disabled><%= I18n.translate("general.buttons.toggle-device") %></button>
+        </span>
       </div>
     </div>
   </div>
   <% end %>
+  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div class="panel-title">Actiavate/Deactivate Users</div>
+      </div>
+      <div class="panel-body" style="border-bottom: 1px solid #ddd; margin: 0px; padding: 0px">
+        <table class="table table-striped table-fixed" style="margin-bottom: 0px">
+          <thead>
+            <tr>
+              <th class="col-xs-1">#</th><th class="col-xs-2">User</th><th class="col-xs-3">IP</th><th class="col-xs-3">Status</th><th class="col-xs-3"><p class="pull-right">Actions</p></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% users.each do |user|%>
+            <tr>
+              <td class="col-xs-1"><%= user[:id] %></td>
+              <td class="col-xs-2"><%= user[:name] %></td>
+              <td class="col-xs-3"><%= user[:ip] %></td>
+              <td class="col-xs-3"><%= user[:status] %></td>
+              <td class="col-xs-3">
+                <form action="/exec" method="post">
+                  <input type="hidden" name="env" value='bash'>
+                  <input type="hidden" name="cmd" value='placeholder'>
+                  <% if user[:status]  == 'activated' %>
+                  <input type="hidden" name="mode" value='deactivate'>
+                  <button class="btn btn-warning pull-right mode-btn" type="submit"> Deactivate </button>
+                  <% else %>
+                  <input type="hidden" name="mode" value='deactivate'>
+                  <button class="btn btn-primary pull-right mode-btn" type="submit" style="padding-left: 20px; padding-right: 20px;">  Activate  </button>
+                  <% end %>
+                </form>
+              </td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+      <div class="row change-conf-div" style>
+        <span class='col-lg-3'>
+          <form action="/exec" method="post">
+            <input type="hidden" name="env" value='bash'>
+            <input type="hidden" name="cmd" value='placeholder'>
+            <input type="hidden" name="mode" value='activate_all'>
+            <button class="btn btn-primary pull-left" style="margin-left: 7px; padding-left: 20px; padding-right: 20px;" type='submit'>Acivate All</button>
+          </form>
+        </span>
+        <span class='col-lg-6'></span>
+        <span class='col-lg-3'>
+          <form action="/exec" method="post">
+            <input type="hidden" name="env" value='bash'>
+            <input type="hidden" name="cmd" value='placeholder'>
+            <input type="hidden" name="mode" value='deactivate_all'>
+            <button class="btn btn-warning pull-right" type='submit'>Deacivate All</button>
+          </form>
+        </span>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- show qrcode modal-->
@@ -490,7 +583,7 @@
         <p><%= I18n.translate("admin.network-page.popups.change-mode-message") %></p>
         <form class="form-signin" action="/exec" method="post">
           <div class="form-group">
-            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="env" value='bash'>
             <input type="hidden" name="cmd" value='internet.sh'>
             <div class="form-group">
                 <div class="radio">
@@ -505,7 +598,7 @@
                 </div>
                 <div class="radio">
                   <label>
-                    <input type="radio" name="mode" id="optionsRadios3" value="restricted" <%= 'checked' if net_info[:mode] == 'restricted' %> disabled><%= I18n.translate("general.messages.managed") %>
+                    <input type="radio" name="mode" id="optionsRadios3" value="restricted" <%= 'checked' if net_info[:mode] == 'restricted' %>><%= I18n.translate("general.messages.managed") %>
                   </label>
                 </div>
             </div>
