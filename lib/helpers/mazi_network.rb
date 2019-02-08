@@ -100,8 +100,20 @@ module MaziNetwork
 
   def get_network_users
     ex = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-u'], @config[:scripts][:enabled_scripts], @config[:general][:mode])
-    lines = ex1.exec_command
-    puts lines.inspect
-    lines
+    lines = ex.exec_command
+    i = 1
+    users = []
+    lines.each do |line|
+      tmp = {}
+      line = line.split
+      tmp[:id] = i
+      tmp[:name] = line[0]
+      tmp[:ip] = line[1]
+      tmp[:status] = line[2]
+      tmp[:mac] = line[3]
+      users << tmp
+      i += 1
+    end
+    users
   end
 end

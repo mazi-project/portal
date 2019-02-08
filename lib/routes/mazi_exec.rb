@@ -45,8 +45,8 @@ module Sinatra
                 redirect '/admin_network'
               end
               args << "-m #{params['mode']}" if params['mode']
-              args << "-a #{params['activate']}" if params['activate']
-              args << "-d #{params['deactivate']}" if params['deactivate']
+              args << "-a #{params['authenticate']}" if params['authenticate']
+              args << "-d #{params['deauthenticate']}" if params['deauthenticate']
               redirect '/admin_network' if args.empty?
             when 'antenna.sh'
               args = []

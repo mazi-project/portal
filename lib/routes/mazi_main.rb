@@ -291,6 +291,11 @@ module Sinatra
               ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-n'], @config[:scripts][:enabled_scripts])
               cur_out = ex7.exec_command
               locals[:local_data][:net_info][:current_internet_connection_on] = cur_out.include?('ok')
+              if locals[:local_data][:net_info][:mode] == 'restricted'
+                ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-l'], @config[:scripts][:enabled_scripts])
+                limit = ex8.exec_command.first.split
+                locals[:local_data][:net_info][:bandwidth_limit] = limit
+              end
               erb :admin_main, locals: locals
             when 'admin_configuration'
               unless authorized?

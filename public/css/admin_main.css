@@ -783,15 +783,17 @@ input:checked + .slider:before {
 }
 
 .table-fixed thead {
-  width: 97%;
+  width: 100%;
 }
 .table-fixed tbody {
   height: 164px;
   overflow-y: auto;
   width: 100%;
+  overflow-x: auto;
 }
 .table-fixed thead, .table-fixed tbody, .table-fixed tr, .table-fixed td, .table-fixed th {
   display: block;
+  text-align: center;
 }
 .table-fixed tbody td, .table-fixed thead > tr> th {
   float: left;

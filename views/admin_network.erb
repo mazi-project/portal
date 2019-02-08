@@ -492,35 +492,39 @@
     </div>
   </div>
   <% end %>
-  <div class='col-lg-4 col-md-6 col-sm-6 col-xs-12'>
+  <div class='col-lg-4 col-md-12 col-sm-12 col-xs-12' style="min-width: 672px">
     <div class="panel panel-default">
       <div class="panel-heading">
-        <div class="panel-title">Activate/Deactivate Users</div>
+        <div class="panel-title">Authenticate/Deauthenticate Users</div>
       </div>
       <div class="panel-body" style="border-bottom: 1px solid #ddd; margin: 0px; padding: 0px">
-        <table class="table table-striped table-fixed" style="margin-bottom: 0px">
+        <table class="table table-fixed" style="margin-bottom: 0px">
           <thead>
             <tr>
-              <th class="col-xs-1">#</th><th class="col-xs-2">User</th><th class="col-xs-3">IP</th><th class="col-xs-3">Status</th><th class="col-xs-3"><p class="pull-right">Actions</p></th>
+              <th class="col-xs-1">#</th>
+              <th class="col-xs-4">User</th>
+              <th class="col-xs-2">IP</th>
+              <th class="col-xs-2">Status</th>
+              <th class="col-xs-3">Actions</p></th>
             </tr>
           </thead>
           <tbody>
             <% users.each do |user|%>
             <tr>
               <td class="col-xs-1"><%= user[:id] %></td>
-              <td class="col-xs-2"><%= user[:name] %></td>
-              <td class="col-xs-3"><%= user[:ip] %></td>
-              <td class="col-xs-3"><%= user[:status] %></td>
+              <td class="col-xs-4"><%= user[:name] %></td>
+              <td class="col-xs-2"><%= user[:ip] %></td>
+              <td class="col-xs-2"><%= user[:status] %></td>
               <td class="col-xs-3">
                 <form action="/exec" method="post">
                   <input type="hidden" name="env" value='bash'>
                   <input type="hidden" name="cmd" value='internet.sh'>
-                  <% if user[:status]  == 'activated' %>
-                  <input type="hidden" name="deactivate" value='<%= user[:ip] %>'>
-                  <button class="btn btn-warning pull-right mode-btn" type="submit"> Deactivate </button>
+                  <% if user[:status]  == 'authenticated' %>
+                  <input type="hidden" name="deauthenticate" value='<%= user[:ip] %>'>
+                  <button class="btn btn-warning pull-right mode-btn" type="submit"> Deauthenticate </button>
                   <% else %>
-                  <input type="hidden" name="activate" value='<%= user[:ip] %>'>
-                  <button class="btn btn-primary pull-right mode-btn" type="submit" style="padding-left: 20px; padding-right: 20px;">  Activate  </button>
+                  <input type="hidden" name="authenticate" value='<%= user[:ip] %>'>
+                  <button class="btn btn-primary pull-right mode-btn" type="submit" style="padding-left: 20px; padding-right: 20px;">  Authenticate  </button>
                   <% end %>
                 </form>
               </td>
@@ -534,8 +538,8 @@
           <form action="/exec" method="post">
             <input type="hidden" name="env" value='bash'>
             <input type="hidden" name="cmd" value='internet.sh'>
-            <input type="hidden" name="activate" value='all'>
-            <button class="btn btn-primary pull-left" style="margin-left: 7px; padding-left: 20px; padding-right: 20px;" type='submit'>Acivate All</button>
+            <input type="hidden" name="authenticate" value='all'>
+            <button class="btn btn-primary pull-left" style="margin-left: 7px; padding-left: 20px; padding-right: 20px;" type='submit'>Authenticate All</button>
           </form>
         </span>
         <span class='col-lg-6'></span>
@@ -543,8 +547,8 @@
           <form action="/exec" method="post">
             <input type="hidden" name="env" value='bash'>
             <input type="hidden" name="cmd" value='internet.sh'>
-            <input type="hidden" name="deactivate" value='all'>
-            <button class="btn btn-warning pull-right" type='submit'>Deacivate All</button>
+            <input type="hidden" name="deauthenticate" value='all'>
+            <button class="btn btn-warning pull-right" type='submit'>Deauthenticate All</button>
           </form>
         </span>
       </div>
