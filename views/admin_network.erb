@@ -514,12 +514,12 @@
               <td class="col-xs-3">
                 <form action="/exec" method="post">
                   <input type="hidden" name="env" value='bash'>
-                  <input type="hidden" name="cmd" value='placeholder'>
+                  <input type="hidden" name="cmd" value='internet.sh'>
                   <% if user[:status]  == 'activated' %>
-                  <input type="hidden" name="mode" value='deactivate'>
+                  <input type="hidden" name="deactivate" value='<%= user[:ip] %>'>
                   <button class="btn btn-warning pull-right mode-btn" type="submit"> Deactivate </button>
                   <% else %>
-                  <input type="hidden" name="mode" value='deactivate'>
+                  <input type="hidden" name="activate" value='<%= user[:ip] %>'>
                   <button class="btn btn-primary pull-right mode-btn" type="submit" style="padding-left: 20px; padding-right: 20px;">  Activate  </button>
                   <% end %>
                 </form>
@@ -533,8 +533,8 @@
         <span class='col-lg-3'>
           <form action="/exec" method="post">
             <input type="hidden" name="env" value='bash'>
-            <input type="hidden" name="cmd" value='placeholder'>
-            <input type="hidden" name="mode" value='activate_all'>
+            <input type="hidden" name="cmd" value='internet.sh'>
+            <input type="hidden" name="activate" value='all'>
             <button class="btn btn-primary pull-left" style="margin-left: 7px; padding-left: 20px; padding-right: 20px;" type='submit'>Acivate All</button>
           </form>
         </span>
@@ -542,8 +542,8 @@
         <span class='col-lg-3'>
           <form action="/exec" method="post">
             <input type="hidden" name="env" value='bash'>
-            <input type="hidden" name="cmd" value='placeholder'>
-            <input type="hidden" name="mode" value='deactivate_all'>
+            <input type="hidden" name="cmd" value='internet.sh'>
+            <input type="hidden" name="deactivate" value='all'>
             <button class="btn btn-warning pull-right" type='submit'>Deacivate All</button>
           </form>
         </span>

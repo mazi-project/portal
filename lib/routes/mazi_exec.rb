@@ -45,6 +45,8 @@ module Sinatra
                 redirect '/admin_network'
               end
               args << "-m #{params['mode']}" if params['mode']
+              args << "-a #{params['activate']}" if params['activate']
+              args << "-d #{params['deactivate']}" if params['deactivate']
               redirect '/admin_network' if args.empty?
             when 'antenna.sh'
               args = []
@@ -55,10 +57,10 @@ module Sinatra
               end
               # ssid = params['ssid'].nil? || params['ssid'].empty? ? params['hidden-ssid'] : params['ssid']
               unless params['ssid'].nil? || params['ssid'].empty?
-                args << "-s #{params['ssid']}"
+                args << "-s '#{params['ssid']}'"
               else
                 unless params['hidden-ssid'].nil? || params['hidden-ssid'].empty?
-                  args << "-s #{params['hidden-ssid']} -h"
+                  args << "-s '#{params['hidden-ssid']}' -h"
                 end
               end
               args << "-i '#{params['interface']}'" if params['interface']
