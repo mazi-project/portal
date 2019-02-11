@@ -406,14 +406,20 @@
         <i class="fa fa-fw fa-5x fa-globe pull-right"></i>
       </div>
       <div class="row change-conf-div" style>
-        <span class='col-lg-3'>
-          <% if net_info['mode'] == 'restricted' %>
-          <button class="btn btn-primary pull-right mode-btn" data-toggle="modal" data-target="#configure-mode-modal"><i class="fas fa-cog"></i> <%= I18n.translate("general.buttons.configure") %>
-          </button>
+        <span class='col-lg-5'>
+          <% if net_info[:mode] == 'restricted' %>
+          <div id="slider-range-min" style="margin-top: 9px; margin-left: 10px;"></div>
           <% end %>
         </span>
-        <span class='col-lg-6'></span>
-        <span class='col-lg-3'>
+        <span class='col-lg-5'>
+          <% if net_info[:mode] == 'restricted' %>
+          <div class="input-w" style="display: flex; flex-direction: row; justify-content: center; align-items: center">
+            <label for="amount" style="padding-top: 5px; padding-right: 5px; border:0; color: black; font-weight:bold;">Limit: </label>
+            <input type="text" id="amount" readonly style="border:0; color:#f6931f; font-weight:bold;">
+          </div>
+          <% end %>
+        </span>
+        <span class='col-lg-2'>
           <button class="btn btn-primary pull-right" data-toggle="modal" data-target="#change-mode-modal">
             <i class="fa fa-pencil-alt"></i> <%= I18n.translate("general.buttons.edit") %>
           </button>
@@ -637,3 +643,7 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+  var bandwidth_limit = <%= net_info[:bandwidth_limit] %>;
+</script>

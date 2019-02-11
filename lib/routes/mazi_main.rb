@@ -172,11 +172,15 @@ module Sinatra
               ssid = ex.parseFor('ssid').last
               domain = ex.parseFor('domain').last
               if mode == "offline"
-                 locals[:message_mode] = "so it does NOT provide internet access."
+                locals[:message_mode] = "so it does NOT provide internet access."
+                locals[:mode] = "offline"
+              elsif mode == "online"
+                locals[:message_mode] = "so it does provide internet access."
+                locals[:mode] = "online"
               else
-                 locals[:message_mode] = "so it does provide internet access."
+                locals[:message_mode] = "so it does provide limited internet access."
+                locals[:mode] = "managed"
               end
-              locals[:mode] = mode
               locals[:ssid] = ssid
               locals[:domain] = "http://#{domain}"
               erb :splash, locals: locals
@@ -293,8 +297,8 @@ module Sinatra
               locals[:local_data][:net_info][:current_internet_connection_on] = cur_out.include?('ok')
               if locals[:local_data][:net_info][:mode] == 'restricted'
                 ex8 = MaziExecCmd.new('bash', '/root/back-end/', 'current.sh', ['-l'], @config[:scripts][:enabled_scripts])
-                limit = ex8.exec_command.first.split
-                locals[:local_data][:net_info][:bandwidth_limit] = limit
+                limit = ex8.exec_command.first.split.last
+                locals[:local_data][:net_info][:bandwidth_limit] = (limit.to_i / 10000).to_i
               end
               erb :admin_main, locals: locals
             when 'admin_configuration'

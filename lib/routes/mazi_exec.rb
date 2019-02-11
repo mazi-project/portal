@@ -47,6 +47,7 @@ module Sinatra
               args << "-m #{params['mode']}" if params['mode']
               args << "-a #{params['authenticate']}" if params['authenticate']
               args << "-d #{params['deauthenticate']}" if params['deauthenticate']
+              args << "-l #{params['limit']}" if params['limit']
               redirect '/admin_network' if args.empty?
             when 'antenna.sh'
               args = []
@@ -108,6 +109,7 @@ module Sinatra
               ex = MaziExecCmd.new(env, path, cmd, args, @config[:scripts][:enabled_scripts])
               lines = ex.exec_command
               sleep 5 if cmd == 'antenna.sh'
+              return {result: 'OK'}.to_json if params[:no_render]
               redirect '/admin_network'
             rescue ScriptNotEnabled => e
               MaziLogger.debug "Not enabled script '#{cmd}'"

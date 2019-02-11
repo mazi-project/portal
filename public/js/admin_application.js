@@ -105,9 +105,7 @@ $( document ).ready(function() {
   });
 
   $('.splash-instance-switch').click(function(){
-    console.log('1111');
     var appId = $(this).attr('id').split('_').pop();
-    console.log('2222');
     $.ajax({
       url: '/application/' + appId + '/instance/splash',
       type: 'PUT',
