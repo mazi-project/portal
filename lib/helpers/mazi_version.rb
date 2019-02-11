@@ -251,6 +251,13 @@ module MaziVersion
       end
     end
 
+    MaziLogger.debug "  Checking updates for version 3.0.3"
+    unless File.exists?('/etc/init.d/mazi-users')
+      MaziLogger.debug "    dependencies missing. Updating."
+      `bash /root/back-end/update.sh 3.0.3`
+      MaziLogger.debug "done."
+    end
+
     remove_old_snapshots
     delete_lock_update_file
   end
