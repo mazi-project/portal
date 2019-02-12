@@ -256,6 +256,7 @@ module MaziVersion
       MaziLogger.debug "    dependencies missing. Updating."
       `bash /root/back-end/update.sh 3.0.3`
       MaziLogger.debug "done."
+      `reboot`
     end
 
     remove_old_snapshots
