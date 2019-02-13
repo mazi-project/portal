@@ -645,5 +645,5 @@
 </div>
 
 <script type="text/javascript">
-  var bandwidth_limit = <%= net_info[:bandwidth_limit] %>;
+  var bandwidth_limit = <%= net_info[:bandwidth_limit].nil? ? 0 : net_info[:bandwidth_limit] %>;
 </script>
