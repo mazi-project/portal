@@ -54,7 +54,8 @@ module MaziNetwork
           redirect "/admin_network"
         end
         ssid = ex2.parseFor('ESSID')
-        if_data[:ssid] = ssid.last.split(':').last.gsub('"', '')
+        ssid.shift
+        if_data[:ssid] = ssid.join(' ').gsub('ESSID:', '').gsub('"', '')
         if_data[:available_ssids] = []
         ex7 = MaziExecCmd.new('bash', '/root/back-end/', 'antenna.sh', ['-l', '-i', if_name], @config[:scripts][:enabled_scripts], @config[:general][:mode])
         if_data[:available_ssids] = ex7.exec_command
