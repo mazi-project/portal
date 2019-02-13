@@ -103,7 +103,7 @@
         <div class="modal-body">
           <form class="form-signin" action="/exec" method="post">
             <div class="form-group">
-              <input type="hidden" name="env" value='sh'>
+              <input type="hidden" name="env" value='bash'>
               <input type="hidden" name="cmd" value='wifiap.sh'>
               <input type="hidden" name="interface" value='<%= if_name %>'>
               <label for='ssid'><%= I18n.translate("general.messages.ssid") %>: </label>
@@ -632,7 +632,7 @@
         <p></p>
         <form class="form-signin" action="/exec" method="post">
           <div class="form-group">
-            <input type="hidden" name="env" value='sh'>
+            <input type="hidden" name="env" value='bash'>
             <input type="hidden" name="cmd" value='mazi-domain.sh'>
             <input type="text" name="domain" class="form-control" value='<%= net_info[:domain] %>' required>
             <button class="btn btn-lg btn-primary btn-block" type="submit"><%= I18n.translate("general.buttons.save") %></button>
