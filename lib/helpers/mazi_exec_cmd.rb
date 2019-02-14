@@ -57,6 +57,10 @@ class MaziExecCmd
     when 'wifiap.sh'
       'OK'
     when 'current.sh'
+      if @args.include?('-u')
+        @output = ['Device-1 10.0.0.1 authenticated e4:46:da:e1:77:4e', 'Device-2 10.0.0.2 deauthenticated e4:46:da:e1:77:4a', 'Device-3 10.0.0.3 authenticated e4:46:db:e1:c7:4e']
+        return @output
+      end
       'OK'
     when 'internet.sh'
       'OK'
