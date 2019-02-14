@@ -79,6 +79,7 @@ es:
       media-library-header: Mediateca
       no-media-warn: No se encontraron imágenes ni vídeos en la mediateca.
     monitoring-page:
+      subheader: Monitorización
       popups:
         device: Dispositivo
         devices: Dispositivos
