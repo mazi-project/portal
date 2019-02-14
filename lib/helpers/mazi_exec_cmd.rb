@@ -48,6 +48,7 @@ class MaziExecCmd
     @output.each do |line|
       out << line.split(splitter) if line.include? token
     end
+    puts "*** #{out}"
     out.empty? ? false : out
   end
 
@@ -60,6 +61,13 @@ class MaziExecCmd
     when 'internet.sh'
       'OK'
     when 'antenna.sh'
+      if @args.include?('-i') && @args.include?('-a')
+        @output = ['active ESSID:"Mazizone-demo" Nickname:"<WIFI@REALTEK>"'] if @args.include?('wlan0')
+        @output = ['active ESSID:off/any']
+        return @output
+      elsif @args.include?('-i') && @args.include?('-l')
+        return ['ESSID:SSID-1', 'ESSID:SSID-2', 'ESSID:SSID-3']
+      end
       'OK'
     when 'mazi-app.sh'
       'OK'
@@ -93,11 +101,18 @@ class MaziExecCmd
       when 'mode'
         return ['mode', 'offline']
       when 'interface'
-        return [{:wlan0=>{:interface=>"wlan0", :name=>"Raspberry WiFi111", :mode=>"wifi"}}]
+        return [["interface", "wlan0", "usb1"], ["interface", "wlan1", "raspberry"], ["wifi_interface", "wlan0"], ["internet_interface", "wlan1"], ["mesh_interface", "-"]]
       end
     when 'internet.sh'
       'OK'
     when 'antenna.sh'
+      if @args.include?('-i') && @args.include?('-a')
+        out = ['active ESSID:', "Mazizone-demo"] if @args.include?('wlan0')
+        out = ['active ESSID:', 'off/any']
+        return out
+      elsif @args.include?('-i') && @args.include?('-l')
+        return ['ESSID:SSID-1', 'ESSID:SSID-2', 'ESSID:SSID-3']
+      end
       'OK'
     when 'mazi-app.sh'
       'OK'
