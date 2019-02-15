@@ -48,7 +48,6 @@ class MaziExecCmd
     @output.each do |line|
       out << line.split(splitter) if line.include? token
     end
-    puts "*** #{out}"
     out.empty? ? false : out
   end
 

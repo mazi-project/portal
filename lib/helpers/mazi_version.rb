@@ -203,6 +203,17 @@ module MaziVersion
     false
   end
 
+  def self.hostapd_conf_updated?
+    filename = '/etc/hostapd/hostapd.conf'
+    if File.file?(filename)
+      File.readlines(filename).each do |line|
+        puts line
+        return true if line.include?('# Hostapd_cli configuration')
+      end
+    end
+    false
+  end
+
   def self.update_dependencies
     MaziLogger.debug "Updating Dependencies"
 
@@ -252,7 +263,7 @@ module MaziVersion
     end
 
     MaziLogger.debug "  Checking updates for version 3.0.3"
-    unless File.exists?('/etc/init.d/mazi-users')
+    unless hostapd_conf_updated?
       MaziLogger.debug "    dependencies missing. Updating."
       `bash /root/back-end/update.sh 3.0.3`
       MaziLogger.debug "done."
