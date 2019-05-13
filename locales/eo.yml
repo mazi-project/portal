@@ -1,0 +1,198 @@
+# Messages for Esperanto (Esperanto)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Mirin
+---
+eo:
+  general:
+    buttons:
+      edit: Redakti
+      cancel: Nuligi
+      ok: Bone
+      close: Fermi
+      create: Krei
+      delete: Forigi
+      save: Konservi Ŝanĝojn
+      choose: Elekti
+      logout: Elsaluti
+      connect: Konekti
+      disconnect: Malkonekti
+      import: Enporti
+      export: Elporti
+      refresh: Refreŝigi
+      continue: Daŭrigi
+      next: Sekven
+      previous: Antaŭen
+      submit: Sendi
+      change: Ŝanĝi
+      qrcode: QR-kodo
+      show: Montri
+      configure: Agordi
+    messages:
+      warning: Averto
+      welcome: Bonvenon
+      version: Versio
+      enable: ŝalti
+      disable: malŝalti
+      checked: kontrolita
+      disconnected: Malkonektita
+      channel: Kanalo
+      password: Pasvorto
+      managed: mastrumata
+      active: aktiva
+      inactive: malaktiva
+      error: eraro
+      stable: Stabila
+      development: Evoluigo
+  portal:
+    top-menu:
+      documentation: Dokumentaro
+    side-menu:
+      applications: Aplikaĵoj
+      system: Sistemo
+      sensors: Sentiloj
+      camera: Fotilo
+      monitoring: Monitorado
+      devices: Aparatoj
+    system-page:
+      subheader: Sistema Informo
+      temperature: Temperaturo
+      cpu: Ĉefprocesoro
+      storage: Konservejo
+    camera-page:
+      header: Fotilo
+    monitoring-page:
+      popups:
+        device: Aparato
+        devices: Aparatoj
+        administrator: Administranto
+        description: Priskribo
+        latitude: Latitudo
+        longitude: Longitudo
+        cpu_temp: Temperaturo de Ĉefprocesoro
+        cpu_load: Ŝarĝo de Ĉefprocesoro
+        nextcloud-users: Uzantoj de Nextcloud
+        nextcloud-files: Dosieroj de Nextcloud
+        nextcloud-downloads: Elŝutoj de Nextcloud
+        nextcloud-datasize: Datena grando de Nextcloud
+        nextcloud-clicks: Alklakoj de Nextcloud
+  admin:
+    general:
+      reboot-modal-title: Restartigi?
+    top-menu:
+      admin: Administrejo
+      portal: Portalo
+      username: Uzantnomo
+      password: Pasvorto
+      mysql-password: Pasvorto de MySQL
+      settings: Agordoj
+    side-menu:
+      devices: Aparatoj
+      notifications: Sciigoj
+      export-import: Elporti/Enporti
+      logs: Protokoloj
+    updates:
+      subheader: Ĝisdatigi
+    setup-page:
+      last-step-header: Kompleta
+    dashboard-page:
+      applications:
+        header: Aplikaĵoj
+        applications-installed: Instalitaj Aplikaĵoj
+      traffic:
+        header: Trafiko
+    applications-page:
+      instances-menu:
+        active-column: Aktiva
+        name-column: Nomo
+        url-column: Retadreso
+        url-hint: la retadreso de la aplikaĵo
+        description-column: Priskribo
+        actions-column: Agoj
+      applications-menu:
+        status-column: Stato
+        icon-column: Ikono
+        color-column: Koloro
+        name-column: Nomo de la Aplikaĵo
+        url-column: Reteja adreso
+        description-column: Priskribo
+        actions-column: Agoj
+    network-page:
+      popups:
+        change-channel-header: Ŝanĝi Kanalon
+        change-password-header: Ŝanĝi Pasvorton
+        change-mode-header: Ŝanĝi Reĝimon
+    appearance-page:
+      subheader: Aspekto
+      theme-panel:
+        header: Agordoj de Etoso
+        home-page-label: Titolo de ĉefpaĝo
+        home-subtitle-label: Subtitolo de ĉefpaĝo
+        colors-label: Koloroj
+      popups:
+        edit-theme-header: Redakti Etoson
+        edit-title-header: Redakti Titolon
+        save-theme-header: Konservi Etoson
+    devices-page:
+      subheader: Aparatoj
+      sensors-panel:
+        header: Setiloj
+        sensors-table:
+          type: Tipo
+          status: Stato
+      camera-panel:
+        header: Fotilo
+      popups:
+        start-sensing-label2: Daŭro (en sekundoj)
+        start-sensing-label4: Intervalo (en sekundoj)
+        start-videos-label1: Daŭro (en sekundoj)
+    monitoring-page:
+      details-panel:
+        header: Detaloj
+        table-label2: Administranto
+        table-label3: Titolo
+        table-label4: Priskribo
+      statistics-panel:
+        statistics-table:
+          status: Stato
+          description: Priskribo
+          action: Ago
+      popups:
+        change-details-label2: Administranto
+        change-details-label3: Titolo
+        change-details-label4: Priskribo
+        change-details-label5: Loko (latitudo, longitudo)
+        hardware-label2: Temperaturo
+        application-label5: aplikaĵo de Nextcloud
+    notifications-page:
+      subheader: Sciigoj
+      notifications-table:
+        header1: Stato
+        header2: Titolo
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: Priskribo
+      etherpad-tab:
+        subheader1: Priskribo
+        paragraph5: Ekzemple,
+      nextcloud-tab:
+        subheader1: Priskribo
+        paragraph10: Retpoŝta adreso
+        paragraph12: Mastrumi vian pasvorton
+      guestbook-tab:
+        subheader1: Priskribo
+        subheader3: Pasvorto de Administranto
+      wordpress-tab:
+        subheader1: Priskribo
+      framadate-tab:
+        subheader1: Priskribo
+        paragraph2: Jen kiel ĝi funkcias
+        paragraph3: Krei opinisondon
+    settings-page:
+      subheader: Agordoj
+      panel-header: Sistemaj agordoj
+      time-date:
+        header: Tempo/Dato
+      popups:
+        change-time-date-title: Ŝanĝi Tempon/Daton
+...
