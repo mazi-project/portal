@@ -12,11 +12,21 @@ eo:
       close: Fermi
       create: Krei
       delete: Forigi
+      start: Komenci
+      stop: Halti
       save: Konservi Ŝanĝojn
       choose: Elekti
+      export-to-csv: Elporti kiel dosiero de komo-apartigitaj valoroj
+      expand: Etendi
+      reboot: Restarti
+      reset: Restarigi
+      shutdown: Malstarti
       logout: Elsaluti
+      update: Ĝisdatigi
       connect: Konekti
       disconnect: Malkonekti
+      remove: Forigi
+      load: Ŝarĝi
       import: Enporti
       export: Elporti
       refresh: Refreŝigi
@@ -35,9 +45,15 @@ eo:
       enable: ŝalti
       disable: malŝalti
       checked: kontrolita
+      on_msg: ŜALTITA
+      off_msg: MALŜALTITA
       disconnected: Malkonektita
+      here: ĉi tie
+      ssid: SSID
       channel: Kanalo
       password: Pasvorto
+      offline: ne konektita
+      online: konektita
       managed: mastrumata
       active: aktiva
       inactive: malaktiva
@@ -56,12 +72,18 @@ eo:
       devices: Aparatoj
     system-page:
       subheader: Sistema Informo
+      users: Konektataj Uzantoj
       temperature: Temperaturo
       cpu: Ĉefprocesoro
+      ram: Ĉefmemoro
       storage: Konservejo
+    sensors-page:
+      direction: Direkto (je Gradoj)
+      acceleration: Akcelo (x, y, z)
     camera-page:
       header: Fotilo
     monitoring-page:
+      subheader: Monitorado
       popups:
         device: Aparato
         devices: Aparatoj
@@ -69,8 +91,12 @@ eo:
         description: Priskribo
         latitude: Latitudo
         longitude: Longitudo
+        system_info: Informo pri Sistemo
         cpu_temp: Temperaturo de Ĉefprocesoro
         cpu_load: Ŝarĝo de Ĉefprocesoro
+        ram_load: Ŝarĝo de Ĉefmemoro
+        wifi-users: Vifiaj Uzantoj
+        storage_use: Ŝarĝo de Konservejo
         nextcloud-users: Uzantoj de Nextcloud
         nextcloud-files: Dosieroj de Nextcloud
         nextcloud-downloads: Elŝutoj de Nextcloud
@@ -78,6 +104,7 @@ eo:
         nextcloud-clicks: Alklakoj de Nextcloud
   admin:
     general:
+      shutdown-modal-title: Ĉu malstarti?
       reboot-modal-title: Restartigi?
     top-menu:
       admin: Administrejo
@@ -87,21 +114,30 @@ eo:
       mysql-password: Pasvorto de MySQL
       settings: Agordoj
     side-menu:
+      applications: Aplikaĵoj
+      networking: Retado
+      appearance: Aspekto
       devices: Aparatoj
+      monitoring: Monitorado
       notifications: Sciigoj
       export-import: Elporti/Enporti
       logs: Protokoloj
+      documentation: Dokumentaro
     updates:
       subheader: Ĝisdatigi
     setup-page:
       last-step-header: Kompleta
     dashboard-page:
+      subheader: Stirpanelo
+      hardware-info:
+        system-temperature: Sistema Temperaturo
       applications:
         header: Aplikaĵoj
         applications-installed: Instalitaj Aplikaĵoj
       traffic:
         header: Trafiko
     applications-page:
+      subheader: Aplikaĵoj
       instances-menu:
         active-column: Aktiva
         name-column: Nomo
@@ -117,7 +153,16 @@ eo:
         url-column: Reteja adreso
         description-column: Priskribo
         actions-column: Agoj
+        app-start-hint: Komenci Aplikaĵon
+        app-stop-hint: Ĉesigi Aplikaĵon
+      popups:
+        web-app-info-title: Reta Aplikaĵo
     network-page:
+      subheader: Agordoj pri Reto
+      wifi-ap-interface-panel:
+        ssid-name-label: Nomo de la Vifia Reto (SSID)
+        wifi-channel-label: Kanalo de la Vifia Reto
+        wifi-password-label: Pasvorto de la Vifia Reto
       popups:
         change-channel-header: Ŝanĝi Kanalon
         change-password-header: Ŝanĝi Pasvorton
@@ -126,12 +171,18 @@ eo:
       subheader: Aspekto
       theme-panel:
         header: Agordoj de Etoso
+        portal-title-label: Titolo de portalo
         home-page-label: Titolo de ĉefpaĝo
         home-subtitle-label: Subtitolo de ĉefpaĝo
         colors-label: Koloroj
       popups:
         edit-theme-header: Redakti Etoson
         edit-title-header: Redakti Titolon
+        edit-home-title-header: Redakti Titolon de Ĉefpaĝo
+        edit-home-subtitle-header: Redakti Subtitolon de Ĉefpaĝo
+        edit-background-image-header: Redakti Fonan Bildon
+        reset-theme-header: Restarigi Etoson
+        load-theme-header: Ŝargi Etoson
         save-theme-header: Konservi Etoson
     devices-page:
       subheader: Aparatoj
@@ -140,18 +191,28 @@ eo:
         sensors-table:
           type: Tipo
           status: Stato
+          entries: Eroj
+          actions: Agoj
+          start-button-hint: Ekkonservi mezurojn
       camera-panel:
         header: Fotilo
       popups:
+        start-sensing-label1: Cela Servilo
         start-sensing-label2: Daŭro (en sekundoj)
         start-sensing-label4: Intervalo (en sekundoj)
+        start-images-label1: Daŭro (je sekundoj)
+        start-images-label2: Intervalo (je sekundoj)
+        delete-images-title: Forigi Ĉiujn Fotojn
         start-videos-label1: Daŭro (en sekundoj)
+        delete-videos-title: Forigi Ĉiujn Videaĵojn
     monitoring-page:
+      subheader: Monitorado
       details-panel:
         header: Detaloj
         table-label2: Administranto
         table-label3: Titolo
         table-label4: Priskribo
+        table-label5: Loko (latitudo, longitudo)
       statistics-panel:
         statistics-table:
           status: Stato
@@ -162,25 +223,47 @@ eo:
         change-details-label3: Titolo
         change-details-label4: Priskribo
         change-details-label5: Loko (latitudo, longitudo)
+        hardware-label1: Cela Servilo
         hardware-label2: Temperaturo
+        hardware-label3: Vifiaj uzantoj
         application-label5: aplikaĵo de Nextcloud
     notifications-page:
       subheader: Sciigoj
       notifications-table:
         header1: Stato
         header2: Titolo
+        header3: Enhavo
+        header4: Agoj
+      popups:
+        create-notification-title: Krei novan sciigon
+        edit-notification-title: Redakti sciigon
+    logs-page:
+      subheader: Protokollegilo
+      message: Vi povas legi protokoldosierojn de Mazi Zone ĉi-sube.
+      portal-log-panel:
+        header: Portala Protokoldosiero
+        header-hint: Portala Protokoldosiero.
+        filter-label1: Erarmesaĝoj
+        filter-label2: Avertmesaĝoj
+        filter-label3: Senerarigaj mesaĝoj
     documentation-page:
+      header: Dokumentaro pri Administrado
       initial-configuration-tab:
         subheader1: Priskribo
       etherpad-tab:
         subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
+        subheader3: Utilaj konsiloj
         paragraph5: Ekzemple,
       nextcloud-tab:
         subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
+        subheader3: Utilaj konsiloj
         paragraph10: Retpoŝta adreso
         paragraph12: Mastrumi vian pasvorton
       guestbook-tab:
         subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
         subheader3: Pasvorto de Administranto
       wordpress-tab:
         subheader1: Priskribo
@@ -188,11 +271,15 @@ eo:
         subheader1: Priskribo
         paragraph2: Jen kiel ĝi funkcias
         paragraph3: Krei opinisondon
+        paragraph6: Diskuti kaj decidi
     settings-page:
       subheader: Agordoj
       panel-header: Sistemaj agordoj
       time-date:
         header: Tempo/Dato
+      mysql-password:
+        header: Pasvorto de MySQL
       popups:
         change-time-date-title: Ŝanĝi Tempon/Daton
+        change-mysql-password-title: Ŝanĝi pasvorton de MySQL
 ...
