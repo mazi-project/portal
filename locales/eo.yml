@@ -25,6 +25,7 @@ eo:
       update: Ĝisdatigi
       connect: Konekti
       disconnect: Malkonekti
+      toggle-device: Ŝanĝi Aparaton
       remove: Forigi
       load: Ŝarĝi
       import: Enporti
@@ -73,20 +74,27 @@ eo:
     system-page:
       subheader: Sistema Informo
       users: Konektataj Uzantoj
+      app-clicks: Alklakoj de Aplikaĵo
       temperature: Temperaturo
       cpu: Ĉefprocesoro
       ram: Ĉefmemoro
       storage: Konservejo
     sensors-page:
+      header: Mezuloj de Sentiloj
+      temperature-for: Temperaturo el %{sensor}
+      humidity-for: Humido el %{sensor}
+      pressure-for: Premo el %{sensor}
       direction: Direkto (je Gradoj)
       acceleration: Akcelo (x, y, z)
     camera-page:
       header: Fotilo
+      media-library-header: Biblioteko de Aŭdvidaĵoj
     monitoring-page:
       subheader: Monitorado
       popups:
         device: Aparato
         devices: Aparatoj
+        deployment: Disponigo
         administrator: Administranto
         description: Priskribo
         latitude: Latitudo
@@ -114,6 +122,7 @@ eo:
       mysql-password: Pasvorto de MySQL
       settings: Agordoj
     side-menu:
+      dashboard: Stirpanelo
       applications: Aplikaĵoj
       networking: Retado
       appearance: Aspekto
@@ -126,6 +135,7 @@ eo:
     updates:
       subheader: Ĝisdatigi
     setup-page:
+      fourth-step-header: Detaloj pri MAZI-Zono
       last-step-header: Kompleta
     dashboard-page:
       subheader: Stirpanelo
@@ -146,6 +156,7 @@ eo:
         description-column: Priskribo
         actions-column: Agoj
       applications-menu:
+        header: Instalitaj Aplikaĵoj
         status-column: Stato
         icon-column: Ikono
         color-column: Koloro
@@ -163,10 +174,15 @@ eo:
         ssid-name-label: Nomo de la Vifia Reto (SSID)
         wifi-channel-label: Kanalo de la Vifia Reto
         wifi-password-label: Pasvorto de la Vifia Reto
+      connect-wifi-panel:
+        wifi-network-hint-1: el Vifiaj Retoj
+        wifi-network-hint-2: Vifia Interreto
       popups:
         change-channel-header: Ŝanĝi Kanalon
         change-password-header: Ŝanĝi Pasvorton
         change-mode-header: Ŝanĝi Reĝimon
+        select-wifi-label: Elekti nomon de Vifio
+        select-mesh-mode-label: Elekti Maŝan reĝimon
     appearance-page:
       subheader: Aspekto
       theme-panel:
@@ -197,6 +213,7 @@ eo:
       camera-panel:
         header: Fotilo
       popups:
+        start-sensing-title: Ekmezurigi sentilojn
         start-sensing-label1: Cela Servilo
         start-sensing-label2: Daŭro (en sekundoj)
         start-sensing-label4: Intervalo (en sekundoj)
