@@ -27,7 +27,7 @@ eo:
       disconnect: Malkonekti
       toggle-device: Ŝanĝi Aparaton
       remove: Forigi
-      load: Ŝarĝi
+      load: Ŝargi
       import: Enporti
       export: Elporti
       refresh: Refreŝigi
@@ -105,6 +105,14 @@ eo:
         ram_load: Ŝarĝo de Ĉefmemoro
         wifi-users: Vifiaj Uzantoj
         storage_use: Ŝarĝo de Konservejo
+        etherpad-users: Uzantoj de Etherpad
+        etherpad-datasize: Datena Grando de Etherpad
+        guestbook-comments: Komentoj de Gastolibro
+        guestbook-images: Bildoj de Gastolibro
+        guestbook-datasize: Datena Grando de Gastolibro
+        guestbook-clicks: Alklakoj de Gastolibro
+        framadate-comments: Komentoj de Framadate
+        framadate-clicks: Alklakoj de Framadate
         nextcloud-users: Uzantoj de Nextcloud
         nextcloud-files: Dosieroj de Nextcloud
         nextcloud-downloads: Elŝutoj de Nextcloud
@@ -112,6 +120,7 @@ eo:
         nextcloud-clicks: Alklakoj de Nextcloud
   admin:
     general:
+      admin-panel: La Administra panelo de MAZI-Zono
       shutdown-modal-title: Ĉu malstarti?
       reboot-modal-title: Restartigi?
     top-menu:
@@ -120,6 +129,7 @@ eo:
       username: Uzantnomo
       password: Pasvorto
       mysql-password: Pasvorto de MySQL
+      check-updates: Kontroli ĝisdatigojn
       settings: Agordoj
     side-menu:
       dashboard: Stirpanelo
@@ -134,18 +144,40 @@ eo:
       documentation: Dokumentaro
     updates:
       subheader: Ĝisdatigi
+      checking-updates: Kontrolante ĝisdatigojn. Bonvolu atendi...
+      update-message-0: Bonvolu elekti vian ĝisdatigan kanalon
+      update-message-4: La sistemo estas ĝisdatiĝanta. Bonvolu atendi...
     setup-page:
+      tog-nav: Baskuligi navigadon
       fourth-step-header: Detaloj pri MAZI-Zono
       last-step-header: Kompleta
     dashboard-page:
       subheader: Stirpanelo
+      welcome:
+        message-list-1: Mastrumi la subtenatajn Aplikaĵojn
+        message-list-2: Agordi la reton de MAZI-Zono
+        message-list-4: Aldoni/forigi sciigojn sur la portalo
+        message-list-5: Elporti/enporti momentkopiojn
       hardware-info:
         system-temperature: Sistema Temperaturo
+        cpu-load: Ŝarĝo sur Ĉefprocesoro
+        ram-load: Ŝarĝo sur Ĉefmemoro
+        storage-load: Ŝarĝo sur Konservejo
+      networking:
+        header: Retado
+        users-online: Nombro de Konektitaj Uzantoj
+        wifi-info: Informo pri Vifia Reto
       applications:
         header: Aplikaĵoj
         applications-installed: Instalitaj Aplikaĵoj
       traffic:
         header: Trafiko
+      notifications:
+        header: Sciigoj
+      time-date:
+        current: Nuna Dato/Tempo
+      version:
+        header: Versio de MAZI-Zono
     applications-page:
       subheader: Aplikaĵoj
       instances-menu:
@@ -154,6 +186,8 @@ eo:
         url-column: Retadreso
         url-hint: la retadreso de la aplikaĵo
         description-column: Priskribo
+        parent-column: Patra Aplikaĵo
+        parent-hint: la patra aplikaĵo
         actions-column: Agoj
       applications-menu:
         header: Instalitaj Aplikaĵoj
@@ -174,7 +208,11 @@ eo:
         ssid-name-label: Nomo de la Vifia Reto (SSID)
         wifi-channel-label: Kanalo de la Vifia Reto
         wifi-password-label: Pasvorto de la Vifia Reto
+      internet-panel:
+        header: Reĝimo de Interreto
+        mode-hint: Reĝimo de la Vifia Reto
       connect-wifi-panel:
+        header: Konekti Vifion por atingo al Interreto
         wifi-network-hint-1: el Vifiaj Retoj
         wifi-network-hint-2: Vifia Interreto
       popups:
@@ -196,6 +234,7 @@ eo:
         edit-title-header: Redakti Titolon
         edit-home-title-header: Redakti Titolon de Ĉefpaĝo
         edit-home-subtitle-header: Redakti Subtitolon de Ĉefpaĝo
+        edit-welcome-message-header: Redakti Bonvenigan Mesaĝon
         edit-background-image-header: Redakti Fonan Bildon
         reset-theme-header: Restarigi Etoson
         load-theme-header: Ŝargi Etoson
@@ -226,6 +265,7 @@ eo:
       subheader: Monitorado
       details-panel:
         header: Detaloj
+        table-label1: Disponigo
         table-label2: Administranto
         table-label3: Titolo
         table-label4: Priskribo
@@ -236,6 +276,7 @@ eo:
           description: Priskribo
           action: Ago
       popups:
+        change-details-label1: Disponigo
         change-details-label2: Administranto
         change-details-label3: Titolo
         change-details-label4: Priskribo
@@ -243,6 +284,11 @@ eo:
         hardware-label1: Cela Servilo
         hardware-label2: Temperaturo
         hardware-label3: Vifiaj uzantoj
+        hardware-label4: Ŝarĝo sur ĉefprocesoro
+        hardware-label5: Ŝarĝo sur ĉefmemoro
+        hardware-label6: Ŝarĝo sur konservejo
+        application-label1: Cela Servilo
+        application-label2: Etherpad-aplikaĵo
         application-label5: aplikaĵo de Nextcloud
     notifications-page:
       subheader: Sciigoj
@@ -254,6 +300,31 @@ eo:
       popups:
         create-notification-title: Krei novan sciigon
         edit-notification-title: Redakti sciigon
+    import-export-page:
+      subheader: Momentkopioj
+      full-snapshots-header: Momentkopioj de MAZI-Zono
+      full-snapshot-panel:
+        form-placeholder: Nomo de Momentkopio
+      configuration-snapshots-header: Momentkopioj de Agordoj
+      save-snapshot-panel:
+        header: Konservi Momentkopion
+        form-placeholder: Nomo de Momentkopio
+        form-hint: Bonvolu enigi la nomon de la nova Momentkopio.
+      load-snapshot-panel:
+        header: Ŝargi Momentkopion
+        header-hint: Vi povas uzi tion por ŝargi momentkopion.
+      import-export-panel:
+        header: Enporti/Elporti Momentkopion
+        message: Bonvolu elekti momentkopion kaj premu la butonon 'ŝargi'.
+      interview-panel:
+        form-placeholder: Nomo de Momentkopio
+      guestbook-panel:
+        form-placeholder: Nomo de Momentkopio
+      popups:
+        import-header: Enporti Momentkopion
+        import-etherpad-header: Enporti Momentkopion de Etherpad
+        import-nextcloud-header: Enporti Momentkopion de Nextcloud
+        import-wordpress-header: Enporti Momentkopion de WordPress
     logs-page:
       subheader: Protokollegilo
       message: Vi povas legi protokoldosierojn de Mazi Zone ĉi-sube.
