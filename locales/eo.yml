@@ -55,6 +55,7 @@ eo:
       password: Pasvorto
       offline: ne konektita
       online: konektita
+      restricted: limigita
       managed: mastrumata
       active: aktiva
       inactive: malaktiva
@@ -86,8 +87,10 @@ eo:
       pressure-for: Premo el %{sensor}
       direction: Direkto (je Gradoj)
       acceleration: Akcelo (x, y, z)
+      gyroscope: Giroskopo (tango, joro, rulo)
     camera-page:
       header: Fotilo
+      live-stream-header: Tuja Videa Elsendado
       media-library-header: Biblioteko de Aŭdvidaĵoj
     monitoring-page:
       subheader: Monitorado
@@ -107,10 +110,13 @@ eo:
         storage_use: Ŝarĝo de Konservejo
         etherpad-users: Uzantoj de Etherpad
         etherpad-datasize: Datena Grando de Etherpad
+        etherpad-clicks: Alklakoj de Etherpad
         guestbook-comments: Komentoj de Gastolibro
         guestbook-images: Bildoj de Gastolibro
         guestbook-datasize: Datena Grando de Gastolibro
         guestbook-clicks: Alklakoj de Gastolibro
+        framadate-polls: Opinisondoj de Framadate
+        framadate-votes: Voĉdonoj de Framadate
         framadate-comments: Komentoj de Framadate
         framadate-clicks: Alklakoj de Framadate
         nextcloud-users: Uzantoj de Nextcloud
@@ -126,6 +132,7 @@ eo:
     top-menu:
       admin: Administrejo
       portal: Portalo
+      set-date: Agordi Daton
       username: Uzantnomo
       password: Pasvorto
       mysql-password: Pasvorto de MySQL
@@ -149,6 +156,12 @@ eo:
       update-message-4: La sistemo estas ĝisdatiĝanta. Bonvolu atendi...
     setup-page:
       tog-nav: Baskuligi navigadon
+      setup-panel: Agorda Panelo de MAZI-Zono
+      first-step-header: Agordado de Administra Pasvorto
+      first-step-hint: 'sugesto: se ĉi tiu estas nova MAZI-Zono, la aktuala pasvorto
+        estas 1234'
+      second-step-header: Agordado de Dato/Tempo
+      third-step-header: Agordado de Sendrata Interfaco
       fourth-step-header: Detaloj pri MAZI-Zono
       last-step-header: Kompleta
     dashboard-page:
@@ -156,9 +169,11 @@ eo:
       welcome:
         message-list-1: Mastrumi la subtenatajn Aplikaĵojn
         message-list-2: Agordi la reton de MAZI-Zono
+        message-list-3: Agordi la vidan prezenton de la portalo
         message-list-4: Aldoni/forigi sciigojn sur la portalo
         message-list-5: Elporti/enporti momentkopiojn
       hardware-info:
+        header: Aparatara Informo pri MAZI-Zono
         system-temperature: Sistema Temperaturo
         cpu-load: Ŝarĝo sur Ĉefprocesoro
         ram-load: Ŝarĝo sur Ĉefmemoro
@@ -175,32 +190,45 @@ eo:
       notifications:
         header: Sciigoj
       time-date:
+        header: Tempo/Dato de MAZI-Zono
         current: Nuna Dato/Tempo
       version:
         header: Versio de MAZI-Zono
+        up-to-date: Ĝisdatigita
     applications-page:
       subheader: Aplikaĵoj
       instances-menu:
         active-column: Aktiva
         name-column: Nomo
+        name-hint: la nomo de la aplikaĵo
         url-column: Retadreso
         url-hint: la retadreso de la aplikaĵo
         description-column: Priskribo
         parent-column: Patra Aplikaĵo
         parent-hint: la patra aplikaĵo
         actions-column: Agoj
+        guestbook-admin-hint: Administra Panelo de Gastolibro
       applications-menu:
         header: Instalitaj Aplikaĵoj
         status-column: Stato
         icon-column: Ikono
+        icon-hint: la implicita ikono de la aplikaĵo
         color-column: Koloro
+        color-hint: la implicita koloro de la aplikaĵo
         name-column: Nomo de la Aplikaĵo
+        name-hint: la nomo de la aplikaĵo
         url-column: Reteja adreso
+        url-hint: la retadreso de la aplikaĵo
         description-column: Priskribo
+        description-hint: la implicita priskribo de la aplikaĵo
         actions-column: Agoj
+        web-app-start-hint: Ĉi tiu estas retaplikaĵo kaj ĉiam ruliĝas.
         app-start-hint: Komenci Aplikaĵon
         app-stop-hint: Ĉesigi Aplikaĵon
       popups:
+        delete-application-title: Forigi Aperon de Aplikaĵo?
+        edit-application-title: Redakti Aperon de Aplikaĵo?
+        create-application-title: Aperigi Aplikaĵon
         web-app-info-title: Reta Aplikaĵo
     network-page:
       subheader: Agordoj pri Reto
@@ -229,6 +257,10 @@ eo:
         home-page-label: Titolo de ĉefpaĝo
         home-subtitle-label: Subtitolo de ĉefpaĝo
         colors-label: Koloroj
+        side-main-color: Ĉefkoloro de flankpanelo
+        side-active-color: Aktiva koloro de flankpanelo
+        top-main-color: Ĉefkoloro de supra panelo
+        top-active-color: Aktiva koloro de supra panelo
       popups:
         edit-theme-header: Redakti Etoson
         edit-title-header: Redakti Titolon
@@ -255,12 +287,17 @@ eo:
         start-sensing-title: Ekmezurigi sentilojn
         start-sensing-label1: Cela Servilo
         start-sensing-label2: Daŭro (en sekundoj)
+        start-sensing-label3: Kalendaro (fina tempo/dato)
         start-sensing-label4: Intervalo (en sekundoj)
+        start-images-title: Eksurdiskigi Bildojn
         start-images-label1: Daŭro (je sekundoj)
         start-images-label2: Intervalo (je sekundoj)
         delete-images-title: Forigi Ĉiujn Fotojn
+        delete-images-message: Ĉu vi volas forigi ĉiujn surdiskigitajn fotojn?
+        start-videos-title: Eksurdiskigi Videaĵon
         start-videos-label1: Daŭro (en sekundoj)
         delete-videos-title: Forigi Ĉiujn Videaĵojn
+        delete-videos-message: Ĉu vi volas forigi ĉiujn surdiskigitajn videaĵojn?
     monitoring-page:
       subheader: Monitorado
       details-panel:
@@ -275,7 +312,12 @@ eo:
           status: Stato
           description: Priskribo
           action: Ago
+          hardware-description-message: Monitorado de sistema aktiveco.
+          application-description-message: Monitorado de aplikaĵa dateno.
       popups:
+        change-details-header: Ŝanĝi detalojn pri monitorado
+        change-details-message: Uzu la jenan formularon por ŝanĝi la detalojn pri
+          monitorado de la modalaĵo
         change-details-label1: Disponigo
         change-details-label2: Administranto
         change-details-label3: Titolo
@@ -289,6 +331,8 @@ eo:
         hardware-label6: Ŝarĝo sur konservejo
         application-label1: Cela Servilo
         application-label2: Etherpad-aplikaĵo
+        application-label3: aplikaĵo Gastolibro
+        application-label4: aplikaĵo Framadate
         application-label5: aplikaĵo de Nextcloud
     notifications-page:
       subheader: Sciigoj
@@ -300,6 +344,8 @@ eo:
       popups:
         create-notification-title: Krei novan sciigon
         edit-notification-title: Redakti sciigon
+        delete-notification-message: Ĉi tiu sciigo foriĝos por ĉiam, for de la datenbanko.
+          Ĉu vi volas daŭrigi?
     import-export-page:
       subheader: Momentkopioj
       full-snapshots-header: Momentkopioj de MAZI-Zono
@@ -313,9 +359,12 @@ eo:
       load-snapshot-panel:
         header: Ŝargi Momentkopion
         header-hint: Vi povas uzi tion por ŝargi momentkopion.
+        message: Bonvolu elekti momentkopion kaj premu 'Ŝargi'. MAZI-portalo restartos.
+        no-snapshots-message: Aktuale, estas neniu konservata momentkopio.
       import-export-panel:
         header: Enporti/Elporti Momentkopion
         message: Bonvolu elekti momentkopion kaj premu la butonon 'ŝargi'.
+      application-snapshots-header: Momentkopioj de Aplikaĵoj
       interview-panel:
         form-placeholder: Nomo de Momentkopio
       guestbook-panel:
@@ -337,24 +386,37 @@ eo:
     documentation-page:
       header: Dokumentaro pri Administrado
       initial-configuration-tab:
+        header: Komenca Agordado
         subheader1: Priskribo
+        subheader2: Konektante per ssh
+        subheader3: Agordado de Raspbian
       etherpad-tab:
         subheader1: Priskribo
         subheader2: Manlibro pri Administrado
         subheader3: Utilaj konsiloj
+        paragraph2: Vi trovos Administran paĝon ĉe
         paragraph5: Ekzemple,
       nextcloud-tab:
         subheader1: Priskribo
         subheader2: Manlibro pri Administrado
         subheader3: Utilaj konsiloj
+        paragraph2: Vi trovos Administran paĝon ĉe
+        paragraph8: Mastrumi vian profilan bildon
         paragraph10: Retpoŝta adreso
+        paragraph11: Listi viajn anecojn en Grupoj
         paragraph12: Mastrumi vian pasvorton
+        paragraph13: Elekti lingvon por fasado de Nextcloud
+        paragraph14: Ligiloj al surtablaj kaj poŝaparataj aplikaĵoj
       guestbook-tab:
         subheader1: Priskribo
         subheader2: Manlibro pri Administrado
         subheader3: Pasvorto de Administranto
+        subheader4: Alternativaj vidoj de enhavo
+        paragraph6: Lumbilda vido
+        paragraph7: Tabulkomputila vido
       wordpress-tab:
         subheader1: Priskribo
+        subheader2: Administrada Manlibro
       framadate-tab:
         subheader1: Priskribo
         paragraph2: Jen kiel ĝi funkcias
@@ -367,7 +429,17 @@ eo:
         header: Tempo/Dato
       mysql-password:
         header: Pasvorto de MySQL
+      apache-filesize:
+        header: maksimuma dosiera grando de Apache
       popups:
         change-time-date-title: Ŝanĝi Tempon/Daton
+        change-time-date-message: Bonvolu uzi la jenan formularon por ŝanĝi la Tempon/Daton
+          de la MAZI-Zono.
         change-mysql-password-title: Ŝanĝi pasvorton de MySQL
+        change-mysql-password-message: Bonvolu uzi la jenan formularon por ŝanĝi la
+          MySQL-pasvorton por ĉi tiu MAZI-Zono.
+        change-apache-filesize-title: Ŝanĝi maksimuman grandon de alŝutata dosiero
+          por Apache
+        change-apache-filesize-message: Bonvolu uzi la jenan formularon por ŝanĝi
+          la maksimuman grandon de alŝuto por ĉi tiu MAZI-Zono.
 ...
