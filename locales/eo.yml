@@ -18,6 +18,7 @@ eo:
       choose: Elekti
       export-to-csv: Elporti kiel dosiero de komo-apartigitaj valoroj
       expand: Etendi
+      expand-storage: Pligrandigi Konservejon
       reboot: Restarti
       reset: Restarigi
       shutdown: Malstarti
@@ -92,6 +93,7 @@ eo:
       header: Fotilo
       live-stream-header: Tuja Videa Elsendado
       media-library-header: Biblioteko de Aŭdvidaĵoj
+      no-media-warn: Nuntempe, estas neniu bildo aŭ videaĵo en la biblioteko!
     monitoring-page:
       subheader: Monitorado
       popups:
@@ -130,6 +132,7 @@ eo:
       shutdown-modal-title: Ĉu malstarti?
       reboot-modal-title: Restartigi?
     top-menu:
+      header: Administra Panelo de MAZI-Zono
       admin: Administrejo
       portal: Portalo
       set-date: Agordi Daton
@@ -163,6 +166,8 @@ eo:
       second-step-header: Agordado de Dato/Tempo
       third-step-header: Agordado de Sendrata Interfaco
       fourth-step-header: Detaloj pri MAZI-Zono
+      fourth-step-message: Bonvolu uzi la jenan formularon por ŝanĝi la detalojn de
+        via MAZI-Zono
       last-step-header: Kompleta
     dashboard-page:
       subheader: Stirpanelo
@@ -189,6 +194,7 @@ eo:
         header: Trafiko
       notifications:
         header: Sciigoj
+        notifications: Aktivaj Portalaj Sciigoj
       time-date:
         header: Tempo/Dato de MAZI-Zono
         current: Nuna Dato/Tempo
@@ -198,6 +204,7 @@ eo:
     applications-page:
       subheader: Aplikaĵoj
       instances-menu:
+        header: Aperoj de Aplikaĵoj
         active-column: Aktiva
         name-column: Nomo
         name-hint: la nomo de la aplikaĵo
@@ -208,6 +215,8 @@ eo:
         parent-hint: la patra aplikaĵo
         actions-column: Agoj
         guestbook-admin-hint: Administra Panelo de Gastolibro
+        delete-instance-hint: Forigi Aperon de Aplikaĵo
+        edit-instance-hint: Redakti Aperon de Aplikaĵo
       applications-menu:
         header: Instalitaj Aplikaĵoj
         status-column: Stato
@@ -226,7 +235,7 @@ eo:
         app-start-hint: Komenci Aplikaĵon
         app-stop-hint: Ĉesigi Aplikaĵon
       popups:
-        delete-application-title: Forigi Aperon de Aplikaĵo?
+        delete-application-title: Ĉu Forigi Aperon de Aplikaĵo?
         edit-application-title: Redakti Aperon de Aplikaĵo?
         create-application-title: Aperigi Aplikaĵon
         web-app-info-title: Reta Aplikaĵo
