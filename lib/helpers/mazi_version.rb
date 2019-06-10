@@ -100,6 +100,8 @@ module MaziVersion
       `cp /etc/mazi/config.yml /etc/mazi/config.yml.bu`
       MaziLogger.debug "Updating back-end scripts"
       `cd /root/back-end && git pull origin #{branch}`
+      MaziLogger.debug "Updating wiki guides scripts"
+      `cd /root/guides.wiki && git fetch && git pull origin master`
       MaziLogger.debug "done."
     end
     nil
