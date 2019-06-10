@@ -121,6 +121,10 @@ module MaziVersion
 
   def self.remove_old_snapshots
     MaziLogger.debug "deleting old snapshots"
+    unless File.directory?('/root/portal/public/snapshots')
+      MaziLogger.debug "Snapshots folder does not exist, creating."
+      FileUtils.mkdir_p('/root/portal/public/snapshots')
+    end
     `rm -rf public/snapshots/* 2> /dev/null`
   end
 
