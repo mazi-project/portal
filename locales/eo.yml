@@ -1,0 +1,454 @@
+# Messages for Esperanto (Esperanto)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Mirin
+---
+eo:
+  general:
+    buttons:
+      edit: Redakti
+      cancel: Nuligi
+      ok: Bone
+      close: Fermi
+      create: Krei
+      delete: Forigi
+      start: Komenci
+      stop: Halti
+      save: Konservi Ŝanĝojn
+      choose: Elekti
+      export-to-csv: Elporti kiel dosiero de komo-apartigitaj valoroj
+      expand: Etendi
+      expand-storage: Pligrandigi Konservejon
+      reboot: Restarti
+      reset: Restarigi
+      shutdown: Malstarti
+      logout: Elsaluti
+      update: Ĝisdatigi
+      connect: Konekti
+      disconnect: Malkonekti
+      toggle-device: Ŝanĝi Aparaton
+      remove: Forigi
+      load: Ŝargi
+      import: Enporti
+      export: Elporti
+      refresh: Refreŝigi
+      continue: Daŭrigi
+      next: Sekven
+      previous: Antaŭen
+      submit: Sendi
+      change: Ŝanĝi
+      qrcode: QR-kodo
+      show: Montri
+      configure: Agordi
+    messages:
+      warning: Averto
+      welcome: Bonvenon
+      version: Versio
+      enable: ŝalti
+      disable: malŝalti
+      checked: kontrolita
+      on_msg: ŜALTITA
+      off_msg: MALŜALTITA
+      disconnected: Malkonektita
+      here: ĉi tie
+      ssid: SSID
+      channel: Kanalo
+      password: Pasvorto
+      offline: ne konektita
+      online: konektita
+      restricted: limigita
+      managed: mastrumata
+      active: aktiva
+      inactive: malaktiva
+      error: eraro
+      stable: Stabila
+      development: Evoluigo
+  portal:
+    top-menu:
+      documentation: Dokumentaro
+    side-menu:
+      applications: Aplikaĵoj
+      system: Sistemo
+      sensors: Sentiloj
+      camera: Fotilo
+      monitoring: Monitorado
+      devices: Aparatoj
+    system-page:
+      subheader: Sistema Informo
+      users: Konektataj Uzantoj
+      app-clicks: Alklakoj de Aplikaĵo
+      temperature: Temperaturo
+      cpu: Ĉefprocesoro
+      ram: Ĉefmemoro
+      storage: Konservejo
+    sensors-page:
+      header: Mezuloj de Sentiloj
+      temperature-for: Temperaturo el %{sensor}
+      humidity-for: Humido el %{sensor}
+      pressure-for: Premo el %{sensor}
+      direction: Direkto (je Gradoj)
+      acceleration: Akcelo (x, y, z)
+      gyroscope: Giroskopo (tango, joro, rulo)
+    camera-page:
+      header: Fotilo
+      live-stream-header: Tuja Videa Elsendado
+      media-library-header: Biblioteko de Aŭdvidaĵoj
+      no-media-warn: Nuntempe, estas neniu bildo aŭ videaĵo en la biblioteko!
+    monitoring-page:
+      subheader: Monitorado
+      popups:
+        device: Aparato
+        devices: Aparatoj
+        deployment: Disponigo
+        administrator: Administranto
+        description: Priskribo
+        latitude: Latitudo
+        longitude: Longitudo
+        system_info: Informo pri Sistemo
+        cpu_temp: Temperaturo de Ĉefprocesoro
+        cpu_load: Ŝarĝo de Ĉefprocesoro
+        ram_load: Ŝarĝo de Ĉefmemoro
+        wifi-users: Vifiaj Uzantoj
+        storage_use: Ŝarĝo de Konservejo
+        etherpad-users: Uzantoj de Etherpad
+        etherpad-datasize: Datena Grando de Etherpad
+        etherpad-clicks: Alklakoj de Etherpad
+        guestbook-comments: Komentoj de Gastolibro
+        guestbook-images: Bildoj de Gastolibro
+        guestbook-datasize: Datena Grando de Gastolibro
+        guestbook-clicks: Alklakoj de Gastolibro
+        framadate-polls: Opinisondoj de Framadate
+        framadate-votes: Voĉdonoj de Framadate
+        framadate-comments: Komentoj de Framadate
+        framadate-clicks: Alklakoj de Framadate
+        nextcloud-users: Uzantoj de Nextcloud
+        nextcloud-files: Dosieroj de Nextcloud
+        nextcloud-downloads: Elŝutoj de Nextcloud
+        nextcloud-datasize: Datena grando de Nextcloud
+        nextcloud-clicks: Alklakoj de Nextcloud
+  admin:
+    general:
+      admin-panel: La Administra panelo de MAZI-Zono
+      shutdown-modal-title: Ĉu malstarti?
+      reboot-modal-title: Restartigi?
+    top-menu:
+      header: Administra Panelo de MAZI-Zono
+      admin: Administrejo
+      portal: Portalo
+      set-date: Agordi Daton
+      username: Uzantnomo
+      password: Pasvorto
+      mysql-password: Pasvorto de MySQL
+      check-updates: Kontroli ĝisdatigojn
+      settings: Agordoj
+    side-menu:
+      dashboard: Stirpanelo
+      applications: Aplikaĵoj
+      networking: Retado
+      appearance: Aspekto
+      devices: Aparatoj
+      monitoring: Monitorado
+      notifications: Sciigoj
+      export-import: Elporti/Enporti
+      logs: Protokoloj
+      documentation: Dokumentaro
+    updates:
+      subheader: Ĝisdatigi
+      checking-updates: Kontrolante ĝisdatigojn. Bonvolu atendi...
+      update-message-0: Bonvolu elekti vian ĝisdatigan kanalon
+      update-message-4: La sistemo estas ĝisdatiĝanta. Bonvolu atendi...
+    setup-page:
+      tog-nav: Baskuligi navigadon
+      setup-panel: Agorda Panelo de MAZI-Zono
+      first-step-header: Agordado de Administra Pasvorto
+      first-step-hint: 'sugesto: se ĉi tiu estas nova MAZI-Zono, la aktuala pasvorto
+        estas 1234'
+      second-step-header: Agordado de Dato/Tempo
+      third-step-header: Agordado de Sendrata Interfaco
+      fourth-step-header: Detaloj pri MAZI-Zono
+      fourth-step-message: Bonvolu uzi la jenan formularon por ŝanĝi la detalojn de
+        via MAZI-Zono
+      last-step-header: Kompleta
+    dashboard-page:
+      subheader: Stirpanelo
+      welcome:
+        message-list-1: Mastrumi la subtenatajn Aplikaĵojn
+        message-list-2: Agordi la reton de MAZI-Zono
+        message-list-3: Agordi la vidan prezenton de la portalo
+        message-list-4: Aldoni/forigi sciigojn sur la portalo
+        message-list-5: Elporti/enporti momentkopiojn
+      hardware-info:
+        header: Aparatara Informo pri MAZI-Zono
+        system-temperature: Sistema Temperaturo
+        cpu-load: Ŝarĝo sur Ĉefprocesoro
+        ram-load: Ŝarĝo sur Ĉefmemoro
+        storage-load: Ŝarĝo sur Konservejo
+      networking:
+        header: Retado
+        users-online: Nombro de Konektitaj Uzantoj
+        wifi-info: Informo pri Vifia Reto
+      applications:
+        header: Aplikaĵoj
+        applications-installed: Instalitaj Aplikaĵoj
+      traffic:
+        header: Trafiko
+      notifications:
+        header: Sciigoj
+        notifications: Aktivaj Portalaj Sciigoj
+      time-date:
+        header: Tempo/Dato de MAZI-Zono
+        current: Nuna Dato/Tempo
+      version:
+        header: Versio de MAZI-Zono
+        up-to-date: Ĝisdatigita
+    applications-page:
+      subheader: Aplikaĵoj
+      instances-menu:
+        header: Aperoj de Aplikaĵoj
+        active-column: Aktiva
+        name-column: Nomo
+        name-hint: la nomo de la aplikaĵo
+        url-column: Retadreso
+        url-hint: la retadreso de la aplikaĵo
+        description-column: Priskribo
+        parent-column: Patra Aplikaĵo
+        parent-hint: la patra aplikaĵo
+        actions-column: Agoj
+        guestbook-admin-hint: Administra Panelo de Gastolibro
+        delete-instance-hint: Forigi Aperon de Aplikaĵo
+        edit-instance-hint: Redakti Aperon de Aplikaĵo
+      applications-menu:
+        header: Instalitaj Aplikaĵoj
+        status-column: Stato
+        icon-column: Ikono
+        icon-hint: la implicita ikono de la aplikaĵo
+        color-column: Koloro
+        color-hint: la implicita koloro de la aplikaĵo
+        name-column: Nomo de la Aplikaĵo
+        name-hint: la nomo de la aplikaĵo
+        url-column: Reteja adreso
+        url-hint: la retadreso de la aplikaĵo
+        description-column: Priskribo
+        description-hint: la implicita priskribo de la aplikaĵo
+        actions-column: Agoj
+        web-app-start-hint: Ĉi tiu estas retaplikaĵo kaj ĉiam ruliĝas.
+        app-start-hint: Komenci Aplikaĵon
+        app-stop-hint: Ĉesigi Aplikaĵon
+      popups:
+        delete-application-title: Ĉu Forigi Aperon de Aplikaĵo?
+        edit-application-title: Redakti Aperon de Aplikaĵo?
+        create-application-title: Aperigi Aplikaĵon
+        web-app-info-title: Reta Aplikaĵo
+    network-page:
+      subheader: Agordoj pri Reto
+      wifi-ap-interface-panel:
+        ssid-name-label: Nomo de la Vifia Reto (SSID)
+        wifi-channel-label: Kanalo de la Vifia Reto
+        wifi-password-label: Pasvorto de la Vifia Reto
+      internet-panel:
+        header: Reĝimo de Interreto
+        mode-hint: Reĝimo de la Vifia Reto
+      connect-wifi-panel:
+        header: Konekti Vifion por atingo al Interreto
+        wifi-network-hint-1: el Vifiaj Retoj
+        wifi-network-hint-2: Vifia Interreto
+      popups:
+        change-channel-header: Ŝanĝi Kanalon
+        change-password-header: Ŝanĝi Pasvorton
+        change-mode-header: Ŝanĝi Reĝimon
+        select-wifi-label: Elekti nomon de Vifio
+        select-mesh-mode-label: Elekti Maŝan reĝimon
+    appearance-page:
+      subheader: Aspekto
+      theme-panel:
+        header: Agordoj de Etoso
+        portal-title-label: Titolo de portalo
+        home-page-label: Titolo de ĉefpaĝo
+        home-subtitle-label: Subtitolo de ĉefpaĝo
+        colors-label: Koloroj
+        side-main-color: Ĉefkoloro de flankpanelo
+        side-active-color: Aktiva koloro de flankpanelo
+        top-main-color: Ĉefkoloro de supra panelo
+        top-active-color: Aktiva koloro de supra panelo
+      popups:
+        edit-theme-header: Redakti Etoson
+        edit-title-header: Redakti Titolon
+        edit-home-title-header: Redakti Titolon de Ĉefpaĝo
+        edit-home-subtitle-header: Redakti Subtitolon de Ĉefpaĝo
+        edit-welcome-message-header: Redakti Bonvenigan Mesaĝon
+        edit-background-image-header: Redakti Fonan Bildon
+        reset-theme-header: Restarigi Etoson
+        load-theme-header: Ŝargi Etoson
+        save-theme-header: Konservi Etoson
+    devices-page:
+      subheader: Aparatoj
+      sensors-panel:
+        header: Setiloj
+        sensors-table:
+          type: Tipo
+          status: Stato
+          entries: Eroj
+          actions: Agoj
+          start-button-hint: Ekkonservi mezurojn
+      camera-panel:
+        header: Fotilo
+      popups:
+        start-sensing-title: Ekmezurigi sentilojn
+        start-sensing-label1: Cela Servilo
+        start-sensing-label2: Daŭro (en sekundoj)
+        start-sensing-label3: Kalendaro (fina tempo/dato)
+        start-sensing-label4: Intervalo (en sekundoj)
+        start-images-title: Eksurdiskigi Bildojn
+        start-images-label1: Daŭro (je sekundoj)
+        start-images-label2: Intervalo (je sekundoj)
+        delete-images-title: Forigi Ĉiujn Fotojn
+        delete-images-message: Ĉu vi volas forigi ĉiujn surdiskigitajn fotojn?
+        start-videos-title: Eksurdiskigi Videaĵon
+        start-videos-label1: Daŭro (en sekundoj)
+        delete-videos-title: Forigi Ĉiujn Videaĵojn
+        delete-videos-message: Ĉu vi volas forigi ĉiujn surdiskigitajn videaĵojn?
+    monitoring-page:
+      subheader: Monitorado
+      details-panel:
+        header: Detaloj
+        table-label1: Disponigo
+        table-label2: Administranto
+        table-label3: Titolo
+        table-label4: Priskribo
+        table-label5: Loko (latitudo, longitudo)
+      statistics-panel:
+        statistics-table:
+          status: Stato
+          description: Priskribo
+          action: Ago
+          hardware-description-message: Monitorado de sistema aktiveco.
+          application-description-message: Monitorado de aplikaĵa dateno.
+      popups:
+        change-details-header: Ŝanĝi detalojn pri monitorado
+        change-details-message: Uzu la jenan formularon por ŝanĝi la detalojn pri
+          monitorado de la modalaĵo
+        change-details-label1: Disponigo
+        change-details-label2: Administranto
+        change-details-label3: Titolo
+        change-details-label4: Priskribo
+        change-details-label5: Loko (latitudo, longitudo)
+        hardware-label1: Cela Servilo
+        hardware-label2: Temperaturo
+        hardware-label3: Vifiaj uzantoj
+        hardware-label4: Ŝarĝo sur ĉefprocesoro
+        hardware-label5: Ŝarĝo sur ĉefmemoro
+        hardware-label6: Ŝarĝo sur konservejo
+        application-label1: Cela Servilo
+        application-label2: Etherpad-aplikaĵo
+        application-label3: aplikaĵo Gastolibro
+        application-label4: aplikaĵo Framadate
+        application-label5: aplikaĵo de Nextcloud
+    notifications-page:
+      subheader: Sciigoj
+      notifications-table:
+        header1: Stato
+        header2: Titolo
+        header3: Enhavo
+        header4: Agoj
+      popups:
+        create-notification-title: Krei novan sciigon
+        edit-notification-title: Redakti sciigon
+        delete-notification-message: Ĉi tiu sciigo foriĝos por ĉiam, for de la datenbanko.
+          Ĉu vi volas daŭrigi?
+    import-export-page:
+      subheader: Momentkopioj
+      full-snapshots-header: Momentkopioj de MAZI-Zono
+      full-snapshot-panel:
+        form-placeholder: Nomo de Momentkopio
+      configuration-snapshots-header: Momentkopioj de Agordoj
+      save-snapshot-panel:
+        header: Konservi Momentkopion
+        form-placeholder: Nomo de Momentkopio
+        form-hint: Bonvolu enigi la nomon de la nova Momentkopio.
+      load-snapshot-panel:
+        header: Ŝargi Momentkopion
+        header-hint: Vi povas uzi tion por ŝargi momentkopion.
+        message: Bonvolu elekti momentkopion kaj premu 'Ŝargi'. MAZI-portalo restartos.
+        no-snapshots-message: Aktuale, estas neniu konservata momentkopio.
+      import-export-panel:
+        header: Enporti/Elporti Momentkopion
+        message: Bonvolu elekti momentkopion kaj premu la butonon 'ŝargi'.
+      application-snapshots-header: Momentkopioj de Aplikaĵoj
+      interview-panel:
+        form-placeholder: Nomo de Momentkopio
+      guestbook-panel:
+        form-placeholder: Nomo de Momentkopio
+      popups:
+        import-header: Enporti Momentkopion
+        import-etherpad-header: Enporti Momentkopion de Etherpad
+        import-nextcloud-header: Enporti Momentkopion de Nextcloud
+        import-wordpress-header: Enporti Momentkopion de WordPress
+    logs-page:
+      subheader: Protokollegilo
+      message: Vi povas legi protokoldosierojn de Mazi Zone ĉi-sube.
+      portal-log-panel:
+        header: Portala Protokoldosiero
+        header-hint: Portala Protokoldosiero.
+        filter-label1: Erarmesaĝoj
+        filter-label2: Avertmesaĝoj
+        filter-label3: Senerarigaj mesaĝoj
+    documentation-page:
+      header: Dokumentaro pri Administrado
+      initial-configuration-tab:
+        header: Komenca Agordado
+        subheader1: Priskribo
+        subheader2: Konektante per ssh
+        subheader3: Agordado de Raspbian
+      etherpad-tab:
+        subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
+        subheader3: Utilaj konsiloj
+        paragraph2: Vi trovos Administran paĝon ĉe
+        paragraph5: Ekzemple,
+      nextcloud-tab:
+        subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
+        subheader3: Utilaj konsiloj
+        paragraph2: Vi trovos Administran paĝon ĉe
+        paragraph8: Mastrumi vian profilan bildon
+        paragraph10: Retpoŝta adreso
+        paragraph11: Listi viajn anecojn en Grupoj
+        paragraph12: Mastrumi vian pasvorton
+        paragraph13: Elekti lingvon por fasado de Nextcloud
+        paragraph14: Ligiloj al surtablaj kaj poŝaparataj aplikaĵoj
+      guestbook-tab:
+        subheader1: Priskribo
+        subheader2: Manlibro pri Administrado
+        subheader3: Pasvorto de Administranto
+        subheader4: Alternativaj vidoj de enhavo
+        paragraph6: Lumbilda vido
+        paragraph7: Tabulkomputila vido
+      wordpress-tab:
+        subheader1: Priskribo
+        subheader2: Administrada Manlibro
+      framadate-tab:
+        subheader1: Priskribo
+        paragraph2: Jen kiel ĝi funkcias
+        paragraph3: Krei opinisondon
+        paragraph6: Diskuti kaj decidi
+    settings-page:
+      subheader: Agordoj
+      panel-header: Sistemaj agordoj
+      time-date:
+        header: Tempo/Dato
+      mysql-password:
+        header: Pasvorto de MySQL
+      apache-filesize:
+        header: maksimuma dosiera grando de Apache
+      popups:
+        change-time-date-title: Ŝanĝi Tempon/Daton
+        change-time-date-message: Bonvolu uzi la jenan formularon por ŝanĝi la Tempon/Daton
+          de la MAZI-Zono.
+        change-mysql-password-title: Ŝanĝi pasvorton de MySQL
+        change-mysql-password-message: Bonvolu uzi la jenan formularon por ŝanĝi la
+          MySQL-pasvorton por ĉi tiu MAZI-Zono.
+        change-apache-filesize-title: Ŝanĝi maksimuman grandon de alŝutata dosiero
+          por Apache
+        change-apache-filesize-message: Bonvolu uzi la jenan formularon por ŝanĝi
+          la maksimuman grandon de alŝuto por ĉi tiu MAZI-Zono.
+...

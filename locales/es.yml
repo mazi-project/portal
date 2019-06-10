@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Fitoschido
+# Author: Harvest
 # Author: Mgaved
 ---
 es:
@@ -17,7 +18,10 @@ es:
       stop: Detener
       save: Guardar cambios
       choose: Elegir
+      choose-timeslot: Elige un intervalo de tiempo
       export-to-csv: Exportar a un archivo CSV
+      expand: Expandir
+      expand-storage: Expandir Almacenamiento
       reboot: Reiniciar
       reset: Restablecer
       shutdown: Apagar
@@ -46,12 +50,20 @@ es:
       version: Versión
       enable: activar
       disable: desactivar
+      checked: revisado
       on_msg: ⏽
       off_msg: ⭘
+      disconnected: Desconectado
       here: aquí
+      ssid: SSID
       channel: Canal
       password: Contraseña
+      online: En línea
+      restricted: Restringido
       managed: gestionado
+      active: activo
+      inactive: Inactivo
+      error: error
       stable: Estable
       development: Desarrollo
   portal:
@@ -72,6 +84,20 @@ es:
       ram: RAM
       storage: Almacenamiento
     sensors-page:
+      header: Medidas de sensor
+      header-message: En esta página  puedes ver las medidas de varios sensores conectadoos
+        a este MAZI Zone. También puedes utilizar el botón de abajo para pedir medidas
+        de un periodo concreto.
+      temperature-for: Temperatura de %{sensor}
+      humidity-for: Humedad de %{sensor}
+      pressure-for: Presión de %{sensor}
+      no-sensors-warn: 'Advertencia: No hay medidas en la base de datos o el dispositivo
+        de sensor no esta conectado a un Mazi Zone'
+      no-sensor-data-warn: 'Advertencia: No hay datos del sensor guardados en este
+        Mazi Zone. Un administrador del sistema puede habilitar la colección de datos
+        del sensor'
+      choose-timeslot-message: Por favor utilice la forma de abajo para seleccionar
+        una intervalo de tiempo.
       direction: Dirección (grados)
       acceleration: Aceleración (x, y, z)
     camera-page:
@@ -79,6 +105,7 @@ es:
       media-library-header: Mediateca
       no-media-warn: No se encontraron imágenes ni vídeos en la mediateca.
     monitoring-page:
+      subheader: Monitorización
       popups:
         device: Dispositivo
         devices: Dispositivos

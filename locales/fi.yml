@@ -1,0 +1,206 @@
+# Messages for Finnish (suomi)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Nike
+# Author: Pyscowicz
+---
+fi:
+  general:
+    buttons:
+      edit: Muokkaa
+      cancel: Peru
+      ok: OK
+      close: Sulje
+      create: Luo
+      delete: Poistsa
+      start: Aloita
+      stop: Pysäytä
+      save: Tallenna muutokset
+      choose: Valitse
+      export-to-csv: Vie CSV-tiedostoon
+      expand: Laajenna
+      reboot: Käynnistä uudelleen
+      reset: Nollaa
+      shutdown: Sammuta
+      logout: Kirjaudu ulos
+      update: Päivitä
+      connect: Yhdistä
+      disconnect: Katkaise yhteys
+      toggle-device: Vaihda laitetta
+      initialize: Alusta
+      remove: Poista
+      load: Lataa
+      import: Tuo
+      export: Vie
+      refresh: Päivitä
+      continue: Jatka
+      next: Seuraava
+      previous: Edellinen
+      submit: Lähetä
+      change: Muuta
+      qrcode: QR-koodi
+      show: Näytä
+    messages:
+      warning: Varoitus
+      welcome: Tervetuloa
+      version: Versio
+      enable: ota käyttöön
+      disable: poista käytöstä
+      on_msg: "ON"
+      off_msg: "OFF"
+      ssid: SSID
+      channel: Kanava
+      password: Salasana
+      active: aktiivinen
+      inactive: inaktiivinen
+      error: virhe
+  portal:
+    top-menu:
+      documentation: Käyttöohjeet
+    side-menu:
+      applications: Sovellukset
+      system: Järjestelmä
+      sensors: Sensorit
+      camera: Kamera
+      monitoring: Monitorointi
+      devices: Laitteet
+    system-page:
+      subheader: Järjestelmätiedot
+      temperature: Lämpötila
+      cpu: Suoritin
+      ram: Muisti
+      storage: Tallennustila
+    sensors-page:
+      header: Sensorilukemat
+    camera-page:
+      header: Kamera
+      media-library-header: Mediakirjasto
+    monitoring-page:
+      popups:
+        device: Laite
+        devices: Laitteet
+        description: Kuvaus
+        latitude: Leveysaste
+        longitude: Pituusaste
+        system_info: Järjestelmätiedot
+        cpu_temp: Suorittimen lämpötila
+        wifi-users: WiFi käyttäjät
+  admin:
+    general:
+      shutdown-modal-title: Sammuta?
+      shutdown-modal-message: MAZI Zone sammuu nyt, tämä aiheuttaa sivuston saavuttamattomuuden
+        ja sinun tarvitsee manuaalisesti uudelleenkäynnistää tämä MAZI Zone. Edetäänkö?
+      reboot-modal-title: Käynnistä uudelleen?
+      reboot-modal-message: MAZI Zone käynnistetään nyt uudelleen, tämä aiheuttaa
+        sivuston saavuttamattomuuden pariksi minuutiksi, odota ja päivitä tämä sivu
+        parin minuutin jälkeen. Edetäänkö?
+    top-menu:
+      admin: Ylläpitäjä
+      portal: Portaali
+      username: Käyttäjänimi
+      password: Salasana
+      mysql-password: MySQL-salasana
+      check-updates: Tarkista päivitykset
+      settings: Asetukset
+    side-menu:
+      dashboard: Kojelauta
+      applications: Sovellukset
+      networking: Verkostointi
+      appearance: Ulkoasu
+      devices: Laitteet
+      monitoring: Seuranta
+      notifications: Ilmoitukset
+      export-import: Vienti/Tuonti
+      logs: Lokit
+      documentation: Käyttöohjeet
+    updates:
+      subheader: Päivitä
+      checking-updates: Tarkistetaan päivityksiä. Odota...
+      update-message-4: Järjestelmä päivittyy. Odota...
+    setup-page:
+      first-step-hint: 'vihje: jos tämä on uusi MAZI Zone, nykyinen salasana on 1234'
+      fourth-step-header: MAZI Zone -tiedot
+    dashboard-page:
+      subheader: Kojelauta
+      hardware-info:
+        system-temperature: Järjestelmän lämpötila
+      applications:
+        header: Sovellukset
+        applications-installed: Sovelluksia asennettu
+      traffic:
+        header: Liikenne
+      notifications:
+        header: Ilmoitukset
+      version:
+        header: MAZI Zone -versio
+    applications-page:
+      subheader: Sovellukset
+      instances-menu:
+        active-column: Aktiivinen
+        name-column: Nimi
+        url-column: URL-osoite
+        description-column: Kuvaus
+      applications-menu:
+        status-column: Tila
+        icon-column: Kuvake
+        color-column: Väri
+        url-column: URL-osoite
+        description-column: Kuvaus
+        app-start-hint: Käynnistä sovellus
+        app-stop-hint: Pysäytä sovellus
+      popups:
+        web-app-info-title: Verkkosovellus
+    network-page:
+      subheader: Verkkoasetukset
+      wifi-ap-interface-panel:
+        ssid-name-label: Wi-Fi-verkon nimi (SSID)
+        wifi-channel-label: Wi-Fi-verkon kanava
+        wifi-password-label: Wi-Fi-verkon salasana
+      connect-wifi-panel:
+        wifi-network-hint-1: Wi-Fi-verkoista
+      popups:
+        edit-wifi-network-header: Muokkaa Wi-Fi-verkon asetuksia
+        show-qrcode-header: Wi-Fi-verkko QRcode
+        change-channel-header: Vaihda kanava
+        change-password-header: Vaihda salasana
+        connect-wifi-header: Yhdistä Wi-Fi-verkkoon
+        select-wifi-label: Valitse Wi-Fi nimi
+        type-wifi-label: Tai kirjoita se tänne jos se on piilotettu
+    appearance-page:
+      subheader: Ulkoasu
+      theme-panel:
+        colors-label: Värit
+      popups:
+        edit-theme-header: Muokkaa teemaa
+        edit-welcome-message-header: Muokkaa tervetuloviestiä
+        edit-background-image-header: Muokkaa taustakuvaa
+        load-theme-header: Lataa teema
+        save-theme-header: Tallenna teema
+    devices-page:
+      subheader: Laitteet
+      sensors-panel:
+        header: Anturit
+      camera-panel:
+        header: Kamera
+      popups:
+        start-sensing-label3: Kalenteri (päättymisaika/päivä)
+        delete-images-title: Poista kaikki kuvat
+        delete-videos-title: Poista kaikki videot
+    monitoring-page:
+      subheader: Valvonta
+      details-panel:
+        table-label2: Ylläpitäjä
+        table-label3: Otsikko
+        table-label4: Kuvaus
+        table-label5: Sijainti (lat, long)
+      statistics-panel:
+        statistics-table:
+          status: Tila
+          description: Kuvaus
+      popups:
+        change-details-label4: Kuvaus
+        change-details-label5: Sijainti (lat, long)
+        hardware-label1: Kohdepalvelin
+        hardware-label2: Lämpötila
+        hardware-label3: WiFi-käyttäjät
+...

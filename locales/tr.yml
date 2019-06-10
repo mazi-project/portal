@@ -208,6 +208,14 @@ tr:
         sürüm ayrıntılarını belirtin.'
       update-chan-warn: 'Uyarı: Başka bir kanala geçmek, bir cihazın yeniden başlatılmasına
         neden olur.'
+      last-jessie-warn: 'Uyarı: Bu, Raspbian Jessie''de bulunan son versiyondur (v2.6).
+        V3''ten beri, araç seti Raspbian Stretch''a dayanmaktadır. MAZI araç seti
+        geliştirmesini takip etmek istiyorsanız en son v3 imajını  <a href=''https://github.com/mazi-project/guides/wiki/Version-History''>buradan</a>
+        indirmelisiniz. Mevcut verilerinizi ve yapılandırmanızı korumak istiyorsanız
+        mevcut MAZI Bölgenizi harici bir <a href=''/admin_snapshot''>USB disk</a>
+        kullanarak dışa aktarabilir ve v3 MAZI Bölgenize aktarabilirsiniz. Daha fazla
+        bilgi için <a href=''https://github.com/mazi-project/guides/wiki/From-v2.6-to-v.3''>buraya</a>
+        da bakın.'
     setup-page:
       tog-nav: Gezinmeyi değiştir
       setup-panel: MAZI Bölgesi Kurulum Paneli

@@ -184,6 +184,10 @@ zh-hant:
       update-chan-hint: 提示：最新版的開發頻段可能會不穩定。不建議進行反覆替換更新頻段，這樣做可能會導致異常的情況發生。請告知版本詳情 %{link}
         以決定您的更新頻段
       update-chan-warn: 警告：更改到其它頻段設備將會重新啟動。
+      last-jessie-warn: 警告：此最新版本（v2.6）是基於 Raspbian Jessie 系統。從 v3 開始，工具套件會改成基於 Raspbian
+        Stretch 系統。若您想持續關注 MAZI 工具套件的開發，您可以從<a href='https://github.com/mazi-project/guides/wiki/Version-History'>這裡</a>下載最新
+        v3 版本的映像檔。若您有想保持您目前資料與設置的情況，您可以使用額外的 <a href='/admin_snapshot'>USB 隨身碟</a>來匯出您目前的
+        MAZI Zone，然後再匯入至 v3 版本的 MAZI Zone。另外可<a href='https://github.com/mazi-project/guides/wiki/From-v2.6-to-v.3'>在此</a>來查看更多資訊。
     setup-page:
       tog-nav: 切換導航
       setup-panel: MAZI Zone 配置面板
