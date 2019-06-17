@@ -253,9 +253,11 @@ eo:
         wifi-network-hint-1: el Vifiaj Retoj
         wifi-network-hint-2: Vifia Interreto
       popups:
+        edit-wifi-header: Redakti agordojn pri Vifio
         change-channel-header: Ŝanĝi Kanalon
         change-password-header: Ŝanĝi Pasvorton
         change-mode-header: Ŝanĝi Reĝimon
+        connect-wifi-header: Konekti al Vifia Reto
         select-wifi-label: Elekti nomon de Vifio
         select-mesh-mode-label: Elekti Maŝan reĝimon
     appearance-page:
@@ -383,6 +385,7 @@ eo:
         import-etherpad-header: Enporti Momentkopion de Etherpad
         import-nextcloud-header: Enporti Momentkopion de Nextcloud
         import-wordpress-header: Enporti Momentkopion de WordPress
+        import-full-header: Enporti Fulmokopion por ĉi tiu MAZI-Zono
     logs-page:
       subheader: Protokollegilo
       message: Vi povas legi protokoldosierojn de Mazi Zone ĉi-sube.
@@ -399,6 +402,10 @@ eo:
         subheader1: Priskribo
         subheader2: Konektante per ssh
         subheader3: Agordado de Raspbian
+        paragraph6: kaj navigu al la menuo.
+        paragraph8: En la opcio pri Internaciigo, kongruigu
+        paragraph9: la lokaĵaron al via loko
+        paragraph10: la horzonon al via loko
       etherpad-tab:
         subheader1: Priskribo
         subheader2: Manlibro pri Administrado
