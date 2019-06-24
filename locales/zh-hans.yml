@@ -3,6 +3,7 @@
 # Export driver: phpyaml
 # Author: Deathkon
 # Author: Liuxinyu970226
+# Author: 神樂坂秀吉
 ---
 zh-hans:
   general:
@@ -58,6 +59,7 @@ zh-hans:
       channel: 频道
       password: 密码
       offline: 离线
+      online: 在线
       restricted: 受限
       managed: 已管理
       active: 活跃
