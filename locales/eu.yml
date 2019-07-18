@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Amaia
+# Author: An13sa
 ---
 eu:
   general:
@@ -49,12 +50,15 @@ eu:
       enable: gaitu
       disable: desgaitu
       checked: Egiaztatua
+      on_msg: "ON"
+      off_msg: "OFF"
       disconnected: Deskonektatua
       here: hemen
       ssid: SSID
       channel: Kanala
       password: Pasahitza
       offline: Konexiorik gabe
+      online: linean
       restricted: mugatua
       managed: kudeatuta
       active: aktiboa
@@ -77,6 +81,7 @@ eu:
       users: Konektatutako erabiltzaileak
       temperature: Tenperatura
       cpu: CPU
+      ram: RAM
       storage: Biltegia
     sensors-page:
       header: Sentsore neurketak
