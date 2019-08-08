@@ -254,6 +254,7 @@ eo:
         wifi-network-hint-2: Vifia Interreto
       popups:
         edit-wifi-header: Redakti agordojn pri Vifio
+        show-qrcode-header: QR-kodo por sendrata reto
         change-channel-header: Ŝanĝi Kanalon
         change-password-header: Ŝanĝi Pasvorton
         change-mode-header: Ŝanĝi Reĝimon
@@ -267,6 +268,8 @@ eo:
         portal-title-label: Titolo de portalo
         home-page-label: Titolo de ĉefpaĝo
         home-subtitle-label: Subtitolo de ĉefpaĝo
+        welcome-message-label: Aplikaĵa Bonveniga Mesaĝo
+        background-image-label: Aplikaĵa Fona Bildo
         colors-label: Koloroj
         side-main-color: Ĉefkoloro de flankpanelo
         side-active-color: Aktiva koloro de flankpanelo
