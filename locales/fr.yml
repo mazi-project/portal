@@ -4,6 +4,7 @@
 # Author: Friday83260
 # Author: Gomoko
 # Author: Mgaved
+# Author: Urhixidur
 # Author: Wladek92
 # Author: Zarisi
 ---
@@ -470,8 +471,8 @@ fr:
     devices-page:
       subheader: Appareils
       message: Vous pouvez utiliser les outils ci-dessous pour contrôler les différents
-        appareils supportés et connectés dans cette zone MAZI (capteurs, appareils
-        photo, etc). Vous pourrez trouver tous les appareils supportés
+        appareils pris en charge et connectés dans cette zone MAZI (capteurs, appareils
+        photo, etc.). Vous pourrez trouver tous les appareils pris en charge
       sensors-panel:
         header: Capteurs
         header-hint: Vous pouvez utiliser cela pour contrôler différents capteurs.
