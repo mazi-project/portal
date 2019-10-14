@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: By erdo can
+# Author: Grkn gll
 # Author: Hedda
 # Author: TmY e12
 # Author: ToprakM
@@ -80,7 +81,7 @@ tr:
       devices: Cihazlar
     system-page:
       subheader: Sistem Bilgisi
-      users: Kullanıcı Çevrimiçi
+      users: Çevrimiçi Kullanıcılar
       app-clicks: Uygulama Tıklamaları
       temperature: Sıcaklık
       cpu: İşlemci

@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Guycn2
+# Author: YaronSh
 ---
 he:
   general:
@@ -285,4 +286,63 @@ he:
         actions-column: פעולות
         actions-hint: פעולות שניתן לבצע ביישום
         guestbook-admin-hint: לוח הניהול של ספר האורחים
+      applications-menu:
+        status-column: מצב
+        status-hint: מצב תפעולי (פעיל/מופסק)
+        icon-column: סמל
+        icon-hint: סמל בררת המחדל של היישומון
+        color-column: צבע
+        color-hint: צבע בררת המחדל של היישומון
+        name-column: שם היישומון
+        name-hint: השם של היישומון
+        url-column: כתובת
+        url-hint: כתובת היישומון
+        description-column: תיאור
+        description-hint: תיאור היישומון
+        actions-column: פעולות
+        actions-hint: פעולות שניתן לבצע על היישומון
+    appearance-page:
+      theme-panel:
+        colors-label: צבעים
+    devices-page:
+      sensors-panel:
+        sensors-table:
+          type: סוג
+          status: מצב
+          entries: רשומות
+          actions: פעולות
+          start-button-hint: התחלת שמירת מדידות
+          delete-button-hint: מחיקת כל המדידות שנשמרו
+        init-button-hint: הפעלת אתחול חיישנים
+      camera-panel:
+        header: מצלמה
+        header-hint: ניתן להשתמש בזה כדי לשלוט במצלמה.
+        toggle-camera-message: הפעלה/השבתה של לשונית המצלמה בפורטל המשתמש
+      popups:
+        start-sensing-label1: שרת יעד
+        start-sensing-label2: משך (שניות)
+        start-sensing-label3: לוח שנה (מועד/תאריך סיום)
+        start-sensing-label4: מרווח זמן (שניות)
+    monitoring-page:
+      details-panel:
+        table-label3: כותרת
+        table-label4: תיאור
+        table-label5: מיקום (אורך, רוחב)
+      statistics-panel:
+        statistics-table:
+          status: מצב
+          description: תיאור
+          action: פעולה
+          hardware-description-message: מעקב אחרת פעילות המערכת.
+          application-description-message: מעקב אחר נתוני היישומון.
+      popups:
+        change-details-label3: כותרת
+        change-details-label4: תיאור
+        change-details-label5: מיקום (אורך, רוחב)
+        hardware-label1: שרת יעד
+        hardware-label2: טמפרטורה
+        hardware-label3: משתמשים ברשת האלחוטית
+        hardware-label4: עומד המעבד
+        hardware-label5: עומס זיכרון
+        hardware-label6: עומס אחסון
 ...
