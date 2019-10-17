@@ -89,12 +89,12 @@ tr:
       storage: Depolama
     sensors-page:
       header: Sensör Ölçümleri
-      header-message: Bu sayfada MAZI Bölgesine bağlı çeşitli sensörlerin ölçümlerini
-        görebilirsiniz. Belirli bir dönemden ölçüm talep etmek için aşağıdaki düğmeyi
+      header-message: Bu sayfada MAZI Zone'a bağlı çeşitli sensörlerin ölçümlerini
+        görebilirsiniz. Belirli bir döneme ait ölçümleri istemek için aşağıdaki düğmeyi
         de kullanabilirsiniz.
       temperature-for: '%{sensor} sensöründen gelen sıcaklık'
-      metrics-for: '%{sensor} sensöründen yön, hızlanma ve jiroskop ölçümleri'
-      humidity-for: '%{sensor} sensöründen gelen nem'
+      metrics-for: '%{sensor} sensöründen gelen Yön, Hızlanma ve Jiroskop ölçümleri'
+      humidity-for: '%{sensor} sensöründen gelen Nem ölçümü'
       pressure-for: '%{sensor} sensöründen gelen basınç'
       no-sensors-warn: 'Uyarı: Veritabanında hiçbir ölçüm yok veya bu MAZI bölgesine
         bir sensör cihazı bağlı değil.'
@@ -109,11 +109,10 @@ tr:
         fazla bilgi için lütfen yönetici paneline bakın.
     camera-page:
       header: Kamera
-      subheader: Bu sayfada, bu MAZI Bölgesine bağlı kamera tarafından çekilen fotoğraf
+      subheader: Bu sayfada, bu MAZI Zone'a bağlı kamera tarafından çekilen fotoğraf
         ve videoları görebilirsiniz.
       live-stream-header: Canlı Video Akışı
-      no-camera-warn: Şu anda bu MAZI Bölgesi'nde düzgün bir şekilde kurulmuş kamera
-        yok!
+      no-camera-warn: Şu anda bu MAZI Zone'a düzgün bir şekilde kurulmuş kamera yok!
       media-library-header: Medya Kütüphanesi
       no-media-warn: Şu anda kütüphanede herhangi bir görüntü veya video bulunamadı!
     monitoring-page:
@@ -154,17 +153,17 @@ tr:
         nextcloud-clicks: Nextcloud Tıklamaları
   admin:
     general:
-      admin-panel: MAZI Bölgesi Yönetim paneli
+      admin-panel: MAZI Zone Yönetim paneli
       shutdown-modal-title: Kapatılsın mı?
-      shutdown-modal-message: MAZI Bölgesi şimdi kapanacak, bu siteye ulaşılamayacak
-        ve bu MAZI Bölgesi'ni manuel olarak yeniden başlatmanız gerekecek. Devam edilsin
+      shutdown-modal-message: MAZI Zone şimdi kapanacak, bu siteye ulaşılamayacak
+        ve bu MAZI Zone'u manuel olarak yeniden başlatmanız gerekecek. Devam edilsin
         mi?
       reboot-modal-title: Yeniden başlatılsın mı?
       reboot-modal-message: MAZI Bölgesi şimdi yeniden başlatılacak, bu sitenin birkaç
         dakikaya erişememesine neden olacak, lütfen birkaç dakika sonra bu sayfayı
         bekleyin ve yenileyin. Devam edilsin mi?
     top-menu:
-      header: MAZI Bölgesi Yönetim Paneli
+      header: MAZI Zone Yönetim Paneli
       admin: Yönetici
       portal: Portal
       set-date: Tarih Ayarla
@@ -186,13 +185,13 @@ tr:
       documentation: Belgeleme
     updates:
       subheader: Güncelle
-      checking-updates: Güncellemeler kontrol ediliyor. Lütfen bekleyin...
+      checking-updates: Güncellemeler denetleniyor. Lütfen bekleyin...
       alert-message-1: Yerel deponuz düzenlendi. Bu, güncelleme işlevinin arızalanmasına
         neden olur. Lütfen düzenlenmiş dosyalar için %{command} kullanarak bu değişiklikleri
         yerel deponuzda geri alın.
       update-message-0: Lütfen güncelleme kanalınızı seçin
       update-message-1: İnternet için aktif herhangi bir bağlantı mevcut değil. Lütfen,
-        bu Mazi Bölgesi'ni internete bağlayın ve tekrar deneyin.
+        bu MAZI Zone'u internete bağlayın ve tekrar deneyin.
       update-message-2: Bu portal Demo modunda çalışır! Bu işlem bir güncelleme işlemini
         başlatırdı.
       update-message-3: Portal zaten güncel olduğu için güncelleme gerekmiyor.
