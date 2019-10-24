@@ -196,6 +196,7 @@ he:
       update-chan-hint: 'עצה: ייתכן שהגרסה האחרונה של ערוץ הפיתוח אינה יציבה. לא מומלץ
         לשנות את ערוץ העדכונים באופן תדיר, משום שהדבר עלול לגרום לתקלות בלתי־צפויות.
         ניתן לעיין בפרטי הגרסה (%{link}) כדי להחליט באיזה ערוץ עדכונים לבחור.'
+      update-chan-warn: 'אזהרה: העברה לערוץ אחר יוביל להפעלת המכשיר מחדש.'
     setup-page:
       tog-nav: מצב הניווט
       setup-panel: לוח ההגדרות של תחום ה־MAZI
@@ -286,7 +287,11 @@ he:
         actions-column: פעולות
         actions-hint: פעולות שניתן לבצע ביישום
         guestbook-admin-hint: לוח הניהול של ספר האורחים
+        delete-instance-hint: מחיקת מופע של יישום
+        create-instance-hint: יצירת מופע חדש של יישום
+        edit-instance-hint: עריכת מופע של יישום
       applications-menu:
+        header: יישומים מותקנים
         status-column: מצב
         status-hint: מצב תפעולי (פעיל/מופסק)
         icon-column: סמל
@@ -301,6 +306,35 @@ he:
         description-hint: תיאור היישומון
         actions-column: פעולות
         actions-hint: פעולות שניתן לבצע על היישומון
+        web-app-start-hint: מדובר ביישום דרך הדפדפן, הוא פעיל תמיד.
+        app-start-hint: להפעיל את היישום
+        app-stop-hint: לעצור את היישום
+      popups:
+        delete-application-title: למחוק מופע של יישום?
+        delete-application-message: מופע היישום הזה יימחק לחלוטין ממסד הנתונים. להמשיך?
+        edit-application-title: לערוך מופע של יישום?
+        application-icon-hint: 'רמז: עבור הסמל יש לעיין בתיעוד %{link}'
+        create-application-title: יצירת מופע חדש ליישום
+        web-app-info-title: יישום מקוון
+    network-page:
+      subheader: הגדרות רשת
+      wifi-ap-interface-panel:
+        header: הגדרות נקודת גישה לרשת אלחוטית עבור %{interface}
+        ssid-name-label: שם הרשת האלחוטית (SSID)
+        wifi-channel-label: ערוץ הרשת האלחוטית
+        wifi-password-label: ססמה לרשת האלחוטית
+      internet-panel:
+        header: מצב רשת אינטרנט
+        mode-hint: מצב הרשת האלחוטית
+      connect-wifi-panel:
+        header: התחברות לרשת אלחוטית כדי לגשת לאינטרנט
+        wifi-network-hint-1: מרשתות אלחוטיות
+        wifi-network-hint-2: רשת אלחוטית לאינטרנט
+        usb-dongle-message: נא לחבר התקן USB לרשת אלחוטית אל ה־Raspberry Pi שלך כדי
+          להפעיל את התכונה הזאת. התקני USB מומלצים
+      access-point-panel:
+        header: הוספת נתב כנקודת גישה
+        current-hint: נקודת גישה לרשת אלחוטית בשימוש
     appearance-page:
       theme-panel:
         colors-label: צבעים
@@ -323,8 +357,25 @@ he:
         start-sensing-label2: משך (שניות)
         start-sensing-label3: לוח שנה (מועד/תאריך סיום)
         start-sensing-label4: מרווח זמן (שניות)
+        delete-images-title: מחיקת כל התמונות
+        delete-images-message: למחוק את כל התמונות שצולמו?
+        start-videos-title: התחלת לכידת סרטונים
+        start-videos-label1: משך (שניות)
+        delete-videos-title: מחיקת כל הסרטונים
+        delete-videos-message: למחוק את כל הסרטונים שצולמו?
     monitoring-page:
+      subheader: מעקב
+      message: ניתן להשתמש בכלים שלהלן כדי לשלוט בדרך בה אזור ה־MAZI שלך אוסף ושולח
+        נתונים לשרת איסוף.
       details-panel:
+        header: פרטים
+        header-hint: ניתן להשתמש בזה כדי להפעיל/להשבית את תכונת המעקב.
+        toggle-monitoring-message: הפעלה/השבתה של תכונת המעקב.
+        toggle-monitoring-hint: הפעלה/השבתה של תכונת המעקב
+        details-message: להלן ניתן לצפות בפרטים של אזור ה־MAZI הזה, ניתן לשנות הכול
+          על ידי לחיצה על כפתור העריכה שלהלן.
+        table-label1: הטמעה
+        table-label2: הנהלה
         table-label3: כותרת
         table-label4: תיאור
         table-label5: מיקום (אורך, רוחב)
@@ -345,4 +396,10 @@ he:
         hardware-label4: עומד המעבד
         hardware-label5: עומס זיכרון
         hardware-label6: עומס אחסון
+    settings-page:
+      panel-header: הגדרות מערכת
+      time-date:
+        header: שעה/תאריך
+      mysql-password:
+        header: ססמת MySQL
 ...
