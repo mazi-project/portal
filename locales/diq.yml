@@ -1,0 +1,198 @@
+# Messages for Zazaki (Zazaki)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Mirzali
+# Author: Orbot707
+---
+diq:
+  general:
+    buttons:
+      edit: Bıvurne
+      cancel: Bıtexelne
+      ok: TEMAM
+      close: Racın
+      create: Vıraze
+      delete: Bestere
+      start: Start
+      stop: Vınde
+      save: Vurnayışan qeyd ke
+      choose: Weçine
+      choose-timeslot: Yew demê zemani weçine
+      expand: Hera kerê
+      expand-storage: Heruna depoyi hera ke
+      reboot: Reyna baş kerê
+      reset: Reset kerê
+      shutdown: Racın
+      logout: Veciyayış
+      update: Rocane ke
+      connect: Gıre de
+      disconnect: Gıre mede
+      toggle-device: Cihazi Bıvurne
+      remove: Wedare
+      load: Bar ke
+      import: Zerre ke
+      export: Teber de
+      refresh: Newe ke
+      continue: Dewam ke
+      next: Bahdoyên
+      previous: Verên
+      submit: Bırışe
+      change: Bıvurne
+      qrcode: QRcode
+      show: Bımocne
+      configure: Awan ke
+    messages:
+      warning: Teme
+      welcome: Xeyr amey
+      version: Versiyon
+      enable: feal kerê
+      disable: dewre ra vece
+      checked: qontrol biyo
+      on_msg: AKERDE
+      off_msg: RACNAYE
+      disconnected: Gıre bırriya
+      here: tiya de
+      ssid: SSID
+      channel: Kanal
+      password: Parola
+      offline: çerxteber
+      online: çerxmiyan
+      active: aktif
+      inactive: aktif niyo
+      error: xeta
+      stable: Stabil
+      development: Raverşiyayış
+  portal:
+    top-menu:
+      documentation: Dokumantasyon
+    side-menu:
+      applications: Aplikasyon
+      system: Sistem
+      sensors: Sensori
+      camera: Kamera
+      monitoring: Çımdariye
+      devices: Cihazi
+    system-page:
+      subheader: Melumatê sistemi
+      temperature: Germiye
+      cpu: CPU
+      ram: RAM
+      storage: Depo
+    sensors-page:
+      header: Sencayışê sensori
+    camera-page:
+      header: Kamera
+      media-library-header: Kıtabxaneyê medya
+    monitoring-page:
+      popups:
+        device: Cihaz
+        devices: Cihazi
+        administrator: İdareker
+        description: Şınasnayış
+        latitude: Verıniye
+        longitude: Derganiye
+        cpu_temp: Germiya CPUyi
+        cpu_load: Barê CPUyi
+        ram_load: Barê RAMi
+        wifi-users: Karberê WiFi
+        storage_use: Barê Depoyi
+        etherpad-pads: Pedê Etherpadi
+        etherpad-users: Karberê Etherpadi
+  admin:
+    top-menu:
+      admin: İdareker
+      portal: Portal
+      username: Nameyê karberi
+      password: Parola
+      settings: Eyari
+    side-menu:
+      dashboard: Pano
+      appearance: Asayış
+      devices: Cihazi
+      notifications: Tebliği
+      logs: Qeydi
+      documentation: Dokumantasyon
+    updates:
+      subheader: Rocane ke
+    setup-page:
+      last-step-header: Temam
+    dashboard-page:
+      subheader: Pano
+      hardware-info:
+        cpu-load: Barê CPU
+        ram-load: Barê RAM
+        storage-load: Barê Depoy
+      networking:
+        header: Torre
+        users-online: Karberê ke Newke Online
+        wifi-info: Melumatê Torra Wi-Fi
+      applications:
+        header: Aplikasyoni
+      traffic:
+        header: Trafik
+        reset-visits: Ziyareta reset kerê
+        portal-visits: Ziyaretê Portali Pêro Piya
+        application-visits: Ziyaretê Aplikasyoni
+      notifications:
+        header: Tebliği
+      time-date:
+        header: MAZI Wextê Seate/Tarix
+        current: Mewcud Tarix / Seate
+      version:
+        header: Versiyonê Warey MAZI
+        up-to-date: Aktuel
+    applications-page:
+      subheader: Aplikasyoni
+      instances-menu:
+        active-column: Aktif
+        name-column: Name
+        url-column: URL
+        url-hint: Url'y Aplikasyoni
+        description-column: Şınasnayış
+        actions-column: Hereketi
+      applications-menu:
+        status-column: Weziyet
+        icon-column: Ikon
+        color-column: Reng
+        name-column: Namey Aplikasyoni
+        name-hint: Namey aplikasyoni
+        url-column: URL
+        url-hint: Url'y Aplikasyoni
+        description-column: Şınasnayış
+        description-hint: Şınasiya hesabyaye aplikasyoni
+        actions-column: Hereketi
+    network-page:
+      popups:
+        change-password-header: Parola bıvurne
+    appearance-page:
+      theme-panel:
+        colors-label: Rengi
+      popups:
+        edit-title-header: Sernameyi bıvurne
+    devices-page:
+      sensors-panel:
+        sensors-table:
+          type: Babet
+          status: Weziyet
+      camera-panel:
+        header: Kamera
+    monitoring-page:
+      details-panel:
+        table-label2: İdarekar
+        table-label3: Sername
+        table-label4: Şınasnayış
+      statistics-panel:
+        statistics-table:
+          status: Weziyet
+          description: Şınasnayış
+      popups:
+        change-details-label3: Sername
+        change-details-label4: Şınasnayış
+    notifications-page:
+      subheader: Tebliği
+      notifications-table:
+        header1: Weziyet
+        header2: Sername
+    settings-page:
+      subheader: Eyari
+...
