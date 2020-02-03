@@ -1,6 +1,7 @@
 # Messages for Turkish (Türkçe)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: BaRaN6161 TURK
 # Author: By erdo can
 # Author: Grkn gll
 # Author: Hedda
@@ -17,20 +18,20 @@ tr:
       create: Oluştur
       delete: Sil
       start: Başla
-      stop: Dur
+      stop: Durdur
       save: Değişiklikleri Kaydet
       choose: Seç
       choose-timeslot: Bir zaman dilimi seçin
       export-to-csv: CSV dosyasına aktar
       expand: Genişlet
-      expand-storage: Depolama alanını genişlet
+      expand-storage: Depolamayı Genişlet
       reboot: Yeniden Başlat
       reset: Sıfırla
       shutdown: Kapat
-      logout: Çıkış
+      logout: Oturumu Kapat
       update: Güncelle
       connect: Bağlan
-      disconnect: Bağlantıyı Kes
+      disconnect: Bağlantıyı kes
       toggle-device: Cihazı Değiştir
       initialize: Başlat
       remove: Kaldır
@@ -65,9 +66,9 @@ tr:
       restricted: kısıtlı
       managed: yönetilen
       active: aktif
-      inactive: pasif
+      inactive: aktif değil
       error: hata
-      stable: Kararlı
+      stable: Sabit
       development: Geliştirme
   portal:
     top-menu:
@@ -167,7 +168,7 @@ tr:
       admin: Yönetici
       portal: Portal
       set-date: Tarih Ayarla
-      username: Kullanıcı Adı
+      username: Kullanıcı adı
       password: Parola
       mysql-password: MySQL Parolası
       check-updates: Güncelleştirmeleri Denetle
@@ -182,7 +183,7 @@ tr:
       notifications: Bildirimler
       export-import: Dışa/İçe Aktarım
       logs: Günlükler
-      documentation: Belgeleme
+      documentation: Belgelendirme
     updates:
       subheader: Güncelle
       checking-updates: Güncellemeler denetleniyor. Lütfen bekleyin...
@@ -223,7 +224,7 @@ tr:
       first-step-header: Yönetici Şifre Kurulumu
       first-step-message: MAZI Bölgesi yönetim paneli için yönetici şifresi ayarlamak
         için aşağıdaki formu kullanın.
-      first-step-hint: 'ipucu: Bu yeni bir MAZI Bölgesi ise geçerli şifre 1234''tür.'
+      first-step-hint: 'ipucu: Bu yeni bir MAZI Bölgesi ise geçerli parola 1234''tür.'
       second-step-header: Tarih/Zaman kurulumu
       second-step-message: Bu MAZI Bölgesi'nin saat diliminin yanı sıra Tarih/Zaman'ı
         değiştirmek için lütfen aşağıdaki formu kullanın.
@@ -239,20 +240,20 @@ tr:
       fourth-step-warning: 'İpucu: Konumunuzu bulmak (enlem, boylam) için Google haritalarını
         kullanabilirsiniz. Sağ tıkla -> Burası neresi. Ardından, ekranın altında görünen
         kutudaki koordinatları kullanın. (örneğin, 39.379012, 22.902813)'
-      last-step-header: Tamamlayınız
+      last-step-header: Tamamla
       last-step-message: Tüm kurulum adımlarını başarıyla tamamladınız. Değişiklikleri
         kaydetmek için lütfen gönder düğmesine tıklayın.
     dashboard-page:
       subheader: Gösterge Paneli
       welcome:
-        message-1: '%{panel}, Bu MAZI Bölgesi portalını yönetmek için kullanılan ana
+        message-1: '%{panel}, bu MAZI Bölgesi portalını yönetmek için kullanılan ana
           araçtır. Ayrıca bu MAZI Bölgesi''nin ağ oluşturma yönüdür.'
         message-2: 'Lütfen, çeşitli araçlara ulaşmak için menüyü kullanın:'
         message-list-1: Desteklenen uygulamaları yönetin
         message-list-2: MAZI Bölgesi ağını yapılandırın
         message-list-3: Portalın görsel sunumunu yapılandırın
         message-list-4: Portalda bildirimleri ekle/kaldır
-        message-list-5: Anlık görüntü alma/verme
+        message-list-5: Anlık görüntü içe/dışa aktar
       hardware-info:
         header: MAZI Bölgesi Donanım Bilgisi
         system-temperature: Sistem Sıcaklığı
@@ -290,11 +291,11 @@ tr:
       subheader: Uygulamalar
       instances-menu:
         header: Uygulama Örnekleri
-        active-column: Aktif
-        active-hint: Portalda uygulama görünürlüğünü değiştir
+        active-column: Etkin
+        active-hint: portalda uygulama görünürlüğünü değiştir
         splash-page-column: Giriş Sayfası
         splash-page-hint: bu uygulamayı portalın giriş sayfası olarak kullan
-        name-column: İsim
+        name-column: Ad
         name-hint: uygulamanın adı
         url-column: URL
         url-hint: uygulamanın URL'si
@@ -304,7 +305,7 @@ tr:
         parent-hint: ana uygulama
         click-column: Tıklanma Sayacı
         click-hint: uygulama için toplam tıklanma
-        actions-column: İşlemler
+        actions-column: Eylemler
         actions-hint: uygulamada gerçekleştirilebilecek işlemler
         guestbook-admin-hint: Ziyaretçi Defteri Yönetici Paneli
         delete-instance-hint: Uygulama Örneğini Sil
@@ -324,7 +325,7 @@ tr:
         url-hint: Uygulamanın URL'si
         description-column: Açıklama
         description-hint: uygulamanın varsayılan açıklaması
-        actions-column: İşlemler
+        actions-column: Eylemler
         actions-hint: uygulamada gerçekleştirilebilecek işlemler
         web-app-info-hint: Bu uygulamanın başlatılması/durdurulması, MAZI Bölgenizin
           performansını etkilemeyecektir.
@@ -337,7 +338,7 @@ tr:
           silinecektir. Devam etmek istiyor musunuz?
         delete-application-hint: Bu uygulamayı silebilmeniz için önce bu uygulamaya
           bağlı tüm uygulama örneklerini silmeniz gerekir.
-        edit-application-title: Uygulama Örneğini Düzenle?
+        edit-application-title: Uygulama Örneğini Düzenlesin mi?
         application-icon-hint: 'İpucu: simge için lütfen %{link} dokümanlarını kontrol
           edin'
         create-application-title: Yeni Uygulama Örneği oluştur
@@ -466,7 +467,7 @@ tr:
           type: Tür
           status: Durum
           entries: Girdiler
-          actions: İşlemler
+          actions: Eylemler
           start-button-hint: Ölçümleri kaydetmeye başla
           delete-button-hint: Kayıtlı tüm ölçümleri sil
           sensehat-calibration-hint: Sensehat'ınızı kalibre etmek isterseniz lütfen
@@ -517,7 +518,7 @@ tr:
         header-hint: İzleme özelliğini etkinleştirmek/devre dışı bırakmak için bunu
           kullanabilirsiniz.
         toggle-monitoring-message: İzleme özelliğini etkinleştirin/devre dışı bırakın.
-        toggle-monitoring-hint: izleme özelliğini etkinleştirme/devre dışı bırakma
+        toggle-monitoring-hint: izleme özelliğini etkinleştir/devre dışı bırak
         details-message: Aşağıda bu MAZI bölgesinin detaylarını görebilirsiniz, alt
           kısımdaki düzenle butonuna basarak her şeyi değiştirebilirsiniz.
         table-label1: Yayılma
@@ -532,14 +533,14 @@ tr:
         header-hint: İzleme faaliyetlerini kontrol etmek için bunu kullanabilirsiniz.
         toggle-monitoring-map-msg: Kullanıcı portali üzerindeki izleme sekmesini etkinleştirin/devre
           dışı bırakın
-        toggle-monitoring-map-hint: izleme sekmesini etkinleştirme/devre dışı bırakma
+        toggle-monitoring-map-hint: izleme sekmesini etkinleştir/devre dışı bırak
         message: Aşağıdaki başlatma/durdurma düğmelerine basarak sistem etkinliğini
           ve uygulama izleme verilerini uzaktan (veya yerel) bir noktaya göndermeyi
           başlatabilir/durdurabilirsiniz.
         statistics-table:
           status: Durum
           description: Açıklama
-          action: İşlem
+          action: Eylem
           hardware-description-message: Sistem aktivitesinin izlenmesi.
           application-description-message: Uygulama verilerinin izlenmesi.
           no-hardware-tasks-message: Şu anda çalışan bir sistem etkinliği izleme görevi
@@ -602,7 +603,7 @@ tr:
         header1: Durum
         header2: Başlık
         header3: Gövde
-        header4: İşlemler
+        header4: Eylemler
       popups:
         create-notification-title: Yeni bildirim oluştur
         edit-notification-title: Bildirimi düzenle
@@ -644,7 +645,7 @@ tr:
           başlatılacak.
         no-snapshots-message: Şu anda kayıtlı anlık görüntü yok.
       import-export-panel:
-        header: Anlık Görüntü Alma/Verme
+        header: Anlık Görüntü Al/Ver
         header-hint: Bir anlık görüntüyü bir zip dosyasına dışa aktarmak için bunu
           kullanabilirsiniz. Veya bir zip dosyasını anlık görüntü olarak içe aktarın.
         message: Lütfen bir anlık görüntü seçin ve yükleye basın.
@@ -764,8 +765,8 @@ tr:
           için, kullanıcıların içeriği ne tür bir içerikte yönlendirmeyi ve göz atmayı
           daha kolay hale getirmeyi kolaylaştırmak için ayrı bir klasör oluşturulmasına
           yardımcı olabilir.
-        paragraph19: Paylaşılan Nextcloud klasörüne yüklenen içeriği başka uygulamalarda
-          kullanmanız gerekiyorsa dosyalara aşağıdaki yoldan erişilebilir.
+        paragraph19: Paylaşılan nextcloud klasörünüze yüklenen içeriği başka uygulamalarda
+          kullanmanız gerekiyorsa, dosyalara aşağıdaki yoldan erişilebilir
         paragraph20: 'Yani, örneğin, kullanıcı ''mazi'' ve klasör ses/yol için şöyle
           olurdu:'
         paragraph21: Nextcloud'da yeni kullanıcılar oluşturmak için internete bağlı
