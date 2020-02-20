@@ -2,6 +2,7 @@
 # Exported from translatewiki.net
 # Export driver: phpyaml
 # Author: Robby
+# Author: Soued031
 ---
 lb:
   general:
@@ -107,7 +108,7 @@ lb:
       documentation: Dokumentatioun
     updates:
       subheader: Aktualiséieren
-      update-message-0: Sicht w.e.g. Äre Kanal fir d'Aktualisatiounen
+      update-message-0: Sicht wgl. Äre Kanal fir d'Aktualisatiounen
     setup-page:
       last-step-header: Komplett
     dashboard-page:

@@ -25,7 +25,7 @@ tr:
       export-to-csv: CSV dosyasına aktar
       expand: Genişlet
       expand-storage: Depolamayı Genişlet
-      reboot: Yeniden Başlat
+      reboot: Yeniden başlat
       reset: Sıfırla
       shutdown: Kapat
       logout: Oturumu Kapat
@@ -68,7 +68,7 @@ tr:
       active: aktif
       inactive: aktif değil
       error: hata
-      stable: Sabit
+      stable: Kararlı
       development: Geliştirme
   portal:
     top-menu:
@@ -157,7 +157,7 @@ tr:
       admin-panel: MAZI Zone Yönetim paneli
       shutdown-modal-title: Kapatılsın mı?
       shutdown-modal-message: MAZI Zone şimdi kapanacak, bu siteye ulaşılamayacak
-        ve bu MAZI Zone'u manuel olarak yeniden başlatmanız gerekecek. Devam edilsin
+        ve bu MAZI Zone'u manüel olarak yeniden başlatmanız gerekecek. Devam edilsin
         mi?
       reboot-modal-title: Yeniden başlatılsın mı?
       reboot-modal-message: MAZI Bölgesi şimdi yeniden başlatılacak, bu sitenin birkaç
@@ -221,8 +221,8 @@ tr:
     setup-page:
       tog-nav: Gezinmeyi değiştir
       setup-panel: MAZI Bölgesi Kurulum Paneli
-      first-step-header: Yönetici Şifre Kurulumu
-      first-step-message: MAZI Bölgesi yönetim paneli için yönetici şifresi ayarlamak
+      first-step-header: Yönetici Parola Kurulumu
+      first-step-message: MAZI Bölgesi yönetim paneli için yönetici parolayı ayarlamak
         için aşağıdaki formu kullanın.
       first-step-hint: 'ipucu: Bu yeni bir MAZI Bölgesi ise geçerli parola 1234''tür.'
       second-step-header: Tarih/Zaman kurulumu
@@ -240,11 +240,11 @@ tr:
       fourth-step-warning: 'İpucu: Konumunuzu bulmak (enlem, boylam) için Google haritalarını
         kullanabilirsiniz. Sağ tıkla -> Burası neresi. Ardından, ekranın altında görünen
         kutudaki koordinatları kullanın. (örneğin, 39.379012, 22.902813)'
-      last-step-header: Tamamla
+      last-step-header: Tamamlandı
       last-step-message: Tüm kurulum adımlarını başarıyla tamamladınız. Değişiklikleri
         kaydetmek için lütfen gönder düğmesine tıklayın.
     dashboard-page:
-      subheader: Gösterge Paneli
+      subheader: Gösterge paneli
       welcome:
         message-1: '%{panel}, bu MAZI Bölgesi portalını yönetmek için kullanılan ana
           araçtır. Ayrıca bu MAZI Bölgesi''nin ağ oluşturma yönüdür.'
