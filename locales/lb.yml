@@ -1,6 +1,7 @@
 # Messages for Luxembourgish (Lëtzebuergesch)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Les Meloures
 # Author: Robby
 # Author: Soued031
 ---
@@ -154,7 +155,7 @@ lb:
         start-sensing-label2: Dauer (Sekonnen)
         start-sensing-label4: Intervall (Sekonnen)
         delete-images-title: All Fotoe läschen
-        delete-images-message: Wëllt Dir all déi gemaacht Fotoe läschen?
+        delete-images-message: Wëllt Dir all déi gemaache Fotoe läschen?
         delete-videos-title: All Videoe läschen
     monitoring-page:
       details-panel:
