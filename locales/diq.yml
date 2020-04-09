@@ -1,6 +1,7 @@
 # Messages for Zazaki (Zazaki)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: 1917 Ekim Devrimi
 # Author: Mirzali
 # Author: Orbot707
 ---
@@ -165,12 +166,14 @@ diq:
       popups:
         change-password-header: Parola bıvurne
     appearance-page:
+      subheader: Asayış
       theme-panel:
         colors-label: Rengi
       popups:
         edit-title-header: Sernameyi bıvurne
     devices-page:
       sensors-panel:
+        header: Sensori
         sensors-table:
           type: Babet
           status: Weziyet
@@ -178,9 +181,12 @@ diq:
         header: Kamera
     monitoring-page:
       details-panel:
+        header: Detayi
+        table-label1: Vılabiyayış
         table-label2: İdarekar
         table-label3: Sername
         table-label4: Şınasnayış
+        table-label5: Lokasyon (lat, long)
       statistics-panel:
         statistics-table:
           status: Weziyet

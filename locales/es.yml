@@ -93,9 +93,9 @@ es:
       pressure-for: Presión de %{sensor}
       no-sensors-warn: 'Advertencia: No hay medidas en la base de datos o el dispositivo
         de sensor no esta conectado a un Mazi Zone'
-      no-sensor-data-warn: 'Advertencia: No hay datos del sensor guardados en este
-        Mazi Zone. Un administrador del sistema puede habilitar la colección de datos
-        del sensor'
+      no-sensor-data-warn: 'Atención: esta zona MAZI no contiene ningún dato proveniente
+        de los sensores. Un administrador de sistema puede activar la recopilación
+        de datos de sensores.'
       choose-timeslot-message: Por favor utilice la forma de abajo para seleccionar
         una intervalo de tiempo.
       direction: Dirección (grados)
