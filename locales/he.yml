@@ -1,6 +1,7 @@
 # Messages for Hebrew (עברית)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Amire80
 # Author: Guycn2
 # Author: YaronSh
 ---
@@ -184,7 +185,7 @@ he:
       update-message-0: נא לבחור את ערוץ העדכונים שלך
       update-message-1: אין חיבור פעיל לאינטרנט. נא לחבר את תחום ה־MAZI הזה לאינטרנט
         ולאחר מכן לנסות שוב.
-      update-message-2: פורטל זה פועל במצב הדגמה! הפעולה הזו הייתה אמורה להתחיל תהליך
+      update-message-2: פורטל זה פועל במצב הדגמה! הפעולה הזאת הייתה אמורה להתחיל תהליך
         עדכון.
       update-message-3: פורטל זה כבר מעודכן, ולכן אין צורך בעדכון.
       update-message-4: המערכת מבצעת עדכון. נא להמתין...
