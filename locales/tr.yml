@@ -757,8 +757,8 @@ tr:
           ayrı bir uygulama olarak doğrudan bir bağlantı oluşturmaktır.
         paragraph16: Daha spesifik olarak, Nextcloud'da yönetici olarak giriş yaptıktan
           sonra, klasörün 'paylaşım' paneline tıklayıp 'Bağlantıyı paylaş' kutusunu
-          ve ardından 'Yükleme ve düzenlemeye izin ver' kutusunu işaretleyin (bkz.
-          aşağıdaki şekil).
+          ve ardından 'Yükleme ve düzenlemeye izin ver' kutusunu işaretleyin (aşağıdaki
+          şekile bakın).
         paragraph17: 'Bu iki onay kutusu arasında görünen bağlantı, artık şuradaki
           yeni bir uygulamanın URL''sine yapıştırılabilir:'
         paragraph18: Ayrıca, farklı türde dosyalar (fotoğraflar, slaytlar, videolar)
