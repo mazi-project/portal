@@ -86,15 +86,30 @@ pt-br:
     sensors-page:
       header: Medidas de sensor
       temperature-for: Temperatura de %{sensor}
+      humidity-for: Umidade de %{sensor}
       pressure-for: Pressão de %{sensor}
+      no-sensors-warn: 'Aviso: ou não há medições no banco de dados ou um dispositivo
+        sensor não está conectado a esta zona MAZI.'
+      no-sensor-data-warn: 'Aviso: Não há dados do sensor armazenados nesta zona MAZI.
+        Um administrador do sistema pode ativar a coleta de dados do sensor.'
+      choose-timeslot-message: Use o formulário abaixo para selecionar um intervalo
+        de tempo, por favor.
       direction: Direção (Graus)
       acceleration: Aceleração (x, y, z)
+      gyroscope: Giroscópio (pitch, yaw, roll)
+      sensors-hint: O sensor deve ser calibrado para ver valores válidos. Por favor,
+        verifique o painel de administração para mais detalhes.
     camera-page:
       header: Câmera
+      subheader: Nesta página, você pode ver as fotos e os vídeos capturados pela
+        câmera conectada a esta zona MAZI.
+      live-stream-header: Transmissão de vídeo ao vivo
       no-camera-warn: Atualmente, não há câmera instalada corretamente nesta zona
         MAZI!
+      media-library-header: Biblioteca de mídia
       no-media-warn: Atualmente, não há imagens ou vídeos encontrados na biblioteca!
     monitoring-page:
+      subheader: Monitoramento
       header-message: Nesta página você pode ver as medidas de várias medições de
         monitoramento desta ou de outras Zonas MAZI.
       popups:
@@ -106,26 +121,49 @@ pt-br:
         latitude: Latitude
         longitude: Longitude
         system_info: Informação do sistema
+        cpu_temp: Temperatura de CPU
+        cpu_load: Carga de CPU
+        ram_load: Carga de RAM
         wifi-users: Usuários de WiFi
+        storage_use: Carga de armazenamento
+        etherpad-users: Usuários de Etherpad
+        guestbook-submissions: Envios de livros de visitas
+        guestbook-comments: Comentários do livro de visitas
+        guestbook-images: Imagens do livro de visitas
         guestbook-datasize: Livro de Convidados
+        guestbook-clicks: Cliques no livro de visitas
   admin:
     general:
+      admin-panel: O painel Administração da zona MAZI
       shutdown-modal-title: Desligar?
+      shutdown-modal-message: A Zona MAZI agora será encerrada, isso fará com que
+        este site fique inacessível e você precisará reiniciar manualmente essa zona
+        MAZI. Continuar?
       reboot-modal-title: Reiniciar?
+      reboot-modal-message: Agora, a Zona MAZI será reiniciada. Isso fará com que
+        este site fique inacessível por alguns minutos. Aguarde e atualize esta página
+        após alguns minutos. Continuar?
     top-menu:
       header: Painel de Administração da Zona MAZI
       admin: Administrador
       portal: Portal
+      set-date: Definir data
       username: Nome de usuário
       password: Senha
+      mysql-password: Senha do MySQL
       check-updates: Verificar se há atualizações
+      settings: Configurações
     side-menu:
       dashboard: Painel de controle
       applications: Aplicativos
+      networking: Rede
       appearance: Aparência
       devices: Dispositivos
+      monitoring: Monitoramento
       notifications: Notificações
+      export-import: Exportar/importar
       logs: Registros
+      documentation: Documentação
     updates:
       subheader: Atualizar
       update-message-0: Por favor escolha o seu canal de atualização
