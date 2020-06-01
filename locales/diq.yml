@@ -75,6 +75,7 @@ diq:
       devices: Cihazi
     system-page:
       subheader: Melumatê sistemi
+      users: Karberê ke xete derê
       temperature: Germiye
       cpu: CPU
       ram: RAM
@@ -125,7 +126,7 @@ diq:
         storage-load: Barê Depoy
       networking:
         header: Torre
-        users-online: Karberê ke Newke Online
+        users-online: Karberê ke nıka xete derê
         wifi-info: Melumatê Torra Wi-Fi
       applications:
         header: Aplikasyoni
@@ -171,7 +172,10 @@ diq:
         colors-label: Rengi
       popups:
         edit-title-header: Sernameyi bıvurne
+        load-theme-header: Mewzu bar ke
+        save-theme-header: Mewzu qeyd ke
     devices-page:
+      subheader: Cihazi
       sensors-panel:
         header: Sensori
         sensors-table:
