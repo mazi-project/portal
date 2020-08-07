@@ -1,0 +1,312 @@
+# Messages for Polish (polski)
+# Exported from translatewiki.net
+# Export driver: phpyaml
+# Author: Chrumps
+# Author: Krzyz23
+# Author: WaldiSt
+# Author: Woytecr
+---
+pl:
+  general:
+    buttons:
+      edit: Edytuj
+      cancel: Anuluj
+      ok: OK
+      close: Zamknij
+      create: Stwórz
+      delete: Usuń
+      start: Start
+      stop: Stop
+      save: Zapisz zmiany
+      choose: Wybierz
+      choose-timeslot: Wybierz przedział czasowy
+      export-to-csv: Eksportuj do pliku CSV
+      expand: Rozwiń
+      expand-storage: Rozwiń pamięć
+      reboot: Zrestartuj
+      reset: Zresetuj
+      shutdown: Wyłącz
+      logout: Wyloguj się
+      update: Aktualizacja
+      connect: Połącz
+      disconnect: Rozłącz
+      toggle-device: Przełącz na urządzenie
+      initialize: Zainicjuj
+      remove: Usuń
+      load: Załaduj
+      import: Importuj
+      export: Eksportuj
+      refresh: Odśwież
+      continue: Kontynuuj
+      next: Następne
+      previous: Poprzedni
+      submit: Prześlij
+      change: Zmień
+      qrcode: Kod QR
+      show: Pokaż
+      configure: Konfiguruj
+    messages:
+      warning: Ostrzeżenie
+      welcome: Witaj
+      version: Wersja
+      enable: Włącz
+      disable: wyłącz
+      checked: przejrzane
+      on_msg: Włącz
+      off_msg: Wyłącz
+      disconnected: Rozłącz
+      here: Tutaj
+      ssid: SSID
+      channel: Kanał
+      password: Hasło
+      offline: offline
+      error: Błąd
+      stable: Stabilny
+  portal:
+    top-menu:
+      documentation: Dokumentacja
+    side-menu:
+      applications: Aplikacje
+      system: System
+      sensors: Czujniki
+      camera: Kamera
+      monitoring: Monitoring
+      devices: Urządzenia
+    system-page:
+      subheader: Informacje systemowe
+      users: Użytkownicy aktywni
+      temperature: Temperatura
+      cpu: CPU
+      ram: RAM
+      storage: Pamięć
+    sensors-page:
+      temperature-for: Temperatura z %{sensor}
+      humidity-for: Wilgotność z %{sensor}
+      pressure-for: Ciśnienie z %{sensor}
+      direction: Kierunek (stopnie)
+      acceleration: Przyspieszenie (x, y, z)
+    camera-page:
+      header: Kamera
+      subheader: Na tej stronie możesz zobaczyć zdjęcia i filmy zarejestrowane przez
+        kamerę podłączoną do tej strefy MAZI.
+      live-stream-header: Transmisja strumieniowa wideo na żywo
+      no-camera-warn: Obecnie w tej Strefie MAZI nie ma poprawnie zainstalowanej kamery!
+      media-library-header: Biblioteka mediów
+    monitoring-page:
+      popups:
+        device: Urządzenie
+        devices: Urządzenia
+        administrator: Administrator
+        description: Opis
+        latitude: Szerokość
+        cpu_temp: Temperatura CPU
+        cpu_load: Obciążenie CPU
+        ram_load: Obciążenie RAM
+        wifi-users: Użytkownicy WiFi
+        storage_use: Obciążenie pamięci
+  admin:
+    general:
+      admin-panel: Panel Administracji strefą MAZI
+      shutdown-modal-title: Zamknąć?
+      reboot-modal-title: Uruchomić ponownie?
+    top-menu:
+      header: Panel Administracyjny Strefy MAZI
+      admin: Administrator
+      portal: Portal
+      set-date: Ustaw datę
+      username: Nazwa użytkownika
+      password: Hasło
+      mysql-password: Hasło MySQL
+      check-updates: Sprawdź dostępność aktualizacji
+      settings: Ustawienia
+    side-menu:
+      dashboard: Panel
+      applications: Aplikacje
+      networking: Sieci
+      appearance: Wygląd
+      devices: Urządzenia
+      monitoring: Monitorowanie
+      notifications: Powiadomienia
+      export-import: Export/Import
+      documentation: Dokumentacja
+    updates:
+      subheader: Aktualizuj
+      checking-updates: Sprawdzanie dostępności aktualizacji. Czekaj...
+      update-message-0: Wybierz swój kanał aktualizacji
+      update-message-4: System jest aktualizowany. Czekaj...
+      update-message-5: Proces aktualizacji jest prawie zakończony. Strefa MAZI zostanie
+        ponownie uruchomiona w celu zainstalowania brakujących zależności. Gdy tylko
+        ponownie zobaczysz swoją sieć Wi-Fi, możesz połączyć się ze zaktualizowaną
+        strefą MAZI.
+      update-message-6: Dostępna jest aktualizacja. Użyj przycisku poniżej, aby rozpocząć
+        proces aktualizacji.
+      update-hint: 'Wskazówka: Jeśli wystąpi nieprawidłowe zachowanie, uruchom ponownie
+        urządzenie.'
+    setup-page:
+      first-step-header: Konfiguracja hasła administratora
+      fourth-step-header: Szczegóły strefy MAZI
+      last-step-header: Ukończono
+    dashboard-page:
+      subheader: Panel
+      hardware-info:
+        cpu-load: Obciążenie CPU
+        ram-load: Obciążenie RAM
+        storage-load: Obciążenie pamięci
+      networking:
+        header: Sieci
+      applications:
+        header: Aplikacje
+      traffic:
+        header: Ruch
+      notifications:
+        header: Powiadomienia
+      version:
+        up-to-date: Aktualny
+    applications-page:
+      subheader: Aplikacje
+      instances-menu:
+        active-column: Aktywny
+        name-column: Nazwa
+        name-hint: nazwa aplikacji
+        url-column: Adres URL
+        url-hint: adres URL aplikacji
+        description-column: Opis
+        description-hint: opis, który będzie widoczny na kafelku aplikacji w Portalu
+        parent-column: Aplikacja nadrzędna
+        parent-hint: aplikacja nadrzędna
+        actions-column: Operacje
+        actions-hint: czynności, które można wykonać w aplikacji
+      applications-menu:
+        status-column: Status
+        icon-column: Ikona
+        icon-hint: domyślna ikona aplikacji
+        color-column: Kolor
+        color-hint: domyślny kolor aplikacji
+        name-column: Nazwa aplikacji
+        name-hint: nazwa aplikacji
+        url-column: Adres URL
+        url-hint: adres URL aplikacji
+        description-column: Opis
+        description-hint: domyślny opis aplikacji
+        actions-column: Operacje
+        actions-hint: czynności, które można wykonać w aplikacji
+        app-start-hint: Uruchom aplikację
+        app-stop-hint: Zatrzymaj aplikację
+      popups:
+        delete-application-title: Usunąć instancję aplikacji?
+    network-page:
+      subheader: Ustawienia sieci
+      wifi-ap-interface-panel:
+        ssid-name-label: Nazwa sieci Wi-Fi (SSID)
+        ssid-name-description: Identyfikator zestawu usług (SSID) to nazwa przypisana
+          do sieci Wi-Fi (bezprzewodowej). Wszystkie urządzenia w sieci muszą używać
+          tej nazwy uwzględniającej wielkość liter, aby komunikować się przez Wi-Fi,
+          która jest ciągiem tekstowym o długości do 32 bajtów. Aby to zmienić, naciśnij
+          przycisk edycji poniżej.
+        wifi-channel-label: Kanał sieci Wi-Fi
+      popups:
+        show-qrcode-header: Kod QR sieci Wi-Fi
+        change-channel-header: Zmień kanał
+        change-password-header: Zmień hasło
+        change-mode-header: Zmień tryb
+        change-mode-message: Użyj poniższego formularza, aby wybrać tryb sieciowy
+          dla tej strefy MAZI. Jeśli chcesz wybrać tryb online, upewnij się, że masz
+          dostęp do Internetu (za pomocą kabla Ethernet lub klucza Wi-Fi).
+        connect-wifi-header: Połącz się z siecią Wi-Fi
+        select-wifi-label: Wybierz nazwę Wi-Fi
+        select-mesh-mode-label: Wybierz tryb Mesh
+        type-wifi-label: Lub wpisz go tutaj, jeśli jest ukryty
+        type-password-label: Wpisz hasło do sieci Wi-Fi
+        change-domain-header: Edytuj domenę portalu
+    appearance-page:
+      subheader: Wygląd
+      theme-panel:
+        header: Konfiguracje motywów
+        portal-title-label: Tytuł portalu
+        portal-title-hint: Ta wartość konfiguruje zarówno tytuł w lewym górnym rogu,
+          jak i tytuł nagłówka html.
+        home-page-label: Tytuł strony głównej
+        home-page-hint: Ta wartość konfiguruje tytuł treści strony głównej portali.
+        home-subtitle-label: Podtytuł strony głównej
+        home-subtitle-hint: Ta wartość konfiguruje podtytuł treści dla strony głównej
+          portali.
+        welcome-message-label: Wiadomość powitalna aplikacji
+        colors-label: Kolory
+        side-main-color: Główny kolor panelu bocznego
+        side-active-color: Panel boczny aktywny w kolorze
+        top-main-color: Kolor główny panelu górnego
+        top-active-color: Aktywny kolor panelu górnego
+      popups:
+        save-theme-header: Zapisz motyw
+    devices-page:
+      subheader: Urządzenia
+      sensors-panel:
+        sensors-table:
+          type: Typ
+          status: Status
+      camera-panel:
+        header: Kamera
+        header-hint: Można go używać do sterowania kamerą.
+      popups:
+        delete-videos-title: Usuń wszystkie filmy
+        delete-videos-message: Czy chcesz usunąć wszystkie przechwycone filmy?
+    monitoring-page:
+      details-panel:
+        header: Szczegóły
+        header-hint: Można użyć tej funkcji, aby włączyć/wyłączyć funkcję monitorowania.
+        table-label2: Administrator
+        table-label3: Tytuł
+        table-label4: Opis
+      statistics-panel:
+        statistics-table:
+          status: Status
+          description: Opis
+      popups:
+        change-details-label2: Administrator
+        change-details-label3: Tytuł
+        change-details-label4: Opis
+        hardware-label2: Temperatura
+        hardware-label3: Użytkownicy WiFi
+        hardware-label4: Obciążenie CPU
+        hardware-label5: Obciążenie pamięci RAM
+        hardware-label6: Obciążenie pamięci
+        application-label1: Serwer docelowy
+    notifications-page:
+      subheader: Powiadomienia
+      notifications-table:
+        header1: Status
+        header2: Tytuł
+        header3: Treść
+    import-export-page:
+      subheader: Migawki
+    documentation-page:
+      header: Dokumentacja administratora
+      initial-configuration-tab:
+        subheader1: Opis
+      etherpad-tab:
+        subheader1: Opis
+        subheader3: Przydatne porady
+        paragraph5: Na przykład,
+      nextcloud-tab:
+        subheader1: Opis
+        paragraph10: Adres e‐mail
+      guestbook-tab:
+        subheader1: Opis
+        subheader3: Hasło administratora
+      wordpress-tab:
+        subheader1: Opis
+      framadate-tab:
+        subheader1: Opis
+    settings-page:
+      subheader: Ustawienia
+      time-date:
+        header: Godzina/Data
+      mysql-password:
+        header: Hasło MySQL
+      apache-filesize:
+        header: Apache maksymalny rozmiar pliku
+      popups:
+        change-apache-filesize-title: Zmień maksymalny rozmiar wysyłanego pliku Apache
+        change-apache-filesize-message: Skorzystaj z poniższego formularza, aby zmienić
+          rozmiar pliku Apache max dla tej strefy MAZI.
+...
