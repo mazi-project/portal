@@ -3,6 +3,7 @@
 # Export driver: phpyaml
 # Author: Bengtsson96
 # Author: Mgaved
+# Author: Sabelöga
 # Author: WikiPhoenix
 ---
 sv:
@@ -65,6 +66,7 @@ sv:
       active: aktiv
       inactive: inaktiv
       error: fel
+      stable: Stabil
       development: Utveckling
   portal:
     top-menu:
@@ -237,7 +239,7 @@ sv:
       applications-menu:
         header: Installerade applikationer
         status-column: Status
-        status-hint: portalens driftstatus (igång / stoppad)
+        status-hint: driftstatusen (igång / stoppad)
         icon-column: Ikon
         icon-hint: Applikationens standardikon
         color-column: Färg

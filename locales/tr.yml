@@ -625,7 +625,7 @@ tr:
           boş alan var.
       full-warning: 'Uyarı: Bir anlık görüntüyü içe ve dışa aktarmak, zaman alıcı
         bir prosedürdür ve ayrıca MAZI Bölgesi verilerinize ve USB cihazınızın hızına
-        bağlıdır. İçe/dışa aktarma prosedürü sırasında MAZI Portalı ile etkileşim
+        bağlıdır. İçe/dışa aktarma prosedürü sırasında MAZI Portali ile etkileşim
         kuramayacaksınız. Cihaz, içe aktarma prosedürünün sonunda yeniden başlatılacaktır.'
       configuration-snapshots-header: Yapılandırma Anlık Görüntüleri
       configuration-snapshots-message: Bu MAZI Bölgesinin mevcut yapılandırmasının
