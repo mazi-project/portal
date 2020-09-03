@@ -51,7 +51,7 @@ sv:
       version: Version
       enable: aktivera
       disable: inaktivera
-      checked: kontrolleras
+      checked: kontrollerad
       on_msg: PÅ
       off_msg: AV
       disconnected: Frånkopplad
