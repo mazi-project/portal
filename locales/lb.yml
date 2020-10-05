@@ -129,6 +129,7 @@ lb:
         description-column: Beschreiwung
         actions-column: Aktiounen
       applications-menu:
+        color-column: Faarf
         url-column: URL
         description-column: Beschreiwung
         actions-column: Aktiounen
