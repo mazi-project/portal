@@ -19,6 +19,7 @@ diq:
       save: Vurnayışan qeyd ke
       choose: Weçine
       choose-timeslot: Yew demê zemani weçine
+      export-to-csv: Çekerê dosyay CSV
       expand: Hera kerê
       expand-storage: Heruna depoyi hera ke
       reboot: Reyna baş kerê
@@ -29,6 +30,7 @@ diq:
       connect: Gıre de
       disconnect: Gıre mede
       toggle-device: Cihazi Bıvurne
+      initialize: Aser fi
       remove: Wedare
       load: Bar ke
       import: Zerre ke
@@ -58,6 +60,8 @@ diq:
       password: Parola
       offline: çerxteber
       online: çerxmiyan
+      restricted: kemeyın
+      managed: İdarebiyen
       active: aktif
       inactive: aktif niyo
       error: xeta
@@ -76,23 +80,30 @@ diq:
     system-page:
       subheader: Melumatê sistemi
       users: Karberê ke xete derê
+      app-clicks: Tıknayışê aplikasyoni
       temperature: Germiye
       cpu: CPU
       ram: RAM
       storage: Depo
     sensors-page:
       header: Sencayışê sensori
+      direction: Heti (Derece)
+      acceleration: Pêtyayış(x, y, z)
+      gyroscope: Ciroskop (kas, ahulyayış, verayış)
     camera-page:
       header: Kamera
       media-library-header: Kıtabxaneyê medya
     monitoring-page:
+      subheader: Çımdariye
       popups:
         device: Cihaz
         devices: Cihazi
+        deployment: Vılabiyayış
         administrator: İdareker
         description: Şınasnayış
         latitude: Verıniye
         longitude: Derganiye
+        system_info: Zanışiya sistemi
         cpu_temp: Germiya CPUyi
         cpu_load: Barê CPUyi
         ram_load: Barê RAMi
@@ -100,6 +111,8 @@ diq:
         storage_use: Barê Depoyi
         etherpad-pads: Pedê Etherpadi
         etherpad-users: Karberê Etherpadi
+        etherpad-datasize: Ebatê datay Etherpad'i
+        etherpad-clicks: Tıknayışê etherpad'i
   admin:
     top-menu:
       admin: İdareker
@@ -109,9 +122,13 @@ diq:
       settings: Eyari
     side-menu:
       dashboard: Pano
+      applications: Aplikasyoni
+      networking: Torre
       appearance: Asayış
       devices: Cihazi
+      monitoring: Çımdariye
       notifications: Tebliği
+      export-import: Teber/zerre
       logs: Qeydi
       documentation: Dokumantasyon
     updates:
@@ -164,6 +181,11 @@ diq:
         description-hint: Şınasiya hesabyaye aplikasyoni
         actions-column: Hereketi
     network-page:
+      connect-wifi-panel:
+        wifi-network-hint-2: Torra Wi-Fi Interneti
+      portal-domain-panel:
+        header: Portal Domain
+        domain-hint: Mewcud cay portali
       popups:
         change-password-header: Parola bıvurne
     appearance-page:
