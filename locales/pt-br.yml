@@ -85,7 +85,11 @@ pt-br:
       storage: Armazenamento
     sensors-page:
       header: Medidas de sensor
+      header-message: Nesta página você pode ver as medições de vários sensores conectados
+        a esta Zona MAZI. Você também pode usar o botão abaixo para solicitar medições
+        de um período específico.
       temperature-for: Temperatura de %{sensor}
+      metrics-for: Métricas de direção, aceleração e giroscópio de %{sensor}
       humidity-for: Umidade de %{sensor}
       pressure-for: Pressão de %{sensor}
       no-sensors-warn: 'Aviso: ou não há medições no banco de dados ou um dispositivo
@@ -166,7 +170,15 @@ pt-br:
       documentation: Documentação
     updates:
       subheader: Atualizar
+      checking-updates: Verificando atualizações. Por favor, espere...
+      alert-message-1: Seu repositório local foi editado. Isso faz com que a função
+        de atualização não funcione corretamente. Reverta essas mudanças no repositório
+        local, usando %{command} para os arquivos editados.
       update-message-0: Por favor escolha o seu canal de atualização
+      update-message-1: Não há conexão ativa com a internet. Conecte esta zona MAZI
+        à Internet e tente novamente.
+      update-message-2: Este portal funciona em modo Demo! Esta ação teria iniciado
+        um processo de atualização.
       update-message-3: O portal está atualizado, não há necessidade de atualização.
       update-message-4: O sistema está atualizando. Por favor, espere...
       update-message-5: O processo de atualização está quase completo. Sua Zona MAZI
@@ -183,19 +195,46 @@ pt-br:
       update-chan-warn: 'Aviso: mudar para outro canal fará com que o dispositivo
         seja reinicializado.'
     setup-page:
+      tog-nav: Alternar de navegação
+      setup-panel: Painel de configuração da zona MAZI
+      first-step-header: Configuração de senha de administrador
+      first-step-message: Use o formulário abaixo para definir a senha de administrador
+        para o painel de administração da Zona MAZI.
       third-step-header: Configuração de interface sem fio
       last-step-header: Completo
     dashboard-page:
       subheader: Painel de controle
       welcome:
+        message-2: 'Use o menu para navegar até as várias ferramentas, que podem:'
+        message-list-1: Gerenciar os aplicativos suportados
         message-list-2: Configurar a rede da Zona MAZI
+        message-list-3: Configure a representação visual do portal
+        message-list-4: Adicionar/remover notificações no portal
+        message-list-5: Exportar/importar instantâneos
       hardware-info:
+        header: Informações de hardware da zona MAZI
         system-temperature: Temperatura do sistema
+        cpu-load: Carga de CPU
         ram-load: Carga de RAM
+        storage-load: Carga de armazenamento
+      networking:
+        header: Rede
+        users-online: Usuários online agora
+        wifi-info: Informações da rede Wi-Fi
       applications:
         header: Aplicativos
+      traffic:
+        header: Tráfego
+      notifications:
+        header: Notificações
+        notifications: Notificações de portal ativo
+      time-date:
+        header: Data/Fuso horário da Zone MAZI
+        current: Data atual/Tempo
       version:
+        header: Versão da Zona MAZI
         version-message: Este Portal é %{nof_commits} commits' por trás.
+        up-to-date: Atualizado
     applications-page:
       subheader: Aplicativos
       instances-menu:
@@ -222,28 +261,99 @@ pt-br:
         application-icon-hint: 'Dica: para o ícone, por favor, verifique a documentação
           %{link}'
     network-page:
+      subheader: Configurações de rede
+      wifi-ap-interface-panel:
+        header: Configurações de rede de ponto de acesso Wi-Fi para %{interface}
+        ssid-name-label: Nome da rede Wi-Fi (SSID)
+        ssid-name-description: O Service Set IDentifier (SSID) é o nome atribuído
+          a uma rede Wi-Fi (sem fio). Todos os dispositivos da rede devem usar esse
+          nome que diferencia maiúsculas de minúsculas para se comunicar por Wi-Fi,
+          que é uma string de texto de até 32 bytes. Por favor, pressione o botão
+          editar abaixo para alterá-lo.
+        wifi-channel-label: Canal da rede Wi-Fi
+        wifi-password-label: Senha da rede Wi-Fi
+        wifi-password-description: A senha de autenticação para a rede Wi-Fi (sem
+          fio). Deve ter pelo menos 8 caracteres. Se ficar vazio, a segurança da rede
+          Wi-Fi será desativada. Por favor, pressione o botão editar abaixo para alterá-lo.
+      unconfigured-dongle-panel:
+        message: Esta interface de rede ainda não foi configurada. Use o botão abaixo,
+          para configurá-lo de forma adequada.
       internet-panel:
+        header: Modo de rede da Internet
         mode-hint: Modo da rede Wi-Fi
       connect-wifi-panel:
+        header: Conecte-se ao Wi-Fi para acesso à Internet
+        wifi-network-hint-1: de redes Wi-Fi
         wifi-network-hint-2: Rede Wi-Fi
+        usb-dongle-message: Conecte um conector de Wi-Fi para USB extra ao seu Raspberry
+          pi para habilitar esse recurso. Conectores de Wi-Fi para USB sugeridos
+      access-point-panel:
+        header: Adicionar roteador como ponto de acesso
+        current-hint: Ponto de acesso Wi-Fi em uso
+        router-message: A interface Raspberry Wi-Fi está sendo usada. Você pode conectar
+          um roteador OpenWRT ao Raspberry pi e mover o ponto de acesso para lá. Dispositivos
+          sugeridos
       portal-domain-panel:
         header: Domínio do Portal
+        domain-hint: Domínio do portal atual
       popups:
+        edit-wifi-header: Editar configuração de Wi-Fi
+        edit-wifi-warning: 'Aviso: Se você alterar quaisquer valores de configuração
+          para esta rede Wi-Fi, sua conexão sem fio a esta Zona MAZI será perdida
+          e você precisará se reconectar à nova rede Wi-Fi.'
+        edit-wifi-network-header: Editar configurações de rede Wi-Fi
+        show-qrcode-header: Código QR da rede Wi-Fi
         change-channel-header: Mudar o canal
         change-password-header: Alterar senha
+        change-mode-header: Mudar modo
         change-mode-message: Use o formulário abaixo para escolher o modo de rede
           para esta zona MAZI. Se você quiser escolher o modo online, certifique-se
           de ter acesso à Internet (através de um cabo ethernet ou de um dongle Wi-Fi).
+        connect-wifi-header: Conecte-se à rede Wi-Fi
+        select-wifi-label: Selecione o nome do Wi-Fi
+        select-mesh-mode-label: Selecione o modo mesh
+        type-wifi-label: Ou digite aqui se estiver oculto
+        type-password-label: Digite a senha da rede Wi-Fi
         change-domain-header: Editar domínio do portal
+        change-domain-message: Esta ação mudará o domínio do portal. Certifique-se
+          de que é um domínio válido (por exemplo, pelo menos um caractere '.').
+        change-domain-warning: 'Aviso: Se você definir um Domínio inválido, o Portal
+          ficará inacessível. No entanto, você pode acessar o painel de administração
+          por meio deste URL'
+        toggle-access-point-header: Alternar dispositivo de ponto de acesso Wi-Fi
     appearance-page:
       subheader: Aparência
       theme-panel:
+        header: Configurações de tema
+        portal-title-label: Título do portal
+        portal-title-hint: Este valor configura o título no canto superior esquerdo
+          e o título do cabeçalho html.
         home-page-label: Título da página inicial
+        home-page-hint: Este valor configura o título do corpo para a página inicial
+          dos portais.
+        home-subtitle-label: Subtítulo da página inicial
+        home-subtitle-hint: Este valor configura o subtítulo do corpo para a página
+          inicial dos portais.
+        background-image-label: Imagem de fundo do aplicativo
+        background-image-hint: Este valor configura a imagem de fundo da página de
+          aplicativos.
         colors-label: Cores
+        side-main-color: Cor principal do painel lateral
+        side-active-color: Cor ativa do painel lateral
+        top-main-color: Cor principal do painel superior
+        top-active-color: Cor ativa do painel superior
+        colors-hint: Os valores acima configuram várias cores do portal.
       popups:
+        edit-theme-header: Editar tema
         edit-title-header: Editar título
         edit-home-title-header: Editar título da pagina inicial
+        edit-home-subtitle-header: Editar subtítulo da página inicial
         edit-welcome-message-header: Editar mensagem de boas-vindas
+        edit-background-image-header: Editar imagem de fundo
+        reset-theme-header: Redefinir tema
+        reset-theme-message: Esta ação irá redefinir todas as configurações visuais
+          para os valores padrão.
+        load-theme-header: Carregar tema
         save-theme-header: Salvar tema
     devices-page:
       subheader: Dispositivos
@@ -261,32 +371,59 @@ pt-br:
       camera-panel:
         header: Câmera
       popups:
+        start-sensing-message: Insira uma duração ou uma data no calendário para definir
+          um intervalo de tempo para coletar as medições. Além disso, use o intervalo
+          para definir a frequência das medições.
+        start-sensing-label1: Servidor de destino
         start-sensing-label2: Duração (segundos)
+        start-sensing-label3: Calendário (hora/data de término)
+        start-sensing-label4: Intervalo (segundos)
+        start-images-label1: Duração (segundos)
+        start-images-label2: Intervalo (segundos)
         start-videos-label1: Duração (segundos)
     monitoring-page:
+      subheader: Monitoramento
+      message: Você pode usar as ferramentas abaixo para controlar a maneira como
+        sua zona MAZI coleta e envia dados para um servidor de coleta de dados.
       details-panel:
         header: Detalhes
         table-label1: Desenvolvimento
         table-label2: Administrador
         table-label3: Título
         table-label4: Descrição
+        table-label5: Localização (lat., long.)
       statistics-panel:
         statistics-table:
           status: Status
           description: Descrição
           action: Ação
+          start-hardware-task-hint: Iniciar o monitoramento da atividade do sistema
+          stop-hardware-task-hint: Parar o monitoramento da atividade do sistema
       popups:
+        change-details-message: Use o formulário abaixo para alterar os detalhes de
+          monitoramento do modal
         change-details-label1: Desenvolvimento
         change-details-label2: Administrador
         change-details-label3: Título
         change-details-label4: Descrição
+        change-details-label5: Localização (lat., long.)
+        hardware-label1: Servidor de destino
         hardware-label2: Temperatura
+        hardware-label3: Usuários de WiFi
+        hardware-label4: Carga de CPU
+        hardware-label5: Carga de RAM
+        hardware-label6: Carga de armazenamento
+        application-label1: Servidor de destino
     notifications-page:
       subheader: Notificações
       notifications-table:
         header1: Status
         header2: Título
+        header3: Corpo
         header4: Ações
+      popups:
+        create-notification-title: Criar nova notificação
+        edit-notification-title: Editar notificação
     import-export-page:
       subheader: Instantâneas
       full-snapshots-header: Instantâneos da Zona MAZI
@@ -355,10 +492,29 @@ pt-br:
         paragraph1: O Framadate é um aplicativo gratuito e de código aberto como o
           Doodle. É fácil criar um compromisso ou uma pesquisa sem registro para convidar
           suas colaborações.
+        paragraph4: Determine as datas ou tópicos a escolher
         paragraph5: Envie o link da pesquisa para seus amigos ou colegas
+        paragraph6: Discuta e tome sua decisão
     settings-page:
       subheader: Configurações
+      message: Você pode usar esta página para alterar várias definições de configuração
+        em sua zona MAZI.
       panel-header: Configurações de sistema
       time-date:
         header: Hora/Data
+      mysql-password:
+        header: Senha do MySQL
+      apache-filesize:
+        header: Tamanho máximo do arquivo Apache
+      popups:
+        change-time-date-title: Mudar hora/data
+        change-time-date-message: Use o formulário abaixo para alterar a hora/fuso
+          horário do MAZI.
+        change-mysql-password-title: Alterar a senha do MySQL
+        change-mysql-password-message: Use o formulário abaixo para alterar a senha
+          do MySQL para esta zona MAZI.
+        change-apache-filesize-title: Alterar o tamanho máximo do arquivo de upload
+          do Apache
+        change-apache-filesize-message: Use o formulário abaixo para alterar o tamanho
+          máximo do arquivo de upload do Apache para esta zona MAZI.
 ...
