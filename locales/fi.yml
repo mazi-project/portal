@@ -54,6 +54,7 @@ fi:
       active: aktiivinen
       inactive: inaktiivinen
       error: virhe
+      stable: Vakaa
   portal:
     top-menu:
       documentation: Käyttöohjeet
