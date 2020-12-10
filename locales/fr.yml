@@ -4,6 +4,7 @@
 # Author: Friday83260
 # Author: Gomoko
 # Author: Mgaved
+# Author: Thibaut120094
 # Author: Urhixidur
 # Author: Verdy p
 # Author: Wladek92
@@ -812,8 +813,8 @@ fr:
         subheader2: Guide d’administration
         subheader3: Mot de passe administrateur
         subheader4: Affichages alternatifs du contenu
-        paragraph1: Le livre d’or MAZI est une application à source ouverte qui peut
-          être utilisée dans les événements, permettant aux participants de partager
+        paragraph1: Le livre d’or MAZI est une application à code source ouvert qui
+          peut être utilisée dans les événements, permettant aux participants de partager
           leurs pensées, leurs photos, etc.
         paragraph2: Pour configurer/modérer l’application livre d’or MAZI, vous pouvez
           aller sur
