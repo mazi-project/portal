@@ -336,8 +336,23 @@ he:
       access-point-panel:
         header: הוספת נתב כנקודת גישה
         current-hint: נקודת גישה לרשת אלחוטית בשימוש
+      popups:
+        change-channel-header: החלפת ערוץ
+        change-password-header: החלפת ססמה
+        change-mode-header: החלפת מצב
+        connect-wifi-header: התחברות לרשת אלחוטית
+        select-wifi-label: בחירת שם רשת אלחוטית
+        type-password-label: נא להקליד את הססמה לרשת האלחוטית
     appearance-page:
+      subheader: מראה
       theme-panel:
+        header: הגדרות ערכת עיצוב
+        portal-title-label: כותרת שער
+        portal-title-hint: ערך זה מגדיר גם את הכותרת בפינה הימנית העליונה ואת כותרת
+          ה־head של ה־html.
+        home-page-label: כותרת דף בית
+        home-page-hint: ערך זה מגדיר את כותרת ה־body לדפי הבית של שערים.
+        home-subtitle-label: כותרת משנה לדף בית
         colors-label: צבעים
     devices-page:
       sensors-panel:
@@ -397,6 +412,8 @@ he:
         hardware-label4: עומד המעבד
         hardware-label5: עומס זיכרון
         hardware-label6: עומס אחסון
+        application-label1: שרת יעד
+        application-label2: יישום Etherpad
     settings-page:
       panel-header: הגדרות מערכת
       time-date:
