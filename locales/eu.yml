@@ -3,6 +3,7 @@
 # Export driver: phpyaml
 # Author: Amaia
 # Author: An13sa
+# Author: Xabier Armendaritz
 ---
 eu:
   general:
@@ -407,8 +408,8 @@ eu:
         no-snapshots-message: Oraingoz ez dago irudirik gordeta.
       import-export-panel:
         header: Inportatu eta esportatu irudia
-        header-hint: Hau erabili dezakezu irudi bat zip fitxategi bezala esportatzeko,
-          edo zip fitxategi bat irudi bezala inportatzeko.
+        header-hint: Hau erabili dezakezu argazki bat ZIP fitxategitzat esportatzeko,
+          edo ZIP fitxategi bat argazkitzat inportatzeko.
         message: Mesedez, aukeratu irudi bat eta sakatu kargatu.
         no-snapshots-message: Oraingoz ez dago irudirik gordeta.
       application-snapshots-header: Aplikazioaren irudiak

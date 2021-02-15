@@ -60,6 +60,8 @@ pl:
       channel: Kanał
       password: Hasło
       offline: offline
+      active: aktywny
+      inactive: nieaktywny
       error: Błąd
       stable: Stabilny
   portal:
