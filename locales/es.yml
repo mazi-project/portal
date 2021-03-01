@@ -58,6 +58,7 @@ es:
       ssid: SSID
       channel: Canal
       password: Contraseña
+      offline: Sin conexión
       online: En línea
       restricted: Restringido
       managed: gestionado
@@ -79,6 +80,7 @@ es:
     system-page:
       subheader: Información de sistema
       users: Usuarios en línea
+      app-clicks: Clics de aplicación
       temperature: Temperatura
       cpu: CPU
       ram: RAM
