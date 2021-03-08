@@ -1,6 +1,7 @@
 # Messages for Spanish (español)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: CarlosHC
 # Author: Fitoschido
 # Author: Harvest
 # Author: Mgaved
@@ -104,6 +105,9 @@ es:
       acceleration: Aceleración (x, y, z)
     camera-page:
       header: Cámara
+      live-stream-header: Transmisión de video en vivo
+      no-camera-warn: Por ahora, no hay ninguna cámara correctamente instalada en
+        esta Zona MAZI
       media-library-header: Mediateca
       no-media-warn: No se encontraron imágenes ni vídeos en la mediateca.
     monitoring-page:
@@ -111,6 +115,7 @@ es:
       popups:
         device: Dispositivo
         devices: Dispositivos
+        administrator: Administrador
         description: Descripción
         latitude: Latitud
         longitude: Longitud
@@ -125,7 +130,14 @@ es:
         nextcloud-files: Archivos de Nextcloud
         nextcloud-downloads: Descargas de Nextcloud
   admin:
+    general:
+      shutdown-modal-title: ¿Apagar?
+      shutdown-modal-message: La Zona MAZI se apagará ahora, esto causará que no se
+        puedan establecer conexiones a este sitio y necesites reiniciar manualmente
+        esta Zona MAZI. ¿Proceder?
+      reboot-modal-title: ¿Reiniciar?
     top-menu:
+      admin: Administrador
       portal: Portal
       set-date: Establecer fecha
       username: Nombre de usuario
@@ -144,7 +156,29 @@ es:
       documentation: Documentación
     updates:
       subheader: Actualizar
+      checking-updates: Comprobando actualizaciones. Por favor espere...
+      update-message-0: Por favor escoge tu canal de actualización
+      update-message-3: El portal ya está actualizado, no hay necesidad de buscar
+        una actualización.
+      update-message-4: El sistema se está actualizando. Por favor espere...
+      update-message-6: Hay una actualización disponible. Por favor, usa el botón
+        de abajo para empezar el proceso de actualización.
+      update-hint: 'Pista: Si experimentas un comportamiento indebido, reinicia tu
+        dispositivo.'
+      update-chan-warn: 'Advertencia: cambiar a otro canal causará un reinicio del
+        dispositivo.'
+    setup-page:
+      first-step-hint: 'Pista: si esta es una nueva Zona MAZI la contraseña actual
+        es 1234'
+      second-step-header: Configuración de Fecha/Hora
+      second-step-message: Por favor usa el formato de abajo para cambiar Fecha/Hora,
+        así como el huso horario de esta Zona MAZI.
+      third-step-header: Configuración de la Interfaz Inalámbrica
+      third-step-message: Por favor, usa el formato de abajo para cambiar el nombre
+        para la red Wi-Fi (Opcional).
+      last-step-header: Completo
     dashboard-page:
+      subheader: Tablero
       hardware-info:
         system-temperature: Temperatura de sistema
         cpu-load: Carga de CPU
@@ -157,13 +191,26 @@ es:
         applications-installed: Aplicaciones instaladas
       traffic:
         header: Tránsito
+      notifications:
+        header: Notificaciones
+      time-date:
+        current: Fecha/Hora actual
+      version:
+        up-to-date: Actualizado
+      popups:
+        expand-storage-message: Puedes expander el almacenamiento de la Zona MAZI
+          hasta la máxima capacidad de tu tarjeta SD usando el botón de abajo. Necesitarás
+          reiniciar el dispositivo para que el cambio tome efecto.
     applications-page:
+      subheader: Aplicaciones
       instances-menu:
+        active-column: Activo
         name-column: Nombre
         name-hint: el nombre de la aplicación
         url-column: URL
         url-hint: el URL de la aplicación
         description-column: Descripción
+        click-column: Contador de clicks
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
       applications-menu:
@@ -180,28 +227,57 @@ es:
         description-column: Descripción
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
+        app-start-hint: Comenzar aplicación
+        app-stop-hint: Parar aplicación
+      popups:
+        web-app-info-title: Aplicación web
     network-page:
+      wifi-ap-interface-panel:
+        ssid-name-label: Nombre de la red Wi-Fi (SSID)
+        wifi-channel-label: Canal de la red Wi-Fi
+        wifi-password-label: Contraseña de la red Wi-Fi
       internet-panel:
         mode-hint: Modo de la red wifi
       portal-domain-panel:
         header: Dominio de portal
       popups:
+        change-channel-header: Cambiar canal
+        change-password-header: Cambiar contraseña
+        change-mode-header: Cambiar modo
+        change-mode-message: Usa el formato de abajo para escoger el Modo de Red para
+          esta Zona MAZI. Si deseas escoger el modo en línea, por favor asegúrate
+          de tener acceso a Internet (ya sea con un cable ethernet o un adaptador
+          Wi-Fi).
         connect-wifi-header: Conectar con una red wifi
+        type-wifi-label: O escríbelo aquí si está oculto
+        type-password-label: Escribe la contraseña para la red Wi-Fi
     appearance-page:
       subheader: Apariencia
       theme-panel:
         portal-title-label: Título del portal
+        colors-label: Colores
       popups:
+        edit-theme-header: Editar Tema
+        edit-title-header: Editar Título
+        reset-theme-header: Restablecer Tema
         save-theme-header: Guardar tema
     devices-page:
+      subheader: Dispositivos
       sensors-panel:
+        header: Sensores
+        header-hint: Puedes usar esto para controlar varios sensores.
         sensors-table:
           status: Estado
           actions: Acciones
       camera-panel:
         header: Cámara
+      popups:
+        start-images-label1: Duración (segundos)
+        start-images-label2: Intervalo (segundos)
+        delete-images-title: Eliminar todas las fotos
     monitoring-page:
       details-panel:
+        header: Detalles
         table-label3: Título
         table-label4: Descripción
         table-label5: Ubicación (lat., long.)
