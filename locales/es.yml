@@ -5,6 +5,7 @@
 # Author: Fitoschido
 # Author: Harvest
 # Author: Mgaved
+# Author: Rauldds
 ---
 es:
   general:
@@ -241,6 +242,12 @@ es:
       portal-domain-panel:
         header: Dominio de portal
       popups:
+        edit-wifi-header: Editar configuración del Wi-Fi
+        edit-wifi-warning: 'Advertencia: Si cambias cualquier valor de configuración
+          para esta red Wi-Fi, su conexión inalámbrica a la zona MAZI será perdida
+          y tendrá que reconectarse a la nueva red Wi-Fi.'
+        edit-wifi-network-header: Editar Configuraciones de la red Wi-Fi
+        show-qrcode-header: QR de la red Wi-Fi
         change-channel-header: Cambiar canal
         change-password-header: Cambiar contraseña
         change-mode-header: Cambiar modo
@@ -249,40 +256,108 @@ es:
           de tener acceso a Internet (ya sea con un cable ethernet o un adaptador
           Wi-Fi).
         connect-wifi-header: Conectar con una red wifi
+        select-wifi-label: Seleccionar nombre del Wi-Fi
         type-wifi-label: O escríbelo aquí si está oculto
         type-password-label: Escribe la contraseña para la red Wi-Fi
+        change-domain-header: Editar dominio del portal
+        change-domain-message: Esta acción modificará el dominio del portal. Por favor
+          asegúrese que es un dominio valido (por ejemplo que al menos contenga una
+          vez el carácter '.').
+        change-domain-warning: 'Advertencia: Si establece un dominio invalido, el
+          portal no será accesible. Aun así, podra acceder al Panel del Administrado
+          a través de este URL'
     appearance-page:
       subheader: Apariencia
       theme-panel:
+        header: Configuraciones del Tema
         portal-title-label: Título del portal
+        portal-title-hint: Este valor configura el titulo en la esquina superior izquierda
+          y el titulo principal html
+        home-page-label: Titulo de la pagina principal
+        home-subtitle-label: Subtitulo de la pagina principal
+        welcome-message-label: Mensaje de bienvenida de la aplicación
+        background-image-label: Imagen de fondo de la aplicación
+        background-image-hint: Este valor configura la imagen de fondo para la pagina
+          de la aplicación
         colors-label: Colores
+        side-main-color: Color principal del panel lateral
+        top-main-color: Color principal del panel superior
+        colors-hint: Los valores de arriba configuran varios colores del portal
       popups:
         edit-theme-header: Editar Tema
         edit-title-header: Editar Título
+        edit-home-title-header: Editar titulo de la pagina principal
+        edit-home-subtitle-header: Editar subtitulo de la pagina principal
+        edit-welcome-message-header: Editar mensaje de bienvenida
+        edit-background-image-header: editar imagen de fondo
         reset-theme-header: Restablecer Tema
+        reset-theme-message: Esta acción reiniciará todas las configuraciones visuales
+          a su estado de fabrica
+        load-theme-header: Cargar tema
+        load-theme-message: Carga uno de los siguiente archivos de configuración
         save-theme-header: Guardar tema
+        save-theme-message: Por favor introduce el nombre del nuevo tema
     devices-page:
       subheader: Dispositivos
+      message: Puede utilizar las herramientas de abajo para controlar los distintos
+        dispositivos soportados que estan conectados a esta zona MAZI (sensores, camaras,
+        etc). Puede encontrar todos los dispositivos soportados
       sensors-panel:
         header: Sensores
         header-hint: Puedes usar esto para controlar varios sensores.
+        toggle-sensors-message: Habilitar/deshabilitar la pestaña de sensores en el
+          portal de usuario
+        toggle-sensors-hint: habilitar/deshabilitar la pestaña de sensores de los
+          portales
         sensors-table:
+          type: Tipo
           status: Estado
+          entries: Entradas
           actions: Acciones
+          start-button-hint: Empezar a guardar mediciones
+          delete-button-hint: Eliminar todas las medidas guardadas
+        no-sensors-message: No se ha encontrado un sensor conectado a esta zona MAZI
+        init-button-hint: Empezar inicialización de sensores
       camera-panel:
         header: Cámara
+        header-hint: Puedes utilizar esto para controlar la camara.
+        toggle-camera-message: Habilitar/deshabilitar la pestaña de camera en el portal
+          de usuario
+        toggle-camera-hint: habilitar/deshabilitar la pestaña de camera de los portales
+        no-camera-message: No se ha detectado cámara conectada a la zona MAZI
       popups:
+        start-sensing-title: Comenzar mediciones del sensor
+        start-sensing-label2: Duración (Segundos)
+        start-sensing-label3: Calendario (tiempo/fecha de finalización)
+        start-sensing-label4: Intervalo (segundos)
+        delete-sensing-title: Eliminar mediciones de sensores
+        delete-sensing-message: ¿Desea eliminar todas las mediciones guardadas?
+        start-images-title: Comenzar a capturar imágenes
         start-images-label1: Duración (segundos)
         start-images-label2: Intervalo (segundos)
         delete-images-title: Eliminar todas las fotos
+        delete-images-message: ¿Desea eliminar todas las imágenes capturadas?
+        start-videos-title: Comenzar a capturar video
+        start-videos-label1: Duración (Segundos)
+        delete-videos-title: Eliminar todos los videos
+        delete-videos-message: ¿Desea eliminar todos los videos capturados?
     monitoring-page:
+      subheader: Monitoreando
+      message: Puede utilizar las herramientas de abajo para controlar la forma en
+        que su zona MAZI recolecta y envía información al servidor de recolección
       details-panel:
         header: Detalles
+        header-hint: Puede utilizar esto para habilitar/deshabilitar el monitoreo
+        table-label2: Administrador
         table-label3: Título
         table-label4: Descripción
         table-label5: Ubicación (lat., long.)
+        details-hint: Es obligatorio cambiar los detalles de monitoreo antes de habilitar
+          el monitoreo
       statistics-panel:
         header: Datos de monitorización
+        header-hint: Puede utilizar esto para controlar las actividades de monitoreo
+        toggle-monitoring-map-hint: habilitar/deshabilitar la pestaña de monitoreo
         statistics-table:
           status: Estado
           description: Descripción
@@ -293,7 +368,15 @@ es:
             de actividad de sistema.
           no-application-tasks-message: No se está ejecutando ninguna tarea de monitorización
             de aplicaciones.
+          start-hardware-task-hint: Iniciar actividad de monitoreo del sistema
+          stop-hardware-task-hint: Detener actividad de monitoreo del sistema
+          delete-hardware-data-hint: Eliminar de la base de datos local todos los
+            datos de la actividad de monitoreo del sistema
+          start-application-task-hint: Iniciar monitoreo de la aplicación
+          stop-application-task-hint: Detener monitoreo de la aplicación
       popups:
+        change-details-header: Cambiar detalles del monitoreo
+        change-details-label2: Administrador
         change-details-label3: Título
         change-details-label4: Descripción
         change-details-label5: Ubicación (lat., long.)
@@ -312,10 +395,18 @@ es:
       popups:
         create-notification-title: Crear notificación nueva
         edit-notification-title: Editar notificación
+    import-export-page:
+      subheader: Capturas
+      full-snapshots-header: Capturas de zona MAZI
     logs-page:
+      subheader: Ver registros
+      message: Abajo puede ver los archivos de registro de la zona MAZI
       portal-log-panel:
         filter-label1: Mensajes de error
+        filter-label2: Mensajes de advertencia
+        filter-label3: Mensajes de depuración
     documentation-page:
+      header: Documentación del administrador
       initial-configuration-tab:
         subheader1: Descripción
       etherpad-tab:
