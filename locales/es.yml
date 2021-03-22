@@ -233,12 +233,17 @@ es:
       popups:
         web-app-info-title: Aplicación web
     network-page:
+      subheader: Ajustes de red
       wifi-ap-interface-panel:
         ssid-name-label: Nombre de la red Wi-Fi (SSID)
         wifi-channel-label: Canal de la red Wi-Fi
         wifi-password-label: Contraseña de la red Wi-Fi
       internet-panel:
         mode-hint: Modo de la red wifi
+      connect-wifi-panel:
+        wifi-network-hint-2: Red de internet Wi-Fi
+      access-point-panel:
+        header: Añadir router como punto de acceso
       portal-domain-panel:
         header: Dominio de portal
       popups:
@@ -380,6 +385,7 @@ es:
         change-details-label3: Título
         change-details-label4: Descripción
         change-details-label5: Ubicación (lat., long.)
+        hardware-label1: Servidor objetivo
         hardware-label2: Temperatura
         hardware-label3: Usuarios de wifi
         hardware-label4: Carga de CPU
@@ -408,23 +414,33 @@ es:
     documentation-page:
       header: Documentación del administrador
       initial-configuration-tab:
+        header: Configuración inicial
         subheader1: Descripción
+        paragraph6: y navega al menú
       etherpad-tab:
         subheader1: Descripción
         subheader2: Guía de administración
         subheader3: Consejos útiles
+        paragraph5: Por ejemplo,
       nextcloud-tab:
         subheader1: Descripción
         subheader2: Guía de administración
         subheader3: Consejos útiles
+        paragraph10: Dirección de correo electrónico
+        paragraph12: Administra tu contraseña
+        paragraph14: Enlaces a aplicaciones móviles y de escritorio
       guestbook-tab:
         subheader1: Descripción
         subheader2: Guía de administración
+        subheader3: Contraseña del administrador
+        paragraph7: Vista de tablet
       wordpress-tab:
         subheader1: Descripción
         subheader2: Guía de administración
       framadate-tab:
         subheader1: Descripción
+        paragraph3: Crear una encuesta
+        paragraph5: Envía el enlace de la encuesta a tus amigos y colegas
     settings-page:
       subheader: Configuración
       panel-header: Configuración del sistema
