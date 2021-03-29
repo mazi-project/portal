@@ -186,17 +186,22 @@ es:
         ram-load: Carga de RAM
         storage-load: Carga de almacenamiento
       networking:
+        users-online: Usuarios en línea
         wifi-info: Información de la red wifi
       applications:
         header: Aplicaciones
         applications-installed: Aplicaciones instaladas
       traffic:
         header: Tránsito
+        reset-visits: Reiniciar visitas
+        application-visits: Visitas de la aplicación
       notifications:
         header: Notificaciones
       time-date:
+        header: Hora/Fecha de la Zona MAZI
         current: Fecha/Hora actual
       version:
+        header: Versión de la Zona MAZI
         up-to-date: Actualizado
       popups:
         expand-storage-message: Puedes expander el almacenamiento de la Zona MAZI
@@ -205,12 +210,14 @@ es:
     applications-page:
       subheader: Aplicaciones
       instances-menu:
+        header: Instancias de la aplicación
         active-column: Activo
         name-column: Nombre
         name-hint: el nombre de la aplicación
         url-column: URL
         url-hint: el URL de la aplicación
         description-column: Descripción
+        parent-column: Aplicación padre
         click-column: Contador de clicks
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
@@ -228,6 +235,7 @@ es:
         description-column: Descripción
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
+        web-app-start-hint: Esta es una aplicación web, siempre corre.
         app-start-hint: Comenzar aplicación
         app-stop-hint: Parar aplicación
       popups:
@@ -241,6 +249,7 @@ es:
       internet-panel:
         mode-hint: Modo de la red wifi
       connect-wifi-panel:
+        wifi-network-hint-1: de redes Wi-Fi
         wifi-network-hint-2: Red de internet Wi-Fi
       access-point-panel:
         header: Añadir router como punto de acceso
@@ -332,6 +341,7 @@ es:
         no-camera-message: No se ha detectado cámara conectada a la zona MAZI
       popups:
         start-sensing-title: Comenzar mediciones del sensor
+        start-sensing-label1: Servidor objetivo
         start-sensing-label2: Duración (Segundos)
         start-sensing-label3: Calendario (tiempo/fecha de finalización)
         start-sensing-label4: Intervalo (segundos)
@@ -391,6 +401,7 @@ es:
         hardware-label4: Carga de CPU
         hardware-label5: Carga de RAM
         hardware-label6: Carga de almacenamiento
+        application-label1: Servidor objetivo
     notifications-page:
       subheader: Notificaciones
       notifications-table:
@@ -404,6 +415,10 @@ es:
     import-export-page:
       subheader: Capturas
       full-snapshots-header: Capturas de zona MAZI
+      full-snapshot-panel:
+        no-usb-message: Actualmente no hay ningún dispositivo de almacenamiento USB
+          detectado. Por favor, conecta un dispositivo de almacenamiento USB y actualiza
+          la página.
     logs-page:
       subheader: Ver registros
       message: Abajo puede ver los archivos de registro de la zona MAZI
@@ -416,6 +431,7 @@ es:
       initial-configuration-tab:
         header: Configuración inicial
         subheader1: Descripción
+        subheader3: Configuración de Raspbian
         paragraph6: y navega al menú
       etherpad-tab:
         subheader1: Descripción
@@ -439,8 +455,10 @@ es:
         subheader2: Guía de administración
       framadate-tab:
         subheader1: Descripción
+        paragraph2: Aquí está cómo funciona
         paragraph3: Crear una encuesta
         paragraph5: Envía el enlace de la encuesta a tus amigos y colegas
+        paragraph6: Discute y toma tu decisión
     settings-page:
       subheader: Configuración
       panel-header: Configuración del sistema
