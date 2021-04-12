@@ -1,6 +1,7 @@
 # Messages for Spanish (español)
 # Exported from translatewiki.net
 # Export driver: phpyaml
+# Author: Adestech
 # Author: CarlosHC
 # Author: Fitoschido
 # Author: Harvest
@@ -116,6 +117,7 @@ es:
       popups:
         device: Dispositivo
         devices: Dispositivos
+        deployment: Implementación
         administrator: Administrador
         description: Descripción
         latitude: Latitud
@@ -127,17 +129,21 @@ es:
         wifi-users: Usuarios de wifi
         storage_use: Carga de almacenamiento
         etherpad-users: Usuarios de Etherpad
+        etherpad-clicks: Clics en Etherpad
         nextcloud-users: Usuarios de Nextcloud
         nextcloud-files: Archivos de Nextcloud
         nextcloud-downloads: Descargas de Nextcloud
+        nextcloud-clicks: Clics en Nextcloud
   admin:
     general:
+      admin-panel: El Panel de Administración de la Zona MAZI
       shutdown-modal-title: ¿Apagar?
       shutdown-modal-message: La Zona MAZI se apagará ahora, esto causará que no se
         puedan establecer conexiones a este sitio y necesites reiniciar manualmente
         esta Zona MAZI. ¿Proceder?
       reboot-modal-title: ¿Reiniciar?
     top-menu:
+      header: Panel de Administración de la Zona MAZI
       admin: Administrador
       portal: Portal
       set-date: Establecer fecha
@@ -147,6 +153,7 @@ es:
       check-updates: Buscar actualizaciones
       settings: Configuración
     side-menu:
+      dashboard: Tablero
       applications: Aplicaciones
       appearance: Apariencia
       devices: Dispositivos
@@ -169,6 +176,9 @@ es:
       update-chan-warn: 'Advertencia: cambiar a otro canal causará un reinicio del
         dispositivo.'
     setup-page:
+      tog-nav: Alternar navegación
+      setup-panel: Panel de configuración de la Zona MAZI
+      first-step-header: Configuración de la contraseña del administrador
       first-step-hint: 'Pista: si esta es una nueva Zona MAZI la contraseña actual
         es 1234'
       second-step-header: Configuración de Fecha/Hora
@@ -177,9 +187,12 @@ es:
       third-step-header: Configuración de la Interfaz Inalámbrica
       third-step-message: Por favor, usa el formato de abajo para cambiar el nombre
         para la red Wi-Fi (Opcional).
+      fourth-step-header: Detalles de la Zona MAZI
       last-step-header: Completo
     dashboard-page:
       subheader: Tablero
+      welcome:
+        message-list-5: Exportar/importar capturas
       hardware-info:
         system-temperature: Temperatura de sistema
         cpu-load: Carga de CPU
@@ -218,6 +231,7 @@ es:
         url-hint: el URL de la aplicación
         description-column: Descripción
         parent-column: Aplicación padre
+        parent-hint: La aplicación padre
         click-column: Contador de clicks
         actions-column: Acciones
         actions-hint: acciones que se pueden llevar a cabo en la aplicación
@@ -243,16 +257,19 @@ es:
     network-page:
       subheader: Ajustes de red
       wifi-ap-interface-panel:
+        header: Configuración de red del Punto de Acceso Wi-Fi para %{interface}
         ssid-name-label: Nombre de la red Wi-Fi (SSID)
         wifi-channel-label: Canal de la red Wi-Fi
         wifi-password-label: Contraseña de la red Wi-Fi
       internet-panel:
         mode-hint: Modo de la red wifi
       connect-wifi-panel:
+        header: Conectado a Wi-Fi para acceso a internet
         wifi-network-hint-1: de redes Wi-Fi
         wifi-network-hint-2: Red de internet Wi-Fi
       access-point-panel:
         header: Añadir router como punto de acceso
+        current-hint: Punto de Acceso Wi-Fi en uso
       portal-domain-panel:
         header: Dominio de portal
       popups:
@@ -295,7 +312,9 @@ es:
           de la aplicación
         colors-label: Colores
         side-main-color: Color principal del panel lateral
+        side-active-color: Color activo del panel lateral
         top-main-color: Color principal del panel superior
+        top-active-color: Color activo del panel superior
         colors-hint: Los valores de arriba configuran varios colores del portal
       popups:
         edit-theme-header: Editar Tema
@@ -363,6 +382,7 @@ es:
       details-panel:
         header: Detalles
         header-hint: Puede utilizar esto para habilitar/deshabilitar el monitoreo
+        table-label1: Implementación
         table-label2: Administrador
         table-label3: Título
         table-label4: Descripción
@@ -391,6 +411,7 @@ es:
           stop-application-task-hint: Detener monitoreo de la aplicación
       popups:
         change-details-header: Cambiar detalles del monitoreo
+        change-details-label1: Implementación
         change-details-label2: Administrador
         change-details-label3: Título
         change-details-label4: Descripción
@@ -402,6 +423,8 @@ es:
         hardware-label5: Carga de RAM
         hardware-label6: Carga de almacenamiento
         application-label1: Servidor objetivo
+        application-label2: Aplicación Etherpad
+        show-application-header: Información del monitoreo de la aplicación
     notifications-page:
       subheader: Notificaciones
       notifications-table:
@@ -416,13 +439,28 @@ es:
       subheader: Capturas
       full-snapshots-header: Capturas de zona MAZI
       full-snapshot-panel:
+        form-placeholder: Nombre de la captura
         no-usb-message: Actualmente no hay ningún dispositivo de almacenamiento USB
           detectado. Por favor, conecta un dispositivo de almacenamiento USB y actualiza
           la página.
+        usb-message: Un dispositivo de almacenamiento USB ha sido detectado. Hay %{free_space}
+          de espacio libre en el dispositivo.
+      save-snapshot-panel:
+        header: Guardar captura
+      interview-panel:
+        form-placeholder: Nombre de la captura
+      guestbook-panel:
+        header-hint: Puedes utilizar esto para importar/exportar una captura.
+      popups:
+        import-header: Importar captura
+        import-etherpad-header: Importar captura para Etherpad
+        import-config-header: Importa una captura de configuración
     logs-page:
       subheader: Ver registros
       message: Abajo puede ver los archivos de registro de la zona MAZI
       portal-log-panel:
+        header: Archivo de Registro del Portal
+        header-hint: Archivo de Registro del Portal.
         filter-label1: Mensajes de error
         filter-label2: Mensajes de advertencia
         filter-label3: Mensajes de depuración
@@ -431,36 +469,58 @@ es:
       initial-configuration-tab:
         header: Configuración inicial
         subheader1: Descripción
+        subheader2: Conectando mediante ssh
         subheader3: Configuración de Raspbian
         paragraph6: y navega al menú
+        paragraph10: La zona horaria para emparejar tu ubicación
       etherpad-tab:
         subheader1: Descripción
         subheader2: Guía de administración
         subheader3: Consejos útiles
+        paragraph2: Encontrarás una pagina de Administración en el
         paragraph5: Por ejemplo,
       nextcloud-tab:
         subheader1: Descripción
         subheader2: Guía de administración
         subheader3: Consejos útiles
+        paragraph2: Encontrarás una pagina de Administración en
+        paragraph3: Para acceder a tus configuraciones personales
+        paragraph6: Algunas características que verás incluyen lo siguiente
+        paragraph8: Administra tu foto de perfil
         paragraph10: Dirección de correo electrónico
         paragraph12: Administra tu contraseña
+        paragraph13: Escoge el idioma para tu interfaz Nextcloud
         paragraph14: Enlaces a aplicaciones móviles y de escritorio
+        paragraph20: Entonces, por ejemplo, para el usuario 'mazi' y la carpeta audio/
+          la ruta sería
       guestbook-tab:
         subheader1: Descripción
         subheader2: Guía de administración
         subheader3: Contraseña del administrador
+        subheader4: Vistas alternativas del contenido
+        paragraph3: Para cambiar la contraseña del administrador, abre el archivo
+          config.js, el cual se encuentra en esta ruta
+        paragraph6: Vista de diapositivas
         paragraph7: Vista de tablet
+        paragraph8: Todos los enlaces funcionan cuando estás conectado a tu Zona MAZI
       wordpress-tab:
         subheader1: Descripción
         subheader2: Guía de administración
+        paragraph2: 'Llena la información: dale un título a tu sitio, crea un nombre
+          de usuario, una contraseña, e introduce tu correo electrónico. Selecciona
+          el botón de Instalar WordPress y después inicia sesión con la cuenta que
+          acabas de crear.'
       framadate-tab:
         subheader1: Descripción
         paragraph2: Aquí está cómo funciona
         paragraph3: Crear una encuesta
+        paragraph4: Determina las fechas o temas para escoger
         paragraph5: Envía el enlace de la encuesta a tus amigos y colegas
         paragraph6: Discute y toma tu decisión
     settings-page:
       subheader: Configuración
+      message: Puedes usar esta página para cambiar varios ajustes de la configuración
+        en tu Zona MAZI.
       panel-header: Configuración del sistema
       time-date:
         header: Fecha y hora
