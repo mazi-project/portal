@@ -696,7 +696,7 @@ fr:
         import-full-header: Importer un instantané pour cette zone MAZI
         import-config-header: Importer un instantané de configuration
     logs-page:
-      subheader: Visualiseur de journal
+      subheader: Visionneuse du journal
       message: Vous pouvez afficher les fichiers journaux de la zone MAZI ci-dessous.
       portal-log-panel:
         header: Fichier de journal du portail
@@ -747,29 +747,30 @@ fr:
           intégré ne vous suffit pas, il y a des tonnes de modules qui vous permettent
           de personnaliser votre instance pour correspondre à vos besoins.
         paragraph2: Vous trouverez une page d’administration au
-        paragraph3: Pour modifier le mot de passe administrateur, dans la page d’Administration,
-          choisissez paramètres et remplacez 'mazizone' par votre mot de passe.
+        paragraph3: Pour modifier le mot de passe administrateur, choisissez les paramètres
+          dans la page d’Administration et remplacez « mazizone » par votre mot de
+          passe.
         paragraph4: Ce sera plus facile pour les utilisateurs de votre zone MAZI si
-          vous créez vous-même un bloc d’index et en faites la page etherpad 'par
-          défaut' en modifiant l’URL dans la zone d’application de l’onglet d’administration,
+          vous créez vous-même un bloc d’index et en faites la page Etherpad « par
+          défaut » en modifiant l’URL dans la zone d’application de l’onglet d’administration,
           quand vous gérez la connexion. Les gens peuvent être invités à créer leurs
-          propres blocs, et ajouter leur lien dans cette page d’index, qui sera aussi
-          'commentable' et la rendre plus facile à naviguer dans les blocs disponibles
+          propres blocs et à ajouter leur lien dans cette page d’index, qui sera aussi
+          « commentable » et la rendre plus facile à naviguer dans les blocs disponibles
           sur le serveur.
         paragraph5: Par exemple,
-        paragraph6: Etherpad fonctionne bien lorsqu'il y a un quelqu'un qui « nettoie
-          » le texte de temps en temps et s'il existe des pages d'« index » convenables
-          qui organisent les différents tampons disponibles.
+        paragraph6: Etherpad fonctionne bien lorsqu’il y a un quelqu’un pour « nettoyer
+          » le texte de temps en temps et s’il existe des pages d’« index » convenables
+          qui organisent les différents blocs disponibles.
       nextcloud-tab:
         subheader1: Description
         subheader2: Guide d’administration
         subheader3: Conseils utiles
-        paragraph1: Nextcloud est un serveur privé de synchronisation et partage de
-          fichiers. Il est totalement open-source et vous pouvez l'héberger vous-même
-          ou payer une compagnie pour le faire à votre place. De cette manière, vous
-          avez le contrôle sur vos photos, votre calendrier et données de contacts,
+        paragraph1: Nextcloud est un serveur privé de synchronisation et de partage
+          de fichiers. Il est totalement en code source ouvert et vous pouvez l’héberger
+          vous-même ou payer une compagnie pour le faire à votre place. De cette manière,
+          vous avez le contrôle sur vos photos, votre calendrier et données de contacts,
           vos documents et tout le reste.
-        paragraph2: Vous trouverez une page administrateur sur
+        paragraph2: Vous trouverez une page d’administration sur
         paragraph3: Pour accéder à vos paramètres personnels
         paragraph4: Cliquez sur l’administration dans le coin en haut à droite de
           votre instance de Nextcloud. Le menu des paramètres personnels s’ouvre.
