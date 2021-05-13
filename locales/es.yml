@@ -105,6 +105,7 @@ es:
         una intervalo de tiempo.
       direction: Dirección (grados)
       acceleration: Aceleración (x, y, z)
+      gyroscope: Giroscopio (campo, yaw, corro)
     camera-page:
       header: Cámara
       live-stream-header: Transmisión de video en vivo
@@ -262,6 +263,7 @@ es:
         wifi-channel-label: Canal de la red Wi-Fi
         wifi-password-label: Contraseña de la red Wi-Fi
       internet-panel:
+        header: Modo de Red del internet
         mode-hint: Modo de la red wifi
       connect-wifi-panel:
         header: Conectado a Wi-Fi para acceso a internet
@@ -451,9 +453,13 @@ es:
         form-placeholder: Nombre de la captura
       guestbook-panel:
         header-hint: Puedes utilizar esto para importar/exportar una captura.
+        form-placeholder: Nombre de la captura
       popups:
         import-header: Importar captura
+        import-interview-header: Importar captura para Interview
+        import-guestbook-header: Importación Snapshot para Guestbook
         import-etherpad-header: Importar captura para Etherpad
+        import-nextcloud-header: Importación Snapshot para Nextcloud
         import-config-header: Importa una captura de configuración
     logs-page:
       subheader: Ver registros
