@@ -7,6 +7,7 @@
 # Author: Mgaved
 # Author: Pascalheynmoeller
 # Author: Sushi
+# Author: Umlaut
 ---
 de:
   general:
@@ -274,6 +275,94 @@ de:
         description-column: Beschreibung
         actions-column: Aktionen
       applications-menu:
+        status-column: Status
+        color-column: Farbe
+        name-column: Anwendungsname
+        name-hint: Der Name der Anwendung
+        url-hint: Die URL der Anwendung
+        description-column: Beschreibung
+        actions-column: Aktionen
         app-start-hint: Anwendung starten
         app-stop-hint: Anwendung stoppen
+    network-page:
+      subheader: Netzwerkeinstellungen
+      wifi-ap-interface-panel:
+        ssid-name-label: Name des WiFi-Netzwerks (SSID)
+        wifi-channel-label: Kanal des WiFi-Netzwerks
+        wifi-password-label: Passwort des WiFi-Netzwerks
+      popups:
+        change-channel-header: Kanal ändern
+        change-password-header: Passwort ändern
+    appearance-page:
+      theme-panel:
+        colors-label: Farben
+      popups:
+        edit-title-header: Titel bearbeiten
+        edit-background-image-header: Hintergrundbild bearbeiten
+    devices-page:
+      subheader: Geräte
+      sensors-panel:
+        sensors-table:
+          status: Status
+      camera-panel:
+        header: Kamera
+      popups:
+        start-sensing-label2: Dauer (Sekunden)
+        start-sensing-label4: Intervall (Sekunden)
+        start-images-label1: Dauer (Sekunden)
+        start-images-label2: Intervall (Sekunden)
+        delete-images-title: Alle Fotos löschen
+        start-videos-label1: Dauer (Sekunden)
+        delete-videos-title: Alle Videos löschen
+    monitoring-page:
+      details-panel:
+        table-label2: Administrator
+        table-label3: Titel
+        table-label4: Beschreibung
+      statistics-panel:
+        statistics-table:
+          status: Status
+          description: Beschreibung
+          action: Aktion
+      popups:
+        change-details-label3: Titel
+        change-details-label4: Beschreibung
+        hardware-label2: Temperatur
+    notifications-page:
+      notifications-table:
+        header1: Status
+        header2: Titel
+        header4: Aktionen
+    logs-page:
+      portal-log-panel:
+        filter-label1: Fehlermeldungen
+        filter-label2: Warnmeldungen
+    documentation-page:
+      initial-configuration-tab:
+        subheader1: Beschreibung
+      etherpad-tab:
+        subheader1: Beschreibung
+        subheader3: Nützliche Hinweise
+        paragraph5: Zum Beispiel,
+      nextcloud-tab:
+        subheader1: Beschreibung
+        subheader2: Administrationshandbuch
+        subheader3: Nützliche Hinweise
+        paragraph10: E-Mail Adresse
+        paragraph12: Dein Passwort verwalten
+        paragraph14: Links zum Desktop und mobilen Apps
+      guestbook-tab:
+        subheader1: Beschreibung
+        subheader2: Administrationshandbuch
+      wordpress-tab:
+        subheader1: Beschreibung
+      framadate-tab:
+        subheader1: Beschreibung
+    settings-page:
+      subheader: Einstellungen
+      panel-header: Systemeinstellungen
+      mysql-password:
+        header: MySQL Passwort
+      popups:
+        change-mysql-password-title: MySQL Passwort ändern
 ...
