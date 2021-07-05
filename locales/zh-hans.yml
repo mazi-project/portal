@@ -3,6 +3,7 @@
 # Export driver: phpyaml
 # Author: A Retired User
 # Author: Deathkon
+# Author: GuoPC
 # Author: Liuxinyu970226
 # Author: 予弦
 # Author: 神樂坂秀吉
@@ -184,6 +185,11 @@ zh-hans:
       update-message-6: 存在可用更新。请使用下方的按钮启动更新程序。
       update-hint: 提示：如果您遇到错误行为，请重启您的设备。
       update-chan-hint: 提示：开发线路的最新版本可能不稳定。不建议来回更换更新线路，因为它可能会导致意外的行为。请告知版本详情%{link}以决定您的更新线路
+      update-chan-warn: 警告：更改到其他频道将导致设备重启。
+      last-jessie-warn: 警告：这是基于Raspbian Jessie的最后一个版本（v2.6）。从v3版本开始，该工具包基于Raspbian
+        Stretch。如果您想继续关注MAZI工具包开发，您必须从<a href='https://github.com/mazi-project/guides/wiki/Version-History'>此处</a>下载最新的v3版本镜像。如果您想保留当前的数据和配置，您可以使用外部<a
+        href='/admin_snapshot'>USB磁盘</a>导出您当前的MAZI Zone并将其导入到您的v3版MAZI Zone。您也可在<a
+        href='https://github.com/mazi-project/guides/wiki/From-v2.6-to-v.3'>此处</a>查看更多信息。
     setup-page:
       tog-nav: 开关导航
       setup-panel: MAZI区域配置面板
@@ -332,7 +338,7 @@ zh-hans:
         change-channel-header: 更改线路
         change-password-header: 更改密码
         change-mode-header: 更改模式
-        change-mode-message: 使用下面的表格为这个MAZI区域选择网络模式。 如果您想选择双模式，请确保能够访问Internet（通过以太网电缆或Wi-Fi加密狗）。
+        change-mode-message: 使用下面的表格为这个MAZI区域选择网络模式。 如果您想选择在线模式，请确保能够访问Internet（通过以太网电缆或Wi-Fi加密狗）。
         connect-wifi-header: 连接到Wi-Fi网络
         select-wifi-label: 选择Wi-Fi名称
         select-mesh-mode-label: 选择网格模式
@@ -502,6 +508,16 @@ zh-hans:
         delete-notification-message: 此通知将从数据库中永久删除。您希望继续么？
     import-export-page:
       subheader: 快照
+      full-snapshots-header: MAZI Zone快照
+      full-snapshots-message: 您可以使用下面的面板来为此MAZI Zone的当前配置进行快照。快照将包含所有内容（网络配置、应用程序、应用程序实例、通知、可视化配置等）。
+      full-snapshot-panel:
+        header-hint: 您可以使用此来导入/导出快照。
+        form-placeholder: 快照名称
+        no-usb-message: 当前未检测到USB存储设备。请插入USB存储设备并刷新页面。
+        usb-message: 已检测到USB存储设备。设备上有%{free_space}剩余空间。
+      full-warning: 警告：导入和导出快照是一个耗时的过程，该过程还取决于您的MAZI Zone数据和USB设备速度。在导入/导出过程中，您将无法与MAZI门户交互。设备将在导入过程结束后重新启动。
+      configuration-snapshots-header: 配置快照
+      configuration-snapshots-message: 您可以使用下面的面板对此MAZI Zone的当前配置进行快照。
       warning: 警告：如果您使用不同的Wi-Fi网络设置加载新快照，则与此MAZI Zone的无线连接将会丢失，您将需要重新连接到新的Wi-Fi网络。
       save-snapshot-panel:
         header: 保存快照
@@ -531,6 +547,10 @@ zh-hans:
         import-interview-header: 导入访问快照
         import-guestbook-header: 导入Guestbook的快照
         import-etherpad-header: 导入Etherpad的快照
+        import-nextcloud-header: 为Nextcloud导入快照
+        import-wordpress-header: 为WordPress导入快照
+        import-full-header: 为此MAZI Zone导入快照
+        import-config-header: 导入配置快照
     logs-page:
       subheader: 日志查看器
       message: 您可以查阅下方的MAZI Zone日志文件
